@@ -1,0 +1,23 @@
+---
+// src/pages/posts/[slug].astro
+// v6부터는 render 함수를 직접 import 해서 사용합니다.
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const postEntries = await getCollection('posts');
+  return postEntries.map(entry => ({
+    // frontmatter에 slug가 지정되어 있으면 그것을, 없으면 파일명(id)을 URL로 사용
+    params: { slug: entry.data.slug || entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+// 기존 entry.render() 대신 새로운 방식 적용
+const { Content } = await render(entry);
+---
+
+<PostLayout frontmatter={entry.data}>
+  <Content />
+</PostLayout>
