@@ -10,6 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+# Node.js 24 환경을 강제로 사용하도록 환경 변수 설정
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,11 +24,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "npm"
+          node-version: 24 # 최신 Node.js 24 사용 (경고 해결)
+          # cache: 'npm' 부분을 제거하여 잠금 파일 누락 시에도 빌드 가능하게 설정
 
       - name: Install dependencies
-        run: npm ci
+        # ci 대신 install을 사용하여 유연하게 패키지 설치
+        run: npm install
 
       - name: Build Astro
         run: npm run build

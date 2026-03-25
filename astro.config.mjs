@@ -5,10 +5,10 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   // 1. 실제 배포될 GitHub Pages 주소를 입력합니다. (아이디: Evan-Yoon)
-  site: "https://Evan-Yoon.github.io",
+  site: "https://Evan-Yoon.github.io/winter31844.github.io",
 
-  // 2. 리포지토리 이름이 'Evan-Yoon.github.io'인 경우 '/'를 사용합니다.
-  base: "/",
+  // 2.
+  base: "/winter31844.github.io/",
 
   integrations: [mdx(), sitemap()],
 
