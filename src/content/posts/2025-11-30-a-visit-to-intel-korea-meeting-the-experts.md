@@ -67,11 +67,11 @@ I arrived in Yeouido around 1 PM, way too early. I was actually the first one th
 
 Intel Client AI Vision (SVP Yoon)
 
-**2. OpenVINO (Director Nam)** The second lecture was by the **Head Developer of OpenVINO.** He explained what OpenVINO is, why it’s powerful, who should use it, and its limitations. Despite being the person who actually *built* this software, he explained it in a way that even non-majors like us could understand. It was awe-inspiring to meet a “Gosu” (master) of this caliber.
+**2. OpenVINO (Director Nam)** The second lecture was by the **Head Developer of OpenVINO.** He explained what OpenVINO is, why it’s powerful, who should use it, and its limitations. Despite being the person who actually _built_ this software, he explained it in a way that even non-majors like us could understand. It was awe-inspiring to meet a “Gosu” (master) of this caliber.
 
 **3. Intel DC AI Solution Overview (SVP Cho)** This session focused on Intel’s graphic cards and products. He candidly discussed the market situation — dominated by NVIDIA — but explained Intel’s strategy of targeting markets that don’t necessarily require ultra-high-end, expensive GPUs.
 
-However… unlike the previous speaker, he seemed unaware of our beginner level. 😅 He dove into extremely technical details about graphic card architecture. It sounded like **alien language** to me: *“This part of the GPU connects with that function…”* But ironically, this lecture made reality hit home. It made me realize just how much I have to learn. I made a vow right then: *“One day, I will listen to this lecture again and understand every single word.”*
+However… unlike the previous speaker, he seemed unaware of our beginner level. 😅 He dove into extremely technical details about graphic card architecture. It sounded like **alien language** to me: _“This part of the GPU connects with that function…”_ But ironically, this lecture made reality hit home. It made me realize just how much I have to learn. I made a vow right then: _“One day, I will listen to this lecture again and understand every single word.”_
 
 **4. Intel AI Toolkit (Deputy Manager Kim)** The final session was practical. As a practitioner, he shared his experiences providing AI solutions. He will actually be visiting our classroom later as a **mentor** for our projects!
 
