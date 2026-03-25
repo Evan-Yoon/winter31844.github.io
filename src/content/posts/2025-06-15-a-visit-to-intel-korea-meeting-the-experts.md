@@ -1,6 +1,6 @@
 ---
 title: "A Visit to Intel Korea: Meeting the Experts"
-slug: "a-visit-to-intel-korea-meeting-the-experts"
+slug: "a-visit-to-intel-korea-meeting-the-experts-sample"
 date: 2025-06-15
 author: "Evan Yoon"
 category: "tech"
