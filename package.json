@@ -1,21 +1,24 @@
 {
   "name": "winter31844.github.io",
-  "type": "module",
   "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate:post": "node scripts/generatePost.js"
+    "blog:git": "node scripts/blog-from-git.js",
+    "blog:doc": "node scripts/blog-from-doc.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.2",
     "@astrojs/sitemap": "^3.7.1",
-    "astro": "^6.0.8"
+    "astro": "^6.0.8",
+    "dotenv": "^16.4.7",
+    "fast-xml-parser": "^4.5.0",
+    "jszip": "^3.10.1",
+    "mammoth": "^1.8.0",
+    "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
     "@astrojs/rss": "^4.0.17"
