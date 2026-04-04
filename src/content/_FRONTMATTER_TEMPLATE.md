@@ -27,6 +27,13 @@ author: "Evan Yoon"
 
 category: "tech"
 
+# ─── 서브카테고리 (선택사항) ──────────────────────────
+
+# category: study  →  subcategory: aws
+# 없으면 이 줄 삭제 또는 주석 처리
+
+# subcategory: "aws"
+
 # ─── 설명 (SEO + 카드 미리보기용, 140자 이내) ─────────
 
 description: "Intel AI for Future Workforce 프로그램의 일환으로 인텔 코리아 본사를 방문한 생생한 기록. AI 전문가들과의 대화에서 얻은 인사이트를 공유합니다."

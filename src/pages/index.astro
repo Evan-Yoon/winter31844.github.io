@@ -21,8 +21,20 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
         Trade stable career for code? Curious why I chose this "Real-Life Isekai." Honest records of my journey from Josun Palace HR to becoming a software developer.
       </p>
       <div class="hero-cta">
-        <a href="/winter31844.github.io/posts" class="btn-primary">Explore My Code</a>
+        <a href="/posts" class="btn-primary">Explore My Code</a>
         <a href="#about" class="btn-ghost">Read My Story</a>
+      </div>
+
+      <div class="visitor-stats">
+        <div class="stat-item">
+          <span class="stat-label">TOTAL VISITS</span>
+          <span class="stat-value" id="stat-total">—</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-label">TODAY</span>
+          <span class="stat-value" id="stat-today">—</span>
+        </div>
       </div>
     </div>
   </header>
@@ -33,7 +45,7 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
         <div class="section-num">01 / RECENT POSTS</div>
         <h2 class="section-title">기록과 공유</h2>
       </div>
-      <a href="/winter31844.github.io/posts" class="view-all">All Posts →</a>
+      <a href="/posts" class="view-all">All Posts →</a>
     </div>
     
     <div class="posts-grid">
@@ -44,7 +56,7 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
             <span class="post-date">{new Date(post.data.date).toLocaleDateString('ko-KR')}</span>
           </div>
           <h3 class="post-card-title">
-            <a href={`/winter31844.github.io/posts/${post.data.slug || post.id}`}>{post.data.title}</a>
+            <a href={`/posts/${post.data.slug || post.id}`}>{post.data.title}</a>
           </h3>
           <div class="post-card-footer">
             <span class="read-time">{post.data.readTime ? `${post.data.readTime} min read` : ''}</span>
@@ -111,6 +123,21 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   </section>
 </BaseLayout>
 
+<script>
+  // GoatCounter 공개 카운터 API로 전체 방문자 수 fetch
+  // 경로: / (현재 사이트 베이스 경로)
+  const GC = 'https://evan-yoon.goatcounter.com/counter';
+  const path = encodeURIComponent('/');
+
+  fetch(`${GC}/${path}.json`)
+    .then(r => r.json())
+    .then(data => {
+      const el = document.getElementById('stat-total');
+      if (el && data.count) el.textContent = data.count;
+    })
+    .catch(() => {});
+</script>
+
 <style>
   /* ─── INDEX SPECIFIC STYLES ─── */
   .hero { min-height: 85vh; display: flex; align-items: center; max-width: var(--max-w); margin: 0 auto; padding: 60px 2rem; border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
@@ -120,6 +147,12 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   .hero-title em.acc-2 { font-style: italic; color: var(--accent-2); }
   .hero-desc { font-size: 1.05rem; line-height: 1.75; color: var(--ink-2); max-width: 44ch; margin-bottom: 3.5rem; font-weight: 300; }
   .hero-cta { display: flex; gap: 1rem; align-items: center; }
+
+  .visitor-stats { display: flex; align-items: center; gap: 2rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stat-item { display: flex; flex-direction: column; gap: 0.3rem; }
+  .stat-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-3); letter-spacing: 0.1em; }
+  .stat-value { font-family: var(--font-mono); font-size: 1.4rem; color: var(--ink); font-weight: 400; }
+  .stat-divider { width: 1px; height: 2rem; background: var(--border-strong); }
   .btn-primary { padding: 12px 28px; background: var(--ink); color: var(--bg); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; transition: all var(--transition); }
   .btn-primary:hover { background: var(--accent); }
   .btn-ghost { padding: 12px 28px; border: 1px solid var(--border-strong); color: var(--ink-2); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; transition: all var(--transition); }

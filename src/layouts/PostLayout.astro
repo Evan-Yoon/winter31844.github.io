@@ -101,6 +101,22 @@ const { frontmatter } = Astro.props;
   [data-theme="dark"] .article-body pre { background: #0D0B08; }
   .article-body pre code { color: #E8E4DC; background: none; border: none; padding: 0; font-size: 0.875rem; }
   
+  /* ─── 이미지 ─── */
+  .article-body img {
+    width: 100%; max-width: 100%; display: block;
+    border-radius: var(--radius); border: 1px solid var(--border);
+    margin: 2.5rem auto;
+  }
+  /* 수동 삽입: ![alt](url "caption") → title이 있으면 figcaption처럼 표시 */
+  .article-body p:has(img) {
+    margin: 0; /* img 자체에 margin 있으므로 p margin 제거 */
+  }
+  /* 자동 삽입 이미지 래퍼 */
+  .auto-image-wrap {
+    margin: 0;
+  }
+  /* alt 텍스트를 캡션으로 표시 (이미지 바로 다음 em 태그 없이, CSS content 활용 불가 → JS 없이 처리 한계) */
+
   .article-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 4rem 0 0; padding-top: 2rem; border-top: 1px solid var(--border); }
   .article-tag { font-size: 0.7rem; padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border-strong); color: var(--ink-3); font-family: var(--font-mono); font-weight: 400; }
   .article-tag:hover { border-color: var(--accent-2); color: var(--accent-2); }

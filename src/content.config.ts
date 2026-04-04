@@ -11,6 +11,7 @@ const posts = defineCollection({
     date: z.coerce.date(),
     author: z.string().default("Evan Yoon"),
     category: z.enum(["study", "project", "trouble", "tech"]).default("tech"),
+    subcategory: z.string().optional(),
     // description 제한을 없애고 선택 사항으로 변경하여 오류를 방지합니다.
     description: z.string().optional().default(""),
     thumbnail: z.string().optional(),
