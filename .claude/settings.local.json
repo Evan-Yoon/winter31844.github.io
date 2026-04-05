@@ -1,10 +1,17 @@
 {
   "permissions": {
-    "additionalDirectories": [
-      "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories"
-    ],
     "allow": [
-      "Bash(git clone:*)"
+      "Bash(git clone:*)",
+      "Read(//c/Users/user/**)",
+      "Bash(python3 -c ':*)",
+      "Bash(pip install:*)",
+      "Read(//tmp/**)",
+      "Read(//c/tmp/**)",
+      "WebFetch(domain:www.notion.so)"
+    ],
+    "additionalDirectories": [
+      "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories",
+      "C:\\Users\\user\\Desktop"
     ]
   }
 }
