@@ -7,7 +7,8 @@
       "Bash(pip install:*)",
       "Read(//tmp/**)",
       "Read(//c/tmp/**)",
-      "WebFetch(domain:www.notion.so)"
+      "WebFetch(domain:www.notion.so)",
+      "WebFetch(domain:github.com)"
     ],
     "additionalDirectories": [
       "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories",

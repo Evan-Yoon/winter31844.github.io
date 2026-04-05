@@ -1,0 +1,101 @@
+---
+title: "GPS 벡터 기반 방향 안내 및 관리자 대시보드 구축"
+slug: "walkmate-day5-gps-vector-and-admin-ui"
+date: 2026-02-13
+author: "Evan Yoon"
+category: "project"
+subcategory: "team-project"
+description: "[Walkmate] 나침반의 한계를 극복하는 GPS 벡터 로직 전면 수정 및 React 기반 관리자 UI 프로토타입 구현 기록."
+thumbnail: "/images/posts/walkmate/cover5.png"
+tags:
+  - GPSVector
+  - React
+  - AdminUI
+  - TailwindCSS
+  - BackendAPI
+  - ARNavigation
+readTime: 12
+series: "Walkmate AI"
+seriesOrder: 5
+featured: false
+draft: false
+toc: true
+---
+
+> **"복잡한 센서의 간섭보다 명확한 물리 법칙이 더 강력할 때가 있다."**
+>
+> 프로젝트 5일 차. 오늘은 보행 내비게이션의 정밀도를 가로막던 나침반 센서의 한계를 인정하고, 사용자의 이동 변위를 계산하는 'GPS 벡터' 방식으로 로직을 전면 수정했다. 또한, 사용자 앱에서 전달된 위험 정보를 한눈에 관리할 수 있는 관리자 대시보드 구축을 병행했다.
+
+---
+
+## 🚀 Today's Mission & Results
+
+GPS 방향 인식의 고질적인 문제를 해결하고, 전체 시스템의 관리 측면을 보강하기 위한 Admin UI 작업을 성공적으로 진행했다.
+
+| 목표 항목 | 상태 | 비고 |
+| :--- | :---: | :--- |
+| GPS 벡터 기반 방향 안내 로직 교체 | ✅ 완료 | 나침반 센서 의존성 제거 |
+| 관리자 페이지(Admin) 프로토타입 구현 | ✅ 완료 | 신고 목록 및 상세 모달 완성 |
+| 백엔드 연동 규격 확정 및 API 연동 | ✅ 완료 | Multipart 사진 전송 및 UUID 적용 |
+| AR 카메라 UI 통합 (4:6 분할) | ✅ 완료 | 상단 지도 + 하단 카메라 뷰 구성 |
+
+---
+
+## 💻 GitHub Commit History
+
+안드로이드 핵심 모듈 업데이트와 관리자 UI 초기 구축을 위해 총 6건의 주요 커밋이 진행되었다.
+
+| Hash | Message | 주요 내용 |
+| :--- | :--- | :--- |
+| `2473abb` | **chore: update Android module dependencies** | Gradle 설정 및 필수 플러그인 의존성 최신화 |
+| `f74029e` | **chore: clean up package-lock.json** | 의존성 충돌 방지를 위한 패키지 잠금 파일 정리 |
+| `873c40b` | **feat: implement Admin ReportsPage** | 신고 목록 조회 및 상태 업데이트 API 연동 |
+| `f9b56f8` | **feat: initialize backend models and API** | DB 스키마 설계 및 백엔드 기초 구조 구축 |
+| `e9a2166` | **feat: initialize Admin UI project** | React+Tailwind 기반 대시보드 환경 구축 |
+| `a300434` | **feat: initialize core navigation components** | GuidingScreen, VisionCamera, DebugMap 초기화 |
+
+---
+
+## 🛠 Tech Stack & Implementation
+
+### 1. GPS 벡터 기반 방향 안내 (GuidingScreen.tsx)
+기존의 나침반 센서는 주변 전자 기기나 금속 환경에 의한 간섭이 잦아 방향이 튀는 문제가 있었다. 이를 해결하기 위해 사용자의 현재 위치와 직전 위치(5걸음 이동 기준) 사이의 벡터를 계산하여 진행 방향을 산출하는 방식으로 교체했다.
+- **UI 통합**: 화면 상단 40%는 TMap 경로를 보여주는 `DebugMap`, 하단 60%는 실시간 AR 안내를 위한 `VisionCamera`로 구성하여 시각적 정보를 조화시켰다.
+
+### 2. 객체 인식 최적화 및 신고 자동화 (VisionCamera.tsx)
+- **모델 교체**: `best_int8` 모델의 로딩 오류를 해결하기 위해 `best_float16`으로 수정하여 안정성을 확보했다.
+- **메모리 보호**: 추론 루프가 겹치지 않도록 락(Lock) 기능을 추가했다.
+- **신고 시스템**: 위험 요소 감지 시 좌표와 현장 사진을 서버로 전송하는 `sendHazardReport` 로직을 구축했다.
+
+### 3. 관리자 대시보드 개발 (Admin UI)
+React와 Tailwind CSS를 활용해 빠르게 관리자 전용 웹을 개발했다. 신고된 목록을 테이블 형태로 조회하고, 상세 모달을 통해 현장 사진과 상태를 관리할 수 있는 기능을 포함한다.
+
+---
+
+## ⚠️ Issue Situation & Troubleshooting
+
+### 이슈 1: GPS 수신 전 '서울 시청' 고스트 현상
+- **문제**: 앱 시작 시 실제 위치를 잡기 전, 라이브러리 기본값인 서울 시청이 잠깐 노출되는 현상이 발생했다.
+- **시도**: `isLoading` 상태를 추가하여 스피너를 띄우도록 수정했으나, 완벽한 해결을 위해 추가적인 위치 보정 로직 검토가 필요한 상태다.
+
+### 이슈 2: 관리자 모달 렌더링 오류 (ReferenceError)
+- **문제**: `HazardModal`에서 상태별 배지 색상을 지정하는 로직의 위치 문제로 렌더링 오류가 발생했다.
+- **해결**: 변수 선언 위치를 `return` 문 이전의 컴포넌트 최상단으로 끌어올려 해결했다.
+
+### 이슈 3: 프로젝트 방향 설정 (Focus & Abandon)
+- **문제**: 점자블록 인식 모델의 연산 부하가 너무 커서 시스템 전체의 속도가 저하되었다.
+- **결정**: 팀 논의 끝에 '파손 점자블록' 인식 기능을 제외하고, **TMap 경로 안내와 YOLO 장애물 탐지**라는 핵심 가치에 집중하기로 결정했다. 이는 개발 효율을 높이는 데 '신의 한 수'가 되었다.
+
+---
+
+## 💭 Reflections
+
+### 인식적 변화
+복잡한 수식과 민감한 센서 데이터보다, 가장 단순한 물리 법칙(좌표 변화)이 실제 환경에서는 더 신뢰할 수 있는 도구가 될 수 있음을 느꼈다. 또한, 팀 협업에서 과감하게 기능을 축소(Drop)하고 핵심에 집중하는 것이 프로젝트의 완성도를 높이는 지름길임을 실감했다.
+
+### 어려웠던 점
+React(Web)와 Capacitor(App) 환경을 동시에 오가며 개발하다 보니, 브라우저 표준 API와 네이티브 전용 플러그인 사이의 미묘한 차이로 인해 코드 작성 시 혼동이 오는 경우가 있었다. 서로 다른 환경에 대한 더 깊은 이해가 필요함을 느꼈다.
+
+---
+
+**Next Plan:** 이번 주말에는 실제 야외 필드 테스트를 통해 GPS 벡터 로직의 정확도를 검증하고, 백엔드와 Admin UI 사이의 전체적인 데이터 흐름을 점검할 계획이다. 🚧

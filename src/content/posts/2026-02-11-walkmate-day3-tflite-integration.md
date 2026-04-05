@@ -1,0 +1,93 @@
+---
+title: "TFLite 모델 연동 및 안드로이드 성능 최적화"
+slug: "walkmate-day3-tflite-integration"
+date: 2026-02-11
+author: "Evan Yoon"
+category: "project"
+subcategory: "team-project"
+description: "[Walkmate] TFLite 모델의 실제 안드로이드 앱 연동 성공 및 고해상도 연산 최적화 기록."
+thumbnail: "/images/posts/walkmate/cover3.png"
+tags:
+  - TFLite
+  - Android
+  - WebView
+  - PerformanceOptimization
+  - TensorFlowJS
+readTime: 12
+series: "Walkmate AI"
+seriesOrder: 3
+featured: false
+draft: false
+toc: true
+---
+
+> **"초록색 박스와 '준비 완료!' 메시지를 마주했을 때의 성취감은 잊을 수 없다."**
+>
+> 프로젝트 3일 차. 오늘은 프로젝트의 가장 큰 기술적 도전 중 하나인 TFLite 모델의 실제 모바일 앱 연동을 진행했다. 안드로이드 환경에서의 경로 문제와 메모리 누수, 연산 성능 사이에서 균형을 맞추는 과정이 핵심이었다.
+
+---
+
+## 🚀 Today's Mission & Results
+
+TFLite 모델을 안드로이드 WebView 환경에 성공적으로 탑재하고, 실시간 추론이 가능한 수준으로 최적화했다.
+
+| 목표 항목 | 상태 | 비고 |
+| :--- | :---: | :--- |
+| TFLite 모델의 실제 앱 연동 및 객체 감지 성공 | ✅ 완료 | 안드로이드에서 "준비 완료!" 확인 |
+| 보도블록(점자/선형) 클래스 분류 정확도 확인 | ✅ 완료 | 정상/파손 4종 클래스 매핑 완료 |
+| 실제 소요 시간 | 9시간 | 계획(8h) 대비 연동 이슈로 1시간 초과 |
+
+---
+
+## 💻 GitHub Commit History
+
+안드로이드 플랫폼 초기화와 TFLite 모델 전용 스크린 구현을 위해 총 6건의 커밋이 이루어졌다.
+
+| Hash | Message | 주요 내용 |
+| :--- | :--- | :--- |
+| `29fa4e5` | **feat: Implement VisionScreen...** | 실시간 객체 탐지용 VisionScreen 및 TTS 플러그인 설정 |
+| `457fb55` | **feat: Initialize new Capacitor project...** | Capacitor 기반 안드로이드 프로젝트 초기화 |
+| `8df639f` | **feat: Add int8 quantized YOLO11n-obb...** | 점자블록용 경량화 모델 및 메타데이터 추가 |
+| `abd9ad1` | **feat: initialize Capacitor Android platform** | 안드로이드 플랫폼 전용 자산 및 설정 파일 구성 |
+| `28d1174` | **한국어 주석 처리** | 코드 가독성 향상을 위한 국문 주석 업데이트 |
+| `726c195` | **user UI 구현** | 사용자 피드백을 위한 UI 요소 추가 |
+
+---
+
+## 🛠 Tech Stack & Implementation
+
+### 1. TFLite 라이브러리 연산 환경 구축
+Vite 빌드 도구와의 충돌을 방지하기 위해 `index.html`에 CDN 방식으로 TensorFlow.js 및 TFLite Web API를 직접 주입했다. WASM 부품 로딩 전 모델 로드 함수가 호출되는 것을 막기 위해 전역 객체 체크 로직을 추가하고, WASM 경로를 특정 버전(`0.0.1-alpha.10`)으로 고정하여 안정성을 확보했다.
+
+### 2. 안드로이드 WebView 경로 이슈 해결
+앱 내부에서 `.tflite` 모델 파일을 찾지 못하는 문제를 해결하기 위해 `androidScheme` 설정을 조정하고, 모델 파일의 절대 경로를 동기화했다.
+
+### 3. 성능 균형과 자원 관리
+- **연산 최적화**: 모델이 요구하는 1280px 고해상도 추론을 위해 입력 규격을 상향 조정하되, 실제 카메라 캡처는 720px로 처리했다. 추론 직전에만 1280px로 리사이징하여 기기의 발열과 연산 부담을 줄였다.
+- **메모리 보호**: 고해상도 이미지 텐서가 누적되어 발생하는 `A resource failed to call close` 경보를 막기 위해 `tf.tidy()`를 적용했다. 중간 연산 텐서를 즉시 해제하고 추론 주기를 5초로 완화하여 앱의 안정성을 높였다.
+
+---
+
+## ⚠️ Issue Situation & Troubleshooting
+
+### 이슈 1: Input tensor shape mismatch
+- **원인**: 코드는 640px로 데이터를 전송했으나, 모델은 1280px로 학습되어 있었다.
+- **해결**: `metadata.yaml` 분석을 통해 정확한 규격을 파악하고 `MODEL_INPUT_SIZE`를 1280으로 수정했다.
+
+### 이슈 2: 메모리 누수 및 시스템 경고
+- **원인**: 고해상도 텐서가 가비지 컬렉션 전에 계속 쌓여 메모리 부족 현상이 발생했다.
+- **해결**: `tf.tidy()`를 통해 사용이 끝난 텐서를 즉시 파괴하는 로직을 구현했다.
+
+---
+
+## 💭 Reflections
+
+### 감정적 변화
+라이브러리 로딩과 파일 경로 문제로 6시간 이상 진전이 없었을 때는 좌절감이 컸다. 하지만 수많은 디버깅 끝에 폰 화면에서 목표물이 감지되었다는 것을 알리는 초록색 박스가 떴을 때, 그동안의 노력이 보상받는 기분이었다.
+
+### 인식적 변화
+단순히 코드를 짜는 것보다 모델의 명세서(`metadata.yaml`)를 꼼꼼히 읽는 기초적인 습관이 디버깅 시간을 얼마나 단축시킬 수 있는지 다시금 깨달았다. 실제 동작 여부를 결정하는 것은 결국 디테일한 설정값들의 일치였다.
+
+---
+
+**Next Plan:** 내일은 실제 현장에서 비디오와 사진을 통한 감지 신뢰도 테스트를 진행할 예정이다. 또한, 감지된 정보를 음성으로 알려주는 TTS(Text-to-Speech) 기능을 구현하여 사용자 경험을 완성할 계획이다. 🚄
