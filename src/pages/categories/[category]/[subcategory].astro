@@ -38,10 +38,9 @@ const catLabels: Record<string, string> = {
 
 // 서브카테고리 메타 정의 (label + 설명)
 const subcatMeta: Record<string, { label: string; description: string }> = {
-  aws: {
-    label: 'AWS',
-    description: 'AWS 자격증 스터디 & 직접 구축 실습 기록',
-  },
+  aws: { label: 'AWS', description: 'AWS 자격증 스터디 & 직접 구축 실습 기록' },
+  'team-project': { label: 'Team Project', description: '팀으로 함께 기획하고 개발한 프로젝트 기록' },
+  'personal-project': { label: 'Personal Project', description: '혼자 기획하고 처음부터 끝까지 만든 프로젝트 기록' },
 };
 
 const catDisplay = catLabels[category] || category;

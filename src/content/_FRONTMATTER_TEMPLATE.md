@@ -29,7 +29,8 @@ category: "tech"
 
 # ─── 서브카테고리 (선택사항) ──────────────────────────
 
-# category: study  →  subcategory: aws
+# category: study   →  subcategory: aws
+# category: project →  subcategory: team-project | personal-project
 # 없으면 이 줄 삭제 또는 주석 처리
 
 # subcategory: "aws"
