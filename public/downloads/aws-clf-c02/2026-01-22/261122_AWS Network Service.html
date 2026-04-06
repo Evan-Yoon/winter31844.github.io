@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>AWS 네트워크 핵심 서비스</title>
+<style>
+body {
+    margin: 0;
+    background: #020617;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #e5e7eb;
+}
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.frame {
+    width: 960px;
+    height: 620px;
+    background: #0f172a;
+    border-radius: 14px;
+    padding: 28px 56px 40px 56px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.slide { display: none; height: 100%; }
+.slide.active { display: block; }
+
+h1 { text-align: center; margin-bottom: 32px; }
+h2 { color: #38bdf8; margin-top: 0; margin-bottom: 16px; }
+p, li { font-size: 21px; line-height: 1.6; }
+
+.highlight { color: #facc15; font-weight: bold; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+th, td {
+    border: 1px solid #334155;
+    padding: 10px;
+    text-align: center;
+}
+th { background: #1e293b; color: #38bdf8; }
+
+.footer {
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    font-size: 14px;
+    color: #94a3b8;
+}
+.quiz {
+    margin-top: 14px;
+}
+
+.quiz input {
+    display: none;
+}
+
+.quiz label {
+    display: block;
+    padding: 10px 14px;
+    margin: 8px 0;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.quiz label:hover {
+    background: #334155;
+}
+
+/* 정답 */
+.quiz input.correct:checked + label {
+    background: #14532d;
+    border-color: #22c55e;
+    color: #dcfce7;
+}
+
+/* 오답 */
+.quiz input.wrong:checked + label {
+    background: #7f1d1d;
+    border-color: #ef4444;
+    color: #fee2e2;
+}
+
+/* 해설 기본 숨김 */
+.quiz .explain {
+    display: none;
+    margin-top: 6px;
+    font-size: 16px;
+    color: #cbd5f5;
+}
+
+/* 어떤 답이든 선택되면 해설 표시 */
+.quiz input:checked ~ .explain {
+    display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<div class="frame">
+
+<!-- Slide 1 -->
+<div class="slide active intro">
+    <h1>AWS 네트워크 핵심 서비스</h1>
+    <p style="text-align:center; margin-bottom:28px;">
+        VPC · Route 53 · ELB · CloudFront
+    </p>
+    <ul style="list-style:none; padding:0; text-align:center;">
+        <li>✅ 시험 단골 비교 포인트 중심</li>
+        <li>✅ “왜 이 서비스인가” 판단 기준</li>
+            <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p class="highlight">발표자 : 이지호🐯
+    </ul>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+    <h2>Amazon VPC</h2>
+    <p class="highlight">
+        AWS 클라우드 안에 만드는 나만의 독립된 가상 네트워크
+    </p>
+    <ul>
+        <li>
+            VPC는 <b>리전(Region)</b> 단위로 생성되며, 처음 만들 때
+            <b>IP 주소 범위(CIDR)</b>를 직접 정함
+        </li>
+        <li>
+            하나의 VPC는 다시 <b>서브넷(Subnet)</b>으로 나뉘고,
+            각 서브넷은 반드시 하나의 <b>가용 영역(AZ)</b>에 속함
+        </li>
+        <li>
+            <b>퍼블릭 서브넷</b>: 인터넷 게이트웨이(IGW)와 연결되어
+            외부 인터넷과 직접 통신 가능
+        </li>
+        <li>
+            <b>프라이빗 서브넷</b>: 외부와 직접 연결되지 않으며,
+            필요 시 <b>NAT Gateway</b>를 통해서만 인터넷 접근
+        </li>
+    </ul>
+    <p style="font-size:16px; color:#94a3b8; margin-top:16px;">
+    ※ NAT Gateway: 프라이빗 서브넷의 서버가 
+    <b>외부로 나가는 인터넷 통신만 가능</b>하게 해주는 중계 장치
+</p>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+    <h2>VPC 보안 (시험 필수 비교)</h2>
+    <p>
+        VPC 안에서 트래픽을 제어하는 대표적인 두 가지 보안 장치
+    </p>
+    <table>
+        <tr>
+            <th>구분</th>
+            <th>Security Group</th>
+            <th>NACL</th>
+        </tr>
+        <tr>
+            <td>적용 범위</td>
+            <td>EC2 인스턴스 단위</td>
+            <td>서브넷 단위</td>
+        </tr>
+        <tr>
+            <td>동작 방식</td>
+            <td class="highlight">
+                Stateful<br>(요청 허용 시 응답 자동 허용)
+            </td>
+            <td class="highlight">
+                Stateless<br>(요청·응답 모두 규칙 필요)
+            </td>
+        </tr>
+        <tr>
+            <td>규칙 유형</td>
+            <td>Allow만 가능</td>
+            <td>Allow / Deny 가능</td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- Slide 4 -->
+<div class="slide">
+    <h2>Amazon Route 53</h2>
+
+    <p class="highlight" style="margin-bottom: 16px;">
+        도메인 이름을 IP 주소로 변환하는 관리형 DNS 서비스
+    </p>
+
+    <!-- DNS 흐름 그림 (크게) -->
+    <div style="margin-bottom: 18px;">
+        <img
+            src="route-53.png"
+            alt="Route 53 DNS 동작 흐름"
+            style="
+                width: 100%;
+                max-height: 380px;
+                object-fit: contain;
+                border-radius: 12px;
+                background: #020617;
+            "
+        />
+    </div>
+
+    <p style="text-align: center; color:#cbd5f5;">
+        사용자는 주소만 입력하지만, 내부에서는 여러 DNS 서버를 거쳐 최종 IP가 결정됩니다
+    </p>
+</div>
+
+
+<!-- Slide : Route 53 역할 설명 -->
+<div class="slide">
+    <h2>Route 53은 이 흐름에서 무엇을 하나?</h2>
+
+    <ul>
+        <li>
+            DNS 조회는 <span class="highlight">전 세계 공통 구조</span>로 동작
+        </li>
+        <li>
+            Root DNS → .com TLD → <span class="highlight">권한 네임서버</span> 순서
+        </li>
+        <li>
+            Amazon Route 53은
+            <br>👉 <span class="highlight">example.com의 최종 책임자(Authoritative DNS)</span>
+        </li>
+    </ul>
+
+    <ul style="margin-top: 14px;">
+        <li>“www.example.com의 IP는 무엇인가?”에 최종 답변</li>
+        <li>이 단계에서 <b>트래픽 분기 정책</b>을 적용 가능</li>
+    </ul>
+
+    <p style="margin-top:16px; color:#94a3b8;">
+        ⚠️ Route 53은 웹 요청을 받지 않습니다 (DNS까지만 담당)
+    </p>
+</div>
+
+<!-- Slide : Route 53 라우팅 정책 -->
+<div class="slide">
+    <h2>Route 53 라우팅 정책 (시험 단골)</h2>
+
+    <ul>
+        <li>
+            <span class="highlight">Simple</span>  
+            → 하나의 서버로 연결 (기본)
+        </li>
+        <li>
+            <span class="highlight">Weighted</span>  
+            → 트래픽 비율 분산 (예: 70% / 30%)
+        </li>
+        <li>
+            <span class="highlight">Latency</span>  
+            → 사용자에게 가장 빠른 리전
+        </li>
+        <li>
+            <span class="highlight">Failover</span>  
+            → 장애 시 자동 전환 (DR 구성)
+        </li>
+        <li>
+            <span class="highlight">Geolocation</span>  
+            → 국가/지역 기준 분기
+        </li>
+    </ul>
+
+    <p style="margin-top:16px; color:#cbd5f5;">
+        👉 “DNS 단계에서 이미 트래픽 전략이 시작된다”
+    </p>
+</div>
+
+
+<!-- Slide 6 -->
+<div class="slide">
+    <h2>ELB (Elastic Load Balancer)</h2>
+    <p class="highlight">
+        들어오는 요청을 여러 대상에게 분산해
+        서비스의 안정성과 확장성을 보장하는 트래픽 진입점
+    </p>
+    <ul>
+        <li>
+            ELB는 EC2가 <b>이미 여러 대일 때만</b> 쓰는 서비스가 아님
+        </li>
+        <li>
+            <b>지금은 1대여도</b>, 앞으로 서버가 늘어날 가능성이 있다면
+            미리 ELB를 앞단에 두는 것이 일반적인 구조
+        </li>
+        <li>
+            사용자는 항상 ELB 주소로 접속하고,
+            실제 서버 수나 변경 여부는 신경 쓸 필요가 없음
+        </li>
+        <li>
+            Health Check를 통해
+            <b>장애가 발생한 서버는 자동으로 트래픽에서 제외</b>
+        </li>
+    </ul>
+
+    <p style="font-size:16px; color:#94a3b8; margin-top:16px;">
+        ※ 핵심: ELB는 “서버가 많아서” 쓰는 게 아니라,
+        <b>서버 수를 신경 쓰지 않기 위해</b> 사용
+    </p>
+</div>
+
+
+
+<!-- Slide 7 -->
+<div class="slide">
+    <h2>ELB 종류 비교 (ALB vs NLB)</h2>
+
+    <table>
+        <tr>
+            <th>구분</th>
+            <th>ALB</th>
+            <th>NLB</th>
+        </tr>
+        <tr>
+            <td>동작 계층</td>
+            <td>
+                L7 (Application Layer)<br>
+                HTTP/HTTPS 이해 가능
+            </td>
+            <td>
+                L4 (Transport Layer)<br>
+                TCP/UDP 패킷 단위 처리
+            </td>
+        </tr>
+        <tr>
+            <td>처리 기준</td>
+            <td>
+                URL 경로, Host, Header 등<br>
+                <b>요청 내용 기반</b>
+            </td>
+            <td>
+                IP 주소, 포트 번호 기준<br>
+                <b>패킷 정보 기반</b>
+            </td>
+        </tr>
+        <tr>
+            <td>특징</td>
+            <td>
+                웹 애플리케이션에 최적화<br>
+                세밀한 라우팅 가능
+            </td>
+            <td>
+                초고성능 처리<br>
+                고정 IP 제공
+            </td>
+        </tr>
+        <tr>
+            <td>적합한 환경</td>
+            <td>
+                웹 서비스<br>
+                REST API<br>
+                마이크로서비스 구조
+            </td>
+            <td>
+                게임 서버<br>
+                실시간 스트리밍<br>
+                대규모 TCP 트래픽
+            </td>
+        </tr>
+    </table>
+
+    <p style="font-size:16px; color:#94a3b8; margin-top:16px;">
+        ※ 쉽게 말해, ALB는 “요청 내용을 보고 판단”,
+        NLB는 “속도와 처리량이 최우선”
+    </p>
+</div>
+
+<!-- Slide X : OSI vs TCP/IP 참고 -->
+<div class="slide">
+    <h2>OSI vs TCP/IP — L7 / L4는 어디서 나왔을까?</h2>
+
+    <p class="highlight" style="margin-bottom: 18px;">
+        네트워크를 이해하기 위한 OSI 모델과 실제 인터넷이 동작하는 TCP/IP 구조의 관계
+    </p>
+
+    <!-- 이미지 영역 (위, 크게) -->
+    <div style="margin-bottom: 22px;">
+        <img 
+            src="L7L4.jpg"
+            alt="OSI와 TCP/IP 계층 비교"
+            style="
+                width: 100%;
+                max-height: 360px;
+                object-fit: contain;
+                border-radius: 12px;
+                background: #020617;
+            "
+        />
+    </div>
+
+    <!-- 설명 영역 (아래) -->
+    <div>
+        <ul>
+            <li>
+                우리가 말하는  
+                <span class="highlight">L7 / L4</span>는  
+                OSI 개념을 빌려 쓰는 표현
+            </li>
+        </ul>
+
+        <ul style="margin-top: 14px;">
+            <li>
+                <b>L7 (Application)</b>  
+                → 요청 내용(URL, 헤더)을 보고 판단  
+                → <span class="highlight">ALB</span>
+            </li>
+            <li>
+                <b>L4 (Transport)</b>  
+                → IP·포트 기반으로 빠르게 전달  
+                → <span class="highlight">NLB</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+<!-- Slide 9 -->
+<div class="slide">
+    <h2>Amazon CloudFront</h2>
+    <p class="highlight">
+        전 세계 사용자에게 콘텐츠를 빠르게 전달하기 위한 CDN 서비스(유튜브/넷플을 생각하기!)
+    </p>
+            <div style="margin-bottom: 18px;">
+        <img
+            src="ACF.png"
+            alt="Amazon CloudFront 서비스 흐름"
+            style="
+                width: 100%;
+                max-height: 380px;
+                object-fit: contain;
+                border-radius: 12px;
+                background: #020617;
+            "
+        />
+    </div>
+    <ul>
+        <li>
+            이미지·동영상·정적 파일을
+            <b>엣지 로케이션</b>에 미리 저장(캐싱)
+        </li>
+        <li>
+            사용자는 가장 가까운 위치에서 콘텐츠를 받아
+            <b>응답 속도가 크게 개선</b>
+        </li>
+        <li>
+            AWS Shield, WAF와 연계해
+            보안까지 함께 강화 가능
+        </li>
+    </ul>
+</div>
+
+<!-- Slide 10 -->
+<div class="slide">
+    <h2>AWS 네트워크 핵심 서비스 한눈 비교</h2>
+
+    <table>
+        <tr>
+            <th>구분</th>
+            <th>VPC</th>
+            <th>Route 53</th>
+            <th>ELB</th>
+            <th>CloudFront</th>
+        </tr>
+        <tr>
+            <td>역할</td>
+            <td>네트워크 공간</td>
+            <td>DNS / 진입점 결정</td>
+            <td>트래픽 분산</td>
+            <td>콘텐츠 전송 가속</td>
+        </tr>
+        <tr>
+            <td>핵심 질문</td>
+            <td>서버는 어디에?</td>
+            <td>어디로 갈까?</td>
+            <td>누가 처리할까?</td>
+            <td>가까운 데 있나?</td>
+        </tr>
+        <tr>
+            <td>동작 위치</td>
+            <td>리전 내부</td>
+            <td>글로벌</td>
+            <td>VPC 내부</td>
+            <td>엣지 로케이션</td>
+        </tr>
+        <tr>
+            <td>주요 기능</td>
+            <td>Subnet, SG, NACL</td>
+            <td>라우팅 정책</td>
+            <td>Health Check</td>
+            <td>캐싱, CDN</td>
+        </tr>
+        <tr>
+            <td>트래픽 처리</td>
+            <td>X</td>
+            <td>X</td>
+            <td class="highlight">O</td>
+            <td>X</td>
+        </tr>
+        <tr>
+            <td>캐싱</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td class="highlight">O</td>
+        </tr>
+        <tr>
+            <td>비유</td>
+            <td>집/단지</td>
+            <td>전화번호부</td>
+            <td>교통정리</td>
+            <td>집 근처 편의점</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Quiz Slide 1 -->
+<div class="slide">
+<h2>QUIZ 1–2 : VPC</h2>
+
+<p><b>Q1.</b> 프라이빗 서브넷의 EC2가 인터넷으로 나가기 위해 필요한 구성은?</p>
+<div class="quiz">
+    <input type="radio" name="q1" id="q1a" class="wrong">
+    <label for="q1a">A. Internet Gateway</label>
+
+    <input type="radio" name="q1" id="q1b" class="wrong">
+    <label for="q1b">B. Elastic IP</label>
+
+    <input type="radio" name="q1" id="q1c" class="correct">
+    <label for="q1c">C. NAT Gateway</label>
+
+    <input type="radio" name="q1" id="q1d" class="wrong">
+    <label for="q1d">D. Route 53</label>
+
+    <div class="explain">
+        👉 프라이빗 서브넷은 IGW와 직접 연결되지 않으며,  
+        외부 통신은 NAT Gateway를 통해서만 가능합니다.
+    </div>
+</div>
+
+<p style="margin-top:24px;"><b>Q2.</b> Security Group에 대한 설명으로 옳은 것은?</p>
+<div class="quiz">
+    <input type="radio" name="q2" id="q2a" class="correct">
+    <label for="q2a">A. Stateful이며 인스턴스 단위로 적용된다</label>
+
+    <input type="radio" name="q2" id="q2b" class="wrong">
+    <label for="q2b">B. Stateless이다</label>
+
+    <input type="radio" name="q2" id="q2c" class="wrong">
+    <label for="q2c">C. Deny 규칙을 설정할 수 있다</label>
+
+    <input type="radio" name="q2" id="q2d" class="wrong">
+    <label for="q2d">D. 서브넷 단위로 적용된다</label>
+
+    <div class="explain">
+        👉 Security Group은 인스턴스 단위이며,  
+        요청에 대한 응답을 자동 허용하는 Stateful 방식입니다.
+    </div>
+</div>
+</div>
+
+
+<!-- Quiz Slide 2 -->
+<div class="slide">
+<h2>QUIZ 3–4 : Amazon Route 53</h2>
+
+<p><b>Q3.</b> Amazon Route 53의 핵심 역할은?</p>
+<div class="quiz">
+    <input type="radio" name="q3" id="q3a" class="wrong">
+    <label for="q3a">A. 웹 요청을 직접 처리한다</label>
+
+    <input type="radio" name="q3" id="q3b" class="correct">
+    <label for="q3b">B. 도메인에 대한 최종 IP를 결정한다</label>
+
+    <input type="radio" name="q3" id="q3c" class="wrong">
+    <label for="q3c">C. 서버 상태를 실시간 모니터링한다</label>
+
+    <input type="radio" name="q3" id="q3d" class="wrong">
+    <label for="q3d">D. 콘텐츠를 캐싱한다</label>
+
+    <div class="explain">
+        👉 Route 53은 권한 네임서버로서  
+        도메인에 대한 최종 IP 응답을 담당합니다.
+    </div>
+</div>
+
+<p style="margin-top:24px;"><b>Q4.</b> Route 53이 트래픽을 직접 처리하지 않는 이유는?</p>
+<div class="quiz">
+    <input type="radio" name="q4" id="q4a" class="wrong">
+    <label for="q4a">A. 성능이 느리기 때문에</label>
+
+    <input type="radio" name="q4" id="q4b" class="correct">
+    <label for="q4b">B. DNS 서비스이기 때문</label>
+
+    <input type="radio" name="q4" id="q4c" class="wrong">
+    <label for="q4c">C. 비용이 비싸기 때문에</label>
+
+    <input type="radio" name="q4" id="q4d" class="wrong">
+    <label for="q4d">D. 보안상 위험하기 때문에</label>
+
+    <div class="explain">
+        👉 Route 53은 DNS까지만 담당하며,  
+        실제 HTTP 트래픽은 ELB나 서버가 처리합니다.
+    </div>
+</div>
+</div>
+
+
+<!-- Quiz Slide 3 -->
+<div class="slide">
+<h2>QUIZ 5–6 : ELB</h2>
+
+<p><b>Q5.</b> ALB가 적합한 환경은?</p>
+<div class="quiz">
+    <input type="radio" name="q5" id="q5a" class="correct">
+    <label for="q5a">A. URL, API 경로 기반 웹 서비스</label>
+
+    <input type="radio" name="q5" id="q5b" class="wrong">
+    <label for="q5b">B. 초당 수백만 TCP 요청</label>
+
+    <input type="radio" name="q5" id="q5c" class="wrong">
+    <label for="q5c">C. 고정 IP가 필요한 서비스</label>
+
+    <input type="radio" name="q5" id="q5d" class="wrong">
+    <label for="q5d">D. 게임 서버</label>
+
+    <div class="explain">
+        👉 ALB는 L7 계층에서 동작하며  
+        URL, 헤더, API 기반 분기에 적합합니다.
+    </div>
+</div>
+
+<p style="margin-top:24px;"><b>Q6.</b> NLB의 특징으로 옳은 것은?</p>
+<div class="quiz">
+    <input type="radio" name="q6" id="q6a" class="wrong">
+    <label for="q6a">A. HTTP 헤더를 분석한다</label>
+
+    <input type="radio" name="q6" id="q6b" class="correct">
+    <label for="q6b">B. TCP/UDP 기반 초고속 처리</label>
+
+    <input type="radio" name="q6" id="q6c" class="wrong">
+    <label for="q6c">C. 경로 기반 라우팅</label>
+
+    <input type="radio" name="q6" id="q6d" class="wrong">
+    <label for="q6d">D. 쿠키를 사용한다</label>
+
+    <div class="explain">
+        👉 NLB는 L4 계층에서 동작하며  
+        대규모 트래픽과 고정 IP 환경에 적합합니다.
+    </div>
+</div>
+</div>
+
+
+<!-- Quiz Slide 4 -->
+<div class="slide">
+<h2>QUIZ 7–8 : CloudFront & 전체 흐름</h2>
+
+<p><b>Q7.</b> Amazon CloudFront의 핵심 목적은?</p>
+<div class="quiz">
+    <input type="radio" name="q7" id="q7a" class="wrong">
+    <label for="q7a">A. 서버 개수를 늘린다</label>
+
+    <input type="radio" name="q7" id="q7b" class="correct">
+    <label for="q7b">B. 콘텐츠 전송 속도를 높인다</label>
+
+    <input type="radio" name="q7" id="q7c" class="wrong">
+    <label for="q7c">C. DNS 요청을 처리한다</label>
+
+    <input type="radio" name="q7" id="q7d" class="wrong">
+    <label for="q7d">D. 데이터베이스를 복제한다</label>
+
+    <div class="explain">
+        👉 CloudFront는 엣지 로케이션에 콘텐츠를 캐싱해  
+        사용자와 가까운 곳에서 전달합니다.
+    </div>
+</div>
+
+<p style="margin-top:24px;"><b>Q8.</b> 올바른 서비스 흐름은?</p>
+<div class="quiz">
+    <input type="radio" name="q8" id="q8a" class="correct">
+    <label for="q8a">A. Route 53 → ELB → EC2</label>
+
+    <input type="radio" name="q8" id="q8b" class="wrong">
+    <label for="q8b">B. ELB → Route 53 → EC2</label>
+
+    <input type="radio" name="q8" id="q8c" class="wrong">
+    <label for="q8c">C. CloudFront → Route 53 → EC2</label>
+
+    <input type="radio" name="q8" id="q8d" class="wrong">
+    <label for="q8d">D. Route 53 → CloudFront → DNS</label>
+
+    <div class="explain">
+        👉 Route 53은 어디로 갈지 결정하고,  
+        ELB는 트래픽을 분산합니다.
+    </div>
+</div>
+</div>
+
+
+
+<div class="footer">← / → 이동</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+let idx = 0;
+document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight" && idx < slides.length - 1) {
+        slides[idx++].classList.remove("active");
+        slides[idx].classList.add("active");
+    }
+    if (e.key === "ArrowLeft" && idx > 0) {
+        slides[idx--].classList.remove("active");
+        slides[idx].classList.add("active");
+    }
+});
+</script>
+
+</body>
+</html>

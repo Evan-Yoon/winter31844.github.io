@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>Instance Store vs EFS</title>
+<style>
+
+body {
+    margin: 0;
+    background: #020617;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #e5e7eb;
+    overflow: hidden;
+}
+.diagram {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.diagram img {
+    max-width: 100%;
+    max-height: 280px;
+    border-radius: 8px;
+    background: #020617;
+}
+.diagram.structure img {
+    max-height: 240px;   /* ⬅️ 구조 슬라이드만 살짝 줄임 */
+}
+.caption {
+    font-size: 16px;
+    color: #94a3b8;
+    margin-top: 8px;
+}
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.frame {
+    width: 920px;
+    height: 620px;          /* ⬅️ 560 → 620 */
+    background: #0f172a;
+    border-radius: 14px;
+    padding: 28px 56px 40px 56px;    /* 위 | 오른쪽 | 아래 | 왼쪽 */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    box-sizing: border-box;
+}
+.slide { display: none; height: 100%; }
+.slide.active { display: block; }
+.slide ul {
+    margin-top: 10px;   /* 기본보다 줄임 */
+}
+
+.slide li {
+    margin-bottom: 6px;
+}
+
+.slide.intro {
+    text-align: center;
+}
+
+.slide.intro ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+h1 { font-size: 40px; }
+h2 { margin-top: 4px; font-size: 32px; color: #38bdf8; }
+p, li { font-size: 21px; line-height: 1.6; }
+
+.highlight { color: #facc15; font-weight: bold; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+th, td {
+    border: 1px solid #334155;
+    padding: 10px;
+    text-align: center;
+}
+th { background: #1e293b; color: #38bdf8; }
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    font-size: 19px;
+    background: #1e293b;
+    color: #e5e7eb;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    cursor: pointer;
+}
+button:hover { background: #334155; }
+
+.result { margin-top: 16px; font-size: 19px; }
+.correct { color: #22c55e; font-weight: bold; }
+.wrong { color: #ef4444; font-weight: bold; }
+
+.footer {
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    font-size: 14px;
+    color: #94a3b8;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<div class="frame">
+
+<!-- Slide 1 -->
+<div class="slide active intro">
+    <h1 class="highlight">Instance Store & EFS</h1>
+    <br>
+    <p>👀시험에서 가장 자주 나오는 비교 포인트</p>
+
+    <br>
+    <ul>
+        <li> ✅ 데이터 수명 (휘발성 vs 영구)</li>
+        <li> ✅ 공유 가능 여부</li>
+    <br>
+    <br>
+    <br>
+    <p class="highlight">발표자 : 이지호🐯
+    </ul>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+    <h2>Instance Store 개념</h2>
+    <p class="highlight">빠르지만 휘발성인 물리적 디스크</p>
+    <ul>
+        <li>EC2 인스턴스가 실행되는 물리적 호스트에 직접 연결</li>
+        <li>Ephemeral Storage</li>
+    </ul>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+    <h2>Instance Store 특징</h2>
+    <ul>
+        <li><span class="highlight">인스턴스 중지/종료 시 데이터 삭제</span></li>
+        <li>네트워크 미사용 → 매우 높은 IOPS</li>
+        <li>캐시, 버퍼, 스크래치 데이터</li>
+    </ul>
+</div>
+
+<!-- Slide 3-1 -->
+<div class="slide">
+    <h2>Instance Store 구조 이해</h2>
+    <p>
+        Instance Store는 <span class="highlight">EC2가 실행 중인 물리 호스트에 종속</span>된 디스크입니다.
+    </p>
+
+<div class="diagram structure">
+    <img src="instance_storage.png" alt="Instance Store 구조도">
+    <div class="caption">
+        각 EC2 인스턴스는 동일 호스트 내 Instance Store만 사용 가능
+    </div>
+</div>
+
+    <ul>
+        <li>✔️ 다른 호스트의 인스턴스와 <b>공유 불가</b></li>
+        <li>✔️ 인스턴스 종료/중지 시 데이터 소실</li>
+        <li>✔️ 네트워크 미사용 → 초고속 I/O</li>
+    </ul>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide">
+    <h2>Amazon EFS 개념</h2>
+    <p class="highlight">여러 서버가 공유하는 네트워크 파일 시스템</p>
+    <ul>
+        <li>완전 관리형 NFS</li>
+        <li>Linux 기반 EC2 전용</li>
+    </ul>
+</div>
+<!-- Slide 4-1 -->
+<div class="slide">
+    <h2>Amazon EFS 구조 이해</h2>
+    <p>
+        EFS는 <span class="highlight">각 AZ마다 Mount Target</span>를 두고,
+        여러 EC2 인스턴스가 동시에 접근합니다.
+    </p>
+
+    <div class="diagram">
+        <img src="efs-ec2-how-it-works-Regional_china-world.png" alt="EFS 구조도">
+        <div class="caption">
+            Multi-AZ 환경에서 EC2들이 하나의 EFS 파일 시스템을 공유
+        </div>
+    </div>
+
+    <ul>
+        <li>✔️ AZ 장애 시에도 다른 AZ에서 접근 가능</li>
+        <li>✔️ 웹 서버, 컨테이너 환경에 적합</li>
+        <li>✔️ Linux 기반 NFS 공유 스토리지</li>
+    </ul>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide">
+    <h2>EFS 특징 및 제약</h2>
+    <ul>
+        <li><span class="highlight">Multi-AZ, 다수 EC2 동시 접근</span></li>
+        <li>자동 확장 / 고가용성</li>
+        <li>Linux 전용 (Windows → FSx)</li>
+    </ul>
+</div>
+
+<!-- Slide 6 : Cheat Sheet -->
+<div class="slide">
+    <h2>발표 요약표 (Cheat Sheet)</h2>
+
+    <table>
+        <tr>
+            <th>특징</th>
+            <th>Instance Store</th>
+            <th>Amazon EFS</th>
+        </tr>
+        <tr>
+            <td>비유</td>
+            <td>컴퓨터 본체 안에 있는 엄청 빠른 임시 RAM 디스크</td>
+            <td>사무실 사람들이 함께 쓰는 네트워크 공유 폴더</td>
+        </tr>
+        <tr>
+            <td>데이터 수명</td>
+            <td><span class="highlight">휘발성 (Ephemeral)</span> – 끄면 삭제됨</td>
+            <td><span class="highlight">영구적</span> – 삭제 전까지 유지됨</td>
+        </tr>
+        <tr>
+            <td>연결성</td>
+            <td>해당 인스턴스 전용</td>
+            <td>수백 개 인스턴스 공유 (<span class="highlight">Multi-AZ</span>)</td>
+        </tr>
+        <tr>
+            <td>주 용도</td>
+            <td>캐시, 임시 데이터, 초고속 연산</td>
+            <td>웹 서버 콘텐츠 공유, 데이터 공유</td>
+        </tr>
+        <tr>
+            <td>OS</td>
+            <td>모든 OS</td>
+            <td><span class="highlight">Linux 전용</span></td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- Quiz Slides -->
+<div class="slide quiz">
+    <h2 id="q-title"></h2>
+    <p id="q-text"></p>
+    <div id="choices"></div>
+    <div id="result" class="result"></div>
+</div>
+
+</div>
+</div>
+
+<div class="footer">← / → 이동</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+let slideIndex = 0;
+
+const quizData = [
+{
+    title: "Q1. 데이터 수명",
+    text: "EC2 인스턴스를 중지했다가 다시 시작했을 때 데이터가 유지되지 않는 스토리지는?",
+    choices: ["Amazon EFS", "Amazon S3", "Instance Store", "Amazon EBS"],
+    answer: 2,
+    explain: "Instance Store는 휘발성 스토리지로, 인스턴스를 중지하거나 종료하면 데이터가 삭제됩니다."
+},
+{
+    title: "Q2. 공유 스토리지",
+    text: "여러 AZ의 EC2 인스턴스가 동시에 파일을 읽고 써야 할 때 가장 적절한 스토리지는?",
+    choices: ["Instance Store", "Amazon EBS", "Amazon EFS", "Amazon S3"],
+    answer: 2,
+    explain: "EFS는 Multi-AZ 환경에서 다수 EC2가 동시에 마운트할 수 있는 공유 파일 시스템입니다."
+},
+{
+    title: "Q3. 고성능 캐시",
+    text: "데이터 유실은 허용되지만 초고속 I/O가 필요한 캐시 용도로 적합한 스토리지는?",
+    choices: ["Amazon EFS", "Amazon S3", "Amazon EBS", "Instance Store"],
+    answer: 3,
+    explain: "Instance Store는 네트워크를 거치지 않아 매우 높은 IOPS를 제공하므로 캐시에 적합합니다."
+},
+{
+    title: "Q4. OS + 서비스 선택",
+    text: "Linux EC2 여러 대에서 웹 콘텐츠를 공유하려 합니다. 가장 적절한 스토리지는?",
+    choices: ["Amazon FSx for Windows", "Amazon EFS", "Instance Store", "Amazon EBS"],
+    answer: 1,
+    explain: "Amazon EFS는 Linux 전용 NFS 기반 공유 파일 시스템입니다."
+}
+];
+
+let quizIndex = 0;
+
+function renderQuiz() {
+    const q = quizData[quizIndex];
+    document.getElementById("q-title").innerText = q.title;
+    document.getElementById("q-text").innerText = q.text;
+
+    const choicesDiv = document.getElementById("choices");
+    const resultDiv = document.getElementById("result");
+    choicesDiv.innerHTML = "";
+    resultDiv.innerHTML = "";
+
+    q.choices.forEach((c, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = c;
+        btn.onclick = () => {
+            resultDiv.innerHTML =
+                i === q.answer
+                ? `<p class="correct">정답 ✔️</p><p>${q.explain}</p>`
+                : `<p class="wrong">오답 ❌</p><p>${q.explain}</p>`;
+        };
+        choicesDiv.appendChild(btn);
+    });
+}
+
+document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") {
+        if (slideIndex < slides.length - 1) {
+            slideIndex++;
+            slides.forEach(s => s.classList.remove("active"));
+            slides[slideIndex].classList.add("active");
+            if (slides[slideIndex].classList.contains("quiz")) renderQuiz();
+        } else if (quizIndex < quizData.length - 1) {
+            quizIndex++;
+            renderQuiz();
+        }
+    }
+    if (e.key === "ArrowLeft") {
+        if (quizIndex > 0 && slides[slideIndex].classList.contains("quiz")) {
+            quizIndex--;
+            renderQuiz();
+        } else if (slideIndex > 0) {
+            slideIndex--;
+            slides.forEach(s => s.classList.remove("active"));
+            slides[slideIndex].classList.add("active");
+        }
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+📌 1회차 — 클라우드 컴퓨팅 기본 개념 [1/6(화)]
+발표자    소주제
+A(대산)    클라우드 컴퓨팅 정의 & 온프레미스 비교
+B(현석)    클라우드 장점 (비용·확장성·민첩성)
+C(지현)    배포 모델 (Public / Private / Hybrid)
+D(지호)    서비스 모델 (IaaS / PaaS / SaaS)
+
+📌 2회차 — AWS 글로벌 인프라 [1/8(목)]
+발표자    소주제
+A(대산)    Region 개념 & 선택 기준
+B(현석)    Availability Zone & 고가용성
+C(현석)    Edge Location & CDN
+D(지호)    Global Service vs Regional Service
+
+📌 3회차 — Compute 핵심 [1/13(화)]
+발표자    소주제
+A(대산)    EC2 기본 개념 & 인스턴스 타입
+B(대산)    EC2 Security Group
+C(지현)    Auto Scaling 개념
+D(지현)    Lambda vs EC2 vs LightSail
+
+📌 4회차 — Storage 핵심 [1/15(목)]
+발표자    소주제
+A(현석)    S3 (객체 스토리지)
+B(현석)    EBS (블록 스토리지)
+C(지호)    Instance Store
+D(지호)    EFS (파일 스토리지)
+
+📌 5회차 — Database 핵심 [1/20(화)]
+발표자    소주제
+A(대산)    RDS
+B(대산)    Aurora
+C(지현)    DynamoDB
+D(지현)    ElastiCache / Redshift
+
+📌 6회차 — Network & Delivery [1/22(목)]
+발표자    소주제
+A(현석)    VPC 기본 개념
+B(현석)    Route 53 (DNS)
+C(지호)    Load Balancer (ALB / NLB)
+D(지호)    CloudFront (CDN)
+
+📌 7회차 — 보안 & 계정 관리 [1/27(화)]
+발표자    소주제
+A(대산)    Shared Responsibility Model
+B(대산)    IAM (User / Group / Role)
+C(지현)    IAM Policy & 접근 방식
+D(지현)    암호화 & MFA
+
+📌 8회차 — 비용 & 아키텍처 원칙 [1/29(목)]
+발표자    소주제
+A(현석)    EC2 구매 옵션 (On-Demand / RI / Spot)
+B(현석)    Savings Plan
+C(지호)    Cost Explorer & Budgets
+D(지호)    Well-Architected Framework & CAF
+
+📌 9회차 — 문제풀이 [2/3(화)]
+
+📌 10회차 — 문제풀이 [2/5(목)온라인 or 2/10(화)]

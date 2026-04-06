@@ -149,7 +149,7 @@ pip install -r requirements.txt
 
 ## 채팅창 AI 기능 구현
 
-> `채팅창에 ai 기능 추가` — 16:26  
+> `채팅창에 ai 기능 추가` — 16:26
 > 15 files changed, 826 insertions(+)
 
 환경 문제들을 다 해결하고 나서야 본 작업을 시작했다. 결과물은 5개 핵심 파일.
@@ -223,7 +223,7 @@ function WelcomeView({ onChipPress }) {
 
 로컬에서 첫 메시지를 보냈더니 서버에서 500이 떨어졌다.
 
-> `chatGPT api 500 error 수정` — 17:29  
+> `chatGPT api 500 error 수정` — 17:29
 > 5 files changed, 168 insertions(+), 103 deletions(-)
 
 원인은 `responder.py`의 history 처리였다. 프론트에서 보낸 history 배열 안에 `role`이나 `content` 키가 없거나, role이 OpenAI 스펙에 맞지 않는 경우 OpenAI API가 400을 뱉고, FastAPI가 이를 잡지 못해 500으로 터졌다.

@@ -106,13 +106,13 @@ def check_inventory(filename):
 def generate_order_sheet(reorder_list):
     today = datetime.now().strftime('%Y-%m-%d')
     filename = f'비품발주요청서_{today}.txt'
-    
+
     with open(filename, 'w', encoding='utf-8-sig') as f:
         f.write(f'비품 발주 요청서\n')
         f.write(f'작성일: {today}\n')
         f.write(f'부서: 총무팀\n')
         f.write('=' * 40 + '\n')
-        
+
         total = 0
         for item in reorder_list:
             f.write(f"\n품목: {item['품목명']}\n")
@@ -120,10 +120,10 @@ def generate_order_sheet(reorder_list):
             f.write(f"  발주 수량: {item['발주수량']}개\n")
             f.write(f"  예상 금액: {item['예상금액']:,}원\n")
             total += item['예상금액']
-        
+
         f.write('\n' + '=' * 40 + '\n')
         f.write(f'총 예상 금액: {total:,}원\n')
-    
+
     return filename
 ```
 
