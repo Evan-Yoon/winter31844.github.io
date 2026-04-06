@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Security: Deep Dive (Final)</title>
+    <style>
+        :root {
+            --aws-orange: #FF9900;
+            --aws-blue: #232F3E;
+            --aws-green: #3F8624;
+            --aws-red: #D13212;
+            --text-color: #333;
+            --code-bg: #f8f8f8;
+        }
+        body {
+            font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #232f3e;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: white;
+            max-width: 1600px;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px 80px;
+            box-sizing: border-box;
+            background: white;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .slide.active { display: flex; }
+
+        h1 { color: var(--aws-blue); border-bottom: 3px solid var(--aws-orange); padding-bottom: 10px; font-size: 2.2em; }
+        h2 { color: var(--aws-orange); margin-top: 5px; font-size: 1.4em; }
+        h3 { color: #0073bb; margin-top: 25px; border-left: 5px solid #0073bb; padding-left: 10px; margin-bottom: 10px; }
+        
+        .highlight { color: #d13212; font-weight: bold; background: #fff3e0; padding: 2px 5px; border-radius: 3px;}
+        .eng-term { color: #555; font-size: 0.9em; font-weight: bold; }
+        .kr-term { color: #888; font-size: 0.85em; }
+
+        /* 테이블 스타일 */
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9em; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: var(--aws-blue); color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* --- AWS Console Mockup Styles --- */
+        .console-window {
+            border: 1px solid #d5dbdb;
+            background: #fff;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .cw-header {
+            background: var(--aws-blue);
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        .cw-body { padding: 20px; font-size: 0.9rem; color: #16191f; }
+        
+        .form-label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.95em; }
+        .form-subtext { font-size: 0.85em; color: #555; margin-bottom: 10px; }
+        
+        /* JSON Editor Mockup */
+        .json-editor {
+            background: var(--code-bg);
+            border: 1px solid #ccc;
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 16px; /* 폰트 크기 키움 */
+            line-height: 1.6;
+            color: #333;
+            border-radius: 4px;
+        }
+        .json-key { color: #a11; font-weight: bold; }
+        .json-string { color: #232F3E; }
+        .json-comment { color: #3F8624; font-style: italic; }
+
+        /* Checkbox Mockup */
+        .mock-checkbox-group {
+            border: 1px solid #ccc; padding: 15px; border-radius: 4px; margin-bottom: 15px;
+        }
+        .mock-checkbox { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+        .mock-check-box { width: 16px; height: 16px; border: 1px solid #555; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .checked { background: #0073bb; border-color: #0073bb; color: white; }
+
+        /* MFA Mockup */
+        .mfa-screen { text-align: center; border: 1px dashed #ccc; padding: 20px; background: #fafafa; }
+
+        /* KMS Radio Mockup */
+        .radio-option { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #eee; margin-bottom: 8px; cursor: pointer; border-radius: 4px; }
+        .radio-option:hover { background: #f9f9f9; border-color: #ec7211; }
+        .radio-circle { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #555; }
+        .radio-selected { border-color: #ec7211; background: #fff8f3; }
+        .radio-selected .radio-circle { border-color: #ec7211; background: radial-gradient(#ec7211 40%, transparent 50%); }
+
+        /* Quiz Styles (English Main) */
+        .exam-paper {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+            margin-bottom: 20px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+        .exam-question { font-weight: bold; margin-bottom: 15px; color: #000; font-size: 1.05em; }
+        .exam-kor { display: block; color: #666; font-size: 0.85em; margin-top: 5px; font-weight: normal; }
+        .exam-options { margin-left: 10px; }
+        .exam-option { margin-bottom: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: 0.2s; }
+        .exam-option:hover { background-color: #f0f8ff; }
+        
+        .answer-box { 
+            display: none; 
+            margin-top: 15px; 
+            padding: 15px; 
+            background: #f1f8e9; 
+            border-left: 5px solid #8bc34a; 
+            color: #33691e;
+        }
+
+        /* User Image Placeholder */
+        .user-img-box {
+            width: 100%;
+            max-height: 400px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            color: #888;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .user-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        /* Nav */
+        .nav-buttons { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
+        .nav-btn { background-color: rgba(35, 47, 62, 0.9); color: white; border: none; padding: 12px 24px; font-size: 16px; cursor: pointer; border-radius: 30px; margin-left: 10px; transition: 0.2s; }
+        .nav-btn:hover { background-color: var(--aws-orange); transform: translateY(-2px); }
+        .page-num { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: #999; }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+
+    <div class="slide active" id="slide1">
+        <div style="text-align: center; margin-top: 15%;">
+            <div style="font-size: 4em; margin-bottom: 20px;">🛡️ 🔐 🔑</div>
+            <h1 style="border: none; font-size: 3em;">AWS Security & Compliance</h1>
+            <h2 style="color: #555;">IAM · Access · MFA · Encryption</h2>
+            <p style="font-size: 1.2em;">AWS Certified Cloud Practitioner (CLF-C02)</p>
+            <div style="margin-top: 50px; background: #f8f9fa; padding: 20px; display: inline-block; border-radius: 8px;">
+                <p style="margin: 0;">발표자: <strong>Winter</strong></p>
+            </div>
+            <p style="color: #888; font-size: 0.9em; margin-top: 80px;">키보드 좌우 방향키로 이동하세요</p>
+        </div>
+        <div class="page-num">1 / 10</div>
+    </div>
+
+    <div class="slide" id="slide2">
+        <h1>1. IAM (Identity and Access Management)</h1>
+        <p>"누가(Who) 무엇을(What) 할 수 있는가"를 제어하는 AWS 보안의 심장입니다.</p>
+        
+        <div style="display: flex; justify-content: space-around; margin-top: 40px;">
+            <div style="text-align: center; width: 30%;">
+                <div style="font-size: 3em;">👤</div>
+                <h3>Users (사용자)</h3>
+                <p><strong>Root User</strong>와 <strong>IAM User</strong>로 나뉨.</p>
+            </div>
+            <div style="text-align: center; width: 30%;">
+                <div style="font-size: 3em;">👥</div>
+                <h3>Groups (그룹)</h3>
+                <p>사용자들의 집합.</p>
+            </div>
+            <div style="text-align: center; width: 30%;">
+                <div style="font-size: 3em;">🎭</div>
+                <h3>Roles (역할)</h3>
+                <p>일시적인 권한 (EC2, Lambda 등).</p>
+            </div>
+        </div>
+        
+        <div style="background: #fff3e0; padding: 20px; margin-top: 30px; border-left: 5px solid #d13212; border-radius: 4px;">
+            <h3 style="margin: 0 0 10px 0; color: #d13212;">🔥 시험 핵심: Root User (루트 사용자)</h3>
+            <p style="margin: 5px 0;">계정 생성 시 만들어지는 슈퍼 관리자. <span style="background:yellow;">절대 일상적인 작업에 사용하지 말 것!</span></p>
+            <p style="margin: 5px 0;">처음에 IAM User 하나 만들고, 로그아웃 후 봉인해야 함.</p>
+        </div>
+        <div class="page-num">2 / 10</div>
+    </div>
+
+    <div class="slide" id="slide3">
+        <h1>2. IAM Policy (정책) 구조</h1>
+        <p>권한은 <strong>JSON 문서</strong>로 정의됩니다. "최소 권한의 원칙(Least Privilege)"을 기억하세요.</p>
+
+        <div class="console-window">
+            <div class="cw-header">Permissions policies (JSON Editor)</div>
+            <div class="cw-body" style="padding: 0;">
+                <div class="json-editor">
+                    <div>{</div>
+                    <div style="padding-left: 20px;"><span class="json-key">"Version"</span>: <span class="json-string">"2012-10-17"</span>,</div>
+                    <div style="padding-left: 20px;"><span class="json-key">"Statement"</span>: [</div>
+                    <div style="padding-left: 40px;">{</div>
+                    <div style="padding-left: 60px;"><span class="json-key">"Effect"</span>: <span class="json-string">"Allow"</span>, <span class="json-comment">// 허용할 것인가? (Deny면 거부)</span></div>
+                    <div style="padding-left: 60px;"><span class="json-key">"Action"</span>: <span class="json-string">"s3:ListBucket"</span>, <span class="json-comment">// 무엇을? (S3 목록 보기)</span></div>
+                    <div style="padding-left: 60px;"><span class="json-key">"Resource"</span>: <span class="json-string">"arn:aws:s3:::example_bucket"</span> <span class="json-comment">// 어디에? (특정 버킷)</span></div>
+                    <div style="padding-left: 40px;">}</div>
+                    <div style="padding-left: 20px;">]</div>
+                    <div>}</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h3>📝 정책 해석</h3>
+            <ul>
+                <li><strong>Effect:</strong> "Allow" (허용) 혹은 "Deny" (거부)</li>
+                <li><strong>Action:</strong> 무엇을 할 수 있는가?</li>
+                <li><strong>Resource:</strong> 대상은 무엇인가?</li>
+            </ul>
+        </div>
+        <div class="page-num">3 / 10</div>
+    </div>
+
+    <div class="slide" id="slide4">
+        <h1>3. AWS 접근 방식 3가지 (Access Methods)</h1>
+        <p>시험에는 무조건 3가지가 나옵니다. 영어 약자와 한글 의미를 꼭 기억하세요.</p>
+
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+            <div style="flex: 1; background: #e3f2fd; padding: 15px; border-radius: 8px;">
+                <h3>1. Console</h3>
+                <p>웹사이트 접속</p>
+                <div style="font-size: 0.9em; margin-bottom: 10px; background:white; padding:5px; border:1px solid #ccc;">🔑 ID + Password</div>
+            </div>
+
+            <div style="flex: 1; background: #fff3e0; padding: 15px; border-radius: 8px;">
+                <h3 class="eng-term">2. CLI <span class="kr-term">(Command Line Interface)</span></h3>
+                <p><strong>"명령줄 인터페이스"</strong></p>
+                <p style="font-size: 0.9em; color: #555;">마우스 없이 검은 화면(터미널)에서 타자로 명령을 내리는 도구입니다.</p>
+                <div style="font-size: 0.9em; margin-top: 10px; background:white; padding:5px; border:1px solid #ccc;">🔑 Access Key</div>
+            </div>
+
+            <div style="flex: 1; background: #f3e5f5; padding: 15px; border-radius: 8px;">
+                <h3 class="eng-term">3. SDK <span class="kr-term">(Software Development Kit)</span></h3>
+                <p><strong>"소프트웨어 개발 키트"</strong></p>
+                <p style="font-size: 0.9em; color: #555;">파이썬(Python), 자바(Java) 같은 <strong>프로그래밍 언어(코드)</strong> 안에서 AWS를 조작할 때 쓰는 도구 모음입니다.</p>
+                <div style="font-size: 0.9em; margin-top: 10px; background:white; padding:5px; border:1px solid #ccc;">🔑 Access Key</div>
+            </div>
+        </div>
+
+        <div class="console-window">
+            <div class="cw-header">Create user (실제 설정 화면)</div>
+            <div class="cw-body">
+                <p style="color: #d13212; font-size: 0.9em;">※ CLI와 SDK는 같은 'Access Key'를 쓰기 때문에 설정 화면에서는 하나로 묶여 있습니다.</p>
+                <div class="mock-checkbox-group">
+                    <div class="mock-checkbox">
+                        <div class="mock-check-box checked">✔</div>
+                        <div>
+                            <strong>Programmatic access</strong> (CLI & SDK)
+                        </div>
+                    </div>
+                </div>
+                <div class="mock-checkbox-group">
+                    <div class="mock-checkbox">
+                        <div class="mock-check-box checked">✔</div>
+                        <div>
+                            <strong>AWS Management Console access</strong> (Console)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-num">4 / 10</div>
+    </div>
+
+    <div class="slide" id="slide5">
+        <h1>4. MFA (Multi-Factor Authentication)</h1>
+        <p>"비밀번호(아는 것) + 스마트폰(가진 것)" = 보안 2배</p>
+        
+        <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+            <div class="console-window" style="width: 45%;">
+                <div class="cw-header">Assign MFA device</div>
+                <div class="cw-body mfa-screen">
+                    <div style="background:#333; color:white; width:80px; height:80px; margin:0 auto; display:flex; align-items:center; justify-content:center;">QR</div>
+                    <p style="font-size:0.8em;">Google Authenticator로 스캔하세요.</p>
+                    
+                    <label class="form-label" style="text-align: left;">MFA code 1</label>
+                    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px;">
+                    
+                    <label class="form-label" style="text-align: left;">MFA code 2</label>
+                    <input type="text" style="width: 100%; padding: 5px;">
+                    
+                    <button style="background: #ec7211; color: white; border: none; padding: 8px 15px; margin-top: 15px;">Add MFA</button>
+                </div>
+            </div>
+
+            <div style="width: 50%; padding-top: 20px;">
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; border-left: 5px solid #2e7d32; font-size: 1.1em;">
+                    <h3>❓ 왜 코드를 2개나 입력하나요?</h3>
+                    <p><strong>"동기화(Sync)를 맞추기 위해서입니다!"</strong></p>
+                    <p>MFA 코드는 30초마다 바뀝니다. AWS 서버 시간과 내 핸드폰 시간이 정확히 맞는지 확인하기 위해, <strong>연속된 두 개의 코드</strong>를 입력받아 확실하게 검증하는 것입니다.</p>
+                </div>
+                <div style="margin-top: 20px; background: #fff3e0; padding: 15px; border-radius: 8px;">
+                    <p class="highlight" style="margin: 0; font-size: 1.2em;">💡 시험 팁: Root User는 무조건 MFA를 켜야 한다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-num">5 / 10</div>
+    </div>
+
+    <div class="slide" id="slide6">
+        <h1>5. Encryption: KMS vs CloudHSM & S3 Options</h1>
+        
+        <h3>🔍 KMS vs CloudHSM 비교 (기업 예시)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="15%">구분</th>
+                    <th width="42%">AWS KMS (Key Management Service)</th>
+                    <th width="43%">AWS CloudHSM (Hardware Security Module)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>방식</strong></td>
+                    <td><strong>멀티 테넌트 (Multi-tenant)</strong><br>하나의 하드웨어를 여러 회사가 나눠 씀 (논리적 분리)</td>
+                    <td><strong>싱글 테넌트 (Single-tenant)</strong><br>나만 쓰는 <strong>전용 하드웨어</strong> 장비</td>
+                </tr>
+                <tr>
+                    <td><strong>특징</strong></td>
+                    <td>사용하기 쉽고, AWS 서비스들과 자동 연동됨.</td>
+                    <td>관리가 어렵고 비쌈. AWS 직원조차 접근 불가능.</td>
+                </tr>
+                <tr>
+                    <td><strong>기업 예시</strong></td>
+                    <td>
+                        🏢 <strong>스타트업, 일반 기업 (당근마켓, 배민 등)</strong><br>
+                        "안전하면 되고 관리가 편한 게 좋아."
+                    </td>
+                    <td>
+                        🏦 <strong>금융권, 국방부, 정부 (은행, 군대)</strong><br>
+                        "법적으로 암호화 키가 <strong>전용 장비</strong>에만 있어야 해."
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>🔒 S3 암호화 옵션 설명</h3>
+        <ul>
+            <li><strong>SSE-S3:</strong> "기본형". S3가 알아서 암호화 키를 만들고 관리함. (가장 간편, 무료)</li>
+            <li><strong>SSE-KMS:</strong> "고급형". KMS 서비스를 써서 <strong>'누가 언제 키를 썼는지'</strong> 추적 가능.</li>
+            <li><strong>DSSE-KMS:</strong> "이중 잠금". 최신 옵션으로, 서버 측에서 <strong>두 번</strong> 암호화함.</li>
+        </ul>
+
+        <div class="user-img-box" style="height: 250px;">
+            <img src="s3_encrypt.png" alt="[여기에 사용자가 올린 S3 암호화 옵션 사진이 들어갑니다. 없으면 s3_encrypt.png 확인]">
+        </div>
+        <div class="page-num">6 / 10</div>
+    </div>
+
+    <div class="slide" id="slide7">
+        <h1>📌 시험 대비 핵심 요약</h1>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="background: #fff3e0; padding: 20px; border-radius: 8px;">
+                <h3 style="color: #d13212;">IAM & Access</h3>
+                <ul>
+                    <li><strong>Root User</strong>: MFA 필수, 평소 사용 금지.</li>
+                    <li><strong>IAM Role</strong>: EC2가 S3 접근할 때 (서비스용).</li>
+                    <li><strong>CLI</strong>: 터미널 (Access Key).</li>
+                    <li><strong>SDK</strong>: 코드/개발 (Access Key).</li>
+                </ul>
+            </div>
+            <div style="background: #e3f2fd; padding: 20px; border-radius: 8px;">
+                <h3 style="color: #0073bb;">Encryption</h3>
+                <ul>
+                    <li><strong>KMS</strong>: 일반적인 키 관리 서비스.</li>
+                    <li><strong>CloudHSM</strong>: 규제 준수용 전용 하드웨어.</li>
+                    <li><strong>Audit (감사)</strong>: KMS를 쓰면 사용 기록 추적 가능.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-num">7 / 10</div>
+    </div>
+
+    <div class="slide" id="slide8">
+        <h1>Practice Exam (Questions 1-3)</h1>
+
+        <div class="exam-paper">
+            <div class="exam-question">
+                1. Which AWS credential is required for a developer to access AWS services using the AWS Command Line Interface (CLI)?
+                <span class="exam-kor">(개발자가 AWS CLI를 사용하여 AWS 서비스에 액세스하려면 어떤 자격 증명이 필요합니까?)</span>
+            </div>
+            <div class="exam-options">
+                <div class="exam-option">A) User name and Password</div>
+                <div class="exam-option">B) Access Key ID and Secret Access Key</div>
+                <div class="exam-option">C) MFA Token</div>
+                <div class="exam-option">D) SSH Key Pair</div>
+            </div>
+            <button class="answer-btn" onclick="toggleAnswer('ans1')">See Answer</button>
+            <div id="ans1" class="answer-box">
+                <strong>Answer: B</strong><br>
+                CLI and SDK use <strong>Access Keys</strong>. (Passwords are for the Console).
+            </div>
+        </div>
+
+        <div class="exam-paper">
+            <div class="exam-question">
+                2. What is the recommended best practice for securing the AWS root user account?
+                <span class="exam-kor">(AWS 루트 사용자 계정을 보호하기 위한 권장 모범 사례는 무엇입니까?)</span>
+            </div>
+            <div class="exam-options">
+                <div class="exam-option">A) Share the password with the admin team</div>
+                <div class="exam-option">B) Use the root user for daily administrative tasks</div>
+                <div class="exam-option">C) Enable Multi-Factor Authentication (MFA)</div>
+                <div class="exam-option">D) Create access keys for the root user</div>
+            </div>
+            <button class="answer-btn" onclick="toggleAnswer('ans2')">See Answer</button>
+            <div id="ans2" class="answer-box">
+                <strong>Answer: C</strong><br>
+                Root user should have <strong>MFA enabled</strong> and should NOT be used for daily tasks.
+            </div>
+        </div>
+
+        <div class="exam-paper">
+            <div class="exam-question">
+                3. An application running on an Amazon EC2 instance needs to access an Amazon S3 bucket. What is the most secure way to grant permissions?
+                <span class="exam-kor">(EC2 인스턴스에서 실행되는 애플리케이션이 S3 버킷에 액세스해야 합니다. 가장 안전한 권한 부여 방법은 무엇입니까?)</span>
+            </div>
+            <div class="exam-options">
+                <div class="exam-option">A) Store Access Keys in the application code</div>
+                <div class="exam-option">B) Create an IAM User for the EC2 instance</div>
+                <div class="exam-option">C) Attach an IAM Role to the EC2 instance</div>
+                <div class="exam-option">D) Make the S3 bucket public</div>
+            </div>
+            <button class="answer-btn" onclick="toggleAnswer('ans3')">See Answer</button>
+            <div id="ans3" class="answer-box">
+                <strong>Answer: C</strong><br>
+                Use <strong>IAM Roles</strong> for AWS services (like EC2) to access other services. Never hard-code keys.
+            </div>
+        </div>
+        <div class="page-num">8 / 10</div>
+    </div>
+
+    <div class="slide" id="slide9">
+        <h1>Practice Exam (Questions 4-6)</h1>
+
+        <div class="exam-paper">
+            <div class="exam-question">
+                4. Which service allows you to create and manage encryption keys and control the use of encryption across a wide range of AWS services?
+                <span class="exam-kor">(암호화 키를 생성 및 관리하고 다양한 AWS 서비스에서 암호화 사용을 제어할 수 있는 서비스는 무엇입니까?)</span>
+            </div>
+            <div class="exam-options">
+                <div class="exam-option">A) AWS Certificate Manager (ACM)</div>
+                <div class="exam-option">B) AWS CloudHSM</div>
+                <div class="exam-option">C) AWS Key Management Service (AWS KMS)</div>
+                <div class="exam-option">D) AWS Secrets Manager</div>
+            </div>
+            <button class="answer-btn" onclick="toggleAnswer('ans4')">See Answer</button>
+            <div id="ans4" class="answer-box">
+                <strong>Answer: C</strong><br>
+                <strong>AWS KMS</strong> is the primary service for managed encryption keys. (CloudHSM is for dedicated hardware compliance).
+            </div>
+        </div>
+
+        <div class="exam-paper">
+            <div class="exam-question">
+                5. Which IAM principle dictates that you should grant only the permissions required to perform a task?
+                <span class="exam-kor">(작업을 수행하는 데 필요한 권한만 부여해야 한다는 IAM 원칙은 무엇입니까?)</span>
+            </div>
+            <div class="exam-options">
+                <div class="exam-option">A) Least Privilege</div>
+                <div class="exam-option">B) Root Access</div>
+                <div class="exam-option">C) Power User Access</div>
+                <div class="exam-option">D) Multi-Factor Authentication</div>
+            </div>
+            <button class="answer-btn" onclick="toggleAnswer('ans5')">See Answer</button>
+            <div id="ans5" class="answer-box">
+                <strong>Answer: A</strong><br>
+                <strong>Least Privilege (최소 권한)</strong> means granting only necessary permissions.
+            </div>
+        </div>
+
+        <div class="exam-paper">
+            <div class="exam-question">
+                6. Under the AWS Shared Responsibility Model, which of the following is the customer's responsibility regarding encryption?
+                <span class="exam-kor">(AWS 공동 책임 모델에 따라 암호화와 관련하여 고객의 책임은 무엇입니까?)</span>
+            </div>
+            <div class="exam-options">
+                <div class="exam-option">A) Physical security of the data center</div>
+                <div class="exam-option">B) Encryption of data at rest and in transit (Client-side)</div>
+                <div class="exam-option">C) Disposal of storage devices</div>
+                <div class="exam-option">D) Patching the hypervisor</div>
+            </div>
+            <button class="answer-btn" onclick="toggleAnswer('ans6')">See Answer</button>
+            <div id="ans6" class="answer-box">
+                <strong>Answer: B</strong><br>
+                Customers are responsible for <strong>encrypting their own data</strong> (Security IN the cloud). AWS handles the hardware (Security OF the cloud).
+            </div>
+        </div>
+        <div class="page-num">9 / 10</div>
+    </div>
+
+    <div class="slide" id="slide10">
+        <div style="text-align: center; margin-top: 15%;">
+            <h1>수고하셨습니다!</h1>
+            <h2>Security is Job Zero</h2>
+            <div style="margin-top: 40px; background: #eee; padding: 20px; border-radius: 8px; display: inline-block;">
+                <p><strong>발표 요약:</strong></p>
+                <p>1. <strong>IAM</strong>: 최소 권한, Role 사용, Root 봉인</p>
+                <p>2. <strong>Access</strong>: CLI/SDK는 Access Key, 콘솔은 PW</p>
+                <p>3. <strong>Encryption</strong>: KMS(일반) vs HSM(전용)</p>
+            </div>
+        </div>
+        <div class="page-num">10 / 10</div>
+    </div>
+
+</div>
+
+<div class="nav-buttons">
+    <button class="nav-btn" onclick="prevSlide()">◀ Prev</button>
+    <button class="nav-btn" onclick="nextSlide()">Next ▶</button>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 10;
+
+    function showSlide(n) {
+        for (let i = 1; i <= totalSlides; i++) {
+            document.getElementById('slide' + i).style.display = 'none';
+            document.getElementById('slide' + i).classList.remove('active');
+        }
+        document.getElementById('slide' + n).style.display = 'flex';
+        document.getElementById('slide' + n).classList.add('active');
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides) {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 1) {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    }
+
+    function toggleAnswer(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none" || x.style.display === "") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    
+    document.addEventListener('keydown', function(event) {
+        if(event.key === "ArrowRight") { nextSlide(); } 
+        else if(event.key === "ArrowLeft") { prevSlide(); }
+    });
+
+    showSlide(currentSlide);
+</script>
+
+</body>
+</html>

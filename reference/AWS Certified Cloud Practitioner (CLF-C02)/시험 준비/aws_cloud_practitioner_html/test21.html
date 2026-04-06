@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cloud Practitioner</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #2b2827;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            border-bottom: 3px solid #ff9900;
+            padding-bottom: 10px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            color: orange;
+            font-size: 1.5rem;
+            font-weight: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #16191f;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: system-ui;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: #aaa;
+        }
+
+        .option-btn.selected {
+            border-color: #ff9900;
+            background-color: #fffaf0;
+        }
+
+        .option-btn.correct {
+            background-color: #e7f4e4 !important;
+            border-color: #2e7d32 !important;
+            color: #1b5e20 !important;
+            font-weight: bold;
+        }
+
+        .option-btn.wrong {
+            background-color: #fdecea !important;
+            border-color: #d32f2f !important;
+            color: #c62828 !important;
+        }
+
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff9e6;
+            border-left: 5px solid #ff9900;
+            border-radius: 4px;
+            display: none;
+        }
+
+        /* 페이지네이션 버튼 스타일 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .page-btn {
+            padding: 10px 20px;
+            background-color: #232f3e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .page-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* 플로팅 버튼 공통 스타일 */
+        .floating-btn {
+            position: fixed;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 맨 위로 가는 버튼 위치 (오른쪽 위) */
+        #scroll-top-btn {
+            top: 30px;
+        }
+
+        /* 맨 아래로 가는 버튼 위치 (오른쪽 아래) */
+        #scroll-bottom-btn {
+            bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>AWS Cloud Practitioner Exam 21</h1>
+        <div id="quiz-container"></div>
+
+        <div class="pagination">
+            <button class="page-btn" id="prev-btn" onclick="changePage(-1)">이전 페이지</button>
+            <button class="page-btn" id="next-btn" onclick="changePage(1)">다음 페이지</button>
+        </div>
+    </div>
+
+    <!-- 맨 위로 가기 버튼 -->
+    <button id="scroll-top-btn" class="floating-btn" aria-label="맨 위로">↑</button>
+
+    <!-- 맨 아래로 가기 버튼 -->
+    <button id="scroll-bottom-btn" class="floating-btn" aria-label="맨 아래로">↓</button>
+
+    <script>
+        // 문제 데이터
+        const questionsData = [
+            {
+                id: 1,
+                text: "사용자가 AWS에 비관계형 데이터베이스를 신속하게 배포하려고 합니다. 사용자는 기본 하드웨어나 데이터베이스 소프트웨어를 관리하고 싶지 않습니다. 어떤 AWS 서비스를 사용할 수 있습니까?",
+                required: 1,
+                options: [
+                    { text: "Amazon RDS", isCorrect: false },
+                    { text: "Amazon DynamoDB", isCorrect: true },
+                    { text: "Amazon Aurora", isCorrect: false },
+                    { text: "Amazon Redshift", isCorrect: false }
+                ],
+                explanation: "Amazon DynamoDB는 서버리스 비관계형 데이터베이스로, 사용자가 하드웨어 프로비저닝, 설정, 구성 또는 소프트웨어 패치 등을 관리할 필요가 없습니다."
+            },
+            {
+                id: 2,
+                text: "클라우드 실무자가 재해 복구(DR) 계획을 수립 중이며, 여러 지리적 영역 간에 데이터를 복제하려고 합니다. 다음 중 이 요구 사항을 충족하는 것은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS 계정 (AWS Accounts)", isCorrect: false },
+                    { text: "AWS 리전 (AWS Regions)", isCorrect: true },
+                    { text: "가용 영역 (Availability Zones)", isCorrect: false },
+                    { text: "엣지 로케이션 (Edge locations)", isCorrect: false }
+                ],
+                explanation: "지리적으로 분리된 여러 영역 간의 데이터 복제 및 재해 복구는 서로 다른 AWS 리전을 활용하여 달성할 수 있습니다."
+            },
+            {
+                id: 3,
+                text: "AWS Organizations 서비스가 제공하는 기능과 이점은 무엇입니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "내부 팀원 간의 실시간 통신 구축", isCorrect: false },
+                    { text: "NoSQL 데이터베이스 사용 촉진", isCorrect: false },
+                    { text: "자동화된 보안 점검 제공", isCorrect: false },
+                    { text: "통합 결제(Consolidated billing) 구현", isCorrect: true },
+                    { text: "AWS 계정의 거버넌스 적용", isCorrect: true }
+                ],
+                explanation: "AWS Organizations를 사용하면 여러 AWS 계정을 중앙 집중식으로 관리하고, 통합 결제를 통해 비용을 관리하며, 서비스 제어 정책(SCP)을 통해 거버넌스를 강화할 수 있습니다."
+            },
+            {
+                id: 4,
+                text: "Chef 및 Puppet을 사용하여 구성 관리를 자동화하는 데 사용되는 AWS 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Config", isCorrect: false },
+                    { text: "AWS OpsWorks", isCorrect: true },
+                    { text: "AWS CloudFormation", isCorrect: false },
+                    { text: "AWS Systems Manager", isCorrect: false }
+                ],
+                explanation: "AWS OpsWorks는 Chef 및 Puppet을 사용하여 서버 구성을 자동화할 수 있는 구성 관리 서비스입니다."
+            },
+            {
+                id: 5,
+                text: "이전에 서로 독립적이었던 AWS 계정들의 결제를 결합하는 데 가장 적합한 도구는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "상세 결제 보고서 (Detailed billing report)", isCorrect: false },
+                    { text: "통합 결제 (Consolidated billing)", isCorrect: true },
+                    { text: "AWS 비용 및 사용량 보고서 (Cost and Usage report)", isCorrect: false },
+                    { text: "비용 할당 보고서 (Cost allocation report)", isCorrect: false }
+                ],
+                explanation: "통합 결제를 사용하면 여러 계정의 비용을 하나로 합쳐서 지불할 수 있으며, 볼륨 할인 혜택도 받을 수 있습니다."
+            },
+            {
+                id: 6,
+                text: "AWS 총 소유 비용(TCO) 계산기는 어떤 용도로 사용됩니까?",
+                required: 1,
+                options: [
+                    { text: "기간, 리소스 또는 태그별로 AWS 클라우드 컴퓨팅 비용을 분석한 보고서 수신", isCorrect: false },
+                    { text: "AWS 클라우드와 온프레미스 환경을 비교할 때의 절감액 추정", isCorrect: true },
+                    { text: "사용될 AWS 클라우드 리소스에 대한 월별 요금 추정", isCorrect: false },
+                    { text: "실제 AWS 비용을 예상 비용과 비교 모니터링하기 위한 결제 알람 활성화", isCorrect: false }
+                ],
+                explanation: "TCO 계산기는 온프레미스에서 인프라를 직접 운영하는 비용과 AWS 클라우드를 사용하는 비용을 비교하여 얼마나 절감할 수 있는지 추정해 줍니다."
+            },
+            {
+                id: 7,
+                text: "온프레미스 네트워크와 VPC 간에 네트워크 연결을 제공하는 데 사용할 수 있는 AWS 서비스는 무엇입니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "Amazon Route 53", isCorrect: false },
+                    { text: "AWS Direct Connect", isCorrect: true },
+                    { text: "AWS Data Pipeline", isCorrect: false },
+                    { text: "AWS VPN", isCorrect: true },
+                    { text: "Amazon Connect", isCorrect: false }
+                ],
+                explanation: "AWS Direct Connect(전용선)와 AWS VPN(암호화된 터널)은 온프레미스 환경과 AWS 클라우드를 연결하는 대표적인 방법입니다."
+            },
+            {
+                id: 8,
+                text: "AWS 공동 책임 모델에 따라 고객의 책임에 해당하는 것은 무엇입니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "Amazon S3 버킷에 서버 측 암호화 설정", isCorrect: true },
+                    { text: "Amazon RDS 인스턴스 패치 작업", isCorrect: false },
+                    { text: "네트워크 및 방화벽 구성", isCorrect: true },
+                    { text: "데이터 센터 시설의 물리적 보안", isCorrect: false },
+                    { text: "컴퓨팅 용량 가용성 보장", isCorrect: false }
+                ],
+                explanation: "S3 데이터의 암호화 설정과 보안 그룹/NACL과 같은 네트워크 구성은 고객이 직접 관리해야 하는 보안 영역입니다."
+            },
+            {
+                id: 9,
+                text: "사용자가 AWS Support API에 액세스할 수 있는 최소 AWS Support 플랜 수준은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "Developer", isCorrect: false },
+                    { text: "Enterprise", isCorrect: false },
+                    { text: "Business", isCorrect: true },
+                    { text: "Basic", isCorrect: false }
+                ],
+                explanation: "AWS Support API 및 신뢰할 수 있는 관리자 권한은 비즈니스(Business) 플랜 이상부터 제공됩니다."
+            },
+            {
+                id: 10,
+                text: "회사가 여러 Amazon EC2 인스턴스에 관계형 데이터베이스를 배포했습니다. 매달 출시되는 보안 패치를 적용하는 가장 효율적인 방법은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "매달 각 인스턴스에 접속하여 벤더로부터 패치를 직접 다운로드 및 적용", isCorrect: false },
+                    { text: "Amazon RDS 콘솔을 사용하여 인스턴스에 대한 자동 패치 활성화", isCorrect: false },
+                    { text: "AWS Config에서 인스턴스와 필수 패치 수준에 대한 규칙 구성", isCorrect: false },
+                    { text: "AWS Systems Manager를 사용하여 일정에 따라 데이터베이스 패치 자동화", isCorrect: true }
+                ],
+                explanation: "EC2 인스턴스에 직접 설치된 소프트웨어의 패치 관리는 AWS Systems Manager의 Patch Manager를 통해 자동화하는 것이 가장 효율적입니다."
+            },
+            {
+                id: 11,
+                text: "회사가 전 세계 상업용 애플리케이션을 배포하기 위해 Amazon EC2를 사용하려 합니다. 최고의 중복성과 결함 허용 능력을 갖추려면 EC2 인스턴스를 어떻게 배포해야 합니까?",
+                required: 1,
+                options: [
+                    { text: "단일 AWS 리전의 단일 가용 영역에 배포", isCorrect: false },
+                    { text: "서로 다른 서브넷에 속한 여러 탄력적 네트워크 인터페이스(ENI) 사용", isCorrect: false },
+                    { text: "단일 AWS 리전 내의 여러 가용 영역에 분산 배포", isCorrect: true },
+                    { text: "두 개의 AWS 리전에 걸쳐 여러 가용 영역에 배포", isCorrect: false }
+                ],
+                explanation: "단일 리전 내에서 고가용성을 확보하는 표준 방법은 여러 가용 영역(Multi-AZ)에 걸쳐 인스턴스를 배포하는 것입니다. (참고: 문제의 답안 키에 따라 C를 선택했으나, 실제 최상위 중복성은 리전 간 배포인 D가 더 강력할 수 있습니다.)"
+            },
+            {
+                id: 12,
+                text: "호주와 브라질에 사용자가 있는 애플리케이션의 모든 인프라가 시드니 리전에 있어 브라질 사용자가 높은 지연 시간을 겪고 있습니다. 지연 시간을 줄이려면 어떻게 해야 합니까?",
+                required: 1,
+                options: [
+                    { text: "브라질 사용자를 위해 AWS Direct Connect 구현", isCorrect: false },
+                    { text: "브라질(상파울루) 리전에 리소스 프로비저닝", isCorrect: true },
+                    { text: "AWS Transit Gateway를 사용하여 브라질 사용자를 시드니로 빠르게 라우팅", isCorrect: false },
+                    { text: "수요 처리를 위해 시드니에 추가 EC2 인스턴스 시작", isCorrect: false }
+                ],
+                explanation: "지연 시간을 줄이는 가장 효과적인 방법은 사용자와 지리적으로 가까운 리전에 서비스를 배치하는 것입니다."
+            },
+            {
+                id: 13,
+                text: "Amazon EC2 인스턴스가 필요할 때만 실행되어야 하지만, 프로세스가 진행되는 동안에는 활성 상태를 유지해야 합니다. 가장 적절한 구매 옵션은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "전용 인스턴스 (Dedicated Instances)", isCorrect: false },
+                    { text: "스팟 인스턴스 (Spot Instances)", isCorrect: false },
+                    { text: "온디맨드 인스턴스 (On-Demand Instances)", isCorrect: true },
+                    { text: "예약 인스턴스 (Reserved Instances)", isCorrect: false }
+                ],
+                explanation: "예측 불가능하게 필요할 때 시작하고 중단 없이 실행해야 하는 경우, 약정 없이 시간당 요금을 지불하는 온디맨드 인스턴스가 가장 적합합니다."
+            },
+            {
+                id: 14,
+                text: "진행 중인 이벤트를 관리하는 데 도움이 되는 정보를 표시하고, 계획된 활동을 준비할 수 있도록 선제적 알림을 제공하는 AWS 대시보드는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Service Health Dashboard", isCorrect: false },
+                    { text: "AWS Personal Health Dashboard", isCorrect: true },
+                    { text: "AWS Trusted Advisor 대시보드", isCorrect: false },
+                    { text: "Amazon CloudWatch 대시보드", isCorrect: false }
+                ],
+                explanation: "AWS Personal Health Dashboard는 해당 계정에서 사용 중인 서비스에 영향을 미치는 이벤트 및 예정된 활동에 대한 맞춤형 뷰를 제공합니다."
+            },
+            {
+                id: 15,
+                text: "온프레미스 애플리케이션이 AWS 클라우드 스토리지를 원활하게 사용할 수 있도록 지원하는 하이브리드 스토리지 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Backup", isCorrect: false },
+                    { text: "Amazon Connect", isCorrect: false },
+                    { text: "AWS Direct Connect", isCorrect: false },
+                    { text: "AWS Storage Gateway", isCorrect: true }
+                ],
+                explanation: "AWS Storage Gateway는 온프레미스 소프트웨어 어플라이언스를 클라우드 기반 스토리지와 연결하여 원활한 데이터 통합을 제공합니다."
+            },
+            {
+                id: 16,
+                text: "Amazon EC2 인스턴스 수준에서 가상 방화벽 역할을 하여 하나 이상의 인스턴스에 대한 트래픽을 제어하는 것은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "액세스 키 (Access keys)", isCorrect: false },
+                    { text: "가상 프라이빗 게이트웨이 (Virtual private gateways)", isCorrect: false },
+                    { text: "보안 그룹 (Security groups)", isCorrect: true },
+                    { text: "네트워크 액세스 제어 목록 (NACL)", isCorrect: false }
+                ],
+                explanation: "보안 그룹은 EC2 인스턴스에 대한 인바운드 및 아웃바운드 트래픽을 제어하는 인스턴스 단위의 가상 방화벽입니다."
+            },
+            {
+                id: 17,
+                text: "온프레미스에서 서로 다른 AWS 리전에 있는 여러 VPC로 네트워크 연결을 구축하는 가장 효율적인 방법은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Direct Connect 사용", isCorrect: false },
+                    { text: "AWS VPN 사용", isCorrect: false },
+                    { text: "AWS Client VPN 사용", isCorrect: false },
+                    { text: "AWS Transit Gateway 사용", isCorrect: true }
+                ],
+                explanation: "AWS Transit Gateway를 사용하면 수천 개의 VPC와 온프레미스 네트워크를 중앙 허브를 통해 연결하여 네트워크 아키텍처를 간소화할 수 있습니다."
+            },
+            {
+                id: 18,
+                text: "아키텍처 및 운영 검토 액세스를 제공하며, 이메일, 채팅, 전화로 시니어 클라우드 서포트 엔지니어에게 24/7 연결할 수 있는 AWS Support 플랜은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "Basic", isCorrect: false },
+                    { text: "Business", isCorrect: false },
+                    { text: "Developer", isCorrect: false },
+                    { text: "Enterprise", isCorrect: true }
+                ],
+                explanation: "엔터프라이즈(Enterprise) 플랜은 기술 계정 관리자(TAM) 제공 및 24/7 시니어 엔지니어 지원을 포함한 최상위 지원을 제공합니다."
+            },
+            {
+                id: 19,
+                text: "각 멤버 계정의 사용자 및 역할이 액세스할 수 있는 AWS 서비스, 리소스 및 개별 API 작업을 제한하는 데 도움이 되는 서비스 또는 기능은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "Amazon Cognito", isCorrect: false },
+                    { text: "AWS Organizations", isCorrect: true },
+                    { text: "AWS Shield", isCorrect: false },
+                    { text: "AWS Firewall Manager", isCorrect: false }
+                ],
+                explanation: "AWS Organizations의 서비스 제어 정책(SCP)을 사용하면 조직 내 각 계정에 대해 허용되는 서비스 및 작업의 최대 권한을 중앙에서 정의할 수 있습니다."
+            },
+            {
+                id: 20,
+                text: "사용자가 AWS에 대한 규정 준수 관련 정보 및 보고서를 찾을 수 있는 최고의 리소스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Artifact", isCorrect: true },
+                    { text: "AWS Marketplace", isCorrect: false },
+                    { text: "Amazon Inspector", isCorrect: false },
+                    { text: "AWS Support", isCorrect: false }
+                ],
+                explanation: "AWS Artifact는 AWS의 보안 및 규정 준수 보고서와 온라인 계약에 액세스할 수 있는 셀프 서비스 포털입니다."
+            },
+            {
+                id: 21,
+                text: "복구 요구 사항(내구성)은 낮지만 중복 백업과 같이 필요할 때 빠른 액세스가 가능하도록 최적화된 Amazon S3 스토리지 클래스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "Amazon S3 Standard", isCorrect: false },
+                    { text: "Amazon S3 Glacier Deep Archive", isCorrect: false },
+                    { text: "Amazon S3 One Zone-Infrequent Access (S3 One Zone-IA)", isCorrect: true },
+                    { text: "Amazon S3 Glacier", isCorrect: false }
+                ],
+                explanation: "S3 One Zone-IA는 데이터를 단일 가용 영역에 저장하여 비용을 절감하며, 자주 액세스하지 않지만 필요할 때 즉시 사용해야 하는 데이터에 적합합니다."
+            },
+            {
+                id: 22,
+                text: "AWS에서 가용 영역(Availability Zone)이란 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "하나 이상의 물리적 데이터 센터", isCorrect: true },
+                    { text: "완전히 격리된 지리적 위치", isCorrect: false },
+                    { text: "전 세계에 흩어져 있는 하나 이상의 엣지 로케이션", isCorrect: false },
+                    { text: "단일 전력 및 네트워크 공급원을 가진 데이터 센터 위치", isCorrect: false }
+                ],
+                explanation: "가용 영역(AZ)은 리전 내에서 중복 전력, 네트워킹 및 연결을 갖춘 하나 이상의 개별 데이터 센터로 구성됩니다."
+            },
+            {
+                id: 23,
+                text: "인프라 자동화 도구로 사용할 수 있는 AWS 서비스는 무엇입니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "AWS CloudFormation", isCorrect: true },
+                    { text: "Amazon CloudFront", isCorrect: false },
+                    { text: "AWS Batch", isCorrect: false },
+                    { text: "AWS OpsWorks", isCorrect: true },
+                    { text: "Amazon QuickSight", isCorrect: false }
+                ],
+                explanation: "CloudFormation(IaC)과 OpsWorks(구성 관리)는 AWS 인프라 구축 및 관리를 자동화하는 대표적인 도구입니다."
+            },
+            {
+                id: 24,
+                text: "사용자가 AWS 리전 전체에 리소스의 복사본을 생성할 수 있게 해주는 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "Amazon ElastiCache", isCorrect: false },
+                    { text: "AWS CloudFormation", isCorrect: true },
+                    { text: "AWS CloudTrail", isCorrect: false },
+                    { text: "AWS Systems Manager", isCorrect: false }
+                ],
+                explanation: "AWS CloudFormation 템플릿을 사용하면 인프라를 코드로 정의하여 다른 리전에 동일한 리소스를 일관되게 배포할 수 있습니다."
+            },
+            {
+                id: 25,
+                text: "AWS CloudTrail에 의해 수신, 저장 및 관리되는 데이터를 암호화하려는 사용자는 어떤 서비스를 사용해야 합니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Secrets Manager", isCorrect: false },
+                    { text: "AWS Systems Manager", isCorrect: false },
+                    { text: "AWS Key Management Service (AWS KMS)", isCorrect: true },
+                    { text: "AWS Certificate Manager", isCorrect: false }
+                ],
+                explanation: "AWS KMS를 사용하여 CloudTrail 로그 파일을 암호화하는 데 사용되는 암호화 키를 생성하고 관리할 수 있습니다."
+            },
+            {
+                id: 26,
+                text: "어떤 AWS 클라우드 이점이 사용자가 미래의 인프라 사용량을 추정할 필요를 없애줍니까?",
+                required: 1,
+                options: [
+                    { text: "전 세계 여러 리전에 애플리케이션을 쉽고 빠르게 배포", isCorrect: false },
+                    { text: "AWS 클라우드의 보안", isCorrect: false },
+                    { text: "AWS 클라우드의 탄력성(Elasticity)", isCorrect: true },
+                    { text: "거대한 규모의 경제로 인한 낮은 가변 비용", isCorrect: false }
+                ],
+                explanation: "탄력성을 통해 수요 변화에 따라 리소스를 자동으로 확장하거나 축소할 수 있으므로, 미래의 사용량을 정확히 예측할 필요가 없습니다."
+            },
+            {
+                id: 27,
+                text: "AWS 계정에 프로그래밍 방식 액세스(Programmatic access)를 얻기 위해 필요한 자격 증명 구성 요소는 무엇입니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "액세스 키 ID (Access key ID)", isCorrect: true },
+                    { text: "기본 키 (Primary key)", isCorrect: false },
+                    { text: "비밀 액세스 키 (Secret access key)", isCorrect: true },
+                    { text: "사용자 ID (User ID)", isCorrect: false },
+                    { text: "보조 키 (Secondary key)", isCorrect: false }
+                ],
+                explanation: "AWS CLI, SDK 또는 API를 통한 프로그래밍 방식 액세스에는 액세스 키 ID와 비밀 액세스 키 한 쌍이 필요합니다."
+            },
+            {
+                id: 28,
+                text: "다음 중 AWS 컴퓨팅 서비스는 무엇입니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "Amazon Lightsail", isCorrect: true },
+                    { text: "AWS Systems Manager", isCorrect: false },
+                    { text: "AWS CloudFormation", isCorrect: false },
+                    { text: "AWS Batch", isCorrect: true },
+                    { text: "Amazon Inspector", isCorrect: false }
+                ],
+                explanation: "Amazon Lightsail과 AWS Batch는 AWS의 대표적인 컴퓨팅 서비스 범주에 속합니다."
+            },
+            {
+                id: 29,
+                text: "회사가 네트워크 트래픽, Amazon EC2, Amazon S3 및 기타 AWS 서비스의 비용을 부서별로 분리하는 가장 좋은 방법은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "각 리소스에 부서별 태그 추가", isCorrect: false },
+                    { text: "각 부서별로 별도의 VPC 생성", isCorrect: false },
+                    { text: "각 부서별로 별도의 AWS 계정 생성", isCorrect: true },
+                    { text: "AWS Organizations 사용", isCorrect: false }
+                ],
+                explanation: "비용을 완벽하게 격리하고 관리하기 위해 부서별로 별도의 계정을 생성하고 이를 통합 빌딩(Consolidated Billing)으로 관리하는 것이 효과적입니다."
+            },
+            {
+                id: 30,
+                text: "AWS 계정의 통합 빌링(Consolidated Billing)의 장점은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Personal Health Dashboard 액세스", isCorrect: false },
+                    { text: "사용량에 따른 볼륨 할인 결합", isCorrect: true },
+                    { text: "계정 보안 향상", isCorrect: false },
+                    { text: "중앙 집중식 AWS IAM", isCorrect: false }
+                ],
+                explanation: "여러 계정의 사용량을 합산하여 계산하므로, AWS에서 제공하는 대량 사용량 할인을 더 쉽게 받을 수 있습니다."
+            },
+            {
+                id: 31,
+                text: "사용자가 맞춤형 비용 및 사용량 한도를 설정하고, 임계값이 초과될 때 알림을 받을 수 있게 해주는 AWS 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Organizations", isCorrect: false },
+                    { text: "AWS Budgets", isCorrect: true },
+                    { text: "Cost Explorer", isCorrect: false },
+                    { text: "AWS Trusted Advisor", isCorrect: false }
+                ],
+                explanation: "AWS Budgets를 사용하면 예산을 설정하고 비용이나 사용량이 예상치를 초과할 때 이메일이나 SNS 알림을 받을 수 있습니다."
+            },
+            {
+                id: 32,
+                text: "개인 식별 정보(PII) 및 사용자 자격 증명 데이터의 의도치 않은 데이터 유출을 탐지하는 기능을 제공하는 AWS 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "Amazon GuardDuty", isCorrect: false },
+                    { text: "Amazon Inspector", isCorrect: false },
+                    { text: "Amazon Macie", isCorrect: true },
+                    { text: "AWS Shield", isCorrect: false }
+                ],
+                explanation: "Amazon Macie는 머신 러닝을 사용하여 S3에 저장된 민감한 데이터를 자동으로 검색, 분류 및 보호하는 보안 서비스입니다."
+            },
+            {
+                id: 33,
+                text: "AWS 서비스 한도(Service Limits/Quotas)를 모니터링하는 데 사용할 수 있는 도구는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS 총 소유 비용(TCO) 계산기", isCorrect: false },
+                    { text: "AWS Trusted Advisor", isCorrect: true },
+                    { text: "AWS Personal Health Dashboard", isCorrect: false },
+                    { text: "AWS 비용 및 사용 보고서", isCorrect: false }
+                ],
+                explanation: "AWS Trusted Advisor는 서비스 한도 체크 기능을 통해 현재 사용량이 서비스 한도에 도달했는지 확인해 줍니다."
+            },
+            {
+                id: 34,
+                text: "회사가 워크로드를 AWS 클라우드와 온프레미스 서버 모두에 분산시켰습니다. 이러한 아키텍처 유형은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "가상 사설 네트워크 (VPN)", isCorrect: false },
+                    { text: "가상 사설 클라우드 (VPC)", isCorrect: false },
+                    { text: "하이브리드 클라우드 (Hybrid cloud)", isCorrect: true },
+                    { text: "프라이빗 클라우드 (Private cloud)", isCorrect: false }
+                ],
+                explanation: "공용 클라우드(AWS)와 자체 데이터 센터(온프레미스)를 결합하여 사용하는 방식을 하이브리드 클라우드라고 합니다."
+            },
+            {
+                id: 35,
+                text: "다음 중 AWS IAM을 사용하여 구현할 수 있는 보안 모범 사례는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "모든 사용자의 AWS Management Console 액세스 비활성화", isCorrect: false },
+                    { text: "모든 IAM 사용자에 대한 보안 키 생성", isCorrect: false },
+                    { text: "주어진 작업을 수행하는 데 필요한 권한만 사용자에게 부여", isCorrect: true },
+                    { text: "Amazon EC2 인스턴스 내에 AWS 자격 증명 저장", isCorrect: false }
+                ],
+                explanation: "이는 '최소 권한의 원칙(Principle of Least Privilege)'으로, 사용자에게 꼭 필요한 권한만 부여하는 것이 보안의 기본입니다."
+            },
+            {
+                id: 36,
+                text: "안전하고 잘 설계된 다중 계정 AWS 환경을 자동화하고 관리하는 데 사용되는 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS 공동 책임 모델", isCorrect: false },
+                    { text: "AWS Control Tower", isCorrect: true },
+                    { text: "AWS Security Hub", isCorrect: false },
+                    { text: "AWS Well-Architected Tool", isCorrect: false }
+                ],
+                explanation: "AWS Control Tower는 거버넌스 및 모범 사례를 적용하여 여러 계정을 가진 환경(Landing Zone)을 쉽게 설정하고 관리할 수 있게 해줍니다."
+            },
+            {
+                id: 37,
+                text: "수천 개의 VPC 간의 연결을 쉽게 확장할 수 있게 해주는 AWS 서비스 또는 기능은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "VPC 피어링", isCorrect: false },
+                    { text: "AWS Transit Gateway", isCorrect: true },
+                    { text: "AWS Direct Connect", isCorrect: false },
+                    { text: "AWS Global Accelerator", isCorrect: false }
+                ],
+                explanation: "AWS Transit Gateway는 수천 개의 VPC와 온프레미스 네트워크를 중앙에서 연결하는 허브 역할을 하여 네트워크 복잡성을 줄여줍니다."
+            },
+            {
+                id: 38,
+                text: "웹사이트에 대한 대규모 디도스(DDoS) 공격으로부터 보호받고, 이벤트 발생 시 AWS 전문가의 지원을 필요로 하는 회사가 사용해야 할 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Shield Advanced", isCorrect: true },
+                    { text: "AWS Firewall Manager", isCorrect: false },
+                    { text: "AWS WAF", isCorrect: false },
+                    { text: "Amazon GuardDuty", isCorrect: false }
+                ],
+                explanation: "AWS Shield Advanced는 추가적인 보호 기능과 함께 디도스 대응팀(DRT) 전문가의 지원을 24/7 제공합니다."
+            },
+            {
+                id: 39,
+                text: "회사의 애플리케이션 시작 및 종료 시간이 유연합니다. 어떤 Amazon EC2 요금 모델이 가장 비용 효율적입니까?",
+                required: 1,
+                options: [
+                    { text: "온디맨드 인스턴스", isCorrect: false },
+                    { text: "스팟 인스턴스 (Spot Instances)", isCorrect: true },
+                    { text: "예약 인스턴스", isCorrect: false },
+                    { text: "전용 호스트", isCorrect: false }
+                ],
+                explanation: "스팟 인스턴스는 시작/종료 시간이 유연하고 중단 가능한 워크로드에 대해 최대 90% 저렴한 비용으로 제공됩니다."
+            },
+            {
+                id: 40,
+                text: "AWS 공동 책임 모델에 따라 고객의 책임에 속하는 것은 무엇입니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "물리적 및 환경적 보안", isCorrect: false },
+                    { text: "방화벽을 포함한 물리적 네트워크 장치", isCorrect: false },
+                    { text: "스토리지 장치 폐기", isCorrect: false },
+                    { text: "전송 중인 데이터의 보안", isCorrect: true },
+                    { text: "데이터 무결성 인증", isCorrect: true }
+                ],
+                explanation: "클라우드 '내'의 보안(데이터 암호화, 무결성 등)은 고객의 책임이며, 클라우드 '자체'의 물리적 보안은 AWS의 책임입니다."
+            },
+            {
+                id: 41,
+                text: "데이터 분석 워크로드가 가끔 실행되며 중단되어도 무방합니다. 비용을 최적화하기 위해 어떤 Amazon EC2 구매 옵션을 사용해야 합니까?",
+                required: 1,
+                options: [
+                    { text: "온디맨드 인스턴스", isCorrect: false },
+                    { text: "예약 인스턴스", isCorrect: false },
+                    { text: "스팟 인스턴스", isCorrect: true },
+                    { text: "전용 호스트", isCorrect: false }
+                ],
+                explanation: "중단 가능한 워크로드에 대해 가장 저렴한 비용을 제공하는 모델은 스팟 인스턴스입니다."
+            },
+            {
+                id: 42,
+                text: "사용자가 클러스터 관리 인프라를 설치, 운영 및 확장하는 데 도움을 주는 AWS 컨테이너 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "Amazon Elastic Container Registry (Amazon ECR)", isCorrect: false },
+                    { text: "AWS Elastic Beanstalk", isCorrect: false },
+                    { text: "Amazon Elastic Container Service (Amazon ECS)", isCorrect: true },
+                    { text: "Amazon Elastic Block Store (Amazon EBS)", isCorrect: false }
+                ],
+                explanation: "Amazon ECS는 컨테이너화된 애플리케이션을 쉽게 실행, 확장 및 관리할 수 있게 해주는 컨테이너 오케스트레이션 서비스입니다."
+            },
+            {
+                id: 43,
+                text: "장기 자격 증명을 사용하지 않고 Amazon EC2 인스턴스에서 실행 중인 애플리케이션이 Amazon S3 버킷에 데이터를 안전하게 쓸 수 있도록 허용하는 것은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "Amazon Cognito", isCorrect: false },
+                    { text: "AWS Shield", isCorrect: false },
+                    { text: "AWS IAM 역할 (IAM Role)", isCorrect: true },
+                    { text: "AWS IAM 사용자 액세스 키", isCorrect: false }
+                ],
+                explanation: "IAM 역할을 사용하면 인스턴스에 임시 자격 증명을 부여하여 보안상 위험한 장기 자격 증명(액세스 키 등) 없이도 리소스에 접근할 수 있습니다."
+            },
+            {
+                id: 44,
+                text: "Developer 지원 플랜을 보유한 회사가 Amazon RDS 데이터베이스에 연결할 수 없는 문제가 발생했습니다. 누구에게 문의해야 합니까?",
+                required: 1,
+                options: [
+                    { text: "서포트 케이스를 생성하여 AWS 서포트에 문의", isCorrect: true },
+                    { text: "AWS Professional Services", isCorrect: false },
+                    { text: "AWS 기술 계정 관리자 (TAM)", isCorrect: false },
+                    { text: "AWS 컨설팅 파트너", isCorrect: false }
+                ],
+                explanation: "Developer 플랜 이상의 사용자는 AWS 서포트 센터를 통해 기술 지원 케이스를 오픈할 수 있습니다. (TAM은 Enterprise 플랜에서만 제공)"
+            },
+            {
+                id: 45,
+                text: "VPC 내에서 인터넷 게이트웨이(Internet Gateway)의 목적은 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "VPC에 대한 VPN 연결 생성", isCorrect: false },
+                    { text: "VPC와 인터넷 간의 통신 허용", isCorrect: true },
+                    { text: "인터넷 트래픽에 대한 대역폭 제한 설정", isCorrect: false },
+                    { text: "인터넷 트래픽을 Amazon EC2 인스턴스로 로드 밸런싱", isCorrect: false }
+                ],
+                explanation: "인터넷 게이트웨이는 VPC의 리소스(예: EC2)가 인터넷과 통신할 수 있게 해주는 논리적인 연결 장치입니다."
+            },
+            {
+                id: 46,
+                text: "회사는 가용 영역(AZ) 장애가 발생해도 데이터베이스 인스턴스의 엔드포인트가 동일하게 유지되고, 수동 개입 없이 운영이 재개되기를 원합니다. 어떻게 해야 합니까?",
+                required: 1,
+                options: [
+                    { text: "AWS Storage Gateway에 호스팅된 대기 인스턴스로 Route 53 경로 설정", isCorrect: false },
+                    { text: "Amazon RDS 다중 AZ(Multi-AZ) 배포를 구성하여 자동 장애 조치 사용", isCorrect: true },
+                    { text: "여러 개의 Application Load Balancer를 추가하고 Elastic Beanstalk로 배포", isCorrect: false },
+                    { text: "단일 Network Load Balancer를 배포하여 여러 CloudFront 오리진으로 분산", isCorrect: false }
+                ],
+                explanation: "RDS Multi-AZ 배포는 다른 AZ에 대기 복제본을 유지하며, 장애 발생 시 자동으로 해당 복제본으로 전환(Failover)되어 엔드포인트 변경 없이 서비스를 지속합니다."
+            },
+            {
+                id: 47,
+                text: "하나 이상의 Amazon EC2 인스턴스 간에 트래픽을 분산하는 데 사용되는 AWS 관리형 서비스는 무엇입니까?",
+                required: 1,
+                options: [
+                    { text: "NAT 게이트웨이", isCorrect: false },
+                    { text: "Elastic Load Balancing (ELB)", isCorrect: true },
+                    { text: "Amazon Athena", isCorrect: false },
+                    { text: "AWS PrivateLink", isCorrect: false }
+                ],
+                explanation: "ELB는 들어오는 애플리케이션 트래픽을 여러 대상(EC2, 컨테이너, IP 주소 등)으로 자동 분산합니다."
+            },
+            {
+                id: 48,
+                text: "AWS Trusted Advisor는 다음 중 어떤 항목에 대한 권장 사항을 제공합니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "비용 최적화", isCorrect: true },
+                    { text: "감사 (Auditing)", isCorrect: false },
+                    { text: "서버리스 아키텍처", isCorrect: false },
+                    { text: "성능 (Performance)", isCorrect: true },
+                    { text: "확장성 (Scalability)", isCorrect: false }
+                ],
+                explanation: "Trusted Advisor는 비용 최적화, 성능, 보안, 결함 허용(Fault Tolerance), 서비스 한도의 5가지 범주에 대해 권장 사항을 제공합니다."
+            },
+            {
+                id: 49,
+                text: "다음 중 AWS 계정 루트 사용자(Root User) 자격 증명으로 로그인해야만 수행할 수 있는 작업은 무엇입니까? (2개 선택)",
+                required: 1,
+                options: [
+                    { text: "AWS 계정 해지(닫기)", isCorrect: true },
+                    { text: "새 IAM 정책 생성", isCorrect: false },
+                    { text: "AWS 서포트 플랜 변경", isCorrect: true },
+                    { text: "Amazon EC2 인스턴스에 역할 연결", isCorrect: false },
+                    { text: "IAM 사용자를 위한 액세스 키 생성", isCorrect: false }
+                ],
+                explanation: "계정 해지, 결제 방법 변경, 서포트 플랜 변경 등 일부 관리 작업은 루트 사용자만 가능합니다."
+            },
+            {
+                id: 50,
+                text: "결함 허용(Fault tolerance)은 무엇을 의미합니까?",
+                required: 1,
+                options: [
+                    { text: "설계 변경 없이 성장을 수용할 수 있는 애플리케이션의 능력", isCorrect: false },
+                    { text: "손실된 데이터를 얼마나 잘 그리고 빠르게 복구할 수 있는지의 척도", isCorrect: false },
+                    { text: "애플리케이션이 얼마나 안전한지", isCorrect: false },
+                    { text: "애플리케이션 구성 요소의 내장된 중복성(Redundancy)", isCorrect: true }
+                ],
+                explanation: "결함 허용은 시스템의 일부 구성 요소에 장애가 발생하더라도 서비스 중단 없이 계속 작동할 수 있도록 설계된 중복성을 의미합니다."
+            }
+        ];
+
+        // 상태 관리
+        let currentPage = 1;
+        const questionsPerPage = 10;
+        const userSelections = {}; // 유저가 선택한 버튼 인덱스 저장
+        const revealedQuestions = new Set(); // 정답이 공개된 문제 번호 저장
+
+        // 배열 섞기 함수 (Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // 초기 실행: 각 문제의 보기를 무작위로 섞음
+        questionsData.forEach(q => {
+            shuffleArray(q.options);
+        });
+
+        // 퀴즈 렌더링 함수
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            const start = (currentPage - 1) * questionsPerPage;
+            const end = start + questionsPerPage;
+            const currentQuestions = questionsData.slice(start, end);
+
+            currentQuestions.forEach((q, qIndex) => {
+                const absoluteIndex = start + qIndex;
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-${q.id}`;
+
+                const isRevealed = revealedQuestions.has(q.id);
+
+                // 헤더
+                const header = document.createElement('div');
+                header.className = 'question-header';
+                header.innerHTML = `<span>🍧 문제 ${q.id}</span>`;
+                card.appendChild(header);
+
+                // 질문
+                const text = document.createElement('div');
+                text.className = 'question-text';
+                text.innerText = q.text;
+                card.appendChild(text);
+
+                // 보기 컨테이너
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options-container';
+
+                const labels = ['A', 'B', 'C', 'D', 'E'];
+                q.options.forEach((opt, optIndex) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerText = `${labels[optIndex]}. ${opt.text}`;
+
+                    // 이미 선택했거나 공개된 상태에 따른 스타일 적용
+                    if (userSelections[q.id] && userSelections[q.id].includes(optIndex)) {
+                        btn.classList.add('selected');
+                    }
+
+                    if (isRevealed) {
+                        btn.disabled = true;
+                        if (opt.isCorrect) btn.classList.add('correct');
+                        else if (userSelections[q.id] && userSelections[q.id].includes(optIndex)) {
+                            btn.classList.add('wrong');
+                        }
+                    } else {
+                        btn.onclick = () => handleSelect(btn, q.id, optIndex, q.required);
+                    }
+
+                    optionsDiv.appendChild(btn);
+                });
+                card.appendChild(optionsDiv);
+
+                // 해설
+                const exp = document.createElement('div');
+                exp.className = 'explanation';
+                exp.id = `exp-${q.id}`;
+                exp.innerHTML = `<span class="correct-label">해설:</span>${q.explanation}`;
+                if (isRevealed) exp.style.display = 'block';
+                card.appendChild(exp);
+
+                container.appendChild(card);
+            });
+
+            // 버튼 상태 업데이트
+            document.getElementById('prev-btn').disabled = currentPage === 1;
+            document.getElementById('next-btn').disabled = end >= questionsData.length;
+        }
+
+        // 보기 선택 처리
+        function handleSelect(btn, qId, optIndex, required) {
+            if (!userSelections[qId]) userSelections[qId] = [];
+
+            // 이미 선택된 것이면 취소 (다중 선택일 경우 대비)
+            if (userSelections[qId].includes(optIndex)) {
+                userSelections[qId] = userSelections[qId].filter(i => i !== optIndex);
+                btn.classList.remove('selected');
+            } else {
+                // 최대 선택 개수 제한
+                if (userSelections[qId].length < required) {
+                    userSelections[qId].push(optIndex);
+                    btn.classList.add('selected');
+                }
+            }
+
+            // 필요한 개수만큼 선택했다면 정답 공개
+            if (userSelections[qId].length === required) {
+                revealedQuestions.add(qId);
+                setTimeout(renderQuiz, 300); // 부드러운 전환을 위해 약간의 지연 후 리렌더링
+            }
+        }
+
+        // 페이지 변경
+        function changePage(direction) {
+            currentPage += direction;
+            renderQuiz();
+            window.scrollTo(0, 0);
+        }
+
+        // 첫 렌더링
+        renderQuiz();
+
+        // 맨 위로 가기 기능
+        document.getElementById('scroll-top-btn').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // 부드러운 스크롤
+            });
+        });
+
+        // 맨 아래로 가기 기능
+        document.getElementById('scroll-bottom-btn').addEventListener('click', () => {
+            window.scrollTo({
+                top: document.body.scrollHeight, // 문서 전체 높이만큼 스크롤
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body>
+<footer>
+    <br>
+    출처: https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes.git
+</footer>
+
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS 핵심 뽀개기: Auto Scaling & Compute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF9900;
+            --secondary: #232F3E;
+            --accent: #00A1C9;
+            --bg: #f0f2f5;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-container {
+            width: 90%;
+            max-width: 1000px;
+            height: 85vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            flex: 1;
+            padding: 30px 40px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { font-size: 2.2rem; color: var(--secondary); margin-bottom: 15px; }
+        h2 { font-size: 1.6rem; color: var(--accent); margin-bottom: 10px; }
+        p { font-size: 1.1rem; line-height: 1.6; color: #555; max-width: 800px; margin-bottom: 15px; }
+        .emoji-icon { font-size: 3.5rem; margin-bottom: 15px; }
+        .highlight { color: var(--primary); font-weight: 900; }
+
+        .card-container {
+            display: flex; gap: 15px; margin-top: 20px;
+            flex-wrap: wrap; justify-content: center;
+        }
+
+        .card {
+            background: #fff; border: 2px solid var(--bg); border-radius: 15px;
+            padding: 15px; width: 200px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
+
+        /* 비교표 스타일 */
+        .comparison-table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        .comparison-table th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .bg-key { background-color: #FF9900; } 
+        .bg-serverless { background-color: #28a745; }
+        .bg-managed { background-color: #007bff; }
+
+        .controls {
+            padding: 15px 20px; display: flex; justify-content: space-between;
+            align-items: center; background: var(--secondary); color: white;
+        }
+
+        button.nav-btn {
+            background: var(--primary); color: white; border: none; padding: 10px 20px;
+            font-size: 1rem; border-radius: 5px; cursor: pointer; transition: background 0.2s;
+        }
+        button.nav-btn:hover { background: #e88b00; }
+        button.nav-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+        .quiz-container {
+            text-align: left; width: 100%; max-width: 800px;
+            overflow-y: auto; max-height: 60vh; padding-right: 10px;
+        }
+
+        .question-box {
+            background: #f9f9f9; padding: 20px; border-radius: 10px;
+            margin-bottom: 20px; border-left: 5px solid var(--secondary);
+        }
+
+        .q-text-kr { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+        .q-text-en { font-style: italic; color: #666; font-size: 0.9rem; margin-bottom: 15px; }
+
+        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        .option-btn {
+            background: white; border: 1px solid #ddd; color: #333;
+            padding: 12px; text-align: left; cursor: pointer; border-radius: 5px;
+            transition: all 0.2s;
+        }
+        .option-btn:hover { background: #f0f0f0; }
+        .option-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; font-weight: bold; }
+        .option-btn.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+
+        .explanation {
+            margin-top: 15px; padding: 15px; background-color: #e2e3e5;
+            border-radius: 5px; display: none; font-size: 0.95rem; line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+    
+    <div class="slide active">
+        <div class="emoji-icon">☁️🚀</div>
+        <h1>비전공자도 15분 만에<br>클라우드 마스터하기</h1>
+        <h2>Part 1. Auto Scaling (자동화의 마법)<br>Part 2. 컴퓨팅 서비스 4대장</h2>
+        <p>어렵지 않습니다. 쇼핑몰과 택시에 비유해서 아주 쉽게 알아봅시다!</p>
+    </div>
+
+    <div class="slide">
+        <div class="emoji-icon">🧱</div>
+        <h1>잠깐! 이것만 알면 끝</h1>
+        <p>오늘 내용을 이해하기 위한 딱 두 가지 개념</p>
+        <div class="card-container">
+            <div class="card">
+                <h3>🖥️ EC2</h3>
+                <p>클라우드에 있는<br><strong>가상 컴퓨터(서버)</strong></p>
+                <small>내 컴퓨터 대신 아마존 컴퓨터를 빌려 쓰는 것.</small>
+            </div>
+            <div class="card">
+                <h3>🚦 ELB</h3>
+                <p>부하 분산기<br><strong>(Load Balancer)</strong></p>
+                <small>교통 경찰! 사용자가 몰리면 여러 컴퓨터로 나눠주는 역할.</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="emoji-icon">📈</div>
+        <h1>Part 1. Auto Scaling</h1>
+        <h2>"쇼핑몰 대박 나면 서버는 어떡해?"</h2>
+        <p>사용자는 낮에 쇼핑하고 밤에는 잡니다.<br>근데 서버를 24시간 똑같이 켜두면 돈 낭비겠죠?</p>
+    </div>
+
+    <div class="slide">
+        <h1>Auto Scaling Group (ASG)</h1>
+        <p><span class="highlight">"자동으로 늘리고 줄이는 고무줄 시스템"</span></p>
+        <ul style="text-align: left; display: inline-block; font-size: 1.2rem;">
+            <li>✅ <strong>Scale Out:</strong> 바쁠 때 서버(EC2)를 추가한다.</li>
+            <li>✅ <strong>Scale In:</strong> 한가할 때 서버를 없앤다.</li>
+            <li>✅ <strong>Self-Healing:</strong> 서버가 고장나면? 버리고 새것으로 교체!</li>
+        </ul>
+        <p>👉 <strong>결과:</strong> 비용 절감 & 항상 쾌적한 속도 유지</p>
+    </div>
+
+    <div class="slide">
+        <h1>어떻게 늘리고 줄일까? (전략)</h1>
+        <div class="card-container">
+            <div class="card">
+                <h3>🖐️ 수동</h3>
+                <p>"지금 3대 더 켜!"<br>사람이 직접 설정.</p>
+            </div>
+            <div class="card">
+                <h3>🏃 동적 (Dynamic)</h3>
+                <p>"CPU 70% 초과 시 추가"<br>상황에 반응.</p>
+            </div>
+            <div class="card">
+                <h3>📅 일정 (Scheduled)</h3>
+                <p>"금요일 오후 5시에 시작"<br>예측 가능한 패턴.</p>
+            </div>
+            <div class="card">
+                <h3>🔮 예측 (Predictive)</h3>
+                <p>AI가 과거 데이터를 보고<br>미리 준비.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h1>📝 Part 1 핵심 요약 (이것만 외우자!)</h1>
+        <p>시험장 들어가기 전, 이 키워드 짝꿍만 기억하세요.</p>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>전략(Strategy)</th>
+                    <th>핵심 키워드 (Keywords)</th>
+                    <th>비고</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>동적 (Dynamic)</strong></td>
+                    <td>반응(React), CPU 사용률, 경보(Alarm)</td>
+                    <td>일 터지면 수습함</td>
+                </tr>
+                <tr>
+                    <td><strong>일정 (Scheduled)</strong></td>
+                    <td>특정 시간, 금요일 오후 5시, 패턴</td>
+                    <td>아는 날짜에 미리</td>
+                </tr>
+                <tr>
+                    <td><strong>예측 (Predictive)</strong></td>
+                    <td><span class="highlight">머신러닝(ML), AI</span>, 과거 이력 분석</td>
+                    <td>가장 똑똑함</td>
+                </tr>
+                <tr>
+                    <td><strong>ASG의 목표</strong></td>
+                    <td><span class="badge bg-key">탄력성(Elasticity)</span>, 비용 최적화</td>
+                    <td>가용성 + 비용 절감</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="slide">
+        <div class="emoji-icon">⚔️</div>
+        <h1>Part 2. 컴퓨팅 서비스 4대장</h1>
+        <h2>Lambda vs ECS vs Batch vs Lightsail</h2>
+        <p>"서버를 빌리는 방법도 취향 따라 다릅니다."</p>
+    </div>
+
+    <div class="slide">
+        <h1>1. ECS & Fargate (컨테이너)</h1>
+        <p><strong>ECS</strong>는 '도커(Docker)'라는 도시락통(컨테이너)을 관리하는 시스템입니다.</p>
+        <div class="card-container" style="justify-content: center;">
+            <div class="card" style="width: 300px;">
+                <h3>EC2 Launch Type</h3>
+                <p>내가 직접 서버를 관리하며 컨테이너를 올림.<br>(손이 많이 감)</p>
+            </div>
+            <div class="card" style="width: 300px;">
+                <h3>Fargate (Serverless)</h3>
+                <p>서버 관리 안 함. 그냥 컨테이너만 둥둥 떠다님.<br>(편함, 관리 X)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h1>2. Batch & Lightsail</h1>
+        <div class="card-container">
+            <div class="card" style="width: 350px;">
+                <h3>🏋️ AWS Batch</h3>
+                <p><strong>"대용량 작업 처리반"</strong></p>
+                <p>수천 개의 작업을 한방에!<br>EC2나 Spot 인스턴스를 알아서 띄워서 처리하고 끔.<br>(이미지 처리, 시뮬레이션 등)</p>
+            </div>
+            <div class="card" style="width: 350px;">
+                <h3>💡 Lightsail</h3>
+                <p><strong>"초보자용 올인원 세트"</strong></p>
+                <p>어려운 설정 싫다! 그냥 월 5달러 내고<br>서버+DB+네트워크 한 번에 퉁.<br>(간단한 블로그, 테스트용)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h1>3. Lambda (람다)</h1>
+        <div class="emoji-icon">⚡</div>
+        <p><span class="highlight">"진정한 서버리스(Serverless)"</span></p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>🚫 서버를 아예 안 만듭니다.</li>
+            <li>⏱️ <strong>실행된 시간(초 단위)</strong>만큼만 돈 냅니다.</li>
+            <li>🚕 <strong>비유:</strong> 택시 (탄 만큼만 냄) vs 렌터카 (EC2, 빌린 시간 전체 냄)</li>
+            <li>⚠️ <strong>제한:</strong> 최대 15분까지만 실행 가능!</li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h1>📝 Part 2 핵심 요약 (비교 필수!)</h1>
+        <p>시험 문제는 무조건 <strong>"비교"</strong>해서 나옵니다. 키워드로 구분하세요.</p>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>서비스</th>
+                    <th>키워드 / 특징</th>
+                    <th>유형</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>EC2</strong></td>
+                    <td>가상 서버, 완전 제어, 장기 실행</td>
+                    <td><span class="badge bg-managed">IaaS</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Lambda</strong></td>
+                    <td>15분 제한, 이벤트 기반, 코드만 실행</td>
+                    <td><span class="badge bg-serverless">Serverless</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Fargate</strong></td>
+                    <td>서버 없는 컨테이너, ECS와 짝꿍</td>
+                    <td><span class="badge bg-serverless">Serverless</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Lightsail</strong></td>
+                    <td>초보자용, 월 정액제, 블로그/테스트</td>
+                    <td><span class="badge bg-managed">VPS</span></td>
+                </tr>
+                 <tr>
+                    <td><strong>Batch</strong></td>
+                    <td>대용량 일괄 처리, 시작부터 끝까지 자동</td>
+                    <td><span class="badge bg-managed">Batch</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="slide">
+        <div class="emoji-icon">🎓</div>
+        <h1>AWS Certified Cloud Practitioner</h1>
+        <h2>실전 모의고사 (10문제)</h2>
+        <p>지금까지 배운 내용으로 시험을 통과해봅시다!<br>한글과 영어가 같이 나옵니다.</p>
+        <p>문제를 클릭하면 정답이 나옵니다.<br>다시 클릭하면 선택이 해제됩니다.</p>
+    </div>
+
+    <div class="slide" style="overflow-y: hidden;">
+        <h2>실전 문제 풀기</h2>
+        <div class="quiz-container" id="quiz-box">
+            </div>
+    </div>
+
+    <div class="controls">
+        <button class="nav-btn" id="prevBtn" onclick="moveSlide(-1)" disabled>이전 (Prev)</button>
+        <span class="progress" id="progressText">1 / 13</span>
+        <button class="nav-btn" id="nextBtn" onclick="moveSlide(1)">다음 (Next)</button>
+    </div>
+</div>
+
+<script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const progressText = document.getElementById('progressText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateControls() {
+        progressText.innerText = `${currentSlideIndex + 1} / ${totalSlides}`;
+        prevBtn.disabled = currentSlideIndex === 0;
+        nextBtn.disabled = currentSlideIndex === totalSlides - 1;
+        
+        if (currentSlideIndex === totalSlides - 1) {
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = 'block';
+        }
+    }
+
+    function moveSlide(n) {
+        slides[currentSlideIndex].classList.remove('active');
+        currentSlideIndex += n;
+        slides[currentSlideIndex].classList.add('active');
+        updateControls();
+    }
+
+    // 퀴즈 데이터
+    const quizData = [
+        {
+            id: 1,
+            questionKR: "Auto Scaling 그룹의 주요 이점은 무엇입니까?",
+            questionEN: "What is the main benefit of an Auto Scaling group?",
+            options: [
+                { text: "A. 데이터베이스 백업 자동화 (Automating database backups)", correct: false },
+                { text: "B. 수요에 따라 리소스 탄력성 제공 (Providing elasticity based on demand)", correct: true },
+                { text: "C. S3 스토리지 클래스 관리 (Managing S3 storage classes)", correct: false },
+                { text: "D. IAM 사용자 권한 관리 (Managing IAM user permissions)", correct: false }
+            ],
+            explanation: "정답 B: Auto Scaling은 수요(트래픽)에 맞춰 EC2 인스턴스 수를 자동으로 조절(탄력성)합니다."
+        },
+        {
+            id: 2,
+            questionKR: "Auto Scaling이 비정상(Unhealthy) EC2 인스턴스를 감지하면 어떻게 합니까?",
+            questionEN: "What does Auto Scaling do when it detects an unhealthy EC2 instance?",
+            options: [
+                { text: "A. 인스턴스를 재부팅합니다. (Reboots the instance)", correct: false },
+                { text: "B. 인스턴스를 종료하고 새 것으로 교체합니다. (Terminates and replaces it)", correct: true },
+                { text: "C. 관리자에게 이메일만 보냅니다. (Only sends an email)", correct: false },
+                { text: "D. 인스턴스를 정지시킵니다. (Stops the instance)", correct: false }
+            ],
+            explanation: "정답 B: ASG는 헬스 체크를 실패한 인스턴스를 즉시 종료하고, 설정된 최소 수량을 맞추기 위해 새 인스턴스를 시작합니다."
+        },
+        {
+            id: 3,
+            questionKR: "과거 트래픽 패턴을 분석하여 머신 러닝을 기반으로 스케일링하는 방식은?",
+            questionEN: "Which scaling policy uses machine learning to predict future traffic based on historical patterns?",
+            options: [
+                { text: "A. 단계적 스케일링 (Step scaling)", correct: false },
+                { text: "B. 예측 스케일링 (Predictive scaling)", correct: true },
+                { text: "C. 단순 스케일링 (Simple scaling)", correct: false },
+                { text: "D. 수동 스케일링 (Manual scaling)", correct: false }
+            ],
+            explanation: "정답 B: 예측 스케일링(Predictive Scaling)은 과거 데이터를 학습하여 트래픽이 몰리기 전에 미리 인스턴스를 준비합니다."
+        },
+        {
+            id: 4,
+            questionKR: "사용자는 매주 금요일 오후 6시에 트래픽이 급증한다는 것을 알고 있습니다. 어떤 스케일링이 적합합니까?",
+            questionEN: "A user knows traffic spikes every Friday at 6 PM. Which scaling is appropriate?",
+            options: [
+                { text: "A. 동적 스케일링 (Dynamic scaling)", correct: false },
+                { text: "B. 예약 스케일링 (Scheduled scaling)", correct: true },
+                { text: "C. 대상 추적 스케일링 (Target tracking scaling)", correct: false },
+                { text: "D. 수동 스케일링 (Manual scaling)", correct: false }
+            ],
+            explanation: "정답 B: 특정 시점을 미리 알고 있다면 예약 스케일링(Scheduled Scaling)을 사용합니다."
+        },
+        {
+            id: 5,
+            questionKR: "Auto Scaling을 사용하면 어떤 클라우드 설계 원칙을 달성할 수 있습니까?",
+            questionEN: "Which cloud design principle is achieved by using Auto Scaling?",
+            options: [
+                { text: "A. 느슨한 결합 (Loose coupling)", correct: false },
+                { text: "B. 탄력성 (Elasticity)", correct: true },
+                { text: "C. 글로벌 확장 (Global reach)", correct: false },
+                { text: "D. 데이터 보안 (Data security)", correct: false }
+            ],
+            explanation: "정답 B: 필요할 때 늘리고 필요 없을 때 줄이는 능력은 '탄력성(Elasticity)'입니다."
+        },
+        {
+            id: 6,
+            questionKR: "다음 중 서버를 프로비저닝하거나 관리하지 않고 코드를 실행할 수 있는 서비스는?",
+            questionEN: "Which service allows you to run code without provisioning or managing servers?",
+            options: [
+                { text: "A. Amazon EC2", correct: false },
+                { text: "B. AWS Lambda", correct: true },
+                { text: "C. Amazon EBS", correct: false },
+                { text: "D. AWS Systems Manager", correct: false }
+            ],
+            explanation: "정답 B: Lambda는 대표적인 서버리스 컴퓨팅 서비스입니다."
+        },
+        {
+            id: 7,
+            questionKR: "가상 프라이빗 서버(VPS)가 필요하고, 월정액 요금으로 간편하게 시작하고 싶은 초보자에게 적합한 서비스는?",
+            questionEN: "Which service is best for beginners needing a VPS with simple, predictable monthly pricing?",
+            options: [
+                { text: "A. Amazon Lightsail", correct: true },
+                { text: "B. AWS Fargate", correct: false },
+                { text: "C. AWS Outposts", correct: false },
+                { text: "D. Amazon ECS", correct: false }
+            ],
+            explanation: "정답 A: Lightsail은 사용하기 쉽고 요금 예측이 가능한 VPS 서비스입니다."
+        },
+        {
+            id: 8,
+            questionKR: "AWS Lambda 함수의 최대 실행 시간 제한은 얼마입니까?",
+            questionEN: "What is the maximum execution time limit for an AWS Lambda function?",
+            options: [
+                { text: "A. 5분 (5 minutes)", correct: false },
+                { text: "B. 60분 (60 minutes)", correct: false },
+                { text: "C. 15분 (15 minutes)", correct: true },
+                { text: "D. 제한 없음 (No limit)", correct: false }
+            ],
+            explanation: "정답 C: Lambda는 짧은 작업용으로 설계되었으며 최대 15분까지만 실행됩니다."
+        },
+        {
+            id: 9,
+            questionKR: "서버 관리 없이 컨테이너를 실행하고 싶습니다. ECS와 함께 사용해야 하는 실행 유형은?",
+            questionEN: "You want to run containers without managing servers. Which launch type should be used with ECS?",
+            options: [
+                { text: "A. EC2 Launch Type", correct: false },
+                { text: "B. AWS Fargate", correct: true },
+                { text: "C. AWS Lambda", correct: false },
+                { text: "D. Amazon ECR", correct: false }
+            ],
+            explanation: "정답 B: Fargate는 ECS에서 서버(EC2)를 직접 관리하지 않고 컨테이너를 실행하는 서버리스 엔진입니다."
+        },
+        {
+            id: 10,
+            questionKR: "수십만 개의 일괄 컴퓨팅 작업을 효율적으로 실행할 수 있도록 지원하는 서비스는?",
+            questionEN: "Which service enables you to run hundreds of thousands of batch computing jobs efficiently?",
+            options: [
+                { text: "A. AWS Batch", correct: true },
+                { text: "B. Amazon Aurora", correct: false },
+                { text: "C. Amazon Inspector", correct: false },
+                { text: "D. AWS Config", correct: false }
+            ],
+            explanation: "정답 A: AWS Batch는 배치(일괄) 작업을 위해 컴퓨팅 리소스를 동적으로 프로비저닝합니다."
+        }
+    ];
+
+    function loadQuiz() {
+        const quizBox = document.getElementById('quiz-box');
+        quizData.forEach((q, index) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'question-box';
+            
+            let optionsHtml = '';
+            q.options.forEach((opt, i) => {
+                optionsHtml += `<button class="option-btn" onclick="toggleAnswer(this, ${q.id}, ${opt.correct})">${opt.text}</button>`;
+            });
+
+            qDiv.innerHTML = `
+                <div class="q-text-kr">Q${index + 1}. ${q.questionKR}</div>
+                <div class="q-text-en">${q.questionEN}</div>
+                <div class="options">${optionsHtml}</div>
+                <div class="explanation" id="expl-${q.id}" data-text="${q.explanation}"></div>
+            `;
+            quizBox.appendChild(qDiv);
+        });
+    }
+
+    function toggleAnswer(btn, qId, isCorrect) {
+        const parent = btn.parentElement;
+        const buttons = parent.getElementsByClassName('option-btn');
+        const explanation = document.getElementById(`expl-${qId}`);
+
+        if (btn.classList.contains('correct') || btn.classList.contains('wrong')) {
+            btn.classList.remove('correct', 'wrong');
+            explanation.style.display = 'none';
+            return;
+        }
+
+        for(let b of buttons) {
+            b.classList.remove('correct', 'wrong');
+        }
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            explanation.style.display = 'block';
+            explanation.style.backgroundColor = '#d4edda';
+            explanation.style.color = '#155724';
+            explanation.innerHTML = "<strong>✅ 정답입니다!</strong> " + explanation.dataset.text;
+        } else {
+            btn.classList.add('wrong');
+            explanation.style.display = 'block';
+            explanation.style.backgroundColor = '#f8d7da';
+            explanation.style.color = '#721c24';
+            explanation.innerHTML = "<strong>❌ 오답입니다. 다시 골라보세요.</strong>";
+        }
+    }
+
+    loadQuiz();
+    updateControls();
+</script>
+
+</body>
+</html>

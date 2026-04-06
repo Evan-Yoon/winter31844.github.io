@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cloud Advantages - 현석(B)</title>
+    <style>
+        /* 1. 기본 설정 및 리셋 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            background-color: #232F3E; /* AWS Dark Blue */
+            color: #333;
+            overflow: hidden; /* 스크롤 방지 */
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* 2. 슬라이드 컨테이너 */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: scale(0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa; /* 밝은 배경 */
+            padding: 40px;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+            pointer-events: all;
+        }
+
+        /* 3. 슬라이드 내부 레이아웃 */
+        .content-box {
+            max-width: 1000px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h1 { font-size: 3.5rem; color: #FF9900; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+        h2 { font-size: 2.5rem; color: #232F3E; margin-bottom: 30px; border-bottom: 3px solid #FF9900; display: inline-block; padding-bottom: 10px; }
+        h3 { font-size: 1.8rem; color: #444; margin-bottom: 15px; }
+        p, li { font-size: 1.4rem; line-height: 1.6; color: #555; margin-bottom: 10px; }
+        ul { text-align: left; display: inline-block; margin-top: 20px; }
+        strong { color: #d17a00; }
+
+        /* 4. 이미지 컨테이너 스타일 (실제 이미지용) */
+        .img-container {
+            width: 100%;
+            max-height: 450px; /* 이미지 높이 제한 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* 플레이스홀더 스타일 (이미지 없는 슬라이드용) */
+        .img-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #e9ecef;
+            border: 2px dashed #adb5bd;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            color: #6c757d;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .img-label { position: absolute; background: rgba(255,255,255,0.8); padding: 10px 20px; border-radius: 20px; }
+
+        /* 5. 퀴즈 스타일 */
+        .quiz-box {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .quiz-box:hover { transform: translateY(-3px); border-color: #FF9900; }
+        .answer { display: none; color: #232F3E; font-weight: bold; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ccc;}
+        .quiz-box.show .answer { display: block; }
+
+        /* 6. 네비게이션 컨트롤 */
+        .controls { position: absolute; bottom: 30px; right: 40px; z-index: 100; display: flex; gap: 10px; }
+        .btn { background-color: rgba(255, 255, 255, 0.2); color: white; border: 1px solid white; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-size: 1rem; transition: background 0.3s; }
+        .btn:hover { background-color: #FF9900; border-color: #FF9900; }
+        .page-indicator { position: absolute; bottom: 30px; left: 40px; color: rgba(255,255,255,0.5); font-size: 1.2rem; z-index: 100; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            p, li { font-size: 1rem; }
+            .img-container { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        
+        <div class="slide active">
+            <div class="content-box">
+                <div style="font-size: 5rem; color:#FF9900; margin-bottom: 20px;">☁️</div>
+                <h1>클라우드 컴퓨팅의 핵심 이점</h1>
+                <h3 style="color: #666;">비용 · 확장성 · 민첩성</h3>
+                <div style="margin-top: 50px; border-top: 1px solid #ccc; padding-top: 20px;">
+                    <p><strong>발표자:</strong> B (현석)</p>
+                    <p><strong>날짜:</strong> 2026. 01. 06</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="content-box">
+                <h2>Why Cloud?</h2>
+                <p>단순한 서버 임대가 아닌, <strong>비즈니스 운영 방식의 혁신</strong>입니다.</p>
+                
+                <div class="img-placeholder" style="background: white; border: none; flex-direction: row; gap: 30px; height: auto; padding: 40px 0;">
+                    <div style="flex:1; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px;">
+                        <div style="font-size: 3rem; margin-bottom:10px;">💰</div>
+                        <h3>비용 효율</h3>
+                        <p style="font-size:1rem;">CAPEX &rarr; OPEX</p>
+                    </div>
+                    <div style="flex:1; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px;">
+                        <div style="font-size: 3rem; margin-bottom:10px;">📈</div>
+                        <h3>확장성</h3>
+                        <p style="font-size:1rem;">탄력적인 자원 관리</p>
+                    </div>
+                    <div style="flex:1; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px;">
+                        <div style="font-size: 3rem; margin-bottom:10px;">🚀</div>
+                        <h3>민첩성</h3>
+                        <p style="font-size:1rem;">글로벌 배포 가속화</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="content-box">
+                <h2>1. 비용의 이점 (Cost)</h2>
+                
+                <div style="display: flex; justify-content: space-around; align-items: center; text-align: left; margin-top: 20px; margin-bottom: 10px;">
+                    <div style="width: 45%;">
+                        <h3>CAPEX(Capital Expenditures)</h3>
+                        <h3>자본적 지출</h3>
+                        <p>🚫 초기 투자 비용 발생</p>
+                        <p>🚫 리스크 큼</p>
+                    </div>
+                    <div style="font-size: 2rem;">➡</div>
+                    <div style="width: 45%;">
+                        <h3>OPEX(Operating Expenditure)</h3>
+                        <h3>운영비용</h3>
+                        <p>✅ <strong>Pay-as-you-go</strong></p>
+                        <p>✅ 쓴 만큼만 지불</p>
+                    </div>
+                </div>
+
+                <div class="img-container">
+                    <img src="AWS 규모의 경제 - 계단식 비용 하락 그래프.png" alt="AWS 규모의 경제 그래프">
+                </div>
+                <p style="font-size: 1rem; color: #666;">* 규모의 경제: 사용자가 늘어날수록 AWS의 단위 비용은 낮아집니다.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="content-box">
+                <h2>2. 확장성 & 탄력성</h2>
+                <p>"용량 추정(Capacity Guessing)을 멈추세요"</p>
+
+                <div class="img-container">
+                    <img src="autoscaling.png" alt="Auto Scaling 그래프">
+                </div>
+                <ul style="font-size: 1.2rem;">
+                    <li><strong>Scalability:</strong> 규모를 키우는 능력 (수직/수평 확장)</li>
+                </ul>
+                <div class="img-container">
+                    <img src="autoscaling1.png" alt="Auto Scaling1 그래프">
+                </div>
+                <ul style="font-size: 1.2rem;">
+                    <li><strong>Elasticity:</strong> 수요에 맞춰 늘리고 줄이는 능력 (자동화)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="content-box">
+                <h2>3. 민첩성 & 글로벌 도달</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #FF9900;">
+                        <h3>⚡ Speed & Agility</h3>
+                        <p>몇 주 걸리던 서버 확보가 <strong>몇 분</strong> 만에 완료.</p>
+                        <p>개발팀은 인프라 관리 대신 <strong>코드와 혁신</strong>에 집중.</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #FF9900;">
+                        <h3>🌏 Go Global in Minutes</h3>
+                        <p>전 세계 AWS 리전을 통해 <strong>지연 시간(Latency) 최소화</strong>.</p>
+                        <p>클릭 몇 번으로 전 세계 배포 가능.</p>
+                    </div>
+                </div>
+
+                <div class="img-container">
+                    <img src="세계 지도 (AWS Global Infrastructure).png" alt="세계 지도">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="content-box">
+                <h2>📝 예제 문제 확인</h2>
+                <p>클릭하여 정답을 확인해보세요.</p>
+
+                <div class="quiz-box" onclick="this.classList.toggle('show')">
+                    <p><strong>Q1.</strong> AWS를 통해 자본적 지출(CAPEX)을 무엇으로 바꿀 수 있나요?</p>
+                    <div class="answer">정답: 가변 비용 (Variable Expense / OPEX)</div>
+                </div>
+
+                <div class="quiz-box" onclick="this.classList.toggle('show')">
+                    <p><strong>Q2.</strong> 트래픽 변화에 따라 리소스를 자동으로 늘리고 줄이는 특징은?</p>
+                    <div class="answer">정답: 탄력성 (Elasticity)</div>
+                </div>
+
+                <div class="quiz-box" onclick="this.classList.toggle('show')">
+                    <p><strong>Q3.</strong> 물리적 서버를 관리하지 않음으로써 얻는 개발 속도 향상의 특징은?</p>
+                    <div class="answer">정답: 민첩성 (Agility)</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="page-indicator" id="page-indicator">1 / 6</div>
+    
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()">◀ Prev</button>
+        <button class="btn" onclick="nextSlide()">Next ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const pageIndicator = document.getElementById('page-indicator');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+            pageIndicator.textContent = `${index + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // 키보드 이벤트 리스너
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // 초기 실행
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
