@@ -1,0 +1,32 @@
+﻿phase,date,sha,commit_message,best_chunk_match,recommended_blog_angle
+Phase 1,2026-03-05,93eb26e,initial Flutter salary calculator application with UI/state/CI,chunks/01_origin_and_idea_selection.md,프로젝트 시작점과 기본 뼈대
+Phase 1,2026-03-05,da285fc,initial salary calculator structure incl. shift entry/calendar/settings,chunks/02_scope_reduction_and_mvp.md,초기 화면/구조 가설
+Phase 1,2026-03-05,2322b36,"onboarding, salary input, settings pages",chunks/03_tech_stack_and_structure.md,초기 앱 플로우 정리
+Phase 2,2026-03-05,414c227,core shift management add/edit/view + provider,chunks/06_state_persistence_and_user_flow.md,근무 기록 흐름 구체화
+Phase 2,2026-03-05,be304a0,"settings page with shift preset management, calculator card, legal information",chunks/05_pay_logic_and_labor_rule_focus.md,설정/법률 안내 연결
+Phase 2,2026-03-05,ba78246,core shift salary calculation logic + add/edit UI,chunks/05_pay_logic_and_labor_rule_focus.md,핵심 계산 로직 구현
+Phase 2,2026-03-05,40ffd1d,unit tests for shift salary calculation logic,chunks/05_pay_logic_and_labor_rule_focus.md,정확도 검증 시도
+Phase 2,2026-03-05,a9a70d0,comprehensive shift salary calculation system,chunks/05_pay_logic_and_labor_rule_focus.md,계산기 중심 앱 정체성 강화
+Phase 3,2026-03-05,798e82c,introduce salary provider + cleanup,chunks/06_state_persistence_and_user_flow.md,상태 관리 구조 정리
+Phase 3,2026-03-05,817a4ce,introduce salary provider + remove temp files,chunks/06_state_persistence_and_user_flow.md,구조 정리/정돈
+Phase 3,2026-03-05,0e5e8a8,calendar page for shift and bonus management,chunks/02_scope_reduction_and_mvp.md,초기 달력 방향의 흔적
+Phase 3,2026-03-05,1ef1313,premium feature guard + settings/statistics pages,chunks/07_feature_expansion_premium_stats_backup.md,서비스 확장 시작
+Phase 3,2026-03-05,7b637d9,RevenueCat-based premium subscription,chunks/07_feature_expansion_premium_stats_backup.md,초기 수익화 실험
+Phase 3,2026-03-05,32ebed0,premium features and paywall UI,chunks/07_feature_expansion_premium_stats_backup.md,페이월 구체화
+Phase 3,2026-03-05,cfa0b35,statistics + PDF export + subscription integration,chunks/07_feature_expansion_premium_stats_backup.md,리포트/통계 기능 확장
+Phase 3,2026-03-05,6497f71,premium features with in-app purchases and paywall,chunks/07_feature_expansion_premium_stats_backup.md,구독 흐름 보완
+Phase 3,2026-03-05,0f89ecc,premium features + IAP + settings UI,chunks/07_feature_expansion_premium_stats_backup.md,결제/설정 고도화
+Phase 3,2026-03-05,b3fc558,migrate IAP implementation to in_app_purchase,chunks/07_feature_expansion_premium_stats_backup.md,구현 방식 정교화
+Phase 4,2026-03-06,2df9dd2,shift history display and salary input onboarding,chunks/06_state_persistence_and_user_flow.md,사용자 흐름 다듬기
+Phase 4,2026-03-06,77f535c,initialize app with shift preset management and icons,chunks/08_polish_release_and_last_mile.md,초기 브랜딩/설정
+Phase 4,2026-03-06,372626c,"Google Drive backup/restore, CSV export, workplace presets",chunks/07_feature_expansion_premium_stats_backup.md,실사용 기능 확장
+Phase 4,2026-03-09,46a9f15,"cloud backup/restore, CSV export, pattern generator, workplace presets",chunks/07_feature_expansion_premium_stats_backup.md,생산성 기능 확대
+Phase 4,2026-03-10,c7e36f7,add two more paid features,chunks/07_feature_expansion_premium_stats_backup.md,수익화 확장
+Phase 4,2026-03-10,dc84393,statistics page + PDF export + premium features + notifications,chunks/07_feature_expansion_premium_stats_backup.md,서비스형 앱으로 확장
+Phase 5,2026-03-17,228c79f,last check,chunks/08_polish_release_and_last_mile.md,마감 직전 점검
+Phase 5,2026-03-17,7f7a830,"AndroidManifest/build.gradle.kts, notification permissions, signing",chunks/08_polish_release_and_last_mile.md,배포 준비 감각
+Phase 5,2026-03-19,f48de2f,changing app icons,chunks/08_polish_release_and_last_mile.md,브랜딩/마감 다듬기
+Phase 5,2026-03-19,c7ad0d4,loading animation fix,chunks/08_polish_release_and_last_mile.md,UX 디테일 개선
+Phase 5,2026-03-19,618fc2b,update on legal_onboarding page,chunks/08_polish_release_and_last_mile.md,법률 안내/온보딩 보완
+Phase 5,2026-03-19,f6d6d40,fixing ui,chunks/08_polish_release_and_last_mile.md,마감 UI 수정
+Phase 5,2026-03-19,e13caf3,delete confirmation,chunks/08_polish_release_and_last_mile.md,작은 UX 안전장치 추가
