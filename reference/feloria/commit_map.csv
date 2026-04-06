@@ -1,0 +1,36 @@
+﻿commit_date,commit_hash,commit_title,stage,feature_area,related_chunks,evidence_reason,recommended_blog_section,importance
+2026-03-10,21243cf,기본 로그인 및 고양이 선택 페이지,bootstrap,start_ui/starter,"01,02",초기 스타터 선택/시작 흐름 요구와 직접 연결,프로토타입 시작,high
+2026-03-10,2f6f80f,making two village and interactions,bootstrap,world/maps/npc,"02,07,08",쯔꾸르식 마을 2개와 상호작용 요구에 대응,초기 월드 구축,high
+2026-03-10,3b45e43,"feat: Initialize core game structure with preload scene, map loader, and village map data.",bootstrap,preload/map_loader,"03,06,07,24",Preload/맵 로더/마을 맵 데이터는 기술 기반 형성 단계,기술 기반 구축,high
+2026-03-10,0c3e015,"feat: Implement turn-based battle system, starter selection, and core game data for creatures, skills, and encounters.",bootstrap,battle/starter/data,"01,02,19,23",스타터/전투/코어 데이터 요구를 동시에 반영,핵심 루프 첫 구현,high
+2026-03-10,09f7be4,capture and state 유지,bootstrap,capture/state,"04,14,23",포획과 상태 유지 요구를 반영한 초기 핵심 메커닉,핵심 루프 첫 구현,high
+2026-03-10,95f47df,"feat: Add core battle system with turn-based combat, capture mechanics, experience gain, and battle UI.",bootstrap,battle/ui/progression,"04,12,23",전투 UI와 경험치가 성장 루프와 직접 연결됨,전투 시스템 확장,high
+2026-03-10,7b4134a,feat: introduce PartyScene for managing player creatures and BattleScene for combat encounters.,bootstrap,party/battle_scene,"12,19,23",파티 관리와 전투 씬 분리가 구조화 포인트,씬 구조 확립,high
+2026-03-10,1ac4fbe,"feat: Implement core game scenes, systems, and data including Codex, Shop, Battle, and World scenes, along with supporting data and build files.",foundation,codex/shop/world,"14,19,23,24",도감/상점/월드 씬으로 게임 골격이 넓어짐,게임 골격 형성,high
+2026-03-10,3fe0316,"feat: Implement core battle system, foundational game scenes, and game configuration.",foundation,core_scenes/config,"03,23,24",기반 씬과 구성 파일 정리 단계,게임 골격 형성,high
+2026-03-11,f311b72,"feat: Implement map loading and parsing, a shop system with buying logic, and the core WorldScene.",foundation,map/shop/worldscene,"06,07,14,23",월드 탐험과 상점 루프 연결,월드 시스템 구체화,high
+2026-03-11,fb72ef4,fixing minor issues,foundation,stability,"15,23",중간 안정화 커밋으로 서술 시 보조 근거,안정화,high
+2026-03-11,c1f8d47,"feat: Implement core game structure with Start, Menu, Battle, World, Save/Load, and Shop scenes, alongside a new quest system and updated game configuration.",foundation,menu/save/quest,"02,13,14,15,23",메뉴/저장/퀘스트가 실제 RPG 형태를 강화,플레이 가능성 확장,high
+2026-03-11,70bee3a,"feat: Implement initial game structure including core scenes like Start, Party, Battle, Inventory, World, and associated data and configuration.",foundation,scene_set,"12,14,19,23",핵심 씬 세트 정립,플레이 가능성 확장,high
+2026-03-11,e82fb34,"feat: add PreloadScene to manage asset loading, display a loading bar, and generate placeholder pixel art for game entities.",foundation,asset_pipeline,"06,21,24",에셋 로딩과 placeholder 생성 파이프라인 확보,에셋 파이프라인,high
+2026-03-11,803da10,"feat: Implement core game systems and initial content, including maps, creatures, trainers, items, quests, encounters, and battle/world scenes.",content,initial_content,"07,08,13,14,19",콘텐츠 세트가 넓어지며 ‘게임’ 형태가 시작됨,콘텐츠 첫 확장,medium
+2026-03-11,9e159e1,feat: add new game maps and PartyScene.,content,maps/party,"07,12,28",맵 추가와 파티 씬 확장,콘텐츠 첫 확장,medium
+2026-03-11,8d8337a,"feat: Implement the core battle system with a dedicated scene, UI, capture mechanics, and add a quest scene, battle system utility, game entry point, and initial map data.",content,battle/quest/integration,"04,07,13,23",전투와 퀘스트가 엔트리/맵 데이터와 통합됨,핵심 루프 통합,medium
+2026-03-11,96f3f81,added storyline,content,story,"05,13,17",스토리라인 블록과 직접 연결,스토리 구조 추가,medium
+2026-03-11,baa5af5,"feat: Add initial game scenes (Battle, World, Evolution), core systems (battle, cutscene, legendary), and game data with HTML entry point.",content,evolution/legendary/cutscene,"12,18,19,23",진화·전설·컷신이 동시에 등장하는 분기점,후반 시스템 씨앗,medium
+2026-03-11,b8acb44,"feat: Implement core battle system including battle scene, UI, turn logic, and creature/skill data.",combat,battle_logic,"04,19,23",전투 턴 로직과 데이터 기반 구조를 명시,전투 시스템 정교화,high
+2026-03-11,5c5bd3c,"feat: Implement core battle system, add numerous game scenes, introduce new creature, skill, and map data, and include map localization.",combat,battle_plus_data,"04,07,19,20,23",전투 외 데이터 규모가 커지는 시점,전투/데이터 동시 확장,high
+2026-03-11,a2d9695,added graphic data,asset,graphic_assets,"06,21,24",그래픽 자산 도입이 명시됨,에셋 확장,medium
+2026-03-11,2297fce,"feat: Initialize project with Phaser game engine, its dependencies, and core assets.",asset,phaser_init,"03,09,24",Phaser 전환이 실코드로 시작된 커밋,기술 전환,medium
+2026-03-11,7a4ac70,add chief npc logic,content,npc_logic,"08,17,23",NPC 역할 분화/대화 설계와 직결,월드 빌딩,medium
+2026-03-11,568885e,"feat: Implement core battle system with UI, actions, skill management, and initial game scenes.",combat,battle_ui_actions,"04,23",행동 선택/스킬 관리 UX의 핵심,전투 UX 개선,high
+2026-03-11,25a5201,"feat: Add new game scenes, skill effect system, and a collection of icon assets.",polish,skill_fx/icons,"18,21,22,24",시각 피드백과 아이콘 자산 확장,연출/폴리시,low
+2026-03-12,2242cf6,adding generated cat images,asset,creature_art,"21,24,25",생성된 고양이 아트 투입,비주얼 자산 강화,medium
+2026-03-12,87fa170,"feat: Implement asset preloading with loading UI and placeholder pixel art generation, and define initial creature encounter tables.",asset,preload/encounters,"06,19,24",로딩 파이프라인과 조우 테이블을 연결,탐험 루프 구체화,medium
+2026-03-12,ade143e,"feat: Introduce the core battle system with new BattleScene, PreloadScene, skill effects, and animation/asset configurations.",combat,battle_scene_fx,"04,18,23,24",배틀씬+프리로드+이펙트가 묶임,전투/연출 통합,high
+2026-03-12,172802c,"feat: Implement initial core game scenes, battle and skill systems, and map data.",foundation,initial_gameplay,"03,04,07,23",핵심 씬/전투/맵 데이터를 한꺼번에 정리,플레이 가능 MVP,high
+2026-03-12,4ddfaed,"feat: Implement a skill effect system to play visual animations on target sprites with dynamic configuration, positioning, scaling, and screen shake.",polish,skill_effects,"18,22,23",스킬 연출 시스템을 따로 설명할 수 있는 강한 근거,연출 강화,low
+2026-03-12,2911eab,feat: implement player name input and starter cat selection scenes.,foundation,name_input/starter,"02,23",게임 시작 경험 개선,온보딩,high
+2026-03-12,a9d2fdd,"feat: Implement turn-based battle system, add new creature sprites, and establish core game scenes including Codex and World.",foundation,battle_world_codex,"04,19,23,24",전투/월드/도감의 삼각 골격 형성,핵심 구조 정리,high
+2026-03-12,c817051,"feat: Implement foundational game scenes, systems, and data including inventory, battle, dialog, party, shop, questing, and asset definitions.",milestone,full_foundation,"08,14,19,23,24",인벤토리/대화/파티/상점/퀘스트까지 한 번에 갖춰진 큰 마일스톤,중간 완성본,high
+2026-03-12,b3af7a9,erasing background of cat pictures,polish,sprite_cleanup,"21,22,25",고양이 스프라이트 다듬기와 비주얼 정리,비주얼 폴리시,low
