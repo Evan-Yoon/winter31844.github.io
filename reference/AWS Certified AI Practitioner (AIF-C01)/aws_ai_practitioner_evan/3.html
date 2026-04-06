@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS AI Practitioner 모의고사 - 세트 3</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #232f3e; border-bottom: 2px solid #ff9900; padding-bottom: 10px; }
+        .info { background-color: #e9ecef; padding: 15px; border-left: 5px solid #007bff; margin-bottom: 30px; font-size: 0.95em; }
+        .question-block { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; }
+        .options-list { list-style-type: none; padding: 0; }
+        .option-item { margin-bottom: 10px; background: #f8f9fa; padding: 10px 15px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; }
+        .option-item:hover { background: #e2e6ea; }
+        .option-item input { margin-right: 10px; }
+        .btn-submit { display: block; width: 100%; padding: 15px; background-color: #ff9900; color: #232f3e; font-size: 1.2em; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        .btn-submit:hover { background-color: #e88a00; }
+        #result-container { display: none; margin-top: 30px; padding: 20px; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 5px; text-align: center; font-size: 1.3em; font-weight: bold; }
+        .correct-answer { background-color: #d4edda !important; border-color: #c3e6cb !important; }
+        .wrong-answer { background-color: #f8d7da !important; border-color: #f5c6cb !important; }
+        .explanation { display: none; margin-top: 10px; padding: 10px; background-color: #eef1f6; border-left: 4px solid #4a90e2; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AWS AI Practitioner (AIF-C01) - 세트 3</h1>
+    <div class="info">
+        <strong>안내:</strong> MLOps 심화, 고급 모델 평가, 책임감 있는 AI(투명성/워터마킹), 보안 및 새로운 AWS 관리형 AI 서비스를 다루는 30문항입니다. 모두 풀고 '채점하기'를 누르세요.
+    </div>
+
+    <form id="quiz-form">
+        <div id="quiz-container"></div>
+        <button type="button" class="btn-submit" onclick="submitQuiz()">제출 및 채점하기</button>
+    </form>
+
+    <div id="result-container"></div>
+</div>
+
+<script>
+    const questionsData = [
+        {
+            q: "1. 책임감 있는 AI 원칙과 관련하여, Amazon Titan Image Generator 모델이 생성한 모든 이미지에 기본적으로 적용되어 해당 이미지가 AI에 의해 생성되었음을 식별할 수 있게 해주는 기능은 무엇입니까?",
+            options: ["Bedrock Guardrails", "투명한 워터마크 (Invisible Watermark)", "AI Service Cards", "AWS CloudTrail"],
+            answer: 1,
+            explanation: "Amazon Titan Image Generator는 시각적으로 식별할 수 없는 눈에 보이지 않는 워터마크(Invisible Watermark)를 생성된 이미지에 삽입하여, 향후 해당 이미지가 AI로 생성되었는지 식별하고 허위 정보 확산을 방지할 수 있도록 돕습니다."
+        },
+        {
+            q: "2. 기계 학습에서 개발자가 모델 구조와 알고리즘은 선택하지만, 최적의 성능을 내기 위해 훈련 전에 수동으로 설정해야 하는 값(예: 학습률, 배치 크기)을 무엇이라고 합니까?",
+            options: ["가중치 (Weights)", "편향 (Biases)", "하이퍼파라미터 (Hyperparameters)", "토큰 (Tokens)"],
+            answer: 2,
+            explanation: "하이퍼파라미터(Hyperparameter)는 모델 훈련 과정을 제어하기 위해 훈련이 시작되기 전에 외부에서 미리 설정하는 구성 값입니다. (반면, 가중치와 편향은 모델이 훈련 과정 중에 데이터로부터 스스로 학습하는 내부 파라미터입니다.)"
+        },
+        {
+            q: "3. 대규모 언어 모델(LLM)의 생성 결과를 제어하는 매개변수 중, 모델이 다음 단어를 선택할 때 '가장 확률이 높은 상위 K개의 후보'로만 선택지를 제한하여 터무니없는 단어 생성을 방지하는 것은 무엇입니까?",
+            options: ["Temperature (온도)", "Top-P", "Top-K", "Max Tokens"],
+            answer: 2,
+            explanation: "Top-K 샘플링은 모델이 다음 토큰을 예측할 때 확률이 가장 높은 상위 K개의 토큰만을 풀(pool)로 남기고 나머지는 무시하는 기법입니다. 이를 통해 엉뚱한(확률이 매우 낮은) 단어가 생성되는 것을 방지합니다."
+        },
+        {
+            q: "4. 기계 학습 모델을 프로덕션 환경에 배포할 때, 새 모델(Green)을 기존 모델(Blue)과 동시에 실행하고 트래픽을 즉시 전환하여 다운타임을 없애고 문제가 생기면 즉시 롤백할 수 있는 배포 전략은 무엇입니까?",
+            options: ["A/B 테스트 배포", "블루/그린 배포 (Blue/Green Deployment)", "카나리 배포 (Canary Deployment)", "섀도우 배포 (Shadow Deployment)"],
+            answer: 1,
+            explanation: "블루/그린 배포는 동일한 프로덕션 환경을 두 개(기존 버전, 새 버전) 유지하면서, 로드 밸런서 등에서 트래픽의 라우팅만 새 버전으로 전환하여 무중단 배포 및 빠른 롤백을 가능하게 하는 전략입니다."
+        },
+        {
+            q: "5. 회사가 자연어 처리(NLP)를 사용하여 기계 번역 모델을 평가하려고 합니다. 생성된 번역이 전문 번역가가 작성한 참조 번역과 얼마나 유사한지를 측정하는 데 특화된 지표는 무엇입니까?",
+            options: ["ROUGE", "BLEU (Bilingual Evaluation Understudy)", "정확도 (Accuracy)", "F1 점수"],
+            answer: 1,
+            explanation: "BLEU 점수는 기계 번역 텍스트의 품질을 평가하는 대표적인 지표로, 생성된 텍스트와 사람이 작성한 고품질 참조 텍스트 간의 n-gram 일치도를 측정합니다. (ROUGE는 주로 요약에 사용됩니다.)"
+        },
+        {
+            q: "6. 병원의 의사와 환자 간의 대화를 실시간으로 텍스트로 변환하고, 의학적 용어(약물, 질환명 등)를 높은 정확도로 인식하도록 특별히 훈련된 AWS 서비스는 무엇입니까?",
+            options: ["Amazon Comprehend Medical", "Amazon Transcribe Medical", "Amazon HealthLake", "Amazon Lex"],
+            answer: 1,
+            explanation: "Amazon Transcribe Medical은 의료 분야의 음성(의사-환자 대화, 의료 구술 등)을 텍스트로 자동 변환(Speech-to-Text)하는 데 특화된 기계 학습 서비스입니다."
+        },
+        {
+            q: "7. 모델 훈련을 위해 데이터를 준비할 때, 서로 단위나 범위가 크게 다른 수치형 데이터(예: 나이 0~100, 소득 0~1,000,000)를 동일한 스케일(예: 0~1 사이)로 맞추어 모델이 특정 변수에 편향되지 않도록 하는 전처리 과정을 무엇이라고 합니까?",
+            options: ["토큰화 (Tokenization)", "정규화/표준화 (Normalization/Standardization)", "데이터 증강 (Data Augmentation)", "원-핫 인코딩 (One-Hot Encoding)"],
+            answer: 1,
+            explanation: "정규화(Normalization)와 표준화(Standardization)는 머신 러닝 알고리즘이 피처(변수)의 스케일 차이로 인해 잘못된 가중치를 부여하는 것을 방지하기 위해 데이터의 범위를 일치시키는 필수 전처리 단계입니다."
+        },
+        {
+            q: "8. Amazon Translate를 사용하여 회사 매뉴얼을 다국어로 번역하려고 합니다. 번역 과정에서 회사의 '고유 브랜드명'이나 '특정 기술 용어'가 잘못 번역되지 않고 일관되게 유지되도록 보장하는 기능은 무엇입니까?",
+            options: ["사용자 지정 언어 모델 (Custom Language Model)", "사용자 지정 용어집 (Custom Terminology)", "Amazon Translate Guardrails", "Amazon Lex 봇"],
+            answer: 1,
+            explanation: "Amazon Translate의 사용자 지정 용어집(Custom Terminology) 기능을 사용하면 특정 단어, 구문, 브랜드 이름 등이 사용자가 정의한 대로 정확하게 번역되거나 번역되지 않고 그대로 유지되도록 강제할 수 있습니다."
+        },
+        {
+            q: "9. 대규모 언어 모델(LLM)이 한 번에 입력으로 받고 처리할 수 있는 최대 텍스트 양(토큰 수)을 제한하는 모델의 아키텍처적 한계를 무엇이라고 합니까?",
+            options: ["파라미터 크기 (Parameter Size)", "학습률 (Learning Rate)", "컨텍스트 윈도우 (Context Window)", "배치 크기 (Batch Size)"],
+            answer: 2,
+            explanation: "컨텍스트 윈도우(Context Window)는 LLM이 프롬프트를 처리할 때 한 번에 '기억'하고 고려할 수 있는 이전 토큰(단어)의 최대 개수입니다. 이 크기를 초과하는 텍스트를 입력하면 모델은 앞부분의 내용을 잊어버리게 됩니다."
+        },
+        {
+            q: "10. 기계 학습 엔지니어가 여러 모델의 훈련 실험에서 사용된 피처(Feature)들을 회사 내 다른 팀과 쉽게 공유하고 재사용하여 데이터 준비 시간을 줄이려고 합니다. 이를 지원하는 Amazon SageMaker 기능은 무엇입니까?",
+            options: ["SageMaker Model Registry", "SageMaker Feature Store", "SageMaker Data Wrangler", "SageMaker JumpStart"],
+            answer: 1,
+            explanation: "Amazon SageMaker Feature Store는 기계 학습 피처를 안전하게 저장, 검색, 공유하기 위한 완전 관리형 중앙 리포지토리로, 팀 간 중복 작업을 줄이고 피처의 일관성을 유지하게 해줍니다."
+        },
+        {
+            q: "11. RAG(검색 증강 생성)가 파운데이션 모델(FM)을 미세 조정(Fine-tuning)하는 것과 비교하여 가지는 주요 이점은 무엇입니까?",
+            options: ["모델의 추론 속도를 10배 이상 높일 수 있다.", "모델의 내부 가중치를 영구적으로 변경하여 새로운 지식을 학습시킨다.", "자주 변경되는 데이터를 반영할 때마다 모델을 재학습할 필요가 없으므로 비용과 시간이 절약된다.", "기본 모델의 파라미터 수를 줄일 수 있다."],
+            answer: 2,
+            explanation: "RAG는 모델을 재학습(미세 조정)하지 않고 외부 데이터베이스에서 실시간으로 정보를 검색하여 프롬프트에 주입하는 방식이므로, 지식이 자주 업데이트되는 환경에서 비용 효율적이고 유연합니다."
+        },
+        {
+            q: "12. 개발자가 Amazon Textract를 사용하여 복잡한 문서(예: W-2 세금 양식, 여권)에서 특정 데이터를 추출하려고 합니다. 정규 표현식이나 복잡한 파싱 코드 없이 '신청자의 이름은 무엇입니까?'와 같은 자연어 질문으로 정확한 값을 추출할 수 있는 Textract의 기능은 무엇입니까?",
+            options: ["Textract Forms", "Textract Tables", "Textract Queries", "Textract Signatures"],
+            answer: 2,
+            explanation: "Amazon Textract Queries 기능을 사용하면 문서 내 데이터의 위치나 구조에 상관없이 자연어 쿼리(질문)를 통해 원하는 정보(예: '송장 날짜는 언제인가요?')를 쉽게 추출할 수 있습니다."
+        },
+        {
+            q: "13. 언어 모델의 성능을 평가하는 데 사용되는 지표로, '모델이 테스트 데이터 샘플을 얼마나 잘 예측하는지'를 측정하며 수치가 낮을수록 모델의 성능이 더 좋음을 의미하는 지표는 무엇입니까?",
+            options: ["재현율 (Recall)", "당혹감 (Perplexity)", "F1 점수", "정확도 (Accuracy)"],
+            answer: 1,
+            explanation: "Perplexity(당혹감)는 언어 모델이 텍스트 시퀀스를 얼마나 헷갈려 하는지(불확실성)를 나타내는 측정값입니다. 값이 낮을수록 모델이 다음 단어를 더 확실하게 예측한다는 뜻이므로 더 좋은 모델로 평가됩니다."
+        },
+        {
+            q: "14. Amazon Bedrock에서 사용자의 프롬프트와 모델의 응답 내역을 거버넌스, 감사 또는 규정 준수 목적으로 저장하려고 합니다. 이 로그 데이터를 안전하게 전송하고 저장할 수 있는 AWS 서비스 대상은 어디입니까?",
+            options: ["Amazon S3 및 Amazon CloudWatch Logs", "AWS CloudTrail", "Amazon DynamoDB", "AWS Systems Manager"],
+            answer: 0,
+            explanation: "Amazon Bedrock의 모델 호출 로깅(Model Invocation Logging) 기능을 활성화하면 모든 프롬프트, 응답 및 메타데이터를 Amazon S3 버킷이나 Amazon CloudWatch Logs로 라우팅하여 저장할 수 있습니다."
+        },
+        {
+            q: "15. 기업이 고객 지원 티켓을 수신할 때마다 '환불', '배송 지연', '제품 결함' 등 회사 고유의 비즈니스 카테고리로 자동 분류하려고 합니다. 기계 학습 인프라 관리 없이 이를 구현할 수 있는 AWS 서비스는?",
+            options: ["Amazon Textract", "Amazon Transcribe", "Amazon Translate", "Amazon Comprehend (사용자 지정 분류)"],
+            answer: 3,
+            explanation: "Amazon Comprehend의 사용자 지정 분류(Custom Classification)를 사용하면 회사의 과거 텍스트 데이터를 제공하여 비즈니스에 특화된 사용자 지정 레이블(카테고리)로 텍스트를 분류하는 모델을 쉽게 훈련시킬 수 있습니다."
+        },
+        {
+            q: "16. Amazon Polly를 사용하여 텍스트를 음성으로 변환할 때, 회사 이름인 'AWS'를 '아마존 웹 서비스'로 발음하게 하거나, 약어나 특수 기호의 발음 방식을 사용자 정의할 수 있는 기능은 무엇입니까?",
+            options: ["SSML (Speech Synthesis Markup Language)", "Lexicons (어휘집)", "Neural TTS", "Custom Voice"],
+            answer: 1,
+            explanation: "Amazon Polly의 어휘집(Lexicons) 기능, 특히 발음 어휘집(Pronunciation Lexicons)을 사용하면 약어, 외래어, 특수 문자 등 특정 단어의 기본 발음을 무시하고 사용자가 지정한 방식으로 발음하도록 맞춤 설정할 수 있습니다."
+        },
+        {
+            q: "17. AWS를 사용하여 실시간 비디오 스트림 내에서 얼굴 인식, 사람, 차량 또는 패키지를 지속적으로 분석하고 감지하려고 합니다. 이를 위해 Amazon Rekognition Video와 결합해야 하는 주요 AWS 서비스는 무엇입니까?",
+            options: ["Amazon Kinesis Video Streams", "AWS Elemental MediaConvert", "Amazon CloudFront", "Amazon S3"],
+            answer: 0,
+            explanation: "Amazon Rekognition Video는 Amazon Kinesis Video Streams와 기본적으로 통합되어 IP 카메라나 라이브 스트리밍 소스에서 실시간으로 비디오 프레임을 가져와 기계 학습 분석을 수행할 수 있습니다."
+        },
+        {
+            q: "18. 비지도 학습(Unsupervised Learning) 알고리즘이 주로 사용되는 문제 유형은 다음 중 어느 것입니까?",
+            options: ["미래의 주택 가격 예측 (회귀)", "이메일이 스팸인지 정상인지 분류 (분류)", "의료 영상에서 종양의 정확한 위치 찾기 (객체 탐지)", "신용 카드 결제 데이터에서 정상 패턴과 다른 이상 거래 탐지 (이상 탐지)"],
+            answer: 3,
+            explanation: "비지도 학습은 정답(레이블)이 없는 데이터에서 데이터의 고유한 구조, 패턴 또는 군집을 찾습니다. 고객 세분화(Clustering)나 정상 패턴을 벗어난 데이터를 찾는 이상 탐지(Anomaly Detection)가 대표적인 사례입니다."
+        },
+        {
+            q: "19. 사용자가 Amazon Bedrock의 특정 모델을 사용하여 생성형 AI 애플리케이션을 구축할 때, 데이터의 프라이버시 및 보안을 보장하기 위해 AWS가 취하는 기본 정책은 무엇입니까?",
+            options: ["고객 데이터는 익명화된 후 기본 모델의 품질 향상을 위해 사용된다.", "고객 데이터는 해당 리전을 벗어나 다른 리전으로 자동 백업된다.", "고객 데이터는 프라이빗하게 유지되며 타사 모델 제공업체와 공유되거나 모델 훈련에 사용되지 않는다.", "고객이 명시적으로 옵트아웃(Opt-out)을 요청해야만 데이터가 보호된다."],
+            answer: 2,
+            explanation: "AWS의 보안 정책상 Amazon Bedrock으로 전송된 고객의 프롬프트, 응답 및 사용자 지정 데이터는 절대로 기본 파운데이션 모델을 훈련하는 데 사용되지 않으며, 모델 제공자(예: Anthropic, AI21)와도 공유되지 않고 고객 환경에 비공개로 유지됩니다."
+        },
+        {
+            q: "20. 코드를 전혀 작성하지 않고도 텍스트 파일(CSV 등)만 업로드하면 데이터를 분석하고, 최적의 기계 학습 알고리즘을 선택하여 모델을 훈련 및 튜닝하는 전체 과정을 자동으로 수행해 주는 SageMaker의 기능은 무엇입니까?",
+            options: ["SageMaker Canvas", "SageMaker Autopilot", "SageMaker Data Wrangler", "SageMaker JumpStart"],
+            answer: 1,
+            explanation: "Amazon SageMaker Autopilot은 데이터를 기반으로 기계 학습 모델을 자동으로 구축, 훈련 및 튜닝(AutoML)하는 기능입니다. 모델 생성 과정을 투명하게 보여주는 노트북도 생성해 줍니다."
+        },
+        {
+            q: "21. 대규모 언어 모델(LLM)에 프롬프트를 작성할 때, 모델에게 '당신은 20년 경력의 시니어 파이썬 개발자입니다.'와 같이 특정 페르소나나 정체성을 부여하여 응답의 톤과 전문성을 조절하는 기법은 무엇입니까?",
+            options: ["Zero-shot 프롬프팅", "체인 오브 소트 (CoT)", "역할 프롬프팅 (Role Prompting)", "미세 조정 (Fine-tuning)"],
+            answer: 2,
+            explanation: "역할 프롬프팅(Role Prompting 또는 Persona Adoption)은 AI에게 특정 역할이나 직업, 페르소나를 지시함으로써 상황에 맞는 더 구체적이고 전문적인 어조의 답변을 이끌어내는 프롬프트 엔지니어링 기법입니다."
+        },
+        {
+            q: "22. 생성형 AI 모델 기반의 코딩 어시스턴트(예: Amazon Q Developer)를 사용할 때 나타날 수 있는 보안 취약성을 완화하기 위해 사용할 수 있는 AI 기반의 정적 애플리케이션 보안 테스트(SAST) 도구는 무엇입니까?",
+            options: ["AWS WAF", "Amazon Inspector", "Amazon CodeGuru Security", "AWS Security Hub"],
+            answer: 2,
+            explanation: "Amazon CodeGuru Security는 기계 학습을 활용하여 작성된 소스 코드 내에서 OWASP Top 10, 하드코딩된 자격 증명, 리소스 누수 등 코드의 논리적 취약점을 찾아내고 수정 권장 사항을 제공하는 보안 테스트 도구입니다."
+        },
+        {
+            q: "23. Amazon Bedrock Agents가 사용자 프롬프트를 바탕으로 회사 내부의 티켓팅 시스템이나 예약 시스템에서 실제로 작업을 '실행'하려면 무엇을 호출해야 합니까?",
+            options: ["Amazon S3", "AWS Lambda 함수 (액션 그룹)", "Amazon EC2", "AWS Glue"],
+            answer: 1,
+            explanation: "Bedrock Agents는 사용자 요청을 분석한 후, 정의된 작업 그룹(Action Groups)을 통해 AWS Lambda 함수를 트리거하고, 이 Lambda 함수가 회사의 API나 시스템과 연동하여 실제 비즈니스 로직(작업)을 수행합니다."
+        },
+        {
+            q: "24. 자연어 텍스트를 파운데이션 모델이 처리하기 위해 컴퓨터가 이해할 수 있는 작은 조각이나 숫자로 나누는 과정을 무엇이라고 합니까?",
+            options: ["임베딩 (Embedding)", "어텐션 (Attention)", "토큰화 (Tokenization)", "정규화 (Normalization)"],
+            answer: 2,
+            explanation: "토큰화(Tokenization)는 원시 텍스트를 단어, 하위 단어(subword), 또는 문자 등 모델이 처리할 수 있는 기본 단위인 토큰(Token)으로 분해하고 고유한 정수 ID를 할당하는 과정입니다."
+        },
+        {
+            q: "25. 고객이 AWS의 AI 서비스(예: Rekognition, Comprehend)를 도입하기 전에, 해당 서비스의 의도된 사용 사례, 제한 사항, 설계 방식 및 책임감 있는 AI 원칙 준수 여부를 투명하게 이해하기 위해 참고해야 하는 공식 문서는 무엇입니까?",
+            options: ["AWS 서비스 수준 계약 (SLA)", "AWS AI Service Cards", "AWS 보안 백서", "Amazon CloudWatch Logs"],
+            answer: 1,
+            explanation: "AWS AI Service Cards는 고객이 AWS AI 서비스를 책임감 있게 사용할 수 있도록 서비스의 기능, 한계, 편향 평가 결과, 권장 및 비권장 사용 사례 등을 설명하는 투명성 문서입니다."
+        },
+        {
+            q: "26. 사용자가 Amazon Lex로 구축된 챗봇을 사용할 때, 백엔드에서 AWS Lambda 함수를 연결하는 주된 이유는 무엇입니까?",
+            options: ["음성을 텍스트로 변환하기 위해", "데이터베이스 조회, 계산 수행 등 비즈니스 로직을 실행하여 봇의 응답을 완료하기 위해", "자연어 이해(NLU) 정확도를 높이기 위해", "대화 로그를 S3에 저장하기 위해"],
+            answer: 1,
+            explanation: "Amazon Lex에서 봇이 사용자 의도(인텐트)를 파악하고 데이터를 수집한 후, 실제 항공편 예약, 데이터베이스 정보 조회 등의 실행(Fulfillment) 로직을 처리하려면 AWS Lambda 함수를 호출해야 합니다."
+        },
+        {
+            q: "27. 머신 러닝 훈련 세트를 준비할 때, 데이터의 양이 부족하여 발생할 수 있는 과대적합(Overfitting)을 방지하기 위해 기존 이미지의 회전, 뒤집기, 자르기 등을 통해 인위적으로 훈련 데이터의 크기와 다양성을 늘리는 기법은?",
+            options: ["데이터 마스킹 (Data Masking)", "데이터 드리프트 (Data Drift)", "데이터 증강 (Data Augmentation)", "데이터 정규화 (Data Normalization)"],
+            answer: 2,
+            explanation: "데이터 증강(Data Augmentation)은 원본 데이터에 약간의 변형을 가하여 새로운 훈련 샘플을 생성함으로써 모델이 더 다양한 패턴을 학습하고 일반화 능력을 키우게 하는 기법입니다."
+        },
+        {
+            q: "28. 기업이 자체 VPC 내의 프라이빗 데이터로 Amazon Bedrock의 모델을 미세 조정(Fine-tuning)할 때, 훈련 중인 데이터나 모델 가중치의 암호화를 제어하고 보호하기 위해 사용할 수 있는 AWS 서비스는?",
+            options: ["AWS KMS (Key Management Service)", "Amazon Macie", "AWS Secrets Manager", "AWS Shield"],
+            answer: 0,
+            explanation: "AWS KMS를 사용하면 고객 관리형 키(CMK)를 생성하여 Amazon Bedrock에서 파운데이션 모델 사용자 지정(미세 조정) 시 사용되는 훈련 데이터 및 저장되는 모델 아티팩트를 안전하게 암호화할 수 있습니다."
+        },
+        {
+            q: "29. 두 개 이상의 기계 학습 모델을 동시에 프로덕션 환경에 배포하고, 사용자 트래픽을 일정 비율(예: 80% 대 20%)로 분할하여 실제 사용자의 반응이나 성능 지표를 비교한 후 최적의 모델을 선택하는 배포 테스트 기법은 무엇입니까?",
+            options: ["블루/그린 배포", "카나리 배포", "A/B 테스트", "인 메모리 테스트"],
+            answer: 2,
+            explanation: "A/B 테스트는 여러 버전의 모델을 동시에 서비스하면서 실제 트래픽을 나누어 보내고, 비즈니스 지표(예: 클릭률, 전환율)나 모델 성능을 직접 비교 분석하여 가장 좋은 버전을 채택하는 방법입니다."
+        },
+        {
+            q: "30. 생성형 AI 모델 아키텍처 중, 무작위 노이즈(가우시안 노이즈)에서 시작하여 텍스트 프롬프트의 안내에 따라 노이즈를 점진적으로 제거해가며 고해상도의 이미지를 생성하는 데 널리 사용되는 모델 유형은 무엇입니까?",
+            options: ["트랜스포머 (Transformer)", "생성적 적대 신경망 (GAN)", "확산 모델 (Diffusion Models)", "순환 신경망 (RNN)"],
+            answer: 2,
+            explanation: "확산 모델(Diffusion Model, 예: Stable Diffusion, Amazon Titan Image Generator의 근간)은 이미지에 점진적으로 노이즈를 추가하는 과정을 학습한 후, 반대로 노이즈를 제거해 나가며 새로운 이미지를 생성하는 아키텍처입니다."
+        }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    function renderQuiz() {
+        let html = '';
+        questionsData.forEach((qObj, index) => {
+            html += `<div class="question-block" id="q-block-${index}">
+                        <div class="question-text">${qObj.q}</div>
+                        <ul class="options-list">`;
+            qObj.options.forEach((opt, optIndex) => {
+                const inputType = Array.isArray(qObj.answer) ? 'checkbox' : 'radio';
+                const inputName = `q${index}`;
+                html += `<li class="option-item" id="opt-label-${index}-${optIndex}">
+                            <label style="display: block; cursor: pointer;">
+                                <input type="${inputType}" name="${inputName}" value="${optIndex}">
+                                ${String.fromCharCode(65 + optIndex)}. ${opt}
+                            </label>
+                        </li>`;
+            });
+            html += `</ul><div class="explanation" id="exp-${index}"><strong>해설:</strong> ${qObj.explanation}</div></div>`;
+        });
+        quizContainer.innerHTML = html;
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        const total = questionsData.length;
+
+        questionsData.forEach((qObj, index) => {
+            const isMultiple = Array.isArray(qObj.answer);
+            const inputs = document.querySelectorAll(`input[name="q${index}"]`);
+            let userAnswers = [];
+
+            inputs.forEach(input => { if (input.checked) userAnswers.push(parseInt(input.value)); });
+
+            let isCorrect = false;
+            if (isMultiple) {
+                const correctAnswers = qObj.answer.slice().sort();
+                userAnswers.sort();
+                if (userAnswers.length === correctAnswers.length && userAnswers.every((val, i) => val === correctAnswers[i])) isCorrect = true;
+            } else {
+                if (userAnswers.length === 1 && userAnswers[0] === qObj.answer) isCorrect = true;
+            }
+
+            const block = document.getElementById(`q-block-${index}`);
+            block.style.borderLeft = isCorrect ? "5px solid #28a745" : "5px solid #dc3545";
+            block.style.paddingLeft = "10px";
+            if(isCorrect) score++;
+
+            if (isMultiple) {
+                qObj.answer.forEach(ans => document.getElementById(`opt-label-${index}-${ans}`).classList.add('correct-answer'));
+            } else {
+                document.getElementById(`opt-label-${index}-${qObj.answer}`).classList.add('correct-answer');
+            }
+
+            userAnswers.forEach(ans => {
+                if ((isMultiple && !qObj.answer.includes(ans)) || (!isMultiple && ans !== qObj.answer)) {
+                    document.getElementById(`opt-label-${index}-${ans}`).classList.add('wrong-answer');
+                }
+            });
+
+            document.getElementById(`exp-${index}`).style.display = 'block';
+        });
+
+        const resultContainer = document.getElementById('result-container');
+        resultContainer.style.display = 'block';
+        const percent = Math.round((score / total) * 100);
+        resultContainer.innerHTML = `총 ${total}문제 중 <strong>${score}문제</strong> 맞췄습니다. (정답률: ${percent}%)`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderQuiz();
+</script>
+
+</body>
+</html>

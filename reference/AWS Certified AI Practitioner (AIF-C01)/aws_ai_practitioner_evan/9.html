@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS AI Practitioner 모의고사 - 세트 9</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #232f3e; border-bottom: 2px solid #ff9900; padding-bottom: 10px; }
+        .info { background-color: #e9ecef; padding: 15px; border-left: 5px solid #007bff; margin-bottom: 30px; font-size: 0.95em; }
+        .question-block { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; }
+        .options-list { list-style-type: none; padding: 0; }
+        .option-item { margin-bottom: 10px; background: #f8f9fa; padding: 10px 15px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; }
+        .option-item:hover { background: #e2e6ea; }
+        .option-item input { margin-right: 10px; }
+        .btn-submit { display: block; width: 100%; padding: 15px; background-color: #ff9900; color: #232f3e; font-size: 1.2em; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        .btn-submit:hover { background-color: #e88a00; }
+        #result-container { display: none; margin-top: 30px; padding: 20px; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 5px; text-align: center; font-size: 1.3em; font-weight: bold; }
+        .correct-answer { background-color: #d4edda !important; border-color: #c3e6cb !important; }
+        .wrong-answer { background-color: #f8d7da !important; border-color: #f5c6cb !important; }
+        .explanation { display: none; margin-top: 10px; padding: 10px; background-color: #eef1f6; border-left: 4px solid #4a90e2; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AWS AI Practitioner (AIF-C01) - 세트 9</h1>
+    <div class="info">
+        <strong>안내:</strong> Model Registry, Ground Truth 자동 레이블링, RAG 아키텍처 심화, AI 서비스 비용 최적화 및 모델 평가(F1 점수)를 묻는 완전히 새로운 30문항입니다. 모두 풀고 '채점하기'를 누르세요.
+    </div>
+
+    <form id="quiz-form">
+        <div id="quiz-container"></div>
+        <button type="button" class="btn-submit" onclick="submitQuiz()">제출 및 채점하기</button>
+    </form>
+
+    <div id="result-container"></div>
+</div>
+
+<script>
+    const questionsData = [
+        {
+            q: "1. Amazon Bedrock Knowledge Bases를 설정할 때, 텍스트 문서를 임베딩하여 벡터로 저장할 대상 데이터베이스(Vector Store)를 사용자가 명시적으로 지정하지 않으면, AWS가 기본적으로 생성하고 연결해 주는 서버리스 벡터 데이터베이스는 무엇입니까?",
+            options: ["Amazon DynamoDB", "Amazon RDS for PostgreSQL", "Amazon OpenSearch Serverless", "Amazon ElastiCache"],
+            answer: 2,
+            explanation: "Amazon Bedrock Knowledge Bases는 벡터 저장소로 Amazon OpenSearch Serverless, Pinecone, Redis Enterprise Cloud 등을 지원하며, 사용자가 지정하지 않을 경우 Amazon OpenSearch Serverless 벡터 검색 컬렉션을 자동으로 프로비저닝하여 관리합니다."
+        },
+        {
+            q: "2. 머신 러닝 데이터 세트를 준비하기 위해 수십만 장의 이미지에 바운딩 박스를 그려야 합니다. 이때, Amazon SageMaker Ground Truth가 지원하는 기능 중 '기계 학습 모델이 사람이 레이블링한 일부 데이터를 학습한 뒤, 나머지 데이터 중 확신이 높은 것은 자동으로 레이블링하여 인력 비용을 최대 70%까지 줄여주는 기능'은 무엇입니까?",
+            options: ["자동 데이터 증강 (Automated Data Augmentation)", "능동 학습 / 자동 데이터 레이블링 (Active Learning / Automated Data Labeling)", "크라우드소싱 검증 (Crowdsourcing Verification)", "데이터 드리프트 탐지 (Data Drift Detection)"],
+            answer: 1,
+            explanation: "SageMaker Ground Truth의 자동 데이터 레이블링(능동 학습 기반)은 기계 학습 모델이 스스로 레이블링을 수행하고, 자신 없는 까다로운 데이터만 사람(작업자)에게 전달하여 시간과 비용을 획기적으로 절감합니다."
+        },
+        {
+            q: "3. 여러 데이터 과학자가 협업하는 대규모 AI 프로젝트에서, 각자 개발하고 튜닝한 수십 개의 '모델 버전'을 중앙에서 카탈로그화하여 관리하려고 합니다. 모델의 메타데이터, 훈련 지표, 승인 상태(예: Approved for Production)를 기록하여 CI/CD 파이프라인과 통합할 수 있게 해주는 MLOps 구성 요소는?",
+            options: ["SageMaker Feature Store", "SageMaker Model Registry", "SageMaker Experiments", "AWS CodeCommit"],
+            answer: 1,
+            explanation: "Amazon SageMaker Model Registry는 기계 학습 모델을 위한 중앙 저장소로, 모델 버전을 관리하고, 메타데이터를 추적하며, 프로덕션 배포를 위한 승인 워크플로를 제공하는 핵심 MLOps 서비스입니다."
+        },
+        {
+            q: "4. Amazon Transcribe를 사용하여 회의 내용을 기록할 때, 회사의 법적 책임 보호를 위해 특정 단어(예: 비속어, 경쟁사 이름)가 트랜스크립션 결과에 아예 나타나지 않도록 차단하거나 마스킹하려고 합니다. 이를 위해 사용하는 기능은?",
+            options: ["사용자 지정 어휘 (Custom Vocabulary)", "콘텐츠 조정 (Content Moderation)", "어휘 필터링 (Vocabulary Filtering)", "화자 식별 (Speaker Identification)"],
+            answer: 2,
+            explanation: "Amazon Transcribe의 어휘 필터링(Vocabulary Filtering) 기능을 사용하면 원치 않는 단어의 목록을 정의하여 해당 단어를 마스킹(***)하거나 트랜스크립션 결과에서 완전히 제거할 수 있습니다."
+        },
+        {
+            q: "5. 의료 기관이 방대한 임상 노트와 의사 소견서에서 약물, 질병, 검사 결과 등의 엔터티를 추출하려고 합니다. 이 과정에서 개인 건강 정보(PHI)를 보호하기 위해 HIPAA 규정을 준수하며, 복잡한 의료 텍스트 처리에 특화된 사전 훈련된 NLP 서비스는 무엇입니까?",
+            options: ["Amazon HealthLake", "Amazon Comprehend Medical", "Amazon Textract", "AWS HealthScribe"],
+            answer: 1,
+            explanation: "Amazon Comprehend Medical은 비정형 의료 텍스트(소견서, 임상 노트 등)에서 의료 정보(약물, 복용량, 증상 등)를 빠르고 정확하게 추출하도록 사전 훈련된 HIPAA 적격 자연어 처리 서비스입니다."
+        },
+        {
+            q: "6. RAG(검색 증강 생성) 파이프라인을 구축할 때, 텍스트 문서의 의미를 보존하면서 모델의 컨텍스트 한도를 초과하지 않도록 문서를 '청킹(Chunking)'해야 합니다. 다음 중 문장의 중간이 잘려 문맥이 손상되는 것을 방지하기 위해 청크(Chunk) 사이에 일부 텍스트를 겹치게 하는 기법을 무엇이라고 합니까?",
+            options: ["문장 패딩 (Sentence Padding)", "청크 오버랩 (Chunk Overlap)", "토큰 마스킹 (Token Masking)", "동적 청킹 (Dynamic Chunking)"],
+            answer: 1,
+            explanation: "청크 오버랩(Chunk Overlap)은 긴 문서를 나눌 때 이전 청크의 마지막 부분을 다음 청크의 시작 부분에 일부 포함시키는 기법으로, 문맥 단절을 방지하고 검색 품질을 높이는 데 필수적입니다."
+        },
+        {
+            q: "7. 기계 학습 이진 분류 모델의 평가 지표 중, 정밀도(Precision)와 재현율(Recall)의 '조화 평균(Harmonic Mean)'을 계산하여 두 지표 중 하나에 치우치지 않고 모델의 전반적인 정확성을 평가하는 데 사용되는 지표는?",
+            options: ["ROC-AUC", "F1 점수 (F1 Score)", "평균 제곱 오차 (MSE)", "혼동 행렬 (Confusion Matrix)"],
+            answer: 1,
+            explanation: "F1 점수(F1 Score)는 정밀도와 재현율의 조화 평균으로, 특히 데이터 클래스의 불균형이 심할 때(예: 정상 데이터가 압도적으로 많고 사기 데이터가 적을 때) 모델의 성능을 평가하는 가장 강력한 단일 지표입니다."
+        },
+        {
+            q: "8. 회사가 특정 브랜드 로고나 회사만의 독특한 부품 이미지를 수천 장 가지고 있습니다. 기본 Amazon Rekognition 모델로는 해당 회사의 고유 부품을 식별할 수 없어, 회사가 자체 이미지를 제공하여 맞춤형 이미지 분류 및 객체 탐지 모델을 훈련시키려고 합니다. 이를 위한 기능은?",
+            options: ["Amazon Rekognition Image Properties", "Amazon Rekognition Custom Labels", "Amazon SageMaker Autopilot", "Amazon Lookout for Metrics"],
+            answer: 1,
+            explanation: "Amazon Rekognition Custom Labels를 사용하면 적은 양의 자체 이미지 데이터만으로도 회사의 특정 비즈니스 요구에 맞는 고품질의 사용자 지정 컴퓨터 비전 모델(예: 회사 로고 탐지, 자체 제품 분류)을 훈련시킬 수 있습니다."
+        },
+        {
+            q: "9. 컴퓨팅 비용 최적화 측면에서, AWS 환경에서 기계 학습 워크로드(SageMaker 훈련 인스턴스, EC2 인스턴스)에 대해 1년 또는 3년 기간의 사용량을 약정하여 온디맨드 요금 대비 최대 72%의 비용을 절감할 수 있는 유연한 요금 모델은 무엇입니까?",
+            options: ["Spot Instances (스팟 인스턴스)", "Compute Savings Plans (컴퓨팅 세이빙스 플랜)", "AWS Free Tier (프리 티어)", "Provisioned Throughput (프로비저닝된 처리량)"],
+            answer: 1,
+            explanation: "AWS Compute Savings Plans는 1년 또는 3년 약정을 대가로 Amazon EC2, AWS Fargate, AWS Lambda뿐만 아니라 Amazon SageMaker의 훈련 및 추론 워크로드에 대한 컴퓨팅 사용량을 대폭 할인해 주는 요금 모델입니다."
+        },
+        {
+            q: "10. Amazon Lex를 사용하여 항공편 예약 챗봇을 설계했습니다. 챗봇이 사용자로부터 출발지, 도착지, 날짜 등의 모든 필수 변수(Slot)를 성공적으로 수집한 후, 실제로 AWS Lambda 함수를 호출하여 항공권 예약 시스템에 데이터를 전달하고 예약을 확정하는 마지막 단계를 무엇이라고 합니까?",
+            options: ["초기화 및 검증 (Initialization and Validation)", "의도 라우팅 (Intent Routing)", "이행 (Fulfillment)", "폴백 (Fallback)"],
+            answer: 2,
+            explanation: "Amazon Lex에서 이행(Fulfillment) 단계는 인텐트(Intent)를 처리하기 위한 모든 정보가 수집된 후, 실제로 비즈니스 로직(예: 예약 완료, 데이터베이스 저장)을 실행하는 최종 단계를 의미합니다."
+        },
+        {
+            q: "11. AWS의 AI 서비스 및 기능 중에서, 코드를 작성하는 개발자를 위해 IDE 내에서 통합 보안 취약점 스캔(정적 애플리케이션 보안 테스트, SAST)을 제공하고 수정 코드를 자동으로 제안하는 서비스는?",
+            options: ["Amazon Inspector", "Amazon Q Developer", "AWS CodeBuild", "AWS Security Hub"],
+            answer: 1,
+            explanation: "Amazon Q Developer(구 CodeWhisperer)는 코드 자동 완성뿐만 아니라 개발 중인 프로젝트 코드에 대한 보안 스캔을 실행하여 하드코딩된 자격 증명이나 로직 취약점을 찾고 생성형 AI를 통해 수정안을 제안합니다."
+        },
+        {
+            q: "12. 데이터 과학자가 모델 성능 저하 문제를 디버깅하고 있습니다. 훈련 세트와 검증 세트의 오차(Loss)를 그래프로 그렸을 때, 훈련 세트의 오차는 지속적으로 0에 가깝게 감소하지만 검증 세트의 오차는 특정 지점 이후 오히려 다시 상승하기 시작했습니다. 이는 어떤 현상의 전형적인 증상입니까?",
+            options: ["데이터 누수 (Data Leakage)", "과소적합 (Underfitting)", "과대적합 (Overfitting)", "개념 드리프트 (Concept Drift)"],
+            answer: 2,
+            explanation: "검증 오차(Validation Loss)가 감소하다가 다시 증가하는 패턴은 모델이 훈련 데이터에 너무 과하게 맞춰져(과대적합) 새로운 데이터에 대한 일반화 능력을 상실하고 있음을 나타내는 가장 명확한 신호입니다."
+        },
+        {
+            q: "13. 생성형 AI 시스템에서 파운데이션 모델(FM)의 '환각(Hallucination)'을 줄이기 위한 설계 기법 중 하나로, 프롬프트 내에 '만약 질문에 대한 답을 모른다면 지어내지 말고 모른다고 대답해라'와 같이 안전 장치를 마련하는 기법을 무엇이라고 합니까?",
+            options: ["제로샷 프롬프팅 (Zero-shot Prompting)", "제약 기반 프롬프팅 / 안전 가드레일 (Constraint-based Prompting)", "퓨샷 프롬프팅 (Few-shot Prompting)", "역할 프롬프팅 (Role Prompting)"],
+            answer: 1,
+            explanation: "프롬프트 내에 명시적인 제약 조건(Constraints)을 부여하는 것은 외부 도구를 사용하지 않고도 모델 스스로 허위 정보를 지어내는 것을 방지하는 가장 기본적이고 효과적인 프롬프트 엔지니어링 전략입니다."
+        },
+        {
+            q: "14. Amazon Textract의 두 가지 주요 API인 `AnalyzeDocument`와 `AnalyzeExpense`의 주된 차이점은 무엇입니까?",
+            options: ["`AnalyzeDocument`는 손글씨만 추출하고, `AnalyzeExpense`는 타이핑된 글자만 추출한다.", "`AnalyzeDocument`는 오프라인에서만 작동하고, `AnalyzeExpense`는 클라우드에서만 작동한다.", "`AnalyzeDocument`는 문서 내의 표(Table)와 폼(Form) 구조를 추출하는 범용 API이며, `AnalyzeExpense`는 청구서 및 영수증에서 총액, 세금 등의 재무 데이터를 찾도록 훈련된 특화 API이다.", "`AnalyzeDocument`는 무료이고 `AnalyzeExpense`는 유료이다."],
+            answer: 2,
+            explanation: "AnalyzeDocument는 일반적인 문서의 구조를 이해하는 데 사용되는 반면, AnalyzeExpense는 영수증과 청구서라는 특정 비즈니스 문서 유형에 맞춰 공급업체 정보나 결제 금액 등 특정 필드를 식별하도록 미세 조정되어 있습니다."
+        },
+        {
+            q: "15. 기계 학습에서 '차원의 저주(Curse of Dimensionality)'가 모델 훈련에 미치는 부정적인 영향은 무엇입니까?",
+            options: ["입력 데이터의 변수(특성, Feature) 개수가 너무 많아지면, 데이터 간의 거리가 멀어지고 패턴을 학습하기 위해 기하급수적으로 더 많은 데이터가 필요해져 성능이 저하된다.", "입력 데이터의 변수가 3개 미만일 때 모델이 과대적합되는 현상이다.", "행렬 연산을 위해 GPU 메모리가 3차원 이상을 지원해야 하는 하드웨어적 한계이다.", "시간 데이터(시계열)를 예측할 때 과거 데이터를 무한히 추적해야 하는 문제이다."],
+            answer: 0,
+            explanation: "차원의 저주는 데이터가 가진 특성(열, Feature)의 수(차원)가 증가할수록 데이터 공간의 부피가 기하급수적으로 커져 데이터가 희소(Sparse)해지므로, 모델이 패턴을 찾기 어려워지고 성능이 저하되는 현상입니다. (이를 해결하기 위해 PCA 등 차원 축소 기법을 사용합니다.)"
+        },
+        {
+            q: "16. Amazon Personalize를 사용하여 새로운 영화 추천 시스템을 만들었습니다. 추천 결과가 너무 비슷한 장르(예: 액션 영화만 계속 추천)로만 구성되어 사용자가 지루함을 느끼는 '필터 버블(Filter Bubble)'에 갇혔습니다. Personalize에서 추천 항목의 다양성(Diversity)과 참신함을 높이기 위해 조절해야 하는 기능은?",
+            options: ["탐색 (Exploration) 가중치", "온도 (Temperature)", "아이템 팝업 (Item Pop-up)", "배치 추론 (Batch Inference)"],
+            answer: 0,
+            explanation: "Amazon Personalize는 탐색(Exploration) 기능을 통해 사용자 상호 작용이 적은 새로운 항목이나 다양한 범주의 항목을 추천 결과에 일정 비율 포함시켜, 모델이 기존의 인기 항목만 계속 추천하는 것을 방지합니다."
+        },
+        {
+            q: "17. 사용자가 Amazon Bedrock 모델의 추론(Inference) 워크로드를 처리할 때, AWS 인프라 차원에서 처리 속도가 매우 빠르고 단위 비용이 가장 낮아 대규모 생성형 AI 워크로드에 경제적인 컴퓨팅 가속기는 무엇입니까?",
+            options: ["Intel Xeon CPU", "AWS Graviton3", "AWS Inferentia", "AWS Trainium"],
+            answer: 2,
+            explanation: "AWS Inferentia는 클라우드에서 가장 비용이 저렴하고 지연 시간이 짧은 기계 학습 추론(Inference)을 제공하도록 AWS가 특별히 구축한 맞춤형 실리콘 칩입니다."
+        },
+        {
+            q: "18. 클라우드에 데이터를 올리지 못하는 제조업체가 있습니다. 기계 장비의 진동 및 온도 데이터를 분석하는 기계 학습 모델을 구축한 후, 인터넷이 끊어진 현장의 로컬 장비에 배포하여 예측(추론)을 실행하도록 도와주는 완전 관리형 AWS 서비스는?",
+            options: ["AWS Outposts", "AWS IoT Greengrass", "Amazon EKS Anywhere", "AWS Direct Connect"],
+            answer: 1,
+            explanation: "AWS IoT Greengrass(Amazon SageMaker Edge Manager와 결합 시)를 사용하면 클라우드에서 훈련된 기계 학습 모델을 엣지 디바이스로 가져와 로컬 데이터로 지연 없이 추론을 수행할 수 있습니다."
+        },
+        {
+            q: "19. RAG 시스템 설계 시, 문서를 벡터화하기 위해 임베딩(Embedding) 모델을 선택해야 합니다. 일반적인 대규모 텍스트 생성 모델(예: Amazon Titan Text Premier)과 임베딩 모델(예: Amazon Titan Text Embeddings)의 가장 근본적인 차이는 무엇입니까?",
+            options: ["임베딩 모델은 사람이 읽을 수 있는 텍스트를 생성하고, 텍스트 모델은 숫자를 생성한다.", "임베딩 모델은 입력 텍스트의 의미를 고정된 길이의 다차원 숫자 배열(벡터)로 반환하며 새로운 텍스트를 창작하지 않는다.", "임베딩 모델은 이미지만 처리할 수 있다.", "임베딩 모델은 온도를 1.0으로 설정해야 작동한다."],
+            answer: 1,
+            explanation: "임베딩 모델은 자연어를 수학적 형태(고차원 벡터 배열)로 인코딩하여 기계가 두 텍스트의 의미적 유사성을 계산할 수 있게 해주는 도구이며, 단어를 생성(Generate)하는 역할을 하지 않습니다."
+        },
+        {
+            q: "20. 파운데이션 모델의 훈련 과정 중 '명령어 미세 조정(Instruction Fine-Tuning)'이 모델에 미치는 가장 큰 변화는 무엇입니까?",
+            options: ["모델이 학습한 모든 이전 지식을 지운다.", "단순히 다음 단어를 예측하던 모델이, 사용자의 질문에 답변하거나 요약해 달라는 명시적인 명령(지시)을 이해하고 적절한 형식으로 응답할 수 있게 된다.", "모델의 파라미터 개수를 두 배로 늘려준다.", "이미지를 생성할 수 있는 능력을 부여한다."],
+            answer: 1,
+            explanation: "사전 훈련된 언어 모델은 단순히 인터넷 텍스트의 '다음 단어'를 예측하는 역할만 합니다. 명령어 미세 조정(프롬프트-응답 쌍 학습)을 거쳐야만 비로소 사람의 명령을 따르고 질문에 응답하는 챗봇(예: ChatGPT, Claude)처럼 동작하게 됩니다."
+        },
+        {
+            q: "21. 기계 학습에서 훈련 데이터의 부족으로 인해 모델이 데이터의 복잡한 패턴을 잡아내지 못하고 너무 단순한 규칙만 학습하여, 훈련 데이터와 테스트 데이터 모두에서 정확도가 낮게 나오는 현상은?",
+            options: ["과대적합 (Overfitting)", "과소적합 (Underfitting)", "차원의 저주", "데이터 드리프트"],
+            answer: 1,
+            explanation: "과소적합(Underfitting)은 모델이 너무 단순하거나 학습 데이터가 부족/훈련 시간이 짧아서 데이터의 기저 패턴조차 제대로 학습하지 못한 상태입니다. (고편향 상태)"
+        },
+        {
+            q: "22. 개발자가 회사의 내부 데이터베이스를 쿼리하는 자연어 인터페이스를 구축하려고 합니다. 사용자가 \"지난 달 매출이 가장 높았던 지점은 어디야?\"라고 텍스트로 질문하면, 이를 올바른 SQL 쿼리문으로 변환(Text-to-SQL)하여 개발자에게 제안하는 데 가장 특화된 모델 기능은?",
+            options: ["Amazon Translate", "Amazon Lex (기본 인텐트)", "파운데이션 모델을 활용한 코드 생성 (예: Claude 3 또는 Q Developer)", "Amazon Rekognition"],
+            answer: 2,
+            explanation: "자연어를 SQL이나 다른 프로그래밍 언어로 변환하는 작업은 대규모 언어 모델의 '코드 생성 및 번역' 기능을 활용하는 대표적인 생성형 AI 사용 사례입니다."
+        },
+        {
+            q: "23. 데이터 세트 내의 특정 개인정보(예: 이름, 주민번호)를 완전히 삭제하지 않으면서도, 원본 데이터를 추론할 수 없도록 수학적 변환(예: 해싱 또는 암호화)을 가하여 데이터의 프라이버시를 보호하는 전처리 기법은?",
+            options: ["가명화 (Pseudonymization)", "데이터 증강 (Data Augmentation)", "원-핫 인코딩 (One-hot Encoding)", "정규화 (Normalization)"],
+            answer: 0,
+            explanation: "가명화(Pseudonymization) 또는 익명화(Anonymization)는 원본 데이터의 개인 식별 정보를 가짜 값이나 암호화된 값으로 대체하여 데이터 분석에 사용하면서도 프라이버시를 보호하는 보안 기법입니다."
+        },
+        {
+            q: "24. Amazon Q Business 애플리케이션에 회사의 여러 데이터를 연동할 때, 검색 결과의 품질을 높이기 위해 PDF 파일이나 스캔된 이미지 문서 내의 텍스트를 사전에 추출해야 합니다. Amazon Q가 내부적으로 이 프로세스를 처리하기 위해 원활하게 통합되어 활용하는 AWS 서비스는?",
+            options: ["Amazon Translate", "Amazon Textract", "Amazon Polly", "Amazon Lex"],
+            answer: 1,
+            explanation: "문서 기반 검색 시스템(Amazon Q, Kendra 등)은 PDF나 이미지 내에 갇힌 텍스트 정보를 인덱싱하기 위해 광학 문자 인식(OCR) 서비스인 Amazon Textract의 기능을 활용하여 텍스트를 추출합니다."
+        },
+        {
+            q: "25. Amazon Bedrock에서 사용자가 선택한 파운데이션 모델(예: Claude, Titan)에 대해 특정 사용 사례에 맞는 성능과 응답 지연 시간(Latency)을 측정하고 테스트하기 위해 제공되는 기능은 무엇입니까?",
+            options: ["Bedrock Model Evaluation (모델 평가)", "Bedrock Knowledge Bases", "Bedrock Agents", "AWS CloudTrail"],
+            answer: 0,
+            explanation: "Amazon Bedrock의 모델 평가(Model Evaluation) 기능은 사용자가 자체 데이터 세트를 업로드하여 여러 파운데이션 모델 간의 출력 정확도, 관련성, 지연 시간, 유해성 등을 자동 또는 사람 평가자를 통해 비교 분석할 수 있게 해줍니다."
+        },
+        {
+            q: "26. AI 개발을 위한 데이터를 Amazon S3에 저장할 때, AWS 보안 공동 책임 모델에 따라 고객이 설정하고 책임져야 하는 항목은 무엇입니까?",
+            options: ["S3 스토리지를 구성하는 물리적 하드웨어의 보안 및 폐기", "S3 버킷의 서버 측 암호화(SSE-KMS) 활성화 및 IAM 정책을 통한 버킷 접근 권한(ACL) 관리", "S3 서비스의 글로벌 네트워크 인프라 유지 보수", "S3 스토리지 호스트의 운영 체제 패치"],
+            answer: 1,
+            explanation: "AWS 환경에서 S3에 저장된 데이터의 암호화 설정, 누가 접근할 수 있는지에 대한 권한 관리(IAM, 버킷 정책)는 전적으로 '고객'의 책임입니다."
+        },
+        {
+            q: "27. Amazon SageMaker에서 모델을 개발할 때, 코드를 전혀 작성할 줄 모르는 비즈니스 분석가를 위한 시각적(Visual) 인터페이스인 (A)와, 파이썬 코드를 작성하는 데이터 과학자 및 개발자를 위한 통합 개발 환경인 (B)는 각각 무엇입니까?",
+            options: ["(A) SageMaker Canvas, (B) SageMaker Studio", "(A) SageMaker Autopilot, (B) SageMaker Ground Truth", "(A) AWS Cloud9, (B) Amazon Bedrock", "(A) Amazon QuickSight, (B) Amazon EMR"],
+            answer: 0,
+            explanation: "SageMaker Canvas는 비즈니스 분석가를 위한 노코드(No-code) 시각적 기계 학습 도구이며, SageMaker Studio는 데이터 과학자와 엔지니어를 위한 주피터 노트북 기반의 완벽한 MLOps 통합 개발 환경(IDE)입니다."
+        },
+        {
+            q: "28. 기계 학습에서 입력 변수(X)와 목적 변수(Y) 간의 선형적인 관계를 학습하여 예측값을 도출하는 가장 기본적이고 해석하기 쉬운 회귀 알고리즘은 무엇입니까?",
+            options: ["의사결정 트리 (Decision Tree)", "선형 회귀 (Linear Regression)", "서포트 벡터 머신 (SVM)", "K-최근접 이웃 (K-NN)"],
+            answer: 1,
+            explanation: "선형 회귀(Linear Regression)는 데이터 포인트들을 가장 잘 대변하는 직선(선형 방정식)을 찾아 연속적인 수치(예: 집값, 판매량)를 예측하는 가장 기본적이고 투명한 기계 학습 알고리즘입니다."
+        },
+        {
+            q: "29. Amazon Comprehend를 사용하여 고객 피드백 텍스트 모음을 분석할 때, 텍스트에 포함된 단어들을 바탕으로 문서가 어떤 주제(예: '환불', '배송', '품질')를 다루고 있는지 사전에 정의된 카테고리 없이 알고리즘이 스스로 유사한 문서들을 묶어 주제를 발견해 내는 기능은?",
+            options: ["주제 모델링 (Topic Modeling)", "핵심 구문 추출 (Key Phrase Extraction)", "엔터티 인식 (Entity Recognition)", "구문 분석 (Syntax Analysis)"],
+            answer: 0,
+            explanation: "주제 모델링(Topic Modeling)은 비지도 학습 기술을 사용하여 대규모 텍스트 코퍼스 내에서 사전에 정의된 레이블 없이 숨겨진 의미 구조와 일반적인 주제(Topic)를 자동으로 분류하고 그룹화하는 기능입니다."
+        },
+        {
+            q: "30. 파운데이션 모델이 특정 사용자의 질문에 답할 때, 모델이 생성한 응답의 투명성과 신뢰성을 높이기 위해 RAG 시스템이 응답과 함께 사용자에게 반드시 제공해야 하는 것은 무엇입니까?",
+            options: ["모델의 파라미터 개수 정보", "응답을 생성하는 데 기반이 된 원본 소스 문서(Knowledge Base)의 인용(Citations) 및 출처 링크", "모델의 훈련 데이터 세트 전체", "응답 생성에 소요된 컴퓨팅 비용 영수증"],
+            answer: 1,
+            explanation: "RAG 시스템(예: Bedrock Knowledge Bases, Amazon Q)의 가장 큰 장점은 생성된 답변이 어디서 왔는지 근거를 제공하는 것입니다. 신뢰성과 설명 가능성을 위해 참조된 문서의 출처/인용(Citations)을 함께 제공하는 것이 모범 사례입니다."
+        }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    function renderQuiz() {
+        let html = '';
+        questionsData.forEach((qObj, index) => {
+            html += `<div class="question-block" id="q-block-${index}">
+                        <div class="question-text">${qObj.q}</div>
+                        <ul class="options-list">`;
+            qObj.options.forEach((opt, optIndex) => {
+                const inputType = Array.isArray(qObj.answer) ? 'checkbox' : 'radio';
+                const inputName = `q${index}`;
+                html += `<li class="option-item" id="opt-label-${index}-${optIndex}">
+                            <label style="display: block; cursor: pointer;">
+                                <input type="${inputType}" name="${inputName}" value="${optIndex}">
+                                ${String.fromCharCode(65 + optIndex)}. ${opt}
+                            </label>
+                        </li>`;
+            });
+            html += `</ul><div class="explanation" id="exp-${index}"><strong>해설:</strong> ${qObj.explanation}</div></div>`;
+        });
+        quizContainer.innerHTML = html;
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        const total = questionsData.length;
+
+        questionsData.forEach((qObj, index) => {
+            const isMultiple = Array.isArray(qObj.answer);
+            const inputs = document.querySelectorAll(`input[name="q${index}"]`);
+            let userAnswers = [];
+
+            inputs.forEach(input => { if (input.checked) userAnswers.push(parseInt(input.value)); });
+
+            let isCorrect = false;
+            if (isMultiple) {
+                const correctAnswers = qObj.answer.slice().sort();
+                userAnswers.sort();
+                if (userAnswers.length === correctAnswers.length && userAnswers.every((val, i) => val === correctAnswers[i])) isCorrect = true;
+            } else {
+                if (userAnswers.length === 1 && userAnswers[0] === qObj.answer) isCorrect = true;
+            }
+
+            const block = document.getElementById(`q-block-${index}`);
+            block.style.borderLeft = isCorrect ? "5px solid #28a745" : "5px solid #dc3545";
+            block.style.paddingLeft = "10px";
+            if(isCorrect) score++;
+
+            if (isMultiple) {
+                qObj.answer.forEach(ans => document.getElementById(`opt-label-${index}-${ans}`).classList.add('correct-answer'));
+            } else {
+                document.getElementById(`opt-label-${index}-${qObj.answer}`).classList.add('correct-answer');
+            }
+
+            userAnswers.forEach(ans => {
+                if ((isMultiple && !qObj.answer.includes(ans)) || (!isMultiple && ans !== qObj.answer)) {
+                    document.getElementById(`opt-label-${index}-${ans}`).classList.add('wrong-answer');
+                }
+            });
+
+            document.getElementById(`exp-${index}`).style.display = 'block';
+        });
+
+        const resultContainer = document.getElementById('result-container');
+        resultContainer.style.display = 'block';
+        const percent = Math.round((score / total) * 100);
+        resultContainer.innerHTML = `총 ${total}문제 중 <strong>${score}문제</strong> 맞췄습니다. (정답률: ${percent}%)`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderQuiz();
+</script>
+
+</body>
+</html>

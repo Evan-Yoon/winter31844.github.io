@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS AI Practitioner 모의고사 - 세트 7</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #232f3e; border-bottom: 2px solid #ff9900; padding-bottom: 10px; }
+        .info { background-color: #e9ecef; padding: 15px; border-left: 5px solid #007bff; margin-bottom: 30px; font-size: 0.95em; }
+        .question-block { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; }
+        .options-list { list-style-type: none; padding: 0; }
+        .option-item { margin-bottom: 10px; background: #f8f9fa; padding: 10px 15px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; }
+        .option-item:hover { background: #e2e6ea; }
+        .option-item input { margin-right: 10px; }
+        .btn-submit { display: block; width: 100%; padding: 15px; background-color: #ff9900; color: #232f3e; font-size: 1.2em; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        .btn-submit:hover { background-color: #e88a00; }
+        #result-container { display: none; margin-top: 30px; padding: 20px; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 5px; text-align: center; font-size: 1.3em; font-weight: bold; }
+        .correct-answer { background-color: #d4edda !important; border-color: #c3e6cb !important; }
+        .wrong-answer { background-color: #f8d7da !important; border-color: #f5c6cb !important; }
+        .explanation { display: none; margin-top: 10px; padding: 10px; background-color: #eef1f6; border-left: 4px solid #4a90e2; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AWS AI Practitioner (AIF-C01) - 세트 7</h1>
+    <div class="info">
+        <strong>안내:</strong> 데이터 편향, RLHF, ReAct 프롬프팅, 특수 AI 서비스(Lookout for Metrics 등) 및 기계 학습의 심층 평가 지표를 묻는 완전히 새로운 30문항입니다. 모두 풀고 '채점하기'를 누르세요.
+    </div>
+
+    <form id="quiz-form">
+        <div id="quiz-container"></div>
+        <button type="button" class="btn-submit" onclick="submitQuiz()">제출 및 채점하기</button>
+    </form>
+
+    <div id="result-container"></div>
+</div>
+
+<script>
+    const questionsData = [
+        {
+            q: "1. 기계 학습 모델을 훈련할 때, 실제 프로덕션 환경에서는 절대 알 수 없는 '미래의 정보'나 '타겟(예측) 변수와 직접적으로 연관된 정보'가 훈련 데이터 세트에 실수로 포함되어, 훈련 시에는 성능이 비정상적으로 높지만 실제 배포 후에는 성능이 형편없는 현상을 무엇이라고 합니까?",
+            options: ["과소적합 (Underfitting)", "데이터 누수 (Data Leakage)", "데이터 증강 (Data Augmentation)", "차원의 저주 (Curse of Dimensionality)"],
+            answer: 1,
+            explanation: "데이터 누수(Data Leakage)는 예측 시점에는 사용할 수 없는 정보가 모델 훈련 과정에 스며들어, 모델이 정답을 '커닝'하게 만들어 평가 지표를 부풀리는 심각한 오류입니다."
+        },
+        {
+            q: "2. 신용카드 사기 탐지 모델을 구축하려고 합니다. 데이터의 99.9%는 정상 거래이고 0.1%만이 사기 거래입니다. 이처럼 클래스 불균형(Class Imbalance)이 심한 데이터를 처리하기 위해 다수 클래스의 데이터를 무작위로 제거하거나 소수 클래스의 데이터를 복제/생성하는 전처리 기법은 무엇입니까?",
+            options: ["SMOTE (Synthetic Minority Over-sampling Technique) / 리샘플링", "L1/L2 정규화 (Regularization)", "K-평균 군집화 (K-Means Clustering)", "주성분 분석 (PCA)"],
+            answer: 0,
+            explanation: "데이터 불균형을 해결하기 위해 오버샘플링(소수 클래스 증식, 예: SMOTE)이나 언더샘플링(다수 클래스 축소) 등의 리샘플링 기법을 사용하여 모델이 소수 클래스를 충분히 학습하도록 돕습니다."
+        },
+        {
+            q: "3. 회사에서 AI 채용 시스템을 도입했습니다. 그러나 훈련 데이터가 과거 10년 동안 합격한 특정 성별과 인종의 지원자 데이터에만 편중되어 있어, AI가 이와 유사한 지원자만 선호하게 되는 문제를 무엇이라고 합니까?",
+            options: ["확증 편향 (Confirmation Bias)", "선택 편향 (Selection Bias) / 역사적 편향 (Historical Bias)", "생존자 편향 (Survivorship Bias)", "회상 편향 (Recall Bias)"],
+            answer: 1,
+            explanation: "선택 편향이나 역사적 편향은 훈련 데이터 자체가 현실 세계의 다양성을 제대로 반영하지 못하거나, 과거의 사회적 편견이 데이터에 그대로 포함되어 있을 때 발생합니다."
+        },
+        {
+            q: "4. Amazon Bedrock을 사용할 때, 고객이 특정 파운데이션 모델(FM)에 대해 온디맨드가 아닌 '프로비저닝된 처리량(Provisioned Throughput)'을 구매하기 위해 약정해야 하는 기간 옵션은 일반적으로 어떻게 됩니까?",
+            options: ["시간 단위 또는 일 단위 약정", "약정 없이 원할 때 즉시 해지 가능", "1개월 또는 6개월 약정", "최소 3년 약정 필수"],
+            answer: 2,
+            explanation: "Amazon Bedrock에서 안정적인 성능 보장을 위해 프로비저닝된 처리량을 구매할 때, 고객은 1개월 또는 6개월 약정 조건으로 모델 단위를 구매해야 합니다. (사용자 지정 미세 조정 모델의 추론을 위해서도 필요합니다.)"
+        },
+        {
+            q: "5. 기계 학습 모델 훈련을 위해 수십만 장의 이미지에 레이블을 지정해야 합니다. 내부 인력이나 크라우드소싱 인력을 관리할 여력이 없을 때, AWS가 선정한 전문가들이 고품질의 데이터 레이블링 워크플로를 대신 관리하고 완료해 주는 완전 관리형 서비스는?",
+            options: ["Amazon Mechanical Turk", "Amazon SageMaker Ground Truth Plus", "Amazon SageMaker Data Wrangler", "Amazon Textract"],
+            answer: 1,
+            explanation: "SageMaker Ground Truth Plus는 고객이 자체 레이블링 애플리케이션을 구축하거나 인력을 관리할 필요 없이, AWS 관리형 전문 인력을 통해 고품질 훈련 데이터를 턴키 방식으로 제공하는 서비스입니다."
+        },
+        {
+            q: "6. 대규모 언어 모델(LLM)이 답변을 생성할 때, 스스로 질문에 대한 추론(Reasoning)을 하고 그 추론에 기반하여 외부 도구 검색이나 행동(Acting)을 번갈아 수행하며 복잡한 문제를 해결하게 하는 프롬프트 엔지니어링 프레임워크는?",
+            options: ["제로샷 프롬프팅 (Zero-shot)", "ReAct (Reasoning and Acting)", "역할 프롬프팅 (Role Prompting)", "퓨샷 프롬프팅 (Few-shot)"],
+            answer: 1,
+            explanation: "ReAct 프롬프팅은 모델에게 생각(추론)을 먼저 명시적으로 하게 한 다음, 그 생각에 따라 행동(API 호출, 검색 등)을 하고 관찰 결과를 바탕으로 다시 생각하는 루프를 만들어 논리적 오류와 환각을 줄입니다."
+        },
+        {
+            q: "7. 심층 신경망(Deep Neural Networks) 모델 훈련 시, 무작위로 일부 뉴런을 일시적으로 비활성화(0으로 만듦)하여 네트워크가 특정 뉴런에 과도하게 의존하는 것을 방지하고 과대적합(Overfitting)을 줄이는 정규화 기법은?",
+            options: ["학습률 감소 (Learning Rate Decay)", "드롭아웃 (Dropout)", "맥스 풀링 (Max Pooling)", "경사 하강법 (Gradient Descent)"],
+            answer: 1,
+            explanation: "드롭아웃(Dropout)은 훈련 과정에서 매 단계마다 네트워크의 노드(뉴런) 일부를 무작위로 꺼버림으로써, 모델이 훈련 데이터에 너무 과적합되는 것을 막고 일반화 성능을 향상시킵니다."
+        },
+        {
+            q: "8. 다음 중 기계 학습에서 '회귀(Regression)' 알고리즘을 사용하여 해결하기에 가장 적합한 문제는 무엇입니까?",
+            options: ["주어진 이미지가 고양이인지 강아지인지 판별", "내일의 온도나 특정 주택의 판매 가격을 연속적인 수치로 예측", "수만 명의 고객을 구매 패턴에 따라 3개의 유사한 그룹으로 세분화", "신용 카드 결제가 정상인지 사기인지 판별"],
+            answer: 1,
+            explanation: "회귀(Regression)는 분류(Classification)와 달리 온도, 가격, 매출액 등과 같이 '연속적인 숫자 값'을 예측하는 지도 학습 알고리즘입니다."
+        },
+        {
+            q: "9. 대규모 언어 모델이 생성한 텍스트의 품질을 높이고 인간의 선호도, 가치관, 윤리 기준과 일치(Alignment)하도록 모델을 미세 조정하기 위해, 사람이 직접 선호하는 응답을 평가하여 보상 모델을 만들고 이를 모델 학습에 반영하는 기법은?",
+            options: ["RAG (검색 증강 생성)", "RLHF (인간 피드백 기반 강화 학습)", "PEFT (파라미터 효율적 미세 조정)", "LoRA"],
+            answer: 1,
+            explanation: "RLHF(Reinforcement Learning from Human Feedback)는 AI 모델이 사람에게 유용하고 무해하며 정직한 답변을 하도록 유도하기 위해, 인간의 평가 점수를 보상으로 사용하여 모델을 강화 학습시키는 기법입니다."
+        },
+        {
+            q: "10. 다중 클래스 분류 신경망 모델(예: 개, 고양이, 새 분류)의 맨 마지막 출력층(Output Layer)에서 주로 사용되며, 모델의 출력값을 0과 1 사이의 확률 값으로 변환하고 모든 클래스의 확률 합을 1로 만들어 주는 활성화 함수는?",
+            options: ["ReLU", "Sigmoid", "Softmax", "Tanh"],
+            answer: 2,
+            explanation: "Softmax 함수는 신경망의 여러 출력값을 정규화하여 각 클래스에 속할 상대적 '확률'로 변환해 주므로 다중 클래스 분류 문제의 최종 출력층에 널리 사용됩니다. (Sigmoid는 이진 분류에 주로 쓰임)"
+        },
+        {
+            q: "11. 전자 상거래 회사가 Amazon Personalize를 도입하려고 합니다. 사용자의 개별적인 취향을 반영하여 홈페이지에서 '당신을 위한 추천 상품' 목록을 표시하는 데 가장 적합한 레시피(Recipe)는 무엇입니까?",
+            options: ["Similar Items", "Trending Now", "User Personalization", "Personalized Ranking"],
+            answer: 2,
+            explanation: "User Personalization 레시피는 사용자의 과거 상호 작용, 실시간 행동 및 항목 메타데이터를 기반으로 특정 사용자에게 맞춤형 항목을 추천하는 핵심 기능입니다."
+        },
+        {
+            q: "12. 기계 학습 모델의 성능을 객관적으로 평가하기 위해 데이터 세트를 나눌 때, 전체 데이터를 K개의 부분(Fold)으로 나누고 한 번씩 번갈아 가며 테스트 세트로 사용하여 모델을 여러 번 평가하고 평균을 내는 통계적 기법은?",
+            options: ["A/B 테스트", "K-Fold 교차 검증 (Cross Validation)", "부트스트래핑 (Bootstrapping)", "그리드 서치 (Grid Search)"],
+            answer: 1,
+            explanation: "K-Fold 교차 검증은 모델이 특정 훈련/테스트 데이터 분할에만 우연히 성능이 좋게 나오는 것을 방지하기 위해, 데이터를 여러 번 쪼개어 검증함으로써 모델의 일반화 성능을 더 신뢰성 있게 평가하는 방법입니다."
+        },
+        {
+            q: "13. 회사에서 과거의 판매 데이터를 기반으로 수요를 예측하는 모델을 배포했습니다. 하지만 갑작스러운 글로벌 경제 위기로 인해 소비자들의 구매 성향 자체가 근본적으로 바뀌어 모델의 예측 정확도가 크게 떨어졌습니다. 이러한 현상을 무엇이라 합니까?",
+            options: ["데이터 편향 (Data Bias)", "데이터 누수 (Data Leakage)", "개념 드리프트 (Concept Drift)", "과소적합 (Underfitting)"],
+            answer: 2,
+            explanation: "개념 드리프트(Concept Drift)는 입력 데이터와 타겟 변수 사이의 내재적인 통계적 관계나 규칙이 시간이 지남에 따라 변하여 기존 모델의 성능이 저하되는 현상입니다."
+        },
+        {
+            q: "14. Amazon Lookout for Metrics를 사용하는 주된 비즈니스 목적은 무엇입니까?",
+            options: ["이미지에서 객체 탐지", "회사 수익, 웹 페이지 뷰 등 비즈니스 시계열 지표에서 비정상적인 이상(Anomaly)을 자동으로 탐지하고 원인을 식별", "산업용 기계의 센서 데이터를 통한 고장 예측", "텍스트 번역"],
+            answer: 1,
+            explanation: "Amazon Lookout for Metrics는 기계 학습을 사용하여 판매 감소, 고객 확보율 급증 등 시계열 비즈니스 지표의 이상을 자동으로 감지하고 분석해 주는 서비스입니다."
+        },
+        {
+            q: "15. 고객센터 상담원이 통화 중에 고객의 문제를 더 빠르게 해결할 수 있도록, 통화 내용을 실시간으로 분석하여 상담원 화면에 지식 베이스 문서, 추천 답변, 요약 등을 자동으로 팝업으로 띄워주는 생성형 AI 기능은?",
+            options: ["Amazon Lex", "Amazon Transcribe", "Amazon Q in Connect", "Amazon Connect Contact Lens"],
+            answer: 2,
+            explanation: "Amazon Q in Connect는 생성형 AI를 활용하여 고객과 상담원의 실시간 대화를 모니터링하고, 상담원에게 답변과 권장 조치를 선제적으로 제안하여 고객 서비스 품질과 속도를 높입니다."
+        },
+        {
+            q: "16. Amazon Textract의 AnalyzeExpense 기능은 어떤 유형의 문서를 처리하는 데 특별히 훈련되어 있습니까?",
+            options: ["여권 및 운전면허증", "의료 처방전", "청구서 (Invoices) 및 영수증 (Receipts)", "법률 계약서"],
+            answer: 2,
+            explanation: "AnalyzeExpense는 송장(청구서) 및 영수증 처리에 특화된 Textract API로, 공급업체 이름, 총액, 세금, 날짜 등과 같은 특정 재무 데이터를 구조나 양식에 상관없이 정확하게 추출합니다."
+        },
+        {
+            q: "17. 컴퓨터 비전의 객체 탐지(Object Detection) 모델에서 이미지 내 특정 물체의 위치를 식별하기 위해 데이터 레이블링 시 이미지 위에 그리는 직사각형 상자를 무엇이라고 합니까?",
+            options: ["세그멘테이션 마스크 (Segmentation Mask)", "바운딩 박스 (Bounding Box)", "폴리곤 (Polygon)", "히트맵 (Heatmap)"],
+            answer: 1,
+            explanation: "바운딩 박스(Bounding Box)는 이미지나 비디오에서 관심 객체(예: 자동차, 사람)의 위치를 사각형으로 둘러싸서 지정하는 가장 일반적인 레이블링 형식입니다."
+        },
+        {
+            q: "18. 기존에 매우 방대한 데이터로 잘 훈련된 기계 학습 모델(예: 일반적인 개와 고양이를 구분하는 CNN 모델)의 가중치를 가져와서, 이를 기반으로 새롭고 비교적 데이터가 적은 유사한 작업(예: 희귀한 고양이 품종 분류)을 빠르게 학습시키는 기법은?",
+            options: ["비지도 학습 (Unsupervised Learning)", "전이 학습 (Transfer Learning)", "강화 학습 (Reinforcement Learning)", "K-평균 (K-Means)"],
+            answer: 1,
+            explanation: "전이 학습(Transfer Learning)은 한 도메인에서 학습한 지식(파라미터/가중치)을 다른 유사한 도메인이나 작업에 재사용하여, 적은 데이터와 짧은 훈련 시간으로도 높은 성능을 얻는 기법입니다."
+        },
+        {
+            q: "19. 대규모 언어 모델(LLM)이 환각(Hallucination)을 일으키는 일반적인 원인이 아닌 것은 무엇입니까?",
+            options: ["모델이 질문에 대한 충분한 최신 지식을 가지고 있지 않음", "프롬프트의 지시가 모호하거나 맥락이 부족함", "훈련 데이터 세트에 포함된 정보의 편향되거나 잘못된 정보", "온도(Temperature)를 0으로 설정하여 무작위성을 완전히 제거함"],
+            answer: 3,
+            explanation: "온도(Temperature)를 0으로 낮추는 것은 모델의 무작위성을 줄여 가장 확률이 높은 단어만 선택하게 하므로, 오히려 환각을 줄이고 사실에 기반한 일관된 답변을 유도하는 데 도움이 됩니다."
+        },
+        {
+            q: "20. 머신 러닝 이진 분류 모델(예: 스팸/정상 분류)의 성능을 평가할 때, 분류 임계값(Threshold)의 변화에 따른 '참 양성 비율(TPR)'과 '위양성 비율(FPR)' 간의 성능 곡선을 나타내며, 곡선 아래의 면적이 1에 가까울수록 좋은 모델로 평가하는 지표는?",
+            options: ["혼동 행렬 (Confusion Matrix)", "AUC-ROC 곡선", "F1 점수 (F1 Score)", "평균 제곱 오차 (MSE)"],
+            answer: 1,
+            explanation: "ROC 곡선 아래 면적(AUC)은 이진 분류기가 긍정 클래스와 부정 클래스를 얼마나 잘 구별할 수 있는지를 나타내는 성능 측정치로, 다양한 임계값에서 모델의 성능을 종합적으로 평가합니다."
+        },
+        {
+            q: "21. AWS 아키텍처에서 Amazon SageMaker가 Amazon S3 버킷에 저장된 훈련 데이터에 접근하기 위해 설정해야 하는 가장 안전하고 올바른 권한 부여 방식은?",
+            options: ["SageMaker 노트북에 AWS 루트(Root) 계정의 Access Key를 하드코딩한다.", "S3 버킷을 퍼블릭(Public) 읽기 권한으로 개방한다.", "SageMaker 서비스가 적절한 S3 읽기 권한을 가진 IAM 역할(IAM Role)을 수임(Assume)하도록 구성한다.", "AWS CloudTrail에서 S3 접근을 승인한다."],
+            answer: 2,
+            explanation: "AWS 보안 모범 사례에 따라, 서비스(SageMaker)가 다른 서비스(S3)의 리소스에 액세스하려면 영구 자격 증명(키)을 사용하는 대신 임시 권한을 제공하는 IAM 역할을 생성하여 서비스에 연결해야 합니다."
+        },
+        {
+            q: "22. 컴퓨터 비전을 사용하여 온프레미스 시설, 식당 등에서 직원들이 손을 씻었는지, 세니타이저를 사용했는지 등의 위생 절차와 동작을 추적할 수 있도록 사전 훈련된 기능/서비스는?",
+            options: ["Amazon Monitron", "Amazon Lookout for Vision", "Amazon Rekognition", "AWS HealthScribe"],
+            answer: 2,
+            explanation: "Amazon Rekognition은 이미지와 비디오를 분석하며, 안전 보건 요구 사항에 맞게 동작 감지, 얼굴 인식, PPE(개인 보호 장비) 감지 기능을 결합하여 사용할 수 있습니다."
+        },
+        {
+            q: "23. 생성형 AI 모델을 사용할 때, 기업의 지적 재산(기밀 코드, 재무 계획 등)이 모델의 응답에 섞여 외부로 유출되지 않도록 제어하는 데 사용할 수 있는 관리형 안전 메커니즘은?",
+            options: ["AWS WAF", "Amazon Bedrock Guardrails", "Amazon CloudFront", "AWS Shield"],
+            answer: 1,
+            explanation: "Bedrock Guardrails를 사용하면 민감한 정보(PII) 난독화는 물론, 회사 정책에 위배되는 특정 주제나 기밀 데이터가 모델 응답이나 사용자 프롬프트에 포함되는 것을 필터링하여 보안을 강화할 수 있습니다."
+        },
+        {
+            q: "24. 머신 러닝 훈련 인프라 최적화와 관련하여, 한 대의 EC2 인스턴스에 있는 여러 개의 GPU 간에 고속으로 데이터를 주고받아 분산 훈련 성능을 극대화하기 위해 지원되는 AWS 네트워킹 기능은?",
+            options: ["Elastic Load Balancing (ELB)", "AWS Direct Connect", "Elastic Fabric Adapter (EFA)", "Amazon API Gateway"],
+            answer: 2,
+            explanation: "Elastic Fabric Adapter(EFA)는 HPC 및 머신 러닝 분산 훈련 워크로드를 위해 매우 낮은 지연 시간과 높은 처리량의 노드 간 통신을 제공하는 EC2 인스턴스용 네트워크 인터페이스입니다."
+        },
+        {
+            q: "25. 생성형 AI의 기반인 파운데이션 모델(FM)이 다양한 광범위한 다운스트림 작업(번역, 요약, 코딩 등)을 수행할 수 있는 근본적인 이유는 모델 훈련 단계 중 어느 과정 덕분입니까?",
+            options: ["강화 학습 (Reinforcement Learning)", "수많은 레이블이 지정된 데이터를 활용한 지도 학습 (Supervised Learning)", "인터넷 규모의 방대한 비정형 데이터를 사용한 자기 지도 기반의 사전 훈련 (Self-supervised Pre-training)", "파라미터 양자화 (Quantization)"],
+            answer: 2,
+            explanation: "FM은 사람이 레이블을 달아주지 않은 방대한 텍스트 데이터에서 스스로 단어의 관계와 문맥(다음 단어 예측 등)을 파악하는 '사전 훈련(Pre-training)'을 통해 범용적인 지식과 언어적 표현력을 획득합니다."
+        },
+        {
+            q: "26. AI 애플리케이션 프런트엔드와 Amazon Bedrock 백엔드 간에 통신할 때, 퍼블릭 인터넷을 거치면 데이터 가로채기나 DDoS 공격의 위험이 있습니다. 인터넷을 거치지 않고 VPC 내에서 Bedrock API를 안전하게 호출하기 위한 서비스는?",
+            options: ["AWS Transit Gateway", "AWS WAF", "AWS PrivateLink (VPC 엔드포인트)", "Amazon CloudFront"],
+            answer: 2,
+            explanation: "AWS PrivateLink를 사용하면 Amazon VPC와 AWS 서비스(예: Bedrock) 간에 프라이빗 연결을 생성하여, 트래픽이 퍼블릭 인터넷에 노출되지 않고 AWS 글로벌 네트워크 내에 머물도록 보장합니다."
+        },
+        {
+            q: "27. 다음 중 대규모 언어 모델(LLM) 프롬프트 엔지니어링 시, 원하는 출력을 유도하기 위해 관련된 예시를 한 개도 주지 않는(0개) 기법은?",
+            options: ["Few-shot Prompting", "Zero-shot Prompting", "One-shot Prompting", "CoT Prompting"],
+            answer: 1,
+            explanation: "Zero-shot Prompting(제로샷 프롬프팅)은 모델에게 입력과 출력의 예시를 전혀 제공하지 않고, 오직 작업에 대한 지시(예: '다음 문장을 불어로 번역해')만 내리는 방식입니다."
+        },
+        {
+            q: "28. 기업이 직원들의 이직률(퇴사 여부)을 예측하는 머신 러닝 분류 모델을 구축했습니다. 하지만 모델의 평가 지표 중 '정밀도(Precision)'와 '재현율(Recall)'이 서로 상충(Trade-off)하는 관계에 있습니다. 만약 회사가 '이직할 가능성이 있는 직원을 단 한 명도 놓치고 싶지 않다(위음성을 최소화)'면 어떤 지표를 중점적으로 최적화해야 합니까?",
+            options: ["정밀도 (Precision)", "재현율 (Recall)", "정확도 (Accuracy)", "특이도 (Specificity)"],
+            answer: 1,
+            explanation: "재현율(Recall)은 실제 정답(퇴사자) 중에서 모델이 찾아낸 비율을 의미합니다. 위음성(퇴사하는데 안 한다고 예측함)을 최소화하려면 재현율을 높여 다소 오람(정상 직원을 퇴사한다고 예측)이 있더라도 빠짐없이 식별해야 합니다."
+        },
+        {
+            q: "29. 애플리케이션에 텍스트-음성 변환(TTS) 기능을 추가하려고 합니다. Amazon Polly를 사용할 때, 뉴스를 읽는 듯한 자연스러운 억양과 감정이 풍부한 최고 품질의 사람 목소리를 생성하기 위해 선택해야 하는 음성 엔진은?",
+            options: ["Standard TTS", "Neural TTS (NTTS)", "Lexicon TTS", "Voice ID"],
+            answer: 1,
+            explanation: "Amazon Polly의 Neural TTS(신경망 텍스트 음성 변환) 엔진은 기계 학습을 심층적으로 활용하여 억양, 운율, 발음이 향상된, 가장 사람과 유사하고 자연스러운 최고 품질의 음성을 제공합니다."
+        },
+        {
+            q: "30. Amazon SageMaker 인프라에서 개발자가 모델 코드를 처음부터 작성하는 대신, 사전에 훈련된 비전, 텍스트, 오디오 모델을 검색하고 단 한 번의 클릭으로 배포할 수 있도록 제공되는 기계 학습 허브(Hub)의 이름은?",
+            options: ["SageMaker Model Monitor", "SageMaker Autopilot", "SageMaker JumpStart", "AWS Marketplace"],
+            answer: 2,
+            explanation: "Amazon SageMaker JumpStart는 수백 개의 오픈 소스(Llama, Mistral 등) 및 전용 기초 모델, 그리고 일반적인 비즈니스 문제에 대한 사전 구축된 ML 솔루션을 제공하는 통합 허브입니다."
+        }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    function renderQuiz() {
+        let html = '';
+        questionsData.forEach((qObj, index) => {
+            html += `<div class="question-block" id="q-block-${index}">
+                        <div class="question-text">${qObj.q}</div>
+                        <ul class="options-list">`;
+            qObj.options.forEach((opt, optIndex) => {
+                const inputType = Array.isArray(qObj.answer) ? 'checkbox' : 'radio';
+                const inputName = `q${index}`;
+                html += `<li class="option-item" id="opt-label-${index}-${optIndex}">
+                            <label style="display: block; cursor: pointer;">
+                                <input type="${inputType}" name="${inputName}" value="${optIndex}">
+                                ${String.fromCharCode(65 + optIndex)}. ${opt}
+                            </label>
+                        </li>`;
+            });
+            html += `</ul><div class="explanation" id="exp-${index}"><strong>해설:</strong> ${qObj.explanation}</div></div>`;
+        });
+        quizContainer.innerHTML = html;
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        const total = questionsData.length;
+
+        questionsData.forEach((qObj, index) => {
+            const isMultiple = Array.isArray(qObj.answer);
+            const inputs = document.querySelectorAll(`input[name="q${index}"]`);
+            let userAnswers = [];
+
+            inputs.forEach(input => { if (input.checked) userAnswers.push(parseInt(input.value)); });
+
+            let isCorrect = false;
+            if (isMultiple) {
+                const correctAnswers = qObj.answer.slice().sort();
+                userAnswers.sort();
+                if (userAnswers.length === correctAnswers.length && userAnswers.every((val, i) => val === correctAnswers[i])) isCorrect = true;
+            } else {
+                if (userAnswers.length === 1 && userAnswers[0] === qObj.answer) isCorrect = true;
+            }
+
+            const block = document.getElementById(`q-block-${index}`);
+            block.style.borderLeft = isCorrect ? "5px solid #28a745" : "5px solid #dc3545";
+            block.style.paddingLeft = "10px";
+            if(isCorrect) score++;
+
+            if (isMultiple) {
+                qObj.answer.forEach(ans => document.getElementById(`opt-label-${index}-${ans}`).classList.add('correct-answer'));
+            } else {
+                document.getElementById(`opt-label-${index}-${qObj.answer}`).classList.add('correct-answer');
+            }
+
+            userAnswers.forEach(ans => {
+                if ((isMultiple && !qObj.answer.includes(ans)) || (!isMultiple && ans !== qObj.answer)) {
+                    document.getElementById(`opt-label-${index}-${ans}`).classList.add('wrong-answer');
+                }
+            });
+
+            document.getElementById(`exp-${index}`).style.display = 'block';
+        });
+
+        const resultContainer = document.getElementById('result-container');
+        resultContainer.style.display = 'block';
+        const percent = Math.round((score / total) * 100);
+        resultContainer.innerHTML = `총 ${total}문제 중 <strong>${score}문제</strong> 맞췄습니다. (정답률: ${percent}%)`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderQuiz();
+</script>
+
+</body>
+</html>

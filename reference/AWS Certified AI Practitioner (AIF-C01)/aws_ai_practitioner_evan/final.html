@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS AI Practitioner (AIF-C01) 최종 실전 모의고사</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #232f3e; border-bottom: 2px solid #ff9900; padding-bottom: 10px; }
+        .info { background-color: #e9ecef; padding: 15px; border-left: 5px solid #007bff; margin-bottom: 30px; font-size: 0.95em; }
+        .domain-title { background-color: #232f3e; color: white; padding: 5px 10px; border-radius: 4px; display: inline-block; font-size: 0.85em; margin-bottom: 10px; }
+        .question-block { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; }
+        .options-list { list-style-type: none; padding: 0; }
+        .option-item { margin-bottom: 10px; background: #f8f9fa; padding: 10px 15px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; }
+        .option-item:hover { background: #e2e6ea; }
+        .option-item input { margin-right: 10px; }
+        .btn-submit { display: block; width: 100%; padding: 15px; background-color: #ff9900; color: #232f3e; font-size: 1.2em; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        .btn-submit:hover { background-color: #e88a00; }
+        #result-container { display: none; margin-top: 30px; padding: 20px; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 5px; text-align: center; font-size: 1.3em; font-weight: bold; }
+        .correct-answer { background-color: #d4edda !important; border-color: #c3e6cb !important; }
+        .wrong-answer { background-color: #f8d7da !important; border-color: #f5c6cb !important; }
+        .explanation { display: none; margin-top: 10px; padding: 10px; background-color: #eef1f6; border-left: 4px solid #4a90e2; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AWS AI Practitioner (AIF-C01) 최종 모의고사</h1>
+    <div class="info">
+        <strong>안내:</strong> 실제 시험 출제 비율에 맞춘 65문항입니다. 46문제 이상 정답 시 합격권입니다.
+    </div>
+
+    <form id="quiz-form">
+        <div id="quiz-container"></div>
+        <button type="button" class="btn-submit" onclick="submitQuiz()">제출 및 채점하기</button>
+    </form>
+
+    <div id="result-container"></div>
+</div>
+
+<script>
+    const questionsData = [
+        // Domain 1: AI/ML 기초 (13문제)
+        { q: "[도메인 1] 인공지능(AI), 기계 학습(ML), 딥 러닝(DL)의 포함 관계를 올바르게 설명한 것은?", options: ["AI ⊂ ML ⊂ DL", "DL ⊂ ML ⊂ AI", "ML ⊂ AI ⊂ DL", "세 가지는 전혀 다른 독립적인 기술이다."], answer: 1, explanation: "딥 러닝은 기계 학습의 하위 분야이며, 기계 학습은 인공지능의 하위 분야입니다. (DL ⊂ ML ⊂ AI)" },
+        { q: "[도메인 1] 정답(레이블)이 포함된 과거 데이터를 사용하여 모델을 훈련시켜 새로운 데이터의 결과를 예측하는 기계 학습 유형은?", options: ["강화 학습", "지도 학습", "비지도 학습", "전이 학습"], answer: 1, explanation: "지도 학습(Supervised Learning)은 입력과 정답(레이블)이 짝지어진 데이터를 통해 모델을 학습시키는 방법입니다." },
+        { q: "[도메인 1] 내일의 기온이나 향후 주택 가격과 같이 연속적인 숫자 값을 예측하는 데 사용되는 알고리즘은 무엇입니까?", options: ["분류 (Classification)", "군집화 (Clustering)", "회귀 (Regression)", "차원 축소"], answer: 2, explanation: "회귀(Regression)는 수치형(연속형) 데이터를 예측할 때 사용되는 지도 학습 알고리즘입니다." },
+        { q: "[도메인 1] 의료 진단 모델에서 암 환자를 놓치지 않는 것이 가장 중요할 때, 가짜 음성(False Negative)을 최소화하기 위해 극대화해야 하는 평가 지표는?", options: ["정밀도 (Precision)", "재현율 (Recall)", "정확도 (Accuracy)", "오차 범위"], answer: 1, explanation: "재현율(Recall)은 실제 긍정 중에서 모델이 긍정으로 올바르게 식별한 비율입니다. 환자를 정상으로 오진(위음성)하는 것을 막으려면 재현율을 높여야 합니다." },
+        { q: "[도메인 1] 기계 학습 모델을 훈련할 때, 알고리즘 내부에서 스스로 학습하는 것이 아니라 데이터 과학자가 훈련 시작 전에 수동으로 설정해야 하는 값(예: 학습률)은?", options: ["가중치 (Weights)", "편향 (Bias)", "하이퍼파라미터 (Hyperparameters)", "에포크 (Epoch)"], answer: 2, explanation: "하이퍼파라미터는 모델의 구조나 훈련 프로세스를 제어하기 위해 훈련 전에 설정하는 매개변수입니다." },
+        { q: "[도메인 1] 모델이 훈련 데이터에 너무 완벽하게 맞춰져서, 새로운 테스트 데이터에서는 성능이 떨어지는 현상을 무엇이라 합니까?", options: ["데이터 누수", "과대적합 (Overfitting)", "과소적합 (Underfitting)", "개념 드리프트"], answer: 1, explanation: "과대적합은 모델이 훈련 데이터의 노이즈까지 암기하여 일반화 능력이 떨어지는 현상입니다." },
+        { q: "[도메인 1] 이미지 인식 및 컴퓨터 비전 작업에 가장 최적화되어 널리 사용되는 딥 러닝 신경망 아키텍처는?", options: ["RNN", "CNN (합성곱 신경망)", "Transformer", "GAN"], answer: 1, explanation: "CNN은 이미지의 공간적 특징을 추출하는 필터를 사용하여 컴퓨터 비전 문제에 주로 사용됩니다." },
+        { q: "[도메인 1] 비즈니스 분석가가 코드를 전혀 작성하지 않고도 시각적 인터페이스를 통해 데이터를 준비하고 기계 학습 모델을 구축할 수 있는 서비스는?", options: ["SageMaker Studio", "SageMaker Canvas", "SageMaker Autopilot", "AWS DeepRacer"], answer: 1, explanation: "SageMaker Canvas는 코딩 경험이 없는 비즈니스 분석가를 위한 노코드 시각적 ML 도구입니다." },
+        { q: "[도메인 1] 모델 훈련 데이터 세트 전체가 신경망을 한 번 완전히 통과하는 학습 단위를 무엇이라 합니까?", options: ["배치 (Batch)", "에포크 (Epoch)", "토큰 (Token)", "스텝 (Step)"], answer: 1, explanation: "에포크는 전체 훈련 데이터가 모델을 한 번 학습하는 주기를 의미합니다." },
+        { q: "[도메인 1] 범주형 데이터(예: 색상 'Red', 'Blue')를 기계 학습 모델이 이해할 수 있도록 0과 1로 구성된 벡터로 변환하는 전처리 기법은?", options: ["정규화 (Normalization)", "원-핫 인코딩 (One-hot Encoding)", "대치 (Imputation)", "데이터 증강"], answer: 1, explanation: "원-핫 인코딩은 범주형 변수를 0과 1의 이진 벡터로 변환하여 모델이 학습할 수 있게 합니다." },
+        { q: "[도메인 1] 회사 전체에서 기계 학습 모델 훈련에 사용되는 특성(Feature)들을 저장, 공유, 재사용하기 위해 사용하는 중앙 리포지토리 서비스는?", options: ["SageMaker Model Registry", "SageMaker Feature Store", "Amazon S3", "SageMaker Experiments"], answer: 1, explanation: "SageMaker Feature Store는 ML 특성을 실시간(온라인) 및 배치(오프라인)로 서빙하고 관리하는 저장소입니다." },
+        { q: "[도메인 1] 모델의 훈련 속도를 높이고 가중치를 조절할 때, 최적의 지점을 찾기 위해 한 번에 이동하는 크기를 결정하는 것은?", options: ["학습률 (Learning Rate)", "드롭아웃", "풀링", "토큰화"], answer: 0, explanation: "학습률은 경사 하강법에서 모델의 가중치를 업데이트할 때 보폭을 결정하는 주요 하이퍼파라미터입니다." },
+        { q: "[도메인 1] 데이터 준비 과정에서 데이터의 누락된 값(Null)을 평균값이나 중앙값 등으로 채워 넣는 작업을 무엇이라 합니까?", options: ["마스킹", "대치 (Imputation)", "정규화", "이상치 제거"], answer: 1, explanation: "대치(Imputation)는 결측치를 삭제하지 않고 다른 통계적 값으로 메워 데이터 손실을 방지하는 기법입니다." },
+
+        // Domain 2: 생성형 AI 기초 (16문제)
+        { q: "[도메인 2] 대규모 데이터로 사전 훈련되어 텍스트 요약, 번역, 질문 답변 등 광범위한 다운스트림 작업에 적용할 수 있는 대규모 모델을 무엇이라 합니까?", options: ["생성적 적대 신경망 (GAN)", "파운데이션 모델 (Foundation Model)", "의사결정 트리", "회귀 모델"], answer: 1, explanation: "파운데이션 모델(FM)은 대규모 비정형 데이터로 사전 훈련된 범용 AI 모델입니다." },
+        { q: "[도메인 2] 대규모 언어 모델(LLM)이 텍스트를 처리하는 기본 단위로, 단어의 일부나 한 글자가 될 수도 있는 것은?", options: ["텐서 (Tensor)", "토큰 (Token)", "임베딩 (Embedding)", "파라미터 (Parameter)"], answer: 1, explanation: "토큰은 모델이 자연어를 처리하기 위해 쪼개는 가장 작은 텍스트 조각 단위입니다." },
+        { q: "[도메인 2] LLM이 답변을 생성할 때, 무작위성을 제어하여 매번 동일하고 결정론적인 응답을 얻고자 할 때 온도를 어떻게 설정해야 합니까?", options: ["Temperature = 0", "Temperature = 1", "Temperature = 100", "온도 대신 Top-P만 1로 설정한다."], answer: 0, explanation: "온도(Temperature)를 0으로 설정하면 모델이 확률이 가장 높은 단어만 선택하여 항상 동일한 답변을 생성합니다." },
+        { q: "[도메인 2] 파운데이션 모델이 한 번의 프롬프트 호출에서 기억하고 처리할 수 있는 최대 텍스트 양을 무엇이라 합니까?", options: ["토큰 한도", "컨텍스트 윈도우 (Context Window)", "배치 크기", "에포크"], answer: 1, explanation: "컨텍스트 윈도우는 모델이 한 번에 입력받고 고려할 수 있는 이전 토큰들의 최대 개수입니다." },
+        { q: "[도메인 2] 점진적으로 노이즈를 추가한 뒤 노이즈를 제거하는 방식을 학습하여 고품질의 이미지를 생성하는 모델 아키텍처는?", options: ["Transformer", "RNN", "Diffusion Model (확산 모델)", "CNN"], answer: 2, explanation: "확산 모델은 노이즈를 역산하여 텍스트 프롬프트를 바탕으로 이미지를 생성합니다." },
+        { q: "[도메인 2] 프롬프트 엔지니어링 기법 중, 원하는 결과의 예시를 하나도 주지 않고 작업만 지시하는 방법은?", options: ["Zero-shot 프롬프팅", "Few-shot 프롬프팅", "Chain of Thought", "미세 조정"], answer: 0, explanation: "제로샷 프롬프팅은 예시 없이 지시문만으로 결과를 도출하는 기법입니다." },
+        { q: "[도메인 2] 복잡한 문제를 해결하기 위해 프롬프트에 '단계별로 생각해 보자'라고 명시하여 모델이 추론 과정을 거치게 하는 기법은?", options: ["역할 프롬프팅", "네거티브 프롬프팅", "Chain of Thought (생각의 사슬)", "형식화 지시"], answer: 2, explanation: "Chain-of-Thought 기법은 모델이 최종 답을 내리기 전 논리적 중간 단계를 생성하도록 유도합니다." },
+        { q: "[도메인 2] 모델이 학습하지 않은 최신 정보에 대해 답변하기 위해, 질문과 관련된 회사 문서를 외부에서 검색하여 프롬프트에 주입하는 아키텍처는?", options: ["RLHF", "RAG (검색 증강 생성)", "LoRA", "전이 학습"], answer: 1, explanation: "RAG는 모델을 재학습하지 않고 지식 베이스 검색을 통해 환각을 줄이고 최신 정보 기반의 응답을 생성합니다." },
+        { q: "[도메인 2] 생성형 AI 모델이 사실이 아닌 내용을 마치 사실인 것처럼 그럴싸하게 지어내어 답변하는 현상은?", options: ["개념 드리프트", "과대적합", "환각 (Hallucination)", "파국적 망각"], answer: 2, explanation: "환각(Hallucination)은 모델이 정보가 부족하거나 잘못 학습하여 허위 사실을 진실처럼 생성하는 문제입니다." },
+        { q: "[도메인 2] 텍스트의 의미를 보존하면서 모델이 유사성을 비교할 수 있도록 다차원 숫자 배열로 변환하는 과정을 무엇이라 합니까?", options: ["청킹", "토큰화", "임베딩 (Embedding)", "디코딩"], answer: 2, explanation: "임베딩은 텍스트(또는 이미지)를 수학적 벡터로 변환하여 시맨틱 검색을 가능하게 합니다." },
+        { q: "[도메인 2] 파운데이션 모델의 가중치를 전부 업데이트하지 않고, 훈련 가능한 작은 가중치 어댑터만 추가하여 자원과 비용을 줄이는 미세 조정 기법은?", options: ["RAG", "PEFT (파라미터 효율적 미세 조정) / LoRA", "지속적 사전 훈련", "데이터 증강"], answer: 1, explanation: "PEFT(특히 LoRA)는 대규모 언어 모델을 미세 조정할 때 연산량과 메모리를 획기적으로 줄여주는 기법입니다." },
+        { q: "[도메인 2] 인간의 가치관과 일치하는 안전하고 유용한 답변을 하도록, 사람의 피드백을 보상으로 사용하여 생성형 AI를 미세 조정하는 기술은?", options: ["RLHF (인간 피드백 기반 강화 학습)", "RAG", "비지도 학습", "원-핫 인코딩"], answer: 0, explanation: "RLHF는 사람의 선호도를 모델에 반영하여 챗봇의 품질과 안전성을 높이는 강화 학습 기법입니다." },
+        { q: "[도메인 2] LLM의 다음 단어 생성 시 확률이 가장 높은 상위 P% 내의 후보군에서만 단어를 샘플링하는 매개변수는?", options: ["온도", "Top-K", "Top-P", "토큰 패널티"], answer: 2, explanation: "Top-P(Nucleus Sampling)는 누적 확률이 P에 도달할 때까지의 후보들 중에서만 단어를 선택하여 생성의 다양성을 조절합니다." },
+        { q: "[도메인 2] 특정 산업의 깊은 도메인 지식을 언어 모델에 학습시키기 위해 레이블이 없는 대규모 텍스트로 추가 학습을 진행하는 방식은?", options: ["명령어 미세 조정", "지속적 사전 훈련 (Domain Adaptation)", "원샷 프롬프팅", "제로샷 프롬프팅"], answer: 1, explanation: "지속적 사전 훈련은 의학, 법률 등 도메인 특화 용어와 문맥을 모델에 내재화시키는 방법입니다." },
+        { q: "[도메인 2] RAG 시스템에서 긴 문서를 벡터 데이터베이스에 넣기 위해 의미 있는 작은 조각으로 나누는 과정을 무엇이라 합니까?", options: ["파싱", "청킹 (Chunking)", "임베딩", "스푸핑"], answer: 1, explanation: "청킹(Chunking)은 긴 문서를 모델의 컨텍스트 윈도우 한계에 맞춰 검색하기 좋은 작은 텍스트 덩어리로 분할하는 것입니다." },
+        { q: "[도메인 2] 프롬프트에 원하는 출력 형식을 명시(예: 'JSON 형식으로 출력해')하는 것은 모델의 어떤 부분을 개선하기 위함입니까?", options: ["환각 증가", "응답 지연 시간 감소", "시스템 통합을 위한 파싱(Parsing) 용이성", "보안 강화"], answer: 2, explanation: "출력 형식화는 AI의 응답을 애플리케이션 코드가 쉽게 읽고 처리할 수 있도록 구조화하는 데 필수적입니다." },
+
+        // Domain 3: 파운데이션 모델 활용 (18문제)
+        { q: "[도메인 3] 인프라 프로비저닝 없이 API를 통해 여러 AI 업체의 파운데이션 모델에 쉽게 접근하고 애플리케이션을 구축할 수 있는 완전 관리형 AWS 서비스는?", options: ["SageMaker JumpStart", "Amazon Bedrock", "Amazon Q", "Amazon Lex"], answer: 1, explanation: "Amazon Bedrock은 다양한 고성능 파운데이션 모델을 단일 API로 제공하는 서비스입니다." },
+        { q: "[도메인 3] Amazon Bedrock Knowledge Bases가 외부 문서를 벡터화하여 저장하고 검색하기 위해 기본적으로 통합하는 기능/서비스는?", options: ["Amazon DynamoDB", "Amazon OpenSearch Serverless (벡터 데이터베이스)", "Amazon S3", "AWS Glue"], answer: 1, explanation: "Bedrock Knowledge Bases는 문서를 임베딩하여 벡터 데이터베이스(기본적으로 OpenSearch Serverless)에 저장합니다." },
+        { q: "[도메인 3] 사용자의 요청에 따라 회사 API를 호출하여 항공편 예약과 같은 다단계 작업을 실제로 실행(Action)할 수 있는 Bedrock 기능은?", options: ["Guardrails", "Agents (에이전트)", "Model Evaluation", "Provisioned Throughput"], answer: 1, explanation: "Bedrock Agents는 사용자 프롬프트를 분석하여 Action Group을 통해 시스템 API를 자율적으로 호출합니다." },
+        { q: "[도메인 3] Amazon Bedrock에서 대규모 생성형 AI 워크로드의 일관된 성능을 보장받거나, 사용자 지정(미세 조정) 모델을 사용하기 위해 약정하여 구매해야 하는 요금 모델은?", options: ["온디맨드", "프로비저닝된 처리량 (Provisioned Throughput)", "스팟 인스턴스", "세이빙스 플랜"], answer: 1, explanation: "프로비저닝된 처리량은 보장된 성능을 제공하며 미세 조정된 모델을 호스팅할 때 필수적입니다." },
+        { q: "[도메인 3] 기업 데이터 소스(SharePoint, S3 등)에 안전하게 연결하여 직원들이 내부 문서를 기반으로 질문하고 요약할 수 있는 생성형 AI 어시스턴트는?", options: ["Amazon Q Developer", "Amazon Q Business", "Amazon Connect", "Amazon Kendra"], answer: 1, explanation: "Amazon Q Business는 엔터프라이즈 시스템과 연결되어 기업 데이터 기반의 답변을 제공하는 비즈니스 어시스턴트입니다." },
+        { q: "[도메인 3] IDE에서 코드를 자동 완성하고 보안 취약점을 스캔해 주는 개발자용 AI 도우미는?", options: ["AWS CodePipeline", "Amazon CodeBuild", "Amazon Q Developer", "Amazon Q Business"], answer: 2, explanation: "Amazon Q Developer(구 CodeWhisperer)는 소프트웨어 개발 수명 주기를 돕는 AI 코딩 어시스턴트입니다." },
+        { q: "[도메인 3] 텍스트에서 긍정/부정 감정을 분석하거나 PII를 찾아 마스킹할 수 있는 자연어 처리(NLP) 서비스는?", options: ["Amazon Comprehend", "Amazon Translate", "Amazon Transcribe", "Amazon Textract"], answer: 0, explanation: "Amazon Comprehend는 기계 학습을 통해 텍스트에서 감정, 엔터티, PII 등을 추출하는 서비스입니다." },
+        { q: "[도메인 3] 영수증, 청구서, 여권 등의 스캔 문서에서 텍스트와 표, 폼 데이터를 원형 그대로 추출하는 서비스는?", options: ["Amazon Rekognition", "Amazon Textract", "Amazon Polly", "Amazon Lex"], answer: 1, explanation: "Amazon Textract는 OCR을 넘어 문서의 레이아웃, 표, 키-값 쌍(양식)을 추출하는 서비스입니다." },
+        { q: "[도메인 3] 업로드된 이미지에서 성인물, 폭력성 등의 부적절한 콘텐츠를 식별하고 필터링하는 서비스 기능은?", options: ["Comprehend Toxicity", "Rekognition Content Moderation", "Macie", "GuardDuty"], answer: 1, explanation: "Amazon Rekognition의 콘텐츠 조정 기능은 이미지 및 비디오에서 부적절한 콘텐츠를 감지합니다." },
+        { q: "[도메인 3] 콜 센터 통화 녹음에서 고객과 상담원의 감정 변화를 분석하고 대화를 텍스트로 변환하는 데 특화된 서비스는?", options: ["Amazon Transcribe Call Analytics", "Amazon Lex", "Amazon Translate", "Amazon Connect"], answer: 0, explanation: "Transcribe Call Analytics는 음성 기반 통화에서 감정, 방해 비율 등 대화 인사이트를 추출합니다." },
+        { q: "[도메인 3] 번역 서비스 사용 시 특정 브랜드명이나 업계 용어가 오번역되지 않고 고정되도록 설정하는 Amazon Translate의 기능은?", options: ["형식화 (Formality)", "사용자 지정 용어집 (Custom Terminology)", "액티브 번역", "어휘 필터링"], answer: 1, explanation: "사용자 지정 용어집을 사용하면 특정 단어가 항상 사용자가 지정한 방식으로 번역되도록 강제할 수 있습니다." },
+        { q: "[도메인 3] 애플리케이션에 대화형 인터페이스(챗봇)를 구축하기 위해 사용자의 의도(Intent)와 변수(Slot)를 인식하는 서비스는?", options: ["Amazon Polly", "Amazon Connect", "Amazon Lex", "Amazon Kendra"], answer: 2, explanation: "Amazon Lex는 음성 및 텍스트 챗봇을 구축하기 위한 완전 관리형 대화형 AI 서비스입니다." },
+        { q: "[도메인 3] 전자상거래 사이트에서 사용자의 실시간 클릭 데이터를 기반으로 맞춤형 상품 추천을 제공하는 데 특화된 서비스는?", options: ["Amazon Personalize", "Amazon Forecast", "Amazon Fraud Detector", "Amazon Lookout for Metrics"], answer: 0, explanation: "Amazon Personalize는 Amazon.com의 기술을 사용하여 실시간 맞춤형 추천 시스템을 생성합니다." },
+        { q: "[도메인 3] 기업 내부 문서 저장소에서 의미론적(시맨틱) 검색을 통해 질문에 대한 정확한 답변과 문서를 찾아주는 기계 학습 기반 검색 서비스는?", options: ["Amazon CloudSearch", "Amazon Kendra", "Amazon Athena", "Amazon OpenSearch"], answer: 1, explanation: "Amazon Kendra는 기계 학습을 기반으로 하는 지능형 엔터프라이즈 검색 서비스입니다." },
+        { q: "[도메인 3] 의사와 환자 간의 대화를 분석하여 핵심 의학 정보를 추출하고 진료 기록(임상 노트) 초안을 자동 생성하는 서비스는?", options: ["Amazon Comprehend Medical", "AWS HealthScribe", "Amazon HealthLake", "Amazon Transcribe Medical"], answer: 1, explanation: "AWS HealthScribe는 생성형 AI를 사용하여 임상 노트 작성을 돕는 의료 특화 서비스입니다." },
+        { q: "[도메인 3] 텍스트를 자연스러운 사람의 음성으로 변환(TTS)하며, SSML 마크업을 통해 숨소리나 억양을 세밀하게 제어할 수 있는 서비스는?", options: ["Amazon Transcribe", "Amazon Lex", "Amazon Polly", "Amazon Macie"], answer: 2, explanation: "Amazon Polly는 텍스트를 사실적인 음성으로 변환해 주는 딥 러닝 서비스입니다." },
+        { q: "[도메인 3] 고객센터 상담원 화면에 고객 통화의 실시간 분석을 바탕으로 답변과 조치를 자동 제안해 주는 기능은?", options: ["Amazon Lex", "Amazon Q in Connect", "Amazon Transcribe", "Amazon QuickSight"], answer: 1, explanation: "Amazon Q in Connect는 생성형 AI를 활용하여 상담원에게 실시간으로 답변을 제안합니다." },
+        { q: "[도메인 3] 수백 개의 오픈 소스 모델(Llama 등)과 사전 구축된 ML 솔루션을 한 번의 클릭으로 SageMaker 인프라에 배포할 수 있는 허브는?", options: ["SageMaker Canvas", "SageMaker Studio", "SageMaker JumpStart", "AWS Marketplace"], answer: 2, explanation: "SageMaker JumpStart는 사전 훈련된 모델과 솔루션을 빠르게 배포할 수 있는 기계 학습 허브입니다." },
+
+        // Domain 4: 책임감 있는 AI (9문제)
+        { q: "[도메인 4] 모델이 특정 성별이나 인종 집단에 불이익을 주는 편향된 결과를 내놓지 않도록 보장하는 책임감 있는 AI의 원칙은?", options: ["프라이버시", "견고성", "공정성 (Fairness)", "투명성"], answer: 2, explanation: "공정성(Fairness)은 AI 시스템이 특정 집단에 차별적으로 편향되지 않도록 완화하는 원칙입니다." },
+        { q: "[도메인 4] 딥 러닝 모델이 특정 예측을 내린 이유(예: 대출 거절 이유)를 각 입력 특성(Feature)의 기여도로 시각화하여 '설명 가능성'을 제공하는 기능은?", options: ["SageMaker Model Monitor", "SageMaker Clarify", "SageMaker Experiments", "AWS CloudTrail"], answer: 1, explanation: "SageMaker Clarify는 기계 학습 모델의 데이터 및 예측 편향을 식별하고 설명 가능성(XAI)을 제공합니다." },
+        { q: "[도메인 4] 악의적인 프롬프트 인젝션 공격이나 예기치 않은 데이터 입력에도 모델이 시스템 고장 없이 일관되게 성능을 유지하는 책임감 있는 AI 원칙은?", options: ["견고성 (Robustness)", "설명 가능성", "프라이버시", "공정성"], answer: 0, explanation: "견고성은 시스템이 악의적 공격이나 오류 상황에서도 안전하게 작동하는 능력을 말합니다." },
+        { q: "[도메인 4] 특정 AWS AI 서비스의 의도된 사용 사례, 한계, 편향 평가 결과를 고객에게 투명하게 공개하여 책임감 있는 사용을 돕는 문서는?", options: ["AWS Well-Architected Framework", "AWS AI Service Cards", "AWS SLA", "Amazon CloudWatch"], answer: 1, explanation: "AI Service Cards는 모델 성능과 한계에 대한 투명성 정보를 제공하는 공개 리소스입니다." },
+        { q: "[도메인 4] 생성형 AI 애플리케이션에서 회사 정책에 위반되는 주제(예: 투자 조언 거부)를 차단하고 유해한 입출력을 필터링하는 Bedrock의 안전 기능은?", options: ["Bedrock Agents", "Bedrock Guardrails", "Bedrock Knowledge Bases", "AWS WAF"], answer: 1, explanation: "Bedrock Guardrails를 사용하면 생성형 AI 앱에 맞춤형 안전 장치 및 콘텐츠 필터를 적용할 수 있습니다." },
+        { q: "[도메인 4] Amazon Titan Image Generator가 생성한 모든 이미지에 기본적으로 삽입되어, 해당 이미지가 AI로 만들어졌음을 식별할 수 있게 돕는 기능은?", options: ["디지털 서명", "투명한 워터마크 (Invisible Watermark)", "메타데이터 암호화", "블록체인 인증"], answer: 1, explanation: "투명한 워터마크는 육안으로는 보이지 않지만 시스템이 AI 생성 이미지임을 감지할 수 있게 하여 허위 정보 확산을 방지합니다." },
+        { q: "[도메인 4] Amazon Bedrock에서 브랜드 어조나 유머 감각과 같은 주관적 품질을 평가하기 위해 사람이 직접 모델 출력을 채점하는 방식은?", options: ["자동 평가", "작업자 기반(Human-based) 모델 평가", "BLEU 점수 측정", "ROUGE 점수 산출"], answer: 1, explanation: "Bedrock 모델 평가는 객관적 지표를 위한 자동 평가와 주관적 지표를 위한 작업자 기반(Human-in-the-loop) 평가를 모두 지원합니다." },
+        { q: "[도메인 4] 시간이 지남에 따라 실제 세계의 데이터 분포가 변하여(예: 고객 성향 변화) 프로덕션에 배포된 모델의 예측 정확도가 떨어지는 현상은?", options: ["과소적합", "데이터 편향", "데이터 드리프트 / 개념 드리프트", "데이터 마스킹"], answer: 2, explanation: "데이터/개념 드리프트는 환경 변화로 인해 모델 훈련 데이터와 실제 데이터 간의 차이가 발생하여 성능이 저하되는 현상입니다." },
+        { q: "[도메인 4] 자연어 처리 모델 평가 지표 중, 기계 번역 결과가 사람이 번역한 정답과 얼마나 일치하는지 측정하는 지표(A)와 요약 결과의 겹침을 측정하는 지표(B)는?", options: ["(A) BLEU, (B) ROUGE", "(A) ROUGE, (B) BLEU", "(A) F1, (B) AUC", "(A) Perplexity, (B) BLEU"], answer: 0, explanation: "BLEU는 주로 기계 번역 평가에, ROUGE는 텍스트 요약 평가에 널리 사용되는 지표입니다." },
+
+        // Domain 5: 보안 및 거버넌스 (9문제)
+        { q: "[도메인 5] AWS의 보안 '공동 책임 모델'에서, Bedrock 모델에 주입되는 프롬프트 데이터의 암호화 설정 및 IAM 접근 권한을 관리할 책임은 누구에게 있습니까?", options: ["AWS", "사용자(Customer)", "모델 제공업체 (예: Anthropic)", "공동 책임"], answer: 1, explanation: "클라우드 '내부'의 데이터 보안, 암호화 구성, IAM 권한 관리는 항상 고객의 책임입니다." },
+        { q: "[도메인 5] Amazon Bedrock을 사용할 때 고객의 데이터(프롬프트, 응답, 미세 조정 데이터) 프라이버시 정책에 대한 올바른 설명은?", options: ["고객 데이터는 기본 파운데이션 모델(FM)을 재학습하는 데 사용된다.", "고객 데이터는 비공개로 유지되며, 타사 모델 제공자나 기본 모델 훈련에 절대 공유되지 않는다.", "비용을 지불해야만 데이터가 보호된다.", "모든 데이터는 인터넷을 통해 퍼블릭으로 전송된다."], answer: 1, explanation: "Bedrock의 핵심 정책은 고객 데이터의 완전한 격리와 프라이버시 보장입니다. 기본 모델 훈련에 절대 사용되지 않습니다." },
+        { q: "[도메인 5] 기계 학습 훈련을 위해 S3에 저장된 데이터 세트 내에 개인 식별 정보(PII)나 금융 데이터가 노출되어 있는지 자동으로 스캔하고 보호하는 서비스는?", options: ["Amazon GuardDuty", "AWS Shield", "Amazon Macie", "Amazon Inspector"], answer: 2, explanation: "Amazon Macie는 S3 환경에서 기계 학습을 사용하여 민감한 데이터(PII 등)를 검색하고 보안 상태를 시각화합니다." },
+        { q: "[도메인 5] 퍼블릭 인터넷 노출로 인한 데이터 유출을 방지하기 위해, 인터넷 게이트웨이 없이 VPC 내부에서 AWS 글로벌 네트워크를 통해 Amazon Bedrock API를 프라이빗하게 호출하는 방법은?", options: ["AWS WAF", "AWS VPC 엔드포인트 (AWS PrivateLink)", "Amazon CloudFront", "AWS Direct Connect"], answer: 1, explanation: "VPC 엔드포인트(PrivateLink)를 사용하면 퍼블릭 인터넷을 우회하여 AWS 서비스에 비공개로 안전하게 접근할 수 있습니다." },
+        { q: "[도메인 5] 특정 IAM 사용자나 애플리케이션(역할)이 꼭 필요한 AWS 서비스(예: 특정 S3 버킷 읽기)에만 접근할 수 있도록 권한을 엄격하게 제한하는 보안 원칙은?", options: ["최소 권한의 원칙 (Least Privilege)", "심층 방어", "데이터 마스킹", "제로 트러스트"], answer: 0, explanation: "최소 권한 원칙은 리소스 손상 시 영향을 최소화하기 위해 딱 필요한 작업 권한만 부여하는 핵심 클라우드 보안 원칙입니다." },
+        { 거: "[도메인 5] 조직 내에서 누가 언제 Amazon Bedrock 모델 호출 API를 실행했는지 추적하고 컴플라이언스 감사를 위해 API 활동 로그를 기록하는 서비스는?", options: ["Amazon CloudWatch", "AWS Config", "AWS CloudTrail", "AWS Artifact"], answer: 2, explanation: "AWS CloudTrail은 AWS 계정 내의 모든 API 호출 활동을 기록하여 거버넌스 및 감사용 이벤트를 제공합니다." },
+        { q: "[도메인 5] 개발자가 작성한 애플리케이션 소스 코드를 기계 학습으로 분석하여 하드코딩된 비밀번호나 논리적 보안 취약점을 식별하는 도구는?", options: ["Amazon CodeGuru Security", "Amazon Inspector", "AWS WAF", "AWS KMS"], answer: 0, explanation: "CodeGuru Security는 코드의 잠재적 취약성(SAST)을 찾아내고 수정 권장 사항을 제시하는 보안 스캔 도구입니다." },
+        { q: "[도메인 5] Amazon Bedrock이나 SageMaker에서 모델을 자체 데이터로 미세 조정(Fine-tuning)할 때, 훈련 데이터와 모델 가중치를 유휴 상태에서 암호화하기 위해 사용하는 서비스는?", options: ["AWS Secrets Manager", "AWS KMS (Key Management Service)", "Amazon Macie", "AWS Certificate Manager"], answer: 1, explanation: "AWS KMS를 사용해 고객 관리형 키를 생성하면 훈련 아티팩트와 데이터를 안전하게 암호화 제어할 수 있습니다." },
+        { q: "[도메인 5] 의료 기업이 AWS의 AI 서비스가 HIPAA, ISO, SOC 등 보안 규정 표준을 준수하는지 확인하고 해당 보안 규정 준수 보고서를 다운로드할 수 있는 포털은?", options: ["AWS Security Hub", "AWS Artifact", "AWS Audit Manager", "AWS Trusted Advisor"], answer: 1, explanation: "AWS Artifact는 AWS의 보안 및 규정 준수 보고서와 온라인 계약에 온디맨드로 액세스할 수 있는 서비스입니다." }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    function renderQuiz() {
+        let html = '';
+        questionsData.forEach((qObj, index) => {
+            html += `<div class="question-block" id="q-block-${index}">
+                        <div class="question-text">${index + 1}. ${qObj.q}</div>
+                        <ul class="options-list">`;
+            qObj.options.forEach((opt, optIndex) => {
+                const inputType = Array.isArray(qObj.answer) ? 'checkbox' : 'radio';
+                const inputName = `q${index}`;
+                html += `<li class="option-item" id="opt-label-${index}-${optIndex}">
+                            <label style="display: block; cursor: pointer;">
+                                <input type="${inputType}" name="${inputName}" value="${optIndex}">
+                                ${String.fromCharCode(65 + optIndex)}. ${opt}
+                            </label>
+                        </li>`;
+            });
+            html += `</ul><div class="explanation" id="exp-${index}"><strong>해설:</strong> ${qObj.explanation}</div></div>`;
+        });
+        quizContainer.innerHTML = html;
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        const total = questionsData.length;
+
+        questionsData.forEach((qObj, index) => {
+            const isMultiple = Array.isArray(qObj.answer);
+            const inputs = document.querySelectorAll(`input[name="q${index}"]`);
+            let userAnswers = [];
+
+            inputs.forEach(input => { if (input.checked) userAnswers.push(parseInt(input.value)); });
+
+            let isCorrect = false;
+            if (isMultiple) {
+                const correctAnswers = qObj.answer.slice().sort();
+                userAnswers.sort();
+                if (userAnswers.length === correctAnswers.length && userAnswers.every((val, i) => val === correctAnswers[i])) isCorrect = true;
+            } else {
+                if (userAnswers.length === 1 && userAnswers[0] === qObj.answer) isCorrect = true;
+            }
+
+            const block = document.getElementById(`q-block-${index}`);
+            block.style.borderLeft = isCorrect ? "5px solid #28a745" : "5px solid #dc3545";
+            block.style.paddingLeft = "10px";
+            if(isCorrect) score++;
+
+            if (isMultiple) {
+                qObj.answer.forEach(ans => document.getElementById(`opt-label-${index}-${ans}`).classList.add('correct-answer'));
+            } else {
+                document.getElementById(`opt-label-${index}-${qObj.answer}`).classList.add('correct-answer');
+            }
+
+            userAnswers.forEach(ans => {
+                if ((isMultiple && !qObj.answer.includes(ans)) || (!isMultiple && ans !== qObj.answer)) {
+                    document.getElementById(`opt-label-${index}-${ans}`).classList.add('wrong-answer');
+                }
+            });
+
+            document.getElementById(`exp-${index}`).style.display = 'block';
+        });
+
+        const resultContainer = document.getElementById('result-container');
+        resultContainer.style.display = 'block';
+        const percent = Math.round((score / total) * 100);
+        
+        let passMsg = percent >= 70 ? "🎉 축하합니다! 합격 기준을 통과하셨습니다. 실제 시험에서도 좋은 결과가 있을 것입니다." : "💡 조금만 더 복습하시면 충분히 합격하실 수 있습니다!";
+        
+        resultContainer.innerHTML = `최종 모의고사 결과: 총 ${total}문제 중 <strong>${score}문제</strong> 정답 (정답률: ${percent}%)<br><br>${passMsg}`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderQuiz();
+</script>
+
+</body>
+</html>
