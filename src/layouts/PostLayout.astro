@@ -226,13 +226,18 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
   
   /* ─── 이미지 ─── */
   .article-body img {
-    width: 100%; max-width: 100%; display: block;
-    border-radius: var(--radius); border: 1px solid var(--border);
-    margin: 2.5rem auto;
+    width: 100%;
+    max-width: min(100%, 680px);
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin: 2.25rem auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   }
   /* 수동 삽입: ![alt](url "caption") → title이 있으면 figcaption처럼 표시 */
   .article-body p:has(img) {
-    margin: 0; /* img 자체에 margin 있으므로 p margin 제거 */
+    margin: 0 auto; /* img 자체에 margin 있으므로 p margin 제거 */
+    max-width: 760px;
   }
   /* 자동 삽입 이미지 래퍼 */
   .auto-image-wrap {
