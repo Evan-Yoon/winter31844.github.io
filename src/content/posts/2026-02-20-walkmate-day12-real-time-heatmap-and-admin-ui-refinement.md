@@ -1,12 +1,12 @@
 ---
-title: "실시간 히트맵 구현 및 관리자 UI 고도화"
-slug: "walkmate-day12-heatmap-and-admin-ui-refinement"
+title: 실시간 히트맵 구현 및 관리자 UI 고도화
+slug: walkmate-day12-heatmap-and-admin-ui-refinement
 date: 2026-02-20
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "[Walkmate] 실시간 위험 지역 히트맵 시각화, Admin UI 다크모드 최적화 및 복합 HTTP 에러 해결 기록."
-thumbnail: "/images/posts/walkmate/cover12.png"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: '[Walkmate] 실시간 위험 지역 히트맵 시각화, Admin UI 다크모드 최적화 및 복합 HTTP 에러 해결 기록.'
+thumbnail: /images/posts/walkmate/cover12.png
 tags:
   - Heatmap
   - AdminUI
@@ -14,8 +14,9 @@ tags:
   - Docker
   - PostgreSQL
   - Troubleshooting
+  - team-project
 readTime: 12
-series: "Walkmate AI"
+series: Walkmate
 seriesOrder: 7
 featured: false
 draft: false

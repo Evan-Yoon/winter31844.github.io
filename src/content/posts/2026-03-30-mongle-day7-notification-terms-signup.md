@@ -1,11 +1,12 @@
 ---
-title: "[Mongle] Day 7 — 알림 시스템 구현, 그리고 과감하게 폐기한 이유"
-slug: "mongle-day7-notification-terms-signup"
+title: '[Mongle] Day 7 — 알림 시스템 구현, 그리고 과감하게 폐기한 이유'
+slug: mongle-day7-notification-terms-signup
 date: 2026-03-30
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "D-7/D-3/D-1 리마인드 알림 시스템을 만들었다가 통째로 폐기했다. 그리고 이용약관 페이지와 회원가입 OTP 인증까지 하루에 다 처리했다."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: D-7/D-3/D-1 리마인드 알림 시스템을 만들었다가 통째로 폐기했다. 그리고 이용약관 페이지와 회원가입 OTP 인증까지
+  하루에 다 처리했다.
 tags:
   - mongle
   - expo-notifications
@@ -15,7 +16,7 @@ tags:
   - react-native
   - team-project
 readTime: 10
-series: "Mongle 프로젝트"
+series: Mongle
 seriesOrder: 7
 featured: false
 draft: false

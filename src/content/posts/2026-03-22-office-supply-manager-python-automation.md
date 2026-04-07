@@ -1,19 +1,21 @@
 ---
-title: "HR 출신 개발자의 첫 자동화 도구: 비품 발주 자동화 스크립트"
-slug: "office-supply-manager-python-automation"
+title: 'HR 출신 개발자의 첫 자동화 도구: 비품 발주 자동화 스크립트'
+slug: office-supply-manager-python-automation
 date: 2026-03-22
-author: "Evan Yoon"
-category: "project"
-description: "총무 업무에서 매주 반복되던 비품 재고 확인과 발주서 작성을 Python으로 자동화한 과정. 외부 라이브러리 없이 표준 라이브러리만으로 실무 자동화를 구현했습니다."
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: 총무 업무에서 매주 반복되던 비품 재고 확인과 발주서 작성을 Python으로 자동화한 과정. 외부 라이브러리 없이 표준 라이브러리만으로
+  실무 자동화를 구현했습니다.
 tags:
   - python
   - automation
   - hr
   - csv
   - side-project
+  - personal-project
+  - tool-review
 readTime: 7
-series: ""
-seriesOrder: 1
 featured: false
 draft: false
 toc: true

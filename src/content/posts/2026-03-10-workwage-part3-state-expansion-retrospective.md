@@ -1,12 +1,13 @@
 ---
-title: "[WorkWage] 계산기에서 제품으로 — 상태 관리, 기능 확장, 그리고 마감의 감각"
-slug: "workwage-part3-state-expansion-retrospective"
+title: '[WorkWage] 계산기에서 제품으로 — 상태 관리, 기능 확장, 그리고 마감의 감각'
+slug: workwage-part3-state-expansion-retrospective
 date: 2026-03-10
-author: "Evan Yoon"
-category: "project"
-subcategory: "personal-project"
-description: "WorkWage 3편. 입력과 합계를 즉시 연결하는 피드백 루프 설계, 계산기에서 서비스형 앱으로 확장된 과정, 그리고 마감 직전 마지막 10%가 왜 생각보다 오래 걸렸는지를 정리했다."
-thumbnail: "/images/posts/workwage-part3/cover.jpg"
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: WorkWage 3편. 입력과 합계를 즉시 연결하는 피드백 루프 설계, 계산기에서 서비스형 앱으로 확장된 과정, 그리고 마감
+  직전 마지막 10%가 왜 생각보다 오래 걸렸는지를 정리했다.
+thumbnail: /images/posts/workwage-part3/cover.jpg
 tags:
   - workwage
   - flutter
@@ -16,7 +17,7 @@ tags:
   - retrospective
   - app-release
 readTime: 12
-series: "WorkWage 프로젝트"
+series: WorkWage
 seriesOrder: 3
 featured: false
 draft: false

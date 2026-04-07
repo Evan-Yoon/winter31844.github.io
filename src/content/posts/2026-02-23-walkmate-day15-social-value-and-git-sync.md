@@ -1,20 +1,22 @@
 ---
-title: "사회적 가치 정립과 협업을 위한 Git 동기화"
-slug: "walkmate-day15-social-value-and-git-sync"
+title: 사회적 가치 정립과 협업을 위한 Git 동기화
+slug: walkmate-day15-social-value-and-git-sync
 date: 2026-02-23
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "[Walkmate] UN SDGs 연계를 통한 프로젝트 가치 정립, 센서 퓨전 기반 방향 보정 설계 및 Git 브랜치 동기화 기록."
-thumbnail: "/images/posts/walkmate/cover15.png"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: '[Walkmate] UN SDGs 연계를 통한 프로젝트 가치 정립, 센서 퓨전 기반 방향 보정 설계 및 Git 브랜치 동기화
+  기록.'
+thumbnail: /images/posts/walkmate/cover15.png
 tags:
   - UNSDGs
   - Git
   - SensorFusion
   - CapacitorAssets
   - Collaboration
+  - team-project
 readTime: 11
-series: "Walkmate AI"
+series: Walkmate
 seriesOrder: 8
 featured: false
 draft: false

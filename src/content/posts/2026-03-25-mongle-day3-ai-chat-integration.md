@@ -1,11 +1,12 @@
 ---
-title: "[Mongle] Day 3 — 채팅창에 AI를 붙이다, 그리고 500 에러와의 전쟁"
-slug: "mongle-day3-ai-chat-integration"
+title: '[Mongle] Day 3 — 채팅창에 AI를 붙이다, 그리고 500 에러와의 전쟁'
+slug: mongle-day3-ai-chat-integration
 date: 2026-03-25
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "React Native 채팅창에 FastAPI + GPT-4o-mini를 연동하고, 의존성 충돌·pycache 충돌·500 에러를 하나씩 잡아나간 하루."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: React Native 채팅창에 FastAPI + GPT-4o-mini를 연동하고, 의존성 충돌·pycache 충돌·500
+  에러를 하나씩 잡아나간 하루.
 tags:
   - mongle
   - react-native
@@ -14,8 +15,9 @@ tags:
   - streaming
   - debugging
   - team-project
+  - troubleshooting
 readTime: 11
-series: "Mongle 프로젝트"
+series: Mongle
 seriesOrder: 3
 featured: false
 draft: false

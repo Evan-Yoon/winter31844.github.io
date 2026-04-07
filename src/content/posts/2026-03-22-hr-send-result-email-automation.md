@@ -1,10 +1,12 @@
 ---
-title: "채용 결과 메일, 이제 1분이면 끝: Python SMTP 자동화"
-slug: "hr-send-result-email-automation"
+title: '채용 결과 메일, 이제 1분이면 끝: Python SMTP 자동화'
+slug: hr-send-result-email-automation
 date: 2026-03-22
-author: "Evan Yoon"
-category: "project"
-description: "HR 담당자가 지원자 100명에게 합격/불합격 메일을 일일이 보내던 2시간짜리 작업을 Python SMTP 자동화로 1분으로 줄인 프로젝트."
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: HR 담당자가 지원자 100명에게 합격/불합격 메일을 일일이 보내던 2시간짜리 작업을 Python SMTP 자동화로 1분으로
+  줄인 프로젝트.
 tags:
   - python
   - smtp
@@ -12,9 +14,9 @@ tags:
   - hr
   - rpa
   - side-project
+  - personal-project
+  - tool-review
 readTime: 8
-series: ""
-seriesOrder: 1
 featured: false
 draft: false
 toc: true

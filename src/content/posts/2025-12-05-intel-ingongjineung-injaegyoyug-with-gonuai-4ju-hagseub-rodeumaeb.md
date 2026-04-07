@@ -1,19 +1,20 @@
 ---
-title: "[인텔 인공지능 인재교육] with 고누아이 4주 학습 로드맵"
-slug: "intel-ingongjineung-injaegyoyug-with-gonuai-4ju-hagseub-rodeumaeb"
+title: '[인텔 인공지능 인재교육] with 고누아이 4주 학습 로드맵'
+slug: intel-ingongjineung-injaegyoyug-with-gonuai-4ju-hagseub-rodeumaeb
 date: 2025-12-05
-author: "Evan Yoon"
-category: "study"
-description: ""
-thumbnail: "/images/posts/intel-ingongjineung-injaegyoyug-with-gonuai-4ju-hagseub-rodeumaeb/cover.jpg"
+author: Evan Yoon
+category: study
+subcategory: self-study
+thumbnail: /images/posts/intel-ingongjineung-injaegyoyug-with-gonuai-4ju-hagseub-rodeumaeb/cover.jpg
 tags:
   - ai
   - aws
   - project
   - study
   - learning
+  - self-study
 readTime: 17
-series: ""
+series: Intel AI for Future Workforce
 seriesOrder: 1
 featured: false
 draft: false

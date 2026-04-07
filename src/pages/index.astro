@@ -52,7 +52,7 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
       {recentPosts.map(post => (
         <article class="post-card">
           <div class="post-card-meta">
-            <span class={`post-cat-badge badge-${post.data.category || 'tech'}`}>{post.data.category || 'tech'}</span>
+            <span class={`post-cat-badge badge-${post.data.category || 'explore'}`}>{post.data.category || 'explore'}</span>
             <span class="post-date">{new Date(post.data.date).toLocaleDateString('ko-KR')}</span>
           </div>
           <h3 class="post-card-title">
@@ -174,10 +174,8 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   
   .badge-study { background: var(--accent-2-soft); color: var(--accent-2); }
   .badge-project { background: #E6F0E6; color: #2E7D32; }
-  .badge-trouble { background: #FFF3E0; color: #E65100; }
-  .badge-tech { background: var(--accent-soft); color: var(--accent); }
+  .badge-explore { background: var(--accent-soft); color: var(--accent); }
   [data-theme="dark"] .badge-project { background: #1A2E1A; color: #66BB6A; }
-  [data-theme="dark"] .badge-trouble { background: #2E1F0A; color: #FFA726; }
 
   .post-date { font-size: 0.75rem; color: var(--ink-3); font-family: var(--font-mono); }
   .post-card-title { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 400; line-height: 1.35; }

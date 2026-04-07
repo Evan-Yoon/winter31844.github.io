@@ -1,12 +1,13 @@
 ---
-title: "시각장애인을 위한 핵심 UI 및 개발 환경 구축"
-slug: "walkmate-day2-ui-components"
+title: 시각장애인을 위한 핵심 UI 및 개발 환경 구축
+slug: walkmate-day2-ui-components
 date: 2026-02-10
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "[Walkmate] Vite + React 환경 구축 및 시각장애인 접근성을 고려한 StandbyScreen, ListeningScreen, Waveform 컴포넌트 개발 기록."
-thumbnail: "/images/posts/walkmate/cover2.png"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: '[Walkmate] Vite + React 환경 구축 및 시각장애인 접근성을 고려한 StandbyScreen, ListeningScreen,
+  Waveform 컴포넌트 개발 기록.'
+thumbnail: /images/posts/walkmate/cover2.png
 tags:
   - Vite
   - React
@@ -14,8 +15,9 @@ tags:
   - TailwindCSS
   - A11y
   - FramerMotion
+  - team-project
 readTime: 10
-series: "Walkmate AI"
+series: Walkmate
 seriesOrder: 2
 featured: false
 draft: false

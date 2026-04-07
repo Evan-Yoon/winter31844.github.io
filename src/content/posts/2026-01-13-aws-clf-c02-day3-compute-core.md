@@ -1,12 +1,13 @@
 ---
-title: "[AWS CLF-C02][3회차] Compute 핵심 정리"
-slug: "aws-clf-c02-day3-compute-core"
+title: '[AWS CLF-C02][3회차] Compute 핵심 정리'
+slug: aws-clf-c02-day3-compute-core
 date: 2026-01-13
-author: "Evan Yoon"
-category: "study"
-subcategory: "aws"
-description: "AWS Certified Cloud Practitioner(CLF-C02) 스터디 3회차 기록. EC2의 기본 개념과 인스턴스 타입, Security Group, Auto Scaling, 그리고 Lambda·EC2·Lightsail의 차이를 한 편으로 자세히 정리했다."
-thumbnail: "/images/posts/aws-clf-c02-series/cover.png"
+author: Evan Yoon
+category: study
+subcategory: certification
+description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 3회차 기록. EC2의 기본 개념과 인스턴스
+  타입, Security Group, Auto Scaling, 그리고 Lambda·EC2·Lightsail의 차이를 한 편으로 자세히 정리했다.
+thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
   - aws
   - clf-c02
@@ -17,8 +18,9 @@ tags:
   - lambda
   - lightsail
   - study
+  - certification
 readTime: 20
-series: "AWS Certified Cloud Practitioner 스터디"
+series: AWS CLF-C02
 seriesOrder: 4
 featured: false
 draft: false

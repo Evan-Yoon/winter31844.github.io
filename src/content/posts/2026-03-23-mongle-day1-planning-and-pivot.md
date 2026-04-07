@@ -1,11 +1,12 @@
 ---
-title: "[Mongle] Day 1 — 기획 피벗, 그리고 폴더 구조 설계"
-slug: "mongle-day1-planning-and-pivot"
+title: '[Mongle] Day 1 — 기획 피벗, 그리고 폴더 구조 설계'
+slug: mongle-day1-planning-and-pivot
 date: 2026-03-23
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "AI 메뉴판 번역 앱에서 웨딩 AI 플랜 서비스로 피벗. Mongle의 첫 날, 기획 확정과 Expo Router 폴더 구조 세팅까지."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: AI 메뉴판 번역 앱에서 웨딩 AI 플랜 서비스로 피벗. Mongle의 첫 날, 기획 확정과 Expo Router 폴더 구조
+  세팅까지.
 tags:
   - mongle
   - react-native
@@ -14,7 +15,7 @@ tags:
   - team-project
   - planning
 readTime: 10
-series: "Mongle 프로젝트"
+series: Mongle
 seriesOrder: 1
 featured: false
 draft: false

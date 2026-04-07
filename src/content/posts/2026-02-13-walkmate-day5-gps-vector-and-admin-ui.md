@@ -1,12 +1,13 @@
 ---
-title: "GPS 벡터 기반 방향 안내 및 관리자 대시보드 구축"
-slug: "walkmate-day5-gps-vector-and-admin-ui"
+title: GPS 벡터 기반 방향 안내 및 관리자 대시보드 구축
+slug: walkmate-day5-gps-vector-and-admin-ui
 date: 2026-02-13
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "[Walkmate] 나침반의 한계를 극복하는 GPS 벡터 로직 전면 수정 및 React 기반 관리자 UI 프로토타입 구현 기록."
-thumbnail: "/images/posts/walkmate/cover5.png"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: '[Walkmate] 나침반의 한계를 극복하는 GPS 벡터 로직 전면 수정 및 React 기반 관리자 UI 프로토타입 구현
+  기록.'
+thumbnail: /images/posts/walkmate/cover5.png
 tags:
   - GPSVector
   - React
@@ -14,8 +15,9 @@ tags:
   - TailwindCSS
   - BackendAPI
   - ARNavigation
+  - team-project
 readTime: 12
-series: "Walkmate AI"
+series: Walkmate
 seriesOrder: 5
 featured: false
 draft: false

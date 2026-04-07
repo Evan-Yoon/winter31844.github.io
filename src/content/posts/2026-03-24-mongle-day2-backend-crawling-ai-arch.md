@@ -1,11 +1,12 @@
 ---
-title: "[Mongle] Day 2 — 백엔드 세팅, 카카오 크롤링 987개, 그리고 AI 아키텍처 설계"
-slug: "mongle-day2-backend-crawling-ai-arch"
+title: '[Mongle] Day 2 — 백엔드 세팅, 카카오 크롤링 987개, 그리고 AI 아키텍처 설계'
+slug: mongle-day2-backend-crawling-ai-arch
 date: 2026-03-24
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "FastAPI 백엔드 구조 설계부터 카카오 로컬 API로 서울 웨딩 업체 987개 수집, GPT-4o-mini로 자동 레이블링, AI 챗봇 아키텍처 설계까지."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: FastAPI 백엔드 구조 설계부터 카카오 로컬 API로 서울 웨딩 업체 987개 수집, GPT-4o-mini로 자동 레이블링,
+  AI 챗봇 아키텍처 설계까지.
 tags:
   - mongle
   - fastapi
@@ -16,7 +17,7 @@ tags:
   - ai-chatbot
   - team-project
 readTime: 12
-series: "Mongle 프로젝트"
+series: Mongle
 seriesOrder: 2
 featured: false
 draft: false

@@ -1,12 +1,13 @@
 ---
-title: "[Rossmann] 이틀짜리 미니 프로젝트로 매출 영향 특성 찾기"
-slug: "rossmann-sales-feature-capstone"
+title: '[Rossmann] 이틀짜리 미니 프로젝트로 매출 영향 특성 찾기'
+slug: rossmann-sales-feature-capstone
 date: 2025-12-09
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "2025년 12월 8일과 9일, Rossmann 매장 데이터로 매출에 영향을 주는 특성을 찾고 매출 증대 아이디어까지 정리한 미니 프로젝트 기록."
-thumbnail: "/images/posts/rossmann-mini-project/presentation-photo.jpeg"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: 2025년 12월 8일과 9일, Rossmann 매장 데이터로 매출에 영향을 주는 특성을 찾고 매출 증대 아이디어까지 정리한
+  미니 프로젝트 기록.
+thumbnail: /images/posts/rossmann-mini-project/presentation-photo.jpeg
 tags:
   - rossmann
   - capstone
@@ -14,7 +15,9 @@ tags:
   - machine-learning
   - retail
   - sales
+  - team-project
 readTime: 15
+series: Rossmann
 featured: false
 draft: false
 toc: true

@@ -23,17 +23,18 @@ author: "Evan Yoon"
 
 # ─── 카테고리 (하나만 선택) ───────────────────────────
 
-# study | project | trouble | tech
+# project | study | explore
 
-category: "tech"
+category: "explore"
 
 # ─── 서브카테고리 (선택사항) ──────────────────────────
 
-# category: study   →  subcategory: aws
 # category: project →  subcategory: team-project | personal-project
+# category: study   →  subcategory: certification | self-study
+# category: explore →  subcategory: visit | new-tech
 # 없으면 이 줄 삭제 또는 주석 처리
 
-# subcategory: "aws"
+# subcategory: "new-tech"
 
 # ─── 설명 (SEO + 카드 미리보기용, 140자 이내) ─────────
 

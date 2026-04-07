@@ -1,11 +1,12 @@
 ---
-title: "[Mongle] Day 8 — 로그인 버그 3연타, 그리고 플래너-커플 연동"
-slug: "mongle-day8-auth-navigation-planner-couple-sync"
+title: '[Mongle] Day 8 — 로그인 버그 3연타, 그리고 플래너-커플 연동'
+slug: mongle-day8-auth-navigation-planner-couple-sync
 date: 2026-03-31
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "로그인 화면 전환이 안 되고, 설정 화면이 홈으로 튕기고, 뒤로가기 버튼이 에러를 냈다. 세 개를 잡고 나서 플래너-커플 데이터 연동을 완성했다."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: 로그인 화면 전환이 안 되고, 설정 화면이 홈으로 튕기고, 뒤로가기 버튼이 에러를 냈다. 세 개를 잡고 나서 플래너-커플 데이터
+  연동을 완성했다.
 tags:
   - mongle
   - expo-router
@@ -14,8 +15,10 @@ tags:
   - supabase
   - react-native
   - team-project
+  - troubleshooting
+  - bugfix
 readTime: 11
-series: "Mongle 프로젝트"
+series: Mongle
 seriesOrder: 8
 featured: false
 draft: false

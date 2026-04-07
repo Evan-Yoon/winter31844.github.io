@@ -1,12 +1,13 @@
 ---
-title: "[Feloria] 고양이만 등장하는 RPG를 직접 만들어봤다 — 발상, 재시작, 그리고 하루"
-slug: "feloria-part1-concept-design-bootstrap"
+title: '[Feloria] 고양이만 등장하는 RPG를 직접 만들어봤다 — 발상, 재시작, 그리고 하루'
+slug: feloria-part1-concept-design-bootstrap
 date: 2026-03-10
-author: "Evan Yoon"
-category: "project"
-subcategory: "personal-project"
-description: "고양이과 동물만 등장하는 몬스터 수집 RPG 'Feloria'. 포켓몬에서 출발했지만 두 번의 전면 재시작을 거쳐, 3월 10일 하루 동안 게임의 핵심 루프를 처음으로 통과시켰다."
-thumbnail: "/images/posts/feloria-part1/cover.jpg"
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: 고양이과 동물만 등장하는 몬스터 수집 RPG 'Feloria'. 포켓몬에서 출발했지만 두 번의 전면 재시작을 거쳐, 3월 10일
+  하루 동안 게임의 핵심 루프를 처음으로 통과시켰다.
+thumbnail: /images/posts/feloria-part1/cover.jpg
 tags:
   - feloria
   - phaser3
@@ -15,7 +16,7 @@ tags:
   - personal-project
   - monster-taming-rpg
 readTime: 14
-series: "Feloria 프로젝트"
+series: Feloria
 seriesOrder: 1
 featured: true
 draft: false

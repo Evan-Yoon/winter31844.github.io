@@ -1,12 +1,13 @@
 ---
-title: "[AWS CLF-C02][7회차] 보안과 IAM 핵심 정리"
-slug: "aws-clf-c02-day7-security-and-iam"
+title: '[AWS CLF-C02][7회차] 보안과 IAM 핵심 정리'
+slug: aws-clf-c02-day7-security-and-iam
 date: 2026-01-27
-author: "Evan Yoon"
-category: "study"
-subcategory: "aws"
-description: "AWS Certified Cloud Practitioner(CLF-C02) 스터디 7회차 기록. Shared Responsibility Model, IAM, IAM Policy, MFA, KMS와 CloudHSM, S3 암호화까지 보안 핵심을 자세히 정리했다."
-thumbnail: "/images/posts/aws-clf-c02-series/cover.png"
+author: Evan Yoon
+category: study
+subcategory: certification
+description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 7회차 기록. Shared Responsibility
+  Model, IAM, IAM Policy, MFA, KMS와 CloudHSM, S3 암호화까지 보안 핵심을 자세히 정리했다.
+thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
   - aws
   - clf-c02
@@ -18,8 +19,9 @@ tags:
   - encryption
   - security
   - study
+  - certification
 readTime: 22
-series: "AWS Certified Cloud Practitioner 스터디"
+series: AWS CLF-C02
 seriesOrder: 8
 featured: false
 draft: false

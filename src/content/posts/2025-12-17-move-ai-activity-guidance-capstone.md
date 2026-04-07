@@ -1,12 +1,13 @@
 ---
-title: "[Move AI] 비활동 시간을 감지해 작은 움직임을 유도한 미니 프로젝트"
-slug: "move-ai-activity-guidance-capstone"
+title: '[Move AI] 비활동 시간을 감지해 작은 움직임을 유도한 미니 프로젝트'
+slug: move-ai-activity-guidance-capstone
 date: 2025-12-17
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "2025년 12월 16일과 17일 진행한 Move AI 미니 프로젝트 기록. 웨어러블 센서 데이터로 활동 유형을 분류하고, 비활동 시간이 길어질 때 바로 실천 가능한 움직임을 제안하는 흐름을 설계했다."
-thumbnail: "/images/posts/move-ai-mini-project/presentation-photo.jpeg"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: 2025년 12월 16일과 17일 진행한 Move AI 미니 프로젝트 기록. 웨어러블 센서 데이터로 활동 유형을 분류하고,
+  비활동 시간이 길어질 때 바로 실천 가능한 움직임을 제안하는 흐름을 설계했다.
+thumbnail: /images/posts/move-ai-mini-project/presentation-photo.jpeg
 tags:
   - move-ai
   - capstone
@@ -14,7 +15,9 @@ tags:
   - clustering
   - wearable
   - healthcare-ai
+  - team-project
 readTime: 14
+series: Move AI
 featured: false
 draft: false
 toc: true

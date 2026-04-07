@@ -1,12 +1,13 @@
 ---
-title: "교대근무자를 위한 급여 계산기를 Flutter로 만들고, 구글 플레이에 올리기까지"
-slug: "workwage-final-retrospective"
+title: 교대근무자를 위한 급여 계산기를 Flutter로 만들고, 구글 플레이에 올리기까지
+slug: workwage-final-retrospective
 date: 2026-03-19
-author: "Evan Yoon"
-category: "project"
-subcategory: "personal-project"
-description: "Flutter 입문 프로젝트로 시작한 WorkWage. 호텔·HR 현장 경험에서 출발해, 야간·휴일 수당까지 반영하는 계산 로직을 만들고, 통계·백업·프리미엄 기능까지 확장한 뒤, 지금은 구글 플레이 등록 절차를 진행 중이다."
-thumbnail: "/images/posts/workwage-final/cover.jpg"
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: Flutter 입문 프로젝트로 시작한 WorkWage. 호텔·HR 현장 경험에서 출발해, 야간·휴일 수당까지 반영하는 계산
+  로직을 만들고, 통계·백업·프리미엄 기능까지 확장한 뒤, 지금은 구글 플레이 등록 절차를 진행 중이다.
+thumbnail: /images/posts/workwage-final/cover.jpg
 tags:
   - workwage
   - flutter
@@ -17,7 +18,7 @@ tags:
   - google-play
   - retrospective
 readTime: 16
-series: "WorkWage 프로젝트"
+series: WorkWage
 seriesOrder: 4
 featured: true
 draft: false

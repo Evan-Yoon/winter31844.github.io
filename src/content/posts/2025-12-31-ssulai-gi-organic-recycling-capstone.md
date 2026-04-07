@@ -1,12 +1,14 @@
 ---
-title: "[쓸AI기] 유기물과 재활용 폐기물을 자동 분류한 3일 미니 프로젝트"
-slug: "ssulai-gi-organic-recycling-capstone"
+title: '[쓸AI기] 유기물과 재활용 폐기물을 자동 분류한 3일 미니 프로젝트'
+slug: ssulai-gi-organic-recycling-capstone
 date: 2025-12-31
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "2025년 12월 29일부터 31일까지 진행한 폐기물 자동 분류 미니 프로젝트 기록. 문제 정의, 5W1H, 데이터 탐색, CNN 모델 비교, 전처리와 증강, optimizer와 learning rate scheduler 조정, YOLO 기반 실시간 분류 가능성까지 정리했다."
-thumbnail: "/images/posts/waste-ai-capstone/presentation-process-photo.jpg"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: 2025년 12월 29일부터 31일까지 진행한 폐기물 자동 분류 미니 프로젝트 기록. 문제 정의, 5W1H, 데이터 탐색,
+  CNN 모델 비교, 전처리와 증강, optimizer와 learning rate scheduler 조정, YOLO 기반 실시간 분류 가능성까지
+  정리했다.
+thumbnail: /images/posts/waste-ai-capstone/presentation-process-photo.jpg
 tags:
   - capstone
   - waste-classification
@@ -14,7 +16,9 @@ tags:
   - cnn
   - yolo
   - recycling
+  - team-project
 readTime: 16
+series: ?AI?
 featured: false
 draft: false
 toc: true

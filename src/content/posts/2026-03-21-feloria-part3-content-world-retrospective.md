@@ -1,12 +1,13 @@
 ---
-title: "[Feloria] 시스템이 다 갖춰진 뒤에야 보이는 것들 — 콘텐츠, 세계, 회고"
-slug: "feloria-part3-content-world-retrospective"
+title: '[Feloria] 시스템이 다 갖춰진 뒤에야 보이는 것들 — 콘텐츠, 세계, 회고'
+slug: feloria-part3-content-world-retrospective
 date: 2026-03-21
-author: "Evan Yoon"
-category: "project"
-subcategory: "personal-project"
-description: "Save/Load가 붙고 나서 Feloria는 처음으로 '게임처럼' 느껴지기 시작했다. 그 다음 문제는 시스템이 아니라 콘텐츠였다. 스토리 구조, NPC 반응성, 100마리 배치 전략, 스킬 애니메이션, 오디오까지 — 후반 개발 전체를 정리했다."
-thumbnail: "/images/posts/feloria-part3/cover.jpg"
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: Save/Load가 붙고 나서 Feloria는 처음으로 '게임처럼' 느껴지기 시작했다. 그 다음 문제는 시스템이 아니라 콘텐츠였다.
+  스토리 구조, NPC 반응성, 100마리 배치 전략, 스킬 애니메이션, 오디오까지 — 후반 개발 전체를 정리했다.
+thumbnail: /images/posts/feloria-part3/cover.jpg
 tags:
   - feloria
   - phaser3
@@ -16,7 +17,7 @@ tags:
   - content-design
   - retrospective
 readTime: 18
-series: "Feloria 프로젝트"
+series: Feloria
 seriesOrder: 3
 featured: false
 draft: false

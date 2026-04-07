@@ -1,11 +1,12 @@
 ---
-title: "[Mongle] Day 6 — 쉬어야 할 일요일, 예산·잔금 Supabase 연동 완료"
-slug: "mongle-day6-supabase-budget-pdf-routing"
+title: '[Mongle] Day 6 — 쉬어야 할 일요일, 예산·잔금 Supabase 연동 완료'
+slug: mongle-day6-supabase-budget-pdf-routing
 date: 2026-03-29
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "원래 쉬기로 했던 일요일. 예산 AI 가중치 튜닝, 잔금 상세 페이지, Supabase 전체 연동, PDF 생성, 뒤로가기 버그까지 혼자 다 잡았다."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: 원래 쉬기로 했던 일요일. 예산 AI 가중치 튜닝, 잔금 상세 페이지, Supabase 전체 연동, PDF 생성, 뒤로가기
+  버그까지 혼자 다 잡았다.
 tags:
   - mongle
   - supabase
@@ -15,7 +16,7 @@ tags:
   - react-native
   - team-project
 readTime: 10
-series: "Mongle 프로젝트"
+series: Mongle
 seriesOrder: 6
 featured: false
 draft: false

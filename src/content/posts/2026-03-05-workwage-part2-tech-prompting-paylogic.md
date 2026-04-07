@@ -1,12 +1,13 @@
 ---
-title: "[WorkWage] Flutter를 택한 건 언어 때문이 아니라 구조 때문이었다 — 기술 선택, AI 도구 활용, 급여 계산 로직"
-slug: "workwage-part2-tech-prompting-paylogic"
+title: '[WorkWage] Flutter를 택한 건 언어 때문이 아니라 구조 때문이었다 — 기술 선택, AI 도구 활용, 급여 계산 로직'
+slug: workwage-part2-tech-prompting-paylogic
 date: 2026-03-05
-author: "Evan Yoon"
-category: "project"
-subcategory: "personal-project"
-description: "WorkWage 2편. Flutter/Provider/SharedPreferences를 선택한 이유, Stitch와 Jules를 구조화된 프롬프트로 활용한 경험, 그리고 자정을 넘기는 야간근무 계산이 왜 까다로운지를 정리했다."
-thumbnail: "/images/posts/workwage-part2/cover.jpg"
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: WorkWage 2편. Flutter/Provider/SharedPreferences를 선택한 이유, Stitch와 Jules를
+  구조화된 프롬프트로 활용한 경험, 그리고 자정을 넘기는 야간근무 계산이 왜 까다로운지를 정리했다.
+thumbnail: /images/posts/workwage-part2/cover.jpg
 tags:
   - workwage
   - flutter
@@ -17,7 +18,7 @@ tags:
   - ai-tools
   - pay-logic
 readTime: 12
-series: "WorkWage 프로젝트"
+series: WorkWage
 seriesOrder: 2
 featured: false
 draft: false

@@ -1,18 +1,20 @@
 ---
-title: "[Intel] AI For Future Workforce (1st Week)"
-slug: "intel-ai-for-future-workforce-1st-week"
+title: '[Intel] AI For Future Workforce (1st Week)'
+slug: intel-ai-for-future-workforce-1st-week
 date: 2025-11-30
-author: "Evan Yoon"
-category: "tech"
-description: ""
-thumbnail: "/images/posts/intel-ai-for-future-workforce-1st-week/cover.jpg"
+author: Evan Yoon
+category: explore
+subcategory: visit
+thumbnail: /images/posts/intel-ai-for-future-workforce-1st-week/cover.jpg
 tags:
   - intel-ai
   - ai
   - java
   - python
+  - field-visit
+  - visit
 readTime: 18
-series: ""
+series: Intel AI for Future Workforce
 seriesOrder: 1
 featured: false
 draft: false

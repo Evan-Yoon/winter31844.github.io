@@ -1,18 +1,20 @@
 ---
-title: "현실로 다가오는 AI 웨딩 플래너: Mongle 프로젝트 개발 일지"
-slug: "mongle-project-ai-budget-and-rag-chatbot"
+title: '현실로 다가오는 AI 웨딩 플래너: Mongle 프로젝트 개발 일지'
+slug: mongle-project-ai-budget-and-rag-chatbot
 date: 2026-03-26
-author: "Evan Yoon"
-category: "project"
-description: "AI 예산 분석 기능과 RAG 기반의 스마트 챗봇을 구현하며 Mongle 프로젝트의 완성도를 높였습니다."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: AI 예산 분석 기능과 RAG 기반의 스마트 챗봇을 구현하며 Mongle 프로젝트의 완성도를 높였습니다.
 tags:
   - mongle
   - ai-planner
   - react-native
   - fastapi
   - rag
+  - team-project
 readTime: 5
-series: ""
+series: Mongle
 seriesOrder: 1
 featured: false
 draft: false

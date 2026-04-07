@@ -12,8 +12,7 @@ const {
 const categoryLabelMap = {
   study: 'Study',
   project: 'Project',
-  trouble: 'Trouble',
-  tech: 'Tech',
+  explore: 'Explore',
 };
 
 const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.category || 'Category';
@@ -25,7 +24,7 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
   <div class="article-wrap fade-in-up">
     <header class="article-header">
       <div class="article-meta-row">
-        <span class={`article-cat badge-${frontmatter.category || 'tech'}`}>{frontmatter.category || 'Tech & AI Lab'}</span>
+        <span class={`article-cat badge-${frontmatter.category || 'explore'}`}>{frontmatter.category || 'Explore'}</span>
         <span class="article-date">{new Date(frontmatter.date).toLocaleDateString('ko-KR')}</span>
         {frontmatter.readTime && <span class="article-read-time">/ {frontmatter.readTime}min read</span>}
       </div>
@@ -101,8 +100,8 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
               <article class={`related-post-card ${index >= 3 ? 'is-hidden' : ''}`}>
                 <a href={`/posts/${post.data.slug || post.id}`} class="related-post-link">
                   <div class="related-post-meta">
-                    <span class={`related-post-badge badge-${post.data.category || 'tech'}`}>
-                      {post.data.category || 'tech'}
+                    <span class={`related-post-badge badge-${post.data.category || 'explore'}`}>
+                      {post.data.category || 'explore'}
                     </span>
                     <span>{new Date(post.data.date).toLocaleDateString('ko-KR')}</span>
                   </div>
@@ -187,10 +186,8 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
   /* Category Badge Colors updated to Slate palette */
   .badge-study { background: var(--accent-2-soft); color: var(--accent-2); }
   .badge-project { background: #E6F0E6; color: #2E7D32; }
-  .badge-trouble { background: #FFF3E0; color: #E65100; }
-  .badge-tech { background: var(--accent-soft); color: var(--accent); }
+  .badge-explore { background: var(--accent-soft); color: var(--accent); }
   [data-theme="dark"] .badge-project { background: #1A2E1A; color: #66BB6A; }
-  [data-theme="dark"] .badge-trouble { background: #2E1F0A; color: #FFA726; }
 
   .article-date, .article-read-time { font-size: 0.75rem; color: var(--ink-3); font-family: var(--font-mono); }
   .article-title { font-family: var(--font-serif); font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 1.5rem; }

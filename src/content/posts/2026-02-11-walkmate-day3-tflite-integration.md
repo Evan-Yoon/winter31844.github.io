@@ -1,20 +1,21 @@
 ---
-title: "TFLite 모델 연동 및 안드로이드 성능 최적화"
-slug: "walkmate-day3-tflite-integration"
+title: TFLite 모델 연동 및 안드로이드 성능 최적화
+slug: walkmate-day3-tflite-integration
 date: 2026-02-11
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "[Walkmate] TFLite 모델의 실제 안드로이드 앱 연동 성공 및 고해상도 연산 최적화 기록."
-thumbnail: "/images/posts/walkmate/cover3.png"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: '[Walkmate] TFLite 모델의 실제 안드로이드 앱 연동 성공 및 고해상도 연산 최적화 기록.'
+thumbnail: /images/posts/walkmate/cover3.png
 tags:
   - TFLite
   - Android
   - WebView
   - PerformanceOptimization
   - TensorFlowJS
+  - team-project
 readTime: 12
-series: "Walkmate AI"
+series: Walkmate
 seriesOrder: 3
 featured: false
 draft: false

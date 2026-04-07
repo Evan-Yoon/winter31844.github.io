@@ -1,20 +1,22 @@
 ---
-title: "시각장애인을 위한 AI 보행 보조 앱 개발"
-slug: "walkmate-day1-ai-setup"
+title: 시각장애인을 위한 AI 보행 보조 앱 개발
+slug: walkmate-day1-ai-setup
 date: 2026-02-09
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "[Walkmate] YOLOv11n과 TFLite를 활용한 온디바이스 AI 보행 보조 서비스의 시작. 데이터셋 구축 및 환경 설정 기록."
-thumbnail: "/images/posts/walkmate/cover.png"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: '[Walkmate] YOLOv11n과 TFLite를 활용한 온디바이스 AI 보행 보조 서비스의 시작. 데이터셋 구축 및 환경
+  설정 기록.'
+thumbnail: /images/posts/walkmate/cover.png
 tags:
   - YOLOv11
   - TFLite
   - Flutter
   - Walkmate
   - Accessibility
+  - team-project
 readTime: 8
-series: "Walkmate AI"
+series: Walkmate
 seriesOrder: 1
 featured: true
 draft: false

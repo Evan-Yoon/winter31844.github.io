@@ -1,12 +1,13 @@
 ---
-title: "[AWS CLF-C02][2회차] AWS 글로벌 인프라 정리"
-slug: "aws-clf-c02-day2-global-infrastructure"
+title: '[AWS CLF-C02][2회차] AWS 글로벌 인프라 정리'
+slug: aws-clf-c02-day2-global-infrastructure
 date: 2026-01-08
-author: "Evan Yoon"
-category: "study"
-subcategory: "aws"
-description: "AWS Certified Cloud Practitioner(CLF-C02) 스터디 2회차 기록. Region, Availability Zone, Edge Location, Global vs Regional Service를 시험 관점과 실제 서비스 관점에서 자세히 정리했다."
-thumbnail: "/images/posts/aws-clf-c02-series/cover.png"
+author: Evan Yoon
+category: study
+subcategory: certification
+description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 2회차 기록. Region, Availability
+  Zone, Edge Location, Global vs Regional Service를 시험 관점과 실제 서비스 관점에서 자세히 정리했다.
+thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
   - aws
   - clf-c02
@@ -17,8 +18,9 @@ tags:
   - global-service
   - regional-service
   - study
+  - certification
 readTime: 17
-series: "AWS Certified Cloud Practitioner 스터디"
+series: AWS CLF-C02
 seriesOrder: 3
 featured: false
 draft: false

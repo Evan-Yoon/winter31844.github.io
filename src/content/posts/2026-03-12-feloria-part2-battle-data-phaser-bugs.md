@@ -1,12 +1,13 @@
 ---
-title: "[Feloria] 전투가 세 번 다시 쓰였다 — 시스템 설계와 기술적 판단들"
-slug: "feloria-part2-battle-data-phaser-bugs"
+title: '[Feloria] 전투가 세 번 다시 쓰였다 — 시스템 설계와 기술적 판단들'
+slug: feloria-part2-battle-data-phaser-bugs
 date: 2026-03-12
-author: "Evan Yoon"
-category: "project"
-subcategory: "personal-project"
-description: "Feloria 개발에서 가장 많이 고친 건 전투였다. EXP가 사라지고, 진화가 두 번 발동하고, 방향키를 누를 때마다 캐릭터가 바뀌었다. 그 과정에서 배운 설계 판단들을 정리했다."
-thumbnail: "/images/posts/feloria-part2/cover.jpg"
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: Feloria 개발에서 가장 많이 고친 건 전투였다. EXP가 사라지고, 진화가 두 번 발동하고, 방향키를 누를 때마다 캐릭터가
+  바뀌었다. 그 과정에서 배운 설계 판단들을 정리했다.
+thumbnail: /images/posts/feloria-part2/cover.jpg
 tags:
   - feloria
   - phaser3
@@ -15,8 +16,10 @@ tags:
   - personal-project
   - battle-system
   - data-driven
+  - troubleshooting
+  - bugfix
 readTime: 16
-series: "Feloria 프로젝트"
+series: Feloria
 seriesOrder: 2
 featured: false
 draft: false

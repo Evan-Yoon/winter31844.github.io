@@ -1,12 +1,13 @@
-﻿---
-title: "[AWS CLF-C02][합격] 온라인 시험 805점 합격 후기"
-slug: "aws-clf-c02-online-exam-pass-review"
+---
+title: '[AWS CLF-C02][합격] 온라인 시험 805점 합격 후기'
+slug: aws-clf-c02-online-exam-pass-review
 date: 2026-02-08
-author: "Evan Yoon"
-category: "study"
-subcategory: "aws"
-description: "AWS Certified Cloud Practitioner(CLF-C02)를 집에서 온라인 감독 시험으로 응시하고 805점으로 합격한 후기. 까다로웠던 사전 환경 점검, 실제 시험 체감, 복기 내용, 합격 확인 자료를 정리했다."
-thumbnail: "/images/posts/aws-clf-c02-series/cover.png"
+author: Evan Yoon
+category: study
+subcategory: certification
+description: AWS Certified Cloud Practitioner(CLF-C02)를 집에서 온라인 감독 시험으로 응시하고 805점으로
+  합격한 후기. 까다로웠던 사전 환경 점검, 실제 시험 체감, 복기 내용, 합격 확인 자료를 정리했다.
+thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
   - aws
   - clf-c02
@@ -16,7 +17,7 @@ tags:
   - certification
   - study
 readTime: 10
-series: "AWS Certified Cloud Practitioner 스터디"
+series: AWS CLF-C02
 seriesOrder: 11
 featured: true
 draft: false

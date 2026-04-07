@@ -1,12 +1,13 @@
 ---
-title: "백엔드 API 안정화 및 모바일 앱 빌드 오류 해결"
-slug: "walkmate-day11-backend-stabilization-and-mobile-build"
+title: 백엔드 API 안정화 및 모바일 앱 빌드 오류 해결
+slug: walkmate-day11-backend-stabilization-and-mobile-build
 date: 2026-02-19
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "[Walkmate] FastAPI 리다이렉트 문제 해결, Capacitor 기반 파일 시스템 교체 및 YOLO 전처리 최적화 기록."
-thumbnail: "/images/posts/walkmate/cover11.png"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: '[Walkmate] FastAPI 리다이렉트 문제 해결, Capacitor 기반 파일 시스템 교체 및 YOLO 전처리 최적화
+  기록.'
+thumbnail: /images/posts/walkmate/cover11.png
 tags:
   - FastAPI
   - Capacitor
@@ -14,8 +15,11 @@ tags:
   - YOLO
   - ReactNativeWeb
   - MobileApp
+  - team-project
+  - troubleshooting
+  - bugfix
 readTime: 10
-series: "Walkmate AI"
+series: Walkmate
 seriesOrder: 6
 featured: false
 draft: false

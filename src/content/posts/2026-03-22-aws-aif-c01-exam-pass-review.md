@@ -1,12 +1,13 @@
 ---
-title: "[AWS AIF-C01][후기] 앤아버 시험장 현장 응시 후기"
-slug: "aws-aif-c01-exam-pass-review"
+title: '[AWS AIF-C01][후기] 앤아버 시험장 현장 응시 후기'
+slug: aws-aif-c01-exam-pass-review
 date: 2026-03-22
-author: "Evan Yoon"
-category: "study"
-subcategory: "aws"
-description: "AWS Certified AI Practitioner(AIF-C01)를 강남 앤아버 시험장에서 현장 응시하고 합격한 후기. 생각보다 어려웠던 시험 체감, 시험장 분위기, 플래그 검토, 합격 확인까지 정리했다."
-thumbnail: "/images/posts/aws-aif-c01-series/cover.png"
+author: Evan Yoon
+category: study
+subcategory: certification
+description: AWS Certified AI Practitioner(AIF-C01)를 강남 앤아버 시험장에서 현장 응시하고 합격한 후기.
+  생각보다 어려웠던 시험 체감, 시험장 분위기, 플래그 검토, 합격 확인까지 정리했다.
+thumbnail: /images/posts/aws-aif-c01-series/cover.png
 tags:
   - aws
   - aif-c01
@@ -15,7 +16,7 @@ tags:
   - certification
   - study
 readTime: 8
-series: "AWS Certified AI Practitioner"
+series: AWS AIF-C01
 seriesOrder: 2
 featured: true
 draft: false

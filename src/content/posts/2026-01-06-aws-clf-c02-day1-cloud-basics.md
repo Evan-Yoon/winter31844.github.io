@@ -1,12 +1,13 @@
 ---
-title: "[AWS CLF-C02][1회차] 클라우드 컴퓨팅 기본 개념 정리"
-slug: "aws-clf-c02-day1-cloud-basics"
+title: '[AWS CLF-C02][1회차] 클라우드 컴퓨팅 기본 개념 정리'
+slug: aws-clf-c02-day1-cloud-basics
 date: 2026-01-06
-author: "Evan Yoon"
-category: "study"
-subcategory: "aws"
-description: "AWS Certified Cloud Practitioner(CLF-C02) 스터디 1회차 기록. 온프레미스와 클라우드의 차이, 클라우드의 핵심 장점, 배포 모델(Public/Private/Hybrid), 서비스 모델(IaaS/PaaS/SaaS)을 자세히 정리했다."
-thumbnail: "/images/posts/aws-clf-c02-series/cover.png"
+author: Evan Yoon
+category: study
+subcategory: certification
+description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 1회차 기록. 온프레미스와 클라우드의 차이,
+  클라우드의 핵심 장점, 배포 모델(Public/Private/Hybrid), 서비스 모델(IaaS/PaaS/SaaS)을 자세히 정리했다.
+thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
   - aws
   - clf-c02
@@ -17,8 +18,9 @@ tags:
   - paas
   - saas
   - study
+  - certification
 readTime: 18
-series: "AWS Certified Cloud Practitioner 스터디"
+series: AWS CLF-C02
 seriesOrder: 2
 featured: false
 draft: false

@@ -1,16 +1,16 @@
 ---
-title: "Midas Group's HR ChatGPT \"MOLLM\""
-slug: "midas-groups-hr-chatgpt-mollm"
+title: Midas Group's HR ChatGPT "MOLLM"
+slug: midas-groups-hr-chatgpt-mollm
 date: 2025-11-28
-author: "Evan Yoon"
-category: "tech"
-description: ""
-thumbnail: "/images/posts/midas-groups-hr-chatgpt-mollm/cover.jpg"
+author: Evan Yoon
+category: explore
+subcategory: new-tech
+thumbnail: /images/posts/midas-groups-hr-chatgpt-mollm/cover.jpg
 tags:
   - ai
+  - new-tech
+  - tool-review
 readTime: 11
-series: ""
-seriesOrder: 1
 featured: false
 draft: false
 toc: true

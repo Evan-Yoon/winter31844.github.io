@@ -1,17 +1,19 @@
 ---
-title: "[인텔 인공지능 인재교육] with 고누아이 : Intel AI for Future Workforce Program"
-slug: "intel-ingongjineung-injaegyoyug-with-gonuai-intel-ai-for-future-workforce-program"
+title: '[인텔 인공지능 인재교육] with 고누아이 : Intel AI for Future Workforce Program'
+slug: intel-ingongjineung-injaegyoyug-with-gonuai-intel-ai-for-future-workforce-program
 date: 2025-12-05
-author: "Evan Yoon"
-category: "tech"
-description: ""
-thumbnail: "/images/posts/intel-ingongjineung-injaegyoyug-with-gonuai-intel-ai-for-future-workforce-program/cover.jpg"
+author: Evan Yoon
+category: explore
+subcategory: visit
+thumbnail: /images/posts/intel-ingongjineung-injaegyoyug-with-gonuai-intel-ai-for-future-workforce-program/cover.jpg
 tags:
   - intel-ai
   - ai
   - project
+  - field-visit
+  - visit
 readTime: 13
-series: ""
+series: Intel AI for Future Workforce
 seriesOrder: 1
 featured: false
 draft: false

@@ -1,12 +1,13 @@
 ---
-title: "[AWS CLF-C02][6회차] Network & Delivery 핵심 정리"
-slug: "aws-clf-c02-day6-network-delivery"
+title: '[AWS CLF-C02][6회차] Network & Delivery 핵심 정리'
+slug: aws-clf-c02-day6-network-delivery
 date: 2026-01-22
-author: "Evan Yoon"
-category: "study"
-subcategory: "aws"
-description: "AWS Certified Cloud Practitioner(CLF-C02) 스터디 6회차 기록. VPC, Security Group와 NACL, Route 53, Load Balancer(ALB/NLB), CloudFront를 한 흐름으로 자세히 정리했다."
-thumbnail: "/images/posts/aws-clf-c02-series/cover.png"
+author: Evan Yoon
+category: study
+subcategory: certification
+description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 6회차 기록. VPC, Security Group와
+  NACL, Route 53, Load Balancer(ALB/NLB), CloudFront를 한 흐름으로 자세히 정리했다.
+thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
   - aws
   - clf-c02
@@ -17,8 +18,9 @@ tags:
   - cloudfront
   - network
   - study
+  - certification
 readTime: 22
-series: "AWS Certified Cloud Practitioner 스터디"
+series: AWS CLF-C02
 seriesOrder: 7
 featured: false
 draft: false

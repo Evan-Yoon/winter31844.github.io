@@ -30,17 +30,19 @@ export async function getStaticPaths() {
 const { posts, category, subcategory } = Astro.props;
 
 const catLabels: Record<string, string> = {
-  study: '학습 기록',
   project: '프로젝트',
-  trouble: 'Trouble Shooting',
-  tech: 'Tech & AI Lab',
+  study: '학습 기록',
+  explore: '탐구 기록',
 };
 
 // 서브카테고리 메타 정의 (label + 설명)
 const subcatMeta: Record<string, { label: string; description: string }> = {
-  aws: { label: 'AWS', description: 'AWS 자격증 스터디 & 직접 구축 실습 기록' },
   'team-project': { label: 'Team Project', description: '팀으로 함께 기획하고 개발한 프로젝트 기록' },
   'personal-project': { label: 'Personal Project', description: '혼자 기획하고 처음부터 끝까지 만든 프로젝트 기록' },
+  certification: { label: 'Certification', description: '자격증 취득 과정과 시험 후기를 모아둔 기록' },
+  'self-study': { label: 'Self Study', description: '개인 공부와 학습 로드맵 기록' },
+  visit: { label: 'Visit', description: '기업 방문, 행사, 프로그램 참가 기록' },
+  'new-tech': { label: 'New Tech', description: '새 기술, 툴, 모델, 서비스 탐구 기록' },
 };
 
 const catDisplay = catLabels[category] || category;

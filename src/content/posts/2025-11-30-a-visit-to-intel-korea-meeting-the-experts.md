@@ -1,17 +1,19 @@
 ---
-title: "A Visit to Intel Korea: Meeting the Experts"
-slug: "a-visit-to-intel-korea-meeting-the-experts"
+title: 'A Visit to Intel Korea: Meeting the Experts'
+slug: a-visit-to-intel-korea-meeting-the-experts
 date: 2025-11-30
-author: "Evan Yoon"
-category: "tech"
-description: ""
-thumbnail: "/images/posts/a-visit-to-intel-korea-meeting-the-experts/cover.jpg"
+author: Evan Yoon
+category: explore
+subcategory: visit
+thumbnail: /images/posts/a-visit-to-intel-korea-meeting-the-experts/cover.jpg
 tags:
   - intel-ai
   - openvino
   - ai
+  - field-visit
+  - visit
 readTime: 16
-series: ""
+series: Intel AI for Future Workforce
 seriesOrder: 1
 featured: false
 draft: false

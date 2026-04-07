@@ -1,20 +1,21 @@
 ---
-title: "TMAP API 전환 및 시각 장애인용 시계 방향 안내 시스템 구축"
-slug: "walkmate-day4-tmap-navigation"
+title: TMAP API 전환 및 시각 장애인용 시계 방향 안내 시스템 구축
+slug: walkmate-day4-tmap-navigation
 date: 2026-02-12
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "[Walkmate] TMAP API를 활용한 실시간 보행 내비게이션 환경 구축 및 시계 방향 안내 로직 구현 기록."
-thumbnail: "/images/posts/walkmate/cover4.png"
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: '[Walkmate] TMAP API를 활용한 실시간 보행 내비게이션 환경 구축 및 시계 방향 안내 로직 구현 기록.'
+thumbnail: /images/posts/walkmate/cover4.png
 tags:
   - TMAP
   - Navigation
   - Accessibility
   - Compass
   - Android
+  - team-project
 readTime: 10
-series: "Walkmate AI"
+series: Walkmate
 seriesOrder: 4
 featured: false
 draft: false

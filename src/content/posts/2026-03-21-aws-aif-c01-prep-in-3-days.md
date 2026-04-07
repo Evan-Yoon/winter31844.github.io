@@ -1,12 +1,13 @@
 ---
-title: "[AWS AIF-C01][준비] 3일 압축으로 AI Practitioner 준비한 기록"
-slug: "aws-aif-c01-prep-in-3-days"
+title: '[AWS AIF-C01][준비] 3일 압축으로 AI Practitioner 준비한 기록'
+slug: aws-aif-c01-prep-in-3-days
 date: 2026-03-21
-author: "Evan Yoon"
-category: "study"
-subcategory: "aws"
-description: "AWS Certified AI Practitioner(AIF-C01)를 준비한 기록. 시험일까지 실제 공부한 날은 3일뿐이었고, 공개 자료와 직접 만든 덤프 문제를 바탕으로 압축해서 준비했다."
-thumbnail: "/images/posts/aws-aif-c01-series/cover.png"
+author: Evan Yoon
+category: study
+subcategory: certification
+description: AWS Certified AI Practitioner(AIF-C01)를 준비한 기록. 시험일까지 실제 공부한 날은 3일뿐이었고,
+  공개 자료와 직접 만든 덤프 문제를 바탕으로 압축해서 준비했다.
+thumbnail: /images/posts/aws-aif-c01-series/cover.png
 tags:
   - aws
   - aif-c01
@@ -15,7 +16,7 @@ tags:
   - exam-prep
   - certification
 readTime: 8
-series: "AWS Certified AI Practitioner"
+series: AWS AIF-C01
 seriesOrder: 1
 featured: false
 draft: false

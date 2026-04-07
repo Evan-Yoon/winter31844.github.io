@@ -1,11 +1,12 @@
 ---
-title: "[Mongle] Day 5 — 견적 비교 AI, PDF 공유, 그리고 잘못된 머지 복구기"
-slug: "mongle-day5-estimation-pdf-rollback"
+title: '[Mongle] Day 5 — 견적 비교 AI, PDF 공유, 그리고 잘못된 머지 복구기'
+slug: mongle-day5-estimation-pdf-rollback
 date: 2026-03-27
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "GPT-4o Vision으로 실제 견적서 사진을 분석하는 기능을 만들었다. 그리고 잘못된 머지 하나가 전체 시스템을 멈추는 걸 경험하고, git log로 직접 복구했다."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: GPT-4o Vision으로 실제 견적서 사진을 분석하는 기능을 만들었다. 그리고 잘못된 머지 하나가 전체 시스템을 멈추는
+  걸 경험하고, git log로 직접 복구했다.
 tags:
   - mongle
   - gpt-4o
@@ -15,8 +16,10 @@ tags:
   - debugging
   - git
   - team-project
+  - troubleshooting
+  - bugfix
 readTime: 12
-series: "Mongle 프로젝트"
+series: Mongle
 seriesOrder: 5
 featured: false
 draft: false

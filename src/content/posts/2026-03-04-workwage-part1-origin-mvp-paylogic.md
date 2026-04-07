@@ -1,12 +1,13 @@
 ---
-title: "[WorkWage] Flutter 7일, 교대근무자를 위한 급여 계산기를 만들었다 — 시작, 설계, 그리고 계산 로직"
-slug: "workwage-part1-origin-mvp-paylogic"
+title: '[WorkWage] Flutter 7일, 교대근무자를 위한 급여 계산기를 만들었다 — 시작, 설계, 그리고 계산 로직'
+slug: workwage-part1-origin-mvp-paylogic
 date: 2026-03-04
-author: "Evan Yoon"
-category: "project"
-subcategory: "personal-project"
-description: "호텔·HR 현장 경험에서 시작된 Flutter 입문 프로젝트 WorkWage. 달력을 버리고 리스트를 택한 이유, 야간·휴일 수당까지 반영하는 급여 계산 로직을 어떻게 구현했는지 정리했다."
-thumbnail: "/images/posts/workwage-part1/cover.jpg"
+author: Evan Yoon
+category: project
+subcategory: personal-project
+description: 호텔·HR 현장 경험에서 시작된 Flutter 입문 프로젝트 WorkWage. 달력을 버리고 리스트를 택한 이유, 야간·휴일
+  수당까지 반영하는 급여 계산 로직을 어떻게 구현했는지 정리했다.
+thumbnail: /images/posts/workwage-part1/cover.jpg
 tags:
   - workwage
   - flutter
@@ -16,7 +17,7 @@ tags:
   - shift-work
   - mvp
 readTime: 13
-series: "WorkWage 프로젝트"
+series: WorkWage
 seriesOrder: 1
 featured: true
 draft: false

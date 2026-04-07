@@ -1,11 +1,12 @@
 ---
-title: "[Mongle] Day 4 — RAG 챗봇, 예산 AI, 그리고 플래너 웹까지"
-slug: "mongle-day4-rag-budget-ai-adminweb"
+title: '[Mongle] Day 4 — RAG 챗봇, 예산 AI, 그리고 플래너 웹까지'
+slug: mongle-day4-rag-budget-ai-adminweb
 date: 2026-03-26
-author: "Evan Yoon"
-category: "project"
-subcategory: "team-project"
-description: "더미 데이터를 걷어내고 실제 Supabase 연동 RAG 챗봇을 완성했다. 예산 최적화 AI, 플래너용 관리자 웹까지 하루에 전부."
+author: Evan Yoon
+category: project
+subcategory: team-project
+description: 더미 데이터를 걷어내고 실제 Supabase 연동 RAG 챗봇을 완성했다. 예산 최적화 AI, 플래너용 관리자 웹까지 하루에
+  전부.
 tags:
   - mongle
   - rag
@@ -16,7 +17,7 @@ tags:
   - admin-web
   - team-project
 readTime: 13
-series: "Mongle 프로젝트"
+series: Mongle
 seriesOrder: 4
 featured: false
 draft: false
