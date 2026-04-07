@@ -44,6 +44,13 @@ toc: true
 
 Walkmate의 출발점은 단순한 객체 탐지 앱이 아니었다. 보행 약자가 길 위에서 마주치는 위험 요소를 빠르게 인식하고, 그 결과를 음성으로 전달하고, 필요하면 운영자가 현장 데이터를 추적할 수 있는 구조를 만드는 것이 목표였다.
 
+처음 구상한 서비스 흐름은 아래 소개 영상에 가장 직관적으로 담겨 있다. 글을 읽기 전에 먼저 보면 이후의 시행착오가 왜 중요했는지 더 잘 들어온다.
+
+<video controls preload="metadata" style="display:block; width:100%; max-width:760px; margin:1rem auto;">
+  <source src="/files/walkmate-intro-demo.mp4" type="video/mp4" />
+  브라우저가 동영상을 지원하지 않으면 <a href="/files/walkmate-intro-demo.mp4">여기서 영상을 열 수 있다</a>.
+</video>
+
 <img src="/images/posts/walkmate/gallery/wm-20.png" alt="Walkmate 최초 기대 화면 콘셉트" style="display:block; width:100%; max-width:720px; margin:1rem auto;" />
 
 처음에는 위와 같은 화면을 기대했다. 사용자는 지금 어디를 보고 있는지, 어떤 위험 요소가 있는지, 어느 방향으로 움직여야 하는지를 한눈에 이해할 수 있어야 했다.
@@ -159,6 +166,13 @@ Walkmate의 출발점은 단순한 객체 탐지 앱이 아니었다. 보행 약
 <img src="/images/posts/walkmate/gallery/wm-18.png" alt="사용자용 안내 중 페이지" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
 
 사용자 안내 화면도 너무 많은 정보를 한 번에 보여주지 않도록 구성했다. 큰 사진이나 복잡한 텍스트보다, 지금 위험한지와 어느 쪽으로 가야 하는지가 우선이었다.
+
+아래 시연 영상은 위에서 설명한 탐지, 위험도 판단, 안내 흐름이 실제 앱에서 어떻게 이어졌는지 보여준다. 소개 영상이 서비스 방향을 설명하는 용도였다면, 이 영상은 구현 결과를 확인하는 데 더 가깝다.
+
+<video controls preload="metadata" style="display:block; width:100%; max-width:760px; margin:1rem auto;">
+  <source src="/files/walkmate-demo.mp4" type="video/mp4" />
+  브라우저가 동영상을 지원하지 않으면 <a href="/files/walkmate-demo.mp4">여기서 영상을 열 수 있다</a>.
+</video>
 
 ---
 

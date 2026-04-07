@@ -262,6 +262,18 @@ context/
 
 ---
 
+## 화면 기록
+
+RAG 챗봇을 실제 데이터와 연결하고, 비용 관리 AI와 플래너용 예산 화면까지 붙인 날이라 Day 4에는 예산 관련 자료를 묶어 두는 게 가장 자연스럽다.
+
+<img src="/images/posts/mongle/budget-ai-logic.png" alt="비용 관리 AI 로직" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
+
+<img src="/images/posts/mongle/couple-budget-screen.png" alt="Mongle couple 비용 관리 화면" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+
+<img src="/images/posts/mongle/planner-budget-screen.png" alt="Mongle planner 비용 관리 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
+
+---
+
 **GitHub:** [APP-Project-Team1/mongle](https://github.com/APP-Project-Team1/mongle)
 ---
 

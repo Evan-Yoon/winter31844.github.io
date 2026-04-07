@@ -262,6 +262,19 @@ PPT 마지막 슬라이드에 이렇게 썼다.
 
 ---
 
+## 시연 자료
+
+마지막 날에는 실제 시연 영상과 웹 품질 점검 결과를 붙여 둔다. Day 9는 새 기능을 더 만든 날이 아니라, 만들어 둔 결과물을 정리해서 보여주는 날이었기 때문이다.
+
+<img src="/images/posts/mongle/lighthouse-web-evaluation.png" alt="Mongle planner web 화면의 Lighthouse 평가 결과" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
+
+<video controls preload="metadata" style="display:block; width:100%; max-width:760px; margin:1rem auto;">
+  <source src="/files/mongle-demo.mp4" type="video/mp4" />
+  브라우저가 동영상을 지원하지 않으면 <a href="/files/mongle-demo.mp4">여기에서 시연 영상을 확인할 수 있다</a>.
+</video>
+
+---
+
 **GitHub:** [APP-Project-Team1/mongle](https://github.com/APP-Project-Team1/mongle)
 
 ---

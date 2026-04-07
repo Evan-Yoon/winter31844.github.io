@@ -343,6 +343,16 @@ Day 4 버전이 main에서 분리되거나 변경이 생긴 것으로 보인다.
 
 ---
 
+## 화면 기록
+
+Day 8은 인증과 라우팅 버그를 정리하면서 플래너와 커플 화면을 다시 맞물리게 만든 날이었다. 그래서 홈 화면과 플래너 메인 화면을 같이 남겨 둔다.
+
+<img src="/images/posts/mongle/couple-home-screen.png" alt="Mongle couple 홈 화면" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+
+<img src="/images/posts/mongle/planner-main-screen.png" alt="Mongle planner 메인 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
+
+---
+
 **GitHub:** [APP-Project-Team1/mongle](https://github.com/APP-Project-Team1/mongle)
 ---
 

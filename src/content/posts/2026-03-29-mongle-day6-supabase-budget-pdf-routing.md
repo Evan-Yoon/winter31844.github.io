@@ -202,6 +202,18 @@ app/(couple)/
 
 ---
 
+## 화면 기록
+
+Supabase 연동과 라우팅 정리가 중심이었던 날이라 일정 화면, 플래너 상세 연결 화면, 플래너용 웹 화면을 같이 배치했다. 모바일과 웹이 동시에 확장되던 시점의 결과물이다.
+
+<img src="/images/posts/mongle/couple-schedule-screen.png" alt="Mongle couple 일정 관리 화면" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+
+<img src="/images/posts/mongle/couple-planner-detail-screen.png" alt="Mongle couple 플래너 상세 화면" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+
+<img src="/images/posts/mongle/planner-web-screen.png" alt="Mongle planner용 web 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
+
+---
+
 **GitHub:** [APP-Project-Team1/mongle](https://github.com/APP-Project-Team1/mongle)
 ---
 

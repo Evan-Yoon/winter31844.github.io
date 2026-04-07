@@ -290,6 +290,18 @@ except Exception as e:
 
 ---
 
+## 화면 기록
+
+이날은 AI 채팅을 실제 앱 화면에 붙여서 동작시키는 흐름이 핵심이었다. 채팅 목록, 초대 코드, AI 대화 화면을 같이 보면 Day 3에서 연결한 기능 범위가 한 번에 보인다.
+
+<img src="/images/posts/mongle/couple-chat-list-screen.png" alt="Mongle couple 채팅 목록 화면" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+
+<img src="/images/posts/mongle/couple-chat-invite-code.png" alt="Mongle couple 채팅 초대 코드 화면" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+
+<img src="/images/posts/mongle/couple-ai-chat-screen.png" alt="Mongle couple AI 챗봇 화면" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+
+---
+
 **GitHub:** [APP-Project-Team1/mongle](https://github.com/APP-Project-Team1/mongle)
 ---
 
