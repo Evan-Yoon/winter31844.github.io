@@ -1,7 +1,22 @@
 ---
 // src/layouts/PostLayout.astro
 import BaseLayout from './BaseLayout.astro';
-const { frontmatter } = Astro.props;
+
+const {
+  frontmatter,
+  previousPost,
+  nextPost,
+  relatedPosts = [],
+} = Astro.props;
+
+const categoryLabelMap = {
+  study: 'Study',
+  project: 'Project',
+  trouble: 'Trouble',
+  tech: 'Tech',
+};
+
+const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.category || 'Category';
 ---
 
 <BaseLayout title={`${frontmatter.title} | Evan Yoon`} description={frontmatter.description}>
@@ -10,7 +25,7 @@ const { frontmatter } = Astro.props;
   <div class="article-wrap fade-in-up">
     <header class="article-header">
       <div class="article-meta-row">
-        <span class="article-cat badge-{frontmatter.category || 'tech'}">{frontmatter.category || 'Tech & AI Lab'}</span>
+        <span class={`article-cat badge-${frontmatter.category || 'tech'}`}>{frontmatter.category || 'Tech & AI Lab'}</span>
         <span class="article-date">{new Date(frontmatter.date).toLocaleDateString('ko-KR')}</span>
         {frontmatter.readTime && <span class="article-read-time">/ {frontmatter.readTime}min read</span>}
       </div>
@@ -33,6 +48,96 @@ const { frontmatter } = Astro.props;
         </div>
       )}
     </article>
+
+    <section class="post-footer-nav" aria-label="Post navigation">
+      <a
+        class={`post-nav-card ${!previousPost ? 'is-disabled' : ''}`}
+        href={previousPost ? `/posts/${previousPost.data.slug || previousPost.id}` : undefined}
+        aria-disabled={!previousPost}
+      >
+        <span class="post-nav-label">이전 포스트</span>
+        {previousPost ? (
+          <>
+            <strong class="post-nav-title">{previousPost.data.title}</strong>
+            <span class="post-nav-meta">{new Date(previousPost.data.date).toLocaleDateString('ko-KR')}</span>
+          </>
+        ) : (
+          <strong class="post-nav-title">첫 글에 도달했습니다</strong>
+        )}
+      </a>
+
+      <a
+        class={`post-nav-card align-right ${!nextPost ? 'is-disabled' : ''}`}
+        href={nextPost ? `/posts/${nextPost.data.slug || nextPost.id}` : undefined}
+        aria-disabled={!nextPost}
+      >
+        <span class="post-nav-label">다음 포스트</span>
+        {nextPost ? (
+          <>
+            <strong class="post-nav-title">{nextPost.data.title}</strong>
+            <span class="post-nav-meta">{new Date(nextPost.data.date).toLocaleDateString('ko-KR')}</span>
+          </>
+        ) : (
+          <strong class="post-nav-title">가장 최신 글입니다</strong>
+        )}
+      </a>
+    </section>
+
+    <section class="related-posts-section" aria-labelledby="related-posts-heading">
+      <div class="related-posts-head">
+        <div>
+          <p class="related-kicker">{categoryLabel}</p>
+          <h2 id="related-posts-heading" class="related-title">카테고리의 다른 글</h2>
+        </div>
+        <a href={`/categories/${frontmatter.category}`} class="related-category-link">
+          카테고리 전체 보기
+        </a>
+      </div>
+
+      {relatedPosts.length > 0 ? (
+        <>
+          <div class="related-posts-grid" id="related-posts-grid">
+            {relatedPosts.map((post, index) => (
+              <article class={`related-post-card ${index >= 3 ? 'is-hidden' : ''}`}>
+                <a href={`/posts/${post.data.slug || post.id}`} class="related-post-link">
+                  <div class="related-post-meta">
+                    <span class={`related-post-badge badge-${post.data.category || 'tech'}`}>
+                      {post.data.category || 'tech'}
+                    </span>
+                    <span>{new Date(post.data.date).toLocaleDateString('ko-KR')}</span>
+                  </div>
+                  <h3 class="related-post-card-title">{post.data.title}</h3>
+                  <p class="related-post-desc">
+                    {post.data.description || '같은 카테고리에서 이어서 읽을 수 있는 글입니다.'}
+                  </p>
+                  <div class="related-post-footer">
+                    <span>{post.data.readTime ? `${post.data.readTime} min read` : 'Read more'}</span>
+                    <span class="related-post-arrow">→</span>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+
+          {relatedPosts.length > 3 && (
+            <div class="related-more-wrap">
+              <button
+                type="button"
+                class="related-more-button"
+                id="related-more-button"
+                data-expanded="false"
+              >
+                더보기
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <div class="related-empty-state">
+          같은 카테고리에 아직 다른 글이 없습니다.
+        </div>
+      )}
+    </section>
   </div>
 </BaseLayout>
 
@@ -46,6 +151,24 @@ const { frontmatter } = Astro.props;
       bar.style.width = pct + '%';
     }
   });
+
+  const moreButton = document.getElementById('related-more-button');
+  const relatedCards = Array.from(document.querySelectorAll('.related-post-card'));
+
+  if (moreButton) {
+    moreButton.addEventListener('click', () => {
+      const expanded = moreButton.dataset.expanded === 'true';
+
+      relatedCards.forEach((card, index) => {
+        if (index >= 3) {
+          card.classList.toggle('is-hidden', expanded);
+        }
+      });
+
+      moreButton.dataset.expanded = expanded ? 'false' : 'true';
+      moreButton.textContent = expanded ? '더보기' : '접기';
+    });
+  }
 </script>
 
 <style is:global>
@@ -121,11 +244,201 @@ const { frontmatter } = Astro.props;
   .article-tag { font-size: 0.7rem; padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border-strong); color: var(--ink-3); font-family: var(--font-mono); font-weight: 400; }
   .article-tag:hover { border-color: var(--accent-2); color: var(--accent-2); }
 
+  .post-footer-nav {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .post-nav-card {
+    min-height: 164px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.85rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    background:
+      linear-gradient(135deg, var(--bg-card) 0%, var(--bg-hover) 100%);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  }
+  .post-nav-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+  }
+  .post-nav-card.align-right { text-align: right; }
+  .post-nav-card.is-disabled {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .post-nav-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .post-nav-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .post-nav-meta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+
+  .related-posts-section {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 1rem 2rem 6rem;
+  }
+  .related-posts-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .related-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .related-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .related-category-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid transparent;
+  }
+  .related-category-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .related-post-card.is-hidden {
+    display: none;
+  }
+  .related-post-link {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.35rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    background: var(--bg-card);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  }
+  .related-post-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.05);
+  }
+  .related-post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-3);
+  }
+  .related-post-badge {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 999px;
+  }
+  .related-post-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .related-post-desc {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+    flex: 1;
+  }
+  .related-post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-3);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .related-post-arrow {
+    font-size: 1rem;
+    color: var(--accent);
+  }
+  .related-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .related-more-button {
+    padding: 0.9rem 1.5rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--bg-card);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: border-color var(--transition), background var(--transition), color var(--transition);
+  }
+  .related-more-button:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .related-empty-state {
+    padding: 1.5rem;
+    border: 1px dashed var(--border-strong);
+    border-radius: 16px;
+    color: var(--ink-3);
+    background: var(--bg-hover);
+  }
+
   @media (max-width: 768px) {
     .article-wrap { border: none; padding-top: 20px; }
     .article-title { font-size: 2rem; }
     .article-header { padding: 4rem 1rem 2rem; }
     .article-body { padding: 0 1rem 5rem; }
     .article-meta-row { flex-wrap: wrap; gap: 0.5rem 1rem; }
+    .post-footer-nav { grid-template-columns: 1fr; padding: 0 1rem 1.5rem; }
+    .post-nav-card, .post-nav-card.align-right { text-align: left; min-height: auto; }
+    .related-posts-section { padding: 1rem 1rem 4rem; }
+    .related-posts-head { align-items: start; flex-direction: column; }
+    .related-posts-grid { grid-template-columns: 1fr; }
   }
 </style>

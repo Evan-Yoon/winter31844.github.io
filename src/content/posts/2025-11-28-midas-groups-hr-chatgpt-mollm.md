@@ -1,5 +1,5 @@
 ---
-title: "Midas Group???HR ChatGPT ??췖LLM??"
+title: "Midas Group's HR ChatGPT \"MOLLM\""
 slug: "midas-groups-hr-chatgpt-mollm"
 date: 2025-11-28
 author: "Evan Yoon"
@@ -16,15 +16,15 @@ draft: false
 toc: true
 ---
 
-# Midas Group???HR ChatGPT ??췖LLM??
+# Midas Group's HR ChatGPT "MOLLM"
 
 A Fine-Tuned GPT Built Specifically for HR
 
 ---
 
-### Midas Group???HR ChatGPT???췖LLM??
+### Midas Group's HR ChatGPT "MOLLM"
 
-#### A Fine-Tuned GPT Built Specifically for?팆R
+#### A Fine-Tuned GPT Built Specifically for HR
 
 Back in 2023, when I was having frequent meetings with **Midas Group** regarding their recruitment branding solution (the one I mentioned in my previous story), they invited me to a special event.
 
@@ -32,48 +32,49 @@ It was an HR seminar hosted by Midas, focused on how AI technology is reshaping 
 
 I arrived at **The K Hotel** near Yangjae Station in Seoul. The place was buzzing. I remember exchanging business cards with countless HR managers. Some were veterans who had been using Midas solutions for years, while others, like me, were just on the verge of trying them out.
 
-![At the entrance, Midas Group had set up an exhibition showcasing their various solutions](/images/posts/midas-groups-hr-chatgpt-mollm/imported-01.png)
+![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-01.png)
 
 At the entrance, Midas Group had set up an exhibition showcasing their various solutions
 
 The seminar was packed with insights. Midas shared their future direction, research results, and upcoming solutions.
 
-![Of course, I had to stop by the photo booth.](/images/posts/midas-groups-hr-chatgpt-mollm/imported-02.png)
+![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-02.png)
 
-Of course, I had to stop by the photo?팦ooth.
+Of course, I had to stop by the photo booth.
 
-![After a dazzling entrance](/images/posts/midas-groups-hr-chatgpt-mollm/imported-03.png)
+![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-03.png)
 
-After a dazzling?틿ntrance
+After a dazzling Entrance
 
-![My seat wasn?셳 that good](/images/posts/midas-groups-hr-chatgpt-mollm/imported-04.png)
+![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-04.png)
 
-My seat wasn???that?팮ood..???
-![About 1200 HR specialists attended](/images/posts/midas-groups-hr-chatgpt-mollm/imported-05.png)
+My seat wasn't that good..🙃
+
+![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-05.png)
 
 About 1200 HR specialists attended
 
 The keynote speakers were particularly impressive. We heard from the **North Asia HR Lead of Johnson & Johnson**, who shared their perspective on HR, followed by a lecture from **Koh Dong-jin, the former CEO of Samsung Electronics.**
 
-![Session lineup](/images/posts/midas-groups-hr-chatgpt-mollm/imported-06.png)
+![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-06.png)
 
-<https://contents.h.place/hlab/article/insight/hrevolution_sketch>/ Session?팊ineup
+<https://contents.h.place/hlab/article/insight/hrevolution_sketch>/ Session Lineup
 
 ---
 
-But among all the sessions, one solution caught my eye. I want to introduce you to **??췖LLM??**
+But among all the sessions, one solution caught my eye. I want to introduce you to **"MOLLM".**
 
-![HR MOLLM](/images/posts/midas-groups-hr-chatgpt-mollm/imported-07.png)
+![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-07.png)
 
 HR MOLLM
 
-#### The Problem: ChatGPT in??023
+#### The Problem: ChatGPT in 2023
 
 To understand why MOLLM matters, we have to look back at the state of ChatGPT in early 2023.
 
-Back then, ChatGPT was heavily biased towards **US standards.** If an employee asked, *??쫛w many days off can I get for parental leave???, ChatGPT would confidently answer based on **US labor laws**, which are completely different from Korean regulations.
+Back then, ChatGPT was heavily biased towards **US standards.** If an employee asked, *"How many days off can I get for parental leave?"*, ChatGPT would confidently answer based on **US labor laws**, which are completely different from Korean regulations.
 
-The bigger problem was **??쫆llucination.??* If I corrected it by saying, *??칚, isn???that US law? Explain it based on South Korean law,?? it would often panic. It would take US information and package it as if it were Korean law, presenting false information as absolute fact.
+The bigger problem was **"Hallucination."** If I corrected it by saying, *"No, isn't that US law? Explain it based on South Korean law,"* it would often panic. It would take US information and package it as if it were Korean law, presenting false information as absolute fact.
 
 For HR professionals dealing with strict legal compliance, this was dangerous.
 
@@ -89,17 +90,16 @@ It goes beyond simple Q&A. It can assist with:
 - Legal compliance processes
 - Employee evaluation methods
 
-![Main page of Mollm](/images/posts/midas-groups-hr-chatgpt-mollm/imported-08.png)
+![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-08.png)
 
-<https://contents.h.place/mollm> / Main Page of?팋ollm
+<https://contents.h.place/mollm> / Main Page of Mollm
 
 ---
 
 #### My Verdict
 
-For large enterprises that already have rigid systems and well-staffed HR teams, MOLLM might just be a ??뛦ce-to-have??tool.
+For large enterprises that already have rigid systems and well-staffed HR teams, MOLLM might just be a "nice-to-have" tool.
 
-However, for **startups** or small businesses where the HR roles aren???clearly defined, this tool is a game-changer. It acts like a legal expert in your pocket, filling the gap where human resources might be scarce.
+However, for **startups** or small businesses where the HR roles aren't clearly defined, this tool is a game-changer. It acts like a legal expert in your pocket, filling the gap where human resources might be scarce.
 
 Seeing a company fine-tune a general AI model to solve a specific, local pain point was a valuable lesson for me as an aspiring developer.
-

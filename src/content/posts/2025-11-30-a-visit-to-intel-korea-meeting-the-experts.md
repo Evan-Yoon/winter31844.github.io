@@ -20,36 +20,40 @@ toc: true
 
 # A Visit to Intel Korea: Meeting the Experts
 
-Intel AI for Future Workforce?듼붴둛pecial Lecture Series
+Intel AI for Future Workforce — Special Lecture Series
 
 ---
 
-### A Visit to Intel Korea: Meeting the혻Experts
+### A Visit to Intel Korea: Meeting the Experts
 
-Intel AI for Future Workforce?듼붴둛pecial Lecture Series
+Intel AI for Future Workforce — Special Lecture Series
 
-The last day of our first week (Friday, Nov 14) was special. We stepped out of the classroom and headed to **Intel Korea?셲 office in Yeouido** for a series of special lectures from current Intel professionals.
+The last day of our first week (Friday, Nov 14) was special. We stepped out of the classroom and headed to **Intel Korea's office in Yeouido** for a series of special lectures from current Intel professionals.
 
-Intel Korea in혻Yeouido
+![image](/images/posts/a-visit-to-intel-korea-meeting-the-experts/imported-01.png)
 
-### ?렎 Lecture혻Schedule
+Intel Korea in Yeouido
+
+### 🎤 Lecture Schedule
 
 - **2:00 PM:** SVP Yoon (Intel Client AI Vision)
 - **3:00 PM:** Director Nam (OpenVINO)
 - **4:00 PM:** SVP Cho (Intel DC AI Solution Overview)
 - **5:00 PM:** Deputy Manager Kim (Intel AI Toolkit)
 
-Attendance wasn?셳 mandatory, but obviously, I wasn?셳 going to miss this. It was a rare opportunity to see Intel?셲 AI technology and real-world solutions up close.
+Attendance wasn't mandatory, but obviously, I wasn't going to miss this. It was a rare opportunity to see Intel's AI technology and real-world solutions up close.
 
 ---
 
-### Preparing to Meet ?쏤uture Bosses?씲??)
+### Preparing to Meet "Future Bosses" (?)
 
 My home is in Yongin, which is quite a trek from Yeouido. Since being late is absolutely unacceptable to me, I planned to leave early.
 
-46min?쫚ot that far혻eh?
+![image](/images/posts/a-visit-to-intel-korea-meeting-the-experts/imported-02.png)
 
-But before that, I had another mission. My hair was a bit of a mess, so I booked a haircut at my usual salon at 11 AM. Why? Well, this program offers **internship opportunities** at Intel for top-performing graduates. So, with the mindset that I might be meeting my **future bosses** (even though they probably won?셳 remember me?쁾), I wanted to look sharp and professional.
+46min…not that far eh?
+
+But before that, I had another mission. My hair was a bit of a mess, so I booked a haircut at my usual salon at 11 AM. Why? Well, this program offers **internship opportunities** at Intel for top-performing graduates. So, with the mindset that I might be meeting my **future bosses** (even though they probably won't remember me😅), I wanted to look sharp and professional.
 
 I arrived in Yeouido around 1 PM, way too early. I was actually the first one there, so I waited at a nearby cafe until my classmates arrived.
 
@@ -57,37 +61,42 @@ I arrived in Yeouido around 1 PM, way too early. I was actually the first one th
 
 ### The Sessions
 
-1. **Intel Client AI Vision (SVP Yoon)** The first session was perfect for our level. He seemed to know exactly how much we knew (and didn?셳 know). He covered the basics of AI, Intel?셲 business areas, and how those businesses connect with AI technology.
+1. **Intel Client AI Vision (SVP Yoon)** The first session was perfect for our level. He seemed to know exactly how much we knew (and didn't know). He covered the basics of AI, Intel's business areas, and how those businesses connect with AI technology.
 
-Intel Client AI Vision (SVP혻Yoon)
+![image](/images/posts/a-visit-to-intel-korea-meeting-the-experts/imported-03.png)
 
-**2. OpenVINO (Director Nam)** The second lecture was by the **Head Developer of OpenVINO.** He explained what OpenVINO is, why it?셲 powerful, who should use it, and its limitations. Despite being the person who actually _built_ this software, he explained it in a way that even non-majors like us could understand. It was awe-inspiring to meet a ?쏥osu??(master) of this caliber.
+Intel Client AI Vision (SVP Yoon)
 
-**3. Intel DC AI Solution Overview (SVP Cho)** This session focused on Intel?셲 graphic cards and products. He candidly discussed the market situation?듼붴둪ominated by NVIDIA?듼붴둨ut explained Intel?셲 strategy of targeting markets that don?셳 necessarily require ultra-high-end, expensive GPUs.
+**2. OpenVINO (Director Nam)** The second lecture was by the **Head Developer of OpenVINO.** He explained what OpenVINO is, why it's powerful, who should use it, and its limitations. Despite being the person who actually *built* this software, he explained it in a way that even non-majors like us could understand. It was awe-inspiring to meet a "Gosu" (master) of this caliber.
 
-However??unlike the previous speaker, he seemed unaware of our beginner level. ?쁾 He dove into extremely technical details about graphic card architecture. It sounded like **alien language** to me: _?쏷his part of the GPU connects with that function?╈? But ironically, this lecture made reality hit home. It made me realize just how much I have to learn. I made a vow right then: _?쏰ne day, I will listen to this lecture again and understand every single word.??
+**3. Intel DC AI Solution Overview (SVP Cho)** This session focused on Intel's graphic cards and products. He candidly discussed the market situation — dominated by NVIDIA — but explained Intel's strategy of targeting markets that don't necessarily require ultra-high-end, expensive GPUs.
+
+However… unlike the previous speaker, he seemed unaware of our beginner level. 😅 He dove into extremely technical details about graphic card architecture. It sounded like **alien language** to me: *"This part of the GPU connects with that function…"* But ironically, this lecture made reality hit home. It made me realize just how much I have to learn. I made a vow right then: *"One day, I will listen to this lecture again and understand every single word."*
 
 **4. Intel AI Toolkit (Deputy Manager Kim)** The final session was practical. As a practitioner, he shared his experiences providing AI solutions. He will actually be visiting our classroom later as a **mentor** for our projects!
 
-He gave us a reality check: **?쏣asy problems have already been solved by existing developers.??* To grow as AI developers and create meaningful results, we need to tackle the **hard problems**?듼붴둻he ones no one has solved yet. He shared an example of a problem he solved for a telecommunications company (omitted here for security reasons).
+He gave us a reality check: **"Easy problems have already been solved by existing developers."** To grow as AI developers and create meaningful results, we need to tackle the **hard problems** — the ones no one has solved yet. He shared an example of a problem he solved for a telecommunications company (omitted here for security reasons).
 
-Oh, one more thing. We each received an **eco bag** as a gift. I saw a review from a previous group of students who took this same lecture, and apparently, they received a hoodie! I can?셳 deny I was a **little bummed** about getting an eco bag instead.
+Oh, one more thing. We each received an **eco bag** as a gift. I saw a review from a previous group of students who took this same lecture, and apparently, they received a hoodie! I can't deny I was a **little bummed** about getting an eco bag instead.
 
-Navy colored eco bag that I혻got!
+![image](/images/posts/a-visit-to-intel-korea-meeting-the-experts/imported-04.png)
+
+Navy colored eco bag that I got!
 
 ---
 
-### A Long Day?셲혻Journey
+### A Long Day's Journey
 
-After the informative sessions, my day wasn?셳 over. It was my grandmother?셲 birthday, so I had to drive straight to **Haman**, which is about 4?? hours away.
+After the informative sessions, my day wasn't over. It was my grandmother's birthday, so I had to drive straight to **Haman**, which is about 4–5 hours away.
 
-taking at least 4 hours..?삮
+![image](/images/posts/a-visit-to-intel-korea-meeting-the-experts/imported-05.png)
+
+taking at least 4 hours..😫
 
 Driving out of Yeouido on a Friday at 6 PM? **Absolute hell.** My schedule that day was intense:
 
-`11 AM Haircut` ??`Cafe` ??`Intel Korea Visit` ??`Hellish Drive` ??`Arrival in Haman`.
+`11 AM Haircut` → `Cafe` → `Intel Korea Visit` → `Hellish Drive` → `Arrival in Haman`.
 
-It was a long, exhausting day. But as I drove, I kept imagining myself: **?쏛fter finishing this 6-month course, could I be working at this amazing company???*
+It was a long, exhausting day. But as I drove, I kept imagining myself: **"After finishing this 6-month course, could I be working at this amazing company?"**
 
 The dream keeps me going.
-

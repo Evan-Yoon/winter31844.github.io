@@ -14,10 +14,33 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
+const allPosts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+const currentPostIndex = allPosts.findIndex(
+  (post) => (post.data.slug || post.id) === (entry.data.slug || entry.id),
+);
+
+const previousPost = currentPostIndex < allPosts.length - 1 ? allPosts[currentPostIndex + 1] : null;
+const nextPost = currentPostIndex > 0 ? allPosts[currentPostIndex - 1] : null;
+
+const relatedPosts = allPosts
+  .filter(
+    (post) =>
+      (post.data.slug || post.id) !== (entry.data.slug || entry.id) &&
+      post.data.category === entry.data.category,
+  )
+  .slice(0, 6);
 // 기존 entry.render() 대신 새로운 방식 적용
 const { Content } = await render(entry);
 ---
 
-<PostLayout frontmatter={entry.data}>
+<PostLayout
+  frontmatter={entry.data}
+  previousPost={previousPost}
+  nextPost={nextPost}
+  relatedPosts={relatedPosts}
+>
   <Content />
 </PostLayout>
