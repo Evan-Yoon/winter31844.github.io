@@ -1,11 +1,11 @@
----
-title: "[Walkmate] Day 16 — 최종 발표 준비와 YOLO11→YOLO26 전환 회고"
+﻿---
+title: "[Walkmate] Day 16 ??理쒖쥌 諛쒗몴 以鍮꾩? YOLO11?뭑OLO26 ?꾪솚 ?뚭퀬"
 slug: "walkmate-day16-presentation-preparation"
 date: 2026-02-24
 author: "Evan Yoon"
 category: "project"
 subcategory: "team-project"
-description: "Walkmate 프로젝트 전체를 정리한 회고. 초기 구상, 관리자 화면, YOLO11 한계, YOLO26 전환, 출력 형식 오류로 인한 오탐, 위험도/음성 안내 로직까지 한 글로 묶음."
+description: "Walkmate ?꾨줈?앺듃 ?꾩껜瑜??뺣━???뚭퀬. 珥덇린 援ъ긽, 愿由ъ옄 ?붾㈃, YOLO11 ?쒓퀎, YOLO26 ?꾪솚, 異쒕젰 ?뺤떇 ?ㅻ쪟濡??명븳 ?ㅽ깘, ?꾪뿕???뚯꽦 ?덈궡 濡쒖쭅源뚯? ??湲濡?臾띠쓬."
 thumbnail: "/images/posts/walkmate/cover16.png"
 tags:
   - walkmate
@@ -21,200 +21,211 @@ draft: false
 toc: true
 ---
 
-> **"발표 자료를 만든다는 건 예쁘게 정리하는 일이 아니라, 어디서 틀렸고 어떻게 바로잡았는지 끝까지 설명하는 일에 가까웠다."**
+> **"諛쒗몴 ?먮즺瑜?留뚮뱺?ㅻ뒗 嫄??덉걯寃??뺣━?섎뒗 ?쇱씠 ?꾨땲?? ?대뵒????멸퀬 ?대뼸寃?諛붾줈?≪븯?붿? ?앷퉴吏 ?ㅻ챸?섎뒗 ?쇱뿉 媛源뚯썱??"**
 >
-> Day 16에는 최종 발표를 준비했지만, 실제로 가장 오래 붙들고 있었던 것은 `Walkmate`가 어떤 문제를 풀려고 했고, 그 과정에서 왜 `YOLO11`에서 `YOLO26`으로 넘어가야 했는지, 그리고 그 전환 과정에서 얼마나 많은 오탐과 시행착오를 겪었는지를 정리하는 일이었다.
+> Day 16?먮뒗 理쒖쥌 諛쒗몴瑜?以鍮꾪뻽吏留? ?ㅼ젣濡?媛???ㅻ옒 遺숇뱾怨??덉뿀??寃껋? `Walkmate`媛 ?대뼡 臾몄젣瑜???ㅺ퀬 ?덇퀬, 洹?怨쇱젙?먯꽌 ??`YOLO11`?먯꽌 `YOLO26`?쇰줈 ?섏뼱媛???덈뒗吏, 洹몃━怨?洹??꾪솚 怨쇱젙?먯꽌 ?쇰쭏??留롮? ?ㅽ깘怨??쒗뻾李⑹삤瑜?寃れ뿀?붿?瑜??뺣━?섎뒗 ?쇱씠?덈떎.
 
 ---
 
-## 🚀 Today's Mission & Results
+## ?? Today's Mission & Results
 
-발표용 슬라이드를 정리하면서 프로젝트 전체 흐름을 다시 엮었다. 특히 사진으로 남아 있던 개발 흔적들을 빠짐없이 정리해 보니, `잘 된 장면`보다 `잘못 감지되던 과정`이 더 많은 설명을 필요로 한다는 점이 분명해졌다.
+諛쒗몴???щ씪?대뱶瑜??뺣━?섎㈃???꾨줈?앺듃 ?꾩껜 ?먮쫫???ㅼ떆 ??뿀?? ?뱁엳 ?ъ쭊?쇰줈 ?⑥븘 ?덈뜕 媛쒕컻 ?붿쟻?ㅼ쓣 鍮좎쭚?놁씠 ?뺣━??蹂대땲, `?????λ㈃`蹂대떎 `?섎せ 媛먯??섎뜕 怨쇱젙`????留롮? ?ㅻ챸???꾩슂濡??쒕떎???먯씠 遺꾨챸?댁죱??
 
-| 목표 항목                    |  상태   | 비고                                            |
+| 紐⑺몴 ??ぉ                    |  ?곹깭   | 鍮꾧퀬                                            |
 | :--------------------------- | :-----: | :---------------------------------------------- |
-| 최종 발표 자료 제작          | ✅ 완료 | 기능보다 의사결정 흐름 중심으로 재구성          |
-| Walkmate 전체 회고 정리      | ✅ 완료 | 기획, 모델 학습, 관리자 UI, 음성 안내까지 통합  |
-| YOLO11→YOLO26 전환 근거 정리 | ✅ 완료 | 탐지 성능과 출력 형식 차이 문제까지 문서화      |
-| 오탐 사례 아카이빙           | ✅ 완료 | 출력 텐서 처리 실수와 점자블록 오인식 사례 포함 |
+| 理쒖쥌 諛쒗몴 ?먮즺 ?쒖옉          | ???꾨즺 | 湲곕뒫蹂대떎 ?섏궗寃곗젙 ?먮쫫 以묒떖?쇰줈 ?ш뎄??         |
+| Walkmate ?꾩껜 ?뚭퀬 ?뺣━      | ???꾨즺 | 湲고쉷, 紐⑤뜽 ?숈뒿, 愿由ъ옄 UI, ?뚯꽦 ?덈궡源뚯? ?듯빀  |
+| YOLO11?뭑OLO26 ?꾪솚 洹쇨굅 ?뺣━ | ???꾨즺 | ?먯? ?깅뒫怨?異쒕젰 ?뺤떇 李⑥씠 臾몄젣源뚯? 臾몄꽌??     |
+| ?ㅽ깘 ?щ? ?꾩뭅?대튃           | ???꾨즺 | 異쒕젰 ?먯꽌 泥섎━ ?ㅼ닔? ?먯옄釉붾줉 ?ㅼ씤???щ? ?ы븿 |
 
 ---
 
-## 1. 우리가 처음 그리고 있던 서비스
+## 1. ?곕━媛 泥섏쓬 洹몃━怨??덈뜕 ?쒕퉬??
+Walkmate??異쒕컻?먯? ?⑥닚??媛앹껜 ?먯? ?깆씠 ?꾨땲?덈떎. 蹂댄뻾 ?쎌옄媛 湲??꾩뿉??留덉＜移섎뒗 ?꾪뿕 ?붿냼瑜?鍮좊Ⅴ寃??몄떇?섍퀬, 洹?寃곌낵瑜??뚯꽦?쇰줈 ?꾨떖?섍퀬, ?꾩슂?섎㈃ ?댁쁺?먭? ?꾩옣 ?곗씠?곕? 異붿쟻?????덈뒗 援ъ“瑜?留뚮뱶??寃껋씠 紐⑺몴???
 
-Walkmate의 출발점은 단순한 객체 탐지 앱이 아니었다. 보행 약자가 길 위에서 마주치는 위험 요소를 빠르게 인식하고, 그 결과를 음성으로 전달하고, 필요하면 운영자가 현장 데이터를 추적할 수 있는 구조를 만드는 것이 목표였다.
+泥섏쓬 援ъ긽???쒕퉬???먮쫫? ?꾨옒 ?뚭컻 ?곸긽??媛??吏곴??곸쑝濡??닿꺼 ?덈떎. 湲???쎄린 ?꾩뿉 癒쇱? 蹂대㈃ ?댄썑???쒗뻾李⑹삤媛 ??以묒슂?덈뒗吏 ?????ㅼ뼱?⑤떎.
 
-처음 구상한 서비스 흐름은 아래 소개 영상에 가장 직관적으로 담겨 있다. 글을 읽기 전에 먼저 보면 이후의 시행착오가 왜 중요했는지 더 잘 들어온다.
+<iframe
+  width="100%"
+  height="428"
+  src="https://www.youtube.com/embed/n8qY4H0dHGQ"
+  title="Walkmate 소개 영상"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+  style="display:block; width:100%; max-width:760px; margin:1rem auto; border:0; border-radius:16px;"
+></iframe>
 
-<video controls preload="metadata" style="display:block; width:100%; max-width:760px; margin:1rem auto;">
-  <source src="/files/walkmate-intro-demo.mp4" type="video/mp4" />
-  브라우저가 동영상을 지원하지 않으면 <a href="/files/walkmate-intro-demo.mp4">여기서 영상을 열 수 있다</a>.
-</video>
+<img src="/images/posts/walkmate/gallery/wm-20.png" alt="Walkmate 理쒖큹 湲곕? ?붾㈃ 肄섏뀎?? style="display:block; width:100%; max-width:720px; margin:1rem auto;" />
 
-<img src="/images/posts/walkmate/gallery/wm-20.png" alt="Walkmate 최초 기대 화면 콘셉트" style="display:block; width:100%; max-width:720px; margin:1rem auto;" />
+泥섏쓬?먮뒗 ?꾩? 媛숈? ?붾㈃??湲곕??덈떎. ?ъ슜?먮뒗 吏湲??대뵒瑜?蹂닿퀬 ?덈뒗吏, ?대뼡 ?꾪뿕 ?붿냼媛 ?덈뒗吏, ?대뒓 諛⑺뼢?쇰줈 ?吏곸뿬???섎뒗吏瑜??쒕늿???댄빐?????덉뼱???덈떎.
 
-처음에는 위와 같은 화면을 기대했다. 사용자는 지금 어디를 보고 있는지, 어떤 위험 요소가 있는지, 어느 방향으로 움직여야 하는지를 한눈에 이해할 수 있어야 했다.
+<img src="/images/posts/walkmate/gallery/wm-05.png" alt="Walkmate ?쒕퉬??援ъ긽?? style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
 
-<img src="/images/posts/walkmate/gallery/wm-05.png" alt="Walkmate 서비스 구상도" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
+援ъ긽?꾩뿉?쒕룄 ?뺤씤?????덈벏, ???섎굹留???留뚮뱶??寃껋쑝濡??앸굹???꾨줈?앺듃媛 ?꾨땲?덈떎. ?ъ슜???⑤쭚, 媛앹껜 ?먯? 紐⑤뜽, ?뚯꽦 ?덈궡, ?쒕쾭 ??μ냼, 愿由ъ옄 ?붾㈃???꾨? ?곌껐?섏뼱???덈떎.
 
-구상도에서도 확인할 수 있듯, 앱 하나만 잘 만드는 것으로 끝나는 프로젝트가 아니었다. 사용자 단말, 객체 탐지 모델, 음성 안내, 서버 저장소, 관리자 화면이 전부 연결되어야 했다.
+<img src="/images/posts/walkmate/gallery/wm-04.png" alt="Walkmate 濡쒓퀬 ?쒖븞" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
 
-<img src="/images/posts/walkmate/gallery/wm-04.png" alt="Walkmate 로고 시안" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
-
-로고 시안도 초반에 정리했다. 겉보기에는 작은 요소지만, 팀 안에서는 "이 프로젝트가 단순한 데모가 아니라 실제 서비스처럼 보여야 한다"는 합의를 상징하는 결과물이기도 했다.
-
----
-
-## 2. 현장 데이터를 모으고 운영할 수 있는 구조부터 만들었다
-
-모델이 좋아도 실제 보행 환경 데이터를 모으고 관리할 수 없으면 금방 막힌다. 그래서 추론 모델과 별개로, 이미지 업로드 경로와 관리자 화면 구조를 꽤 일찍부터 잡아 두었다.
-
-<img src="/images/posts/walkmate/gallery/wm-01.png" alt="백엔드 파일 구조 설정 화면" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
-
-백엔드 파일 구조를 먼저 정리한 이유는 이후 들어올 이미지, 탐지 결과, 위험도 분류 결과를 흩어지지 않게 관리하기 위해서였다.
-
-<img src="/images/posts/walkmate/gallery/wm-28.png" alt="휴대폰에서 3초마다 찍은 사진을 AWS S3에 저장한 화면" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
-
-현장 테스트에서는 휴대폰에서 3초마다 사진을 찍어 `AWS S3`에 올리는 방식으로 데이터를 남겼다. 이 기록이 있어야 모델이 어떤 장면에서 흔들렸는지 나중에 재검토할 수 있었다.
-
-<img src="/images/posts/walkmate/gallery/wm-10.png" alt="관리자용 웹 대시보드 페이지" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
-
-<img src="/images/posts/walkmate/gallery/wm-11.png" alt="관리자용 웹 마스터DB 페이지" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
-
-<img src="/images/posts/walkmate/gallery/wm-12.png" alt="관리자용 웹 세부 항목 페이지" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
-
-관리자 웹도 함께 만들었다. 위험 신고를 단순히 쌓아 두는 것이 아니라, 어떤 지점에서 무엇이 반복적으로 탐지되는지, 어떤 사진이 실제 위험 판단에 쓰일 만한지 검토할 수 있게 하려는 목적이었다. 현장성과 운영성을 같이 잡아야 서비스가 굴러간다는 걸 이 시점부터 의식했다.
+濡쒓퀬 ?쒖븞??珥덈컲???뺣━?덈떎. 寃됰낫湲곗뿉???묒? ?붿냼吏留? ? ?덉뿉?쒕뒗 "???꾨줈?앺듃媛 ?⑥닚???곕え媛 ?꾨땲???ㅼ젣 ?쒕퉬?ㅼ쿂??蹂댁뿬???쒕떎"???⑹쓽瑜??곸쭠?섎뒗 寃곌낵臾쇱씠湲곕룄 ?덈떎.
 
 ---
 
-## 3. YOLO11 단계: 점자블록을 세밀하게 나누려 했지만 너무 자주 흔들렸다
+## 2. ?꾩옣 ?곗씠?곕? 紐⑥쑝怨??댁쁺?????덈뒗 援ъ“遺??留뚮뱾?덈떎
 
-초기에는 `YOLO11` 계열 모델로 시작했다. 점자블록과 주변 장애물을 같이 다루면서도 모바일에서 돌아갈 수 있는 선을 찾으려다 보니, 경량 모델에 기대를 많이 걸었다.
+紐⑤뜽??醫뗭븘???ㅼ젣 蹂댄뻾 ?섍꼍 ?곗씠?곕? 紐⑥쑝怨?愿由ы븷 ???놁쑝硫?湲덈갑 留됲엺?? 洹몃옒??異붾줎 紐⑤뜽怨?蹂꾧컻濡? ?대?吏 ?낅줈??寃쎈줈? 愿由ъ옄 ?붾㈃ 援ъ“瑜?苑??쇱컢遺???≪븘 ?먯뿀??
 
-<img src="/images/posts/walkmate/gallery/wm-02.png" alt="Roboflow에서 기존 모델을 검색한 화면" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-01.png" alt="諛깆뿏???뚯씪 援ъ“ ?ㅼ젙 ?붾㈃" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
 
-처음에는 `Roboflow`에서 기존 모델을 검토하며 어떤 클래스 구성이 현실적인지부터 확인했다. 이때만 해도 "기존 모델을 조금 손보면 되지 않을까"라는 기대가 있었다.
+諛깆뿏???뚯씪 援ъ“瑜?癒쇱? ?뺣━???댁쑀???댄썑 ?ㅼ뼱???대?吏, ?먯? 寃곌낵, ?꾪뿕??遺꾨쪟 寃곌낵瑜??⑹뼱吏吏 ?딄쾶 愿由ы븯湲??꾪빐?쒖???
 
-<img src="/images/posts/walkmate/gallery/wm-21.png" alt="점자블록을 네 종류로 학습시키고 정확도를 분석한 화면" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-28.png" alt="?대??곗뿉??3珥덈쭏??李띿? ?ъ쭊??AWS S3????ν븳 ?붾㈃" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
 
-우리는 점자블록을 `stop block broken`, `stop block normal`, `straight block broken`, `straight block normal`처럼 세밀하게 나눠 학습시켜 보았다. 아이디어 자체는 좋았지만, 실제 모바일 추론 환경에서는 클래스가 세분화될수록 안정성이 떨어졌다.
+?꾩옣 ?뚯뒪?몄뿉?쒕뒗 ?대??곗뿉??3珥덈쭏???ъ쭊??李띿뼱 `AWS S3`???щ━??諛⑹떇?쇰줈 ?곗씠?곕? ?④꼈?? ??湲곕줉???덉뼱??紐⑤뜽???대뼡 ?λ㈃?먯꽌 ?붾뱾?몃뒗吏 ?섏쨷???ш??좏븷 ???덉뿀??
 
-<img src="/images/posts/walkmate/gallery/wm-26.png" alt="초기 모델이 노란색 점자 블록을 감지한 장면" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-10.png" alt="愿由ъ옄??????쒕낫???섏씠吏" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
 
-<img src="/images/posts/walkmate/gallery/wm-06.png" alt="YOLO11 nano 모델이 일부 점자 블록만 감지한 장면" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-11.png" alt="愿由ъ옄????留덉뒪?캝B ?섏씠吏" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
 
-초기 모델은 노란색 점자블록을 어느 정도 잡기는 했지만, 연속된 블록을 모두 읽지 못하고 일부만 감지하는 경우가 자주 나왔다. 한 장면 안에서도 어떤 블록은 잡고 어떤 블록은 놓치는 식이라, 실제 안내용으로 쓰기에는 불안정했다.
+<img src="/images/posts/walkmate/gallery/wm-12.png" alt="愿由ъ옄?????몃? ??ぉ ?섏씠吏" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
 
-<img src="/images/posts/walkmate/gallery/wm-03.png" alt="직진 블록과 정지 블록, 파손 여부를 세밀하게 감지하는 데 실패한 화면" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
-
-세부 클래스를 더 잘 나눌수록 좋은 모델이 될 거라 생각했지만 결과는 반대였다. 직진 블록인지 정지 블록인지, 파손 여부가 맞는지까지 한 번에 맞히려다 보니 모델이 장면을 안정적으로 해석하지 못했다.
-
-<img src="/images/posts/walkmate/gallery/wm-22.png" alt="점자블록은 감지했지만 auto orient 설정 문제로 이상하게 표시된 화면" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
-
-여기에 `auto orient` 설정 문제까지 겹쳤다. 감지는 되었는데 화면 좌표계가 틀어져 엉뚱한 위치에 박스가 그려지는 상황이 발생했다. 이때 깨달은 건, 모델 정확도만이 아니라 입력 이미지 전처리와 후처리까지 포함해 전체 파이프라인을 봐야 한다는 점이었다.
+愿由ъ옄 ?밸룄 ?④퍡 留뚮뱾?덈떎. ?꾪뿕 ?좉퀬瑜??⑥닚???볦븘 ?먮뒗 寃껋씠 ?꾨땲?? ?대뼡 吏?먯뿉??臾댁뾿??諛섎났?곸쑝濡??먯??섎뒗吏, ?대뼡 ?ъ쭊???ㅼ젣 ?꾪뿕 ?먮떒???곗씪 留뚰븳吏 寃?좏븷 ???덇쾶 ?섎젮??紐⑹쟻?댁뿀?? ?꾩옣?깃낵 ?댁쁺?깆쓣 媛숈씠 ?≪븘???쒕퉬?ㅺ? 援대윭媛꾨떎??嫄????쒖젏遺???섏떇?덈떎.
 
 ---
 
-## 4. 그래서 YOLO11에서 YOLO26으로 갈아탔다
+## 3. YOLO11 ?④퀎: ?먯옄釉붾줉???몃??섍쾶 ?섎늻???덉?留??덈Т ?먯＜ ?붾뱾?몃떎
 
-점자블록과 일반 장애물을 더 정밀하게 잡아야 했기 때문에, 우리는 결국 `YOLO11` 중심 접근을 접고 `YOLO26` 계열로 전환했다. 더 정확하게 잡히길 기대했지만, 여기서부터는 다른 종류의 문제가 시작됐다.
+珥덇린?먮뒗 `YOLO11` 怨꾩뿴 紐⑤뜽濡??쒖옉?덈떎. ?먯옄釉붾줉怨?二쇰? ?μ븷臾쇱쓣 媛숈씠 ?ㅻ（硫댁꽌??紐⑤컮?쇱뿉???뚯븘媛????덈뒗 ?좎쓣 李얠쑝?ㅻ떎 蹂대땲, 寃쎈웾 紐⑤뜽??湲곕?瑜?留롮씠 嫄몄뿀??
 
-<img src="/images/posts/walkmate/gallery/wm-07.png" alt="YOLO26n 구성 로직" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-02.png" alt="Roboflow?먯꽌 湲곗〈 紐⑤뜽??寃?됲븳 ?붾㈃" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
 
-모델 교체 자체는 생각보다 빠르게 진행됐다. 하지만 `YOLO26`은 기존에 쓰던 모델과 출력 형식이 달랐고, 이 차이를 우리가 초반에 너무 가볍게 봤다.
+泥섏쓬?먮뒗 `Roboflow`?먯꽌 湲곗〈 紐⑤뜽??寃?좏븯硫??대뼡 ?대옒??援ъ꽦???꾩떎?곸씤吏遺???뺤씤?덈떎. ?대븣留??대룄 "湲곗〈 紐⑤뜽??議곌툑 ?먮낫硫??섏? ?딆쓣源??쇰뒗 湲곕?媛 ?덉뿀??
 
-<img src="/images/posts/walkmate/gallery/wm-17.png" alt="YOLO26nano로 바꿨지만 출력 형식 차이로 잘못 감지한 장면" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-21.png" alt="?먯옄釉붾줉????醫낅쪟濡??숈뒿?쒗궎怨??뺥솗?꾨? 遺꾩꽍???붾㈃" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
 
-정확도를 높이기 위해 `YOLO26nano`로 올렸는데도 결과가 이상했던 이유는 모델 자체의 성능보다 `출력 텐서 해석 방식`에 있었다. 클래스 축, 박스 좌표, confidence를 읽는 순서가 기존 코드와 맞지 않으면 모델이 멀쩡해도 엉뚱한 물체를 본다.
+?곕━???먯옄釉붾줉??`stop block broken`, `stop block normal`, `straight block broken`, `straight block normal`泥섎읆 ?몃??섍쾶 ?섎닠 ?숈뒿?쒖폒 蹂댁븯?? ?꾩씠?붿뼱 ?먯껜??醫뗭븯吏留? ?ㅼ젣 紐⑤컮??異붾줎 ?섍꼍?먯꽌???대옒?ㅺ? ?몃텇?붾맆?섎줉 ?덉젙?깆씠 ?⑥뼱議뚮떎.
 
-<img src="/images/posts/walkmate/gallery/wm-15.png" alt="모델 출력 형식을 잘못 입력해서 사물을 이상하게 추론한 화면" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-26.png" alt="珥덇린 紐⑤뜽???몃????먯옄 釉붾줉??媛먯????λ㈃" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
 
-<img src="/images/posts/walkmate/gallery/wm-14.png" alt="모델 출력 형식을 잘못 입력하여 사물을 잘못 인식한 두 번째 사례" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-06.png" alt="YOLO11 nano 紐⑤뜽???쇰? ?먯옄 釉붾줉留?媛먯????λ㈃" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
 
-초반에는 "모델이 왜 이렇게 멍청해졌지?"라고 생각했지만, 사실 멍청했던 건 모델이 아니라 우리가 작성한 후처리 코드였다. 출력 형식을 한 번 잘못 해석하니 박스 위치와 클래스 결과가 줄줄이 무너졌다.
+珥덇린 紐⑤뜽? ?몃????먯옄釉붾줉???대뒓 ?뺣룄 ?↔린???덉?留? ?곗냽??釉붾줉??紐⑤몢 ?쎌? 紐삵븯怨??쇰?留?媛먯??섎뒗 寃쎌슦媛 ?먯＜ ?섏솕?? ???λ㈃ ?덉뿉?쒕룄 ?대뼡 釉붾줉? ?↔퀬 ?대뼡 釉붾줉? ?볦튂???앹씠?? ?ㅼ젣 ?덈궡?⑹쑝濡??곌린?먮뒗 遺덉븞?뺥뻽??
 
-<img src="/images/posts/walkmate/gallery/wm-13.png" alt="모델 출력 형식을 맞춘 뒤 모든 사물을 제대로 인식한 장면" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-03.png" alt="吏곸쭊 釉붾줉怨??뺤? 釉붾줉, ?뚯넀 ?щ?瑜??몃??섍쾶 媛먯??섎뒗 ???ㅽ뙣???붾㈃" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
 
-출력 형식을 다시 맞춘 뒤에는 결과가 확연히 달라졌다. 이 장면은 우리가 "모델을 바꾸는 것"보다 "모델이 뱉는 값을 정확히 읽는 것"이 먼저라는 사실을 가장 분명하게 확인한 순간이었다.
+?몃? ?대옒?ㅻ? ?????섎닃?섎줉 醫뗭? 紐⑤뜽????嫄곕씪 ?앷컖?덉?留?寃곌낵??諛섎???? 吏곸쭊 釉붾줉?몄? ?뺤? 釉붾줉?몄?, ?뚯넀 ?щ?媛 留욌뒗吏源뚯? ??踰덉뿉 留욏엳?ㅻ떎 蹂대땲 紐⑤뜽???λ㈃???덉젙?곸쑝濡??댁꽍?섏? 紐삵뻽??
 
-<img src="/images/posts/walkmate/gallery/wm-19.png" alt="출력 형식을 올바르게 맞췄지만 노란색 점자 블록을 벤치로 잘못 인식한 화면" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-22.png" alt="?먯옄釉붾줉? 媛먯??덉?留?auto orient ?ㅼ젙 臾몄젣濡??댁긽?섍쾶 ?쒖떆???붾㈃" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
 
-물론 여기서 끝나지는 않았다. 출력 형식을 제대로 맞춘 뒤에도 노란색 점자블록을 벤치로 잘못 인식하는 장면이 나왔다. 이건 모델 파싱 문제가 아니라 데이터 편향과 클래스 경계 문제에 가까웠다. 즉, 코드 수정만으로 해결되지 않는 오탐도 분명히 있었다.
-
-<img src="/images/posts/walkmate/gallery/wm-08.png" alt="YOLO26nano 모델이 출력 형식을 맞춘 뒤 물체를 정밀하게 감지하는 장면" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
-
-그래도 최종적으로는 `YOLO26nano` 쪽이 더 안정적인 결과를 보여줬다. 완벽하다고 말할 수는 없지만, 최소한 "왜 틀리는지 설명할 수 없는 상태"에서는 벗어났다. 그 차이가 실제 프로젝트에서는 매우 컸다.
+?ш린??`auto orient` ?ㅼ젙 臾몄젣源뚯? 寃뱀낀?? 媛먯????섏뿀?붾뜲 ?붾㈃ 醫뚰몴怨꾧? ??댁졇 ?됰슧???꾩튂??諛뺤뒪媛 洹몃젮吏???곹솴??諛쒖깮?덈떎. ?대븣 源⑤떖? 嫄? 紐⑤뜽 ?뺥솗?꾨쭔???꾨땲???낅젰 ?대?吏 ?꾩쿂由ъ? ?꾩쿂由ш퉴吏 ?ы븿???꾩껜 ?뚯씠?꾨씪?몄쓣 遊먯빞 ?쒕떎???먯씠?덈떎.
 
 ---
 
-## 5. 탐지 결과를 사용자 안내로 바꾸는 로직
+## 4. 洹몃옒??YOLO11?먯꽌 YOLO26?쇰줈 媛덉븘?붾떎
 
-탐지는 시작일 뿐이다. Walkmate에서는 감지된 결과를 곧바로 사용자 음성 안내와 위험도 판단으로 바꿔야 했다. 이 과정이 없으면 박스가 잘 그려져도 서비스 가치는 거의 없다.
+?먯옄釉붾줉怨??쇰컲 ?μ븷臾쇱쓣 ???뺣??섍쾶 ?≪븘???덇린 ?뚮Ц?? ?곕━??寃곌뎅 `YOLO11` 以묒떖 ?묎렐???묎퀬 `YOLO26` 怨꾩뿴濡??꾪솚?덈떎. ???뺥솗?섍쾶 ?≫엳湲?湲곕??덉?留? ?ш린?쒕??곕뒗 ?ㅻⅨ 醫낅쪟??臾몄젣媛 ?쒖옉?먮떎.
 
-<img src="/images/posts/walkmate/gallery/wm-27.png" alt="YOLO 80개 물체를 한글로 매핑한 코드 화면" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-07.png" alt="YOLO26n 援ъ꽦 濡쒖쭅" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
 
-먼저 `YOLO` 클래스들을 한글 안내 문장에 맞게 매핑했다. 영어 클래스 이름을 그대로 읽어 주는 앱은 실제 사용자에게 거의 도움이 되지 않기 때문이다.
+紐⑤뜽 援먯껜 ?먯껜???앷컖蹂대떎 鍮좊Ⅴ寃?吏꾪뻾?먮떎. ?섏?留?`YOLO26`? 湲곗〈???곕뜕 紐⑤뜽怨?異쒕젰 ?뺤떇???щ옄怨? ??李⑥씠瑜??곕━媛 珥덈컲???덈Т 媛蹂띻쾶 遊ㅻ떎.
 
-<img src="/images/posts/walkmate/gallery/wm-09.png" alt="감지 물체를 3단계 위험도로 분류한 코드 화면" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-17.png" alt="YOLO26nano濡?諛붽엥吏留?異쒕젰 ?뺤떇 李⑥씠濡??섎せ 媛먯????λ㈃" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
 
-탐지된 물체는 `3단계 위험도`로 나눴다. 모든 물체를 동일하게 읽어 주면 오히려 소음만 많아지기 때문에, 어떤 것은 즉시 경고하고 어떤 것은 참고 정보로만 주는 식의 층위가 필요했다.
+?뺥솗?꾨? ?믪씠湲??꾪빐 `YOLO26nano`濡??щ졇?붾뜲??寃곌낵媛 ?댁긽?덈뜕 ?댁쑀??紐⑤뜽 ?먯껜???깅뒫蹂대떎 `異쒕젰 ?먯꽌 ?댁꽍 諛⑹떇`???덉뿀?? ?대옒??異? 諛뺤뒪 醫뚰몴, confidence瑜??쎈뒗 ?쒖꽌媛 湲곗〈 肄붾뱶? 留욎? ?딆쑝硫?紐⑤뜽??硫姨≫빐???됰슧??臾쇱껜瑜?蹂몃떎.
 
-<img src="/images/posts/walkmate/gallery/wm-16.png" alt="물체 인식과 위험도, 거리 인식 기반 음성 안내 출력 코드" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-15.png" alt="紐⑤뜽 異쒕젰 ?뺤떇???섎せ ?낅젰?댁꽌 ?щЪ???댁긽?섍쾶 異붾줎???붾㈃" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
 
-이후 거리 판단과 연결해 음성 안내 문장을 구성했다. 결국 사용자가 듣게 되는 것은 코드가 아니라 "앞에 장애물이 있습니다", "조심해서 이동하세요" 같은 문장이기 때문에, 추론 결과를 사용자 언어로 번역하는 레이어가 중요했다.
+<img src="/images/posts/walkmate/gallery/wm-14.png" alt="紐⑤뜽 異쒕젰 ?뺤떇???섎せ ?낅젰?섏뿬 ?щЪ???섎せ ?몄떇????踰덉㎏ ?щ?" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
 
-<img src="/images/posts/walkmate/gallery/wm-18.png" alt="사용자용 안내 중 페이지" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+珥덈컲?먮뒗 "紐⑤뜽?????대젃寃?硫띿껌?댁죱吏?"?쇨퀬 ?앷컖?덉?留? ?ъ떎 硫띿껌?덈뜕 嫄?紐⑤뜽???꾨땲???곕━媛 ?묒꽦???꾩쿂由?肄붾뱶??? 異쒕젰 ?뺤떇????踰??섎せ ?댁꽍?섎땲 諛뺤뒪 ?꾩튂? ?대옒??寃곌낵媛 以꾩쨪??臾대꼫議뚮떎.
 
-사용자 안내 화면도 너무 많은 정보를 한 번에 보여주지 않도록 구성했다. 큰 사진이나 복잡한 텍스트보다, 지금 위험한지와 어느 쪽으로 가야 하는지가 우선이었다.
+<img src="/images/posts/walkmate/gallery/wm-13.png" alt="紐⑤뜽 異쒕젰 ?뺤떇??留욎텣 ??紐⑤뱺 ?щЪ???쒕?濡??몄떇???λ㈃" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
 
-아래 시연 영상은 위에서 설명한 탐지, 위험도 판단, 안내 흐름이 실제 앱에서 어떻게 이어졌는지 보여준다. 소개 영상이 서비스 방향을 설명하는 용도였다면, 이 영상은 구현 결과를 확인하는 데 더 가깝다.
+異쒕젰 ?뺤떇???ㅼ떆 留욎텣 ?ㅼ뿉??寃곌낵媛 ?뺤뿰???щ씪議뚮떎. ???λ㈃? ?곕━媛 "紐⑤뜽??諛붽씀??寃?蹂대떎 "紐⑤뜽??諭됰뒗 媛믪쓣 ?뺥솗???쎈뒗 寃???癒쇱??쇰뒗 ?ъ떎??媛??遺꾨챸?섍쾶 ?뺤씤???쒓컙?댁뿀??
 
-<video controls preload="metadata" style="display:block; width:100%; max-width:760px; margin:1rem auto;">
-  <source src="/files/walkmate-demo.mp4" type="video/mp4" />
-  브라우저가 동영상을 지원하지 않으면 <a href="/files/walkmate-demo.mp4">여기서 영상을 열 수 있다</a>.
-</video>
+<img src="/images/posts/walkmate/gallery/wm-19.png" alt="異쒕젰 ?뺤떇???щ컮瑜닿쾶 留욎톬吏留??몃????먯옄 釉붾줉??踰ㅼ튂濡??섎せ ?몄떇???붾㈃" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
 
----
+臾쇰줎 ?ш린???앸굹吏???딆븯?? 異쒕젰 ?뺤떇???쒕?濡?留욎텣 ?ㅼ뿉???몃????먯옄釉붾줉??踰ㅼ튂濡??섎せ ?몄떇?섎뒗 ?λ㈃???섏솕?? ?닿굔 紐⑤뜽 ?뚯떛 臾몄젣媛 ?꾨땲???곗씠???명뼢怨??대옒??寃쎄퀎 臾몄젣??媛源뚯썱?? 利? 肄붾뱶 ?섏젙留뚯쑝濡??닿껐?섏? ?딅뒗 ?ㅽ깘??遺꾨챸???덉뿀??
 
-## 6. 발표에서 가장 강조한 장면은 '잘된 결과'보다 '틀린 결과'였다
+<img src="/images/posts/walkmate/gallery/wm-08.png" alt="YOLO26nano 紐⑤뜽??異쒕젰 ?뺤떇??留욎텣 ??臾쇱껜瑜??뺣??섍쾶 媛먯??섎뒗 ?λ㈃" style="display:block; width:100%; max-width:560px; margin:1rem auto;" />
 
-발표를 준비하면서 오히려 더 확신하게 된 건, Walkmate의 핵심은 멋진 데모 화면 몇 장이 아니라 왜 틀렸는지 추적하고 고친 과정 자체에 있었다는 점이다.
-
-- `YOLO11` 단계에서는 점자블록 세분화 자체가 모바일 추론 안정성과 충돌했다.
-- `YOLO26` 단계에서는 모델 변경보다 출력 형식 변경이 더 큰 난관이었다.
-- 출력 형식을 맞춘 뒤에도 점자블록을 벤치로 보는 식의 오탐이 남았고, 이건 데이터 품질과 클래스 설계 문제를 다시 보게 만들었다.
-- 결국 모델 선택, 후처리, 위험도 분류, 음성 안내, 관리자 검토 화면이 한 세트로 움직여야 했다.
-
-이 프로젝트를 통해 배운 건 "더 최신 모델을 쓰면 끝난다"가 아니라, 모델 버전이 바뀌는 순간 주변 코드와 데이터 해석 방식도 함께 다시 검증해야 한다는 사실이었다. 이번 글에서 사진을 전부 넣은 이유도 그 때문이다. 잘 나온 결과만 보면 간단해 보이지만, 실제로는 그 앞에 훨씬 많은 실패 화면이 있었다.
+洹몃옒??理쒖쥌?곸쑝濡쒕뒗 `YOLO26nano` 履쎌씠 ???덉젙?곸씤 寃곌낵瑜?蹂댁뿬以щ떎. ?꾨꼍?섎떎怨?留먰븷 ?섎뒗 ?놁?留? 理쒖냼??"???由щ뒗吏 ?ㅻ챸?????녿뒗 ?곹깭"?먯꽌??踰쀬뼱?щ떎. 洹?李⑥씠媛 ?ㅼ젣 ?꾨줈?앺듃?먯꽌??留ㅼ슦 而몃떎.
 
 ---
 
-## 7. 팀 프로젝트다운 흔적들도 같이 남겨 두었다
+## 5. ?먯? 寃곌낵瑜??ъ슜???덈궡濡?諛붽씀??濡쒖쭅
 
-기술 얘기만 남기면 프로젝트가 너무 매끈하게 보일 수 있다. 실제 현장에서는 밤늦게까지 모델 테스트를 돌리고, 잘못 감지된 사진을 다시 보고, 발표 자료를 고치면서 버티는 시간이 더 길었다. 그리고 정말 감사하게도 지호님 남편분께서 직접 두쫀쿠의 변형 버전인 두쫀초랑 휘낭시에를 만들어서 주셨다. 덕분에 팀원들과 함께 힘내서 발표를 준비할 수 있었다.
+?먯????쒖옉??肉먯씠?? Walkmate?먯꽌??媛먯???寃곌낵瑜?怨㏓컮濡??ъ슜???뚯꽦 ?덈궡? ?꾪뿕???먮떒?쇰줈 諛붽퓭???덈떎. ??怨쇱젙???놁쑝硫?諛뺤뒪媛 ??洹몃젮?몃룄 ?쒕퉬??媛移섎뒗 嫄곗쓽 ?녿떎.
 
-<img src="/images/posts/walkmate/gallery/wm-23.png" alt="팀 프로젝트 중 함께 먹은 두쫀초 사진 1" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-27.png" alt="YOLO 80媛?臾쇱껜瑜??쒓?濡?留ㅽ븨??肄붾뱶 ?붾㈃" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
 
-<img src="/images/posts/walkmate/gallery/wm-24.png" alt="팀 프로젝트 중 함께 먹은 두쫀초 사진 2" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
+癒쇱? `YOLO` ?대옒?ㅻ뱾???쒓? ?덈궡 臾몄옣??留욊쾶 留ㅽ븨?덈떎. ?곸뼱 ?대옒???대쫫??洹몃?濡??쎌뼱 二쇰뒗 ?깆? ?ㅼ젣 ?ъ슜?먯뿉寃?嫄곗쓽 ?꾩????섏? ?딄린 ?뚮Ц?대떎.
 
-<img src="/images/posts/walkmate/gallery/wm-25.png" alt="팀 프로젝트 중 함께 먹은 휘낭시에 사진" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
+<img src="/images/posts/walkmate/gallery/wm-09.png" alt="媛먯? 臾쇱껜瑜?3?④퀎 ?꾪뿕?꾨줈 遺꾨쪟??肄붾뱶 ?붾㈃" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
 
-이 사진들은 기능 설명과 직접 연결되지는 않지만, Walkmate가 실제로는 사람들 사이의 협업과 체력전 위에서 굴러갔다는 걸 보여주는 기록이라 남겨 두었다. 문제를 해결한 건 모델 하나가 아니라 끝까지 붙들고 있던 팀이었다.
+?먯???臾쇱껜??`3?④퀎 ?꾪뿕??濡??섎댋?? 紐⑤뱺 臾쇱껜瑜??숈씪?섍쾶 ?쎌뼱 二쇰㈃ ?ㅽ엳???뚯쓬留?留롮븘吏湲??뚮Ц?? ?대뼡 寃껋? 利됱떆 寃쎄퀬?섍퀬 ?대뼡 寃껋? 李멸퀬 ?뺣낫濡쒕쭔 二쇰뒗 ?앹쓽 痢듭쐞媛 ?꾩슂?덈떎.
+
+<img src="/images/posts/walkmate/gallery/wm-16.png" alt="臾쇱껜 ?몄떇怨??꾪뿕?? 嫄곕━ ?몄떇 湲곕컲 ?뚯꽦 ?덈궡 異쒕젰 肄붾뱶" style="display:block; width:100%; max-width:620px; margin:1rem auto;" />
+
+?댄썑 嫄곕━ ?먮떒怨??곌껐???뚯꽦 ?덈궡 臾몄옣??援ъ꽦?덈떎. 寃곌뎅 ?ъ슜?먭? ?ｊ쾶 ?섎뒗 寃껋? 肄붾뱶媛 ?꾨땲??"?욎뿉 ?μ븷臾쇱씠 ?덉뒿?덈떎", "議곗떖?댁꽌 ?대룞?섏꽭?? 媛숈? 臾몄옣?닿린 ?뚮Ц?? 異붾줎 寃곌낵瑜??ъ슜???몄뼱濡?踰덉뿭?섎뒗 ?덉씠?닿? 以묒슂?덈떎.
+
+<img src="/images/posts/walkmate/gallery/wm-18.png" alt="?ъ슜?먯슜 ?덈궡 以??섏씠吏" style="display:block; width:100%; max-width:420px; margin:1rem auto;" />
+
+?ъ슜???덈궡 ?붾㈃???덈Т 留롮? ?뺣낫瑜???踰덉뿉 蹂댁뿬二쇱? ?딅룄濡?援ъ꽦?덈떎. ???ъ쭊?대굹 蹂듭옟???띿뒪?몃낫?? 吏湲??꾪뿕?쒖?? ?대뒓 履쎌쑝濡?媛???섎뒗吏媛 ?곗꽑?댁뿀??
+
+?꾨옒 ?쒖뿰 ?곸긽? ?꾩뿉???ㅻ챸???먯?, ?꾪뿕???먮떒, ?덈궡 ?먮쫫???ㅼ젣 ?깆뿉???대뼸寃??댁뼱議뚮뒗吏 蹂댁뿬以?? ?뚭컻 ?곸긽???쒕퉬??諛⑺뼢???ㅻ챸?섎뒗 ?⑸룄??ㅻ㈃, ???곸긽? 援ы쁽 寃곌낵瑜??뺤씤?섎뒗 ????媛源앸떎.
+
+<iframe
+  width="100%"
+  height="428"
+  src="https://www.youtube.com/embed/whSMlrArFEI"
+  title="Walkmate 시연 영상"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+  style="display:block; width:100%; max-width:760px; margin:1rem auto; border:0; border-radius:16px;"
+></iframe>
 
 ---
 
-## 📥 첨부 파일: 결과 보고서
+## 6. 諛쒗몴?먯꽌 媛??媛뺤“???λ㈃? '?섎맂 寃곌낵'蹂대떎 '?由?寃곌낵'???
+諛쒗몴瑜?以鍮꾪븯硫댁꽌 ?ㅽ엳?????뺤떊?섍쾶 ??嫄? Walkmate???듭떖? 硫뗭쭊 ?곕え ?붾㈃ 紐??μ씠 ?꾨땲??????몃뒗吏 異붿쟻?섍퀬 怨좎튇 怨쇱젙 ?먯껜???덉뿀?ㅻ뒗 ?먯씠??
 
-최종 발표 자료는 아래 파일에 정리해 두었다.
+- `YOLO11` ?④퀎?먯꽌???먯옄釉붾줉 ?몃텇???먯껜媛 紐⑤컮??異붾줎 ?덉젙?깃낵 異⑸룎?덈떎.
+- `YOLO26` ?④퀎?먯꽌??紐⑤뜽 蹂寃쎈낫??異쒕젰 ?뺤떇 蹂寃쎌씠 ?????쒓??댁뿀??
+- 異쒕젰 ?뺤떇??留욎텣 ?ㅼ뿉???먯옄釉붾줉??踰ㅼ튂濡?蹂대뒗 ?앹쓽 ?ㅽ깘???⑥븯怨? ?닿굔 ?곗씠???덉쭏怨??대옒???ㅺ퀎 臾몄젣瑜??ㅼ떆 蹂닿쾶 留뚮뱾?덈떎.
+- 寃곌뎅 紐⑤뜽 ?좏깮, ?꾩쿂由? ?꾪뿕??遺꾨쪟, ?뚯꽦 ?덈궡, 愿由ъ옄 寃???붾㈃?????명듃濡??吏곸뿬???덈떎.
 
-[결과보고서\_3팀(공부많이된다)\_260225.pptx](/files/walkmate-final-report-team3.pptx)
+???꾨줈?앺듃瑜??듯빐 諛곗슫 嫄?"??理쒖떊 紐⑤뜽???곕㈃ ?앸궃??媛 ?꾨땲?? 紐⑤뜽 踰꾩쟾??諛붾뚮뒗 ?쒓컙 二쇰? 肄붾뱶? ?곗씠???댁꽍 諛⑹떇???④퍡 ?ㅼ떆 寃利앺빐???쒕떎???ъ떎?댁뿀?? ?대쾲 湲?먯꽌 ?ъ쭊???꾨? ?ｌ? ?댁쑀??洹??뚮Ц?대떎. ???섏삩 寃곌낵留?蹂대㈃ 媛꾨떒??蹂댁씠吏留? ?ㅼ젣濡쒕뒗 洹??욎뿉 ?⑥뵮 留롮? ?ㅽ뙣 ?붾㈃???덉뿀??
 
 ---
 
-## 💭 Reflections
+## 7. ? ?꾨줈?앺듃?ㅼ슫 ?붿쟻?ㅻ룄 媛숈씠 ?④꺼 ?먯뿀??
+湲곗닠 ?섍린留??④린硫??꾨줈?앺듃媛 ?덈Т 留ㅻ걟?섍쾶 蹂댁씪 ???덈떎. ?ㅼ젣 ?꾩옣?먯꽌??諛ㅻ뒭寃뚭퉴吏 紐⑤뜽 ?뚯뒪?몃? ?뚮━怨? ?섎せ 媛먯????ъ쭊???ㅼ떆 蹂닿퀬, 諛쒗몴 ?먮즺瑜?怨좎튂硫댁꽌 踰꾪떚???쒓컙????湲몄뿀?? 洹몃━怨??뺣쭚 媛먯궗?섍쾶??吏?몃떂 ?⑦렪遺꾧퍡??吏곸젒 ?먯?荑좎쓽 蹂??踰꾩쟾???먯?珥덈옉 ?섎궘?쒖뿉瑜?留뚮뱾?댁꽌 二쇱뀲?? ?뺣텇????먮뱾怨??④퍡 ?섎궡??諛쒗몴瑜?以鍮꾪븷 ???덉뿀??
 
-발표 자료를 만들며 가장 크게 느낀 점은, 프로젝트 후반부의 문서화가 단순한 정리 작업이 아니라 사실상 마지막 디버깅이라는 것이다. 사진을 한 장씩 다시 보니, "모델이 안 좋았다"라고 뭉뚱그릴 수 있는 문제가 거의 없었다. 입력 전처리, 출력 파싱, 클래스 정의, 데이터 수집, 사용자 안내 문구까지 전부 얽혀 있었다.
+<img src="/images/posts/walkmate/gallery/wm-23.png" alt="? ?꾨줈?앺듃 以??④퍡 癒뱀? ?먯?珥??ъ쭊 1" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
 
-Walkmate를 다시 한다면 처음부터 더 큰 모델을 쓰기보다, `어떤 장면에서 왜 틀리는지 설명 가능한 구조`를 먼저 만들 것이다. 이번에 `YOLO11`에서 `YOLO26`으로 바꾼 경험은 성능 향상보다 검증 방식의 중요성을 더 크게 남겼다.
+<img src="/images/posts/walkmate/gallery/wm-24.png" alt="? ?꾨줈?앺듃 以??④퍡 癒뱀? ?먯?珥??ъ쭊 2" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
 
-**Next Plan:** 최종 발표 이후에는 점자블록 데이터 품질을 다시 손보고, 벤치/블록 오인식처럼 남아 있는 클래스 경계 문제를 줄이는 방향으로 후속 개선을 검토할 예정이다.
+<img src="/images/posts/walkmate/gallery/wm-25.png" alt="? ?꾨줈?앺듃 以??④퍡 癒뱀? ?섎궘?쒖뿉 ?ъ쭊" style="display:block; width:100%; max-width:520px; margin:1rem auto;" />
+
+???ъ쭊?ㅼ? 湲곕뒫 ?ㅻ챸怨?吏곸젒 ?곌껐?섏????딆?留? Walkmate媛 ?ㅼ젣濡쒕뒗 ?щ엺???ъ씠???묒뾽怨?泥대젰???꾩뿉??援대윭媛붾떎??嫄?蹂댁뿬二쇰뒗 湲곕줉?대씪 ?④꺼 ?먯뿀?? 臾몄젣瑜??닿껐??嫄?紐⑤뜽 ?섎굹媛 ?꾨땲???앷퉴吏 遺숇뱾怨??덈뜕 ??댁뿀??
+
+---
+
+## ?뱿 泥⑤? ?뚯씪: 寃곌낵 蹂닿퀬??
+理쒖쥌 諛쒗몴 ?먮즺???꾨옒 ?뚯씪???뺣━???먯뿀??
+
+[寃곌낵蹂닿퀬??_3?(怨듬?留롮씠?쒕떎)\_260225.pptx](/files/walkmate-final-report-team3.pptx)
+
+---
+
+## ?뮡 Reflections
+
+諛쒗몴 ?먮즺瑜?留뚮뱾硫?媛???ш쾶 ?먮? ?먯?, ?꾨줈?앺듃 ?꾨컲遺??臾몄꽌?붽? ?⑥닚???뺣━ ?묒뾽???꾨땲???ъ떎??留덉?留??붾쾭源낆씠?쇰뒗 寃껋씠?? ?ъ쭊?????μ뵫 ?ㅼ떆 蹂대땲, "紐⑤뜽????醫뗭븯???쇨퀬 萸됰슧洹몃┫ ???덈뒗 臾몄젣媛 嫄곗쓽 ?놁뿀?? ?낅젰 ?꾩쿂由? 異쒕젰 ?뚯떛, ?대옒???뺤쓽, ?곗씠???섏쭛, ?ъ슜???덈궡 臾멸뎄源뚯? ?꾨? ?쏀? ?덉뿀??
+
+Walkmate瑜??ㅼ떆 ?쒕떎硫?泥섏쓬遺??????紐⑤뜽???곌린蹂대떎, `?대뼡 ?λ㈃?먯꽌 ???由щ뒗吏 ?ㅻ챸 媛?ν븳 援ъ“`瑜?癒쇱? 留뚮뱾 寃껋씠?? ?대쾲??`YOLO11`?먯꽌 `YOLO26`?쇰줈 諛붽씔 寃쏀뿕? ?깅뒫 ?μ긽蹂대떎 寃利?諛⑹떇??以묒슂?깆쓣 ???ш쾶 ?④꼈??
+
+**Next Plan:** 理쒖쥌 諛쒗몴 ?댄썑?먮뒗 ?먯옄釉붾줉 ?곗씠???덉쭏???ㅼ떆 ?먮낫怨? 踰ㅼ튂/釉붾줉 ?ㅼ씤?앹쿂???⑥븘 ?덈뒗 ?대옒??寃쎄퀎 臾몄젣瑜?以꾩씠??諛⑺뼢?쇰줈 ?꾩냽 媛쒖꽑??寃?좏븷 ?덉젙?대떎.
+
