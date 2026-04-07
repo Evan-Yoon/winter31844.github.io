@@ -7,7 +7,7 @@ category: project
 subcategory: personal-project
 description: Save/Load가 붙고 나서 Feloria는 처음으로 '게임처럼' 느껴지기 시작했다. 그 다음 문제는 시스템이 아니라 콘텐츠였다.
   스토리 구조, NPC 반응성, 100마리 배치 전략, 스킬 애니메이션, 오디오까지 — 후반 개발 전체를 정리했다.
-thumbnail: /images/posts/feloria-part3/cover.jpg
+thumbnail: /images/posts/feloria-part3/cover.png
 tags:
   - feloria
   - phaser3
@@ -103,6 +103,17 @@ Chapter 3 — Ancient Forest & Mosslight Shrine
 
 이 구조가 좋았던 이유는 "플레이어가 모르게 빌런을 위해 일했다"는 반전이 탐험과 퀘스트 진행에 새로운 의미를 붙이기 때문이다. 단순히 강해지는 것이 아니라, 내가 뭔가를 망가뜨리고 있었다는 감각.
 
+<img src="/images/posts/feloria-part3/story-outline.png" alt="Feloria 스토리 구상 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
+_스토리 윤곽을 잡아가던 화면. 시스템이 아니라 서사가 게임을 앞으로 끌고 가기 시작한 시기였다._
+
+`스토리 고도화.txt`를 다시 보면, 내가 당시 밀고 싶었던 비극 구조가 더 선명하다.
+
+- 촌장 현석은 수호자를 몰아내고 봉인을 풀려는 흑막이다.
+- 토비와 리나 같은 주민들은 "로완이 숲의 힘을 독차지한다"는 거짓말에 세뇌돼 있다.
+- 플레이어는 선행을 한다고 믿고 퀘스트를 수행하지만, 실제로는 세라, 루크, 로완 같은 선한 수호자들을 하나씩 무너뜨리는 장기말이 된다.
+
+이 요약을 다시 읽고 나니, Feloria의 후반부가 왜 단순한 배틀 확장이 아니라 '내가 무엇을 하고 있었는지 뒤늦게 깨닫는 이야기'가 되어야 했는지도 분명해졌다.
+
 ---
 
 ## 보스전과 신규 지역
@@ -173,6 +184,12 @@ if (!questStarted) {
 대사는 전부 한국어로 작성됐다. 세계관 밀도를 올리는 데 대사 언어가 생각보다 큰 역할을 한다. 영어 대사일 때는 "퀘스트 UI 텍스트"처럼 느껴지던 것이, 한국어로 바꾸니 캐릭터가 말하는 것처럼 읽혔다.
 
 NPC 대화 데이터는 `mapNpcDialogues.js`로 분리됐다. 맵 ID → NPC ID → 대사 배열 구조다. 씬 코드에 대사 문자열을 직접 넣지 않는 것이 원칙이었다.
+
+<img src="/images/posts/feloria-part3/ui-and-npcs.png" alt="Feloria의 UI와 NPC 구성이 제법 그럴듯해진 시점의 화면" style="display:block; width:100%; max-width:820px; margin:1rem auto; border-radius:16px;" />
+_UI와 NPC 배치가 어느 정도 자리를 잡고 나자 비로소 '게임 세계에 사람이 살고 있다'는 느낌이 생겼다._
+
+<img src="/images/posts/feloria-part3/village-chief.png" alt="플레이어를 반겨주는 촌장 현석 장면" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
+_플레이어를 반겨주는 촌장 현석. 그래서 나중에 이 인물이 흑막이라는 설정이 더 잘 먹힌다. 처음엔 가장 믿음직해 보여야 했기 때문이다._
 
 ---
 
@@ -330,6 +347,24 @@ SE   — 짧은 효과음 (버튼, 포획, 피격)
 씬은 AudioManager에게 "이 BGM으로 바꿔줘"라고 요청한다. 실제 페이드아웃/인 처리, 중복 방지, 씬 전환 후 복원은 AudioManager가 담당한다. 씬이 직접 `this.sound.play()`로 BGM을 관리하지 않는다.
 
 맵별 BGM 매핑도 데이터로 관리됐다. `mapMusicConfig.js`에 맵 ID와 BGM 키를 연결해두면, WorldScene이 맵에 진입할 때 자동으로 AudioManager를 호출한다.
+
+## 배포와 외부 피드백
+
+끝까지 혼자만 본 프로젝트로 두지 않으려고 Vercel 배포도 붙였다. 브라우저에서 바로 열 수 있게 해두니, 그제야 다른 사람이 실제로 플레이해보고 피드백을 줄 수 있었다.
+
+<img src="/images/posts/feloria-part3/vercel-deploy-success.png" alt="Feloria의 Vercel 배포 성공 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
+_배포 성공 화면. 이 한 장 덕분에 로컬에서만 돌던 프로토타입이 '남이 직접 눌러볼 수 있는 게임'으로 넘어갔다._
+
+특히 고마웠던 자료가 [Feloria 버그 리포트 by 지호](/files/feloria/feloria-bug-report-by-jiho.pdf)였다. 실제로 Vercel에 올린 빌드를 플레이한 뒤 직접 정리해준 리포트였고, 읽어보면 플레이어가 어디에서 막히는지가 아주 구체적으로 드러난다.
+
+- 로딩바 고양이 연출, 조사 조사문구 조사 같은 UI 문장 처리
+- 일반 공격 피드백 속도와 데미지 숫자 표시
+- 골드와 포획 크리스탈을 평소에도 보이게 해달라는 자원 관리 문제
+- 도감에서 빠져나올 때 입력 포커스가 메인 화면으로 새는 버그
+- 상점에서 첫 포션 클릭 시 타입 에러
+- 약초를 어떻게 캐는지 알기 어렵다는 퀘스트 전달 문제
+
+마지막 항목이 특히 중요했다. "저기 있는 약초는 어떻게 캐나요..."라는 한 줄은, 내가 시스템을 만들었다고 생각한 것과 플레이어가 실제로 이해한 것 사이에 큰 간극이 있었다는 뜻이기 때문이다. 이 리포트는 Feloria가 아직 챕터 1 프로토타입이더라도, 적어도 남이 끝까지 눌러보며 문제를 짚어줄 만큼은 만들어졌다는 증거이기도 하다.
 
 ---
 

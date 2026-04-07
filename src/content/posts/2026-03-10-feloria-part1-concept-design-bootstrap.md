@@ -7,7 +7,7 @@ category: project
 subcategory: personal-project
 description: 고양이과 동물만 등장하는 몬스터 수집 RPG 'Feloria'. 포켓몬에서 출발했지만 두 번의 전면 재시작을 거쳐, 3월 10일
   하루 동안 게임의 핵심 루프를 처음으로 통과시켰다.
-thumbnail: /images/posts/feloria-part1/cover.jpg
+thumbnail: /images/posts/feloria-part1/cover.png
 tags:
   - feloria
   - phaser3
@@ -32,6 +32,15 @@ toc: true
 프로젝트 이름은 **Feloria**. 인간이 없는 고양이 문명 세계다. 집고양이, 야생 고양이과, 정령 고양이, 전설 고양이가 공존하는 세계에서, 플레이어는 잃어버린 별의 유산을 찾아 대륙을 탐험한다. 포켓몬의 감성을 참고했지만 이름·설정·UI·전투 구조는 처음부터 독창적으로 설계했다. 저작권 문제도 있었고, 어차피 참고할 수 있는 건 감성뿐이니까.
 
 결론부터 말하면 Feloria는 3월 10일 하루 동안 게임의 핵심 루프를 처음 통과했다. 스타터 선택 → 마을 탐험 → 야생 조우 → 전투 → 포획 → 파티 관리. 폴리시는 없었고 그래픽도 placeholder였지만, 그 날 처음으로 "이게 게임이다"라는 느낌이 왔다.
+
+<img src="/images/posts/feloria-part1/pre-phaser-screen-1.png" alt="Phaser로 넘어가기 전의 첫 번째 Feloria 시안 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
+_Phaser로 갈아타기 전 첫 화면. 지금 보면 투박하지만, 이때 이미 '고양이 RPG를 직접 굴려보겠다'는 방향은 분명했다._
+
+<img src="/images/posts/feloria-part1/pre-phaser-screen-2.png" alt="Phaser로 넘어가기 전의 두 번째 Feloria 시안 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
+_두 번째 시안에서는 화면 구성이 조금 더 생겼지만, 아직은 게임이라기보다 아이디어 스케치에 가까웠다._
+
+<img src="/images/posts/feloria-part1/pre-phaser-screen-3.png" alt="Phaser로 넘어가기 전의 세 번째 Feloria 시안 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
+_세 번째 시안까지도 핵심 문제는 같았다. 화면은 늘었지만 플레이 루프가 이어지지 않았다._
 
 ---
 
@@ -87,6 +96,15 @@ BootScene → PreloadScene → StartScene → NameScene → StarterSelectScene
 ```
 
 각 씬이 자신의 역할만 담당하고 데이터는 Phaser registry를 통해 공유하는 구조다.
+
+<img src="/images/posts/feloria-part1/phaser-simple-prototype.png" alt="Phaser만으로 간단하게 옮겨본 초기 프로토타입" style="display:block; width:100%; max-width:780px; margin:1rem auto; border-radius:16px;" />
+_Phaser로 옮긴 뒤의 아주 초기 화면. 화려하진 않았지만, 적어도 엔진이 맡아줄 부분과 내가 직접 짜야 할 부분이 분리되기 시작했다._
+
+<img src="/images/posts/feloria-part1/two-character-dialogue.png" alt="Feloria에서 두 캐릭터 대화 화면을 구현한 모습" style="display:block; width:100%; max-width:780px; margin:1rem auto; border-radius:16px;" />
+_두 캐릭터 대화 화면을 붙이면서 비로소 '탐험하는 세계'의 감각이 생겼다. 전투 이전에 세계가 먼저 말을 걸기 시작한 순간이었다._
+
+<img src="/images/posts/feloria-part1/simple-village.png" alt="간단하게 구현한 Feloria 초기 마을 화면" style="display:block; width:100%; max-width:780px; margin:1rem auto; border-radius:16px;" />
+_마을을 단순하게라도 먼저 만든 건 중요한 판단이었다. 시스템을 늘리기보다, 플레이어가 돌아다닐 실제 공간을 우선 확보한 셈이다._
 
 ---
 
@@ -161,6 +179,15 @@ SPRITES: {
 
 선택된 스타터와 이름은 Phaser registry에 저장한다. BattleScene에서 파티 데이터를 읽을 때도, PartyScene에서 크리처를 보여줄 때도 같은 registry를 참조한다.
 
+<img src="/images/posts/feloria-part1/name-entry.png" alt="Feloria 주인공 이름 설정 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
+_이름 입력 화면. 아주 작은 기능 같지만 시작 흐름을 끝까지 연결하기 위해 반드시 필요했던 화면이다._
+
+<img src="/images/posts/feloria-part1/starter-selection.png" alt="Feloria 스타팅 캣 선택 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
+_스타팅 캣 선택 화면. Leafkit, Emberpaw, Misttail 세 마리를 실제 선택지로 보여줘야 그 다음 장면들이 비로소 의미를 갖는다._
+
+<img src="/images/posts/feloria-part1/opening-story.png" alt="Feloria 시작 시 스토리 설명 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
+_시작 스토리 설명까지 붙었을 때, Feloria는 단순 데모가 아니라 '무엇을 하러 떠나는지 아는 게임'에 가까워졌다._
+
 ### 2. 마을 2개와 상호작용
 
 Starwhisk Village와 Greenpaw Forest, NPC 상호작용이 한 커밋에 들어갔다. 맵을 2개로 제한한 건 의도적인 결정이었다. 이전 시도에서 맵을 많이 만들다가 렌더러가 무너진 경험이 있었다. 2개에서 이동·충돌·NPC 대화·워프가 정상 동작하는 것을 먼저 잡는 게 훨씬 안전했다.
@@ -197,6 +224,15 @@ HP 바, 스킬 선택 UI, 경험치 획득 로직이 추가됐다. 이 시점의
 ### 7. PartyScene과 BattleScene 분리
 
 하루의 마지막 커밋에서 파티 관리와 전투가 별도 씬으로 분리됐다. 파티 관리 로직이 전투 로직과 섞이면 상태 관리가 꼬인다. 각 씬이 자신의 역할만 담당하는 구조가 이때 자리를 잡았다.
+
+<img src="/images/posts/feloria-part1/title-screen.png" alt="Feloria 타이틀 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
+_타이틀 화면이 따로 생기자 프로젝트가 급격히 게임처럼 보이기 시작했다. 첫인상이 생긴다는 건 생각보다 큰 차이였다._
+
+<img src="/images/posts/feloria-part1/menu-screen.png" alt="Feloria 초기 메뉴 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
+_메뉴 화면 구성도 이 시기에 자리 잡았다. 플레이어가 시스템을 '기능 목록'이 아니라 '들어갈 수 있는 화면'으로 체감하기 시작한 지점이다._
+
+<img src="/images/posts/feloria-part1/nyan-cat-loading.png" alt="Feloria 로딩 화면의 냥캣 연출" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
+_로딩 화면은 냥캣으로 처리했다. 아주 작은 장난 같은 요소였지만, 이런 디테일이 붙기 시작하면서 개발 자체가 훨씬 덜 무미건조해졌다._
 
 ---
 
