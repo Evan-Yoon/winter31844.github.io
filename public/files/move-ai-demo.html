@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이크로 활동 촉진기</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        #status {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        #timerDisplay {
+            font-size: 2.5em;
+            color: #e74c3c;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .prompt-box {
+            background-color: #e8f5e9;
+            color: #27ae60;
+            border: 2px solid #2ecc71;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: 700;
+            display: none; /* 초기에는 숨김 */
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .active {
+            color: #2ecc71;
+        }
+        .inactive {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🚶 마이크로 활동 촉진기</h1>
+        <p id="status" class="active">현재 활동 중입니다...</p>
+        
+        <p>비활동 시간 (초):</p>
+        <div id="timerDisplay">0</div>
+
+        <div id="activityPrompt" class="prompt-box">
+            <p>🚨 장시간 활동이 감지되지 않았습니다. 🚨</p>
+            <p id="suggestionText">가장 가까운 창가까지 걸어갔다 오세요!</p>
+        </div>
+    </div>
+
+    <script>
+        // --- 설정 값 ---
+        const INACTIVITY_THRESHOLD = 5; // 비활동 감지 시간 (초)
+
+        // --- 변수 ---
+        let inactivityTimer = 0; // 비활동 시간 카운터
+        let intervalId = null;   // setInterval ID
+        
+        // DOM 요소
+        const statusEl = document.getElementById('status');
+        const timerDisplayEl = document.getElementById('timerDisplay');
+        const promptBoxEl = document.getElementById('activityPrompt');
+        const suggestionTextEl = document.getElementById('suggestionText');
+
+        // 활동 제안 목록
+        const activitySuggestions = [
+            "가장 가까운 창가까지 걸어갔다 오세요!",
+            "자리에서 일어나서 5분 동안 스트레칭을 하세요.",
+            "물 한 잔을 마시고 오세요.",
+            "3분 동안 눈을 감고 심호흡을 하세요.",
+            "책상 주변을 정리하며 가볍게 움직이세요."
+        ];
+
+        // 타이머를 1초마다 업데이트하는 함수
+        function updateTimer() {
+            inactivityTimer++;
+            timerDisplayEl.textContent = inactivityTimer;
+            
+            // 임계값 초과 시 알림
+            if (inactivityTimer >= INACTIVITY_THRESHOLD) {
+                if (promptBoxEl.style.display === 'none' || promptBoxEl.style.display === '') {
+                    // 비활동 상태로 변경
+                    statusEl.textContent = "⚠ 비활동 상태가 감지되었습니다!";
+                    statusEl.className = 'inactive';
+                    
+                    // 활동 제안 표시 및 내용 변경
+                    promptBoxEl.style.display = 'block';
+                    
+                    // 무작위로 활동 제안 선택
+                    const randomIndex = Math.floor(Math.random() * activitySuggestions.length);
+                    suggestionTextEl.textContent = activitySuggestions[randomIndex];
+                }
+            } else {
+                // 활동 상태 유지
+                statusEl.textContent = "현재 활동 중입니다...";
+                statusEl.className = 'active';
+                promptBoxEl.style.display = 'none'; // 활동 중일 때는 숨김
+            }
+        }
+
+        // 비활동 타이머를 리셋하고 다시 시작하는 함수
+        function resetTimer() {
+            inactivityTimer = 0;
+            timerDisplayEl.textContent = 0;
+            statusEl.textContent = "현재 활동 중입니다...";
+            statusEl.className = 'active';
+            promptBoxEl.style.display = 'none'; // 활동 감지 창 숨기기
+        }
+
+        // 키보드나 마우스 이벤트가 발생하면 타이머 리셋
+        document.addEventListener('mousemove', resetTimer);
+        document.addEventListener('keypress', resetTimer);
+        
+        // 페이지 로드 시 타이머 시작
+        function startTimer() {
+            if (intervalId) clearInterval(intervalId); // 기존 인터벌 제거
+            intervalId = setInterval(updateTimer, 1000); // 1초마다 updateTimer 실행
+        }
+
+        startTimer();
+
+    </script>
+
+</body>
+</html>
