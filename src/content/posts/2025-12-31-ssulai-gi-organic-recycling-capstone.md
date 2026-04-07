@@ -312,6 +312,16 @@ scheduler 쪽에서는 두 전략을 비교했다.
 
 최종적으로는 이런 결과물을 영상 형태로도 정리해 냈다.
 
-[쓸AI기 프로젝트 결과 영상 보기](https://youtu.be/riRWPgqTpoo)
+<div style="position:relative; width:100%; max-width:760px; margin:1rem auto; aspect-ratio:16 / 9;">
+  <iframe
+    src="https://www.youtube.com/embed/riRWPgqTpoo"
+    title="쓸AI기 프로젝트 결과 영상"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+    style="position:absolute; inset:0; width:100%; height:100%; border:0; border-radius:16px;"
+  ></iframe>
+</div>
 
 3일짜리 미니 프로젝트였지만, 문제 정의, 데이터 탐색, 모델 비교, 최적화, 현장 적용 가능성, 발표용 스토리텔링까지 짧은 시간 안에 한 번에 경험해 볼 수 있었던 작업이었다. 특히 이번 프로젝트는 "좋은 모델"을 만드는 것만큼이나 "왜 이 모델이 현실 문제를 푸는 데 의미가 있는가"를 설명하는 일이 중요하다는 걸 다시 확인하게 해 줬다.
