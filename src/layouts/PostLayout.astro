@@ -24,7 +24,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   <div class="progress-bar" id="progress"></div>
 
   <div class="article-wrap fade-in-up">
-    <header class={`article-header ${showToc ? 'has-toc' : ''}`}>
+    <header class="article-header">
       <div class="article-meta-row">
         <span class={`article-cat badge-${frontmatter.category || 'explore'}`}>{frontmatter.category || 'Explore'}</span>
         <span class="article-date">{new Date(frontmatter.date).toLocaleDateString('ko-KR')}</span>
@@ -286,6 +286,24 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       });
     });
   }
+
+  const articleBody = document.getElementById('article-body');
+  const tocInner = document.querySelector('.article-toc-inner');
+
+  if (articleBody && tocInner) {
+    const syncTocOffset = () => {
+      if (window.innerWidth <= 1280) {
+        tocInner.style.removeProperty('top');
+        return;
+      }
+
+      const bodyTop = articleBody.getBoundingClientRect().top;
+      tocInner.style.top = `${Math.max(96, Math.round(bodyTop))}px`;
+    };
+
+    syncTocOffset();
+    window.addEventListener('resize', syncTocOffset);
+  }
 </script>
 
 <style is:global>
@@ -434,11 +452,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .article-content-shell.has-toc {
-    max-width: 1280px;
-    display: grid;
-    grid-template-columns: minmax(0, var(--col)) 260px;
-    gap: 6rem;
-    align-items: start;
+    max-width: calc(var(--col) + 4rem);
   }
 
   .article-body {
@@ -635,17 +649,16 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .article-toc {
-    position: relative;
-    min-height: 1px;
+    display: contents;
   }
 
   .article-toc-inner {
     position: fixed;
-    top: 168px;
-    right: max(1.5rem, calc((100vw - 1280px) / 2 + 2rem));
-    width: 260px;
+    left: calc(50% + 500px);
+    width: 220px;
     padding: 1.25rem 1rem 1.25rem 1.1rem;
     border-left: 1px solid var(--border);
+    background: transparent;
   }
 
   .article-toc-kicker {
@@ -957,52 +970,17 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   @media (max-width: 1280px) {
-    .article-content-shell.has-toc {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.5rem;
-    }
-
-    .article-header.has-toc {
-      margin: 0 auto;
-      text-align: center;
-    }
-
     .article-toc {
-      order: -1;
+      display: block;
     }
 
     .article-toc-inner {
       position: static;
+      width: auto;
       padding: 1rem 1.1rem;
       border: 1px solid var(--border);
       background: var(--bg-card);
       border-radius: 16px;
-    }
-  }
-
-  @media (min-width: 1281px) {
-    .article-header.has-toc {
-      max-width: 1280px;
-      display: grid;
-      grid-template-columns: minmax(0, var(--col)) 260px;
-      gap: 6rem;
-      align-items: start;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      text-align: left;
-    }
-
-    .article-header.has-toc > * {
-      grid-column: 1;
-    }
-
-    .article-header.has-toc .article-meta-row {
-      justify-content: flex-start;
-    }
-
-    .article-header.has-toc .article-subtitle {
-      margin-left: 0;
-      margin-right: 0;
     }
   }
 
