@@ -1,0 +1,9 @@
+services:
+  spam-lab:
+    build: .
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
