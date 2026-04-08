@@ -24,7 +24,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   <div class="progress-bar" id="progress"></div>
 
   <div class="article-wrap fade-in-up">
-    <header class="article-header">
+    <header class={`article-header ${showToc ? 'has-toc' : ''}`}>
       <div class="article-meta-row">
         <span class={`article-cat badge-${frontmatter.category || 'explore'}`}>{frontmatter.category || 'Explore'}</span>
         <span class="article-date">{new Date(frontmatter.date).toLocaleDateString('ko-KR')}</span>
@@ -962,6 +962,11 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       gap: 1.5rem;
     }
 
+    .article-header.has-toc {
+      margin: 0 auto;
+      text-align: center;
+    }
+
     .article-toc {
       order: -1;
     }
@@ -972,6 +977,32 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       border: 1px solid var(--border);
       background: var(--bg-card);
       border-radius: 16px;
+    }
+  }
+
+  @media (min-width: 1281px) {
+    .article-header.has-toc {
+      max-width: 1280px;
+      display: grid;
+      grid-template-columns: minmax(0, var(--col)) 260px;
+      gap: 6rem;
+      align-items: start;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      text-align: left;
+    }
+
+    .article-header.has-toc > * {
+      grid-column: 1;
+    }
+
+    .article-header.has-toc .article-meta-row {
+      justify-content: flex-start;
+    }
+
+    .article-header.has-toc .article-subtitle {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 
