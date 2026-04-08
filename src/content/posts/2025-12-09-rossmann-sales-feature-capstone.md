@@ -340,9 +340,9 @@ Random Forest가 압도적으로 혼자 튀는 수준은 아니고 `LightGBM`도
 
 <img src="/images/posts/rossmann-mini-project/presentation-photo.jpeg" alt="Rossmann 미니 프로젝트 발표 사진" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
 
-발표 자료 PDF도 같이 남겨 둔다.
+발표 자료는 아래에 첨부해 둔다.
 
-[Rossmann 미니 프로젝트 발표 자료 보기](/files/rossmann-capstone-team3-presentation.pdf)
+- [Rossmann 미니 프로젝트 발표 자료 보기](/files/rossmann-capstone-team3-presentation.pdf)
 
 ## 마무리
 

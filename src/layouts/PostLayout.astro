@@ -1,5 +1,4 @@
 ---
-// src/layouts/PostLayout.astro
 import BaseLayout from './BaseLayout.astro';
 
 const {
@@ -7,6 +6,7 @@ const {
   previousPost,
   nextPost,
   relatedPosts = [],
+  headings = [],
 } = Astro.props;
 
 const categoryLabelMap = {
@@ -16,6 +16,8 @@ const categoryLabelMap = {
 };
 
 const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.category || 'Category';
+const tocItems = (headings ?? []).filter((heading) => heading.depth === 2 || heading.depth === 3);
+const showToc = frontmatter.toc !== false && tocItems.length > 0;
 ---
 
 <BaseLayout title={`${frontmatter.title} | Evan Yoon`} description={frontmatter.description}>
@@ -36,17 +38,41 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
       <div class="struct-line"></div>
     </div>
 
-    <article class="article-body">
-      <slot />
-      
-      {frontmatter.tags && (
-        <div class="article-tags">
-          {frontmatter.tags.map((tag: string) => (
-            <span class="article-tag">#{tag}</span>
-          ))}
-        </div>
+    <div class={`article-content-shell ${showToc ? 'has-toc' : ''}`}>
+      <article class="article-body" id="article-body">
+        <slot />
+
+        {frontmatter.tags && (
+          <div class="article-tags">
+            {frontmatter.tags.map((tag: string) => (
+              <span class="article-tag">#{tag}</span>
+            ))}
+          </div>
+        )}
+      </article>
+
+      {showToc && (
+        <aside class="article-toc" aria-label="글 네비게이션" data-toc>
+          <div class="article-toc-inner">
+            <p class="article-toc-kicker">On This Page</p>
+            <h2 class="article-toc-title">지금 읽는 위치</h2>
+            <nav class="article-toc-nav">
+              {tocItems.map((heading) => (
+                <a
+                  class={`toc-link toc-depth-${heading.depth}`}
+                  href={`#${heading.slug}`}
+                  data-toc-link
+                  data-target={heading.slug}
+                >
+                  <span class="toc-link-dot" aria-hidden="true"></span>
+                  <span class="toc-link-text">{heading.text}</span>
+                </a>
+              ))}
+            </nav>
+          </div>
+        </aside>
       )}
-    </article>
+    </div>
 
     <section class="post-footer-nav" aria-label="Post navigation">
       <a
@@ -61,7 +87,7 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
             <span class="post-nav-meta">{new Date(previousPost.data.date).toLocaleDateString('ko-KR')}</span>
           </>
         ) : (
-          <strong class="post-nav-title">첫 글에 도달했습니다</strong>
+          <strong class="post-nav-title">첫 글입니다</strong>
         )}
       </a>
 
@@ -86,7 +112,7 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
       <div class="related-posts-head">
         <div>
           <p class="related-kicker">{categoryLabel}</p>
-          <h2 id="related-posts-heading" class="related-title">카테고리의 다른 글</h2>
+          <h2 id="related-posts-heading" class="related-title">같은 카테고리의 다른 글</h2>
         </div>
         <a href={`/categories/${frontmatter.category}`} class="related-category-link">
           카테고리 전체 보기
@@ -141,15 +167,18 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
 </BaseLayout>
 
 <script>
-  /* READING PROGRESS (NO ANIMATION ON JS) */
   const bar = document.getElementById('progress');
-  window.addEventListener('scroll', () => {
-    if(bar) {
-      const doc = document.documentElement;
-      const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
-      bar.style.width = pct + '%';
-    }
-  });
+
+  const updateReadingProgress = () => {
+    if (!bar) return;
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollable > 0 ? (doc.scrollTop / scrollable) * 100 : 0;
+    bar.style.width = `${Math.max(0, Math.min(100, pct))}%`;
+  };
+
+  updateReadingProgress();
+  window.addEventListener('scroll', updateReadingProgress, { passive: true });
 
   const moreButton = document.getElementById('related-more-button');
   const relatedCards = Array.from(document.querySelectorAll('.related-post-card'));
@@ -168,60 +197,341 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
       moreButton.textContent = expanded ? '더보기' : '접기';
     });
   }
+
+  const tocLinks = Array.from(document.querySelectorAll('[data-toc-link]'));
+  const tocSections = tocLinks
+    .map((link) => {
+      const id = link.getAttribute('data-target');
+      return id ? document.getElementById(id) : null;
+    })
+    .filter(Boolean);
+
+  if (tocLinks.length > 0 && tocSections.length > 0) {
+    const setActiveLink = (id) => {
+      tocLinks.forEach((link) => {
+        const isActive = link.getAttribute('data-target') === id;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    const getCurrentSectionId = () => {
+      const scrollOffset = 140;
+      let currentId = tocSections[0].id;
+
+      tocSections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop <= scrollOffset) {
+          currentId = section.id;
+        }
+      });
+
+      return currentId;
+    };
+
+    setActiveLink(getCurrentSectionId());
+    window.addEventListener(
+      'scroll',
+      () => {
+        setActiveLink(getCurrentSectionId());
+      },
+      { passive: true },
+    );
+
+    tocLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const id = link.getAttribute('data-target');
+        const target = id ? document.getElementById(id) : null;
+        if (!target) return;
+
+        event.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 92;
+        window.history.replaceState({}, '', `#${id}`);
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+  }
 </script>
 
 <style is:global>
-  /* ─── POST LAYOUT & TYPOGRAPHY STYLES (Focused on Reading) ─── */
-  .progress-bar { position: fixed; top: 60px; left: 0; height: 1.5px; background: var(--accent); width: 0%; z-index: 99; }
-  
-  .article-wrap { padding-top: 60px; max-width: var(--max-w); margin: 0 auto; border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
-  /* Simple load animation for the article only */
-  .fade-in-up { animation: fadeInUp 0.4s 0.1s ease-out forwards; opacity: 0; transform: translateY(10px); }
-  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+  .progress-bar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 1.5px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 99;
+  }
 
-  .article-header { max-width: var(--col); margin: 0 auto; padding: 6rem 2rem 3rem; text-align: center; }
-  .article-meta-row { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
-  .article-cat { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; font-family: var(--font-mono); }
-  
-  /* Category Badge Colors updated to Slate palette */
-  .badge-study { background: var(--accent-2-soft); color: var(--accent-2); }
-  .badge-project { background: #E6F0E6; color: #2E7D32; }
-  .badge-explore { background: var(--accent-soft); color: var(--accent); }
-  [data-theme="dark"] .badge-project { background: #1A2E1A; color: #66BB6A; }
+  .article-wrap {
+    padding-top: 60px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
 
-  .article-date, .article-read-time { font-size: 0.75rem; color: var(--ink-3); font-family: var(--font-mono); }
-  .article-title { font-family: var(--font-serif); font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 1.5rem; }
-  .article-subtitle { font-size: 1.1rem; line-height: 1.7; color: var(--ink-2); font-weight: 300; margin-bottom: 2rem; max-width: 35ch; margin-left: auto; margin-right: auto; }
-  
-  .article-structure-divider { max-width: var(--max-w); margin: 0 auto 4rem; padding: 0 2rem; display: flex; align-items: center; }
-  .struct-line { flex: 1; height: 1px; background: var(--border); position: relative; }
-  .struct-line::before { content: ''; position: absolute; left: 0; top: -3px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-  .struct-line::after { content: ''; position: absolute; right: 0; top: -3px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-  
-  .article-body { max-width: var(--col); margin: 0 auto; padding: 0 2rem 8rem; }
-  
-  /* Content Typography: Use Geologica with slightly heavier base weight for reading */
-  .article-body h2 { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; color: var(--ink); margin: 3.5rem 0 1.25rem; line-height: 1.2; letter-spacing: -0.01em; }
-  .article-body h3 { font-family: var(--font-sans); font-size: 1.15rem; font-weight: 600; color: var(--ink); margin: 2.5rem 0 1rem; }
-  
-  .article-body p { font-size: 1.05rem; line-height: 1.9; color: var(--ink-2); font-weight: 400; /* Medium weight for readable Geologica */ margin-bottom: 1.6rem; letter-spacing: -0.005em; }
-  .article-body strong { color: var(--ink); font-weight: 600; }
-  .article-body em { font-style: italic; }
-  .article-body a { color: var(--accent); border-bottom: 1px solid var(--accent-soft); transition: border-color var(--transition); }
-  .article-body a:hover { border-color: var(--accent); }
-  
-  .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.6rem; }
-  .article-body li { font-size: 1.05rem; line-height: 1.9; color: var(--ink-2); font-weight: 400; margin-bottom: 0.5rem; }
-  
-  .article-body blockquote { margin: 3rem 0; padding: 1.5rem 2.5rem; border-left: 1px solid var(--accent-2); background: var(--bg-card); position: relative; border-radius: var(--radius); }
-  .article-body blockquote p { font-family: var(--font-serif); font-size: 1.2rem; font-style: italic; font-weight: 300; color: var(--ink); margin: 0; line-height: 1.7; }
-  
-  .article-body code { font-family: var(--font-mono); font-size: 0.85em; background: var(--accent-soft); color: var(--accent); padding: 3px 6px; border-radius: 2px; }
-  .article-body pre { margin: 2.5rem 0; border-radius: var(--radius); background: #1A1917; padding: 1.5rem; overflow-x: auto; border: 1px solid var(--border-strong); }
-  [data-theme="dark"] .article-body pre { background: #0D0B08; }
-  .article-body pre code { color: #E8E4DC; background: none; border: none; padding: 0; font-size: 0.875rem; }
-  
-  /* ─── 이미지 ─── */
+  .fade-in-up {
+    animation: fadeInUp 0.4s 0.1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .article-header {
+    max-width: var(--col);
+    margin: 0 auto;
+    padding: 6rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .article-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .article-cat {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+  }
+
+  .badge-study {
+    background: var(--accent-2-soft);
+    color: var(--accent-2);
+  }
+
+  .badge-project {
+    background: #e6f0e6;
+    color: #2e7d32;
+  }
+
+  .badge-explore {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  [data-theme="dark"] .badge-project {
+    background: #1a2e1a;
+    color: #66bb6a;
+  }
+
+  .article-date,
+  .article-read-time {
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+  }
+
+  .article-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .article-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    max-width: 35ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .article-structure-divider {
+    max-width: var(--max-w);
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .struct-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .struct-line::before,
+  .struct-line::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .struct-line::before {
+    left: 0;
+  }
+
+  .struct-line::after {
+    right: 0;
+  }
+
+  .article-content-shell {
+    max-width: calc(var(--col) + 4rem);
+    margin: 0 auto;
+    padding: 0 2rem 8rem;
+  }
+
+  .article-content-shell.has-toc {
+    max-width: 1080px;
+    display: grid;
+    grid-template-columns: minmax(0, var(--col)) 240px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .article-body {
+    min-width: 0;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .article-body h2,
+  .article-body h3 {
+    scroll-margin-top: 92px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 3.5rem 0 1.25rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .article-body p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--ink-2);
+    font-weight: 400;
+    margin-bottom: 1.6rem;
+    letter-spacing: -0.005em;
+    word-break: keep-all;
+  }
+
+  .article-body strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .article-body em {
+    font-style: italic;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent-soft);
+    transition: border-color var(--transition);
+  }
+
+  .article-body a:hover {
+    border-color: var(--accent);
+  }
+
+  .article-body ul,
+  .article-body ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .article-body li {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--ink-2);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    word-break: keep-all;
+  }
+
+  .article-body blockquote {
+    margin: 3rem 0;
+    padding: 1.5rem 2.5rem;
+    border-left: 1px solid var(--accent-2);
+    background: var(--bg-card);
+    position: relative;
+    border-radius: var(--radius);
+  }
+
+  .article-body blockquote p {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .article-body code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 3px 6px;
+    border-radius: 2px;
+  }
+
+  .article-body pre {
+    margin: 2.5rem 0;
+    border-radius: var(--radius);
+    background: #1a1917;
+    padding: 1.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--border-strong);
+  }
+
+  [data-theme="dark"] .article-body pre {
+    background: #0d0b08;
+  }
+
+  .article-body pre code {
+    color: #e8e4dc;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+
   .article-body img {
     width: 100%;
     max-width: min(100%, 680px);
@@ -231,20 +541,172 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     margin: 2.25rem auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   }
-  /* 수동 삽입: ![alt](url "caption") → title이 있으면 figcaption처럼 표시 */
+
   .article-body p:has(img) {
-    margin: 0 auto; /* img 자체에 margin 있으므로 p margin 제거 */
+    margin: 0 auto;
     max-width: 760px;
   }
-  /* 자동 삽입 이미지 래퍼 */
+
   .auto-image-wrap {
     margin: 0;
   }
-  /* alt 텍스트를 캡션으로 표시 (이미지 바로 다음 em 태그 없이, CSS content 활용 불가 → JS 없이 처리 한계) */
 
-  .article-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 4rem 0 0; padding-top: 2rem; border-top: 1px solid var(--border); }
-  .article-tag { font-size: 0.7rem; padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border-strong); color: var(--ink-3); font-family: var(--font-mono); font-weight: 400; }
-  .article-tag:hover { border-color: var(--accent-2); color: var(--accent-2); }
+  .article-body p > a[href^="/files/"]:only-child,
+  .article-body p > a[href^="/downloads/"]:only-child,
+  .article-body p > a[href^="/docs/"]:only-child,
+  .article-body li > a[href^="/files/"]:first-child,
+  .article-body li > a[href^="/downloads/"]:first-child,
+  .article-body li > a[href^="/docs/"]:first-child,
+  .article-body blockquote p > strong > a[href^="/files/"]:only-child,
+  .article-body blockquote p > strong > a[href^="/downloads/"]:only-child,
+  .article-body blockquote p > strong > a[href^="/docs/"]:only-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    max-width: 100%;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--bg-card);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    font-weight: 500;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+    overflow-wrap: anywhere;
+    vertical-align: middle;
+  }
+
+  .article-body p > a[href^="/files/"]:only-child::before,
+  .article-body p > a[href^="/downloads/"]:only-child::before,
+  .article-body p > a[href^="/docs/"]:only-child::before,
+  .article-body li > a[href^="/files/"]:first-child::before,
+  .article-body li > a[href^="/downloads/"]:first-child::before,
+  .article-body li > a[href^="/docs/"]:first-child::before,
+  .article-body blockquote p > strong > a[href^="/files/"]:only-child::before,
+  .article-body blockquote p > strong > a[href^="/downloads/"]:only-child::before,
+  .article-body blockquote p > strong > a[href^="/docs/"]:only-child::before {
+    content: '다운로드';
+    flex: none;
+    padding: 0.12rem 0.42rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .article-body li > a[href^="/files/"]:first-child,
+  .article-body li > a[href^="/downloads/"]:first-child,
+  .article-body li > a[href^="/docs/"]:first-child {
+    margin-bottom: 0.25rem;
+  }
+
+  .article-toc {
+    position: relative;
+  }
+
+  .article-toc-inner {
+    position: sticky;
+    top: 96px;
+    padding: 1.25rem 1rem 1.25rem 1.1rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .article-toc-kicker {
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .article-toc-title {
+    margin-bottom: 1rem;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .article-toc-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .toc-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.45rem 0;
+    color: var(--ink-3);
+    transition: color var(--transition), transform var(--transition);
+  }
+
+  .toc-link:hover {
+    color: var(--ink);
+    transform: translateX(2px);
+  }
+
+  .toc-link-dot {
+    width: 7px;
+    height: 7px;
+    margin-top: 0.45rem;
+    border-radius: 50%;
+    background: var(--border-strong);
+    transition: background var(--transition), transform var(--transition);
+    flex: none;
+  }
+
+  .toc-link-text {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    word-break: keep-all;
+  }
+
+  .toc-depth-3 {
+    padding-left: 1rem;
+  }
+
+  .toc-depth-3 .toc-link-text {
+    font-size: 0.85rem;
+  }
+
+  .toc-link.is-active {
+    color: var(--ink);
+  }
+
+  .toc-link.is-active .toc-link-dot {
+    background: var(--accent);
+    transform: scale(1.15);
+  }
+
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 4rem 0 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .article-tag {
+    font-size: 0.7rem;
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border-strong);
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+
+  .article-tag:hover {
+    border-color: var(--accent-2);
+    color: var(--accent-2);
+  }
 
   .post-footer-nav {
     max-width: var(--max-w);
@@ -254,6 +716,7 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
+
   .post-nav-card {
     min-height: 164px;
     display: flex;
@@ -263,20 +726,25 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     padding: 1.5rem;
     border: 1px solid var(--border-strong);
     border-radius: 16px;
-    background:
-      linear-gradient(135deg, var(--bg-card) 0%, var(--bg-hover) 100%);
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-hover) 100%);
     transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
   }
+
   .post-nav-card:hover {
     transform: translateY(-2px);
     border-color: var(--accent);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
   }
-  .post-nav-card.align-right { text-align: right; }
+
+  .post-nav-card.align-right {
+    text-align: right;
+  }
+
   .post-nav-card.is-disabled {
     opacity: 0.55;
     pointer-events: none;
   }
+
   .post-nav-label {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -284,12 +752,14 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     text-transform: uppercase;
     color: var(--accent);
   }
+
   .post-nav-title {
     font-family: var(--font-serif);
     font-size: 1.35rem;
     line-height: 1.35;
     color: var(--ink);
   }
+
   .post-nav-meta {
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -301,6 +771,7 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     margin: 0 auto;
     padding: 1rem 2rem 6rem;
   }
+
   .related-posts-head {
     display: flex;
     align-items: end;
@@ -310,6 +781,7 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     padding-top: 2rem;
     border-top: 1px solid var(--border);
   }
+
   .related-kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -318,12 +790,14 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     color: var(--accent);
     margin-bottom: 0.6rem;
   }
+
   .related-title {
     font-family: var(--font-serif);
     font-size: clamp(1.7rem, 3vw, 2.2rem);
     font-weight: 400;
     color: var(--ink);
   }
+
   .related-category-link {
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -331,18 +805,22 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     padding-bottom: 0.2rem;
     border-bottom: 1px solid transparent;
   }
+
   .related-category-link:hover {
     color: var(--accent);
     border-color: var(--accent);
   }
+
   .related-posts-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
   }
+
   .related-post-card.is-hidden {
     display: none;
   }
+
   .related-post-link {
     height: 100%;
     display: flex;
@@ -354,11 +832,13 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     background: var(--bg-card);
     transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
   }
+
   .related-post-link:hover {
     transform: translateY(-2px);
     border-color: var(--accent);
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.05);
   }
+
   .related-post-meta {
     display: flex;
     align-items: center;
@@ -368,6 +848,7 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     font-size: 0.72rem;
     color: var(--ink-3);
   }
+
   .related-post-badge {
     font-size: 0.65rem;
     letter-spacing: 0.08em;
@@ -375,18 +856,21 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     padding: 4px 8px;
     border-radius: 999px;
   }
+
   .related-post-card-title {
     font-family: var(--font-serif);
     font-size: 1.2rem;
     line-height: 1.35;
     color: var(--ink);
   }
+
   .related-post-desc {
     font-size: 0.92rem;
     line-height: 1.7;
     color: var(--ink-2);
     flex: 1;
   }
+
   .related-post-footer {
     display: flex;
     align-items: center;
@@ -397,15 +881,18 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     padding-top: 1rem;
     border-top: 1px solid var(--border);
   }
+
   .related-post-arrow {
     font-size: 1rem;
     color: var(--accent);
   }
+
   .related-more-wrap {
     display: flex;
     justify-content: center;
     margin-top: 1.5rem;
   }
+
   .related-more-button {
     padding: 0.9rem 1.5rem;
     border: 1px solid var(--border-strong);
@@ -418,11 +905,13 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     text-transform: uppercase;
     transition: border-color var(--transition), background var(--transition), color var(--transition);
   }
+
   .related-more-button:hover {
     border-color: var(--accent);
     background: var(--accent-soft);
     color: var(--accent);
   }
+
   .related-empty-state {
     padding: 1.5rem;
     border: 1px dashed var(--border-strong);
@@ -431,16 +920,97 @@ const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.cate
     background: var(--bg-hover);
   }
 
+  @media (max-width: 1100px) {
+    .article-content-shell.has-toc {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    .article-toc {
+      order: -1;
+    }
+
+    .article-toc-inner {
+      position: static;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      border-radius: 16px;
+    }
+  }
+
   @media (max-width: 768px) {
-    .article-wrap { border: none; padding-top: 20px; }
-    .article-title { font-size: 2rem; }
-    .article-header { padding: 4rem 1rem 2rem; }
-    .article-body { padding: 0 1rem 5rem; }
-    .article-meta-row { flex-wrap: wrap; gap: 0.5rem 1rem; }
-    .post-footer-nav { grid-template-columns: 1fr; padding: 0 1rem 1.5rem; }
-    .post-nav-card, .post-nav-card.align-right { text-align: left; min-height: auto; }
-    .related-posts-section { padding: 1rem 1rem 4rem; }
-    .related-posts-head { align-items: start; flex-direction: column; }
-    .related-posts-grid { grid-template-columns: 1fr; }
+    .article-wrap {
+      border: none;
+      padding-top: 20px;
+    }
+
+    .article-title {
+      font-size: 2rem;
+    }
+
+    .article-header {
+      padding: 4rem 1rem 2rem;
+    }
+
+    .article-content-shell,
+    .article-content-shell.has-toc {
+      padding: 0 1rem 5rem;
+    }
+
+    .article-meta-row {
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+    }
+
+    .article-body {
+      word-break: normal;
+    }
+
+    .article-body p > a[href^="/files/"]:only-child,
+    .article-body p > a[href^="/downloads/"]:only-child,
+    .article-body p > a[href^="/docs/"]:only-child,
+    .article-body li > a[href^="/files/"]:first-child,
+    .article-body li > a[href^="/downloads/"]:first-child,
+    .article-body li > a[href^="/docs/"]:first-child,
+    .article-body blockquote p > strong > a[href^="/files/"]:only-child,
+    .article-body blockquote p > strong > a[href^="/downloads/"]:only-child,
+    .article-body blockquote p > strong > a[href^="/docs/"]:only-child {
+      font-size: 0.86rem;
+      padding: 0.42rem 0.72rem;
+    }
+
+    .article-toc-inner {
+      padding: 0.95rem 1rem;
+      border-radius: 14px;
+    }
+
+    .toc-link-text {
+      font-size: 0.88rem;
+    }
+
+    .post-footer-nav {
+      grid-template-columns: 1fr;
+      padding: 0 1rem 1.5rem;
+    }
+
+    .post-nav-card,
+    .post-nav-card.align-right {
+      text-align: left;
+      min-height: auto;
+    }
+
+    .related-posts-section {
+      padding: 1rem 1rem 4rem;
+    }
+
+    .related-posts-head {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .related-posts-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

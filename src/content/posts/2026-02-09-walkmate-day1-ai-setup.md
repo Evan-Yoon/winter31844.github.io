@@ -88,12 +88,11 @@ toc: true
 
 ---
 
-## 📂 Project Resources
+## Project Resources
 
 프로젝트의 상세한 기획 내용이 담긴 제안서 파일을 아래 링크에서 확인할 수 있다.
 
-> [!IMPORTANT]
-> **[Walkmate 프로젝트 기획서 다운로드 (PDF/MD)](/docs/Walkmate_Proposal.md)**
+- [Walkmate 프로젝트 기획서 다운로드 (PDF/MD)](/docs/Walkmate_Proposal.md)
 
 ---
 

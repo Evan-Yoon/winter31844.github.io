@@ -298,9 +298,12 @@ scheduler 쪽에서는 두 전략을 비교했다.
 
 프로젝트 전체 스토리를 이해하려면 문제 정의 PDF와 최종 발표 자료를 같이 보는 편이 좋다.
 
-[문제 정의 PDF 보기](/files/waste-ai-problem-statement-module38.pdf)
+## 첨부 자료
 
-[최종 발표자료 PDF 보기](/files/ssulai-gi-organic-recycling-capstone-team3.pdf)
+프로젝트 문제 정의와 최종 발표 자료는 아래에 같이 정리해 둔다.
+
+- [문제 정의 PDF 보기](/files/waste-ai-problem-statement-module38.pdf)
+- [최종 발표자료 PDF 보기](/files/ssulai-gi-organic-recycling-capstone-team3.pdf)
 
 ## 마무리: 발표에서 영상까지
 
