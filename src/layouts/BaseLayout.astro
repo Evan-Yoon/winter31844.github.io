@@ -121,7 +121,7 @@ const {
       font-weight: 300; /* Use light weight for Geologica as base */
       line-height: 1.6;
       transition: background var(--transition), color var(--transition);
-      overflow-x: hidden;
+      overflow-x: clip;
     }
     body.fade-in { animation: bodyFadeIn 0.4s ease-out forwards; }
     @keyframes bodyFadeIn { from { opacity: 0; } to { opacity: 1; } }

@@ -23,6 +23,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 <BaseLayout title={`${frontmatter.title} | Evan Yoon`} description={frontmatter.description}>
   <div class="progress-bar" id="progress"></div>
 
+  <div class={`post-layout-outer ${showToc ? 'has-toc' : ''}`}>
   <div class="article-wrap fade-in-up">
     <header class="article-header">
       <div class="article-meta-row">
@@ -38,7 +39,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       <div class="struct-line"></div>
     </div>
 
-    <div class={`article-content-shell ${showToc ? 'has-toc' : ''}`}>
+    <div class="article-content-shell">
       <article class="article-body" id="article-body">
         <slot />
 
@@ -50,28 +51,6 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
           </div>
         )}
       </article>
-
-      {showToc && (
-        <aside class="article-toc" aria-label="글 네비게이션" data-toc>
-          <div class="article-toc-inner">
-            <p class="article-toc-kicker">On This Page</p>
-            <h2 class="article-toc-title">지금 읽는 위치</h2>
-            <nav class="article-toc-nav">
-              {tocItems.map((heading) => (
-                <a
-                  class={`toc-link toc-depth-${heading.depth}`}
-                  href={`#${heading.slug}`}
-                  data-toc-link
-                  data-target={heading.slug}
-                >
-                  <span class="toc-link-dot" aria-hidden="true"></span>
-                  <span class="toc-link-text">{heading.text}</span>
-                </a>
-              ))}
-            </nav>
-          </div>
-        </aside>
-      )}
     </div>
 
     <section class="post-footer-nav" aria-label="Post navigation">
@@ -163,6 +142,29 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
         </div>
       )}
     </section>
+  </div>
+
+  {showToc && (
+    <aside class="article-toc" aria-label="글 네비게이션" data-toc>
+      <div class="article-toc-inner">
+        <p class="article-toc-kicker">On This Page</p>
+        <h2 class="article-toc-title">지금 읽는 위치</h2>
+        <nav class="article-toc-nav">
+          {tocItems.map((heading) => (
+            <a
+              class={`toc-link toc-depth-${heading.depth}`}
+              href={`#${heading.slug}`}
+              data-toc-link
+              data-target={heading.slug}
+            >
+              <span class="toc-link-dot" aria-hidden="true"></span>
+              <span class="toc-link-text">{heading.text}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+    </aside>
+  )}
   </div>
 </BaseLayout>
 
@@ -287,23 +289,6 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     });
   }
 
-  const articleBody = document.getElementById('article-body');
-  const tocInner = document.querySelector('.article-toc-inner');
-
-  if (articleBody && tocInner) {
-    const syncTocOffset = () => {
-      if (window.innerWidth <= 1280) {
-        tocInner.style.removeProperty('top');
-        return;
-      }
-
-      const bodyTop = articleBody.getBoundingClientRect().top;
-      tocInner.style.top = `${Math.max(96, Math.round(bodyTop))}px`;
-    };
-
-    syncTocOffset();
-    window.addEventListener('resize', syncTocOffset);
-  }
 </script>
 
 <style is:global>
@@ -315,6 +300,23 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     background: var(--accent);
     width: 0%;
     z-index: 99;
+  }
+
+  .post-layout-outer {
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .post-layout-outer.has-toc {
+    max-width: calc(var(--max-w) + 300px + 3rem);
+    display: flex;
+    align-items: stretch;
+    gap: 3rem;
+  }
+
+  .post-layout-outer.has-toc > .article-wrap {
+    flex: 1;
+    min-width: 0;
   }
 
   .article-wrap {
@@ -451,9 +453,6 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     padding: 0 2rem 8rem;
   }
 
-  .article-content-shell.has-toc {
-    max-width: calc(var(--col) + 4rem);
-  }
 
   .article-body {
     min-width: 0;
@@ -556,6 +555,10 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     border-radius: 2px;
   }
 
+  .article-body hr {
+    display: none;
+  }
+
   .article-body pre {
     margin: 2.5rem 0;
     border-radius: var(--radius);
@@ -649,15 +652,24 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .article-toc {
-    display: contents;
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 96px;
+    align-self: flex-start;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 96px);
   }
 
   .article-toc-inner {
-    position: fixed;
-    left: calc(50% + 500px);
-    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-height: 0;
     padding: 1.25rem 1rem 1.25rem 1.1rem;
-    border-left: 1px solid var(--border);
     background: transparent;
   }
 
@@ -671,9 +683,9 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .article-toc-title {
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
     font-family: var(--font-serif);
-    font-size: 1rem;
+    font-size: 0.88rem;
     font-weight: 500;
     color: var(--ink);
   }
@@ -681,14 +693,20 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   .article-toc-nav {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    align-items: flex-start;
+    gap: 0;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    width: 100%;
   }
 
   .toc-link {
     display: flex;
     align-items: flex-start;
-    gap: 0.65rem;
-    padding: 0.45rem 0;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
     color: var(--ink-3);
     font-weight: 400;
     transition: color var(--transition), transform var(--transition);
@@ -700,9 +718,9 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .toc-link-dot {
-    width: 7px;
-    height: 7px;
-    margin-top: 0.45rem;
+    width: 5px;
+    height: 5px;
+    margin-top: 0.4rem;
     border-radius: 50%;
     background: var(--border-strong);
     transition: background var(--transition), transform var(--transition);
@@ -710,17 +728,17 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .toc-link-text {
-    font-size: 0.92rem;
-    line-height: 1.55;
+    font-size: 0.78rem;
+    line-height: 1.4;
     word-break: keep-all;
   }
 
   .toc-depth-3 {
-    padding-left: 1rem;
+    padding-left: 0.75rem;
   }
 
   .toc-depth-3 .toc-link-text {
-    font-size: 0.85rem;
+    font-size: 0.72rem;
   }
 
   .toc-link.is-active {
@@ -970,13 +988,18 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   @media (max-width: 1280px) {
-    .article-toc {
+    .post-layout-outer.has-toc {
       display: block;
+    }
+
+    .article-toc {
+      width: auto;
+      padding-top: 0;
+      margin-top: 3rem;
     }
 
     .article-toc-inner {
       position: static;
-      width: auto;
       padding: 1rem 1.1rem;
       border: 1px solid var(--border);
       background: var(--bg-card);
@@ -998,8 +1021,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       padding: 4rem 1rem 2rem;
     }
 
-    .article-content-shell,
-    .article-content-shell.has-toc {
+    .article-content-shell {
       padding: 0 1rem 5rem;
     }
 
