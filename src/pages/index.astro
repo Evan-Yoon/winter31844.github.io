@@ -27,13 +27,18 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
 
       <div class="visitor-stats">
         <div class="stat-item">
-          <span class="stat-label">TOTAL VISITS</span>
+          <span class="stat-label">VISITS</span>
           <span class="stat-value" id="stat-total">—</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
-          <span class="stat-label">TODAY</span>
-          <span class="stat-value" id="stat-today">—</span>
+          <span class="stat-label">POSTS</span>
+          <span class="stat-value">{allPosts.length}</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-label">DAYS</span>
+          <span class="stat-value" id="stat-days">—</span>
         </div>
       </div>
       <a
@@ -138,18 +143,31 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
 </BaseLayout>
 
 <script>
-  // GoatCounter 공개 카운터 API로 전체 방문자 수 fetch
-  // 경로: / (현재 사이트 베이스 경로)
-  const GC = 'https://evan-yoon.goatcounter.com/counter';
-  const path = encodeURIComponent('/');
+  // ── 운영일 계산 (2025-11-28 기준) ──
+  const launch = new Date('2025-11-28T00:00:00+09:00');
+  const today = new Date();
+  const days = Math.floor((today.getTime() - launch.getTime()) / (1000 * 60 * 60 * 24));
+  const daysEl = document.getElementById('stat-days');
+  if (daysEl) daysEl.textContent = days.toLocaleString('ko-KR');
 
-  fetch(`${GC}/${path}.json`)
-    .then(r => r.json())
+  // ── GoatCounter 전체 방문자 수 ──
+  // ※ 작동하려면 GoatCounter 대시보드 → Settings → "Allow public access to stats" 활성화 필요
+  fetch('https://evan-yoon.goatcounter.com/counter/TOTAL.json')
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
     .then(data => {
       const el = document.getElementById('stat-total');
       if (el && data.count) el.textContent = data.count;
     })
-    .catch(() => {});
+    .catch(() => {
+      // fallback: 홈페이지 경로만이라도 시도
+      fetch('https://evan-yoon.goatcounter.com/counter/%2F.json')
+        .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+        .then(data => {
+          const el = document.getElementById('stat-total');
+          if (el && data.count) el.textContent = data.count;
+        })
+        .catch(() => {});
+    });
 </script>
 
 <style>
