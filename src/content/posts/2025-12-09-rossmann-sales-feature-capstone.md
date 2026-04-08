@@ -29,7 +29,7 @@ toc: true
 
 ## 프로젝트 과제와 데이터
 
-과제 PDF의 핵심은 분명했다.
+과제 PDF 기준으로 내가 해야 할 일은 명확했다.
 
 - Rossmann 매장 데이터를 탐색한다.
 - 매출에 영향을 주는 특성을 찾는다.
@@ -57,7 +57,7 @@ toc: true
 - 날짜에서 `Year`, `Month`, `Day`, `WeekOfYear`, `Quarter`, `IsMonthEnd` 같은 파생 변수를 만들었다.
 - 경쟁점 오픈 기간과 `Promo2` 지속 기간 같은 기간형 변수도 추가했다.
 
-발표 자료에 정리한 기준 중 특히 중요했던 것은 아래와 같다.
+내가 발표 자료에 정리한 기준 중 특히 중요했던 것은 아래와 같다.
 
 - `Open=0`인데 매출이 0인 행은 영업하지 않은 날로 보고 분석 대상에서 조정했다.
 - `Promo2=0`일 때 관련 컬럼이 비어 있는 것은 결측이라기보다 "장기 프로모션 미참여" 상태로 해석했다.
@@ -165,7 +165,7 @@ print(f"R^2  : {rf_r2:.4f}")
 
 ## Random Forest 결과를 어떻게 읽었는가
 
-노트북에는 단순 예측 성능뿐 아니라, 실제값-예측값 산점도, 잔차 분포, 중요 변수 시각화, 깊이별 성능 확인 그래프가 들어 있었다. 발표 PDF에 정리된 슬라이드를 보면 당시 어떤 그림을 핵심으로 골랐는지 더 잘 보인다.
+노트북에는 단순 예측 성능뿐 아니라, 실제값-예측값 산점도, 잔차 분포, 중요 변수 시각화, 깊이별 성능 확인 그래프가 들어 있었다. 내가 발표 PDF에 넣은 슬라이드를 기준으로 보면 당시 어떤 그림을 핵심으로 골랐는지 더 잘 드러난다.
 
 <img src="/images/posts/rossmann-mini-project/model-comparison-slide.png" alt="Random Forest와 다른 모델 비교 슬라이드" style="display:block; width:100%; max-width:1100px; margin:1rem auto; border-radius:16px;" />
 
@@ -245,7 +245,7 @@ promo_pred = rf_model.predict(scenario_promo)
 
 <img src="/images/posts/rossmann-mini-project/random-forest-scenarios-slide.png" alt="Random Forest 기반 가상 시나리오 분석 슬라이드" style="display:block; width:100%; max-width:1100px; margin:1rem auto; border-radius:16px;" />
 
-이 슬라이드를 보면 Random Forest가 실제로 어떤 질문에 답하게 했는지 한눈에 보인다.
+내가 이 슬라이드에 담고 싶었던 건 Random Forest가 실제로 어떤 질문에 답하게 했는지였다.
 
 - 경쟁점 거리가 가까우면 매출이 어떻게 바뀌는가
 - 프로모션을 했을 때와 안 했을 때 차이가 얼마나 나는가
@@ -264,7 +264,7 @@ promo_pred = rf_model.predict(scenario_promo)
 
 - `Customers`: 고객 수가 늘면 매출도 거의 직접적으로 증가했다.
 - `Month`: 전반적으로 특정 시즌, 특히 연말 구간에서 매출 강도가 높게 나타났다.
-- `DayOfWeek`: 요일별 편차가 분명했다.
+- `DayOfWeek`: 요일에 따라 편차가 꽤 크게 났다.
 - `IsMonthEnd`: 월말 여부가 매출 변화와 연결됐다.
 - `Promo`: 당일 프로모션은 매출 상승에 직접적인 영향을 줬다.
 - `StateHoliday`: 공휴일은 일반 영업일과 다른 패턴을 만들었다.
@@ -292,11 +292,11 @@ promo_pred = rf_model.predict(scenario_promo)
 
 최종 발표에서는 `Random Forest`를 베스트 모델로 소개했다. 성능도 가장 좋았지만, 무엇보다 feature 해석과 시나리오 설명에 연결하기 편했다는 점이 컸다. 짧은 프로젝트에서는 "최고 성능" 자체보다 "왜 그렇게 나왔는지 설명 가능한가"가 발표 완성도를 좌우했다.
 
-발표 자료에서도 이 비교표를 별도 슬라이드로 뽑아 두었다.
+이 비교표는 발표 자료에서도 별도 슬라이드로 뽑아 두었다.
 
 <img src="/images/posts/rossmann-mini-project/model-comparison-slide.png" alt="Rossmann 모델 비교와 특징 중요도 슬라이드" style="display:block; width:100%; max-width:1100px; margin:1rem auto; border-radius:16px;" />
 
-Random Forest가 압도적으로 혼자 튀는 수준은 아니고 `LightGBM`도 거의 비슷하게 따라왔다. 그래서 오히려 발표에서 중요한 건 "왜 Random Forest를 대표 모델로 삼았는가"를 설명하는 일이었다. 내 기준에서는 아래 세 가지 이유가 분명했다.
+Random Forest가 압도적으로 혼자 튀는 수준은 아니고 `LightGBM`도 거의 비슷하게 따라왔다. 그래서 오히려 발표에서는 "왜 Random Forest를 대표 모델로 삼았는가"를 설명하는 쪽이 더 중요했다. 내가 발표에서 밀었던 이유는 아래 세 가지였다.
 
 - 결과가 좋다.
 - 중요 변수를 직관적으로 설명하기 쉽다.
@@ -334,7 +334,7 @@ Random Forest가 압도적으로 혼자 튀는 수준은 아니고 `LightGBM`도
 - 모델 점수보다 "무슨 특성이 매출에 영향을 주는가"가 더 기억에 남는다.
 - 실행 가능한 제안이 있어야 분석 결과가 발표 자료 안에서 살아난다.
 
-특히 발표 자료를 만들면서 좋았던 점은, 탐색 결과와 모델 결과를 한 장씩 따로 놓는 대신 "이 특성이 중요하다 → 그래서 이런 전략이 가능하다"로 연결한 부분이었다. 나중에 다시 봐도 발표 흐름이 끊기지 않았다.
+특히 나는 발표 자료에서 탐색 결과와 모델 결과를 따로 떼어놓지 않고 "이 특성이 중요하다 → 그래서 이런 전략이 가능하다"로 이어 붙였다. 나중에 다시 봐도 흐름이 끊기지 않았다.
 
 아래 사진은 그 발표를 직접 진행하던 순간이다.
 

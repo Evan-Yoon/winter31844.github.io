@@ -34,7 +34,7 @@ toc: true
 결론부터 말하면 Feloria는 3월 10일 하루 동안 게임의 핵심 루프를 처음 통과했다. 스타터 선택 → 마을 탐험 → 야생 조우 → 전투 → 포획 → 파티 관리. 폴리시는 없었고 그래픽도 placeholder였지만, 그 날 처음으로 "이게 게임이다"라는 느낌이 왔다.
 
 <img src="/images/posts/feloria-part1/pre-phaser-screen-1.png" alt="Phaser로 넘어가기 전의 첫 번째 Feloria 시안 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
-_Phaser로 갈아타기 전 첫 화면. 지금 보면 투박하지만, 이때 이미 '고양이 RPG를 직접 굴려보겠다'는 방향은 분명했다._
+_Phaser로 갈아타기 전 첫 화면. 지금 보면 투박하지만, 이때 이미 '고양이 RPG를 직접 굴려보겠다'는 방향은 잡혀 있었다._
 
 <img src="/images/posts/feloria-part1/pre-phaser-screen-2.png" alt="Phaser로 넘어가기 전의 두 번째 Feloria 시안 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
 _두 번째 시안에서는 화면 구성이 조금 더 생겼지만, 아직은 게임이라기보다 아이디어 스케치에 가까웠다._

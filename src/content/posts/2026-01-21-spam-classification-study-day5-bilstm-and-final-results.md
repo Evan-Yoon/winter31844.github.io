@@ -125,7 +125,7 @@ max_length = 150
 embedding_dim = 100
 ```
 
-바꾼 이유는 단순했다.
+이렇게 바꾼 데에는 이유가 있었다.
 
 - 더 많은 단어를 사전에 담고 싶었다
 - 임베딩 표현력도 조금 더 넓혀 보고 싶었다
@@ -240,7 +240,7 @@ plt.show()
 
 ## 마지막에는 epoch를 더 길게 두고 다시 한 번 밀어봤다
 
-이후에는 학습을 조금 더 길게 가져가면서 다시 한 번 성능을 확인했다. 여기서도 핵심은 같은 방향이었다.
+이후에는 학습을 조금 더 길게 가져가면서 다시 한 번 성능을 확인했다. 방향은 앞선 실험과 같았다.
 
 - precision은 최대한 유지하고
 - recall을 조금 더 올려 보고
@@ -264,7 +264,7 @@ plt.show()
 
 <img src="/images/posts/spam-classification-study/epochs30-confusion-matrix.png" alt="최종 BiLSTM 실험 혼동행렬" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
 
-즉 마지막 회차의 결론은 단순했다. BiLSTM이 무조건 마법처럼 문제를 해결한 것은 아니지만, 적절한 구조 조정과 학습 제어, threshold tuning을 같이 가져가니 꽤 설득력 있는 결과를 만들 수 있었다.
+마지막 회차를 정리하면 이랬다. BiLSTM이 무조건 마법처럼 문제를 해결한 것은 아니었지만, 구조 조정과 학습 제어, threshold tuning을 같이 가져가니 꽤 설득력 있는 결과를 만들 수 있었다.
 
 ## 왜 마지막까지 threshold tuning을 같이 봤는가
 
