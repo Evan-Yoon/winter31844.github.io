@@ -207,6 +207,8 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     .filter(Boolean);
 
   if (tocLinks.length > 0 && tocSections.length > 0) {
+    const visibleSections = new Map();
+
     const setActiveLink = (id) => {
       tocLinks.forEach((link) => {
         const isActive = link.getAttribute('data-target') === id;
@@ -220,12 +222,20 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     };
 
     const getCurrentSectionId = () => {
-      const scrollOffset = 140;
+      const sortedVisibleSections = Array.from(visibleSections.values()).sort(
+        (left, right) => left.top - right.top,
+      );
+
+      if (sortedVisibleSections.length > 0) {
+        return sortedVisibleSections[0].id;
+      }
+
+      const activationOffset = 140;
       let currentId = tocSections[0].id;
 
       tocSections.forEach((section) => {
-        const sectionTop = section.getBoundingClientRect().top;
-        if (sectionTop <= scrollOffset) {
+        const { top } = section.getBoundingClientRect();
+        if (top <= activationOffset) {
           currentId = section.id;
         }
       });
@@ -234,13 +244,34 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     };
 
     setActiveLink(getCurrentSectionId());
-    window.addEventListener(
-      'scroll',
-      () => {
-        setActiveLink(getCurrentSectionId());
+
+    const syncActiveLink = () => {
+      setActiveLink(getCurrentSectionId());
+    };
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.set(entry.target.id, {
+              id: entry.target.id,
+              top: entry.boundingClientRect.top,
+            });
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
+        });
+
+        syncActiveLink();
       },
-      { passive: true },
+      {
+        rootMargin: '-96px 0px -55% 0px',
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+      },
     );
+
+    tocSections.forEach((section) => sectionObserver.observe(section));
+    window.addEventListener('scroll', syncActiveLink, { passive: true });
 
     tocLinks.forEach((link) => {
       link.addEventListener('click', (event) => {
@@ -605,13 +636,17 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
   .article-toc {
     position: relative;
+    align-self: start;
   }
 
   .article-toc-inner {
     position: sticky;
-    top: 96px;
+    top: 88px;
+    max-height: calc(100vh - 112px);
+    overflow-y: auto;
     padding: 1.25rem 1rem 1.25rem 1.1rem;
     border-left: 1px solid var(--border);
+    scrollbar-width: thin;
   }
 
   .article-toc-kicker {
@@ -677,6 +712,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
   .toc-link.is-active {
     color: var(--ink);
+    font-weight: 600;
   }
 
   .toc-link.is-active .toc-link-dot {
