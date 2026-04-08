@@ -1,11 +1,12 @@
 ---
-title: '[Feloria] 시스템이 다 갖춰진 뒤에야 보이는 것들 — 콘텐츠, 세계, 회고'
+title: "[Feloria] 시스템이 다 갖춰진 뒤에야 보이는 것들 — 콘텐츠, 세계, 회고"
 slug: feloria-part3-content-world-retrospective
 date: 2026-03-21
 author: Evan Yoon
 category: project
 subcategory: personal-project
-description: Save/Load가 붙고 나서 Feloria는 처음으로 '게임처럼' 느껴지기 시작했다. 그 다음 문제는 시스템이 아니라 콘텐츠였다.
+description:
+  Save/Load가 붙고 나서 Feloria는 처음으로 '게임처럼' 느껴지기 시작했다. 그 다음 문제는 시스템이 아니라 콘텐츠였다.
   스토리 구조, NPC 반응성, 100마리 배치 전략, 스킬 애니메이션, 오디오까지 — 후반 개발 전체를 정리했다.
 thumbnail: /images/posts/feloria-part3/cover.png
 tags:
@@ -173,11 +174,11 @@ collector   → 특정 아이템/크리처 교환
 ```js
 // Elder Mira 대사 분기 예시
 if (!questStarted) {
-  "요즘 숲의 기운이 조금 이상하단다."
+  ("요즘 숲의 기운이 조금 이상하단다.");
 } else if (questInProgress) {
-  "네 고양이를 잘 돌봐주거라."
+  ("네 고양이를 잘 돌봐주거라.");
 } else if (questCompleted) {
-  "고생했구나. 네가 해냈어."
+  ("고생했구나. 네가 해냈어.");
 }
 ```
 
@@ -220,13 +221,13 @@ SOLARION: {
 
 현재 맵별 배치 원칙:
 
-| 지역 | 배치 크리처 | 기준 |
-|------|-----------|------|
-| Starwhisk Village 주변 | Thistlekit, Snagpuss, Mosslynx | 초기, 약함 |
-| Greenpaw Forest | Fernclaw, Thornkit, Barkpelt, Ripplepaw(희귀) | 숲/풀 타입 중심 |
-| Mosslight Path | Thornmane, Vinefang, Sparkpaw, Pebblepaw | 중간 강도 |
-| Ancient Forest | Verdantlynx, Umbrafang, Mistlynx, Stormkit | 강함 |
-| Mosslight Shrine | 랜덤 조우 없음 (보스만) | — |
+| 지역                   | 배치 크리처                                   | 기준            |
+| ---------------------- | --------------------------------------------- | --------------- |
+| Starwhisk Village 주변 | Thistlekit, Snagpuss, Mosslynx                | 초기, 약함      |
+| Greenpaw Forest        | Fernclaw, Thornkit, Barkpelt, Ripplepaw(희귀) | 숲/풀 타입 중심 |
+| Mosslight Path         | Thornmane, Vinefang, Sparkpaw, Pebblepaw      | 중간 강도       |
+| Ancient Forest         | Verdantlynx, Umbrafang, Mistlynx, Stormkit    | 강함            |
+| Mosslight Shrine       | 랜덤 조우 없음 (보스만)                       | —               |
 
 전설 크리처는 Chapter 1 엔딩 컷신에서만 짧게 등장한다. 전투도 포획도 없다. 봉인이 깨지는 순간 빠르게 플래시처럼 보였다가 사라지는 시각적 복선이다.
 
@@ -264,17 +265,17 @@ BattleScene에서 재생
 
 ```js
 const skillAnimationMap = {
-  ember_bite:    "Fire1",
-  flame_dash:    "Fire3",
+  ember_bite: "Fire1",
+  flame_dash: "Fire3",
   inferno_slash: "Fire4",
-  water_slash:   "Ice1",
-  mist_burst:    "Ice3",
-  shadow_sneak:  "Darkness1",
-  thunder_paw:   "Thunder2",
-  storm_call:    "Thunder4",
-  vine_swipe:    "Wind1",
-  leaf_dart:     "Wind2",
-  soul_reap:     "Special3",
+  water_slash: "Ice1",
+  mist_burst: "Ice3",
+  shadow_sneak: "Darkness1",
+  thunder_paw: "Thunder2",
+  storm_call: "Thunder4",
+  vine_swipe: "Wind1",
+  leaf_dart: "Wind2",
+  soul_reap: "Special3",
   // ...
 };
 ```
@@ -286,17 +287,21 @@ const skillAnimationMap = {
 ```js
 const animationConfig = {
   Fire1: {
-    frameWidth: 192, frameHeight: 192,
-    frameCount: 4, frameRate: 12,
+    frameWidth: 192,
+    frameHeight: 192,
+    frameCount: 4,
+    frameRate: 12,
     scale: 1.5,
-    anchorType: "center"   // 타겟 중심
+    anchorType: "center", // 타겟 중심
   },
   Thunder2: {
-    frameWidth: 96, frameHeight: 192,
-    frameCount: 6, frameRate: 16,
+    frameWidth: 96,
+    frameHeight: 192,
+    frameCount: 6,
+    frameRate: 16,
     scale: 2.0,
-    anchorType: "feet"     // 타겟 발 아래
-  }
+    anchorType: "feet", // 타겟 발 아래
+  },
 };
 ```
 
@@ -317,9 +322,9 @@ const animationConfig = {
 ```js
 // 일부 발췌
 const typeChart = {
-  Fire:   { Forest: 2.0, Ice: 2.0, Water: 0.5 },
-  Water:  { Fire: 2.0,   Rock: 2.0, Forest: 0.5 },
-  Forest: { Water: 2.0,  Rock: 2.0, Fire: 0.5 },
+  Fire: { Forest: 2.0, Ice: 2.0, Water: 0.5 },
+  Water: { Fire: 2.0, Rock: 2.0, Forest: 0.5 },
+  Forest: { Water: 2.0, Rock: 2.0, Fire: 0.5 },
   Shadow: { Spirit: 0.5, Mystic: 2.0 },
   // ...
 };
@@ -377,14 +382,28 @@ _배포 성공 화면. 이 한 장 덕분에 로컬에서만 돌던 프로토타
 ```json
 {
   "id": "mosslight_path",
-  "width": 20, "height": 20, "tileSize": 32,
+  "width": 20,
+  "height": 20,
+  "tileSize": 32,
   "layers": {
-    "ground":     [ /* 지면 타일 배열 */ ],
-    "collision":  [ /* 1=막힘, 0=통과 */ ],
-    "encounter":  [ /* 1=풀숲조우 */ ],
-    "objects":    [ /* 표지판, 상자 */ ],
-    "npcs":       [ /* NPC 위치 */ ],
-    "warps":      [ /* 워프 포인트 */ ]
+    "ground": [
+      /* 지면 타일 배열 */
+    ],
+    "collision": [
+      /* 1=막힘, 0=통과 */
+    ],
+    "encounter": [
+      /* 1=풀숲조우 */
+    ],
+    "objects": [
+      /* 표지판, 상자 */
+    ],
+    "npcs": [
+      /* NPC 위치 */
+    ],
+    "warps": [
+      /* 워프 포인트 */
+    ]
   }
 }
 ```
@@ -399,20 +418,20 @@ collision 레이어는 렌더링되지 않는다. 이 규칙은 처음부터 있
 
 **시스템 (동작하는 것):**
 
-| 시스템 | 상태 |
-|--------|------|
-| 탑다운 월드 탐험 | ✓ |
-| 턴제 전투 (야생 + 트레이너) | ✓ |
-| 포획 / 파티 / 도감 | ✓ |
-| 레벨업 / 진화 | ✓ |
-| 상점 / 인벤토리 / 골드 | ✓ |
-| NPC 대화 + 퀘스트 | ✓ |
-| 저장 / 불러오기 | ✓ |
-| 타입 상성 | ✓ |
-| 스킬 애니메이션 | ✓ |
-| 오디오 시스템 | ✓ |
-| 보스전 + 컷신 | ✓ |
-| 전설 복선 시스템 | ✓ |
+| 시스템                      | 상태 |
+| --------------------------- | ---- |
+| 탑다운 월드 탐험            | ✓    |
+| 턴제 전투 (야생 + 트레이너) | ✓    |
+| 포획 / 파티 / 도감          | ✓    |
+| 레벨업 / 진화               | ✓    |
+| 상점 / 인벤토리 / 골드      | ✓    |
+| NPC 대화 + 퀘스트           | ✓    |
+| 저장 / 불러오기             | ✓    |
+| 타입 상성                   | ✓    |
+| 스킬 애니메이션             | ✓    |
+| 오디오 시스템               | ✓    |
+| 보스전 + 컷신               | ✓    |
+| 전설 복선 시스템            | ✓    |
 
 **콘텐츠 (만들어진 것):**
 
@@ -470,11 +489,16 @@ Feloria는 챕터 1이 플레이 가능한 상태에서 멈춰 있다. Shadowval
 
 저장이 되지 않던 세계가 저장되기 시작하는 순간처럼, 게임 개발도 어느 순간 "이게 실제로 돌아간다"는 감각이 온다.
 
-그 감각이 오면 멈추기 어렵다.
----
+## 그 감각이 오면 멈추기 어렵다.
 
 ## 콘텐츠와 세계관을 끝까지 밀어붙이며 느낀 점
 
 게임 프로젝트 후반부로 갈수록 기술 구현보다 더 어려운 것은 일관성을 유지하는 일이다. 캐릭터 설정, 지역 분위기, 전투 보상, 탐험 동기, 서사 톤이 따로 놀기 시작하면 플레이 경험이 금방 산만해진다. Feloria 3편의 회고가 의미 있는 이유도, 콘텐츠 양 자체보다 이 일관성을 지키기 위해 어떤 판단을 했는지 기록하고 있다는 점에 있다.
 
-특히 개인 프로젝트에서는 "내가 재미있다고 느끼는 것"과 "플레이어가 이해할 수 있는 것" 사이의 거리를 자주 점검해야 한다. 이 파트를 지나며 얻은 가장 큰 교훈은, 세계관은 텍스트 양으로 완성되는 것이 아니라 시스템과 플레이 동기 속에서 반복적으로 확인될 때 살아난다는 점이었다.
+## 특히 개인 프로젝트에서는 "내가 재미있다고 느끼는 것"과 "플레이어가 이해할 수 있는 것" 사이의 거리를 자주 점검해야 한다. 이 파트를 지나며 얻은 가장 큰 교훈은, 세계관은 텍스트 양으로 완성되는 것이 아니라 시스템과 플레이 동기 속에서 반복적으로 확인될 때 살아난다는 점이었다.
+
+## 플레이 링크
+
+실제로 플레이해보려면 여기로 들어가면 된다.
+
+[Feloria 플레이하기](https://feloria.vercel.app/)

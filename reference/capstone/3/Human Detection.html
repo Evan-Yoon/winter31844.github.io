@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TensorFlow.js 실시간 사람 감지</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; font-family: sans-serif; }
+        #canvas-container { position: relative; }
+        video, canvas { position: absolute; left: 0; top: 0; }
+        #status { margin-bottom: 10px; font-weight: bold; color: blue; }
+    </style>
+</head>
+<body>
+    <h1>웹캠 사람 감지 시스템</h1>
+    <div id="status">모델 로딩 중...</div>
+    <div id="canvas-container">
+        <video id="webcam" autoplay muted width="640" height="480"></video>
+        <canvas id="canvas" width="640" height="480"></canvas>
+    </div>
+
+    <script>
+        const video = document.getElementById('webcam');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const statusText = document.getElementById('status');
+        let model;
+
+        // 1. 웹캠 설정
+        async function setupWebcam() {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { width: 640, height: 480 },
+                audio: false
+            });
+            video.srcObject = stream;
+            return new Promise((resolve) => {
+                video.onloadedmetadata = () => resolve(video);
+            });
+        }
+
+        // 2. 예측 및 그리기 루프
+        async function predict() {
+            // 모델을 통해 객체 감지
+            const predictions = await model.detect(video);
+            
+            // 캔버스 초기화
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let personFound = false;
+
+            predictions.forEach(prediction => {
+                if (prediction.class === 'person') {
+                    personFound = true;
+                    // 박스 그리기
+                    ctx.strokeStyle = '#00FF00';
+                    ctx.lineWidth = 4;
+                    ctx.strokeRect(...prediction.bbox);
+
+                    // 라벨 표시
+                    ctx.fillStyle = '#00FF00';
+                    ctx.font = '20px Arial';
+                    ctx.fillText(
+                        `${prediction.class} (${Math.round(prediction.score * 100)}%)`,
+                        prediction.bbox[0],
+                        prediction.bbox[1] > 10 ? prediction.bbox[1] - 5 : 10
+                    );
+                }
+            });
+
+            // 상태 업데이트
+            statusText.innerText = personFound ? "⚠️ 사람이 감지되었습니다!" : "안전 (사람 없음)";
+            statusText.style.color = personFound ? "red" : "blue";
+
+            // 다음 프레임 실행
+            requestAnimationFrame(predict);
+        }
+
+        // 3. 메인 실행부
+        async function main() {
+            try {
+                // 모델 로드 (COCO-SSD)
+                model = await cocoSsd.load();
+                statusText.innerText = "모델 로드 완료! 카메라 연결 중...";
+                
+                await setupWebcam();
+                statusText.innerText = "실시간 감지 중...";
+                
+                predict();
+            } catch (error) {
+                statusText.innerText = "에러 발생: " + error.message;
+            }
+        }
+
+        main();
+    </script>
+</body>
+</html>
