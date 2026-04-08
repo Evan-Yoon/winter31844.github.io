@@ -434,10 +434,10 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .article-content-shell.has-toc {
-    max-width: 1080px;
+    max-width: 1280px;
     display: grid;
-    grid-template-columns: minmax(0, var(--col)) 240px;
-    gap: 3rem;
+    grid-template-columns: minmax(0, var(--col)) 260px;
+    gap: 6rem;
     align-items: start;
   }
 
@@ -636,17 +636,16 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
   .article-toc {
     position: relative;
-    align-self: start;
+    min-height: 1px;
   }
 
   .article-toc-inner {
-    position: sticky;
-    top: 88px;
-    max-height: calc(100vh - 112px);
-    overflow-y: auto;
+    position: fixed;
+    top: 168px;
+    right: max(1.5rem, calc((100vw - 1280px) / 2 + 2rem));
+    width: 260px;
     padding: 1.25rem 1rem 1.25rem 1.1rem;
     border-left: 1px solid var(--border);
-    scrollbar-width: thin;
   }
 
   .article-toc-kicker {
@@ -678,6 +677,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     gap: 0.65rem;
     padding: 0.45rem 0;
     color: var(--ink-3);
+    font-weight: 400;
     transition: color var(--transition), transform var(--transition);
   }
 
@@ -712,7 +712,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
   .toc-link.is-active {
     color: var(--ink);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .toc-link.is-active .toc-link-dot {
@@ -956,7 +956,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     background: var(--bg-hover);
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1280px) {
     .article-content-shell.has-toc {
       grid-template-columns: minmax(0, 1fr);
       gap: 1.5rem;
