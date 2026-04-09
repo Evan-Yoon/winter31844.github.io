@@ -271,9 +271,9 @@ upload_to_supabase.py →  Supabase 업로드 스크립트
 
 Day 2는 화면보다 AI 백엔드 구조를 먼저 세운 날이었다. 실제로 어떤 코드를 붙였고, 어떤 주제로 챗봇을 만들었는지가 보이는 자료를 같이 남긴다.
 
-<img src="/images/posts/mongle/chatbot-photo.png" alt="Mongle 챗봇 관련 정리 자료" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
+<img src="/images/posts/mongle/chatbot-photo.png" alt="Mongle 챗봇 관련 정리 자료" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
 
-<img src="/images/posts/mongle/chatbot-core-code.png" alt="Kakao API 크롤링, RAG 임베딩, 프롬프트를 포함한 챗봇 핵심 코드" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
+<img src="/images/posts/mongle/chatbot-core-code.png" alt="Kakao API 크롤링, RAG 임베딩, 프롬프트를 포함한 챗봇 핵심 코드" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
 
 ---
 

@@ -10,7 +10,8 @@
       "WebFetch(domain:www.notion.so)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(python3)"
     ],
     "additionalDirectories": [
       "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories",

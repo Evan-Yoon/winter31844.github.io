@@ -277,10 +277,7 @@ PPT 마지막 슬라이드에 이렇게 썼다.
 
 <img src="/images/posts/mongle/lighthouse-web-evaluation.png" alt="Mongle planner web 화면의 Lighthouse 평가 결과" style="display:block; width:100%; max-width:760px; margin:1rem auto;" />
 
-<video controls preload="metadata" style="display:block; width:100%; max-width:760px; margin:1rem auto;">
-  <source src="/files/mongle-demo.mp4" type="video/mp4" />
-  브라우저가 동영상을 지원하지 않으면 <a href="/files/mongle-demo.mp4">여기에서 시연 영상을 확인할 수 있다</a>.
-</video>
+<iframe width="760" height="428" src="https://www.youtube.com/embed/77DpISLNaF4" title="Mongle 시연 영상" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="display:block; width:100%; max-width:760px; margin:1rem auto;"></iframe>
 
 ---
 
