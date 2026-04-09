@@ -5,10 +5,12 @@ interface Props {
   description?: string;
 }
 
-const { 
-  title = "Evan Yoon | Pressing 'Restart' on Life", 
-  description = "Former HR specialist (Josun Palace), Former GM (Blizzard) who decided to trade a stable career for code. Evan Yoon's journey." 
+const {
+  title = "Evan Yoon | Pressing 'Restart' on Life",
+  description = "Former HR specialist (Josun Palace), Former GM (Blizzard) who decided to trade a stable career for code. Evan Yoon's journey."
 } = Astro.props;
+
+const email = import.meta.env.EMAIL_ADDRESS;
 ---
 
 <!DOCTYPE html>
@@ -73,7 +75,7 @@ const {
       <span class="footer-logo">Restart<span>.</span></span>
       <ul class="footer-links">
         <li><a href="https://github.com/Evan-Yoon" target="_blank">GitHub</a></li>
-        <li><a href="mailto:[EMAIL_ADDRESS]">Contact</a></li>
+        <li><a href={`mailto:${email}`}>Contact</a></li>
       </ul>
       <span class="footer-copy">© 2025 Evan Yoon</span>
     </div>
