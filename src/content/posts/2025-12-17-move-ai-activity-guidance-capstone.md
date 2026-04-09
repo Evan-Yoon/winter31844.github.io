@@ -1,5 +1,5 @@
 ---
-title: '[Move AI] 비활동 시간을 감지해 작은 움직임을 유도한 미니 프로젝트'
+title: '[Move AI] 너무 오래 앉아 있으면 움직이라고 알려주는 앱'
 slug: move-ai-activity-guidance-capstone
 date: 2025-12-17
 author: Evan Yoon

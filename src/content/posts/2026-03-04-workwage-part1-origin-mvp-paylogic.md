@@ -1,5 +1,5 @@
 ---
-title: '[WorkWage] Flutter 7일, 교대근무자를 위한 급여 계산기를 만들었다 — 시작, 설계, 그리고 계산 로직'
+title: '[WorkWage] Flutter로 교대근무자 급여 계산기 만든 7일'
 slug: workwage-part1-origin-mvp-paylogic
 date: 2026-03-04
 author: Evan Yoon

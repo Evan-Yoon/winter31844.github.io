@@ -1,5 +1,5 @@
 ---
-title: 사회적 가치 정립과 협업을 위한 Git 동기화
+title: '[Walkmate] Day 15 — 앱의 방향 다시 잡고 Git 동기화'
 slug: walkmate-day15-social-value-and-git-sync
 date: 2026-02-23
 author: Evan Yoon

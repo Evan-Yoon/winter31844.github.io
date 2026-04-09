@@ -1,5 +1,5 @@
 ---
-title: TMAP API 전환 및 시각 장애인용 시계 방향 안내 시스템 구축
+title: '[Walkmate] Day 4 — TMAP으로 갈아타고 시계 방향 안내 만들기'
 slug: walkmate-day4-tmap-navigation
 date: 2026-02-12
 author: Evan Yoon

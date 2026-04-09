@@ -1,5 +1,5 @@
 ---
-title: '채용 결과 메일, 이제 1분이면 끝: Python SMTP 자동화'
+title: '채용 결과 메일 자동으로 보내기 — Python SMTP'
 slug: hr-send-result-email-automation
 date: 2026-03-22
 author: Evan Yoon

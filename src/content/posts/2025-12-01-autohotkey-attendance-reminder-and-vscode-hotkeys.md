@@ -1,5 +1,5 @@
 ---
-title: "출석 체크를 안 잊기 위해 만든 AutoHotkey 알림, 그리고 VS Code 핫키까지"
+title: '출석 빠뜨리기 싫어서 만든 AutoHotkey 알림, VS Code 단축키도 추가'
 slug: autohotkey-attendance-reminder-and-vscode-hotkeys
 date: 2025-12-01
 author: Evan Yoon

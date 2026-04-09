@@ -1,5 +1,5 @@
 ---
-title: '[Rossmann] 이틀짜리 미니 프로젝트로 매출 영향 특성 찾기'
+title: '[Rossmann] 이틀 만에 매출에 영향 주는 특성 찾기'
 slug: rossmann-sales-feature-capstone
 date: 2025-12-09
 author: Evan Yoon

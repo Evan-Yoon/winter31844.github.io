@@ -1,5 +1,5 @@
 ---
-title: '[Feloria] 전투가 세 번 다시 쓰였다 — 시스템 설계와 기술적 판단들'
+title: '[Feloria] 전투 시스템, 세 번 갈아엎은 이야기'
 slug: feloria-part2-battle-data-phaser-bugs
 date: 2026-03-12
 author: Evan Yoon

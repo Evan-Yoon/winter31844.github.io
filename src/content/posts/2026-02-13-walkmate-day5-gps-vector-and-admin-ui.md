@@ -1,5 +1,5 @@
 ---
-title: GPS 벡터 기반 방향 안내 및 관리자 대시보드 구축
+title: '[Walkmate] Day 5 — GPS 벡터로 방향 잡고 관리자 화면까지'
 slug: walkmate-day5-gps-vector-and-admin-ui
 date: 2026-02-13
 author: Evan Yoon

@@ -1,5 +1,5 @@
 ---
-title: 실시간 히트맵 구현 및 관리자 UI 고도화
+title: '[Walkmate] Day 12 — 실시간 히트맵 붙이고 관리자 화면 다듬기'
 slug: walkmate-day12-heatmap-and-admin-ui-refinement
 date: 2026-02-20
 author: Evan Yoon

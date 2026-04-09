@@ -1,5 +1,5 @@
 ---
-title: "[Feloria] 시스템이 다 갖춰진 뒤에야 보이는 것들 — 콘텐츠, 세계, 회고"
+title: '[Feloria] 다 만들고 나서야 보이는 것들 — 콘텐츠, 세계관, 회고'
 slug: feloria-part3-content-world-retrospective
 date: 2026-03-21
 author: Evan Yoon

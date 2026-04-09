@@ -1,5 +1,5 @@
 ---
-title: '[WorkWage] 계산기에서 제품으로 — 상태 관리, 기능 확장, 그리고 마감의 감각'
+title: '[WorkWage] 계산기에서 앱으로 — 기능 붙이고 마감까지'
 slug: workwage-part3-state-expansion-retrospective
 date: 2026-03-10
 author: Evan Yoon

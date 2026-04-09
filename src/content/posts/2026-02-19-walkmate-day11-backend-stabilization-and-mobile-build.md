@@ -1,5 +1,5 @@
 ---
-title: 백엔드 API 안정화 및 모바일 앱 빌드 오류 해결
+title: '[Walkmate] Day 11 — 백엔드 잡고 빌드 오류도 잡고'
 slug: walkmate-day11-backend-stabilization-and-mobile-build
 date: 2026-02-19
 author: Evan Yoon

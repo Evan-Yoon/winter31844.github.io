@@ -1,5 +1,5 @@
 ---
-title: TFLite 모델 연동 및 안드로이드 성능 최적화
+title: '[Walkmate] Day 3 — TFLite 모델 붙이고 안드로이드에서 돌리기'
 slug: walkmate-day3-tflite-integration
 date: 2026-02-11
 author: Evan Yoon

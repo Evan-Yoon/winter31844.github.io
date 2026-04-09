@@ -1,5 +1,5 @@
 ---
-title: 시각장애인을 위한 핵심 UI 및 개발 환경 구축
+title: '[Walkmate] Day 2 — UI 틀 잡고 개발 환경 세팅'
 slug: walkmate-day2-ui-components
 date: 2026-02-10
 author: Evan Yoon

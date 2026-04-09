@@ -1,5 +1,5 @@
 ---
-title: 시각장애인을 위한 AI 보행 보조 앱 개발
+title: '[Walkmate] Day 1 — 시각장애인 AI 보행 앱, 첫날 세팅'
 slug: walkmate-day1-ai-setup
 date: 2026-02-09
 author: Evan Yoon

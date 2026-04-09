@@ -1,5 +1,5 @@
 ---
-title: '[AWS AIF-C01][준비] 3일 압축으로 AI Practitioner 준비한 기록'
+title: '[AWS AIF-C01][준비] 3일 벼락치기로 AI Practitioner 준비한 기록'
 slug: aws-aif-c01-prep-in-3-days
 date: 2026-03-21
 author: Evan Yoon
