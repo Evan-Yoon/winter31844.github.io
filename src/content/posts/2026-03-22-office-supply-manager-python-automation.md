@@ -1,5 +1,7 @@
 ---
-title: 'HR 출신이 처음 만든 자동화 도구 — 비품 발주 스크립트'
+title: |
+  비품 발주 자동화
+  Python 스크립트
 slug: office-supply-manager-python-automation
 date: 2026-03-22
 author: Evan Yoon

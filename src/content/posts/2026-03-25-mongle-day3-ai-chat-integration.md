@@ -1,5 +1,7 @@
 ---
-title: '[Mongle] Day 3 — 채팅창에 AI를 붙이다, 그리고 500 에러와의 전쟁'
+title: |
+  [Mongle] Day 3
+  AI 채팅 연동과 500 에러
 slug: mongle-day3-ai-chat-integration
 date: 2026-03-25
 author: Evan Yoon

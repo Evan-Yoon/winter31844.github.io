@@ -1,5 +1,7 @@
 ---
-title: '[Feloria] 전투 시스템, 세 번 갈아엎은 이야기'
+title: |
+  [Feloria] Part 2
+  전투 시스템과 버그
 slug: feloria-part2-battle-data-phaser-bugs
 date: 2026-03-12
 author: Evan Yoon

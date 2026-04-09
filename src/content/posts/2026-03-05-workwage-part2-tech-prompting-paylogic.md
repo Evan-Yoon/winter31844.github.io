@@ -1,5 +1,7 @@
 ---
-title: '[WorkWage] Flutter를 택한 건 언어 때문이 아니라 구조 때문이었다'
+title: |
+  [WorkWage] Part 2
+  기술 선택과 급여 로직
 slug: workwage-part2-tech-prompting-paylogic
 date: 2026-03-05
 author: Evan Yoon

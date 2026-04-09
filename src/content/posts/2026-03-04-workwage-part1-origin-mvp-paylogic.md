@@ -1,5 +1,7 @@
 ---
-title: "[WorkWage] 교대근무 급여 계산기를 Flutter로 만든 기록"
+title: |
+  [WorkWage] Part 1
+  기획, 정리, 그리고 MVP
 slug: workwage-part1-origin-mvp-paylogic
 date: 2026-03-04
 author: Evan Yoon

@@ -1,5 +1,7 @@
 ---
-title: "[Mongle] Day 9 — 발표 전날, 11일을 한 장에 담다"
+title: |
+  [Mongle] Day 9
+  발표 전날, 11일의 기록
 slug: mongle-day9-demo-ppt-final
 date: 2026-04-01
 author: Evan Yoon

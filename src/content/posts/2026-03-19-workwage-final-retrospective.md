@@ -1,5 +1,7 @@
 ---
-title: 교대근무자를 위한 급여 계산기를 Flutter로 만들고, 구글 플레이에 올리기까지
+title: |
+  [WorkWage] 회고
+  Flutter 앱, 플레이스토어까지
 slug: workwage-final-retrospective
 date: 2026-03-19
 author: Evan Yoon

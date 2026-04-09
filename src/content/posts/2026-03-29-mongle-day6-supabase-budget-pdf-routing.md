@@ -1,5 +1,7 @@
 ---
-title: '[Mongle] Day 6 — 쉬어야 할 일요일, 예산·잔금 Supabase 연동 완료'
+title: |
+  [Mongle] Day 6
+  Supabase 예산·잔금 연동
 slug: mongle-day6-supabase-budget-pdf-routing
 date: 2026-03-29
 author: Evan Yoon

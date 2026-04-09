@@ -1,5 +1,7 @@
 ---
-title: '[Mongle] Day 5 — 견적 비교 AI, PDF 공유, 그리고 잘못된 머지 복구기'
+title: |
+  [Mongle] Day 5
+  견적 AI, PDF, 머지 복구
 slug: mongle-day5-estimation-pdf-rollback
 date: 2026-03-27
 author: Evan Yoon

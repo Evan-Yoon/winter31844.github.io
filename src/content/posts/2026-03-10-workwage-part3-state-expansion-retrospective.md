@@ -1,5 +1,7 @@
 ---
-title: '[WorkWage] 계산기에서 앱으로 — 기능 붙이고 마감까지'
+title: |
+  [WorkWage] Part 3
+  기능 확장과 마감
 slug: workwage-part3-state-expansion-retrospective
 date: 2026-03-10
 author: Evan Yoon

@@ -1,5 +1,7 @@
 ---
-title: '[Feloria] 고양이만 등장하는 RPG를 직접 만들어봤다 — 발상, 재시작, 그리고 하루'
+title: |
+  [Feloria] Part 1
+  기획, 재시작, 그리고 하루
 slug: feloria-part1-concept-design-bootstrap
 date: 2026-03-10
 author: Evan Yoon

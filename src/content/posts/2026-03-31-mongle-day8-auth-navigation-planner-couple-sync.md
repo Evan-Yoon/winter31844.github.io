@@ -1,5 +1,7 @@
 ---
-title: '[Mongle] Day 8 — 로그인 버그 3연타, 그리고 플래너-커플 연동'
+title: |
+  [Mongle] Day 8
+  로그인 버그와 커플 연동
 slug: mongle-day8-auth-navigation-planner-couple-sync
 date: 2026-03-31
 author: Evan Yoon

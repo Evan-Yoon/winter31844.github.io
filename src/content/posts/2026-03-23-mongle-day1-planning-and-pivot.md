@@ -1,5 +1,7 @@
 ---
-title: '[Mongle] Day 1 — 기획 피벗, 그리고 폴더 구조 설계'
+title: |
+  [Mongle] Day 1
+  기획 피벗과 폴더 구조
 slug: mongle-day1-planning-and-pivot
 date: 2026-03-23
 author: Evan Yoon

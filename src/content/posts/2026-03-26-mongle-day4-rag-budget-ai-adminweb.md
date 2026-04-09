@@ -1,5 +1,7 @@
 ---
-title: '[Mongle] Day 4 — RAG 챗봇, 예산 AI, 그리고 플래너 웹까지'
+title: |
+  [Mongle] Day 4
+  RAG 챗봇과 플래너 웹
 slug: mongle-day4-rag-budget-ai-adminweb
 date: 2026-03-26
 author: Evan Yoon

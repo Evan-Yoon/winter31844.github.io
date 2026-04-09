@@ -1,5 +1,7 @@
 ---
-title: '[Mongle] Day 2 — 백엔드 세팅, 카카오 크롤링 987개, 그리고 AI 아키텍처 설계'
+title: |
+  [Mongle] Day 2
+  백엔드 세팅과 AI 아키텍처
 slug: mongle-day2-backend-crawling-ai-arch
 date: 2026-03-24
 author: Evan Yoon

@@ -1,5 +1,7 @@
 ---
-title: '신규 입사자 온보딩에 AI 챗봇 붙이기 — React Native + GPT-4o-mini'
+title: |
+  온보딩 AI 챗봇
+  React Native + GPT-4o-mini
 slug: onboarding-chatbot-react-native-openai
 date: 2026-03-20
 author: Evan Yoon

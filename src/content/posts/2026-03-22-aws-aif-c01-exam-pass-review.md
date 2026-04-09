@@ -1,5 +1,7 @@
 ---
-title: '[AWS AIF-C01][후기] 앤아버 시험장 현장 응시 후기'
+title: |
+  [AWS AIF-C01] 후기
+  앤아버 시험장 현장 응시
 slug: aws-aif-c01-exam-pass-review
 date: 2026-03-22
 author: Evan Yoon

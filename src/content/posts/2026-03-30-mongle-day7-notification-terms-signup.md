@@ -1,5 +1,7 @@
 ---
-title: '[Mongle] Day 7 — 알림 시스템 구현, 그리고 과감하게 폐기한 이유'
+title: |
+  [Mongle] Day 7
+  알림 시스템과 폐기 결정
 slug: mongle-day7-notification-terms-signup
 date: 2026-03-30
 author: Evan Yoon
