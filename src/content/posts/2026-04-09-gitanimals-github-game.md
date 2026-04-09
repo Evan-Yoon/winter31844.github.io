@@ -156,10 +156,10 @@ toc: true
 
 ## 내 동물들
 
-지금 내 메인 동물.
+지금 내 메인 동물 유니콘.
 
 <a href="https://github.com/devxb/gitanimals">
-  <img src="https://render.gitanimals.org/lines/Evan-Yoon?pet-id=3" width="1000" height="200"/>
+  <img src="https://render.gitanimals.org/lines/Evan-Yoon?pet-id=829896534857322024" width="1000" height="200"/>
 </a>
 
 농장 전체도 볼 수 있다.
