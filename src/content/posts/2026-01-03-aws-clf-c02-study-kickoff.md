@@ -1,11 +1,12 @@
 ---
-title: '[AWS CLF-C02][시작] Cloud Practitioner 스터디를 시작한 이유'
+title: "[AWS CLF-C02] Cloud Practitioner 스터디 시작"
 slug: aws-clf-c02-study-kickoff
 date: 2026-01-03
 author: Evan Yoon
 category: study
 subcategory: certification
-description: 인텔 인공지능 인재교육 과정 중 AWS Certified Cloud Practitioner(CLF-C02) 자격증 취득을 목표로
+description:
+  인텔 인공지능 인재교육 과정 중 AWS Certified Cloud Practitioner(CLF-C02) 자격증 취득을 목표로
   스터디를 시작하게 된 배경과 운영 방식을 정리했다.
 thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:

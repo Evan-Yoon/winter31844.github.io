@@ -1,11 +1,14 @@
 ---
-title: '[AWS CLF-C02][4회차] Storage 핵심 정리'
+title: |
+  [AWS CLF-C02] [4회차]
+  Storage 핵심 정리
 slug: aws-clf-c02-day4-storage-core
 date: 2026-01-15
 author: Evan Yoon
 category: study
 subcategory: certification
-description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 4회차 기록. S3, EBS, Instance
+description:
+  AWS Certified Cloud Practitioner(CLF-C02) 스터디 4회차 기록. S3, EBS, Instance
   Store, EFS의 차이와 각각의 사용 목적을 시험 관점과 실제 사용 관점에서 자세히 정리했다.
 thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:

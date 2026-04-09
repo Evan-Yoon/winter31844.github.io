@@ -1,12 +1,15 @@
 ---
-title: '[AWS CLF-C02][3회차] Compute 핵심 정리'
+title: |
+  [AWS CLF-C02] [3회차]
+  Compute 핵심 정리
 slug: aws-clf-c02-day3-compute-core
 date: 2026-01-13
 author: Evan Yoon
 category: study
 subcategory: certification
-description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 3회차 기록. EC2의 기본 개념과 인스턴스
-  타입, Security Group, Auto Scaling, 그리고 Lambda·EC2·Lightsail의 차이를 한 편으로 자세히 정리했다.
+description:
+  AWS Certified Cloud Practitioner(CLF-C02) 스터디 3회차 기록. EC2의 기본 개념과 인스턴스
+  타입, Security Group, Auto Scaling, 그리고 Lambda·EC2·Lightsail의 차이
 thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
   - aws
@@ -609,7 +612,7 @@ Cloud Practitioner 시험도 결국 이 관점에 가깝다. 서비스 기능을
 
 reference 폴더 기준으로 3회차와 직접 연결되는 자료 파일은 아래 3개였다. 복습용으로 바로 내려받을 수 있게 정적 경로로 옮겨두었다.
 
-- [3_Compute핵심_Auto Scaling&4Services_지현.html](/downloads/aws-clf-c02/2026-01-13/3_Compute%ED%95%B5%EC%8B%AC_Auto%20Scaling%264Services_%EC%A7%80%ED%98%84.html)
+- [3*Compute핵심\_Auto Scaling&4Services*지현.html](/downloads/aws-clf-c02/2026-01-13/3_Compute%ED%95%B5%EC%8B%AC_Auto%20Scaling%264Services_%EC%A7%80%ED%98%84.html)
   Auto Scaling, Lambda, EC2, Lightsail 비교가 들어 있는 핵심 발표 자료.
 
 - [autoscaling.PNG](/downloads/aws-clf-c02/2026-01-13/autoscaling.PNG)

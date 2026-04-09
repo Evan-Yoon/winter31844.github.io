@@ -1,12 +1,15 @@
 ---
-title: '[AWS CLF-C02][8회차] 비용과 아키텍처 원칙 정리'
+title: |
+  [AWS CLF-C02] [8회차]
+  비용과 아키텍처 원칙
 slug: aws-clf-c02-day8-cost-and-architecture
 date: 2026-01-29
 author: Evan Yoon
 category: study
 subcategory: certification
-description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 8회차 기록. EC2 구매 옵션, Savings
-  Plans, Cost Explorer와 Budgets, Well-Architected Framework와 CAF를 시험 관점과 실무 관점에서 자세히
+description:
+  AWS Certified Cloud Practitioner(CLF-C02) 스터디 8회차 기록. EC2 구매 옵션, Savings
+  Plans, Cost Explorer와 Budgets, Well-Architected Framework와 CAF를 시험 관점과 실무 관점에서
   정리했다.
 thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:

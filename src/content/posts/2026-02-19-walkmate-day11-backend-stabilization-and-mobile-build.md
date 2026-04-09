@@ -1,12 +1,15 @@
 ---
-title: '[Walkmate] Day 11 — 백엔드 잡고 빌드 오류도 잡고'
+title: |
+  [Walkmate] Day 11
+  백엔드와 빌드 오류 잡기
 slug: walkmate-day11-backend-stabilization-and-mobile-build
 date: 2026-02-19
 author: Evan Yoon
 category: project
 subcategory: team-project
-description: '[Walkmate] FastAPI 리다이렉트 문제 해결, Capacitor 기반 파일 시스템 교체 및 YOLO 전처리 최적화
-  기록.'
+description:
+  "[Walkmate] FastAPI 리다이렉트 문제 해결, Capacitor 기반 파일 시스템 교체 및 YOLO 전처리 최적화
+  기록."
 thumbnail: /images/posts/walkmate/cover11.png
 tags:
   - FastAPI
@@ -36,13 +39,13 @@ toc: true
 
 백엔드 API 안정화와 모바일 앱 빌드 환경의 고도화를 목표로 삼았으며, 대부분의 이슈를 해결하고 전처리 알고리즘을 개선했다.
 
-| 목표 항목 | 상태 | 비고 |
-| :--- | :---: | :--- |
-| 백엔드 API 연결 안정화 (Trailing Slash 이슈) | ✅ 완료 | 307 리다이렉트 및 404 해결 |
-| 모바일 앱 빌드 오류 해결 (Capacitor 마이그레이션) | ✅ 완료 | `react-native-fs`를 `capacitor/filesystem`으로 교체 |
-| YOLO 이미지 전처리 최적화 (Letterbox 도입) | ✅ 완료 | 이미지 왜곡 방지 및 인식률 향상 |
-| Vite 빌드 설정 최적화 및 네이티브 라이브러리 충돌 수정 | ✅ 완료 | `vite.config.ts` alias 및 exclude 설정 |
-| AdminUI 타입 에러 수정 | ✅ 완료 | ReportCard 컴포넌트 key 속성 타입 에러 해결 |
+| 목표 항목                                              |  상태   | 비고                                                |
+| :----------------------------------------------------- | :-----: | :-------------------------------------------------- |
+| 백엔드 API 연결 안정화 (Trailing Slash 이슈)           | ✅ 완료 | 307 리다이렉트 및 404 해결                          |
+| 모바일 앱 빌드 오류 해결 (Capacitor 마이그레이션)      | ✅ 완료 | `react-native-fs`를 `capacitor/filesystem`으로 교체 |
+| YOLO 이미지 전처리 최적화 (Letterbox 도입)             | ✅ 완료 | 이미지 왜곡 방지 및 인식률 향상                     |
+| Vite 빌드 설정 최적화 및 네이티브 라이브러리 충돌 수정 | ✅ 완료 | `vite.config.ts` alias 및 exclude 설정              |
+| AdminUI 타입 에러 수정                                 | ✅ 완료 | ReportCard 컴포넌트 key 속성 타입 에러 해결         |
 
 ---
 
@@ -50,28 +53,31 @@ toc: true
 
 빌드 환경 구축과 핵심 내비게이션 기능의 기초를 다지기 위해 주요 커밋들이 진행되었다.
 
-| Hash | Message | 주요 내용 |
-| :--- | :--- | :--- |
-| `a528c0a` | **build: add Capacitor Android build configuration** | 핵심 및 커뮤니티 플러그인 Android 빌드 설정 추가 |
-| `6db7e26` | **feat: Add YOLO parsing utility and reporting API** | YOLO 결과 파싱 유틸리티 및 Vision Camera 연동 API 구축 |
-| `28d247f` | **feat: Introduce hazard reporting system** | 실시간 객체 탐지 기반 S3 이미지 업로드 및 신고 관리 기능 |
-| `e1382e2` | **feat: Initialize Capacitor Android project with TFLite** | Web API 기반 TFLite 연동 및 앱 구조 초기화 |
-| `52c27f6` | **feat: Add initial user and admin UI structures** | API 연동 및 환경 설정, UI 기본 구조 구축 |
-| `0f3375b` | **feat: Integrate TMAP API for navigation** | 경로 계산, 장소 검색 및 디버그용 맵(Leaflet) 통합 |
-| `7346e82` | **feat: Implement real-time pedestrian navigation** | GPS/나침반/TTS 통합 백엔드 경로 안내 화면 구현 |
-| `6644a0f` | **chore: Add package-lock.json** | 의존성 잠금 및 환경 일관성 확보 |
+| Hash      | Message                                                    | 주요 내용                                                |
+| :-------- | :--------------------------------------------------------- | :------------------------------------------------------- |
+| `a528c0a` | **build: add Capacitor Android build configuration**       | 핵심 및 커뮤니티 플러그인 Android 빌드 설정 추가         |
+| `6db7e26` | **feat: Add YOLO parsing utility and reporting API**       | YOLO 결과 파싱 유틸리티 및 Vision Camera 연동 API 구축   |
+| `28d247f` | **feat: Introduce hazard reporting system**                | 실시간 객체 탐지 기반 S3 이미지 업로드 및 신고 관리 기능 |
+| `e1382e2` | **feat: Initialize Capacitor Android project with TFLite** | Web API 기반 TFLite 연동 및 앱 구조 초기화               |
+| `52c27f6` | **feat: Add initial user and admin UI structures**         | API 연동 및 환경 설정, UI 기본 구조 구축                 |
+| `0f3375b` | **feat: Integrate TMAP API for navigation**                | 경로 계산, 장소 검색 및 디버그용 맵(Leaflet) 통합        |
+| `7346e82` | **feat: Implement real-time pedestrian navigation**        | GPS/나침반/TTS 통합 백엔드 경로 안내 화면 구현           |
+| `6644a0f` | **chore: Add package-lock.json**                           | 의존성 잠금 및 환경 일관성 확보                          |
 
 ---
 
 ## 🛠 Tech Stack & Implementation
 
 ### 1. API 통신의 미묘한 차이: Trailing Slash 이슈
+
 FastAPI 서버에서 특정 엔드포인트 호출 시 307 리다이렉트나 404 오류가 반복적으로 발생했다. 조사 결과, 백엔드 경로 정의와 클라이언트 요청 주소의 끝에 슬래시(/) 유무가 일치하지 않아 발생하는 문제였다. 모든 API 주소 끝에 슬래시를 추가하여 통신 안정성을 확보했다.
 
 ### 2. Capacitor 기반 파일 시스템 교체
+
 기존 `react-native-fs`를 사용하던 중 호환성 문제로 인해 빌드 오류가 지속되었다. 이를 해결하기 위해 Capacitor 환경에 최적화된 `@capacitor/filesystem`으로 플러그인을 교체했다. 네이티브 파일 접근 방식이 더 깔끔해졌으며 빌드 안정성도 높아졌다.
 
 ### 3. Vite 빌드 환경 및 Ngrok 우회
+
 - **네이티브 라이브러리 충돌**: Vite 빌드 시 특정 라이브러리가 브라우저 환경과 충돌하는 문제를 방지하기 위해 `vite.config.ts`에서 `alias`와 `exclude` 설정을 세밀하게 조정했다.
 - **Ngrok 경고 페이지**: 무료 버전의 ngrok은 첫 접속 시 안내 페이지를 띄우는데, 이로 인해 API 요청이 차단되는 현상이 있었다. 모든 요청 헤더에 `ngrok-skip-browser-warning`을 추가하여 이를 우회했다.
 
@@ -80,10 +86,12 @@ FastAPI 서버에서 특정 엔드포인트 호출 시 307 리다이렉트나 40
 ## ⚠️ Issue Situation & Troubleshooting
 
 ### 이슈 1: 이미지 왜곡으로 인한 오인식 (Stretching vs Letterbox)
+
 - **문제**: YOLO 모델에 입력되는 이미지 리사이징 과정에서 종횡비를 무시하고 늘리는(Stretching) 방식이 사용되었다. 이로 인해 노란색 점자블록이 벤치처럼 길쭉하게 왜곡되어 오인인식되는 문제가 발생했다.
 - **해결**: 이미지의 원본 비율을 유지하면서 부족한 부분을 검은색 등으로 채우는 **레터박스(Letterbox)** 방식을 도입했다. 이를 통해 객체의 기하학적 형태가 보존되어 인식 정확도가 대폭 향상되었다.
 
 ### 이슈 2: react-native 내부 Flow 문법으로 인한 Vite 빌드 실패
+
 - **문제**: 일부 라이브러리 내부에서 Flow 타입 문법이 사용되어 Vite의 기본 빌드 프로세스에서 에러가 발생했다.
 - **해결**: `react-native-web`을 설치하고, 빌드 시 해당 모듈로 대체(alias)하도록 설정하여 웹 환경에서도 원활하게 빌드되도록 조치했다.
 
@@ -92,15 +100,16 @@ FastAPI 서버에서 특정 엔드포인트 호출 시 307 리다이렉트나 40
 ## 💭 Reflections
 
 ### 기술적 깨달음
+
 FastAPI에서 슬래시 하나가 통신 성공 여부를 가르는 것을 보며, 프레임워크마다 다른 관례(Convention)에 대한 면밀한 확인이 필요함을 다시금 느꼈다. 또한, AI 모델의 성능을 높이기 위해서는 모델 자체의 아키텍처만큼이나 입력 데이터의 비율을 유지하는 '전처리 과정'이 얼마나 결정적인지 실감한 하루였다.
 
 ### 향후 과제
+
 안정화된 빌드 환경을 바탕으로, 내일부터는 실제 카메라 프레임 전처리에 레터박스 방식을 전면 적용하고 YOLO26n 모델의 성능 검증에 집중할 계획이다. 작은 디테일을 놓치지 않는 것이 결국 사용자 경험의 완성도를 결정한다는 것을 잊지 말아야겠다.
 
 ---
 
-**Next Plan:** 카메라 프레임 전처리 알고리즘 고도화 및 YOLO26n 모델 현장 테스트 진행 예정. 🧭
----
+## **Next Plan:** 카메라 프레임 전처리 알고리즘 고도화 및 YOLO26n 모델 현장 테스트 진행 예정. 🧭
 
 ## 안정화 단계에서 드러난 실제 병목
 

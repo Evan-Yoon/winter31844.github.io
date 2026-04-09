@@ -1,11 +1,16 @@
 ---
-title: '[스팸 분류 스터디][5회차] BiLSTM 개선과 최종 결과 정리'
+title: |
+  [스팸 분류 스터디] [5회차]
+  BiLSTM 개선과 최종 결과
 slug: spam-classification-study-day5-bilstm-and-final-results
 date: 2026-01-21
 author: Evan Yoon
 category: study
 subcategory: self-study
-description: 2026년 1월 21일 스팸 분류 스터디 마지막 기록. 기본 LSTM의 한계를 확인하고 Bidirectional LSTM, Early Stopping, threshold tuning으로 precision 1.0을 유지한 최종 결과를 정리했다.
+description: |
+  2026년 1월 21일 스팸 분류 스터디 마지막 기록. 기본
+  LSTM의 한계를 확인하고 Bidirectional LSTM, Early Stopping, threshold tuning으로 precision 1.0을
+  유지한 최종 결과
 thumbnail: /images/posts/spam-classification-study/epochs30-confusion-matrix.png
 tags:
   - nlp

@@ -1,5 +1,7 @@
 ---
-title: "[스팸 분류 스터디][2회차] 길이 분포와 워드클라우드로 데이터 읽기"
+title: |
+  [스팸 분류 스터디] [2회차]
+  길이 분포와 워드클라우드로 데이터 읽기
 slug: spam-classification-study-day2-eda-and-visualization
 date: 2026-01-09
 author: Evan Yoon

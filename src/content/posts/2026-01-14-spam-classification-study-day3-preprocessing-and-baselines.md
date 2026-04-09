@@ -1,11 +1,15 @@
 ---
-title: "[스팸 분류 스터디][3회차] 전처리 적용과 Bag of Words, TF-IDF 첫 비교"
+title: |
+  [스팸 분류 스터디] [3회차]
+  전처리 적용과 Bag of Words, TF-IDF 첫 비교
 slug: spam-classification-study-day3-preprocessing-and-baselines
 date: 2026-01-14
 author: Evan Yoon
 category: study
 subcategory: self-study
-description: 2026년 1월 14일 스팸 분류 스터디 세 번째 기록. 특수문자 제거, 소문자 변환, 불용어 제거, 스테밍을 적용하고 Bag of Words와 TF-IDF 기반 Naive Bayes 결과를 처음 비교했다.
+description:
+  2026년 1월 14일 스팸 분류 스터디 세 번째 기록. 특수문자 제거, 소문자 변환, 불용어 제거,
+  스테밍을 적용하고 Bag of Words와 TF-IDF 기반 Naive Bayes 결과를 처음 비교했다.
 thumbnail: /images/posts/spam-classification-study/nb-vs-tfidf-comparison.png
 tags:
   - nlp

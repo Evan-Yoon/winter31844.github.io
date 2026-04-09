@@ -1,12 +1,14 @@
 ---
-title: '[Rossmann] 이틀 만에 매출에 영향 주는 특성 찾기'
+title: "[Rossmann] 이틀 만에 매출에 영향 주는 특성 찾기"
 slug: rossmann-sales-feature-capstone
 date: 2025-12-09
 author: Evan Yoon
 category: project
 subcategory: team-project
-description: 2025년 12월 8일과 9일, Rossmann 매장 데이터로 매출에 영향을 주는 특성을 찾고 매출 증대 아이디어까지 정리한
-  미니 프로젝트 기록.
+description: |
+  2025년 12월 8일과 9일, Rossmann 매장 데이터로
+  매출에 영향을 주는 특성을 찾고
+  매출 증대 아이디어까지 정리한 미니 프로젝트
 thumbnail: /images/posts/rossmann-mini-project/presentation-photo.jpeg
 tags:
   - rossmann
@@ -178,18 +180,18 @@ print(f"R^2  : {rf_r2:.4f}")
 
 노트북 출력값 기준 top feature importance는 아래 순서였다.
 
-| Feature | Importance |
-| --- | ---: |
-| Customers | 0.736121 |
-| StoreType | 0.057394 |
-| CompetitionDistance | 0.054285 |
-| Promo | 0.034123 |
-| Store | 0.032212 |
-| Promo2SinceWeek | 0.010810 |
-| DayOfWeek | 0.010062 |
-| CompetitionOpenSinceMonth | 0.009225 |
-| Assortment | 0.008834 |
-| CompetitionOpenDuration | 0.008286 |
+| Feature                   | Importance |
+| ------------------------- | ---------: |
+| Customers                 |   0.736121 |
+| StoreType                 |   0.057394 |
+| CompetitionDistance       |   0.054285 |
+| Promo                     |   0.034123 |
+| Store                     |   0.032212 |
+| Promo2SinceWeek           |   0.010810 |
+| DayOfWeek                 |   0.010062 |
+| CompetitionOpenSinceMonth |   0.009225 |
+| Assortment                |   0.008834 |
+| CompetitionOpenDuration   |   0.008286 |
 
 이 결과를 보고 가장 먼저 든 생각은 "고객 수가 중요하다"라는 너무 당연한 결론이 아니라, 그 다음 줄에 있는 변수들이었다. `StoreType`, `CompetitionDistance`, `Promo`, `Assortment`가 모두 상위권에 있다는 건, Rossmann 매출이 단지 유입량만의 함수가 아니라 매장 포지셔닝과 경쟁 환경, 판촉 운영의 영향을 함께 받는다는 뜻이다.
 
@@ -232,10 +234,10 @@ promo_pred = rf_model.predict(scenario_promo)
 
 노트북 출력은 아래처럼 나왔다.
 
-| Promo | Predicted Sales |
-| --- | ---: |
-| No Promo | 2883.783333 |
-| Promo | 7368.650000 |
+| Promo    | Predicted Sales |
+| -------- | --------------: |
+| No Promo |     2883.783333 |
+| Promo    |     7368.650000 |
 
 차이는 무려 `4484.87`이었다. 물론 평균 매장 1개를 기준으로 한 시뮬레이션이라 과장될 수는 있다. 그래서 노트북에서는 `X_test`에서 200개 샘플을 뽑아 다시 비교했고, 그 평균 효과는 약 `830.71`로 나왔다. 나는 오히려 이 두 숫자를 같이 보는 게 중요하다고 느꼈다. 프로모션 효과는 분명 존재하지만, 매장 조건에 따라 그 크기가 크게 달라진다는 뜻이기 때문이다.
 
@@ -281,14 +283,14 @@ promo_pred = rf_model.predict(scenario_promo)
 
 발표 자료 기준으로 모델 비교 결과는 아래처럼 정리했다.
 
-| Model | RMSE | MAE | R² | 비고 |
-| --- | ---: | ---: | ---: | --- |
-| Random Forest | 469.5302 | 312.5302 | 0.9771 | Best Model |
-| LightGBM | 476.6559 | 332.0468 | 0.9764 | 근소한 차이 |
-| CatBoost | 599.8146 | 421.2359 | 0.9626 | 범주형 처리 강점 |
-| XGBoost | 797.5473 | 578.3192 | 0.9340 | 기준선 비교용 |
-| LSTM | 740.7106 | 538.5830 | 0.9391 | DL 모델 |
-| MLP | 1436.3629 | 1007.9686 | 0.7853 | DL 모델 |
+| Model         |      RMSE |       MAE |     R² | 비고             |
+| ------------- | --------: | --------: | -----: | ---------------- |
+| Random Forest |  469.5302 |  312.5302 | 0.9771 | Best Model       |
+| LightGBM      |  476.6559 |  332.0468 | 0.9764 | 근소한 차이      |
+| CatBoost      |  599.8146 |  421.2359 | 0.9626 | 범주형 처리 강점 |
+| XGBoost       |  797.5473 |  578.3192 | 0.9340 | 기준선 비교용    |
+| LSTM          |  740.7106 |  538.5830 | 0.9391 | DL 모델          |
+| MLP           | 1436.3629 | 1007.9686 | 0.7853 | DL 모델          |
 
 최종 발표에서는 `Random Forest`를 베스트 모델로 소개했다. 성능도 가장 좋았지만, 무엇보다 feature 해석과 시나리오 설명에 연결하기 편했다는 점이 컸다. 짧은 프로젝트에서는 "최고 성능" 자체보다 "왜 그렇게 나왔는지 설명 가능한가"가 발표 완성도를 좌우했다.
 

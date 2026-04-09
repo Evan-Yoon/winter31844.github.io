@@ -1,11 +1,15 @@
 ---
-title: '[Move AI] 너무 오래 앉아 있으면 움직이라고 알려주는 앱'
+title: |
+  [Move AI] 너무 가만히 있으면
+  움직이라고 알려주는 앱
 slug: move-ai-activity-guidance-capstone
 date: 2025-12-17
 author: Evan Yoon
 category: project
 subcategory: team-project
-description: 2025년 12월 16일과 17일 진행한 Move AI 미니 프로젝트 기록. 웨어러블 센서 데이터로 활동 유형을 분류하고,
+description: |
+  2025년 12월 16일과 17일에 진행한 미니 프로젝트.
+  웨어러블 센서 데이터로 활동 유형을 분류하고,
   비활동 시간이 길어질 때 바로 실천 가능한 움직임을 제안하는 흐름을 설계했다.
 thumbnail: /images/posts/move-ai-mini-project/presentation-photo.jpeg
 tags:
@@ -87,9 +91,7 @@ toc: true
 
 실제로는 이런 분석 흐름이 아주 차분하게만 진행되지는 않았다. 짧은 일정 안에 데이터 해석, 모델 비교, 발표 자료 정리까지 한 번에 밀어 넣어야 했기 때문에 중간 과정은 꽤 현실적인 체력전이었다.
 
-먼저 자료를 만들고 결과를 정리하던 순간은 아래 사진처럼 거의 계속 노트북 앞에서 슬라이드와 분석 결과를 같이 맞춰 가는 흐름이었다. 단순히 코드만 실행하는 시간이 아니라, "이 결과를 발표에서 어떻게 설명할지"까지 동시에 정리해야 해서 생각보다 손이 많이 갔다.
-
-<img src="/images/posts/move-ai-mini-project/working-photo.jpeg" alt="Move AI 미니 프로젝트 자료를 정리하며 작업하는 모습" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
+먼저 자료를 만들고 결과를 정리하던 순간은 거의 계속 노트북 앞에서 슬라이드와 분석 결과를 같이 맞춰 가는 흐름이었다. 단순히 코드만 실행하는 시간이 아니라, "이 결과를 발표에서 어떻게 설명할지"까지 동시에 정리해야 해서 생각보다 손이 많이 갔다.
 
 특히 미니 프로젝트는 결과만 내면 끝나는 게 아니라, 왜 이런 기준으로 `k`를 골랐는지, 차원 축소는 왜 따로 봤는지, 그리고 이 분석이 실제 서비스 아이디어와 어떻게 연결되는지까지 짧은 시간 안에 설명 가능해야 했다. 그래서 분석, 정리, 발표 준비가 완전히 분리되지 않고 한 덩어리로 움직였다.
 
@@ -214,9 +216,6 @@ toc: true
 
 ## 첨부 자료
 
-발표 자료와 데모는 아래에서 바로 확인할 수 있다.
-
-- [MOVE AI HTML 데모 열기](/files/move-ai-demo.html)
 - [Move AI 발표자료 PDF 다운로드](/files/move-ai-capstone-team2-presentation.pdf)
 
 ## 마무리

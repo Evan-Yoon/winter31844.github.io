@@ -1,11 +1,17 @@
 ---
-title: '출석 빠뜨리기 싫어서 만든 AutoHotkey 알림, VS Code 단축키도 추가'
+title: |
+  출석 빠뜨리기 싫어서 만든
+  AutoHotkey 알림,
+  VS Code 단축키도 추가
 slug: autohotkey-attendance-reminder-and-vscode-hotkeys
 date: 2025-12-01
 author: Evan Yoon
 category: explore
 subcategory: new-tech
-description: "AI for Future Workforce 과정의 출석 체크를 놓치지 않기 위해 AutoHotkey로 시작 프로그램 알림을 만들고, 그 흐름으로 VS Code용 핫키까지 적용해본 기록."
+description: |
+  인텔 아카데미 과정의 출석 체크를 놓치지 않기 위해
+  AutoHotkey로 시작 프로그램 알림을 만들고,
+  그 흐름으로 VS Code용 핫키까지 적용해본 기록.
 thumbnail: /images/posts/autohotkey-attendance-reminder-and-vscode-hotkeys/cover.png
 tags:
   - autohotkey

@@ -1,12 +1,15 @@
 ---
-title: '[AWS CLF-C02][9회차] 문제풀이와 학습 공백 정리'
+title: |
+  [AWS CLF-C02] [9회차]
+  문제풀이와 학습 공백 정리
 slug: aws-clf-c02-day9-practice-and-gap-filling
 date: 2026-02-03
 author: Evan Yoon
 category: study
 subcategory: certification
-description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 9회차 기록. 현석님이 만든 HTML 문제
-  세트를 네 명이 함께 풀고, 틀린 문제는 LLM에 다시 물어보며 개념 공백을 메웠다.
+description:
+  AWS Certified Cloud Practitioner(CLF-C02) 스터디 9회차 기록. 현석님이 만든 HTML 문제
+  세트를 풀고, 틀린 문제는 LLM에 다시 물어보며 공부
 thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
   - aws

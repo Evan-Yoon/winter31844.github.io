@@ -1,11 +1,14 @@
 ---
-title: '[AWS CLF-C02][2회차] AWS 글로벌 인프라 정리'
+title: |
+  [AWS CLF-C02] [2회차]
+  AWS 글로벌 인프라 정리
 slug: aws-clf-c02-day2-global-infrastructure
 date: 2026-01-08
 author: Evan Yoon
 category: study
 subcategory: certification
-description: AWS Certified Cloud Practitioner(CLF-C02) 스터디 2회차 기록. Region, Availability
+description:
+  AWS Certified Cloud Practitioner(CLF-C02) 스터디 2회차 기록. Region, Availability
   Zone, Edge Location, Global vs Regional Service를 시험 관점과 실제 서비스 관점에서 자세히 정리했다.
 thumbnail: /images/posts/aws-clf-c02-series/cover.png
 tags:
@@ -404,10 +407,10 @@ Regional Service는 리전 선택이 중요하다. 지연 시간, 비용, 데이
 
 reference 폴더 기준으로 2회차와 직접 연결되는 자료 파일은 아래 2개였다. 복습용으로 바로 내려받을 수 있게 정적 경로로 옮겨두었다.
 
-- [2_AWS 글로벌 인프라_지현 (1).pdf](/downloads/aws-clf-c02/2026-01-08/2_AWS%20%EA%B8%80%EB%A1%9C%EB%B2%8C%20%EC%9D%B8%ED%94%84%EB%9D%BC_%EC%A7%80%ED%98%84%20%281%29.pdf)
+- [2*AWS 글로벌 인프라*지현 (1).pdf](/downloads/aws-clf-c02/2026-01-08/2_AWS%20%EA%B8%80%EB%A1%9C%EB%B2%8C%20%EC%9D%B8%ED%94%84%EB%9D%BC_%EC%A7%80%ED%98%84%20%281%29.pdf)
   글로벌 인프라 관련 정리 자료. Region, AZ, Edge Location 맥락 복습용.
 
-- [AWS 서비스 범위의 이해_Global vs Regional_260107.pdf](/downloads/aws-clf-c02/2026-01-08/AWS%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%B2%94%EC%9C%84%EC%9D%98%20%EC%9D%B4%ED%95%B4_Global%20vs%20Regional_260107.pdf)
+- [AWS 서비스 범위의 이해\_Global vs Regional_260107.pdf](/downloads/aws-clf-c02/2026-01-08/AWS%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%B2%94%EC%9C%84%EC%9D%98%20%EC%9D%B4%ED%95%B4_Global%20vs%20Regional_260107.pdf)
   Global Service와 Regional Service 구분 자료.
 
 다음 글에서는 1월 13일 3회차 주제였던 Compute 핵심, 특히 EC2와 Auto Scaling, 그리고 서비스 선택 기준을 정리할 예정이다.

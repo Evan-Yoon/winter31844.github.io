@@ -1,12 +1,11 @@
 ---
-title: '[WorkWage] Flutter로 교대근무자 급여 계산기 만든 7일'
+title: "[WorkWage] 교대근무 급여 계산기를 Flutter로 만든 기록"
 slug: workwage-part1-origin-mvp-paylogic
 date: 2026-03-04
 author: Evan Yoon
 category: project
 subcategory: personal-project
-description: 호텔·HR 현장 경험에서 시작된 Flutter 입문 프로젝트 WorkWage. 달력을 버리고 리스트를 택한 이유, 야간·휴일
-  수당까지 반영하는 급여 계산 로직을 어떻게 구현했는지 정리했다.
+description: 호텔·HR 현장 경험에서 시작된 Flutter 입문 프로젝트 WorkWage. 불규칙한 근무 스케줄을 가진 사람들을 위해 야간·휴일 수당까지 반영하는 급여 계산기를 만들어봤다.
 thumbnail: /images/posts/workwage-part1/cover.jpg
 tags:
   - workwage

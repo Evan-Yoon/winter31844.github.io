@@ -1,11 +1,15 @@
 ---
-title: '[스팸 분류 스터디][4회차] SVM과 임계값 조정으로 정상 메시지 지키기'
+title: |
+  [스팸 분류 스터디] [4회차]
+  SVM과 임계값 조정으로 정상 메시지 지키기
 slug: spam-classification-study-day4-svm-and-threshold
 date: 2026-01-16
 author: Evan Yoon
 category: study
 subcategory: self-study
-description: 2026년 1월 16일 스팸 분류 스터디 네 번째 기록. SVM과 N-gram을 적용하고, 정상 메시지를 스팸으로 잘못 분류하지 않도록 safety threshold를 조정한 과정을 정리했다.
+description:
+  2026년 1월 16일 스팸 분류 스터디 네 번째 기록. SVM과 N-gram을 적용하고, 정상 메시지를
+  스팸으로 잘못 분류하지 않도록 safety threshold를 조정한 과정
 thumbnail: /images/posts/spam-classification-study/confusion-matrix-zero-fp.png
 tags:
   - nlp

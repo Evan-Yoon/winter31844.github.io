@@ -1,11 +1,15 @@
 ---
-title: "[스팸 분류 스터디][1회차] 스터디 시작과 데이터 첫 점검"
+title: |
+  [스팸 분류 스터디] [1회차]
+  스터디 시작
 slug: spam-classification-study-day1-kickoff-and-data-loading
 date: 2026-01-07
 author: Evan Yoon
 category: study
 subcategory: self-study
-description: 2026년 1월 7일 스팸 분류 스터디 첫날 기록. 스터디 결성 배경, 환경 통일 시도, spam.csv 로드, 컬럼 구조와 클래스 비율을 점검한 과정을 정리했다.
+description: |
+  2026년 1월 7일 스팸 분류 스터디 첫날 기록. 스터디 결성 배경, 환경 통일 시도, spam.csv 로드,
+  컬럼 구조와 클래스 비율을 점검한 과정을 정리했다.
 thumbnail: /images/posts/spam-classification-study/study-kickoff.png
 tags:
   - nlp
