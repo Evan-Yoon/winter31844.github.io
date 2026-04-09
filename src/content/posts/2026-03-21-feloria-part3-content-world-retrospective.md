@@ -107,7 +107,7 @@ Chapter 3 — Ancient Forest & Mosslight Shrine
 이 구조가 좋았던 이유는 "플레이어가 모르게 빌런을 위해 일했다"는 반전이 탐험과 퀘스트 진행에 새로운 의미를 붙이기 때문이다. 단순히 강해지는 것이 아니라, 내가 뭔가를 망가뜨리고 있었다는 감각.
 
 <img src="/images/posts/feloria-part3/story-outline.png" alt="Feloria 스토리 구상 화면" style="display:block; width:100%; max-width:860px; margin:1rem auto; border-radius:16px;" />
-_스토리 윤곽을 잡아가던 화면. 시스템이 아니라 서사가 게임을 앞으로 끌고 가기 시작한 시기였다._
+스토리 윤곽을 잡아가던 화면. 시스템이 아니라 서사가 게임을 앞으로 끌고 가기 시작한 시기였다.
 
 `스토리 고도화.txt`를 다시 보면, 내가 당시 밀고 싶었던 비극 구조가 더 선명하다.
 
@@ -189,10 +189,10 @@ if (!questStarted) {
 NPC 대화 데이터는 `mapNpcDialogues.js`로 분리됐다. 맵 ID → NPC ID → 대사 배열 구조다. 씬 코드에 대사 문자열을 직접 넣지 않는 것이 원칙이었다.
 
 <img src="/images/posts/feloria-part3/ui-and-npcs.png" alt="Feloria의 UI와 NPC 구성이 제법 그럴듯해진 시점의 화면" style="display:block; width:100%; max-width:820px; margin:1rem auto; border-radius:16px;" />
-_UI와 NPC 배치가 어느 정도 자리를 잡고 나자 비로소 '게임 세계에 사람이 살고 있다'는 느낌이 생겼다._
+UI와 NPC 배치가 어느 정도 자리를 잡고 나자 비로소 '게임 세계에 사람이 살고 있다'는 느낌이 생겼다.
 
 <img src="/images/posts/feloria-part3/village-chief.png" alt="플레이어를 반겨주는 촌장 현석 장면" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
-_플레이어를 반겨주는 촌장 현석. 그래서 나중에 이 인물이 흑막이라는 설정이 더 잘 먹힌다. 처음엔 가장 믿음직해 보여야 했기 때문이다._
+플레이어를 반겨주는 촌장 현석. 그래서 나중에 이 인물이 흑막이라는 설정이 더 잘 먹힌다. 처음엔 가장 믿음직해 보여야 했기 때문이다.
 
 ---
 
@@ -360,7 +360,7 @@ SE   — 짧은 효과음 (버튼, 포획, 피격)
 끝까지 혼자만 본 프로젝트로 두지 않으려고 Vercel 배포도 붙였다. 브라우저에서 바로 열 수 있게 해두니, 그제야 다른 사람이 실제로 플레이해보고 피드백을 줄 수 있었다.
 
 <img src="/images/posts/feloria-part3/vercel-deploy-success.png" alt="Feloria의 Vercel 배포 성공 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
-_배포 성공 화면. 이 한 장 덕분에 로컬에서만 돌던 프로토타입이 '남이 직접 눌러볼 수 있는 게임'으로 넘어갔다._
+배포 성공 화면. 이 한 장 덕분에 로컬에서만 돌던 프로토타입이 '남이 직접 눌러볼 수 있는 게임'으로 넘어갔다.
 
 특히 고마웠던 자료가 [Feloria 버그 리포트 by 지호](/files/feloria/feloria-bug-report-by-jiho.pdf)였다. 실제로 Vercel에 올린 빌드를 플레이한 뒤 직접 정리해준 리포트였고, 읽어보면 플레이어가 어디에서 막히는지가 아주 구체적으로 드러난다.
 

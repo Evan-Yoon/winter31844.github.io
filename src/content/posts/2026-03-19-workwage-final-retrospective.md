@@ -1,7 +1,7 @@
 ---
 title: |
   [WorkWage] 회고
-  Flutter 앱, 플레이스토어까지
+  플레이스토어 출시
 slug: workwage-final-retrospective
 date: 2026-03-19
 author: Evan Yoon
