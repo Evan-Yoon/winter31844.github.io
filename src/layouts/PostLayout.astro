@@ -9,18 +9,18 @@ const {
   headings = [],
 } = Astro.props;
 
-const categoryLabelMap = {
+const categoryLabelMap: Record<string, string> = {
   study: 'Study',
   project: 'Project',
   explore: 'Explore',
 };
 
-const categoryLabel = categoryLabelMap[frontmatter.category] || frontmatter.category || 'Category';
-const tocItems = (headings ?? []).filter((heading) => heading.depth === 2 || heading.depth === 3);
+const categoryLabel = categoryLabelMap[frontmatter.category as string] || frontmatter.category || 'Category';
+const tocItems = (headings ?? []).filter((heading: { depth: number; slug: string; text: string }) => heading.depth === 2 || heading.depth === 3);
 const showToc = frontmatter.toc !== false && tocItems.length > 0;
 ---
 
-<BaseLayout title={`${frontmatter.title} | Evan Yoon`} description={frontmatter.description}>
+<BaseLayout title={`${frontmatter.title} | Evan Yoon`} description={frontmatter.description?.replace(/[\n\r]+/g, ' ').trim()}>
   <div class="progress-bar" id="progress"></div>
 
   <div class={`post-layout-outer ${showToc ? 'has-toc' : ''}`}>
@@ -101,7 +101,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       {relatedPosts.length > 0 ? (
         <>
           <div class="related-posts-grid" id="related-posts-grid">
-            {relatedPosts.map((post, index) => (
+            {relatedPosts.map((post: any, index: number) => (
               <article class={`related-post-card ${index >= 3 ? 'is-hidden' : ''}`}>
                 <a href={`/posts/${post.data.slug || post.id}`} class="related-post-link">
                   <div class="related-post-meta">
@@ -150,7 +150,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
         <p class="article-toc-kicker">On This Page</p>
         <h2 class="article-toc-title">지금 읽는 위치</h2>
         <nav class="article-toc-nav">
-          {tocItems.map((heading) => (
+          {tocItems.map((heading: { depth: number; slug: string; text: string }) => (
             <a
               class={`toc-link toc-depth-${heading.depth}`}
               href={`#${heading.slug}`}
@@ -206,12 +206,12 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       const id = link.getAttribute('data-target');
       return id ? document.getElementById(id) : null;
     })
-    .filter(Boolean);
+    .filter((el): el is HTMLElement => el !== null);
 
   if (tocLinks.length > 0 && tocSections.length > 0) {
     const visibleSections = new Map();
 
-    const setActiveLink = (id) => {
+    const setActiveLink = (id: string) => {
       tocLinks.forEach((link) => {
         const isActive = link.getAttribute('data-target') === id;
         link.classList.toggle('is-active', isActive);
@@ -461,9 +461,20 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     overflow-wrap: break-word;
   }
 
+  .article-body h1,
   .article-body h2,
   .article-body h3 {
     scroll-margin-top: 92px;
+  }
+
+  .article-body h1 {
+    font-family: var(--font-serif);
+    font-size: 2.1rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 4rem 0 1.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 
   .article-body h2 {
@@ -582,8 +593,9 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .article-body img {
-    width: 100%;
+    width: auto;
     max-width: min(100%, 680px);
+    max-height: 700px;
     display: block;
     border-radius: 12px;
     border: 1px solid var(--border);
