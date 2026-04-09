@@ -32,6 +32,11 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
+          <span class="stat-label">TODAY</span>
+          <span class="stat-value" id="stat-daily">—</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
           <span class="stat-label">POSTS</span>
           <span class="stat-value">{allPosts.length}</span>
         </div>
@@ -79,6 +84,13 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
           </h3>
           <div class="post-card-footer">
             <span class="read-time">{post.data.readTime ? `${post.data.readTime} min read` : ''}</span>
+            <span
+              class="post-view-count"
+              data-post-views
+              data-goatcounter-path={`/posts/${post.data.slug || post.id}/`}
+            >
+              views -
+            </span>
             <span class="read-arrow">→</span>
           </div>
         </article>
@@ -150,6 +162,13 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   const daysEl = document.getElementById('stat-days');
   if (daysEl) daysEl.textContent = days.toLocaleString('ko-KR');
 
+  const todayKst = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(today);
+
   // ── GoatCounter 전체 방문자 수 ──
   // ※ 작동하려면 GoatCounter 대시보드 → Settings → "Allow public access to stats" 활성화 필요
   fetch('https://evan-yoon.goatcounter.com/counter/TOTAL.json')
@@ -164,6 +183,22 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
         .then(r => { if (!r.ok) throw new Error(); return r.json(); })
         .then(data => {
           const el = document.getElementById('stat-total');
+          if (el && data.count) el.textContent = data.count;
+        })
+        .catch(() => {});
+    });
+
+  fetch(`https://evan-yoon.goatcounter.com/counter/TOTAL.json?start=${todayKst}&end=${todayKst}`)
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+    .then(data => {
+      const el = document.getElementById('stat-daily');
+      if (el && data.count) el.textContent = data.count;
+    })
+    .catch(() => {
+      fetch(`https://evan-yoon.goatcounter.com/counter/%2F.json?start=${todayKst}&end=${todayKst}`)
+        .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+        .then(data => {
+          const el = document.getElementById('stat-daily');
           if (el && data.count) el.textContent = data.count;
         })
         .catch(() => {});
@@ -250,8 +285,10 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   .post-card-title { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 400; line-height: 1.35; }
   .post-card-title a { color: var(--ink); }
   .post-card-title a:hover { color: var(--accent); }
-  .post-card-footer { display: flex; justify-content: space-between; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); }
+  .post-card-footer { display: flex; align-items: center; gap: 0.75rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); }
   .read-time { font-size: 0.75rem; color: var(--ink-3); font-family: var(--font-mono); }
+  .post-view-count { font-size: 0.75rem; color: var(--ink-3); font-family: var(--font-mono); }
+  .post-card-footer > .read-time { margin-right: auto; }
   .read-arrow { font-size: 0.8rem; color: var(--ink-3); transition: transform var(--transition); }
   .post-card:hover .read-arrow { color: var(--accent); transform: translateX(4px); }
 

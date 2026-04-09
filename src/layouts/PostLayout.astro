@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 
 const {
   frontmatter,
+  postPath,
   previousPost,
   nextPost,
   relatedPosts = [],
@@ -30,6 +31,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
         <span class={`article-cat badge-${frontmatter.category || 'explore'}`}>{frontmatter.category || 'Explore'}</span>
         <span class="article-date">{new Date(frontmatter.date).toLocaleDateString('ko-KR')}</span>
         {frontmatter.readTime && <span class="article-read-time">/ {frontmatter.readTime}min read</span>}
+        {postPath && <span class="article-view-count" data-post-views data-goatcounter-path={postPath}>/ views -</span>}
       </div>
       <h1 class="article-title">{frontmatter.title}</h1>
       {frontmatter.description && <p class="article-subtitle">{frontmatter.description}</p>}
@@ -116,6 +118,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
                   </p>
                   <div class="related-post-footer">
                     <span>{post.data.readTime ? `${post.data.readTime} min read` : 'Read more'}</span>
+                    <span class="post-view-count" data-post-views data-goatcounter-path={`/posts/${post.data.slug || post.id}/`}>views -</span>
                     <span class="related-post-arrow">→</span>
                   </div>
                 </a>
@@ -386,7 +389,8 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   }
 
   .article-date,
-  .article-read-time {
+  .article-read-time,
+  .article-view-count {
     font-size: 0.75rem;
     color: var(--ink-3);
     font-family: var(--font-mono);
@@ -956,11 +960,16 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.75rem;
     font-family: var(--font-mono);
     font-size: 0.74rem;
     color: var(--ink-3);
     padding-top: 1rem;
     border-top: 1px solid var(--border);
+  }
+
+  .related-post-footer > :first-child {
+    margin-right: auto;
   }
 
   .related-post-arrow {

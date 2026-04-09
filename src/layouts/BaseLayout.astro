@@ -40,11 +40,11 @@ const contactHref = email ? `mailto:${email}` : "/#about";
     </ul>
     <div class="nav-right">
       <button id="search-toggle" aria-label="Search" title="Search (Ctrl+Shift+P)">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button id="theme-toggle" aria-label="Toggle theme">☽</button>
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
-      <button id="theme-toggle" aria-label="Toggle theme">☽</button>
+      <button id="theme-toggle" aria-label="Toggle theme">??/button>
     </div>
   </nav>
 
@@ -55,14 +55,14 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="search-icon-inline">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
-        <input id="search-input" type="text" placeholder="검색어를 입력하세요..." autocomplete="off" spellcheck="false" />
+        <input id="search-input" type="text" placeholder="野꺜??깅선????낆젾??뤾쉭??.." autocomplete="off" spellcheck="false" />
         <kbd id="search-esc-hint">ESC</kbd>
       </div>
       <div id="search-results"></div>
       <div id="search-footer">
-        <span><kbd>↑</kbd><kbd>↓</kbd> 이동</span>
-        <span><kbd>↵</kbd> 열기</span>
-        <span><kbd>ESC</kbd> 닫기</span>
+        <span><kbd>??/kbd><kbd>??/kbd> ??猷?/span>
+        <span><kbd>??/kbd> ??용┛</span>
+        <span><kbd>ESC</kbd> ??る┛</span>
       </div>
     </div>
   </div>
@@ -78,15 +78,15 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         <li><a href="https://github.com/Evan-Yoon" target="_blank">GitHub</a></li>
         <li><a href={contactHref}>Contact</a></li>
       </ul>
-      <span class="footer-copy">© 2025 Evan Yoon</span>
+      <span class="footer-copy">吏?2025 Evan Yoon</span>
     </div>
   </footer>
 
-  <!-- GoatCounter: 방문자 추적 -->
+  <!-- GoatCounter: 獄쎻뫖揆???곕뗄??-->
   <script data-goatcounter="https://evan-yoon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
   <script is:inline>
-    /* ── SEARCH ── */
+    /* ???? SEARCH ???? */
     (function () {
       let posts = null;
       let active = -1;
@@ -144,7 +144,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         }).slice(0, 8);
 
         if (matched.length === 0) {
-          results.innerHTML = '<div class="sr-empty">결과가 없습니다</div>';
+          results.innerHTML = '<div class="sr-empty">野껉퀗?드첎? ??곷뮸??덈뼄</div>';
           active = -1;
           return;
         }
@@ -152,7 +152,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         results.innerHTML = matched.map((p, i) => {
           const catClass = 'badge-' + (p.category || 'explore');
           const desc = p.description
-            ? highlight(p.description.slice(0, 90) + (p.description.length > 90 ? '…' : ''), q)
+            ? highlight(p.description.slice(0, 90) + (p.description.length > 90 ? '?? : ''), q)
             : '';
           return `<a class="sr-item" href="/posts/${p.slug}" data-index="${i}" tabindex="-1">
             <div class="sr-top">
@@ -224,7 +224,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       });
     })();
 
-    /* ── THEME TOGGLE (NO ANIMATION) ── */
+    /* ???? THEME TOGGLE (NO ANIMATION) ???? */
     const toggle = document.getElementById('theme-toggle');
     const saved = localStorage.getItem('theme') || 'light';
     document.documentElement.dataset.theme = saved;
@@ -235,10 +235,58 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       localStorage.setItem('theme', next);
       toggle.textContent = next === 'dark' ? '☀' : '☽';
     });
+
+    /* POST VIEW COUNTS */
+    (function () {
+      const site = 'https://evan-yoon.goatcounter.com';
+      const selector = '[data-post-views][data-goatcounter-path]';
+      const cache = new Map();
+
+      function normalizePath(path) {
+        if (!path) return '/';
+        const trimmed = path.trim();
+        if (!trimmed) return '/';
+        return trimmed.endsWith('/') ? trimmed : `${trimmed}/`;
+      }
+
+      async function loadCount(path) {
+        const normalized = normalizePath(path);
+        if (cache.has(normalized)) return cache.get(normalized);
+
+        const request = fetch(`${site}/counter/${encodeURIComponent(normalized)}.json`)
+          .then((response) => {
+            if (!response.ok) throw new Error(`Failed to load count for ${normalized}`);
+            return response.json();
+          })
+          .then((data) => Number(data?.count ?? 0))
+          .catch(() => 0);
+
+        cache.set(normalized, request);
+        return request;
+      }
+
+      async function renderCounts() {
+        const nodes = Array.from(document.querySelectorAll(selector));
+        if (nodes.length === 0) return;
+
+        await Promise.all(
+          [...new Set(nodes.map((node) => normalizePath(node.dataset.goatcounterPath || '')))].map((path) =>
+            loadCount(path),
+          ),
+        );
+
+        for (const node of nodes) {
+          const count = await loadCount(node.dataset.goatcounterPath || '/');
+          node.textContent = `views ${count.toLocaleString('ko-KR')}`;
+        }
+      }
+
+      renderCounts();
+    })();
   </script>
 
   <style is:global>
-    /* ─── GLOBAL DESIGN TOKENS (NEW PALETTE) ─── */
+    /* ?????? GLOBAL DESIGN TOKENS (NEW PALETTE) ?????? */
     :root {
       --bg: #F9F9F7;        /* Off-White, easier on eyes */
       --bg-card: #FFFFFF;
@@ -276,7 +324,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       --border-strong: #3A3A38;
     }
 
-    /* ─── RESET & BASE ─── */
+    /* ?????? RESET & BASE ?????? */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
@@ -295,7 +343,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
     img { display: block; max-width: 100%; }
     button { cursor: pointer; border: none; background: none; font: inherit; }
 
-    /* ─── NAV CSS (STRUCTURAL & CLEAN) ─── */
+    /* ?????? NAV CSS (STRUCTURAL & CLEAN) ?????? */
     nav {
       position: sticky; top: 0; z-index: 100;
       padding: 0 2rem; height: 60px;
@@ -316,7 +364,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
     }
     #theme-toggle:hover, #search-toggle:hover { background: var(--bg-hover); color: var(--ink); }
 
-    /* ─── SEARCH MODAL ─── */
+    /* ?????? SEARCH MODAL ?????? */
     #search-overlay {
       position: fixed; inset: 0; z-index: 9999;
       background: rgba(0, 0, 0, 0.5);
@@ -395,7 +443,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       background: var(--bg-card);
     }
 
-    /* ─── FOOTER CSS (SIMPLE) ─── */
+    /* ?????? FOOTER CSS (SIMPLE) ?????? */
     footer { border-top: 1px solid var(--border); padding: 4rem 2rem; }
     .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; color: var(--ink-2); }
@@ -405,7 +453,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
     .footer-links a:hover { color: var(--accent); }
     .footer-copy { font-size: 0.72rem; color: var(--ink-3); font-family: var(--font-mono); }
 
-    /* ─── SCROLLBAR ─── */
+    /* ?????? SCROLLBAR ?????? */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border-strong); }
