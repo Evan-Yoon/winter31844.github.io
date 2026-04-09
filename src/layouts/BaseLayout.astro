@@ -10,7 +10,8 @@ const {
   description = "Former HR specialist (Josun Palace), Former GM (Blizzard) who decided to trade a stable career for code. Evan Yoon's journey."
 } = Astro.props;
 
-const email = import.meta.env.EMAIL_ADDRESS;
+const email = import.meta.env.EMAIL_ADDRESS ?? "winter31844@gmail.com";
+const contactHref = email ? `mailto:${email}` : "/#about";
 ---
 
 <!DOCTYPE html>
@@ -75,7 +76,7 @@ const email = import.meta.env.EMAIL_ADDRESS;
       <span class="footer-logo">Restart<span>.</span></span>
       <ul class="footer-links">
         <li><a href="https://github.com/Evan-Yoon" target="_blank">GitHub</a></li>
-        <li><a href={`mailto:${email}`}>Contact</a></li>
+        <li><a href={contactHref}>Contact</a></li>
       </ul>
       <span class="footer-copy">© 2025 Evan Yoon</span>
     </div>
