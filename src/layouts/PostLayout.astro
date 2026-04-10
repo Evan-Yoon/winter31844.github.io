@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 
 const {
   frontmatter,
+  postSlug,
   postPath,
   previousPost,
   nextPost,
@@ -51,6 +52,66 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
               <span class="article-tag">#{tag}</span>
             ))}
           </div>
+        )}
+
+        {postSlug && (
+          <section class="comments-section" data-comments-section data-post-slug={postSlug}>
+            <div class="comments-header">
+              <div>
+                <p class="comments-kicker">Community</p>
+                <h2 class="comments-title">Comments</h2>
+              </div>
+              <span class="comments-count" data-comments-count>0 comments</span>
+            </div>
+
+            <p class="comments-note">
+              New comments are saved first and appear after approval.
+            </p>
+
+            <form class="comment-form" data-comment-form novalidate>
+              <label class="comment-field">
+                <span>Name</span>
+                <input
+                  type="text"
+                  name="author"
+                  maxlength="40"
+                  placeholder="Your name"
+                  required
+                />
+              </label>
+
+              <label class="comment-field">
+                <span>Comment</span>
+                <textarea
+                  name="content"
+                  rows="5"
+                  maxlength="500"
+                  placeholder="Write something worth keeping."
+                  required
+                ></textarea>
+              </label>
+
+              <input
+                class="comment-honeypot"
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              />
+
+              <div class="comment-form-footer">
+                <p class="comment-help">Max 40 chars for name, 500 chars for comment.</p>
+                <button type="submit" class="comment-submit">Send Comment</button>
+              </div>
+
+              <p class="comment-status" data-comment-status aria-live="polite"></p>
+            </form>
+
+            <div class="comments-list" data-comments-list>
+              <p class="comments-empty">No approved comments yet.</p>
+            </div>
+          </section>
         )}
       </article>
     </div>
@@ -292,6 +353,174 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     });
   }
 
+</script>
+
+<script type="module">
+  import { initializeApp } from 'firebase/app';
+  import { equalTo, get, getDatabase, orderByChild, push, query, ref } from 'firebase/database';
+
+  const section = document.querySelector('[data-comments-section]');
+
+  if (section) {
+    const firebaseConfig = {
+      apiKey: 'AIzaSyCNkdX0A83XXEK-FIjqPt7b8iZxJ5mlw_4',
+      authDomain: 'blog-stats-3b3fd.firebaseapp.com',
+      databaseURL: 'https://blog-stats-3b3fd-default-rtdb.firebaseio.com',
+      projectId: 'blog-stats-3b3fd',
+      storageBucket: 'blog-stats-3b3fd.firebasestorage.app',
+      messagingSenderId: '1009895082497',
+      appId: '1:1009895082497:web:938bf796556e7889570e00',
+      measurementId: 'G-Y6835HX2J5'
+    };
+
+    const app = initializeApp(firebaseConfig, 'comments');
+    const database = getDatabase(app);
+    const postSlug = section.getAttribute('data-post-slug') || '';
+    const form = section.querySelector('[data-comment-form]');
+    const list = section.querySelector('[data-comments-list]');
+    const count = section.querySelector('[data-comments-count]');
+    const status = section.querySelector('[data-comment-status]');
+    const commentsRef = ref(database, `comments/${postSlug}`);
+    const approvedCommentsQuery = query(commentsRef, orderByChild('approved'), equalTo(true));
+    const submitCooldownKey = `comment_submit_${postSlug}`;
+    const submitCooldownMs = 60_000;
+
+    const formatDate = (value) => {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return date.toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    };
+
+    const setStatus = (message, tone = 'neutral') => {
+      if (!status) return;
+      status.textContent = message;
+      status.dataset.tone = tone;
+    };
+
+    const setCount = (total) => {
+      if (!count) return;
+      count.textContent = `${total} comment${total === 1 ? '' : 's'}`;
+    };
+
+    const renderComments = (items) => {
+      if (!list) return;
+
+      if (items.length === 0) {
+        list.innerHTML = '<p class="comments-empty">No approved comments yet.</p>';
+        setCount(0);
+        return;
+      }
+
+      list.innerHTML = '';
+      setCount(items.length);
+
+      items.forEach((item) => {
+        const article = document.createElement('article');
+        article.className = 'comment-card';
+
+        const header = document.createElement('div');
+        header.className = 'comment-card-head';
+
+        const author = document.createElement('strong');
+        author.className = 'comment-author';
+        author.textContent = item.author;
+
+        const date = document.createElement('span');
+        date.className = 'comment-date';
+        date.textContent = formatDate(item.createdAt);
+
+        const body = document.createElement('p');
+        body.className = 'comment-body';
+        body.textContent = item.content;
+
+        header.append(author, date);
+        article.append(header, body);
+        list.append(article);
+      });
+    };
+
+    const loadComments = async () => {
+      try {
+        const snapshot = await get(approvedCommentsQuery);
+        const raw = snapshot.val() || {};
+        const items = Object.values(raw)
+          .filter((item) => item && typeof item === 'object')
+          .sort((left, right) => Number(right.createdAt || 0) - Number(left.createdAt || 0));
+
+        renderComments(items);
+      } catch (error) {
+        console.error('Failed to load comments.', error);
+        if (list) {
+          list.innerHTML = '<p class="comments-empty">Comments are temporarily unavailable.</p>';
+        }
+      }
+    };
+
+    loadComments();
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const now = Date.now();
+      const lastSubmittedAt = Number(localStorage.getItem(submitCooldownKey) || 0);
+      if (now - lastSubmittedAt < submitCooldownMs) {
+        setStatus('Please wait a minute before sending another comment.', 'error');
+        return;
+      }
+
+      const formData = new FormData(form);
+      const author = String(formData.get('author') || '').trim();
+      const content = String(formData.get('content') || '').trim();
+      const website = String(formData.get('website') || '').trim();
+
+      if (website) {
+        setStatus('Comment rejected.', 'error');
+        return;
+      }
+
+      if (author.length < 2 || author.length > 40) {
+        setStatus('Name must be between 2 and 40 characters.', 'error');
+        return;
+      }
+
+      if (content.length < 3 || content.length > 500) {
+        setStatus('Comment must be between 3 and 500 characters.', 'error');
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+      }
+
+      setStatus('Saving comment...', 'neutral');
+
+      try {
+        await push(commentsRef, {
+          author,
+          content,
+          createdAt: now,
+          approved: false,
+          postSlug,
+        });
+
+        localStorage.setItem(submitCooldownKey, String(now));
+        form.reset();
+        setStatus('Comment saved. It will appear after approval.', 'success');
+      } catch (error) {
+        console.error('Failed to save comment.', error);
+        setStatus('Failed to save comment. Please try again later.', 'error');
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+        }
+      }
+    });
+  }
 </script>
 
 <style is:global>
@@ -1010,6 +1239,179 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     background: var(--bg-hover);
   }
 
+  .comments-section {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .comments-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .comments-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .comments-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .comments-count {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+
+  .comments-note,
+  .comment-help,
+  .comments-empty,
+  .comment-date {
+    color: var(--ink-3);
+    font-size: 0.92rem;
+  }
+
+  .comment-form {
+    margin-top: 1.5rem;
+    padding: 1.4rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    background: var(--bg-card);
+  }
+
+  .comment-field {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .comment-field span {
+    display: block;
+    margin-bottom: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .comment-field input,
+  .comment-field textarea {
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 0.9rem 1rem;
+    font: inherit;
+    resize: vertical;
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+
+  .comment-field input:focus,
+  .comment-field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(74, 103, 133, 0.12);
+  }
+
+  .comment-honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .comment-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .comment-submit {
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.85rem 1.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background var(--transition), border-color var(--transition), opacity var(--transition);
+  }
+
+  .comment-submit:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .comment-submit:disabled {
+    opacity: 0.55;
+    cursor: wait;
+  }
+
+  .comment-status {
+    min-height: 1.4rem;
+    margin-top: 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .comment-status[data-tone="error"] {
+    color: #b42318;
+  }
+
+  .comment-status[data-tone="success"] {
+    color: #067647;
+  }
+
+  .comments-list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .comment-card {
+    padding: 1.2rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-card);
+  }
+
+  .comment-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .comment-author {
+    color: var(--ink);
+    font-size: 1rem;
+  }
+
+  .comment-body {
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.75;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
   @media (max-width: 1280px) {
     .post-layout-outer.has-toc {
       display: block;
@@ -1101,6 +1503,17 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
     .related-posts-grid {
       grid-template-columns: 1fr;
+    }
+
+    .comments-header,
+    .comment-form-footer,
+    .comment-card-head {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .comment-submit {
+      width: 100%;
     }
   }
 </style>
