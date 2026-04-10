@@ -1,0 +1,63 @@
+/* application.css */
+.root {
+    -fx-background-color: #f4f7f6; /* 부드러운 회색 배경 */
+    -fx-font-family: 'Malgun Gothic', sans-serif;
+}
+
+.label-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 20;
+}
+
+.label-instruction {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.text-field:focused {
+    -fx-border-color: #3498db;
+}
+
+.button-analyze {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 20;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(52, 152, 219, 0.4), 10, 0, 0, 4);
+}
+
+.button-analyze:hover {
+    -fx-background-color: #2980b9;
+}
+
+.button-analyze:pressed {
+    -fx-background-color: #1abc9c;
+}
+
+.label-result-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+.label-result-value {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e74c3c; /* 기본 강조색 */
+}

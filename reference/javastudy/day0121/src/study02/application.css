@@ -1,0 +1,76 @@
+/* 전체 배경 */
+.main-background {
+    -fx-background-color: linear-gradient(to bottom right, #ece9e6, #ffffff);
+}
+
+/* 타이틀 */
+.title-label {
+    -fx-font-family: "Malgun Gothic", "Segoe UI", sans-serif;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #7f8c8d;
+}
+
+/* 진행 상태 */
+.status-label {
+    -fx-font-family: "Consolas", monospace;
+    -fx-font-size: 14px;
+    -fx-text-fill: #95a5a6;
+}
+
+/* 카드 영역 */
+.card-pane {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+/* 데이터 텍스트 */
+.data-label {
+    -fx-font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-alignment: center;
+}
+
+/* 버튼 공통 */
+.btn {
+    -fx-background-radius: 30;
+    -fx-font-family: "Malgun Gothic", sans-serif;
+    -fx-font-size: 18px; /* 버튼 3개가 들어가므로 폰트 살짝 조정 */
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-padding: 15 30 15 30;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);
+    -fx-transition: all 0.2s;
+}
+.btn:pressed {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
+    -fx-translate-y: 2;
+}
+
+/* 긍정 (파랑) */
+.btn-positive {
+    -fx-background-color: linear-gradient(to right, #36D1DC, #5B86E5);
+}
+.btn-positive:hover {
+    -fx-background-color: linear-gradient(to right, #5B86E5, #36D1DC);
+}
+
+/* [추가됨] 중립 (초록) */
+.btn-neutral {
+    -fx-background-color: linear-gradient(to right, #11998e, #38ef7d);
+}
+.btn-neutral:hover {
+    -fx-background-color: linear-gradient(to right, #38ef7d, #11998e);
+}
+
+/* 부정 (빨강) */
+.btn-negative {
+    -fx-background-color: linear-gradient(to right, #FF416C, #FF4B2B);
+}
+.btn-negative:hover {
+    -fx-background-color: linear-gradient(to right, #FF4B2B, #FF416C);
+}

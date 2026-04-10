@@ -1,0 +1,14 @@
+Wrapper Class (포장 클래스)
+
+java.lang에 정의되어 있는 Number 클래스의 자식들
+기본자료형       포장 클래스
+byte            Byte
+char            Character
+short           Short
+int             Integer
+long            Long
+float           Float
+double          Double
+boolean         Boolean
+
+포장하고 있는 기본 타입을 객체로 생성하는데 목적이 있다.

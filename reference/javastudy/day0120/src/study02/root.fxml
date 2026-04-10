@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="382.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="study02.rootController">
+   <children>
+      <TextArea fx:id="taContent" prefHeight="298.0" prefWidth="490.0" />
+      <HBox alignment="CENTER" prefHeight="66.0" prefWidth="600.0" spacing="30.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onActionSaveBtn" text="Save" />
+            <Button mnemonicParsing="false" onAction="#onActionClearBtn" text="Clear" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
