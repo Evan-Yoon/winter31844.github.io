@@ -68,7 +68,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
               Comments appear immediately. Use report if something needs review.
             </p>
 
-            <form class="comment-form" data-comment-form novalidate>
+            <form class="comment-form" data-comment-form method="post" action="#" novalidate>
               <label class="comment-field">
                 <span>Name</span>
                 <input
@@ -501,6 +501,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
     form?.addEventListener('submit', async (event) => {
       event.preventDefault();
+      event.stopPropagation();
 
       const now = Date.now();
       const lastSubmittedAt = Number(localStorage.getItem(submitCooldownKey) || 0);
