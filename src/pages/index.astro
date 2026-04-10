@@ -170,39 +170,22 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   }).format(today);
 
   // ── GoatCounter 전체 방문자 수 ──
-  // ※ 작동하려면 GoatCounter 대시보드 → Settings → "Allow public access to stats" 활성화 필요
   fetch('https://evan-yoon.goatcounter.com/counter/TOTAL.json')
     .then(r => { if (!r.ok) throw new Error(); return r.json(); })
     .then(data => {
       const el = document.getElementById('stat-total');
-      if (el && data.count) el.textContent = data.count;
+      if (el && data.count != null) el.textContent = Number(data.count).toLocaleString('ko-KR');
     })
-    .catch(() => {
-      // fallback: 홈페이지 경로만이라도 시도
-      fetch('https://evan-yoon.goatcounter.com/counter/%2F.json')
-        .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-        .then(data => {
-          const el = document.getElementById('stat-total');
-          if (el && data.count) el.textContent = data.count;
-        })
-        .catch(() => {});
-    });
+    .catch(() => {});
 
+  // ── GoatCounter 오늘 방문자 수 ──
   fetch(`https://evan-yoon.goatcounter.com/counter/TOTAL.json?start=${todayKst}&end=${todayKst}`)
     .then(r => { if (!r.ok) throw new Error(); return r.json(); })
     .then(data => {
       const el = document.getElementById('stat-daily');
-      if (el && data.count) el.textContent = data.count;
+      if (el && data.count != null) el.textContent = Number(data.count).toLocaleString('ko-KR');
     })
-    .catch(() => {
-      fetch(`https://evan-yoon.goatcounter.com/counter/%2F.json?start=${todayKst}&end=${todayKst}`)
-        .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-        .then(data => {
-          const el = document.getElementById('stat-daily');
-          if (el && data.count) el.textContent = data.count;
-        })
-        .catch(() => {});
-    });
+    .catch(() => {});
 </script>
 
 <style>
