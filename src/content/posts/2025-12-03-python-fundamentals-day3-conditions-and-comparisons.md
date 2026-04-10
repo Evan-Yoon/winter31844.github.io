@@ -94,9 +94,26 @@ else:
 
 ## 복습용으로 남기는 질문
 
-1. `a = 3`과 `a == 3`은 각각 어떤 의미인가?
-2. `if`, `elif`, `else`는 어떤 상황에서 쓰는가?
-3. Python에서 조건문 들여쓰기가 중요한 이유는 무엇인가?
+<details>
+<summary>1. <code>a = 3</code>과 <code>a == 3</code>은 각각 어떤 의미인가?</summary>
+
+`a = 3`은 변수 `a`에 `3`을 저장하는 대입이고, `a == 3`은 변수 `a`의 값이 `3`과 같은지 비교하는 조건식이다.
+
+</details>
+
+<details>
+<summary>2. <code>if</code>, <code>elif</code>, <code>else</code>는 어떤 상황에서 쓰는가?</summary>
+
+`if`는 첫 조건을 검사할 때, `elif`는 앞조건이 거짓일 때 다른 조건을 이어서 검사할 때, `else`는 위 조건들이 모두 아닐 때 마지막 기본 흐름을 처리할 때 쓴다.
+
+</details>
+
+<details>
+<summary>3. Python에서 조건문 들여쓰기가 중요한 이유는 무엇인가?</summary>
+
+Python은 들여쓰기로 조건문에 속한 코드 범위를 구분한다. 그래서 들여쓰기가 틀리면 어떤 코드가 `if` 안에 들어가는지 달라지고, 문법 오류나 의도와 다른 실행이 생길 수 있다.
+
+</details>
 
 ## 한 줄 정리
 

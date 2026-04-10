@@ -267,12 +267,47 @@ mymore1 = MoreFourCal(4, 3)
 
 이 글만 읽고 아래 질문에 답할 수 있으면 중급 3일차 내용은 잘 정리된 것이다.
 
-1. 상속은 왜 사용하는가?
-2. 부모 클래스와 자식 클래스는 각각 어떤 역할을 하는가?
-3. `MoreFourCal(FourCal)`에서 괄호 안 `FourCal`은 무엇을 뜻하는가?
-4. `MoreFourCal`이 `add()`를 사용할 수 있는 이유는 무엇인가?
-5. 상속은 왜 코드 중복을 줄이는 데 도움이 되는가?
-6. 자식 클래스에 `__init__`이 없어도 객체를 만들 수 있는 이유는 무엇인가?
+<details>
+<summary>1. 상속은 왜 사용하는가?</summary>
+
+기존 클래스의 공통 기능을 재사용하면서, 필요한 기능만 추가하거나 바꾸기 위해 사용한다. 이렇게 하면 중복 코드가 줄고 구조가 더 깔끔해진다.
+
+</details>
+
+<details>
+<summary>2. 부모 클래스와 자식 클래스는 각각 어떤 역할을 하는가?</summary>
+
+부모 클래스는 공통 기능을 담는 기본 클래스이고, 자식 클래스는 그 기능을 물려받아 필요한 부분을 확장하는 클래스다.
+
+</details>
+
+<details>
+<summary>3. <code>MoreFourCal(FourCal)</code>에서 괄호 안 <code>FourCal</code>은 무엇을 뜻하는가?</summary>
+
+`MoreFourCal`이 `FourCal`을 상속받는다는 뜻이다. 즉, `FourCal`이 부모 클래스라는 표시다.
+
+</details>
+
+<details>
+<summary>4. <code>MoreFourCal</code>이 <code>add()</code>를 사용할 수 있는 이유는 무엇인가?</summary>
+
+`add()`가 부모 클래스 `FourCal`에 이미 정의되어 있고, 자식 클래스 `MoreFourCal`이 그 기능을 물려받았기 때문이다.
+
+</details>
+
+<details>
+<summary>5. 상속은 왜 코드 중복을 줄이는 데 도움이 되는가?</summary>
+
+공통 기능을 부모 클래스에 한 번만 작성하고, 자식 클래스에서는 차이 나는 부분만 추가하면 되기 때문이다. 같은 메서드를 여러 클래스에 반복해서 적지 않아도 된다.
+
+</details>
+
+<details>
+<summary>6. 자식 클래스에 <code>__init__</code>이 없어도 객체를 만들 수 있는 이유는 무엇인가?</summary>
+
+부모 클래스의 생성자를 그대로 물려받을 수 있기 때문이다. 그래서 자식 클래스가 생성자를 따로 정의하지 않아도 부모의 초기화 방식을 사용할 수 있다.
+
+</details>
 
 ## 한 줄 정리
 

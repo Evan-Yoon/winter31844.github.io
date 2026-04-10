@@ -240,12 +240,47 @@ def div(a, b):
 
 ## 복습용으로 남기는 질문
 
-1. `try-except`는 언제 필요한가?
-2. `ZeroDivisionError`와 `TypeError`는 어떤 차이가 있는가?
-3. `if`와 `try-except`는 어떤 점에서 다른가?
-4. `SafeFourCal`은 왜 예외처리와 연결해서 이해할 수 있는가?
-5. `calc.py`처럼 파일을 분리하는 이유는 무엇인가?
-6. 모듈 분리는 코드 구조에 어떤 장점을 주는가?
+<details>
+<summary>1. <code>try-except</code>는 언제 필요한가?</summary>
+
+코드 실행 중 오류가 생길 가능성이 있을 때 필요하다. 예외가 발생해도 프로그램이 바로 멈추지 않고, 정해 둔 방식으로 대응하게 만들 수 있다.
+
+</details>
+
+<details>
+<summary>2. <code>ZeroDivisionError</code>와 <code>TypeError</code>는 어떤 차이가 있는가?</summary>
+
+`ZeroDivisionError`는 0으로 나누는 잘못된 연산에서 생기고, `TypeError`는 자료형이 맞지 않아 연산이나 함수 사용이 불가능할 때 생긴다.
+
+</details>
+
+<details>
+<summary>3. <code>if</code>와 <code>try-except</code>는 어떤 점에서 다른가?</summary>
+
+`if`는 조건을 미리 검사하는 방식이고, `try-except`는 실제 실행하다가 발생한 예외를 처리하는 방식이다. 둘 다 안전장치지만 쓰이는 시점이 다르다.
+
+</details>
+
+<details>
+<summary>4. <code>SafeFourCal</code>은 왜 예외처리와 연결해서 이해할 수 있는가?</summary>
+
+0으로 나누는 위험한 상황을 미리 검사해 막기 때문이다. 예외를 직접 잡지는 않지만, 문제가 생길 지점을 코드에 반영한다는 점에서 같은 맥락이다.
+
+</details>
+
+<details>
+<summary>5. <code>calc.py</code>처럼 파일을 분리하는 이유는 무엇인가?</summary>
+
+기능별로 코드를 나눠 메인 코드가 덜 복잡해지고, 관련 기능을 한곳에서 관리하고 재사용하기 쉬워지기 때문이다.
+
+</details>
+
+<details>
+<summary>6. 모듈 분리는 코드 구조에 어떤 장점을 주는가?</summary>
+
+역할이 분명해지고, 읽기 쉬워지며, 재사용성과 유지보수성이 좋아진다. 프로젝트가 커질수록 이런 구조 분리가 더 중요해진다.
+
+</details>
 
 ## 한 줄 정리
 
