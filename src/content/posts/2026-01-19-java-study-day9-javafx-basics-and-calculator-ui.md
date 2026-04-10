@@ -417,14 +417,61 @@ day9의 좋은 점은 한 가지 방식만 본 게 아니라는 점이다.
 ## 오늘의 복습 질문
 이 글만 읽고 아래 질문에 답할 수 있으면 day9 내용은 잘 정리된 것이다.
 
-1. JavaFX의 `main()`, `init()`, `start()`, `stop()`은 각각 언제 실행될까?
-2. `Stage`와 `Scene`은 어떻게 다를까?
-3. 코드 기반 UI와 FXML 기반 UI는 각각 어떤 장점이 있을까?
-4. `fx:id`와 `@FXML`은 왜 같이 써야 할까?
-5. `onAction="#onActionBtn"`는 어떤 의미일까?
-6. 컨트롤러의 `initialize()`는 어떤 용도로 쓰기 좋을까?
-7. 계산기 예제에서 `appendText()`를 쓰는 이유는 무엇일까?
-8. `exp4j` 같은 외부 라이브러리를 붙이는 것이 왜 유용할까?
+<details>
+<summary>1. JavaFX의 <code>main()</code>, <code>init()</code>, <code>start()</code>, <code>stop()</code>은 각각 언제 실행될까?</summary>
+
+`main()`은 프로그램 시작점이고, `init()`은 UI가 뜨기 전 초기화, `start()`는 실제 화면 구성을 시작할 때, `stop()`은 앱 종료 직전에 호출된다.
+
+</details>
+
+<details>
+<summary>2. <code>Stage</code>와 <code>Scene</code>은 어떻게 다를까?</summary>
+
+`Stage`는 창 자체이고, `Scene`은 그 창 안에 들어가는 화면 내용이다.
+
+</details>
+
+<details>
+<summary>3. 코드 기반 UI와 FXML 기반 UI는 각각 어떤 장점이 있을까?</summary>
+
+코드 기반 UI는 흐름을 한 파일에서 직접 제어하기 쉽고, FXML 기반 UI는 화면 구조와 로직을 분리해 더 읽기 좋고 관리하기 쉽다.
+
+</details>
+
+<details>
+<summary>4. <code>fx:id</code>와 <code>@FXML</code>은 왜 같이 써야 할까?</summary>
+
+FXML 화면 요소와 컨트롤러 필드를 연결하기 위해서다. `fx:id`가 화면 쪽 이름이고, `@FXML`은 컨트롤러에서 그 요소를 주입받게 한다.
+
+</details>
+
+<details>
+<summary>5. <code>onAction=&quot;#onActionBtn&quot;</code>는 어떤 의미일까?</summary>
+
+버튼 등의 액션 이벤트가 발생했을 때 컨트롤러의 `onActionBtn` 메서드를 호출하라는 뜻이다.
+
+</details>
+
+<details>
+<summary>6. 컨트롤러의 <code>initialize()</code>는 어떤 용도로 쓰기 좋을까?</summary>
+
+화면이 로드된 직후 필요한 초기 설정, 값 채우기, 이벤트 바인딩 같은 준비 작업에 쓰기 좋다.
+
+</details>
+
+<details>
+<summary>7. 계산기 예제에서 <code>appendText()</code>를 쓰는 이유는 무엇일까?</summary>
+
+기존 입력 뒤에 새 숫자나 기호를 이어 붙여 표시하기 위해서다. 계산기 입력 흐름에 자연스럽다.
+
+</details>
+
+<details>
+<summary>8. <code>exp4j</code> 같은 외부 라이브러리를 붙이는 것이 왜 유용할까?</summary>
+
+복잡한 수식 파싱과 계산 로직을 직접 다 짜지 않아도 되기 때문이다. 개발 속도와 안정성을 높여 준다.
+
+</details>
 
 ## 마무리
 1월 19일은 자바 학습이 콘솔 중심 사고에서 화면 중심 사고로 넘어간 날이었다. 입력과 출력이 더 이상 터미널 문자열이 아니라 버튼, 텍스트필드, 레이블, 창으로 바뀌었고, 프로그램 구조도 프레임워크 생명주기와 컨트롤러 중심으로 재편되기 시작했기 때문이다.

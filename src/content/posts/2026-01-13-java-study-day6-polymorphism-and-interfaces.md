@@ -515,15 +515,68 @@ day6에서 가장 헷갈리기 쉬운 부분이 이 비교다.
 ## 오늘의 복습 질문
 이 글만 읽고 아래 질문에 답할 수 있으면 day6 내용은 꽤 잘 정리된 것이다.
 
-1. `Driver.drive(Vehicle vehicle)`가 버스와 택시를 모두 처리할 수 있는 이유는 무엇일까?
-2. `instanceof` 패턴 매칭은 기존 캐스팅 방식보다 어떤 점이 편할까?
-3. 추상 클래스는 왜 직접 객체를 만들 수 없을까?
-4. 추상 메서드와 일반 메서드는 어떻게 다를까?
-5. 인터페이스와 추상 클래스는 각각 어떤 상황에서 더 자연스러울까?
-6. `default` 메서드는 왜 도입됐을까?
-7. 같은 `RemoteControl` 인터페이스를 구현해도 `Television`과 `Audio`의 무음 처리 방식이 달라질 수 있는 이유는 무엇일까?
-8. 한 클래스가 `RemoteControl`과 `Searchable`을 함께 구현하는 구조는 어떤 장점이 있을까?
-9. `InterfaceA`, `InterfaceB`, `InterfaceC` 예제에서 참조 타입이 바뀌면 보이는 메서드가 왜 달라질까?
+<details>
+<summary>1. <code>Driver.drive(Vehicle vehicle)</code>가 버스와 택시를 모두 처리할 수 있는 이유는 무엇일까?</summary>
+
+버스와 택시가 모두 `Vehicle` 타입으로 다뤄질 수 있기 때문이다. 공통 부모 타입 하나로 여러 자식 객체를 받는 다형성 구조다.
+
+</details>
+
+<details>
+<summary>2. <code>instanceof</code> 패턴 매칭은 기존 캐스팅 방식보다 어떤 점이 편할까?</summary>
+
+타입 확인과 캐스팅을 한 번에 처리할 수 있어 코드가 더 짧고 안전해진다. 불필요한 중복 캐스팅을 줄여 준다.
+
+</details>
+
+<details>
+<summary>3. 추상 클래스는 왜 직접 객체를 만들 수 없을까?</summary>
+
+완성된 설계가 아니라 미완성 규칙을 포함한 기반 클래스이기 때문이다. 자식 클래스가 구체 구현을 채워 넣어야 한다.
+
+</details>
+
+<details>
+<summary>4. 추상 메서드와 일반 메서드는 어떻게 다를까?</summary>
+
+추상 메서드는 선언만 있고 구현이 없어서 자식이 반드시 구현해야 하고, 일반 메서드는 이미 동작 코드까지 들어 있다.
+
+</details>
+
+<details>
+<summary>5. 인터페이스와 추상 클래스는 각각 어떤 상황에서 더 자연스러울까?</summary>
+
+공통 코드와 상태를 일부 공유하고 싶으면 추상 클래스가, 서로 다른 클래스들에 같은 역할이나 규칙을 부여하고 싶으면 인터페이스가 더 자연스럽다.
+
+</details>
+
+<details>
+<summary>6. <code>default</code> 메서드는 왜 도입됐을까?</summary>
+
+기존 구현체를 모두 깨지 않으면서 인터페이스에 기본 동작을 추가하기 위해서다. 공통 동작 제공도 쉬워진다.
+
+</details>
+
+<details>
+<summary>7. 같은 <code>RemoteControl</code> 인터페이스를 구현해도 <code>Television</code>과 <code>Audio</code>의 무음 처리 방식이 달라질 수 있는 이유는 무엇일까?</summary>
+
+같은 계약을 구현해도 실제 클래스가 오버라이딩한 내부 로직은 다를 수 있기 때문이다. 인터페이스는 역할을 맞추고 구현은 각 클래스가 정한다.
+
+</details>
+
+<details>
+<summary>8. 한 클래스가 <code>RemoteControl</code>과 <code>Searchable</code>을 함께 구현하는 구조는 어떤 장점이 있을까?</summary>
+
+한 객체가 여러 역할을 동시에 수행할 수 있어 설계가 유연해진다. 예를 들어 리모컨 기능과 검색 기능을 함께 제공할 수 있다.
+
+</details>
+
+<details>
+<summary>9. <code>InterfaceA</code>, <code>InterfaceB</code>, <code>InterfaceC</code> 예제에서 참조 타입이 바뀌면 보이는 메서드가 왜 달라질까?</summary>
+
+참조 변수 타입이 컴파일 시점에 접근 가능한 메서드 범위를 결정하기 때문이다. 실제 객체는 같아도 보이는 계약 범위는 참조 타입을 따른다.
+
+</details>
 
 ## 마무리
 1월 13일은 자바 객체지향이 한 단계 더 추상적으로 보이기 시작한 날이었다. 상속만으로 구조를 짜는 데서 멈추지 않고, 공통 동작은 추상 클래스로 정리하고, 역할은 인터페이스로 분리하며, 공통 타입 하나로 여러 구현을 다루는 방법을 본격적으로 익히기 시작했기 때문이다.

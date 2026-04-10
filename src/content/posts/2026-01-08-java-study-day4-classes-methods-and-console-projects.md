@@ -478,12 +478,47 @@ public PinMoney(String date, String content, int amount, boolean income) {
 ## 오늘의 복습 질문
 이 글만 읽고 아래 질문에 답할 수 있으면 day4 내용은 꽤 잘 정리된 것이다.
 
-1. 클래스와 객체는 어떻게 다를까?
-2. 생성자가 필요한 이유는 무엇일까?
-3. `this.model = model;`에서 왼쪽과 오른쪽은 각각 무엇을 가리킬까?
-4. `static` 필드와 일반 필드는 어떤 차이가 있을까?
-5. 주소록 프로그램에서 `AddressBook.cnt` 같은 정적 변수를 둔 이유는 무엇일까?
-6. 가계부 프로그램에서 `PinMoney.totalMoney`는 왜 객체마다 따로 있지 않고 클래스에 붙어 있을까?
+<details>
+<summary>1. 클래스와 객체는 어떻게 다를까?</summary>
+
+클래스는 설계도이고, 객체는 그 설계도로 실제 만들어진 인스턴스다. 클래스가 틀이라면 객체는 실제 데이터와 상태를 가진 결과물이다.
+
+</details>
+
+<details>
+<summary>2. 생성자가 필요한 이유는 무엇일까?</summary>
+
+객체가 만들어질 때 필요한 초기 상태를 바로 넣기 위해서다. 생성자가 있으면 객체가 의미 있는 상태로 시작할 수 있다.
+
+</details>
+
+<details>
+<summary>3. <code>this.model = model;</code>에서 왼쪽과 오른쪽은 각각 무엇을 가리킬까?</summary>
+
+왼쪽 `this.model`은 현재 객체의 필드이고, 오른쪽 `model`은 생성자나 메서드에 전달된 매개변수다.
+
+</details>
+
+<details>
+<summary>4. <code>static</code> 필드와 일반 필드는 어떤 차이가 있을까?</summary>
+
+`static` 필드는 객체 전체가 아니라 클래스 차원에서 하나만 공유되고, 일반 필드는 객체마다 따로 존재한다.
+
+</details>
+
+<details>
+<summary>5. 주소록 프로그램에서 <code>AddressBook.cnt</code> 같은 정적 변수를 둔 이유는 무엇일까?</summary>
+
+전체 주소록 항목 수처럼 모든 객체가 함께 봐야 하는 공통 상태를 관리하기 위해서다. 이런 값은 객체별로 따로 두는 것보다 클래스 하나에 두는 편이 자연스럽다.
+
+</details>
+
+<details>
+<summary>6. 가계부 프로그램에서 <code>PinMoney.totalMoney</code>는 왜 객체마다 따로 있지 않고 클래스에 붙어 있을까?</summary>
+
+전체 잔액은 개별 지출/수입 객체 하나의 상태가 아니라 모든 내역이 함께 만든 공유 결과이기 때문이다.
+
+</details>
 
 ## 마무리
 1월 8일은 자바 학습에서 꽤 중요한 전환점이다. 앞선 3일 동안 배운 변수, 조건문, 반복문, 문자열, 배열이 이날부터 클래스와 객체 안으로 묶이기 시작했기 때문이다. 단순히 문법 항목 하나를 더 배운 것이 아니라, 프로그램을 구성하는 방식 자체가 바뀌기 시작한 날이라고 보는 편이 맞다.

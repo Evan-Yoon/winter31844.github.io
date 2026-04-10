@@ -444,14 +444,61 @@ Course.registerCourse2(new Applicant<HighStudent>(new HighStudent()));
 ## 오늘의 복습 질문
 이 글만 읽고 아래 질문에 답할 수 있으면 day7 내용은 잘 정리된 것이다.
 
-1. `try`, `catch`, `finally`는 각각 어떤 역할을 할까?
-2. `throws ClassNotFoundException`은 무엇을 의미할까?
-3. 멀티 캐치는 어떤 상황에서 유용할까?
-4. 사용자 정의 예외는 왜 `Exception` 하나로 통일하지 않고 따로 만들까?
-5. 왜 제네릭을 쓰면 캐스팅이 줄고 타입 실수가 빨리 드러날까?
-6. 제네릭 클래스와 제네릭 메서드는 어떻게 다를까?
-7. `T extends Number`를 붙이면 메서드 안에서 어떤 이점이 생길까?
-8. `<? extends Student>`와 `<? super Worker>`는 각각 어떤 범위를 허용할까?
+<details>
+<summary>1. <code>try</code>, <code>catch</code>, <code>finally</code>는 각각 어떤 역할을 할까?</summary>
+
+`try`는 예외가 발생할 수 있는 코드를 실행하고, `catch`는 발생한 예외를 처리하며, `finally`는 예외 여부와 관계없이 마무리 작업을 수행한다.
+
+</details>
+
+<details>
+<summary>2. <code>throws ClassNotFoundException</code>은 무엇을 의미할까?</summary>
+
+이 메서드가 해당 예외를 직접 처리하지 않고, 호출한 쪽으로 처리 책임을 넘긴다는 뜻이다.
+
+</details>
+
+<details>
+<summary>3. 멀티 캐치는 어떤 상황에서 유용할까?</summary>
+
+서로 다른 예외를 같은 방식으로 처리할 때 유용하다. 중복 `catch` 블록을 줄여 코드를 간결하게 만들 수 있다.
+
+</details>
+
+<details>
+<summary>4. 사용자 정의 예외는 왜 <code>Exception</code> 하나로 통일하지 않고 따로 만들까?</summary>
+
+도메인 규칙 위반 원인을 더 명확히 표현하기 위해서다. 예외 이름만 봐도 어떤 문제가 발생했는지 바로 이해하기 쉬워진다.
+
+</details>
+
+<details>
+<summary>5. 왜 제네릭을 쓰면 캐스팅이 줄고 타입 실수가 빨리 드러날까?</summary>
+
+컴파일러가 타입을 미리 검사해 주기 때문이다. 잘못된 타입 사용이 실행 전부터 드러나고, 꺼낼 때도 명시적 캐스팅이 줄어든다.
+
+</details>
+
+<details>
+<summary>6. 제네릭 클래스와 제네릭 메서드는 어떻게 다를까?</summary>
+
+제네릭 클래스는 클래스 전체에서 타입 매개변수를 쓰고, 제네릭 메서드는 특정 메서드 하나 안에서만 타입 매개변수를 사용한다.
+
+</details>
+
+<details>
+<summary>7. <code>T extends Number</code>를 붙이면 메서드 안에서 어떤 이점이 생길까?</summary>
+
+숫자 타입만 받도록 제한할 수 있어 `doubleValue()` 같은 `Number` 계열 기능을 안전하게 사용할 수 있다.
+
+</details>
+
+<details>
+<summary>8. <code>&lt;? extends Student&gt;</code>와 <code>&lt;? super Worker&gt;</code>는 각각 어떤 범위를 허용할까?</summary>
+
+`<? extends Student>`는 `Student`와 그 하위 타입까지, `<? super Worker>`는 `Worker`와 그 상위 타입까지 허용한다.
+
+</details>
 
 ## 마무리
 1월 14일은 자바 코드가 한층 더 현실적으로 보이기 시작한 날이었다. 단순히 객체를 만들고 상속하는 데서 멈추지 않고, 실패 상황을 제어하고, 타입을 일반화하고, 잘못된 사용을 컴파일 단계에서 막는 방법까지 배우기 시작했기 때문이다.

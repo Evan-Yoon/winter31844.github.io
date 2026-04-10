@@ -321,12 +321,47 @@ newArray = oldArray;
 ## 오늘의 복습 질문
 이 글만 읽고 아래 질문에 답할 수 있으면 day3 내용은 잘 정리된 것이다.
 
-1. 문자열 비교에서 `==`를 쓰면 왜 위험할까?
-2. `null`과 `""`는 어떻게 다를까?
-3. `substring(0, 6)`에서 왜 6번째 인덱스 문자는 포함되지 않을까?
-4. 배열 순회에서 `scores.length`를 쓰는 이유는 무엇일까?
-5. 2차원 배열에서 `scores.length`와 `scores[i].length`는 각각 무엇을 뜻할까?
-6. 배열 대입과 배열 복사는 왜 다른가?
+<details>
+<summary>1. 문자열 비교에서 <code>==</code>를 쓰면 왜 위험할까?</summary>
+
+`==`는 문자열 내용이 아니라 참조 위치를 비교하기 때문이다. 문자열 내용 비교는 `equals()`를 써야 안전하다.
+
+</details>
+
+<details>
+<summary>2. <code>null</code>과 <code>""</code>는 어떻게 다를까?</summary>
+
+`null`은 문자열 객체가 아예 없는 상태이고, `""`는 길이가 0인 빈 문자열 객체다. 둘은 의미가 다르다.
+
+</details>
+
+<details>
+<summary>3. <code>substring(0, 6)</code>에서 왜 6번째 인덱스 문자는 포함되지 않을까?</summary>
+
+`substring(begin, end)`는 시작 인덱스는 포함하고 끝 인덱스는 포함하지 않는 규칙을 따르기 때문이다.
+
+</details>
+
+<details>
+<summary>4. 배열 순회에서 <code>scores.length</code>를 쓰는 이유는 무엇일까?</summary>
+
+배열 길이를 직접 숫자로 적지 않고 실제 크기에 맞춰 반복하기 위해서다. 배열 크기가 바뀌어도 코드를 수정할 필요가 줄어든다.
+
+</details>
+
+<details>
+<summary>5. 2차원 배열에서 <code>scores.length</code>와 <code>scores[i].length</code>는 각각 무엇을 뜻할까?</summary>
+
+`scores.length`는 행 개수, `scores[i].length`는 특정 행 안의 열 개수를 뜻한다. 즉, 바깥 배열 크기와 안쪽 배열 크기를 따로 보는 것이다.
+
+</details>
+
+<details>
+<summary>6. 배열 대입과 배열 복사는 왜 다른가?</summary>
+
+배열 대입은 같은 배열을 함께 가리키게 하고, 배열 복사는 내용을 새 배열에 따로 옮긴다. 그래서 한쪽 수정이 다른 쪽에 영향을 주는지가 달라진다.
+
+</details>
 
 ## 마무리
 1월 7일은 Java가 단순 계산용 언어에서 "텍스트와 여러 값을 다루는 언어"로 보이기 시작한 날이었다. 문자열 메서드를 통해 필요한 정보를 꺼내고, 배열을 통해 여러 데이터를 묶어서 반복문으로 순회하는 흐름이 만들어졌기 때문이다.
