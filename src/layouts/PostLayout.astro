@@ -65,7 +65,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
             </div>
 
             <p class="comments-note">
-              New comments are saved first and appear after approval.
+              Comments appear immediately. Use report if something needs review.
             </p>
 
             <form class="comment-form" data-comment-form novalidate>
@@ -109,7 +109,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
             </form>
 
             <div class="comments-list" data-comments-list>
-              <p class="comments-empty">No approved comments yet.</p>
+              <p class="comments-empty">No comments yet.</p>
             </div>
           </section>
         )}
@@ -356,32 +356,19 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 </script>
 
 <script type="module">
-  import { initializeApp } from 'firebase/app';
-  import { equalTo, get, getDatabase, orderByChild, push, query, ref } from 'firebase/database';
+  import { get, push, ref, runTransaction } from 'firebase/database';
+  import { getFirebaseDatabase } from '../lib/firebase/client';
 
   const section = document.querySelector('[data-comments-section]');
 
   if (section) {
-    const firebaseConfig = {
-      apiKey: 'AIzaSyCNkdX0A83XXEK-FIjqPt7b8iZxJ5mlw_4',
-      authDomain: 'blog-stats-3b3fd.firebaseapp.com',
-      databaseURL: 'https://blog-stats-3b3fd-default-rtdb.firebaseio.com',
-      projectId: 'blog-stats-3b3fd',
-      storageBucket: 'blog-stats-3b3fd.firebasestorage.app',
-      messagingSenderId: '1009895082497',
-      appId: '1:1009895082497:web:938bf796556e7889570e00',
-      measurementId: 'G-Y6835HX2J5'
-    };
-
-    const app = initializeApp(firebaseConfig, 'comments');
-    const database = getDatabase(app);
+    const database = getFirebaseDatabase('comments');
     const postSlug = section.getAttribute('data-post-slug') || '';
     const form = section.querySelector('[data-comment-form]');
     const list = section.querySelector('[data-comments-list]');
     const count = section.querySelector('[data-comments-count]');
     const status = section.querySelector('[data-comment-status]');
     const commentsRef = ref(database, `comments/${postSlug}`);
-    const approvedCommentsQuery = query(commentsRef, orderByChild('approved'), equalTo(true));
     const submitCooldownKey = `comment_submit_${postSlug}`;
     const submitCooldownMs = 60_000;
 
@@ -406,11 +393,46 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       count.textContent = `${total} comment${total === 1 ? '' : 's'}`;
     };
 
+    const reportComment = async (commentId, reportButton) => {
+      const storageKey = `comment_reported_${postSlug}_${commentId}`;
+      if (localStorage.getItem(storageKey)) {
+        setStatus('You already reported this comment from this browser.', 'error');
+        return;
+      }
+
+      reportButton.disabled = true;
+
+      try {
+        const commentRef = ref(database, `comments/${postSlug}/${commentId}`);
+        const result = await runTransaction(commentRef, (current) => {
+          if (!current || typeof current !== 'object') return current;
+          return {
+            ...current,
+            reportCount: Number(current.reportCount || 0) + 1,
+            lastReportedAt: Date.now(),
+          };
+        });
+
+        if (result.committed) {
+          localStorage.setItem(storageKey, '1');
+          setStatus('Comment reported.', 'success');
+          await loadComments();
+        } else {
+          setStatus('Failed to report comment.', 'error');
+        }
+      } catch (error) {
+        console.error('Failed to report comment.', error);
+        setStatus('Failed to report comment. Please try again later.', 'error');
+      } finally {
+        reportButton.disabled = false;
+      }
+    };
+
     const renderComments = (items) => {
       if (!list) return;
 
       if (items.length === 0) {
-        list.innerHTML = '<p class="comments-empty">No approved comments yet.</p>';
+        list.innerHTML = '<p class="comments-empty">No comments yet.</p>';
         setCount(0);
         return;
       }
@@ -437,17 +459,32 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
         body.className = 'comment-body';
         body.textContent = item.content;
 
+        const footer = document.createElement('div');
+        footer.className = 'comment-card-footer';
+
+        const reportMeta = document.createElement('span');
+        reportMeta.className = 'comment-report-meta';
+        reportMeta.textContent = `Reports ${Number(item.reportCount || 0)}`;
+
+        const reportButton = document.createElement('button');
+        reportButton.type = 'button';
+        reportButton.className = 'comment-report-button';
+        reportButton.textContent = 'Report';
+        reportButton.addEventListener('click', () => reportComment(item.id, reportButton));
+
+        footer.append(reportMeta, reportButton);
         header.append(author, date);
-        article.append(header, body);
+        article.append(header, body, footer);
         list.append(article);
       });
     };
 
-    const loadComments = async () => {
+    async function loadComments() {
       try {
-        const snapshot = await get(approvedCommentsQuery);
+        const snapshot = await get(commentsRef);
         const raw = snapshot.val() || {};
-        const items = Object.values(raw)
+        const items = Object.entries(raw)
+          .map(([id, item]) => ({ id, ...(item || {}) }))
           .filter((item) => item && typeof item === 'object')
           .sort((left, right) => Number(right.createdAt || 0) - Number(left.createdAt || 0));
 
@@ -458,7 +495,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
           list.innerHTML = '<p class="comments-empty">Comments are temporarily unavailable.</p>';
         }
       }
-    };
+    }
 
     loadComments();
 
@@ -504,13 +541,15 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
           author,
           content,
           createdAt: now,
-          approved: false,
           postSlug,
+          reportCount: 0,
+          lastReportedAt: 0,
         });
 
         localStorage.setItem(submitCooldownKey, String(now));
         form.reset();
-        setStatus('Comment saved. It will appear after approval.', 'success');
+        setStatus('Comment posted.', 'success');
+        await loadComments();
       } catch (error) {
         console.error('Failed to save comment.', error);
         setStatus('Failed to save comment. Please try again later.', 'error');
@@ -1412,6 +1451,46 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     word-break: break-word;
   }
 
+  .comment-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.9rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .comment-report-meta {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-3);
+  }
+
+  .comment-report-button {
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink-2);
+    padding: 0.45rem 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: border-color var(--transition), color var(--transition), background var(--transition);
+  }
+
+  .comment-report-button:hover {
+    border-color: #b42318;
+    color: #b42318;
+    background: rgba(180, 35, 24, 0.06);
+  }
+
+  .comment-report-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
   @media (max-width: 1280px) {
     .post-layout-outer.has-toc {
       display: block;
@@ -1507,7 +1586,8 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
     .comments-header,
     .comment-form-footer,
-    .comment-card-head {
+    .comment-card-head,
+    .comment-card-footer {
       align-items: start;
       flex-direction: column;
     }

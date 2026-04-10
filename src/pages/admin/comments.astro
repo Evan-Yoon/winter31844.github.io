@@ -1,0 +1,491 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Comment Admin | Evan Yoon" description="Comment moderation dashboard">
+  <section class="admin-shell">
+    <div class="admin-header">
+      <div>
+        <p class="admin-kicker">Admin</p>
+        <h1 class="admin-title">Comment Dashboard</h1>
+        <p class="admin-subtitle">Sign in with Firebase Auth. Admin access is controlled by `admins/{'{uid}'}` in Realtime Database.</p>
+      </div>
+      <div class="admin-actions">
+        <span class="admin-user" data-admin-user>Signed out</span>
+        <button type="button" class="admin-button admin-button-ghost" data-admin-logout hidden>Sign Out</button>
+      </div>
+    </div>
+
+    <div class="admin-grid">
+      <section class="admin-card">
+        <h2 class="admin-card-title">Login</h2>
+        <form class="admin-form" data-admin-login novalidate>
+          <label class="admin-field">
+            <span>Email</span>
+            <input type="email" name="email" placeholder="admin@example.com" required />
+          </label>
+          <label class="admin-field">
+            <span>Password</span>
+            <input type="password" name="password" placeholder="Password" required />
+          </label>
+          <button type="submit" class="admin-button">Sign In</button>
+          <p class="admin-status" data-admin-auth-status aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="admin-card admin-card-wide">
+        <div class="admin-card-head">
+          <div>
+            <h2 class="admin-card-title">Comments</h2>
+            <p class="admin-card-copy">Reported comments float to the top. Delete removes the comment immediately.</p>
+          </div>
+          <button type="button" class="admin-button admin-button-ghost" data-admin-refresh>Refresh</button>
+        </div>
+        <div class="admin-status-row">
+          <span data-admin-summary>Not loaded</span>
+          <span data-admin-access>Admin access required</span>
+        </div>
+        <div class="admin-comments" data-admin-comments>
+          <p class="admin-empty">Sign in to load comments.</p>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="module">
+  import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+  import { get, ref, remove, update } from 'firebase/database';
+  import { getFirebaseAuth, getFirebaseDatabase } from '../../lib/firebase/client';
+
+  const auth = getFirebaseAuth('comments-admin');
+  const database = getFirebaseDatabase('comments-admin');
+
+  const loginForm = document.querySelector('[data-admin-login]');
+  const authStatus = document.querySelector('[data-admin-auth-status]');
+  const userLabel = document.querySelector('[data-admin-user]');
+  const logoutButton = document.querySelector('[data-admin-logout]');
+  const refreshButton = document.querySelector('[data-admin-refresh]');
+  const commentsRoot = document.querySelector('[data-admin-comments]');
+  const summaryLabel = document.querySelector('[data-admin-summary]');
+  const accessLabel = document.querySelector('[data-admin-access]');
+
+  let currentUser = null;
+  let hasAdminAccess = false;
+
+  const setAuthStatus = (message, tone = 'neutral') => {
+    if (!authStatus) return;
+    authStatus.textContent = message;
+    authStatus.dataset.tone = tone;
+  };
+
+  const setSummary = (message) => {
+    if (summaryLabel) summaryLabel.textContent = message;
+  };
+
+  const setAccess = (message) => {
+    if (accessLabel) accessLabel.textContent = message;
+  };
+
+  const formatDate = (value) => {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '-';
+    return date.toLocaleString('ko-KR');
+  };
+
+  const escapeHtml = (value) =>
+    String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+
+  async function checkAdminAccess(uid) {
+    const snapshot = await get(ref(database, `admins/${uid}`));
+    return snapshot.val() === true;
+  }
+
+  async function loadComments() {
+    if (!hasAdminAccess) {
+      if (commentsRoot) commentsRoot.innerHTML = '<p class="admin-empty">Admin access required.</p>';
+      setSummary('Not loaded');
+      return;
+    }
+
+    try {
+      const snapshot = await get(ref(database, 'comments'));
+      const raw = snapshot.val() || {};
+      const items = Object.entries(raw).flatMap(([postSlug, comments]) =>
+        Object.entries(comments || {}).map(([commentId, comment]) => ({
+          commentId,
+          postSlug,
+          ...(comment || {}),
+        })),
+      );
+
+      items.sort((left, right) => {
+        const reportDelta = Number(right.reportCount || 0) - Number(left.reportCount || 0);
+        if (reportDelta !== 0) return reportDelta;
+        return Number(right.createdAt || 0) - Number(left.createdAt || 0);
+      });
+
+      setSummary(`${items.length} comments loaded`);
+
+      if (!commentsRoot) return;
+      if (items.length === 0) {
+        commentsRoot.innerHTML = '<p class="admin-empty">No comments found.</p>';
+        return;
+      }
+
+      commentsRoot.innerHTML = items.map((item) => `
+        <article class="admin-comment-card" data-comment-id="${escapeHtml(item.commentId)}" data-post-slug="${escapeHtml(item.postSlug)}">
+          <div class="admin-comment-head">
+            <div>
+              <strong class="admin-comment-author">${escapeHtml(item.author || 'Unknown')}</strong>
+              <p class="admin-comment-meta">/${escapeHtml(item.postSlug)} · ${escapeHtml(formatDate(item.createdAt))}</p>
+            </div>
+            <div class="admin-comment-badges">
+              <span class="admin-badge ${Number(item.reportCount || 0) > 0 ? 'is-hot' : ''}">Reports ${Number(item.reportCount || 0)}</span>
+              <span class="admin-badge">ID ${escapeHtml(item.commentId)}</span>
+            </div>
+          </div>
+          <p class="admin-comment-body">${escapeHtml(item.content || '')}</p>
+          <div class="admin-comment-actions">
+            <button type="button" class="admin-button admin-button-ghost" data-reset-report>Reset Reports</button>
+            <button type="button" class="admin-button admin-button-danger" data-delete-comment>Delete</button>
+          </div>
+        </article>
+      `).join('');
+    } catch (error) {
+      console.error('Failed to load admin comments.', error);
+      if (commentsRoot) commentsRoot.innerHTML = '<p class="admin-empty">Failed to load comments.</p>';
+      setSummary('Load failed');
+    }
+  }
+
+  loginForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(loginForm);
+    const email = String(formData.get('email') || '').trim();
+    const password = String(formData.get('password') || '');
+
+    if (!email || !password) {
+      setAuthStatus('Email and password are required.', 'error');
+      return;
+    }
+
+    setAuthStatus('Signing in...', 'neutral');
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setAuthStatus('Signed in.', 'success');
+    } catch (error) {
+      console.error('Failed to sign in.', error);
+      setAuthStatus('Failed to sign in. Check your credentials.', 'error');
+    }
+  });
+
+  logoutButton?.addEventListener('click', async () => {
+    await signOut(auth);
+  });
+
+  refreshButton?.addEventListener('click', async () => {
+    await loadComments();
+  });
+
+  commentsRoot?.addEventListener('click', async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    const card = target.closest('[data-comment-id]');
+    if (!(card instanceof HTMLElement)) return;
+
+    const commentId = card.dataset.commentId;
+    const postSlug = card.dataset.postSlug;
+    if (!commentId || !postSlug || !hasAdminAccess) return;
+
+    if (target.matches('[data-delete-comment]')) {
+      const confirmed = window.confirm('Delete this comment permanently?');
+      if (!confirmed) return;
+
+      try {
+        await remove(ref(database, `comments/${postSlug}/${commentId}`));
+        await loadComments();
+      } catch (error) {
+        console.error('Failed to delete comment.', error);
+        setAuthStatus('Failed to delete comment.', 'error');
+      }
+    }
+
+    if (target.matches('[data-reset-report]')) {
+      try {
+        await update(ref(database, `comments/${postSlug}/${commentId}`), {
+          reportCount: 0,
+          lastReportedAt: 0,
+        });
+        await loadComments();
+      } catch (error) {
+        console.error('Failed to reset report count.', error);
+        setAuthStatus('Failed to reset reports.', 'error');
+      }
+    }
+  });
+
+  onAuthStateChanged(auth, async (user) => {
+    currentUser = user;
+    hasAdminAccess = false;
+
+    if (!user) {
+      if (userLabel) userLabel.textContent = 'Signed out';
+      if (logoutButton) logoutButton.hidden = true;
+      setAccess('Admin access required');
+      if (commentsRoot) commentsRoot.innerHTML = '<p class="admin-empty">Sign in to load comments.</p>';
+      setSummary('Not loaded');
+      return;
+    }
+
+    if (userLabel) userLabel.textContent = user.email || user.uid;
+    if (logoutButton) logoutButton.hidden = false;
+
+    try {
+      hasAdminAccess = await checkAdminAccess(user.uid);
+      setAccess(hasAdminAccess ? 'Admin access granted' : 'Signed in, but not listed in admins/');
+
+      if (hasAdminAccess) {
+        await loadComments();
+      } else if (commentsRoot) {
+        commentsRoot.innerHTML = '<p class="admin-empty">This account is not registered as admin in Realtime Database.</p>';
+      }
+    } catch (error) {
+      console.error('Failed to check admin access.', error);
+      setAccess('Failed to verify admin access');
+    }
+  });
+</script>
+
+<style>
+  .admin-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 120px 1.25rem 80px;
+  }
+
+  .admin-header,
+  .admin-card-head,
+  .admin-actions,
+  .admin-status-row,
+  .admin-comment-head,
+  .admin-comment-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .admin-header {
+    align-items: end;
+    margin-bottom: 1.5rem;
+  }
+
+  .admin-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+  }
+
+  .admin-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    line-height: 1.05;
+    color: var(--ink);
+  }
+
+  .admin-subtitle {
+    color: var(--ink-2);
+    max-width: 56ch;
+    margin-top: 0.85rem;
+    line-height: 1.7;
+  }
+
+  .admin-user,
+  .admin-status-row,
+  .admin-comment-meta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+
+  .admin-grid {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .admin-card {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg-card);
+    padding: 1.35rem;
+  }
+
+  .admin-card-wide {
+    min-height: 520px;
+  }
+
+  .admin-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--ink);
+  }
+
+  .admin-card-copy {
+    color: var(--ink-2);
+    margin-top: 0.35rem;
+  }
+
+  .admin-form {
+    margin-top: 1rem;
+  }
+
+  .admin-field {
+    display: block;
+    margin-bottom: 0.9rem;
+  }
+
+  .admin-field span {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .admin-field input {
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 0.85rem 0.95rem;
+    font: inherit;
+  }
+
+  .admin-button {
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.8rem 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .admin-button-ghost {
+    border-color: var(--border-strong);
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .admin-button-danger {
+    border-color: #b42318;
+    background: #b42318;
+    color: #fff;
+  }
+
+  .admin-status {
+    min-height: 1.4rem;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .admin-status[data-tone="error"] {
+    color: #b42318;
+  }
+
+  .admin-status[data-tone="success"] {
+    color: #067647;
+  }
+
+  .admin-comments {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .admin-comment-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg);
+    padding: 1rem;
+  }
+
+  .admin-comment-head {
+    align-items: start;
+  }
+
+  .admin-comment-author {
+    color: var(--ink);
+  }
+
+  .admin-comment-body {
+    margin: 0.9rem 0;
+    line-height: 1.75;
+    color: var(--ink-2);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .admin-comment-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-badge {
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--ink-2);
+    padding: 0.35rem 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  .admin-badge.is-hot {
+    background: rgba(180, 35, 24, 0.1);
+    color: #b42318;
+  }
+
+  .admin-empty {
+    color: var(--ink-3);
+    padding: 2rem 0;
+  }
+
+  @media (max-width: 960px) {
+    .admin-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .admin-header,
+    .admin-card-head,
+    .admin-actions,
+    .admin-status-row,
+    .admin-comment-head,
+    .admin-comment-actions {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .admin-button {
+      width: 100%;
+    }
+  }
+</style>
