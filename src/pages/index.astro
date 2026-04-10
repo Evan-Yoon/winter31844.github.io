@@ -154,7 +154,23 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   </section>
 </BaseLayout>
 
-<script>
+<script type="module">
+  import { initializeApp } from 'firebase/app';
+  import { getDatabase, get, ref, runTransaction } from 'firebase/database';
+
+  const firebaseConfig = {
+    apiKey: 'AIzaSyCNkdX0A83XXEK-FIjqPt7b8iZxJ5mlw_4',
+    authDomain: 'blog-stats-3b3fd.firebaseapp.com',
+    databaseURL: 'https://blog-stats-3b3fd-default-rtdb.firebaseio.com',
+    projectId: 'blog-stats-3b3fd',
+    storageBucket: 'blog-stats-3b3fd.firebasestorage.app',
+    messagingSenderId: '1009895082497',
+    appId: '1:1009895082497:web:938bf796556e7889570e00',
+    measurementId: 'G-Y6835HX2J5'
+  };
+
+  const firebaseApp = initializeApp(firebaseConfig);
+  const database = getDatabase(firebaseApp);
   // ── 운영일 계산 (2025-11-28 기준) ──
   const launch = new Date('2025-11-28T00:00:00+09:00');
   const today = new Date();
@@ -180,25 +196,26 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
 
   // ── Firebase 오늘 방문자 수 ──
   (async () => {
-    const db = 'https://blog-stats-3b3fd-default-rtdb.firebaseio.com';
     const el = document.getElementById('stat-daily');
+    const dailyRef = ref(database, `visits/${todayKst}`);
+    const storageKey = `visited_${todayKst}`;
     try {
       // 오늘 카운트 읽기
-      const res = await fetch(`${db}/visits/${todayKst}.json`);
-      const current = (await res.json()) ?? 0;
+      const snapshot = await get(dailyRef);
+      const current = snapshot.exists() ? snapshot.val() : 0;
       if (el) el.textContent = Number(current).toLocaleString('ko-KR');
 
       // 하루에 한 번만 카운트 (같은 브라우저/기기 기준)
-      const storageKey = `visited_${todayKst}`;
       if (!localStorage.getItem(storageKey)) {
-        await fetch(`${db}/visits/${todayKst}.json`, {
-          method: 'PUT',
-          body: JSON.stringify(current + 1),
-        });
+        const result = await runTransaction(dailyRef, (value) => (value || 0) + 1);
         localStorage.setItem(storageKey, '1');
-        if (el) el.textContent = (current + 1).toLocaleString('ko-KR');
+        if (result.committed && el) {
+          el.textContent = Number(result.snapshot.val() ?? current).toLocaleString('ko-KR');
+        }
       }
-    } catch {}
+    } catch (error) {
+      console.error('Failed to load daily visits from Firebase.', error);
+    }
   })();
 </script>
 
