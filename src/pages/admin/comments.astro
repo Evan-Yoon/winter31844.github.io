@@ -3,67 +3,57 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Comment Admin | Evan Yoon" description="Comment moderation dashboard">
-  <section class="admin-shell">
+  <section class="admin-auth-shell" data-admin-auth-screen>
+    <div class="admin-auth-card">
+      <p class="admin-kicker">Admin</p>
+      <h1 class="admin-title">Comment Login</h1>
+      <p class="admin-subtitle">로그인하지 않은 상태에서는 이 화면만 표시됩니다.</p>
+      <form class="admin-form" data-admin-login novalidate>
+        <label class="admin-field">
+          <span>Email</span>
+          <input type="email" name="email" placeholder="admin@example.com" required />
+        </label>
+        <label class="admin-field">
+          <span>Password</span>
+          <input type="password" name="password" placeholder="Password" required />
+        </label>
+        <button type="submit" class="admin-button">Login</button>
+        <p class="admin-status" data-admin-auth-status aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="admin-shell" data-admin-dashboard hidden>
     <div class="admin-header">
       <div>
         <p class="admin-kicker">Admin</p>
         <h1 class="admin-title">Comment Dashboard</h1>
-        <p class="admin-subtitle">Sign in with Firebase Auth. Admin access is controlled by `admins/{'{uid}'}` in Realtime Database.</p>
+        <p class="admin-subtitle">댓글 신고 현황을 확인하고 삭제 또는 리포트 초기화를 할 수 있습니다.</p>
       </div>
       <div class="admin-actions">
         <span class="admin-user" data-admin-user>Signed out</span>
-        <button type="button" class="admin-button admin-button-ghost" data-admin-logout hidden>Sign Out</button>
+        <button type="button" class="admin-button admin-button-ghost" data-admin-logout>Logout</button>
       </div>
     </div>
 
-    <div class="admin-grid">
-      <section class="admin-card">
-        <h2 class="admin-card-title">Login</h2>
-        <form class="admin-form" data-admin-login novalidate>
-          <label class="admin-field">
-            <span>Email</span>
-            <input type="email" name="email" placeholder="admin@example.com" required />
-          </label>
-          <label class="admin-field">
-            <span>Password</span>
-            <input type="password" name="password" placeholder="Password" required />
-          </label>
-          <button type="submit" class="admin-button">Sign In</button>
-          <p class="admin-status" data-admin-auth-status aria-live="polite"></p>
-        </form>
-      </section>
-
-      <section class="admin-card admin-card-wide">
-        <div class="admin-lock" data-admin-lock>
-          <div class="admin-lock-icon" aria-hidden="true">LOCKED</div>
-          <h2 class="admin-card-title">Restricted Area</h2>
-          <p class="admin-card-copy">
-            Sign in with an admin account to view reported comments, reset reports, and delete entries.
-          </p>
-          <div class="admin-status-row admin-status-row-lock">
-            <span data-admin-summary>Not loaded</span>
-            <span data-admin-access>Admin access required</span>
+    <section class="admin-card admin-card-wide">
+      <div class="admin-panel" data-admin-panel>
+        <div class="admin-card-head">
+          <div>
+            <h2 class="admin-card-title">Comments</h2>
+            <p class="admin-card-copy">Reported comments float to the top. Delete removes the comment immediately.</p>
           </div>
+          <button type="button" class="admin-button admin-button-ghost" data-admin-refresh>Refresh</button>
         </div>
-
-        <div class="admin-panel" data-admin-panel hidden>
-          <div class="admin-card-head">
-            <div>
-              <h2 class="admin-card-title">Comments</h2>
-              <p class="admin-card-copy">Reported comments float to the top. Delete removes the comment immediately.</p>
-            </div>
-            <button type="button" class="admin-button admin-button-ghost" data-admin-refresh>Refresh</button>
-          </div>
-          <div class="admin-status-row">
-            <span data-admin-summary>Not loaded</span>
-            <span data-admin-access>Admin access required</span>
-          </div>
-          <div class="admin-comments" data-admin-comments>
-            <p class="admin-empty">No comments found.</p>
-          </div>
+        <div class="admin-status-row">
+          <span data-admin-summary>Not loaded</span>
+          <span data-admin-access>Admin access required</span>
         </div>
-      </section>
-    </div>
+        <div class="admin-comments" data-admin-comments>
+          <p class="admin-empty">No comments found.</p>
+        </div>
+      </div>
+    </section>
   </section>
 </BaseLayout>
 
@@ -75,50 +65,59 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const auth = getFirebaseAuth('comments-admin');
   const database = getFirebaseDatabase('comments-admin');
 
-  const loginForm = document.querySelector('[data-admin-login]');
-  const authStatus = document.querySelector('[data-admin-auth-status]');
-  const userLabel = document.querySelector('[data-admin-user]');
-  const logoutButton = document.querySelector('[data-admin-logout]');
-  const refreshButton = document.querySelector('[data-admin-refresh]');
-  const commentsRoot = document.querySelector('[data-admin-comments]');
-  const adminLock = document.querySelector('[data-admin-lock]');
-  const adminPanel = document.querySelector('[data-admin-panel]');
-  const summaryLabel = document.querySelector('[data-admin-summary]');
-  const accessLabel = document.querySelector('[data-admin-access]');
-
-  let currentUser = null;
+  const loginForm = document.querySelector<HTMLFormElement>('[data-admin-login]');
+  const authStatus = document.querySelector<HTMLElement>('[data-admin-auth-status]');
+  const authScreen = document.querySelector<HTMLElement>('[data-admin-auth-screen]');
+  const adminDashboard = document.querySelector<HTMLElement>('[data-admin-dashboard]');
+  const userLabel = document.querySelector<HTMLElement>('[data-admin-user]');
+  const logoutButton = document.querySelector<HTMLElement>('[data-admin-logout]');
+  const refreshButton = document.querySelector<HTMLButtonElement>('[data-admin-refresh]');
+  const commentsRoot = document.querySelector<HTMLElement>('[data-admin-comments]');
+  const adminPanel = document.querySelector<HTMLElement>('[data-admin-panel]');
+  const summaryLabels = Array.from(document.querySelectorAll<HTMLElement>('[data-admin-summary]'));
+  const accessLabels = Array.from(document.querySelectorAll<HTMLElement>('[data-admin-access]'));
   let hasAdminAccess = false;
 
-  const setAuthStatus = (message, tone = 'neutral') => {
+  const setAuthStatus = (message: string, tone = 'neutral') => {
     if (!authStatus) return;
     authStatus.textContent = message;
     authStatus.dataset.tone = tone;
   };
 
-  const setSummary = (message) => {
-    if (summaryLabel) summaryLabel.textContent = message;
+  const setSummary = (message: string) => {
+    summaryLabels.forEach((node) => {
+      node.textContent = message;
+    });
   };
 
-  const setAccess = (message) => {
-    if (accessLabel) accessLabel.textContent = message;
+  const setAccess = (message: string) => {
+    accessLabels.forEach((node) => {
+      node.textContent = message;
+    });
   };
 
-  const setAdminView = (isUnlocked) => {
-    if (adminLock instanceof HTMLElement) {
-      adminLock.hidden = isUnlocked;
+  const setScreenState = (isAuthenticatedView: boolean) => {
+    if (authScreen instanceof HTMLElement) {
+      authScreen.hidden = isAuthenticatedView;
     }
+    if (adminDashboard instanceof HTMLElement) {
+      adminDashboard.hidden = !isAuthenticatedView;
+    }
+  };
+
+  const setAdminView = (isUnlocked: boolean) => {
     if (adminPanel instanceof HTMLElement) {
       adminPanel.hidden = !isUnlocked;
     }
   };
 
-  const formatDate = (value) => {
+  const formatDate = (value: number | string | Date) => {
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return '-';
     return date.toLocaleString('ko-KR');
   };
 
-  const escapeHtml = (value) =>
+  const escapeHtml = (value: any) =>
     String(value)
       .replaceAll('&', '&amp;')
       .replaceAll('<', '&lt;')
@@ -126,10 +125,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#39;');
 
-  async function checkAdminAccess(uid) {
+  async function checkAdminAccess(uid: string) {
     const snapshot = await get(ref(database, `admins/${uid}`));
     return snapshot.val() === true;
   }
+
+  const collectDescendantIds = (items: Array<any>, parentId: string) => {
+    const descendants: string[] = [];
+    const queue = [parentId];
+
+    while (queue.length > 0) {
+      const currentId = queue.shift();
+      const children = items.filter((item) => item.parentId === currentId).map((item) => item.commentId);
+      children.forEach((childId) => {
+        descendants.push(childId);
+        queue.push(childId);
+      });
+    }
+
+    return descendants;
+  };
 
   async function loadComments() {
     if (!hasAdminAccess) {
@@ -158,16 +173,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       setSummary(`${items.length} comments loaded`);
 
       if (!commentsRoot) return;
+      commentsRoot.dataset.comments = JSON.stringify(items);
       if (items.length === 0) {
         commentsRoot.innerHTML = '<p class="admin-empty">No comments found.</p>';
         return;
       }
 
       commentsRoot.innerHTML = items.map((item) => `
-        <article class="admin-comment-card" data-comment-id="${escapeHtml(item.commentId)}" data-post-slug="${escapeHtml(item.postSlug)}">
+        <article class="admin-comment-card ${item.parentId ? 'is-reply' : ''}" data-comment-id="${escapeHtml(item.commentId)}" data-post-slug="${escapeHtml(item.postSlug)}">
           <div class="admin-comment-head">
             <div>
               <strong class="admin-comment-author">${escapeHtml(item.author || 'Unknown')}</strong>
+              ${item.parentId ? `<p class="admin-comment-parent">Reply to ${escapeHtml(item.parentId)}</p>` : ''}
               <p class="admin-comment-meta">/${escapeHtml(item.postSlug)} · ${escapeHtml(formatDate(item.createdAt))}</p>
             </div>
             <div class="admin-comment-badges">
@@ -236,7 +253,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       if (!confirmed) return;
 
       try {
-        await remove(ref(database, `comments/${postSlug}/${commentId}`));
+        const items = JSON.parse(commentsRoot?.dataset.comments || '[]');
+        const descendantIds = collectDescendantIds(items, commentId);
+        await Promise.all([
+          remove(ref(database, `comments/${postSlug}/${commentId}`)),
+          ...descendantIds.map((id) => remove(ref(database, `comments/${postSlug}/${id}`))),
+        ]);
         await loadComments();
       } catch (error) {
         console.error('Failed to delete comment.', error);
@@ -259,12 +281,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   });
 
   onAuthStateChanged(auth, async (user) => {
-    currentUser = user;
     hasAdminAccess = false;
 
     if (!user) {
       if (userLabel) userLabel.textContent = 'Signed out';
-      if (logoutButton) logoutButton.hidden = true;
+      loginForm?.reset();
+      setAuthStatus('', 'neutral');
+      setScreenState(false);
       setAdminView(false);
       setAccess('Admin access required');
       setSummary('Not loaded');
@@ -272,31 +295,58 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     if (userLabel) userLabel.textContent = user.email || user.uid;
-    if (logoutButton) logoutButton.hidden = false;
 
     try {
       hasAdminAccess = await checkAdminAccess(user.uid);
       setAccess(hasAdminAccess ? 'Admin access granted' : 'Signed in, but not listed in admins/');
 
       if (hasAdminAccess) {
+        setAuthStatus('', 'neutral');
+        setScreenState(true);
         setAdminView(true);
         await loadComments();
       } else {
+        setScreenState(false);
         setAdminView(false);
+        setAuthStatus('관리자 권한이 없는 계정입니다.', 'error');
       }
     } catch (error) {
       console.error('Failed to check admin access.', error);
+      setScreenState(false);
       setAdminView(false);
       setAccess('Failed to verify admin access');
+      setAuthStatus('관리자 권한 확인에 실패했습니다.', 'error');
     }
   });
 </script>
 
 <style>
+  .admin-auth-shell {
+    min-height: calc(100vh - 140px);
+    display: grid;
+    place-items: center;
+    padding: 96px 1.25rem 48px;
+  }
+
+  .admin-auth-card {
+    width: min(100%, 440px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background: var(--bg-card);
+    padding: 2rem;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+  }
+
   .admin-shell {
     max-width: 1180px;
     margin: 0 auto;
     padding: 120px 1.25rem 80px;
+  }
+
+  .admin-auth-shell[hidden],
+  .admin-shell[hidden],
+  .admin-panel[hidden] {
+    display: none !important;
   }
 
   .admin-header,
@@ -347,12 +397,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     color: var(--ink-3);
   }
 
-  .admin-grid {
-    display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);
-    gap: 1rem;
-  }
-
   .admin-card {
     border: 1px solid var(--border);
     border-radius: 20px;
@@ -362,36 +406,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .admin-card-wide {
     min-height: 520px;
-  }
-
-  .admin-lock {
-    min-height: 420px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem 0.25rem;
-  }
-
-  .admin-lock-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 120px;
-    padding: 0.55rem 0.9rem;
-    border-radius: 999px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .admin-panel[hidden],
-  .admin-lock[hidden] {
-    display: none !important;
   }
 
   .admin-card-title {
@@ -486,12 +500,24 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.03);
   }
 
+  .admin-comment-card.is-reply {
+    margin-left: 2rem;
+    border-left: 4px solid var(--accent);
+  }
+
   .admin-comment-head {
     align-items: start;
   }
 
   .admin-comment-author {
     color: var(--ink);
+  }
+
+  .admin-comment-parent {
+    margin-top: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
   }
 
   .admin-comment-body {
@@ -530,12 +556,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     padding: 2rem 0;
   }
 
-  .admin-status-row-lock {
-    justify-content: flex-start;
-    gap: 1.25rem;
-    padding-top: 0.25rem;
-  }
-
   .admin-comment-actions {
     justify-content: flex-end;
     margin-top: 0.2rem;
@@ -558,10 +578,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   @media (max-width: 960px) {
-    .admin-grid {
-      grid-template-columns: 1fr;
-    }
-
     .admin-header,
     .admin-card-head,
     .admin-actions,
@@ -583,6 +599,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .admin-comment-actions .admin-button {
       width: 100%;
       min-width: 0;
+    }
+
+    .admin-comment-card.is-reply {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .admin-auth-card {
+      padding: 1.5rem;
+    }
+
+    .admin-shell {
+      padding-top: 96px;
     }
   }
 </style>

@@ -69,6 +69,11 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
             </p>
 
             <form class="comment-form" data-comment-form method="post" action="#" novalidate>
+              <div class="comment-reply-target" data-comment-reply-target hidden>
+                <span class="comment-reply-label" data-comment-reply-label></span>
+                <button type="button" class="comment-reply-cancel" data-comment-reply-cancel>Cancel reply</button>
+              </div>
+
               <label class="comment-field">
                 <span>Name</span>
                 <input
@@ -99,6 +104,8 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
                 autocomplete="off"
                 aria-hidden="true"
               />
+
+              <input type="hidden" name="parentId" value="" data-comment-parent-id />
 
               <div class="comment-form-footer">
                 <p class="comment-help">Max 40 chars for name, 500 chars for comment.</p>
@@ -365,12 +372,34 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     const database = getFirebaseDatabase('comments');
     const postSlug = section.getAttribute('data-post-slug') || '';
     const form = section.querySelector('[data-comment-form]');
+    const parentIdInput = section.querySelector('[data-comment-parent-id]');
+    const replyTarget = section.querySelector('[data-comment-reply-target]');
+    const replyLabel = section.querySelector('[data-comment-reply-label]');
+    const replyCancel = section.querySelector('[data-comment-reply-cancel]');
     const list = section.querySelector('[data-comments-list]');
     const count = section.querySelector('[data-comments-count]');
     const status = section.querySelector('[data-comment-status]');
     const commentsRef = ref(database, `comments/${postSlug}`);
     const submitCooldownKey = `comment_submit_${postSlug}`;
     const submitCooldownMs = 60_000;
+
+    const setReplyTarget = (comment) => {
+      if (!(parentIdInput instanceof HTMLInputElement) || !replyTarget || !replyLabel) return;
+      if (!comment) {
+        parentIdInput.value = '';
+        replyTarget.hidden = true;
+        replyLabel.textContent = '';
+        return;
+      }
+
+      parentIdInput.value = comment.id;
+      replyTarget.hidden = false;
+      replyLabel.textContent = `Replying to ${comment.author}`;
+    };
+
+    replyCancel?.addEventListener('click', () => {
+      setReplyTarget(null);
+    });
 
     const formatDate = (value) => {
       const date = new Date(value);
@@ -391,6 +420,33 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     const setCount = (total) => {
       if (!count) return;
       count.textContent = `${total} comment${total === 1 ? '' : 's'}`;
+    };
+
+    const sortByCreatedAt = (left, right) => Number(left.createdAt || 0) - Number(right.createdAt || 0);
+
+    const buildCommentTree = (items) => {
+      const byId = new Map();
+      const roots = [];
+
+      items.forEach((item) => {
+        byId.set(item.id, { ...item, replies: [] });
+      });
+
+      byId.forEach((item) => {
+        if (item.parentId && byId.has(item.parentId)) {
+          byId.get(item.parentId).replies.push(item);
+        } else {
+          roots.push(item);
+        }
+      });
+
+      const sortTree = (nodes) => {
+        nodes.sort(sortByCreatedAt);
+        nodes.forEach((node) => sortTree(node.replies));
+      };
+
+      sortTree(roots);
+      return roots;
     };
 
     const reportComment = async (commentId, reportButton) => {
@@ -439,10 +495,16 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
       list.innerHTML = '';
       setCount(items.length);
+      const tree = buildCommentTree(items);
 
-      items.forEach((item) => {
+      const createCommentCard = (item, depth = 0) => {
         const article = document.createElement('article');
         article.className = 'comment-card';
+        if (depth > 0) {
+          article.classList.add('is-reply');
+        }
+        article.dataset.commentId = item.id;
+        article.dataset.commentDepth = String(depth);
 
         const header = document.createElement('div');
         header.className = 'comment-card-head';
@@ -466,16 +528,55 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
         reportMeta.className = 'comment-report-meta';
         reportMeta.textContent = `Reports ${Number(item.reportCount || 0)}`;
 
+        const actions = document.createElement('div');
+        actions.className = 'comment-card-actions';
+
+        const replyButton = document.createElement('button');
+        replyButton.type = 'button';
+        replyButton.className = 'comment-reply-button';
+        replyButton.textContent = 'Reply';
+        replyButton.addEventListener('click', () => {
+          setReplyTarget(item);
+          if (form instanceof HTMLFormElement) {
+            const authorInput = form.querySelector('input[name="author"]');
+            const contentInput = form.querySelector('textarea[name="content"]');
+            window.scrollTo({
+              top: form.getBoundingClientRect().top + window.scrollY - 110,
+              behavior: 'smooth',
+            });
+            if (authorInput instanceof HTMLElement && !(authorInput instanceof HTMLInputElement && authorInput.value.trim())) {
+              authorInput.focus();
+            } else if (contentInput instanceof HTMLElement) {
+              contentInput.focus();
+            }
+          }
+        });
+
         const reportButton = document.createElement('button');
         reportButton.type = 'button';
         reportButton.className = 'comment-report-button';
         reportButton.textContent = 'Report';
         reportButton.addEventListener('click', () => reportComment(item.id, reportButton));
 
-        footer.append(reportMeta, reportButton);
+        actions.append(replyButton, reportButton);
+        footer.append(reportMeta, actions);
         header.append(author, date);
         article.append(header, body, footer);
-        list.append(article);
+
+        if (item.replies.length > 0) {
+          const replies = document.createElement('div');
+          replies.className = 'comment-replies';
+          item.replies.forEach((reply) => {
+            replies.append(createCommentCard(reply, depth + 1));
+          });
+          article.append(replies);
+        }
+
+        return article;
+      };
+
+      tree.forEach((item) => {
+        list.append(createCommentCard(item, 0));
       });
     };
 
@@ -486,7 +587,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
         const items = Object.entries(raw)
           .map(([id, item]) => ({ id, ...(item || {}) }))
           .filter((item) => item && typeof item === 'object')
-          .sort((left, right) => Number(right.createdAt || 0) - Number(left.createdAt || 0));
+          .sort((left, right) => Number(left.createdAt || 0) - Number(right.createdAt || 0));
 
         renderComments(items);
       } catch (error) {
@@ -514,6 +615,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       const author = String(formData.get('author') || '').trim();
       const content = String(formData.get('content') || '').trim();
       const website = String(formData.get('website') || '').trim();
+      const parentId = String(formData.get('parentId') || '').trim();
 
       if (website) {
         setStatus('Comment rejected.', 'error');
@@ -543,12 +645,14 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
           content,
           createdAt: now,
           postSlug,
+          parentId: parentId || null,
           reportCount: 0,
           lastReportedAt: 0,
         });
 
         localStorage.setItem(submitCooldownKey, String(now));
         form.reset();
+        setReplyTarget(null);
         setStatus('Comment posted.', 'success');
         await loadComments();
       } catch (error) {
@@ -1410,6 +1514,45 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     font-size: 0.9rem;
   }
 
+  .comment-reply-target {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--bg-card);
+  }
+
+  .comment-reply-label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-2);
+  }
+
+  .comment-reply-cancel,
+  .comment-reply-button {
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink-2);
+    padding: 0.45rem 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: border-color var(--transition), color var(--transition), background var(--transition);
+  }
+
+  .comment-reply-cancel:hover,
+  .comment-reply-button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
   .comment-status[data-tone="error"] {
     color: #b42318;
   }
@@ -1429,6 +1572,11 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     border: 1px solid var(--border);
     border-radius: 16px;
     background: var(--bg-card);
+  }
+
+  .comment-card.is-reply {
+    margin-top: 0.9rem;
+    background: color-mix(in srgb, var(--bg-card) 88%, var(--accent-soft) 12%);
   }
 
   .comment-card-head {
@@ -1460,6 +1608,18 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     margin-top: 0.9rem;
     padding-top: 0.85rem;
     border-top: 1px solid var(--border);
+  }
+
+  .comment-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .comment-replies {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
   }
 
   .comment-report-meta {
@@ -1528,6 +1688,23 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
     .article-content-shell {
       padding: 0 1rem 5rem;
+    }
+
+    .comment-reply-target,
+    .comment-card-head,
+    .comment-card-footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .comment-card-actions {
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .comment-replies {
+      padding-left: 0.85rem;
     }
 
     .article-meta-row {
