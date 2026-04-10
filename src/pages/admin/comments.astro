@@ -28,7 +28,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div>
         <p class="admin-kicker">Admin</p>
         <h1 class="admin-title">Comment Dashboard</h1>
-        <p class="admin-subtitle">댓글 신고 현황을 확인하고 삭제 또는 리포트 초기화를 할 수 있습니다.</p>
+        <p class="admin-subtitle">신고 여부와 관계없이 모든 댓글을 확인하고 바로 삭제할 수 있습니다.</p>
       </div>
       <div class="admin-actions">
         <span class="admin-user" data-admin-user>Signed out</span>
@@ -41,9 +41,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <div class="admin-card-head">
           <div>
             <h2 class="admin-card-title">Comments</h2>
-            <p class="admin-card-copy">Reported comments float to the top. Delete removes the comment immediately.</p>
+            <p class="admin-card-copy">All comments are listed here. Reported comments float to the top, but any comment can be deleted immediately.</p>
           </div>
-          <button type="button" class="admin-button admin-button-ghost" data-admin-refresh>Refresh</button>
+          <div class="admin-toolbar">
+            <div class="admin-filters" role="tablist" aria-label="Comment filters">
+              <button type="button" class="admin-filter is-active" data-admin-filter="all" aria-pressed="true">All</button>
+              <button type="button" class="admin-filter" data-admin-filter="reported" aria-pressed="false">Reported</button>
+            </div>
+            <button type="button" class="admin-button admin-button-ghost" data-admin-refresh>Refresh</button>
+          </div>
         </div>
         <div class="admin-status-row">
           <span data-admin-summary>Not loaded</span>
@@ -72,11 +78,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const userLabel = document.querySelector<HTMLElement>('[data-admin-user]');
   const logoutButton = document.querySelector<HTMLElement>('[data-admin-logout]');
   const refreshButton = document.querySelector<HTMLButtonElement>('[data-admin-refresh]');
+  const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-admin-filter]'));
   const commentsRoot = document.querySelector<HTMLElement>('[data-admin-comments]');
   const adminPanel = document.querySelector<HTMLElement>('[data-admin-panel]');
   const summaryLabels = Array.from(document.querySelectorAll<HTMLElement>('[data-admin-summary]'));
   const accessLabels = Array.from(document.querySelectorAll<HTMLElement>('[data-admin-access]'));
   let hasAdminAccess = false;
+  let activeFilter: 'all' | 'reported' = 'all';
 
   const setAuthStatus = (message: string, tone = 'neutral') => {
     if (!authStatus) return;
@@ -93,6 +101,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const setAccess = (message: string) => {
     accessLabels.forEach((node) => {
       node.textContent = message;
+    });
+  };
+
+  const setActiveFilter = (filter: 'all' | 'reported') => {
+    activeFilter = filter;
+    filterButtons.forEach((button) => {
+      const isActive = button.dataset.adminFilter === filter;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
     });
   };
 
@@ -170,16 +187,24 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         return Number(right.createdAt || 0) - Number(left.createdAt || 0);
       });
 
-      setSummary(`${items.length} comments loaded`);
-
       if (!commentsRoot) return;
       commentsRoot.dataset.comments = JSON.stringify(items);
-      if (items.length === 0) {
+      const visibleItems = activeFilter === 'reported'
+        ? items.filter((item) => Number(item.reportCount || 0) > 0)
+        : items;
+
+      if (activeFilter === 'reported') {
+        setSummary(`${visibleItems.length} reported comments loaded`);
+      } else {
+        setSummary(`${items.length} comments loaded`);
+      }
+
+      if (visibleItems.length === 0) {
         commentsRoot.innerHTML = '<p class="admin-empty">No comments found.</p>';
         return;
       }
 
-      commentsRoot.innerHTML = items.map((item) => `
+      commentsRoot.innerHTML = visibleItems.map((item) => `
         <article class="admin-comment-card ${item.parentId ? 'is-reply' : ''}" data-comment-id="${escapeHtml(item.commentId)}" data-post-slug="${escapeHtml(item.postSlug)}">
           <div class="admin-comment-head">
             <div>
@@ -235,6 +260,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   refreshButton?.addEventListener('click', async () => {
     await loadComments();
+  });
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const nextFilter = button.dataset.adminFilter === 'reported' ? 'reported' : 'all';
+      if (nextFilter === activeFilter) return;
+      setActiveFilter(nextFilter);
+      await loadComments();
+    });
   });
 
   commentsRoot?.addEventListener('click', async (event) => {
@@ -351,6 +385,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .admin-header,
   .admin-card-head,
+  .admin-toolbar,
   .admin-actions,
   .admin-status-row,
   .admin-comment-head,
@@ -417,6 +452,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .admin-card-copy {
     color: var(--ink-2);
     margin-top: 0.35rem;
+  }
+
+  .admin-toolbar,
+  .admin-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .admin-filter {
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink-2);
+    padding: 0.55rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .admin-filter.is-active {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--bg);
   }
 
   .admin-form {
@@ -580,6 +640,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   @media (max-width: 960px) {
     .admin-header,
     .admin-card-head,
+    .admin-toolbar,
     .admin-actions,
     .admin-status-row,
     .admin-comment-head,
