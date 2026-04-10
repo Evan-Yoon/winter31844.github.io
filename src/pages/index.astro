@@ -154,7 +154,7 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   </section>
 </BaseLayout>
 
-<script type="module">
+<script>
   import { initializeApp } from 'firebase/app';
   import { getDatabase, get, ref, runTransaction } from 'firebase/database';
 

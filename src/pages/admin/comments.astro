@@ -53,7 +53,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 </BaseLayout>
 
-<script type="module">
+<script>
   import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
   import { get, ref, remove, update } from 'firebase/database';
   import { getFirebaseAuth, getFirebaseDatabase } from '../../lib/firebase/client';

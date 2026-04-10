@@ -238,26 +238,42 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       const selector = '[data-post-views][data-goatcounter-path]';
       const cache = new Map();
 
-      function normalizePath(path) {
-        if (!path) return '/';
-        const trimmed = path.trim();
-        if (!trimmed) return '/';
-        return trimmed.endsWith('/') ? trimmed : `${trimmed}/`;
+      function getPathVariants(path) {
+        const trimmed = (path || '').trim();
+        if (!trimmed || trimmed === '/') return ['/'];
+
+        const normalized = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+        const variants = normalized.endsWith('/')
+          ? [normalized, normalized.slice(0, -1)]
+          : [normalized, `${normalized}/`];
+
+        return [...new Set(variants.filter(Boolean))];
+      }
+
+      async function fetchCountForPath(path) {
+        const response = await fetch(`${site}/counter/${encodeURIComponent(path)}.json`);
+        if (response.status === 404) return null;
+        if (!response.ok) throw new Error(`Failed to load count for ${path}`);
+        const data = await response.json();
+        return Number(data?.count ?? 0);
       }
 
       async function loadCount(path) {
-        const normalized = normalizePath(path);
-        if (cache.has(normalized)) return cache.get(normalized);
+        const cacheKey = (path || '').trim() || '/';
+        if (cache.has(cacheKey)) return cache.get(cacheKey);
 
-        const request = fetch(`${site}/counter/${encodeURIComponent(normalized)}.json`)
-          .then((response) => {
-            if (!response.ok) throw new Error(`Failed to load count for ${normalized}`);
-            return response.json();
-          })
-          .then((data) => Number(data?.count ?? 0))
-          .catch(() => 0);
+        const request = (async () => {
+          const variants = getPathVariants(path);
 
-        cache.set(normalized, request);
+          for (const candidate of variants) {
+            const count = await fetchCountForPath(candidate);
+            if (count != null) return count;
+          }
+
+          return 0;
+        })().catch(() => 0);
+
+        cache.set(cacheKey, request);
         return request;
       }
 
@@ -266,7 +282,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         if (nodes.length === 0) return;
 
         await Promise.all(
-          [...new Set(nodes.map((node) => normalizePath(node.dataset.goatcounterPath || '')))].map((path) =>
+          [...new Set(nodes.map((node) => (node.dataset.goatcounterPath || '').trim() || '/'))].map((path) =>
             loadCount(path),
           ),
         );
