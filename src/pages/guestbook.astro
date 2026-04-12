@@ -1,0 +1,351 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Guestbook | Evan Yoon" description="Leave a message, an inspiration, or just say hello.">
+  <div class="guestbook-container fade-in-up">
+    <header class="guestbook-header">
+      <p class="guestbook-kicker">Community</p>
+      <h1 class="guestbook-title">Guestbook</h1>
+      <p class="guestbook-desc">
+        Feel free to leave a short message or a greeting here. <br>
+        Your digital traces are welcomed.
+      </p>
+    </header>
+
+    <div class="guestbook-layout-inner">
+      <section class="guestbook-form-section">
+        <form class="guestbook-form" id="guestbook-form" novalidate>
+          <div class="form-row">
+            <label class="gb-field">
+              <span class="field-label">Name</span>
+              <input type="text" name="author" maxlength="40" placeholder="Your name" required />
+            </label>
+          </div>
+          <label class="gb-field">
+            <span class="field-label">Message</span>
+            <textarea name="content" rows="4" maxlength="500" placeholder="Write something worth keeping." required></textarea>
+          </label>
+          
+          <input class="gb-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          
+          <div class="form-footer">
+            <p class="form-help">Be kind and professional.</p>
+            <button type="submit" class="gb-submit-btn">Leave a Trace</button>
+          </div>
+          <p id="gb-status" class="gb-status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="guestbook-list-section">
+        <div class="gb-list-header">
+          <span class="gb-count" id="gb-count">0 messages</span>
+        </div>
+        <div class="gb-list" id="gb-list">
+          <p class="gb-loading">Initializing guestbook...</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { get, push, ref, query, orderByKey, limitToLast } from 'firebase/database';
+  import { getFirebaseDatabase } from '../lib/firebase/client';
+
+  const form = document.getElementById('guestbook-form') as HTMLFormElement;
+  const list = document.getElementById('gb-list');
+  const countSpan = document.getElementById('gb-count');
+  const status = document.getElementById('gb-status');
+  
+  if (form && list) {
+    const database = getFirebaseDatabase('comments'); // Using same app name as PostLayout
+    const guestbookRef = ref(database, 'comments/guestbook');
+    const submitCooldownKey = 'gb_submit_last';
+    const cooldownMs = 30_000;
+
+    const setStatus = (msg: string, type = 'neutral') => {
+      if (!status) return;
+      status.textContent = msg;
+      status.className = `gb-status is-${type}`;
+    };
+
+    const formatDate = (val: number) => {
+      return new Date(val).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    };
+
+    async function loadEntries() {
+      try {
+        const gbQuery = query(guestbookRef, orderByKey());
+        const snapshot = await get(gbQuery);
+        const data = snapshot.val() || {};
+        const entries = Object.entries(data)
+          .map(([id, val]: [string, any]) => ({ id, ...val }))
+          .sort((a, b) => b.createdAt - a.createdAt);
+
+        if (countSpan) countSpan.textContent = `${entries.length} message${entries.length === 1 ? '' : 's'}`;
+
+        if (entries.length === 0) {
+          list!.innerHTML = '<p class="gb-empty">The guestbook is currently empty. Be the first to leave a mark.</p>';
+          return;
+        }
+
+        list!.innerHTML = entries.map(entry => `
+          <article class="gb-entry">
+            <div class="gb-entry-head">
+              <strong class="gb-entry-author">${escapeHtml(entry.author)}</strong>
+              <span class="gb-entry-date">${formatDate(entry.createdAt)}</span>
+            </div>
+            <p class="gb-entry-body">${escapeHtml(entry.content)}</p>
+          </article>
+        `).join('');
+      } catch (err) {
+        console.error('Failed to load guestbook', err);
+        list!.innerHTML = '<p class="gb-empty">Connection lost. Please try again later.</p>';
+      }
+    }
+
+    function escapeHtml(text: string) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    loadEntries();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const now = Date.now();
+      const lastSubmit = Number(localStorage.getItem(submitCooldownKey) || 0);
+      if (now - lastSubmit < cooldownMs) {
+        setStatus('Please wait a moment before leaving another message.', 'error');
+        return;
+      }
+
+      const formData = new FormData(form);
+      const author = (formData.get('author') as string).trim();
+      const content = (formData.get('content') as string).trim();
+      const website = formData.get('website');
+
+      if (website) return; // Honeypot
+
+      if (author.length < 2 || author.length > 40) {
+        setStatus('Name should be 2-40 characters.', 'error');
+        return;
+      }
+      if (content.length < 3 || content.length > 500) {
+        setStatus('Message should be 3-500 characters.', 'error');
+        return;
+      }
+
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = true;
+      setStatus('Sending...', 'neutral');
+
+      try {
+        await push(guestbookRef, {
+          author,
+          content,
+          createdAt: now,
+          postSlug: 'guestbook',
+          parentId: null,
+          reportCount: 0,
+          lastReportedAt: 0
+        });
+        
+        localStorage.setItem(submitCooldownKey, String(now));
+        form.reset();
+        setStatus('Successfully left a message.', 'success');
+        await loadEntries();
+      } catch (err) {
+        console.error(err);
+        setStatus('Failed to send message.', 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+</script>
+
+<style>
+  .guestbook-container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 100px 2rem;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    min-height: 80vh;
+  }
+
+  .guestbook-header {
+    max-width: var(--col);
+    margin: 0 auto 5rem;
+    text-align: center;
+  }
+
+  .guestbook-kicker {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .guestbook-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .guestbook-desc {
+    font-size: 1.1rem;
+    color: var(--ink-2);
+    font-weight: 300;
+  }
+
+  .guestbook-layout-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  /* FORM */
+  .guestbook-form-section {
+    position: sticky;
+    top: 120px;
+  }
+
+  .guestbook-form {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+  }
+
+  .field-label {
+    display: block;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--ink-3);
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .gb-field input, .gb-field textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    padding: 0.85rem;
+    border-radius: var(--radius);
+    transition: all var(--transition);
+  }
+
+  .gb-field input:focus, .gb-field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--bg-hover);
+  }
+
+  .form-row { margin-bottom: 1.5rem; }
+  .gb-field { display: block; margin-bottom: 1.5rem; }
+
+  .gb-honeypot { display: none; }
+
+  .form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .form-help { font-size: 0.75rem; color: var(--ink-3); font-style: italic; }
+
+  .gb-submit-btn {
+    padding: 12px 24px;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all var(--transition);
+  }
+
+  .gb-submit-btn:hover:not(:disabled) {
+    background: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .gb-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .gb-status { font-size: 0.8rem; margin-top: 1rem; text-align: right; }
+  .gb-status.is-success { color: #2e7d32; }
+  .gb-status.is-error { color: #c62828; }
+
+  /* LIST */
+  .gb-list-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .gb-count { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-3); }
+
+  .gb-entry {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius);
+    transition: all var(--transition);
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  .gb-entry:hover { border-color: var(--accent); transform: translateX(4px); }
+
+  .gb-entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+  }
+
+  .gb-entry-author { font-size: 1rem; color: var(--ink); font-weight: 500; }
+  .gb-entry-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-3); }
+  .gb-entry-body { font-size: 1.05rem; color: var(--ink-2); line-height: 1.7; font-weight: 300; white-space: pre-wrap; }
+
+  .gb-loading, .gb-empty { text-align: center; padding: 4rem 1rem; color: var(--ink-3); font-family: var(--font-mono); font-size: 0.9rem; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .guestbook-container { padding: 60px 1rem; border: none; }
+    .guestbook-layout-inner { grid-template-columns: 1fr; gap: 4rem; }
+    .guestbook-form-section { position: static; }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.4s ease-out forwards;
+  }
+</style>

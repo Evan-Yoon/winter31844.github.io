@@ -5,7 +5,17 @@ import { getCollection } from 'astro:content';
 
 // 마크다운 글 데이터를 불러와서 최신순으로 정렬하고 3개만 자릅니다.
 const allPosts = await getCollection('posts');
-const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()).slice(0, 3);
+
+// Filter recent posts (excluding ai-news) for the home page list
+const recentPosts = allPosts
+  .filter(post => post.data.category !== 'ai-news')
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
+  .slice(0, 3);
+
+// Get latest AI News
+const latestNews = allPosts
+  .filter(post => post.data.category === 'ai-news')
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())[0];
 ---
 
 <BaseLayout>
@@ -120,11 +130,38 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
       </div>
     </div>
   </section>
+  
+  <section class="activity-section">
+    <div class="section-header">
+      <div>
+        <div class="section-num">03 / ACTIVITY</div>
+        <h2 class="section-title">Build History</h2>
+      </div>
+    </div>
+    
+    <div class="activity-container">
+      <div class="github-graph-wrap">
+        <div id="github-calendar">
+          <p class="activity-loading">활동 내역을 불러오고 있습니다..</p>
+        </div>
+      </div>
+      
+      <div class="recent-commits-wrap">
+        <h3 class="commits-title">Recent Work</h3>
+        <div id="recent-commits-list">
+          <p class="activity-loading">커밋 내역을 불러오는 중..</p>
+        </div>
+        <a href="https://github.com/Evan-Yoon" target="_blank" class="github-link-button">
+          Full GitHub Profile →
+        </a>
+      </div>
+    </div>
+  </section>
 
   <section class="timeline-section">
     <div class="section-header">
       <div>
-        <div class="section-num">03 / JOURNEY</div>
+        <div class="section-num">04 / JOURNEY</div>
         <h2 class="section-title">The Blueprint</h2>
       </div>
     </div>
@@ -152,6 +189,34 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
       </div>
     </div>
   </section>
+
+  {latestNews && (
+    <section class="ai-news-section">
+      <div class="section-header">
+        <div>
+          <div class="section-num">05 / AI NEWS</div>
+          <h2 class="section-title">Weekly AI Summary</h2>
+        </div>
+        <a href="/ai-news" class="view-all">All News Archive →</a>
+      </div>
+      
+      <div class="news-preview-card">
+        <div class="news-preview-meta">
+          <span class="news-preview-date">{latestNews.data.date.toLocaleDateString('ko-KR')}</span>
+          <span class="news-preview-kicker">Latest Update</span>
+        </div>
+        <h3 class="news-preview-title">
+          <a href={`/ai-news/${latestNews.data.slug || latestNews.id}`}>{latestNews.data.title}</a>
+        </h3>
+        <p class="news-preview-desc">{latestNews.data.description}</p>
+        <div class="news-preview-footer">
+          <a href={`/ai-news/${latestNews.data.slug || latestNews.id}`} class="news-preview-link">
+            Read Full Summary <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>
 
 <script>
@@ -215,6 +280,84 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
       }
     } catch (error) {
       console.error('Failed to load daily visits from Firebase.', error);
+    }
+  })();
+
+  // ── GitHub Activity Implementation ──
+  (async () => {
+    // 1. GitHub Calendar
+    try {
+      const script = document.createElement('script');
+      script.src = "https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js";
+      script.onload = () => {
+        // @ts-ignore
+        GitHubCalendar("#github-calendar", "Evan-Yoon", { 
+          responsive: true, 
+          tooltips: true, 
+          summary_text: " ",
+          global_stats: false 
+        }).then(() => {
+          // Additional cleanup for elements that might be hard to reach with CSS
+          const calendar = document.querySelector('#github-calendar');
+          if (calendar) {
+            const toHide = calendar.querySelectorAll('.year-tabs, .contrib-footer, h2, .sr-only, .float-left.text-gray');
+            toHide.forEach(el => (el as HTMLElement).style.display = 'none');
+          }
+        });
+      };
+      document.head.appendChild(script);
+      
+      const link = document.createElement('link');
+      link.rel = "stylesheet";
+      link.href = "https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css";
+      document.head.appendChild(link);
+    } catch (e) {
+      console.error("Failed to load GitHub Calendar", e);
+    }
+
+    // 2. Recent Commits
+    const commitsList = document.getElementById('recent-commits-list');
+    if (!commitsList) return;
+
+    try {
+      const res = await fetch('https://api.github.com/users/Evan-Yoon/events/public');
+      const events = await res.json();
+      
+      if (!Array.isArray(events)) throw new Error("Invalid response");
+
+      const pushes = events
+        .filter(e => e.type === 'PushEvent' || e.type === 'CreateEvent')
+        .slice(0, 3);
+
+      if (pushes.length === 0) {
+        commitsList.innerHTML = '<p class="no-activity">최근 작업 내역이 없습니다.</p>';
+        return;
+      }
+
+      commitsList.innerHTML = pushes.map(event => {
+        const repo = event.repo.name.replace('Evan-Yoon/', '');
+        const date = new Date(event.created_at).toLocaleDateString('ko-KR');
+        let msg = '';
+        
+        if (event.type === 'PushEvent' && event.payload.commits?.length > 0) {
+          msg = event.payload.commits[0].message;
+        } else if (event.type === 'CreateEvent') {
+          msg = `New Project: ${repo}`;
+        } else {
+          msg = 'Code Contribution';
+        }
+
+        return `
+          <div class="commit-item">
+            <span class="commit-repo">${repo}</span>
+            <p class="commit-msg">${msg}</p>
+            <span class="commit-date">${date}</span>
+          </div>
+        `;
+      }).join('');
+    } catch (e) {
+      console.error("Failed to fetch Github events", e);
+      commitsList.innerHTML = '<p class="no-activity">활동 내역을 불러올 수 없습니다.</p>';
     }
   })();
 </script>
@@ -365,4 +508,78 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
     .tl-item { grid-template-columns: 1fr; gap: 0.5rem; border: none; border-left: 1px solid var(--border); padding: 1rem 0 1.5rem 1rem; margin-left: 1rem; }
     .tl-date { text-align: left; margin-bottom: 0; }
   }
+
+  /* AI NEWS SECTION */
+  .ai-news-section { border-top: 1px solid var(--border); }
+  .news-preview-card {
+    background: var(--bg-card);
+    padding: 3rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    max-width: var(--col);
+    margin: 0 auto;
+    transition: all var(--transition);
+  }
+  .news-preview-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+  
+  .news-preview-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .news-preview-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-3); }
+  .news-preview-kicker { font-size: 0.65rem; font-family: var(--font-mono); color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; background: var(--accent-soft); padding: 2px 8px; border-radius: 2px; }
+  
+  .news-preview-title { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; line-height: 1.3; margin-bottom: 1rem; color: var(--ink); }
+  .news-preview-title a:hover { color: var(--accent); }
+  
+  .news-preview-desc { font-size: 1.05rem; color: var(--ink-2); line-height: 1.7; font-weight: 300; margin-bottom: 2rem; }
+  
+  .news-preview-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; font-family: var(--font-mono); color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.05em; transition: all var(--transition); }
+  .news-preview-link:hover { color: var(--accent); }
+  .news-preview-link .arrow { transition: transform var(--transition); }
+  .news-preview-link:hover .arrow { transform: translateX(4px); }
+
+  @media (max-width: 800px) {
+    .news-preview-card { padding: 2rem; }
+    .news-preview-title { font-size: 1.5rem; }
+  }
+
+  /* ACTIVITY SECTION */
+  .activity-container { display: grid; gap: 4rem; grid-template-columns: 1fr; }
+  .github-graph-wrap { background: var(--bg-card); padding: 2rem; border: 1px solid var(--border-strong); border-radius: var(--radius); overflow-x: auto; }
+  .recent-commits-wrap { max-width: 800px; padding-left: 0.5rem; }
+  .commits-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 2rem; font-family: var(--font-mono); font-weight: 500; }
+  
+  .activity-loading, .no-activity { font-size: 0.85rem; color: var(--ink-3); font-family: var(--font-mono); }
+  
+  .commit-item { display: flex; flex-direction: column; gap: 0.35rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+  .commit-item:last-child { border-bottom: none; }
+  .commit-repo { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-2); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .commit-msg { font-size: 1rem; color: var(--ink); line-height: 1.5; font-weight: 300; }
+  .commit-date { font-size: 0.7rem; color: var(--ink-3); font-family: var(--font-mono); }
+  
+  .github-link-button { display: inline-block; margin-top: 2rem; font-size: 0.75rem; color: var(--ink-2); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-mono); border-bottom: 1px solid var(--border); transition: all var(--transition); }
+  .github-link-button:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* GitHub Calendar Custom Theme (Deep Overrides) */
+  :global(#github-calendar) { min-height: 180px; position: relative; }
+  :global(.calendar) { font-family: var(--font-mono) !important; font-size: 11px !important; border: none !important; color: var(--ink-3) !important; background: transparent !important; }
+  
+  /* Aggressive Hiding of GitHub UI */
+  :global(.calendar h2), :global(.calendar .sr-only), :global(.calendar .year-tabs), :global(.calendar .contrib-footer), :global(.calendar .contrib-column) { display: none !important; }
+  :global(.calendar .width-full) { border: none !important; padding: 0 !important; margin: 0 !important; }
+  :global(.calendar .graph-before-tabs) { border: none !important; margin: 0 !important; }
+  
+  /* Coloring - Important: Select both rect and rect with classes */
+  :global(#github-calendar .ContributionCalendar-day[data-level="0"]),
+  :global(#github-calendar .ContributionCalendar-day:not([data-level])) { fill: var(--bg-hover) !important; }
+  :global(#github-calendar .ContributionCalendar-day[data-level="1"]) { fill: rgba(74, 103, 133, 0.2) !important; }
+  :global(#github-calendar .ContributionCalendar-day[data-level="2"]) { fill: rgba(74, 103, 133, 0.4) !important; }
+  :global(#github-calendar .ContributionCalendar-day[data-level="3"]) { fill: rgba(74, 103, 133, 0.7) !important; }
+  :global(#github-calendar .ContributionCalendar-day[data-level="4"]) { fill: var(--accent) !important; }
+  
+  /* Label Styling */
+  :global(.calendar .ContributionCalendar-label) { fill: var(--ink-3) !important; font-family: var(--font-mono) !important; font-size: 10px !important; }
+  :global(.calendar-graph) { height: auto !important; padding: 0 !important; display: flex !important; justify-content: center !important; }
+  :global(.calendar .text-gray) { color: var(--ink-3) !important; font-family: var(--font-mono) !important; }
+  
+  /* Tooltip styling if needed */
+  :global(.js-calendar-graph-svg) { margin: 0 auto; }
 </style>

@@ -1,0 +1,180 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allPosts = await getCollection('posts');
+const sortedNews = allPosts
+  .filter(post => post.data.category === 'ai-news')
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+---
+
+<BaseLayout title="AI Weekly News Archive | Evan Yoon" description="Explore the history of weekly AI breakthroughs and insights.">
+  <div class="news-archive-container fade-in-up">
+    <header class="archive-header">
+      <p class="archive-kicker">Archive</p>
+      <h1 class="archive-title">Weekly AI News</h1>
+      <p class="archive-desc">
+        A curated history of AI developments, reasoning models, <br>
+        and practical insights for the future of tech.
+      </p>
+    </header>
+
+    <div class="archive-grid">
+      {sortedNews.map((news) => (
+        <article class="news-list-card">
+          <div class="news-card-meta">
+            <span class="news-card-date">{news.data.date.toLocaleDateString('ko-KR')}</span>
+            {news.data.tags && (
+              <div class="news-card-tags">
+                {news.data.tags.map(tag => <span class="news-tag">#{tag}</span>)}
+              </div>
+            )}
+          </div>
+          <h2 class="news-card-title">
+            <a href={`/ai-news/${news.slug}`}>{news.data.title}</a>
+          </h2>
+          <p class="news-card-desc">{news.data.description}</p>
+          <a href={`/ai-news/${news.slug}`} class="news-read-more">
+            Read Full Summary <span class="arrow">→</span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {sortedNews.length === 0 && (
+      <div class="archive-empty">
+        <p>No AI news updates found yet. Check back soon.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .news-archive-container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 100px 2rem;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    min-height: 80vh;
+  }
+
+  .archive-header {
+    max-width: var(--col);
+    margin: 0 auto 5rem;
+    text-align: center;
+  }
+
+  .archive-kicker {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .archive-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .archive-desc {
+    font-size: 1.1rem;
+    color: var(--ink-2);
+    font-weight: 300;
+  }
+
+  .archive-grid {
+    max-width: var(--col);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .news-list-card {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    transition: all var(--transition);
+  }
+
+  .news-list-card:last-child { border-bottom: none; }
+
+  .news-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .news-card-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-3);
+  }
+
+  .news-card-tags {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .news-tag {
+    font-size: 0.7rem;
+    color: var(--accent-2);
+    font-family: var(--font-mono);
+  }
+
+  .news-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+
+  .news-card-title a:hover { color: var(--accent); }
+
+  .news-card-desc {
+    font-size: 1.05rem;
+    color: var(--ink-2);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .news-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(-- ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all var(--transition);
+  }
+
+  .news-read-more:hover { color: var(--accent); }
+  .news-read-more .arrow { transition: transform var(--transition); }
+  .news-read-more:hover .arrow { transform: translateX(4px); }
+
+  .archive-empty { text-align: center; padding: 5rem 0; color: var(--ink-3); font-family: var(--font-mono); }
+
+  .fade-in-up {
+    animation: fadeInUp 0.4s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 800px) {
+    .news-archive-container { padding: 60px 1rem; border: none; }
+  }
+</style>
