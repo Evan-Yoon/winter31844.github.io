@@ -4,7 +4,7 @@ slug: python-fundamentals-day3-conditions-and-comparisons
 date: 2025-12-03
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 기초 3일차 기록. 비교 연산자와 if 문을 통해 코드가 상황에 따라 다르게 움직이는 기본 구조를 정리했다."
 tags:
   - python

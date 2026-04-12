@@ -4,7 +4,7 @@ slug: java-study-day10-javafx-addressbook-and-memo-app
 date: 2026-01-20
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 20일 Java 학습 기록. JavaFX로 이미지 리소스 전환, 파일 기반 메모장, 다중 창 주소록 CRUD를 구현하며 콘솔 프로그램을 실제 GUI 앱 구조로 확장한 과정을 자세히 정리했다."
 tags:
   - java

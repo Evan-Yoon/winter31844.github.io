@@ -4,7 +4,7 @@ slug: intel-mlops-cloud-ai-serving-special-lecture
 date: 2026-03-13
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: lecture
 description: |
   3월 13일 인텔 과정에서 들은 MLOps 및 클라우드 기반 AI 서비스 운영 특강 내용을 정리했다.
   모델을 만드는 것과 서비스를 운영하는 것의 차이, FastAPI 기반 서빙, Docker 컨테이너화,

@@ -4,7 +4,7 @@ slug: midas-groups-hr-chatgpt-mollm
 date: 2025-11-28
 author: Evan Yoon
 category: explore
-subcategory: new-tech
+subcategory: essay
 thumbnail: /images/posts/midas-groups-hr-chatgpt-mollm/cover.jpg
 tags:
   - ai

@@ -4,7 +4,7 @@ slug: intel-uiux-special-lecture-day2
 date: 2026-03-04
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: lecture
 description: |
   인텔 과정에서 들은 3월 4일 UI/UX 디자인 특강 내용을 정리했다.
   더블 다이아몬드 프로세스, 사용자 리서치, 인사이트 정리, 페르소나와 여정지도,

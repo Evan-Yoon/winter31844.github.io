@@ -4,7 +4,7 @@ slug: intel-ingongjineung-injaegyoyug-with-gonuai-intel-ai-for-future-workforce-
 date: 2025-12-05
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: field-visit
 thumbnail: /images/posts/intel-ingongjineung-injaegyoyug-with-gonuai-intel-ai-for-future-workforce-program/cover.jpg
 tags:
   - intel-ai

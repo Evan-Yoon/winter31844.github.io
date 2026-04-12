@@ -4,7 +4,7 @@ slug: python-fundamentals-day4-loops-and-collections
 date: 2025-12-04
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 기초 4일차 기록. for 문과 while 문, 리스트와 인덱싱을 다시 보며 같은 작업을 여러 번 처리하는 기본기를 다졌다."
 tags:
   - python

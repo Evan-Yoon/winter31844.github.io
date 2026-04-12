@@ -4,7 +4,7 @@ slug: intel-career-special-lecture-nonmajors
 date: 2026-01-28
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: lecture
 description: |
   1월 28일 인텔 특강에서 들은 비전공자 진로 탐색 강의 내용을 정리했다.
   AI/ML 직무를 바라보는 방식, 도메인 이해의 중요성, 글로벌 테크 한국 지사의 구조,

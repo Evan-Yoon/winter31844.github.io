@@ -4,7 +4,7 @@ slug: java-study-day1-basics-and-types
 date: 2026-01-05
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 5일 Java 첫 학습 기록. Hello World부터 변수 선언, 진법, 기본 자료형, 형변환과 문자열-숫자 변환까지 실습한 내용을 자세히 정리했다."
 tags:
   - java

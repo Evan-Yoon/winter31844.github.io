@@ -4,7 +4,7 @@ slug: intel-special-lecture-ai-engineer-data-analyst-pm
 date: 2026-02-23
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: lecture
 description: |
   2월 23일 인텔 과정에서 들은 직무 비교 특강 내용을 정리했다.
   AI Engineer, Data Analyst, PM이 각각 어떤 관점으로 일하는지,

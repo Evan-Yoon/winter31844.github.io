@@ -12,7 +12,9 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:api.github.com)",
       "Bash(python3)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(sed -i 's/^category: project$/category: explore/' /c/dev/project/winter31844.github.io/src/content/posts/2025-12-01-autohotkey-attendance-reminder-and-vscode-hotkeys.md)",
+      "Bash(sed -i 's/^subcategory: personal-project$/subcategory: new-tech/' /c/dev/project/winter31844.github.io/src/content/posts/2025-12-01-autohotkey-attendance-reminder-and-vscode-hotkeys.md)"
     ],
     "additionalDirectories": [
       "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories",

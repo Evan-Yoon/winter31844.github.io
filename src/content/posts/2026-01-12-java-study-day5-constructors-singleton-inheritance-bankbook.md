@@ -4,7 +4,7 @@ slug: java-study-day5-constructors-singleton-inheritance-bankbook
 date: 2026-01-12
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 12일 Java 학습 기록. final 필드와 상수, getter/setter와 캡슐화, 싱글턴 패턴, 상속과 오버라이딩, 자동 타입 변환과 강제 캐스팅, 은행장부 콘솔 프로그램까지 실습 내용을 자세히 정리했다."
 tags:
   - java

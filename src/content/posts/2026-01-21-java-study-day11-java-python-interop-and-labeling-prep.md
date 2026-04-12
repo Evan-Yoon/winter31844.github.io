@@ -4,7 +4,7 @@ slug: java-study-day11-java-python-interop-and-labeling-prep
 date: 2026-01-21
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 21일 Java 학습 기록. ProcessBuilder로 Java에서 Python 스크립트를 실행하고, 문장 데이터 전처리와 JavaFX 라벨링 도구 초안, 감정 분석 모델 연동 준비까지 이어진 과정을 자세히 정리했다."
 tags:
   - java

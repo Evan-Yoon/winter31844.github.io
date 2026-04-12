@@ -40,9 +40,12 @@ const subcatMeta: Record<string, { label: string; description: string }> = {
   'team-project': { label: 'Team Project', description: '팀으로 함께 기획하고 개발한 프로젝트 기록' },
   'personal-project': { label: 'Personal Project', description: '혼자 기획하고 처음부터 끝까지 만든 프로젝트 기록' },
   certification: { label: 'Certification', description: '자격증 취득 과정과 시험 후기를 모아둔 기록' },
-  'self-study': { label: 'Self Study', description: '개인 공부와 학습 로드맵 기록' },
-  visit: { label: 'Visit', description: '기업 방문, 행사, 프로그램 참가 기록' },
+  bootcamp: { label: 'Bootcamp', description: 'Intel AI 과정에서 진행한 수업 기록' },
+  'self-study': { label: 'Self Study', description: '팀 스터디 및 개인 자습 기록' },
+  'field-visit': { label: 'Field Visit', description: '직접 현장을 찾아간 방문 기록' },
+  lecture: { label: 'Lecture', description: '외부 강사 특강 및 강의 기록' },
   'new-tech': { label: 'New Tech', description: '새 기술, 툴, 모델, 서비스 탐구 기록' },
+  essay: { label: 'Essay', description: '개인 이야기, 경험담, 생각 정리' },
 };
 
 const catDisplay = catLabels[category] || category;

@@ -4,7 +4,7 @@ slug: intel-ingongjineung-injaegyoyug-with-gonuai-4ju-hagseub-rodeumaeb
 date: 2025-12-05
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 thumbnail: /images/posts/intel-ingongjineung-injaegyoyug-with-gonuai-4ju-hagseub-rodeumaeb/cover.jpg
 tags:
   - ai

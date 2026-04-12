@@ -4,7 +4,7 @@ slug: python-intermediate-day2-init-and-method-design
 date: 2025-12-11
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 중급 2일차 기록. __init__ 생성자의 역할, 객체가 만들어질 때 초기값을 정하는 방법, 메서드 설계의 기본 감각을 자동차와 책 예제로 자세히 정리했다."
 tags:
   - python

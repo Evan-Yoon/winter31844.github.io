@@ -4,7 +4,7 @@ slug: java-study-day12-data-labeling-ui-and-sentiment-analysis
 date: 2026-01-22
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 22일 Java 학습 기록. JavaFX 라벨링 도구를 다듬고 중립 라벨과 CSS를 보강한 뒤, Python 데이터 증강과 모델 재학습, JavaFX 감정 분석기 연동까지 하나의 흐름으로 완성한 과정을 자세히 정리했다."
 tags:
   - java

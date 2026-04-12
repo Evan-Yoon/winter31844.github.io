@@ -4,7 +4,7 @@ slug: a-visit-to-intel-korea-meeting-the-experts
 date: 2025-11-30
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: field-visit
 thumbnail: /images/posts/a-visit-to-intel-korea-meeting-the-experts/cover.jpg
 tags:
   - intel-ai

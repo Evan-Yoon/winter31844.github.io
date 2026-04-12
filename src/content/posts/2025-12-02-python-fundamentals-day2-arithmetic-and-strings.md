@@ -4,7 +4,7 @@ slug: python-fundamentals-day2-arithmetic-and-strings
 date: 2025-12-02
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 기초 2일차 기록. 사칙연산, 몫과 나머지, 거듭제곱, 문자열 연결과 반복을 직접 실습하며 계산 감각을 다졌다."
 tags:
   - python

@@ -4,7 +4,7 @@ slug: java-study-day4-classes-methods-and-console-projects
 date: 2026-01-08
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 8일 Java 학습 기록. 클래스와 객체, 생성자, 메서드, 오버로딩, static과 정적 초기화 블록, 주소록과 가계부 콘솔 프로젝트까지 실습 내용을 자세히 정리했다."
 tags:
   - java

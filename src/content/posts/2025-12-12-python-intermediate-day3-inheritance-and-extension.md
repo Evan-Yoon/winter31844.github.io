@@ -4,7 +4,7 @@ slug: python-intermediate-day3-inheritance-and-extension
 date: 2025-12-12
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 중급 3일차 기록. FourCal 예제를 통해 상속이 왜 필요한지, 부모 클래스 기능을 재사용하면서 자식 클래스에서 기능을 확장하는 흐름을 자세히 정리했다."
 tags:
   - python

@@ -4,7 +4,7 @@ slug: java-study-day2-operators-conditions-loops
 date: 2026-01-06
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 6일 Java 학습 기록. Scanner 입력부터 산술/비교/논리 연산자, if와 switch, for문과 패턴 출력까지 실제 실습 파일 기준으로 자세히 정리했다."
 tags:
   - java

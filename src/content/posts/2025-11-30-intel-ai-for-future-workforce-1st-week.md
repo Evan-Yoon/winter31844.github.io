@@ -4,7 +4,7 @@ slug: intel-ai-for-future-workforce-1st-week
 date: 2025-11-30
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: field-visit
 thumbnail: /images/posts/intel-ai-for-future-workforce-1st-week/cover.jpg
 tags:
   - intel-ai

@@ -4,7 +4,7 @@ slug: intel-uiux-special-lecture-day1
 date: 2026-03-03
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: lecture
 description: |
   인텔 과정에서 들은 3월 3일 UI/UX 디자인 특강 내용을 정리했다.
   UI와 UX의 차이, 좋은 UX 원칙, 다크 UX, AI 시대의 인터페이스 변화,

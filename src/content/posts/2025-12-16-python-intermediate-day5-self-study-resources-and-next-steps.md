@@ -4,7 +4,7 @@ slug: python-intermediate-day5-self-study-resources-and-next-steps
 date: 2025-12-16
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 중급 5일차 기록. 수업에서 배운 클래스, 상속, 예외처리 이후 혼자 더 공부하기 위해 참고할 GitHub 자료, 점프 투 파이썬, 프로그래머스를 정리했다."
 tags:
   - python

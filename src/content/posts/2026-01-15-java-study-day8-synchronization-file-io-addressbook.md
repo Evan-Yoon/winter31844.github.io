@@ -4,7 +4,7 @@ slug: java-study-day8-synchronization-file-io-addressbook
 date: 2026-01-15
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 15일 Java 학습 기록. synchronized 메서드와 동기화 블록, wait/notify, 스레드 종료와 interrupt, 데몬 스레드, ExecutorService, 바이트 스트림과 문자 스트림까지 실습 내용을 자세히 정리했다."
 tags:
   - java

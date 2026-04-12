@@ -4,7 +4,7 @@ slug: python-intermediate-day1-class-and-object-basics
 date: 2025-12-10
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 중급 1일차 기록. 클래스와 객체의 차이, 속성과 메서드, self의 의미를 자동차 예제를 중심으로 자세히 정리했다."
 tags:
   - python

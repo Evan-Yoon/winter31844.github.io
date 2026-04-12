@@ -4,7 +4,7 @@ slug: python-intermediate-day4-exception-handling-and-modules
 date: 2025-12-15
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 중급 4일차 기록. try-except로 프로그램 오류를 다루는 방법과 calc.py 같은 모듈 분리를 통해 코드를 역할별로 나누는 흐름을 자세히 정리했다."
 tags:
   - python

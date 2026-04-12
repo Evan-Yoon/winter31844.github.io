@@ -4,7 +4,7 @@ slug: intel-uiux-special-lecture-day3
 date: 2026-03-05
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: lecture
 description: |
   인텔 과정 중 3월 5일에 들은 UI/UX 디자인 특강 내용을 정리했다.
   이번 특강에서는 기능 중심 사고와 사용자 중심 사고의 차이, 디자인 씽킹 프로세스,

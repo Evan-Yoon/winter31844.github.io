@@ -4,7 +4,7 @@ slug: java-study-day3-strings-and-arrays
 date: 2026-01-07
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 7일 Java 학습 기록. 문자열 비교와 메서드, 배열 선언과 순회, 2차원 배열, 배열 복사와 문자열 분해까지 실습 내용을 자세히 정리했다."
 tags:
   - java

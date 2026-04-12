@@ -4,7 +4,7 @@ slug: python-fundamentals-day1-variables-types-and-output
 date: 2025-12-01
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "12월 첫 평일에 정리한 Python 기초 1일차 기록. 변수, 자료형, type(), print()를 다시 익히며 가장 기초적인 문법 감각을 다졌다."
 tags:
   - python

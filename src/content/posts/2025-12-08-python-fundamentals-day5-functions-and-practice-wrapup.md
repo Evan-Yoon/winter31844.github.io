@@ -4,7 +4,7 @@ slug: python-fundamentals-day5-functions-and-practice-wrapup
 date: 2025-12-08
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "Python 기초 5일차 기록. 함수의 필요성을 이해하고, 1주차에 배운 변수, 연산, 조건, 반복을 하나로 묶어 정리했다."
 tags:
   - python

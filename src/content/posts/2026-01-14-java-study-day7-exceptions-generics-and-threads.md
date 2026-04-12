@@ -4,7 +4,7 @@ slug: java-study-day7-exceptions-generics-and-threads
 date: 2026-01-14
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 14일 Java 학습 기록. try-catch-finally, 예외 떠넘기기와 사용자 정의 예외, 일반 API와 래퍼 클래스, 제네릭 클래스/메서드, 제한된 타입 매개변수와 와일드카드까지 실습 내용을 자세히 정리했다."
 tags:
   - java

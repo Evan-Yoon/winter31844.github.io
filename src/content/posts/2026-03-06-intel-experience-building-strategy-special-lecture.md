@@ -4,7 +4,7 @@ slug: intel-experience-building-strategy-special-lecture
 date: 2026-03-06
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: lecture
 description: |
   3월 6일 인텔 과정에서 들은 경험 만들기 전략 특강 내용을 정리했다.
   인턴 없이도 실무형 경험을 쌓는 방법, 캐글과 토이 프로젝트를 포트폴리오로 바꾸는 방식,

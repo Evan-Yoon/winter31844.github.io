@@ -4,7 +4,7 @@ slug: java-study-day9-javafx-basics-and-calculator-ui
 date: 2026-01-19
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 19일 Java 학습 기록. JavaFX 애플리케이션 생명주기, 코드 기반 UI와 FXML, fx:id와 @FXML 주입, 컨트롤러 이벤트 처리, exp4j를 이용한 계산기 UI 구현까지 실습 내용을 자세히 정리했다."
 tags:
   - java

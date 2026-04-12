@@ -4,7 +4,7 @@ slug: intel-startup-pm-project-management-ai-special-lecture
 date: 2026-03-27
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: lecture
 description: |
   3월 27일 인텔 과정에서 들은 스타트업 PM 특강 내용을 정리했다.
   PM과 PO의 차이, 실제 프로젝트 관리 흐름, 스타트업에서 PM이 맡는 역할,

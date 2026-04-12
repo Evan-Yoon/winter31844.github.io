@@ -4,7 +4,7 @@ slug: my-real-life-isekai-why-i-quit-my-hr-career-to-become-a-developer
 date: 2025-11-28
 author: Evan Yoon
 category: explore
-subcategory: new-tech
+subcategory: essay
 thumbnail: /images/posts/my-real-life-isekai-why-i-quit-my-hr-career-to-become-a-developer/cover.jpg
 tags:
   - ai

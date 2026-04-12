@@ -4,7 +4,7 @@ slug: java-study-day6-polymorphism-and-interfaces
 date: 2026-01-13
 author: Evan Yoon
 category: study
-subcategory: self-study
+subcategory: bootcamp
 description: "1월 13일 Java 학습 기록. 추상 클래스와 추상 메서드, 다형성 복습, instanceof 패턴 매칭, 인터페이스 구현과 다중 구현, default 메서드와 static 메서드, 인터페이스 상속까지 실습 내용을 자세히 정리했다."
 tags:
   - java
