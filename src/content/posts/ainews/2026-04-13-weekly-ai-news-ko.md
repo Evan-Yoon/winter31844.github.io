@@ -4,7 +4,7 @@ slug: "2026-04-13-weekly-ai-news-ko"
 date: "2026-04-13"
 author: "Evan Yoon"
 category: "ai-news"
-description: "4월 둘째 주 핵심 AI 이슈를 4개 매체에서 3개씩 골라 카드로 정리했다."
+description: "4월 둘째 주 핵심 AI 이슈를 12장의 카드로 정리했다."
 thumbnail: "/images/ai-news/2026-04-13-weekly-overview.svg"
 tags: ["주간-ai-뉴스", "ai-브리핑", "카드뉴스", "기술트렌드"]
 draft: false
