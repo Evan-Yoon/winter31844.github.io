@@ -1,5 +1,5 @@
 ---
-title: "인텔 특강 Day 1: UI/UX 디자인 특강 정리"
+title: "인텔 특강: UI/UX 디자인 특강 정리"
 slug: intel-uiux-special-lecture-day1
 date: 2026-03-03
 author: Evan Yoon

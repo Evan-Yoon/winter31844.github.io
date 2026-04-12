@@ -1,5 +1,5 @@
 ---
-title: "인텔 특강 Day 2: UI/UX 디자인 프로세스와 방법"
+title: "인텔 특강: UI/UX 디자인 프로세스와 방법"
 slug: intel-uiux-special-lecture-day2
 date: 2026-03-04
 author: Evan Yoon

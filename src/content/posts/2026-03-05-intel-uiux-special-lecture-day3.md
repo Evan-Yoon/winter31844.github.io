@@ -1,5 +1,5 @@
 ---
-title: "인텔 특강 Day 3: 사용자 중심 디자인과 UI/UX 용어 정리"
+title: "인텔 특강: 사용자 중심 디자인과 UI/UX 용어 정리"
 slug: intel-uiux-special-lecture-day3
 date: 2026-03-05
 author: Evan Yoon
