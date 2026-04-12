@@ -3,6 +3,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+function getEntrySlug(entry) {
+  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
+}
+
 // 마크다운 글 데이터를 불러와서 최신순으로 정렬하고 3개만 자릅니다.
 const allPosts = await getCollection('posts');
 
@@ -90,14 +94,14 @@ const latestNews = allPosts
             <span class="post-date">{new Date(post.data.date).toLocaleDateString('ko-KR')}</span>
           </div>
           <h3 class="post-card-title">
-            <a href={`/posts/${post.data.slug || post.id}`}>{post.data.title}</a>
+            <a href={`/posts/${getEntrySlug(post)}`}>{post.data.title}</a>
           </h3>
           <div class="post-card-footer">
             <span class="read-time">{post.data.readTime ? `${post.data.readTime} min read` : ''}</span>
             <span
               class="post-view-count"
               data-post-views
-              data-goatcounter-path={`/posts/${post.data.slug || post.id}/`}
+              data-goatcounter-path={`/posts/${getEntrySlug(post)}/`}
             >
               views -
             </span>
@@ -206,11 +210,11 @@ const latestNews = allPosts
           <span class="news-preview-kicker">Latest Update</span>
         </div>
         <h3 class="news-preview-title">
-          <a href={`/ai-news/${latestNews.data.slug || latestNews.id}`}>{latestNews.data.title}</a>
+          <a href={`/ai-news/${getEntrySlug(latestNews)}`}>{latestNews.data.title}</a>
         </h3>
         <p class="news-preview-desc">{latestNews.data.description}</p>
         <div class="news-preview-footer">
-          <a href={`/ai-news/${latestNews.data.slug || latestNews.id}`} class="news-preview-link">
+          <a href={`/ai-news/${getEntrySlug(latestNews)}`} class="news-preview-link">
             Read Full Summary <span class="arrow">→</span>
           </a>
         </div>

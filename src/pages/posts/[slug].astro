@@ -2,22 +2,27 @@
 import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
+function getEntrySlug(entry: { id: string; data: { slug?: string } }) {
+  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
+}
+
 export async function getStaticPaths() {
   const postEntries = await getCollection('posts');
   return postEntries.map((entry) => ({
-    params: { slug: entry.data.slug || entry.id },
+    params: { slug: entry.data.slug ?? entry.id.split('/').pop() ?? entry.id },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const currentPostPath = `/posts/${entry.data.slug || entry.id}/`;
+const currentPostSlug = getEntrySlug(entry);
+const currentPostPath = `/posts/${currentPostSlug}/`;
 const allPosts = (await getCollection('posts'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
 const currentPostIndex = allPosts.findIndex(
-  (post) => (post.data.slug || post.id) === (entry.data.slug || entry.id),
+  (post) => getEntrySlug(post) === currentPostSlug,
 );
 
 const previousPost = currentPostIndex < allPosts.length - 1 ? allPosts[currentPostIndex + 1] : null;
@@ -26,7 +31,7 @@ const nextPost = currentPostIndex > 0 ? allPosts[currentPostIndex - 1] : null;
 const relatedPosts = allPosts
   .filter(
     (post) =>
-      (post.data.slug || post.id) !== (entry.data.slug || entry.id) &&
+      getEntrySlug(post) !== currentPostSlug &&
       post.data.category === entry.data.category,
   )
   .slice(0, 6);
@@ -36,7 +41,7 @@ const { Content, headings } = await render(entry);
 
 <PostLayout
   frontmatter={entry.data}
-  postSlug={entry.data.slug || entry.id}
+  postSlug={currentPostSlug}
   postPath={currentPostPath}
   previousPost={previousPost}
   nextPost={nextPost}

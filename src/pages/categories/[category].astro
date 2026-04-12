@@ -3,6 +3,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+function getEntrySlug(entry) {
+  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
+}
+
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
   const categories = ['project', 'study', 'explore'];
@@ -103,7 +107,7 @@ const hasSubcategories = subcategories.length > 0;
             </div>
             <div class="post-content">
               <h2 class="post-title">
-                <a href={`/posts/${post.data.slug || post.id}`}>{post.data.title}</a>
+                <a href={`/posts/${getEntrySlug(post)}`}>{post.data.title}</a>
               </h2>
               {post.data.description && <p class="post-desc">{post.data.description}</p>}
               <div class="post-stats">
@@ -111,7 +115,7 @@ const hasSubcategories = subcategories.length > 0;
                 <span
                   class="post-view-count"
                   data-post-views
-                  data-goatcounter-path={`/posts/${post.data.slug || post.id}/`}
+                  data-goatcounter-path={`/posts/${getEntrySlug(post)}/`}
                 >
                   views -
                 </span>

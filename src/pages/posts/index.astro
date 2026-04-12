@@ -3,6 +3,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+function getEntrySlug(entry) {
+  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
+}
+
 // posts 폴더 안의 모든 마크다운을 가져와서 최신순으로 정렬합니다.
 const allPosts = await getCollection('posts');
 const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
@@ -24,14 +28,14 @@ const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
           </div>
           <div class="post-content">
             <h2 class="post-title">
-              <a href={`/posts/${post.data.slug || post.id}`}>{post.data.title}</a>
+              <a href={`/posts/${getEntrySlug(post)}`}>{post.data.title}</a>
             </h2>
             <div class="post-stats">
               {post.data.readTime && <span class="read-time">{post.data.readTime} min read</span>}
               <span
                 class="post-view-count"
                 data-post-views
-                data-goatcounter-path={`/posts/${post.data.slug || post.id}/`}
+                data-goatcounter-path={`/posts/${getEntrySlug(post)}/`}
               >
                 views -
               </span>

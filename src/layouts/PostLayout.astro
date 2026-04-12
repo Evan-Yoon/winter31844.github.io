@@ -1,6 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 
+function getEntrySlug(entry) {
+  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
+}
+
 const {
   frontmatter,
   postSlug,
@@ -143,7 +147,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
     <section class="post-footer-nav" aria-label="Post navigation">
       <a
         class={`post-nav-card ${!previousPost ? 'is-disabled' : ''}`}
-        href={previousPost ? `/posts/${previousPost.data.slug || previousPost.id}` : undefined}
+        href={previousPost ? `/posts/${getEntrySlug(previousPost)}` : undefined}
         aria-disabled={!previousPost}
       >
         <span class="post-nav-label">이전 포스트</span>
@@ -159,7 +163,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
       <a
         class={`post-nav-card align-right ${!nextPost ? 'is-disabled' : ''}`}
-        href={nextPost ? `/posts/${nextPost.data.slug || nextPost.id}` : undefined}
+        href={nextPost ? `/posts/${getEntrySlug(nextPost)}` : undefined}
         aria-disabled={!nextPost}
       >
         <span class="post-nav-label">다음 포스트</span>
@@ -190,7 +194,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
           <div class="related-posts-grid" id="related-posts-grid">
             {relatedPosts.map((post: any, index: number) => (
               <article class={`related-post-card ${index >= 3 ? 'is-hidden' : ''}`}>
-                <a href={`/posts/${post.data.slug || post.id}`} class="related-post-link">
+                <a href={`/posts/${getEntrySlug(post)}`} class="related-post-link">
                   <div class="related-post-meta">
                     <span class={`related-post-badge badge-${post.data.category || 'explore'}`}>
                       {post.data.category || 'explore'}
@@ -203,7 +207,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
                   </p>
                   <div class="related-post-footer">
                     <span>{post.data.readTime ? `${post.data.readTime} min read` : 'Read more'}</span>
-                    <span class="post-view-count" data-post-views data-goatcounter-path={`/posts/${post.data.slug || post.id}/`}>views -</span>
+                    <span class="post-view-count" data-post-views data-goatcounter-path={`/posts/${getEntrySlug(post)}/`}>views -</span>
                     <span class="related-post-arrow">→</span>
                   </div>
                 </a>
