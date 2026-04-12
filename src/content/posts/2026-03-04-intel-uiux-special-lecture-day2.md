@@ -30,6 +30,8 @@ toc: true
 
 ![UI UX 디자인 프로세스 소개](/images/posts/intel-uiux-special-lecture-day2/image2.jpg)
 
+핵심 슬라이드:
+더블 다이아몬드 전체 구조를 한눈에 보여 준 장면이다.
 ![더블 다이아몬드 프로세스 전체 구조](/images/posts/intel-uiux-special-lecture-day2/image3.jpg)
 
 ## 더블 다이아몬드로 보는 UI/UX 디자인 흐름
@@ -52,6 +54,8 @@ toc: true
 
 발견하기 단계에서는 리서치가 가장 중요한 시작점으로 소개됐다. 데스크 리서치는 이미 있는 자료와 데이터를 활용해 시장과 문제를 파악하는 방식이고, 필드 리서치는 실제 사용자 환경에서 직접 만나거나 관찰하는 방식이다. 여기에 사용자 리뷰 분석이나 설문조사처럼 그 사이에 걸쳐 있는 방법도 포함된다.
 
+핵심 슬라이드:
+리서치가 왜 출발점인지 정리한 장면이다.
 ![발견하기 단계와 Research](/images/posts/intel-uiux-special-lecture-day2/image8.jpg)
 
 ![데스크 리서치와 필드 리서치](/images/posts/intel-uiux-special-lecture-day2/image9.jpg)
@@ -132,6 +136,8 @@ toc: true
 
 전달하기 단계에서 가장 인상적이었던 것은 디자인 시스템이었다. 강의에서는 디자인 시스템을 서비스에 쓰이는 UI 요소의 규칙과 컴포넌트를 정리해 재사용 가능하게 만든 기준이라고 설명했다. 버튼, 컬러, 타이포, 간격 규칙이 정리되어 있으면 화면마다 다시 만들지 않아도 되고, 팀 전체의 일관성도 유지된다.
 
+핵심 슬라이드:
+디자인 시스템과 테스트까지 포함한 전달 단계 요약이다.
 ![전달하기 단계](/images/posts/intel-uiux-special-lecture-day2/image28.jpg)
 
 ![디자인 시스템](/images/posts/intel-uiux-special-lecture-day2/image30.jpg)
