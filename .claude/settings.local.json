@@ -14,7 +14,12 @@
       "Bash(python3)",
       "Bash(xargs grep:*)",
       "Bash(sed -i 's/^category: project$/category: explore/' /c/dev/project/winter31844.github.io/src/content/posts/2025-12-01-autohotkey-attendance-reminder-and-vscode-hotkeys.md)",
-      "Bash(sed -i 's/^subcategory: personal-project$/subcategory: new-tech/' /c/dev/project/winter31844.github.io/src/content/posts/2025-12-01-autohotkey-attendance-reminder-and-vscode-hotkeys.md)"
+      "Bash(sed -i 's/^subcategory: personal-project$/subcategory: new-tech/' /c/dev/project/winter31844.github.io/src/content/posts/2025-12-01-autohotkey-attendance-reminder-and-vscode-hotkeys.md)",
+      "Bash(grep -h \"^category:\" c:/dev/project/winter31844.github.io/src/content/posts/*.md)",
+      "Bash(grep -l 'category: study' c:/dev/project/winter31844.github.io/src/content/posts/*.md)",
+      "Bash(grep -l 'category: project' c:/dev/project/winter31844.github.io/src/content/posts/*.md)",
+      "Bash(grep -l 'category: explore' c:/dev/project/winter31844.github.io/src/content/posts/*.md)",
+      "Bash(grep -h \"^subcategory:\" c:/dev/project/winter31844.github.io/src/content/posts/*.md)"
     ],
     "additionalDirectories": [
       "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories",
