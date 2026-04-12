@@ -116,8 +116,7 @@ toc: true
 <a href="https://www.gitanimals.org/">
   <img
     src="https://render.gitanimals.org/guilds/829895026409453279/draw"
-    width="600"
-    height="300"
+    style="display:block; width:100%; max-width:600px; margin:1rem auto;"
     alt="gitanimals guild"
   />
 </a>
@@ -159,7 +158,7 @@ toc: true
 지금 내 메인 동물 유니콘.
 
 <a href="https://github.com/devxb/gitanimals">
-  <img src="https://render.gitanimals.org/lines/Evan-Yoon?pet-id=829896534857322024" width="1000" height="200"/>
+  <img src="https://render.gitanimals.org/lines/Evan-Yoon?pet-id=829896534857322024" style="display:block; width:100%; max-width:700px; margin:1rem auto;" alt="내 유니콘 펫"/>
 </a>
 
 농장 전체도 볼 수 있다.

@@ -11,7 +11,8 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:api.github.com)",
-      "Bash(python3)"
+      "Bash(python3)",
+      "Bash(xargs grep:*)"
     ],
     "additionalDirectories": [
       "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories",

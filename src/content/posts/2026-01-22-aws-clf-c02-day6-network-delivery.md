@@ -323,7 +323,7 @@ Route 53은 웹 요청 자체를 처리하는 서비스가 아니다.
 
 ## Route 53 라우팅 정책
 
-![Route 53 DNS 흐름 설명 이미지](/downloads/aws-clf-c02/2026-01-22/route-53.png)
+<img src="/downloads/aws-clf-c02/2026-01-22/route-53.png" alt="Route 53 DNS 흐름 설명 이미지" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
 
 Cloud Practitioner에서는 Route 53을 단순 DNS 서비스로만 외우면 부족하다. 자료에서도 나왔듯이, **라우팅 정책**이 자주 출제된다.
 
@@ -459,7 +459,7 @@ HTTP 요청 내용, URL, 헤더 같은 애플리케이션 수준
 
 ## CloudFront란 무엇인가
 
-![Load Balancer 계층 비교 보조 이미지](/downloads/aws-clf-c02/2026-01-22/L7L4.JPG)
+<img src="/downloads/aws-clf-c02/2026-01-22/L7L4.JPG" alt="Load Balancer 계층 비교 보조 이미지" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
 
 Amazon CloudFront는 AWS의 **CDN(Content Delivery Network)** 서비스다.
 

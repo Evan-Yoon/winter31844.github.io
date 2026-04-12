@@ -27,7 +27,7 @@ Potius sero quam nunquam — Titus Livius
 
 #### To explain why I suddenly fell into the world of AI and development, we have to travel back in time. Not to 2025, but to **January 2023.**
 
-Back then, "Chat GPT" was barely a whisper in Korea. But my cousin, who was doing his master's in the US, had just come back to visit. We met for lunch, and he was absolutely buzzing. He told me, "We've found the new fire. This is going to flip the world upside down, just like when computers were first invented."
+Back then, ChatGPT was barely a whisper in Korea. But my cousin, who was doing his master's in the US, had just come back to visit. We met for lunch, and he was absolutely buzzing. He told me, "We've found the new fire. This is going to flip the world upside down, just like when computers were first invented."
 
 Instead of asking how I've been, he immediately opened his laptop. He showed me a lot of features, but one thing made my jaw drop: **it wrote a resume and cover letter in just 5 seconds.**
 
@@ -39,11 +39,11 @@ My cousin also gave me a hot tip: **"Buy Microsoft stock."** At that time, it wa
 
 [blogs.microsoft.com](https://blogs.microsoft.com/blog/2023/01/23/microsoftandopenaiextendpartnership/)
 
-Now, I'm no stock expert. Giving investment advice is usually a terrible idea. But after seeing Chat - GPT, I thought, *"There is no way this won't go up. It's impossible."*
+Now, I'm no stock expert. Giving investment advice is usually a terrible idea. But after seeing ChatGPT, I thought, *"There is no way this won't go up. It's impossible."*
 
 I went to work the next day and gathered my HR team to show them this "magic." Everyone was surprised, sure. But maybe because it felt too futuristic, the shock wore off quickly. They went back to their coffees, and life went on.
 
-Fast forward two weeks: every news outlet in Korea was plastered with stories about Chat - GPT. Three months later? Microsoft stock hit **$374.**
+Fast forward two weeks: every news outlet in Korea was plastered with stories about ChatGPT. Three months later? Microsoft stock hit **$374.**
 
 It's rare for a giant company's stock to jump that high, that fast. I sold everything and made a pretty decent profit. Thanks to this, my first impression of AI was, well… very profitable.
 

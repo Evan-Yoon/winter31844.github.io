@@ -37,7 +37,7 @@ They said that with enough passion, even non-majors could keep up. I poured that
 
 The journey began on **November 10, 2025**, and will run until **May 20, 2026.** It is an incredibly tight and intense schedule. In just six months, we are expected to master **Python, Java, and Kotlin**, learn AI project methodologies, and complete **four actual projects.**
 
-When I showed this curriculum to my younger sister (an andriod app developer) and my father (a 30-year IT veteran), they both looked skeptical. *"Is this even possible in 6 months?"* Even my friends who had switched from non-tech majors to developer warned me that this schedule looked brutal.
+When I showed this curriculum to my younger sister (an Android app developer) and my father (a 30-year IT veteran), they both looked skeptical. *"Is this even possible in 6 months?"* Even my friends who had switched from non-tech majors to developer warned me that this schedule looked brutal.
 
 ![image](/images/posts/intel-ai-for-future-workforce-1st-week/imported-01.png)
 
@@ -118,7 +118,7 @@ Here is a log of what we covered in our first week:
 
 ### The Daily Routine & The Journal
 
-Our schedule is fixed: **Monday to Friday, 9 AM to 6 PM.** The most unique part of the day is the last hour (5 PM — 6 PM). We spend this time writing a **"Learning Journal."** by using **Notion**.
+Our schedule is fixed: **Monday to Friday, 9 AM to 6 PM.** The most unique part of the day is the last hour (5 PM — 6 PM). We spend this time writing a **"Learning Journal"** on **Notion**.
 
 ![image](/images/posts/intel-ai-for-future-workforce-1st-week/imported-03.png)
 

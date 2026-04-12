@@ -311,7 +311,7 @@ Cloud Practitioner 문제에서는 종종:
 
 ## IAM Policy란 무엇인가
 
-![IAM Policy 설명 보조 이미지](/downloads/aws-clf-c02/2026-01-27/policy.png)
+<img src="/downloads/aws-clf-c02/2026-01-27/policy.png" alt="IAM Policy 설명 보조 이미지" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
 
 IAM Policy는 AWS 권한을 정의하는 **JSON 문서**다.
 
@@ -504,7 +504,7 @@ AWS의 대표적인 **관리형 키 관리 서비스**다.
 
 ## S3 암호화 옵션
 
-![S3 암호화 옵션 설명 보조 이미지](/downloads/aws-clf-c02/2026-01-27/s3_encrypt.png)
+<img src="/downloads/aws-clf-c02/2026-01-27/s3_encrypt.png" alt="S3 암호화 옵션 설명 보조 이미지" style="display:block; width:100%; max-width:700px; margin:1rem auto;" />
 
 자료에는 S3 암호화 옵션도 정리되어 있었다.
 

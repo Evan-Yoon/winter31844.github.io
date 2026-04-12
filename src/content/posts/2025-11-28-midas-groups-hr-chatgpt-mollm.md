@@ -84,11 +84,7 @@ To solve this, Midas Group took action. They used **Fine-Tuning** technology to 
 
 The result is **MOLLM**, a solution they offer for free.
 
-It goes beyond simple Q&A. It can assist with:
-
-- Concrete **CDP (Career Development Plan)** planning
-- Legal compliance processes
-- Employee evaluation methods
+It goes beyond simple Q&A — it can help with concrete **CDP (Career Development Plan)** planning, legal compliance processes, and even employee evaluation methods.
 
 ![image](/images/posts/midas-groups-hr-chatgpt-mollm/imported-08.png)
 
