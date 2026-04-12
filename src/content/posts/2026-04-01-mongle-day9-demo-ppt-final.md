@@ -8,7 +8,7 @@ author: Evan Yoon
 category: project
 subcategory: team-project
 description:
-  코드를 닫고 발표 자료를 열었다. 시연 영상, PPT, 발표 연습. 11일간 만든 것들을 40장 슬라이드에 정리하면서, 우리가
+  시연 영상, PPT, 발표 연습. 11일간 만든 것들을 40장 슬라이드에 정리하면서, 우리가
   무엇을 만들었는지 다시 봤다.
 tags:
   - mongle

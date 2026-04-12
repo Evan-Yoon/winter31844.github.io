@@ -322,6 +322,96 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         });
       }
     })();
+
+    /* BLIZZARD EASTER EGG */
+    (function() {
+      let snowing = false;
+      const input = document.getElementById('search-input');
+      const overlay = document.getElementById('search-overlay');
+      
+      function startSnow() {
+        if (snowing) return;
+        snowing = true;
+        
+        const canvas = document.createElement('canvas');
+        canvas.id = 'blizzard-canvas';
+        Object.assign(canvas.style, {
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+          zIndex: 10000,
+        });
+        document.body.appendChild(canvas);
+        
+        const ctx = canvas.getContext('2d');
+        let w, h;
+        const particles = [];
+        
+        function resize() {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        
+        for (let i = 0; i < 150; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 2 + 0.5,
+            d: Math.random() * Math.PI * 2,
+            v: Math.random() * 1.5 + 0.5,
+            s: Math.random() * 0.5 + 0.2
+          });
+        }
+        
+        function draw() {
+          ctx.clearRect(0, 0, w, h);
+          ctx.fillStyle = document.documentElement.dataset.theme === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.9)';
+          ctx.beginPath();
+          for (const p of particles) {
+            ctx.moveTo(p.x, p.y);
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+          }
+          ctx.fill();
+        }
+        
+        function update() {
+          for (const p of particles) {
+            p.y += p.v;
+            p.x += Math.sin(p.d) * p.s;
+            p.d += 0.01;
+            if (p.y > h) {
+              p.y = -5;
+              p.x = Math.random() * w;
+            }
+            if (p.x > w) p.x = 0;
+            if (p.x < 0) p.x = w;
+          }
+        }
+        
+        function loop() {
+          draw();
+          update();
+          requestAnimationFrame(loop);
+        }
+        
+        if (overlay) overlay.classList.remove('open');
+        loop();
+      }
+
+      if (input) {
+        input.addEventListener('input', (e) => {
+          if (e.target.value.toLowerCase() === 'blizzard') {
+            startSnow();
+            input.value = '';
+          }
+        });
+      }
+    })();
   </script>
 
   <style is:global>
@@ -361,6 +451,36 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       --accent-2-soft: #2D261D;
       --border: #2A2A28;
       --border-strong: #3A3A38;
+    }
+
+    /* DARK MODE ARTWORK */
+    [data-theme="dark"] body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 15% 25%, rgba(143, 170, 200, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(224, 199, 168, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(143, 170, 200, 0.03) 0%, transparent 60%);
+      z-index: -2;
+      pointer-events: none;
+      filter: blur(40px);
+      animation: atmospherePulse 20s infinite alternate ease-in-out;
+    }
+    
+    [data-theme="dark"] body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L12 12M90 10L88 12M10 90L12 88M90 90L88 88' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='0.5' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
+      opacity: 0.8;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes atmospherePulse {
+      from { opacity: 0.6; transform: scale(1); }
+      to { opacity: 1; transform: scale(1.1); }
     }
 
     /* RESET & BASE */

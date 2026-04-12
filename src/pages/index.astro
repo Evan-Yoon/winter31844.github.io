@@ -74,7 +74,7 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
     
     <div class="posts-grid">
       {recentPosts.map(post => (
-        <article class="post-card">
+        <article class="post-card" data-summary={post.data.description || "이 포스트의 핵심 내용을 확인해보세요."}>
           <div class="post-card-meta">
             <span class={`post-cat-badge badge-${post.data.category || 'explore'}`}>{post.data.category || 'explore'}</span>
             <span class="post-date">{new Date(post.data.date).toLocaleDateString('ko-KR')}</span>
@@ -305,6 +305,38 @@ const recentPosts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - ne
   .post-card-footer > .read-time { margin-right: auto; }
   .read-arrow { font-size: 0.8rem; color: var(--ink-3); transition: transform var(--transition); }
   .post-card:hover .read-arrow { color: var(--accent); transform: translateX(4px); }
+  
+  /* Tooltip logic */
+  .post-card { position: relative; }
+  .post-card::after {
+    content: attr(data-summary);
+    position: absolute;
+    bottom: calc(100% + 15px);
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 100;
+    font-family: var(--font-sans);
+    font-weight: 300;
+  }
+  .post-card:hover::after {
+    opacity: 1;
+    transform: translateY(-8px);
+  }
+  [data-theme="dark"] .post-card::after {
+    background: var(--bg-hover);
+    color: var(--ink);
+    border: 1px solid var(--border-strong);
+  }
 
   .about-section { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .about-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
