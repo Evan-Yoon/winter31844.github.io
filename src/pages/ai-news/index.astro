@@ -6,8 +6,8 @@ function getEntrySlug(entry: { id: string; data: { slug?: string } }) {
   return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
 }
 
-function isWeeklyNews(entry: { id: string; data: { slug?: string; category?: string } }) {
-  return entry.data.category === 'ai-news' && getEntrySlug(entry).includes('weekly-ai-news');
+function isWeeklyNews(entry: { id: string; data: { slug?: string; category?: string; draft?: boolean } }) {
+  return !entry.data.draft && entry.data.category === 'ai-news' && getEntrySlug(entry).includes('weekly-ai-news');
 }
 
 const allPosts = await getCollection('posts');

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="AI Times KR IBM ROI">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <circle cx="930" cy="220" r="220" fill="#fdba74" fill-opacity="0.22"/>
+  <text x="72" y="118" fill="#fff7ed" font-size="34" font-weight="700" font-family="Inter, Arial, sans-serif">인공지능신문</text>
+  <text x="72" y="202" fill="#fed7aa" font-size="26" font-weight="700" font-family="Inter, Arial, sans-serif">정책 / 심층</text>
+  <text x="72" y="392" fill="#fff7ed" font-size="82" font-weight="700" font-family="Inter, Arial, sans-serif">61% Adopted</text>
+  <text x="72" y="486" fill="#fff7ed" font-size="82" font-weight="700" font-family="Inter, Arial, sans-serif">Only 25%</text>
+  <text x="72" y="580" fill="#fff7ed" font-size="72" font-weight="700" font-family="Inter, Arial, sans-serif">Show ROI</text>
+  <text x="72" y="972" fill="#ffedd5" font-size="28" font-weight="500" font-family="Inter, Arial, sans-serif">Adoption widened faster than operating discipline.</text>
+</svg>

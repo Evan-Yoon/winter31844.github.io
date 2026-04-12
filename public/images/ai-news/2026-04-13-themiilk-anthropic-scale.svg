@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="TheMiilk Anthropic Scale">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <circle cx="920" cy="220" r="230" fill="#93c5fd" fill-opacity="0.28"/>
+  <circle cx="970" cy="860" r="180" fill="#60a5fa" fill-opacity="0.14"/>
+  <text x="72" y="118" fill="#e2e8f0" font-size="34" font-weight="700" font-family="Inter, Arial, sans-serif">THEMiiLK</text>
+  <text x="72" y="200" fill="#bfdbfe" font-size="26" font-weight="700" font-family="Inter, Arial, sans-serif">GLOBAL TREND</text>
+  <text x="72" y="398" fill="#f8fafc" font-size="86" font-weight="700" font-family="Inter, Arial, sans-serif">Anthropic</text>
+  <text x="72" y="494" fill="#f8fafc" font-size="86" font-weight="700" font-family="Inter, Arial, sans-serif">45T Run Rate</text>
+  <text x="72" y="590" fill="#f8fafc" font-size="62" font-weight="700" font-family="Inter, Arial, sans-serif">TPU Scale-Up</text>
+  <text x="72" y="980" fill="#dbeafe" font-size="28" font-weight="500" font-family="Inter, Arial, sans-serif">Infrastructure became the growth story itself.</text>
+</svg>

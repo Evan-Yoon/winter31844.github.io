@@ -7,7 +7,7 @@ function getEntrySlug(entry: { id: string; data: { slug?: string } }) {
 }
 
 export async function getStaticPaths() {
-  const postEntries = await getCollection('posts');
+  const postEntries = (await getCollection('posts')).filter((entry) => !entry.data.draft);
   return postEntries.map((entry) => ({
     params: { slug: entry.data.slug ?? entry.id.split('/').pop() ?? entry.id },
     props: { entry },

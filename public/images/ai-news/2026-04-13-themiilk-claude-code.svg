@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="TheMiilk Claude Code work OS">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#065f46"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <circle cx="950" cy="210" r="220" fill="#4ade80" fill-opacity="0.2"/>
+  <circle cx="980" cy="930" r="170" fill="#86efac" fill-opacity="0.12"/>
+  <text x="72" y="118" fill="#f3f4f6" font-size="34" font-weight="700" font-family="Inter, Arial, sans-serif">THEMiiLK</text>
+  <text x="72" y="202" fill="#86efac" font-size="26" font-weight="700" font-family="Inter, Arial, sans-serif">GLOBAL TREND</text>
+  <text x="72" y="392" fill="#ecfdf5" font-size="86" font-weight="700" font-family="Inter, Arial, sans-serif">Claude Code</text>
+  <text x="72" y="488" fill="#ecfdf5" font-size="78" font-weight="700" font-family="Inter, Arial, sans-serif">as Work OS</text>
+  <text x="72" y="972" fill="#d1fae5" font-size="28" font-weight="500" font-family="Inter, Arial, sans-serif">Queues shrink when AI can act across tools, not just chat.</text>
+</svg>

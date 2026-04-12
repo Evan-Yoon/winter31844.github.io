@@ -8,7 +8,7 @@ function getEntrySlug(entry) {
 }
 
 function isWeeklyNews(entry) {
-  return entry.data.category === 'ai-news' && getEntrySlug(entry).includes('weekly-ai-news');
+  return !entry.data.draft && entry.data.category === 'ai-news' && getEntrySlug(entry).includes('weekly-ai-news');
 }
 
 // 마크다운 글 데이터를 불러와서 최신순으로 정렬하고 3개만 자릅니다.
@@ -16,7 +16,7 @@ const allPosts = await getCollection('posts');
 
 // Filter recent posts (excluding ai-news) for the home page list
 const recentPosts = allPosts
-  .filter(post => post.data.category !== 'ai-news')
+  .filter(post => !post.data.draft && post.data.category !== 'ai-news')
   .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
   .slice(0, 3);
 

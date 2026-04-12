@@ -6,7 +6,7 @@ function getEntrySlug(entry: { id: string; data: { slug?: string } }) {
 }
 
 export const GET: APIRoute = async () => {
-  const posts = await getCollection('posts');
+  const posts = (await getCollection('posts')).filter((post) => !post.data.draft);
 
   const data = posts
     .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())

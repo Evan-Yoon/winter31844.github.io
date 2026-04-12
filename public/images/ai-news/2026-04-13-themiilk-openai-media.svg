@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="TheMiilk OpenAI media strategy">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="100%" stop-color="#7c2d12"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <circle cx="900" cy="240" r="230" fill="#fb923c" fill-opacity="0.24"/>
+  <rect x="72" y="84" width="238" height="44" rx="22" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="98" y="114" fill="#f3f4f6" font-size="32" font-weight="700" font-family="Inter, Arial, sans-serif">THEMiiLK</text>
+  <text x="72" y="210" fill="#fdba74" font-size="26" font-weight="700" font-family="Inter, Arial, sans-serif">GLOBAL TREND</text>
+  <text x="72" y="396" fill="#fff7ed" font-size="82" font-weight="700" font-family="Inter, Arial, sans-serif">OpenAI</text>
+  <text x="72" y="486" fill="#fff7ed" font-size="82" font-weight="700" font-family="Inter, Arial, sans-serif">Bought</text>
+  <text x="72" y="576" fill="#fff7ed" font-size="82" font-weight="700" font-family="Inter, Arial, sans-serif">Narrative Power</text>
+  <text x="72" y="974" fill="#ffedd5" font-size="28" font-weight="500" font-family="Inter, Arial, sans-serif">The media layer is becoming a strategic asset.</text>
+</svg>

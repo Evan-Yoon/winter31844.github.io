@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="AI Times KR V-JEPA 2">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <circle cx="920" cy="220" r="240" fill="#c4b5fd" fill-opacity="0.2"/>
+  <text x="72" y="118" fill="#f5f3ff" font-size="34" font-weight="700" font-family="Inter, Arial, sans-serif">인공지능신문</text>
+  <text x="72" y="202" fill="#ddd6fe" font-size="26" font-weight="700" font-family="Inter, Arial, sans-serif">정책 / 심층</text>
+  <text x="72" y="392" fill="#faf5ff" font-size="86" font-weight="700" font-family="Inter, Arial, sans-serif">V-JEPA 2</text>
+  <text x="72" y="488" fill="#faf5ff" font-size="76" font-weight="700" font-family="Inter, Arial, sans-serif">World Model</text>
+  <text x="72" y="584" fill="#faf5ff" font-size="76" font-weight="700" font-family="Inter, Arial, sans-serif">Open Source</text>
+  <text x="72" y="972" fill="#ede9fe" font-size="28" font-weight="500" font-family="Inter, Arial, sans-serif">Thinking before acting is becoming the new robotics baseline.</text>
+</svg>

@@ -5,6 +5,7 @@ import { XMLParser } from "fast-xml-parser";
 import { callClaude } from "./lib/claude.js";
 
 const OUTPUT_DIR = path.join(process.cwd(), "src", "content", "posts", "ainews");
+const GENERATED_IMAGE_DIR = path.join(process.cwd(), "public", "images", "ai-news");
 
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -13,19 +14,6 @@ const parser = new XMLParser({
 });
 
 const SOURCE_CONFIGS = [
-  {
-    id: "en",
-    sourceName: "AI News",
-    siteUrl: "https://www.artificialintelligence-news.com",
-    feedUrls: [
-      "https://www.artificialintelligence-news.com/feed/",
-      "https://www.artificialintelligence-news.com/news/feed/",
-    ],
-    language: "English",
-    locale: "en-US",
-    promptLanguage:
-      "Write the article in natural English. Keep it compact, readable, and editorial rather than promotional.",
-  },
   {
     id: "ko",
     sourceName: "AI타임스",
@@ -225,6 +213,120 @@ function uniqueByLink(items) {
   });
 }
 
+function slugify(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+}
+
+function escapeXml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function wrapSvgText(value, maxCharsPerLine = 20, maxLines = 3) {
+  const words = String(value || "").split(/\s+/).filter(Boolean);
+  const lines = [];
+  let current = "";
+
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (next.length <= maxCharsPerLine) {
+      current = next;
+      continue;
+    }
+    if (current) lines.push(current);
+    current = word;
+    if (lines.length === maxLines - 1) break;
+  }
+
+  if (lines.length < maxLines && current) lines.push(current);
+  if (lines.length === 0) lines.push("Weekly AI News");
+  return lines.slice(0, maxLines);
+}
+
+function getIllustrationPalette(sourceId, index) {
+  const palettes = {
+    en: [
+      ["#0b1020", "#1e40af", "#60a5fa"],
+      ["#111827", "#14532d", "#4ade80"],
+      ["#1f2937", "#7c2d12", "#fb923c"],
+      ["#172554", "#4338ca", "#a78bfa"],
+      ["#0f172a", "#0f766e", "#5eead4"],
+    ],
+    ko: [
+      ["#1f2937", "#9a3412", "#fdba74"],
+      ["#172554", "#1d4ed8", "#93c5fd"],
+      ["#111827", "#166534", "#86efac"],
+      ["#3f0d12", "#7f1d1d", "#fca5a5"],
+      ["#1e1b4b", "#6d28d9", "#c4b5fd"],
+    ],
+  };
+
+  const bucket = palettes[sourceId] || palettes.en;
+  return bucket[index % bucket.length];
+}
+
+function createFallbackIssueImage({ digestDate, source, article, index }) {
+  fs.mkdirSync(GENERATED_IMAGE_DIR, { recursive: true });
+
+  const filename = `${digestDate}-${source.id}-issue-${String(index + 1).padStart(2, "0")}-${slugify(article.title)}.svg`;
+  const filePath = path.join(GENERATED_IMAGE_DIR, filename);
+  const publicUrl = `/images/ai-news/${filename}`;
+  const [bg, accent, soft] = getIllustrationPalette(source.id, index);
+  const titleLines = wrapSvgText(article.title, source.id === "ko" ? 14 : 20, 3);
+  const sourceLabel = source.id === "ko" ? "WEEKLY AI NEWS" : "WEEKLY AI NEWS";
+  const issueLabel = source.id === "ko" ? `이슈 ${index + 1}` : `ISSUE ${index + 1}`;
+  const linesMarkup = titleLines
+    .map(
+      (line, lineIndex) =>
+        `<text x="56" y="${176 + lineIndex * 38}" fill="#f8fafc" font-size="${source.id === "ko" ? 28 : 30}" font-weight="700" font-family="Pretendard, Inter, Arial, sans-serif">${escapeXml(line)}</text>`,
+    )
+    .join("");
+
+  const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="${escapeXml(article.title)}">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${bg}" />
+      <stop offset="100%" stop-color="${accent}" />
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="25%" r="50%">
+      <stop offset="0%" stop-color="${soft}" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="${soft}" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" rx="36" fill="url(#bg)" />
+  <circle cx="980" cy="140" r="220" fill="url(#glow)" />
+  <circle cx="1100" cy="580" r="180" fill="${soft}" fill-opacity="0.14" />
+  <rect x="56" y="56" width="220" height="42" rx="21" fill="#ffffff" fill-opacity="0.14" />
+  <text x="80" y="84" fill="#e2e8f0" font-size="20" font-weight="700" font-family="Inter, Arial, sans-serif">${sourceLabel}</text>
+  <text x="56" y="138" fill="${soft}" font-size="18" font-weight="700" font-family="Inter, Arial, sans-serif">${issueLabel}</text>
+  ${linesMarkup}
+  <text x="56" y="620" fill="#cbd5e1" font-size="22" font-weight="500" font-family="Inter, Arial, sans-serif">${escapeXml(source.sourceName)}</text>
+  <path d="M920 168h212" stroke="#ffffff" stroke-opacity="0.45" stroke-width="18" stroke-linecap="round" />
+  <path d="M920 226h168" stroke="#ffffff" stroke-opacity="0.25" stroke-width="18" stroke-linecap="round" />
+  <path d="M920 284h236" stroke="#ffffff" stroke-opacity="0.18" stroke-width="18" stroke-linecap="round" />
+</svg>
+`;
+
+  fs.writeFileSync(filePath, svg, "utf-8");
+  return publicUrl;
+}
+
+function attachIssueImages({ digestDate, source, articles }) {
+  return articles.map((article, index) => ({
+    ...article,
+    imageUrl:
+      article.imageUrl || createFallbackIssueImage({ digestDate, source, article, index }),
+  }));
+}
+
 function collectFeedItems(xmlText, source) {
   const parsed = parser.parse(xmlText);
   if (!parsed?.rss?.channel?.item) return [];
@@ -365,7 +467,7 @@ toc: false
    - 1 or 2 short sentences of summary
    - one source line in markdown: Source: [title](url)
 5. If an article has no image URL, skip the image line for that issue only.
-6. Keep the whole body around 220 to 360 words in English, or 260 to 420 words in Korean.
+6. Keep the whole body around 260 to 420 words in Korean.
 7. Make it clear that this is a weekly summary for the supplied Monday-to-Sunday range.
 8. Focus on AI technology, models, chips, infrastructure, tooling, and deployment.
 9. Avoid filler, hype, and press-release tone.
@@ -395,8 +497,14 @@ async function createWeeklyPost({ source, digestDate, window }) {
     return null;
   }
 
+  const selectedWithImages = attachIssueImages({
+    digestDate,
+    source,
+    articles: selected,
+  });
+
   const markdown = await callClaude({
-    prompt: buildPrompt({ source, digestDate, window, articles: selected }),
+    prompt: buildPrompt({ source, digestDate, window, articles: selectedWithImages }),
     maxTokens: 2200,
     temperature: 0.45,
   });

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Weekly AI Card Briefing">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="50%" stop-color="#7c2d12"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="76%" cy="22%" r="45%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" rx="40" fill="url(#bg)"/>
+  <circle cx="1220" cy="170" r="280" fill="url(#glow)"/>
+  <circle cx="1320" cy="730" r="200" fill="#60a5fa" fill-opacity="0.12"/>
+  <rect x="78" y="76" width="264" height="48" rx="24" fill="#ffffff" fill-opacity="0.12"/>
+  <text x="104" y="108" fill="#e5e7eb" font-size="24" font-weight="700" font-family="Inter, Arial, sans-serif">WEEKLY AI CARD BRIEFING</text>
+  <text x="78" y="190" fill="#fdba74" font-size="28" font-weight="700" font-family="Inter, Arial, sans-serif">2026.04.06 - 2026.04.12</text>
+  <text x="78" y="284" fill="#f8fafc" font-size="72" font-weight="700" font-family="Inter, Arial, sans-serif">AI타임스 · 인공지능신문 · TheMiilk</text>
+  <text x="78" y="370" fill="#f8fafc" font-size="60" font-weight="700" font-family="Inter, Arial, sans-serif">이번 주 핵심 이슈만 카드로 정리</text>
+  <text x="78" y="470" fill="#d1d5db" font-size="30" font-weight="500" font-family="Inter, Arial, sans-serif">칩, 데이터센터, 로봇 파운데이션 모델, 미디어 전략, 작업형 에이전트까지</text>
+  <text x="78" y="780" fill="#e5e7eb" font-size="26" font-weight="500" font-family="Inter, Arial, sans-serif">Click card front to flip. Read details and open source links on the back.</text>
+</svg>
