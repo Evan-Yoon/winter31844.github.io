@@ -74,7 +74,7 @@ AI for Future Workforce 과정을 들으면서, 생각보다 많은 사람들이
 
 내가 최종적으로 만든 출석 체크용 스크립트는 아래 한 줄이다.
 
-```ahk
+```
 MsgBox "QR SCAN"
 ```
 
@@ -109,7 +109,7 @@ MsgBox "QR SCAN"
 
 지금 사용 중인 핵심 설정은 아래와 같다.
 
-```ahk
+```
 SetStoreCapslockMode false
 SetCapsLockState "AlwaysOff"
 

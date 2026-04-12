@@ -2,9 +2,17 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+function getEntrySlug(entry: { id: string; data: { slug?: string } }) {
+  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
+}
+
+function isWeeklyNews(entry: { id: string; data: { slug?: string; category?: string } }) {
+  return entry.data.category === 'ai-news' && getEntrySlug(entry).includes('weekly-ai-news');
+}
+
 const allPosts = await getCollection('posts');
 const sortedNews = allPosts
-  .filter(post => post.data.category === 'ai-news')
+  .filter(post => isWeeklyNews(post))
   .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 ---
 
@@ -22,6 +30,17 @@ const sortedNews = allPosts
     <div class="archive-grid">
       {sortedNews.map((news) => (
         <article class="news-list-card">
+          {news.data.thumbnail && (
+            <a href={`/ai-news/${getEntrySlug(news)}`} class="news-thumb-wrap">
+              <img
+                src={news.data.thumbnail}
+                alt={news.data.title}
+                class="news-thumb"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+              />
+            </a>
+          )}
           <div class="news-card-meta">
             <span class="news-card-date">{news.data.date.toLocaleDateString('ko-KR')}</span>
             {news.data.tags && (
@@ -31,10 +50,10 @@ const sortedNews = allPosts
             )}
           </div>
           <h2 class="news-card-title">
-            <a href={`/ai-news/${news.slug}`}>{news.data.title}</a>
+            <a href={`/ai-news/${getEntrySlug(news)}`}>{news.data.title}</a>
           </h2>
           <p class="news-card-desc">{news.data.description}</p>
-          <a href={`/ai-news/${news.slug}`} class="news-read-more">
+          <a href={`/ai-news/${getEntrySlug(news)}`} class="news-read-more">
             Read Full Summary <span class="arrow">→</span>
           </a>
         </article>
@@ -98,12 +117,28 @@ const sortedNews = allPosts
   }
 
   .news-list-card {
+    display: grid;
+    gap: 1.25rem;
     padding-bottom: 3rem;
     border-bottom: 1px solid var(--border);
     transition: all var(--transition);
   }
 
   .news-list-card:last-child { border-bottom: none; }
+
+  .news-thumb-wrap {
+    display: block;
+  }
+
+  .news-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+  }
 
   .news-card-meta {
     display: flex;

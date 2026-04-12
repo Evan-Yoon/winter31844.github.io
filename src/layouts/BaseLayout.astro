@@ -33,11 +33,11 @@ const contactHref = email ? `mailto:${email}` : "/#about";
     <a href="/" class="nav-logo">Evan Yoon<span>.</span></a>
     <ul class="nav-links">
       <li><a href="/posts">All</a></li>
+      <li><a href="/guestbook">Guestbook</a></li>
+      <li><a href="/ai-news">AI News</a></li>
       <li><a href="/categories/explore">Explore</a></li>
       <li><a href="/categories/study">Study</a></li>
       <li><a href="/categories/project">Projects</a></li>
-      <li><a href="/guestbook">Guestbook</a></li>
-      <li><a href="/ai-news">AI News</a></li>
       <li><a href="/#about">About</a></li>
     </ul>
     <div class="nav-right">
@@ -509,15 +509,30 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       position: sticky; top: 0; z-index: 100;
       padding: 0 2rem; height: 60px;
       display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
       background: var(--bg);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: var(--ink); }
+    .nav-logo { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: var(--ink); flex-shrink: 0; }
     .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 2.5rem; align-items: center; list-style: none; }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      list-style: none;
+      flex: 1;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      white-space: nowrap;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links li { flex: 0 0 auto; }
     .nav-links a { font-size: 0.8rem; font-weight: 400; color: var(--ink-2); letter-spacing: 0.04em; text-transform: uppercase; }
     .nav-links a:hover { color: var(--ink); }
-    .nav-right { display: flex; gap: 1rem; align-items: center; }
+    .nav-right { display: flex; gap: 1rem; align-items: center; flex-shrink: 0; }
     #theme-toggle, #search-toggle {
       width: 32px; height: 32px; border: 1px solid var(--border-strong);
       background: transparent; color: var(--ink-2); display: flex; align-items: center; justify-content: center;
@@ -623,8 +638,9 @@ const contactHref = email ? `mailto:${email}` : "/#about";
 
     @media (max-width: 800px) {
       nav { padding: 0 1rem; }
-      .nav-links { gap: 1.5rem; }
+      .nav-links { gap: 1rem; }
       .nav-links a { font-size: 0.75rem; }
+      .nav-right { gap: 0.5rem; }
     }
 
     /* SCROLL NAVIGATION */

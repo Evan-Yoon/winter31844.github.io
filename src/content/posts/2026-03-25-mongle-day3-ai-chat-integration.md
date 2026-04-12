@@ -110,7 +110,7 @@ git rm -r --cached Mongle-server/ai/__pycache__
 
 > `feat: python cache gitignore에 추가`
 
-```gitignore
+```
 # Python
 __pycache__/
 *.pyc

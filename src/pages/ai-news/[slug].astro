@@ -8,7 +8,10 @@ function getEntrySlug(entry: { id: string; data: { slug?: string } }) {
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
-  const newsEntries = allPosts.filter(post => post.data.category === 'ai-news');
+  const newsEntries = allPosts.filter((post) => {
+    const slug = post.data.slug ?? post.id.split('/').pop() ?? post.id;
+    return post.data.category === 'ai-news' && slug.includes('weekly-ai-news');
+  });
   return newsEntries.map(entry => ({
     params: { slug: entry.data.slug ?? entry.id.split('/').pop() ?? entry.id }, props: { entry },
   }));
@@ -27,6 +30,15 @@ const { Content } = await render(entry);
       </div>
       <h1 class="news-title">{entry.data.title}</h1>
       <p class="news-intro">{entry.data.description}</p>
+      {entry.data.thumbnail && (
+        <img
+          src={entry.data.thumbnail}
+          alt={entry.data.title}
+          class="news-cover"
+          loading="eager"
+          referrerpolicy="no-referrer"
+        />
+      )}
     </header>
 
     <article class="news-content">
@@ -97,6 +109,17 @@ const { Content } = await render(entry);
     font-weight: 300;
     line-height: 1.7;
     font-style: italic;
+  }
+
+  .news-cover {
+    display: block;
+    width: 100%;
+    max-width: 860px;
+    margin: 2.5rem auto 0;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    background: var(--bg-card);
   }
 
   .news-content {
