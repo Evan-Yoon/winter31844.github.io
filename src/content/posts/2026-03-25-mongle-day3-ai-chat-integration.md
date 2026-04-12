@@ -85,7 +85,7 @@ npm install expo-calendar --legacy-peer-deps
 
 ---
 
-## 이슈 2: Git Pull 충돌 — `__pycache__`
+## 이슈 2: Git Pull 충돌 — `__pycache__` <!-- short: 이슈 2 -->
 
 main 브랜치를 pull 받다가 충돌이 났다.
 

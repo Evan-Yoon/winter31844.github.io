@@ -15,17 +15,17 @@ draft: false
 toc: true
 ---
 
-# My Real-Life 'Isekai': Why I Quit My HR Career to Become a Developer
+# My Real-Life 'Isekai': Why I Quit My HR Career to Become a Developer <!-- short: My Real-Life 'Isekai' -->
 
 Potius sero quam nunquam — Titus Livius
 
 ---
 
-### My Real-Life 'Isekai': Why I Quit My HR Career to Become a Developer
+### My Real-Life 'Isekai': Why I Quit My HR Career to Become a Developer <!-- short: My Real-Life 'Isekai' -->
 
 > Potius sero quam nunquam — Titus Livius
 
-#### To explain why I suddenly fell into the world of AI and development, we have to travel back in time. Not to 2025, but to **January 2023.**
+#### To explain why I suddenly fell into the world of AI and development, we have to travel back in time. Not to 2025, but to **January 2023.** <!-- short: My Journey to AI -->
 
 Back then, ChatGPT was barely a whisper in Korea. But my cousin, who was doing his master's in the US, had just come back to visit. We met for lunch, and he was absolutely buzzing. He told me, "We've found the new fire. This is going to flip the world upside down, just like when computers were first invented."
 

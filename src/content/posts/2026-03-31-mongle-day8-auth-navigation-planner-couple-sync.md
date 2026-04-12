@@ -164,7 +164,7 @@ if (userRole === 'planner') {
 
 ---
 
-## 네 번째 로그인 수정: `waitForResolvedAuth`
+## 네 번째 로그인 수정: `waitForResolvedAuth` <!-- short: 네 번째 로그인 수정 -->
 
 > `로그인 에러 수정` — 16:17
 > 3 files, 78 insertions(+), 2 deletions(-)

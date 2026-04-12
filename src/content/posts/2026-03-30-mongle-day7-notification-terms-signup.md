@@ -124,7 +124,7 @@ calculateCompletenessScore(item) {
 2. **백엔드 (FastAPI)** — 매일 실행되는 크론 잡이 일정을 확인하고 알림 발송
 3. **외부 API (Expo Push Service)** — 실제 기기에 알림 전달
 
-### `useNotifications.js` — Push Token 등록
+### `useNotifications.js` — Push Token 등록 <!-- short: `useNotifications.js` -->
 
 ```javascript
 export function useNotifications() {

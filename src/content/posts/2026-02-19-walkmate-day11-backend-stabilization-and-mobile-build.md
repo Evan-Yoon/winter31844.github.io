@@ -68,7 +68,7 @@ toc: true
 
 ## 🛠 Tech Stack & Implementation
 
-### 1. API 통신의 미묘한 차이: Trailing Slash 이슈
+### 1. API 통신의 미묘한 차이: Trailing Slash 이슈 <!-- short: 1. API 통신의 미묘한 차이 -->
 
 FastAPI 서버에서 특정 엔드포인트 호출 시 307 리다이렉트나 404 오류가 반복적으로 발생했다. 조사 결과, 백엔드 경로 정의와 클라이언트 요청 주소의 끝에 슬래시(/) 유무가 일치하지 않아 발생하는 문제였다. 모든 API 주소 끝에 슬래시를 추가하여 통신 안정성을 확보했다.
 
@@ -83,14 +83,14 @@ FastAPI 서버에서 특정 엔드포인트 호출 시 307 리다이렉트나 40
 
 ---
 
-## ⚠️ Issue Situation & Troubleshooting
+## ⚠️ Issue Situation & Troubleshooting <!-- short: Troubleshooting -->
 
-### 이슈 1: 이미지 왜곡으로 인한 오인식 (Stretching vs Letterbox)
+### 이슈 1: 이미지 왜곡으로 인한 오인식 (Stretching vs Letterbox) <!-- short: 이슈 1 -->
 
 - **문제**: YOLO 모델에 입력되는 이미지 리사이징 과정에서 종횡비를 무시하고 늘리는(Stretching) 방식이 사용되었다. 이로 인해 노란색 점자블록이 벤치처럼 길쭉하게 왜곡되어 오인인식되는 문제가 발생했다.
 - **해결**: 이미지의 원본 비율을 유지하면서 부족한 부분을 검은색 등으로 채우는 **레터박스(Letterbox)** 방식을 도입했다. 이를 통해 객체의 기하학적 형태가 보존되어 인식 정확도가 대폭 향상되었다.
 
-### 이슈 2: react-native 내부 Flow 문법으로 인한 Vite 빌드 실패
+### 이슈 2: react-native 내부 Flow 문법으로 인한 Vite 빌드 실패 <!-- short: 이슈 2 -->
 
 - **문제**: 일부 라이브러리 내부에서 Flow 타입 문법이 사용되어 Vite의 기본 빌드 프로세스에서 에러가 발생했다.
 - **해결**: `react-native-web`을 설치하고, 빌드 시 해당 모듈로 대체(alias)하도록 설정하여 웹 환경에서도 원활하게 빌드되도록 조치했다.
@@ -105,7 +105,7 @@ FastAPI에서 슬래시 하나가 통신 성공 여부를 가르는 걸 보고, 
 
 ---
 
-## **Next Plan:** 카메라 프레임 전처리 알고리즘 고도화 및 YOLO26n 모델 현장 테스트 진행 예정. 🧭
+## **Next Plan:** 카메라 프레임 전처리 알고리즘 고도화 및 YOLO26n 모델 현장 테스트 진행 예정. 🧭 <!-- short: Next Plan -->
 
 ## 안정화 단계에서 드러난 실제 병목
 

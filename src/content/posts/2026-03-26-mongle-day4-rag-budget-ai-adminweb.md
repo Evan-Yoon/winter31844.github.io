@@ -209,7 +209,7 @@ const optimize = useCallback(async (params) => {
 
 ---
 
-## 밤: 플래너 관리자 웹 (Admin Web) 전체 스캐폴딩
+## 밤: 플래너 관리자 웹 (Admin Web) 전체 스캐폴딩 <!-- short: 밤 -->
 
 > `design: 플래너용 웹페이지 제작` — 21:54
 > 53 files, 6,341 insertions(+)

@@ -185,7 +185,7 @@ Scene scene = new Scene(root);
 
 즉, JavaFX는 단순 출력 도구가 아니라 실제 업무 화면 같은 폼 UI도 만들 수 있다는 걸 보기 시작한 단계다.
 
-## 6. `fx:id`와 `@FXML`: 화면 요소를 자바 코드와 연결하기
+## 6. `fx:id`와 `@FXML`: 화면 요소를 자바 코드와 연결하기 <!-- short: 6. `fx -->
 `hellofx`와 `study05`는 이 연결 구조를 가장 잘 보여 준다.
 
 `hellofx.fxml`에는 이런 부분이 있다.
@@ -221,7 +221,7 @@ public class Controller {
 
 즉, FXML은 단순한 그림이 아니라 컨트롤러와 연결되는 살아 있는 화면 정의다.
 
-## 7. `initialize()`: 화면이 로드된 뒤 초기 설정을 넣는 자리
+## 7. `initialize()`: 화면이 로드된 뒤 초기 설정을 넣는 자리 <!-- short: 7. `initialize()` -->
 `hellofx/Controller.java`의 `initialize()`는 자주 쓰이는 패턴이다.
 
 ```java
@@ -279,7 +279,7 @@ public void onActionBtn(ActionEvent e) {
 
 즉, 콘솔에서 하던 `Scanner -> parseInt -> 계산 -> println` 흐름이 이제 JavaFX UI 안으로 옮겨온 것이다.
 
-## 9. 계산기 UI: 여러 버튼과 이벤트를 한 화면에 묶기
+## 9. 계산기 UI: 여러 버튼과 이벤트를 한 화면에 묶기 <!-- short: 9. 계산기 UI -->
 `study06/root.fxml`는 계산기 화면을 꽤 본격적으로 구성한다.
 
 - 숫자 버튼 `0~9`

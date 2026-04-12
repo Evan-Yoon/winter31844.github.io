@@ -22,7 +22,7 @@ draft: false
 toc: true
 ---
 
-## 오늘은 "동시에 실행되는 코드"와 "데이터를 파일로 남기는 코드"를 함께 다룬 날이었다
+## 오늘은 "동시에 실행되는 코드"와 "데이터를 파일로 남기는 코드"를 함께 다룬 날이었다 <!-- short: 오늘 배운 핵심 -->
 `reference/javastudy/day0115/src/javaStudy`에는 `Calculator`, `User1Thread`, `User2Thread`, `WorkObject`, `ThreadA`, `ThreadB`, `PrintThread`, `AutoSaveThread`와 함께 `Study09.java`부터 `Study16.java`까지의 파일 입출력 예제가 들어 있다. 전날 day7이 예외 처리와 제네릭으로 "안전한 코드"를 만드는 감각을 익히는 날이었다면, day8은 그 코드가 동시에 실행될 때 생기는 문제와, 실행 결과를 파일에 저장하는 방법을 배우는 날이었다.
 
 이날 학습 흐름을 크게 나누면 이렇다.
@@ -61,7 +61,7 @@ private int memory;
 
 즉, 멀티스레드에서 중요한 건 "코드가 맞느냐"만이 아니라 "동시에 실행돼도 안전하냐"다.
 
-## 2. `synchronized` 메서드: 메서드 전체를 한 번에 한 스레드만 실행하게 하기
+## 2. `synchronized` 메서드: 메서드 전체를 한 번에 한 스레드만 실행하게 하기 <!-- short: 2. `synchronized` 메서드 -->
 `Calculator.java`의 첫 번째 메서드는 `synchronized`가 붙어 있다.
 
 ```java
@@ -84,7 +84,7 @@ public synchronized void setMemory1(int memory) {
 
 즉, `synchronized`는 공유 자원을 다루는 코드 구간을 원자적으로 보이게 만드는 도구다.
 
-## 3. 동기화 블록: 메서드 전체가 아니라 필요한 부분만 잠그기
+## 3. 동기화 블록: 메서드 전체가 아니라 필요한 부분만 잠그기 <!-- short: 3. 동기화 블록 -->
 `Calculator.java`의 두 번째 메서드는 조금 다르게 작성돼 있다.
 
 ```java
@@ -109,7 +109,7 @@ public void setMemory2(int memory) {
 
 실제 프로그램에서는 불필요하게 너무 넓게 잠그면 성능이 떨어질 수 있다. 그래서 정말 공유 자원을 다루는 핵심 구간만 잠그는 방식이 자주 쓰인다.
 
-## 4. `wait()`와 `notify()`: 스레드가 번갈아 일하게 만들기
+## 4. `wait()`와 `notify()`: 스레드가 번갈아 일하게 만들기 <!-- short: 4. `wait()`와 `notify()` -->
 `Study02.java`와 `WorkObject.java`는 day8의 핵심 예제다.
 
 ```java
@@ -151,7 +151,7 @@ public synchronized void methodA() {
 ### 왜 `wait()`와 `notify()`가 필요할까
 동기화만으로는 "동시에 못 들어오게"만 할 수 있다. 하지만 어떤 경우에는 두 스레드가 정해진 순서대로 번갈아 일해야 한다. 생산자-소비자 문제처럼 협업이 필요한 상황이 그렇다. 그런 제어에 `wait()`와 `notify()`가 쓰인다.
 
-## 5. 스레드 종료 1: 플래그 변수로 스스로 멈추게 하기
+## 5. 스레드 종료 1: 플래그 변수로 스스로 멈추게 하기 <!-- short: 5. 스레드 종료 1 -->
 `Study03.java`는 `PrintThread`를 사용한다.
 
 ```java
@@ -180,7 +180,7 @@ System.out.println("실행 종료");
 
 그래서 day8에서는 인터럽트 방식도 이어서 다룬다.
 
-## 6. 스레드 종료 2: `interrupt()`로 깨우기
+## 6. 스레드 종료 2: `interrupt()`로 깨우기 <!-- short: 6. 스레드 종료 2 -->
 `Study04.java`는 `PrintThread2`를 시작한 뒤 `interrupt()`를 호출한다.
 
 ```java
@@ -228,7 +228,7 @@ System.out.println("실행 종료");
 - `sleep()`/`wait()` 중 인터럽트 받기
 - 직접 인터럽트 상태 확인하기
 
-## 8. 데몬 스레드: 보조 역할 스레드는 메인 작업이 끝나면 같이 끝나게 하기
+## 8. 데몬 스레드: 보조 역할 스레드는 메인 작업이 끝나면 같이 끝나게 하기 <!-- short: 8. 데몬 스레드 -->
 `Study06.java`는 `AutoSaveThread`를 데몬 스레드로 실행한다.
 
 ```java
@@ -253,7 +253,7 @@ while (true) {
 
 즉, 데몬 스레드는 "주인공이 아니라 배경 지원 역할"이라고 이해하면 쉽다.
 
-## 9. `ExecutorService`: 스레드를 직접 만들기보다 풀로 관리하기
+## 9. `ExecutorService`: 스레드를 직접 만들기보다 풀로 관리하기 <!-- short: 9. `ExecutorService` -->
 `Study07.java`와 `Study08.java`는 `ExecutorService`를 다룬다.
 
 기본 생성:
@@ -347,7 +347,7 @@ if(num == -1) break;
 ### 왜 읽기 결과가 `int`일까
 `read()`는 실제 데이터 값뿐 아니라 파일 끝을 뜻하는 `-1`도 반환해야 한다. 그래서 `byte`가 아니라 `int`를 사용한다. 이런 작은 디테일을 이해하면 IO 코드가 덜 낯설어진다.
 
-## 12. 파일 복사: 텍스트가 아닌 바이너리도 결국 스트림이다
+## 12. 파일 복사: 텍스트가 아닌 바이너리도 결국 스트림이다 <!-- short: 12. 파일 복사 -->
 `Study14.java`는 이미지 파일을 복사한다.
 
 ```java

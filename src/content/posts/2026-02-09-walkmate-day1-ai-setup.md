@@ -99,7 +99,7 @@ toc: true
 
 ---
 
-## **Next Plan:** 내일은 실제 맞춤형 데이터셋(점자블록, 킥보드 등)을 구축하고 YOLOv11n 모델의 첫 전이 학습(Transfer Learning)을 실시할 예정이다.
+## **Next Plan:** 내일은 실제 맞춤형 데이터셋(점자블록, 킥보드 등)을 구축하고 YOLOv11n 모델의 첫 전이 학습(Transfer Learning)을 실시할 예정이다. <!-- short: Next Plan -->
 
 ## 왜 이 문제가 실제로 중요했는가
 

@@ -75,7 +75,7 @@ toc: true
 
 ---
 
-## ⚠️ Issue Situation & Troubleshooting
+## ⚠️ Issue Situation & Troubleshooting <!-- short: Troubleshooting -->
 
 개발 과정에서 마주한 이슈들과 그 해결 과정을 기록했다.
 
@@ -101,7 +101,7 @@ toc: true
 
 ---
 
-## **Next Plan:** 내일은 팀 프로젝트 기획서 발표가 있다. **WalkMate**의 기획 의도와 기술적 차별성을 명확히 전달할 수 있도록 준비할 예정이다.
+## **Next Plan:** 내일은 팀 프로젝트 기획서 발표가 있다. **WalkMate**의 기획 의도와 기술적 차별성을 명확히 전달할 수 있도록 준비할 예정이다. <!-- short: Next Plan -->
 
 ## 접근성 UI를 만들며 가장 신경 쓴 부분
 

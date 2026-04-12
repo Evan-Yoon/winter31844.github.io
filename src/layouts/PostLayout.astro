@@ -18,7 +18,19 @@ const categoryLabelMap: Record<string, string> = {
 };
 
 const categoryLabel = categoryLabelMap[frontmatter.category as string] || frontmatter.category || 'Category';
-const tocItems = (headings ?? []).filter((heading: { depth: number; slug: string; text: string }) => heading.depth === 2 || heading.depth === 3);
+
+const tocItems = (headings ?? [])
+  .filter((heading: { depth: number; slug: string; text: string }) => heading.depth === 2 || heading.depth === 3)
+  .map((heading: { depth: number; slug: string; text: string }) => {
+    // Look for <!-- short: ... --> pattern
+    const shortMatch = heading.text.match(/(.*)<!--\s*short:\s*(.*)\s*-->/);
+    return {
+      ...heading,
+      // If short version exist, use it. Otherwise, strip any other comments.
+      displayTitle: shortMatch ? shortMatch[2].trim() : heading.text.replace(/<!--.*?-->/g, '').trim()
+    };
+  });
+
 const showToc = frontmatter.toc !== false && tocItems.length > 0;
 ---
 
@@ -221,7 +233,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
         <p class="article-toc-kicker">On This Page</p>
         <h2 class="article-toc-title">지금 읽는 위치</h2>
         <nav class="article-toc-nav">
-          {tocItems.map((heading: { depth: number; slug: string; text: string }) => (
+          {tocItems.map((heading: any) => (
             <a
               class={`toc-link toc-depth-${heading.depth}`}
               href={`#${heading.slug}`}
@@ -229,7 +241,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
               data-target={heading.slug}
             >
               <span class="toc-link-dot" aria-hidden="true"></span>
-              <span class="toc-link-text">{heading.text}</span>
+              <span class="toc-link-text">{heading.displayTitle}</span>
             </a>
           ))}
         </nav>

@@ -459,7 +459,7 @@ Auto Scaling에서 자주 나오는 핵심 동작은 세 가지다.
 
 ---
 
-## 내가 맡았던 주제 2: Lambda vs EC2 vs LightSail
+## 내가 맡았던 주제 2: Lambda vs EC2 vs LightSail <!-- short: 내가 맡았던 주제 2 -->
 
 이번 3회차에서 내가 맡은 두 번째 발표는 **Lambda, EC2, Lightsail 비교**였다.
 

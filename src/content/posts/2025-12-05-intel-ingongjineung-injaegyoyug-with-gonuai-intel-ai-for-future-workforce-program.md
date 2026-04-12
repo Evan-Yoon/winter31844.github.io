@@ -26,7 +26,7 @@ toc: true
 
 ---
 
-### [인텔 인공지능 인재교육] with 고누아이 : Intel AI for Future Workforce Program
+### [인텔 인공지능 인재교육] with 고누아이 : Intel AI for Future Workforce Program <!-- short: Intel AI Program -->
 
 이번에 인텔 인공지능 인재교육(with 고누아이) 과정을 수강하게 되었다.
 

@@ -346,7 +346,7 @@ Regional Service는 리전 선택이 중요하다. 지연 시간, 비용, 데이
 
 ---
 
-## Region / AZ / Edge Location / Service Scope를 한 번에 연결해 보기
+## Region / AZ / Edge Location / Service Scope를 한 번에 연결해 보기 <!-- short: 인프라 서비스 맵핑 -->
 
 2회차는 사실 네 개의 독립 주제가 아니라 하나의 흐름으로 이어진다.
 

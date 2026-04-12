@@ -20,13 +20,13 @@ draft: false
 toc: true
 ---
 
-# A Visit to Intel Korea: Meeting the Experts
+# A Visit to Intel Korea: Meeting the Experts <!-- short: A Visit to Intel Korea -->
 
 Intel AI for Future Workforce — Special Lecture Series
 
 ---
 
-### A Visit to Intel Korea: Meeting the Experts
+### A Visit to Intel Korea: Meeting the Experts <!-- short: A Visit to Intel Korea -->
 
 Intel AI for Future Workforce — Special Lecture Series
 

@@ -79,9 +79,9 @@ Google Maps API가 국내 도보 경로 미지원을 확인한 후, 즉시 TMAP 
 
 ---
 
-## ⚠️ Issue Situation & Troubleshooting
+## ⚠️ Issue Situation & Troubleshooting <!-- short: Troubleshooting -->
 
-### 이슈 1: TMAP API 403 Forbidden 에러
+### 이슈 1: TMAP API 403 Forbidden 에러 <!-- short: 이슈 1 -->
 
 - **문제**: API 키가 유효함에도 `INVALID_API_KEY` 에러가 발생하며 경로 정보를 불러오지 못했다.
 - **해결**: TMAP 대시보드의 '상품 관리' 탭에서 '보행자 경로 안내' 서비스를 별도로 구독해야 함을 발견했다. 외부 API 사용 시 단순 키 발급 외에 서비스 활성화 상태 확인의 중요성을 깨달았다.
@@ -101,7 +101,7 @@ Google API 미지원 소식에 잠깐 당황했지만, TMAP으로 전환 후 첫
 
 ---
 
-## **Next Plan:** 내일은 실제 야외 환경에서 GPS 오차 보정 로직을 정밀화하고 필드 테스트를 진행할 예정이다. 또한, 관리자용 대시보드 설계를 시작하여 시스템의 관리 측면도 보충할 계획이다. 🚧
+## **Next Plan:** 내일은 실제 야외 환경에서 GPS 오차 보정 로직을 정밀화하고 필드 테스트를 진행할 예정이다. 또한, 관리자용 대시보드 설계를 시작하여 시스템의 관리 측면도 보충할 계획이다. 🚧 <!-- short: Next Plan -->
 
 ## 길안내 UX를 설계하면서 중요했던 판단
 

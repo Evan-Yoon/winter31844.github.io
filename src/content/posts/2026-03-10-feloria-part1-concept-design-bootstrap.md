@@ -78,7 +78,7 @@ Phaser로 갈아타기 전 첫 화면. 지금 보면 투박하지만, 이때 이
 
 지역도 정했다. Starwhisk Village, Greenpaw Forest, Mosslight Path, Aurora Creek, Shadowvale Ruins, Celestial Gate. 이 구조는 이후 커밋까지 거의 바뀌지 않았다.
 
-### 두 번째 전환: 전면 재시작 — Phaser 3 + JavaScript
+### 두 번째 전환: 전면 재시작 — Phaser 3 + JavaScript <!-- short: 두 번째 전환 -->
 
 React + TypeScript + Canvas 스택은 동작은 했지만 맵 렌더러가 계속 문제였다. 충돌 처리, 카메라 팔로우, NPC 레이어, 조우 구역 — 이것들을 직접 Canvas에 구현하려니 매번 무너졌다.
 
@@ -254,7 +254,7 @@ HP 바, 스킬 선택 UI, 경험치 획득 로직이 추가됐다. 이 시점의
 
 다음 글에서는 Foundation ~ Content 단계를 다룬다. 씬 골격이 갖춰지고, 도감·상점·퀘스트·저장이 붙으면서 "시스템 모음"이 "게임"처럼 보이기 시작하는 구간이다.
 
-## 그리고 왜 그렇게 많은 버그가 Phase 5에서 한꺼번에 터졌는지도 얘기할 것이다.
+## 그리고 왜 그렇게 많은 버그가 Phase 5에서 한꺼번에 터졌는지도 얘기할 것이다. <!-- short: 버그 회고 예고 -->
 
 ## 콘셉트 단계에서 범위를 먼저 줄인 이유
 

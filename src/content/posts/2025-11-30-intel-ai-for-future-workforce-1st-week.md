@@ -27,9 +27,9 @@ toc: true
 
 ---
 
-### [Intel] AI For Future Workforce (1st Week)
+### [Intel] AI For Future Workforce (1st Week) <!-- short: Intel AI Week 1 -->
 
-### 6-Month Intensive Bootcamp to Pivot from HR to AI Developer
+### 6-Month Intensive Bootcamp to Pivot from HR to AI Developer <!-- short: 6-Month Bootcamp -->
 
 As I mentioned in my previous post, I have officially enrolled in the **Intel AI Developer Training Program.**
 
@@ -71,7 +71,7 @@ It's a fascinating mix. Out of the 13 of us, about **7 are complete beginners** 
 
 ---
 
-### Week 1: The First Step into the AI World
+### Week 1: The First Step into the AI World <!-- short: Week 1 -->
 
 The first week wasn't just about coding; it was a deep dive into the landscape of AI and how diverse its services have become.
 
