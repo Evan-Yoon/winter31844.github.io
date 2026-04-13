@@ -1,7 +1,5 @@
 ---
-title: |
-  [스팸 분류 스터디] [5회차]
-  BiLSTM 개선과 최종 결과
+title: "[스팸 분류] 5회차: BiLSTM 개선과 최종 결과 - BiLSTM으로 성능 개선"
 slug: spam-classification-study-day5-bilstm-and-final-results
 date: 2026-01-21
 author: Evan Yoon

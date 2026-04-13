@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [3회차]
-  Compute 핵심 정리
+title: "[AWS] 3회차: Compute 핵심 정리 - Compute 서비스 이해"
 slug: aws-clf-c02-day3-compute-core
 date: 2026-01-13
 author: Evan Yoon

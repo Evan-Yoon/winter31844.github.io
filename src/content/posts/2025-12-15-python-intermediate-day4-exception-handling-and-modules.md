@@ -1,5 +1,5 @@
 ---
-title: "Python 중급 4일차: 예외처리와 모듈 분리"
+title: "[Python] 9일차: 예외처리와 모듈 분리 - 에러 처리와 코드 조직화"
 slug: python-intermediate-day4-exception-handling-and-modules
 date: 2025-12-15
 author: Evan Yoon

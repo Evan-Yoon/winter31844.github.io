@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [1회차]
-  클라우드 컴퓨팅
+title: "[AWS] 1회차: 클라우드 컴퓨팅 - AWS 기초 개념 이해"
 slug: aws-clf-c02-day1-cloud-basics
 date: 2026-01-06
 author: Evan Yoon

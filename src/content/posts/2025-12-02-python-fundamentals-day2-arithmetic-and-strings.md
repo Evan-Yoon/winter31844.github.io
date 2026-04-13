@@ -1,5 +1,5 @@
 ---
-title: "Python 기초 2일차: 산술 연산자, 문자열 연산"
+title: "[Python] 2일차: 산술 연산자, 문자열 연산 - 계산과 텍스트 처리"
 slug: python-fundamentals-day2-arithmetic-and-strings
 date: 2025-12-02
 author: Evan Yoon

@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 6: React 상태관리, useState로 화면 업데이트하기"
+title: "[APP] 6일차: React 상태관리, useState로 화면 업데이트하기 - 상태관리와 useEffect"
 slug: intel-app-day6-react-state
 date: 2026-03-10
 author: Evan Yoon

@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 13: React Native 모델 서빙과 갤러리·카메라 연동"
+title: "[APP] 13일차: React Native 모델 서빙과 갤러리·카메라 연동 - 심화 기능 구현"
 slug: intel-app-day13-react-native-model-camera
 date: 2026-03-19
 author: Evan Yoon

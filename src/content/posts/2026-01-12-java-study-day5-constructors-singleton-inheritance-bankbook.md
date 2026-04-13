@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 5일차: final, 캡슐화, 싱글턴, 상속, 다형성, 은행장부"
+title: "[Java] 5일차: 캡슐화, 싱글턴, 상속 - 객체지향 심화"
 slug: java-study-day5-constructors-singleton-inheritance-bankbook
 date: 2026-01-12
 author: Evan Yoon

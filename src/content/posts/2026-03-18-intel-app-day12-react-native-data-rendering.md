@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 12: React Native 데이터 기반 렌더링, 리스트와 카드를 만들다"
+title: "[APP] 12일차: React Native 데이터 기반 렌더링, 리스트와 카드를 만들다 - 데이터 기반 UI"
 slug: intel-app-day12-react-native-data-rendering
 date: 2026-03-18
 author: Evan Yoon

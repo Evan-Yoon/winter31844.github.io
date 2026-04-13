@@ -1,5 +1,5 @@
 ---
-title: "Python 기초 1일차: 변수, 자료형, 출력"
+title: "[Python] 1일차: 변수, 자료형, 출력 - 기본 문법과 자료형 이해하기"
 slug: python-fundamentals-day1-variables-types-and-output
 date: 2025-12-01
 author: Evan Yoon

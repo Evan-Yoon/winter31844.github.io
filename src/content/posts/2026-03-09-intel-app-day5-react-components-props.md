@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 5: React 컴포넌트와 Props, 조각을 조합하다"
+title: "[APP] 5일차: React 컴포넌트와 Props, 조각을 조합하다 - Props와 컴포넌트 설계"
 slug: intel-app-day5-react-components-props
 date: 2026-03-09
 author: Evan Yoon

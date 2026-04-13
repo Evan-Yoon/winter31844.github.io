@@ -1,5 +1,5 @@
 ---
-title: "Python 중급 1일차: 클래스, 객체, 속성, 메서드"
+title: "[Python] 6일차: 클래스, 객체, 속성, 메서드 - 객체지향 프로그래밍 입문"
 slug: python-intermediate-day1-class-and-object-basics
 date: 2025-12-10
 author: Evan Yoon

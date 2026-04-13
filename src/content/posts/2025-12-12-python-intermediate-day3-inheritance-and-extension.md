@@ -1,5 +1,5 @@
 ---
-title: "Python 중급 3일차: 상속과 클래스 확장"
+title: "[Python] 8일차: 상속과 클래스 확장 - 클래스 재사용과 확장"
 slug: python-intermediate-day3-inheritance-and-extension
 date: 2025-12-12
 author: Evan Yoon

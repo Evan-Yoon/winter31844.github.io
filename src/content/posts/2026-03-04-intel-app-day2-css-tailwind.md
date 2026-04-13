@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 2: CSS와 TailwindCSS 기초"
+title: "[APP] 2일차: CSS와 TailwindCSS 기초 - CSS 스타일링 및 레이아웃"
 slug: intel-app-day2-css-tailwind
 date: 2026-03-04
 author: Evan Yoon

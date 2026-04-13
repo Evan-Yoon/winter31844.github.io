@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [7회차]
-  보안과 IAM
+title: "[AWS] 7회차: 보안과 IAM - IAM 및 보안 개념 정리"
 slug: aws-clf-c02-day7-security-and-iam
 date: 2026-01-27
 author: Evan Yoon

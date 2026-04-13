@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [9회차]
-  문제풀이와 학습 공백 정리
+title: "[AWS] 9회차: 문제풀이와 학습 공백 정리 - 시험 대비 문제 풀이"
 slug: aws-clf-c02-day9-practice-and-gap-filling
 date: 2026-02-03
 author: Evan Yoon

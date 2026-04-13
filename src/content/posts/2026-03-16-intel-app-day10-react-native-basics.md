@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 10: React Native 시작, 웹과 모바일의 차이"
+title: "[APP] 10일차: React Native 시작, 웹과 모바일의 차이 - 모바일 개발 시작"
 slug: intel-app-day10-react-native-basics
 date: 2026-03-16
 author: Evan Yoon

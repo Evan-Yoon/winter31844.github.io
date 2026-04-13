@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [2회차]
-  AWS 글로벌 인프라 정리
+title: "[AWS] 2회차: AWS 글로벌 인프라 - 글로벌 인프라 이해"
 slug: aws-clf-c02-day2-global-infrastructure
 date: 2026-01-08
 author: Evan Yoon

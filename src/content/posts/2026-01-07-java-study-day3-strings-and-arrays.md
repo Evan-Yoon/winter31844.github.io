@@ -1,5 +1,5 @@
 ﻿---
-title: "Java 학습 3일차: 문자열 처리와 배열 다루기"
+title: "[Java] 3일차: 문자열 처리와 배열 다루기 - 컬렉션 기초"
 slug: java-study-day3-strings-and-arrays
 date: 2026-01-07
 author: Evan Yoon

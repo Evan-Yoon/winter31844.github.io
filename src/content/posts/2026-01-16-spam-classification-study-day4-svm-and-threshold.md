@@ -1,7 +1,5 @@
 ---
-title: |
-  [스팸 분류 스터디] [4회차]
-  SVM과 임계값 조정으로 정상 메시지 지키기
+title: "[스팸 분류] 4회차: SVM과 임계값 조정으로 정상 메시지 지키기 - 임계값 조정"
 slug: spam-classification-study-day4-svm-and-threshold
 date: 2026-01-16
 author: Evan Yoon

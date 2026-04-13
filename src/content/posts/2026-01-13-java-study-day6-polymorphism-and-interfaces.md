@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 6일차: 추상 클래스, 다형성, 인터페이스 설계"
+title: "[Java] 6일차: 추상 클래스, 다형성, 인터페이스 - 유연한 설계"
 slug: java-study-day6-polymorphism-and-interfaces
 date: 2026-01-13
 author: Evan Yoon

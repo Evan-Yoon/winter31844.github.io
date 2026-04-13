@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 9: FastAPI 기본, Python으로 백엔드 서버를 만들다"
+title: "[APP] 9일차: FastAPI 기본, Python으로 백엔드 서버를 만들다 - 백엔드 API 구축"
 slug: intel-app-day9-fastapi
 date: 2026-03-13
 author: Evan Yoon

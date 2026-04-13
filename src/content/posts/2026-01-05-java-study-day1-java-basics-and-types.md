@@ -1,5 +1,5 @@
 ﻿---
-title: "Java 학습 1일차: 출력, 변수, 자료형, 형변환 정리"
+title: "[Java] 1일차: 출력, 변수, 자료형, 형변환 - Java 기초 이해하기"
 slug: java-study-day1-basics-and-types
 date: 2026-01-05
 author: Evan Yoon

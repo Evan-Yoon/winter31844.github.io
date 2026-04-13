@@ -1,7 +1,5 @@
 ---
-title: |
-  [스팸 분류 스터디] [3회차]
-  전처리 적용과 Bag of Words, TF-IDF 첫 비교
+title: "[스팸 분류] 3회차: 전처리 적용과 Bag of Words, TF-IDF 첫 비교 - 기본 모델 비교"
 slug: spam-classification-study-day3-preprocessing-and-baselines
 date: 2026-01-14
 author: Evan Yoon

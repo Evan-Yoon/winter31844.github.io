@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [8회차]
-  비용과 아키텍처 원칙
+title: "[AWS] 8회차: 비용과 아키텍처 원칙 - 비용 최적화와 설계 원칙"
 slug: aws-clf-c02-day8-cost-and-architecture
 date: 2026-01-29
 author: Evan Yoon

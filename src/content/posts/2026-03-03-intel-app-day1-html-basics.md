@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 1: HTML, 다시 처음부터"
+title: "[APP] 1일차: HTML, 다시 처음부터 - HTML 구조와 기본 태그"
 slug: intel-app-day1-html-basics
 date: 2026-03-03
 author: Evan Yoon

@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 8일차: 스레드 동기화, 인터럽트, 스레드풀, 파일 입출력"
+title: "[Java] 8일차: 스레드 동기화, 파일 입출력 - 병렬 처리와 데이터"
 slug: java-study-day8-synchronization-file-io-addressbook
 date: 2026-01-15
 author: Evan Yoon

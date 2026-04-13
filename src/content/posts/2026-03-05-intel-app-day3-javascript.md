@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 3: JavaScript, 웹에 동작을 심다"
+title: "[APP] 3일차: JavaScript, 웹에 동작을 심다 - JavaScript 핵심 개념"
 slug: intel-app-day3-javascript
 date: 2026-03-05
 author: Evan Yoon

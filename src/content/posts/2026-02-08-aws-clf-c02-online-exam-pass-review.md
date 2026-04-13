@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [합격]
-  온라인 시험 합격 후기
+title: "[AWS] 합격: 온라인 시험 합격 후기 - CLF-C02 합격 후기 및 팁"
 slug: aws-clf-c02-online-exam-pass-review
 date: 2026-02-08
 author: Evan Yoon

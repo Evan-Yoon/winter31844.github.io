@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 14: 총정리, 3주 만에 웹과 앱을 건드리다"
+title: "[APP] 14일차: 총정리, 3주 만에 웹과 앱을 건드리다 - 과정 총정리"
 slug: intel-app-day14-final-review
 date: 2026-03-20
 author: Evan Yoon

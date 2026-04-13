@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 4일차: 클래스, 객체, 생성자, 메서드, 콘솔 미니 프로젝트"
+title: "[Java] 4일차: 클래스, 객체, 생성자, 메서드 - 객체지향 입문"
 slug: java-study-day4-classes-methods-and-console-projects
 date: 2026-01-08
 author: Evan Yoon

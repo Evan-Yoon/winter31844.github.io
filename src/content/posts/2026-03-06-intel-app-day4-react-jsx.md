@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 4: React와 JSX, 컴포넌트의 시작"
+title: "[APP] 4일차: React와 JSX, 컴포넌트의 시작 - React 기초"
 slug: intel-app-day4-react-jsx
 date: 2026-03-06
 author: Evan Yoon

@@ -1,5 +1,5 @@
 ---
-title: "Python 중급 5일차: 공부 자료, 자습 방향"
+title: "[Python] 10일차: 공부 자료, 자습 방향 - Python 학습의 다음 단계"
 slug: python-intermediate-day5-self-study-resources-and-next-steps
 date: 2025-12-16
 author: Evan Yoon

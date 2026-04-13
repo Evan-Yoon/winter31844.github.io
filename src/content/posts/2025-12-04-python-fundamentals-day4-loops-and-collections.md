@@ -1,5 +1,5 @@
 ---
-title: "Python 기초 4일차: 반복문, 리스트"
+title: "[Python] 4일차: 반복문, 리스트 - 반복과 컬렉션 다루기"
 slug: python-fundamentals-day4-loops-and-collections
 date: 2025-12-04
 author: Evan Yoon

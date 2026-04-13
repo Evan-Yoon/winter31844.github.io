@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [6회차]
-  Network & Delivery
+title: "[AWS] 6회차: Network & Delivery - 네트워킹 이해"
 slug: aws-clf-c02-day6-network-delivery
 date: 2026-01-22
 author: Evan Yoon

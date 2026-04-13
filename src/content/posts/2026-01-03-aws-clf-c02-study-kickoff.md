@@ -1,5 +1,5 @@
 ---
-title: "[AWS CLF-C02] Cloud Practitioner 스터디 시작"
+title: "[AWS] Kickoff: Cloud Practitioner 스터디 시작 - AWS 자격증 준비"
 slug: aws-clf-c02-study-kickoff
 date: 2026-01-03
 author: Evan Yoon

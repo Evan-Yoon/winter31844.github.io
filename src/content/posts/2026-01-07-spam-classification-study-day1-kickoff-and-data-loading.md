@@ -1,7 +1,5 @@
 ---
-title: |
-  [스팸 분류 스터디] [1회차]
-  스터디 시작
+title: "[스팸 분류] 1회차: 스터디 시작 - 스팸 분류 데이터 로드"
 slug: spam-classification-study-day1-kickoff-and-data-loading
 date: 2026-01-07
 author: Evan Yoon

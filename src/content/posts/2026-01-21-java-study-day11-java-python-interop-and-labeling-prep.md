@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 11일차: Java-Python 연동, 라벨링 도구, 감정 분석 준비"
+title: "[Java] 11일차: Java-Python 연동, 라벨링 도구 - 다중 언어 협업"
 slug: java-study-day11-java-python-interop-and-labeling-prep
 date: 2026-01-21
 author: Evan Yoon

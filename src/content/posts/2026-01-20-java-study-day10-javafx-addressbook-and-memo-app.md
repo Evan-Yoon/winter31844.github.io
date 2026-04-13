@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 10일차: JavaFX 이미지 뷰어, 메모장, GUI 주소록 CRUD"
+title: "[Java] 10일차: JavaFX 이미지 뷰어, 메모장, 주소록 - 실전 GUI"
 slug: java-study-day10-javafx-addressbook-and-memo-app
 date: 2026-01-20
 author: Evan Yoon

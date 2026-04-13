@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 7: 제어 컴포넌트와 TodoList"
+title: "[APP] 7일차: 제어 컴포넌트와 TodoList - 폼 제어와 localStorage"
 slug: intel-app-day7-controlled-component-todolist
 date: 2026-03-11
 author: Evan Yoon

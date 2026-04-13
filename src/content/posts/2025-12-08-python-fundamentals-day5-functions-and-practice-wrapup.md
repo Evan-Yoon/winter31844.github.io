@@ -1,5 +1,5 @@
 ---
-title: "Python 기초 5일차: 함수, 기초 정리"
+title: "[Python] 5일차: 함수, 기초 정리 - 함수와 프로그램 구조화"
 slug: python-fundamentals-day5-functions-and-practice-wrapup
 date: 2025-12-08
 author: Evan Yoon

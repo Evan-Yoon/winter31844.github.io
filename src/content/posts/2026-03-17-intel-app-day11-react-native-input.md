@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 11: React Native 사용자 입력, 모바일 UX를 손으로 익히다"
+title: "[APP] 11일차: React Native 사용자 입력, 모바일 UX를 손으로 익히다 - 모바일 입력 처리"
 slug: intel-app-day11-react-native-input
 date: 2026-03-17
 author: Evan Yoon

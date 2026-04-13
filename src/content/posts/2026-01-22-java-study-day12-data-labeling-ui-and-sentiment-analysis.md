@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 12일차: 데이터 라벨링 UI 완성과 감정 분석 모델 연동"
+title: "[Java] 12일차: 데이터 라벨링 UI, 감정 분석 연동 - 프로젝트 완성"
 slug: java-study-day12-data-labeling-ui-and-sentiment-analysis
 date: 2026-01-22
 author: Evan Yoon

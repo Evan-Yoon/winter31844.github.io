@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 9일차: JavaFX 생명주기, FXML, 컨트롤러, 계산기 UI"
+title: "[Java] 9일차: JavaFX 생명주기, FXML, 컨트롤러 - GUI 프로그래밍"
 slug: java-study-day9-javafx-basics-and-calculator-ui
 date: 2026-01-19
 author: Evan Yoon

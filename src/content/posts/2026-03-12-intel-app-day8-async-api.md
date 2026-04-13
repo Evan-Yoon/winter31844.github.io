@@ -1,5 +1,5 @@
 ---
-title: "[App Dev] Day 8: 비동기 통신과 API 연동, 실제 데이터와 연결하다"
+title: "[APP] 8일차: 비동기 통신과 API 연동, 실제 데이터와 연결하다 - API 통신과 상태관리"
 slug: intel-app-day8-async-api
 date: 2026-03-12
 author: Evan Yoon

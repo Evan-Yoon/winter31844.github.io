@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [4회차]
-  Storage 핵심 정리
+title: "[AWS] 4회차: Storage 핵심 정리 - Storage 서비스 이해"
 slug: aws-clf-c02-day4-storage-core
 date: 2026-01-15
 author: Evan Yoon

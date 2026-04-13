@@ -1,5 +1,5 @@
 ---
-title: "Python 기초 3일차: 비교 연산, 조건문"
+title: "[Python] 3일차: 비교 연산, 조건문 - 조건에 따른 실행 흐름"
 slug: python-fundamentals-day3-conditions-and-comparisons
 date: 2025-12-03
 author: Evan Yoon

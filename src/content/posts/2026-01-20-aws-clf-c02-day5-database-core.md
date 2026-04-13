@@ -1,7 +1,5 @@
 ---
-title: |
-  [AWS CLF-C02] [5회차]
-  Database 핵심 정리
+title: "[AWS] 5회차: Database 핵심 정리 - Database 서비스 이해"
 slug: aws-clf-c02-day5-database-core
 date: 2026-01-20
 author: Evan Yoon

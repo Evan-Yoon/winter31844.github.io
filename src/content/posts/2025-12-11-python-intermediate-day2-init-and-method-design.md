@@ -1,5 +1,5 @@
 ---
-title: "Python 중급 2일차: __init__ 생성자와 메서드 설계"
+title: "[Python] 7일차: __init__ 생성자와 메서드 설계 - 객체 초기화와 메서드"
 slug: python-intermediate-day2-init-and-method-design
 date: 2025-12-11
 author: Evan Yoon

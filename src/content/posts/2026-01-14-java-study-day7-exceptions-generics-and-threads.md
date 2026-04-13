@@ -1,5 +1,5 @@
 ---
-title: "Java 학습 7일차: 예외 처리, 일반 API, 제네릭, 와일드카드"
+title: "[Java] 7일차: 예외 처리, 제네릭, 스레드 - 고급 기능"
 slug: java-study-day7-exceptions-generics-and-threads
 date: 2026-01-14
 author: Evan Yoon

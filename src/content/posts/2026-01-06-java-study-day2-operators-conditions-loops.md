@@ -1,5 +1,5 @@
 ﻿---
-title: "Java 학습 2일차: 입력, 연산자, 조건문, 반복문"
+title: "[Java] 2일차: 입력, 연산자, 조건문, 반복문 - 제어문 익히기"
 slug: java-study-day2-operators-conditions-loops
 date: 2026-01-06
 author: Evan Yoon
