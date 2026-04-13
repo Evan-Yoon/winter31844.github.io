@@ -30,7 +30,9 @@ const contactHref = email ? `mailto:${email}` : "/#about";
 <body class="fade-in">
 
   <nav id="global-nav">
-    <a href="/" class="nav-logo">Evan Yoon<span>.</span></a>
+    <a href="/" class="nav-logo">
+      <img src="/public/favicon.svg" alt="Evan Yoon" class="nav-logo-img" />
+    </a>
     <ul class="nav-links">
       <li><a href="/posts">All</a></li>
       <li><a href="/guestbook">Guestbook</a></li>
@@ -521,7 +523,8 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       background: var(--bg);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+    .nav-logo { display: flex; align-items: center; flex-shrink: 0; width: 40px; height: 40px; }
+    .nav-logo-img { width: 100%; height: 100%; object-fit: contain; }
     .nav-logo span { color: var(--accent); }
     .nav-links {
       display: flex;
