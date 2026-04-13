@@ -19,7 +19,14 @@
       "Bash(grep -l 'category: study' c:/dev/project/winter31844.github.io/src/content/posts/*.md)",
       "Bash(grep -l 'category: project' c:/dev/project/winter31844.github.io/src/content/posts/*.md)",
       "Bash(grep -l 'category: explore' c:/dev/project/winter31844.github.io/src/content/posts/*.md)",
-      "Bash(grep -h \"^subcategory:\" c:/dev/project/winter31844.github.io/src/content/posts/*.md)"
+      "Bash(grep -h \"^subcategory:\" c:/dev/project/winter31844.github.io/src/content/posts/*.md)",
+      "Bash(node pentest/run-tests.js)",
+      "Bash(node -e \"const fs = require\\('fs'\\); try { JSON.parse\\(fs.readFileSync\\('c:/dev/project/winter31844.github.io/pentest/firebase-rules-fixed.json', 'utf8'\\)\\); console.log\\('✅ Valid JSON'\\); } catch\\(e\\) { console.log\\('❌ Invalid JSON:', e.message\\); }\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); try { JSON.parse\\(fs.readFileSync\\('c:/dev/project/winter31844.github.io/pentest/firebase-rules-fixed.json', 'utf8'\\)\\); console.log\\('✅ Valid JSON'\\); } catch\\(e\\) { console.log\\('❌', e.message\\); }\")",
+      "Bash(npm install:*)",
+      "Bash(firebase --version)",
+      "Bash(firebase use:*)",
+      "Bash(firebase deploy:*)"
     ],
     "additionalDirectories": [
       "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories",

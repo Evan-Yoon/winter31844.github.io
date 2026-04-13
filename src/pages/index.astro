@@ -244,7 +244,8 @@ const latestNews = allPosts
 
 <script>
   import { initializeApp } from 'firebase/app';
-  import { getDatabase, get, ref, runTransaction } from 'firebase/database';
+  import { getDatabase, get, ref } from 'firebase/database';
+  import { getFunctions, httpsCallable } from 'firebase/functions';
 
   const firebaseConfig = {
     apiKey: 'AIzaSyCNkdX0A83XXEK-FIjqPt7b8iZxJ5mlw_4',
@@ -259,6 +260,7 @@ const latestNews = allPosts
 
   const firebaseApp = initializeApp(firebaseConfig);
   const database = getDatabase(firebaseApp);
+  const functions = getFunctions(firebaseApp, 'asia-northeast3');
   // ── 운영일 계산 (2025-11-28 기준) ──
   const launch = new Date('2025-11-28T00:00:00+09:00');
   const today = new Date();
@@ -288,17 +290,21 @@ const latestNews = allPosts
     const dailyRef = ref(database, `visits/${todayKst}`);
     const storageKey = `visited_${todayKst}`;
     try {
-      // 오늘 카운트 읽기
+      // 오늘 카운트 읽기 (읽기는 여전히 클라이언트에서 직접)
       const snapshot = await get(dailyRef);
       const current = snapshot.exists() ? snapshot.val() : 0;
       if (el) el.textContent = Number(current).toLocaleString('ko-KR');
 
-      // 하루에 한 번만 카운트 (같은 브라우저/기기 기준)
+      // 하루에 한 번만 카운트 (localStorage로 중복 함수 호출 방지)
       if (!localStorage.getItem(storageKey)) {
-        const result = await runTransaction(dailyRef, (value) => (value || 0) + 1);
+        const trackVisit = httpsCallable<{ date: string }, { counted: boolean; current: number }>(
+          functions,
+          'trackVisit'
+        );
+        const result = await trackVisit({ date: todayKst });
         localStorage.setItem(storageKey, '1');
-        if (result.committed && el) {
-          el.textContent = Number(result.snapshot.val() ?? current).toLocaleString('ko-KR');
+        if (el) {
+          el.textContent = Number(result.data.current).toLocaleString('ko-KR');
         }
       }
     } catch (error) {
