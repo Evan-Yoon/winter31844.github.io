@@ -60,12 +60,33 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </div>
     </section>
+
+    <section class="admin-card admin-card-wide" style="margin-top: 1.25rem;">
+      <div class="admin-panel" data-admin-panel>
+        <div class="admin-card-head">
+          <div>
+            <h2 class="admin-card-title">Security Logs</h2>
+            <p class="admin-card-copy">비정상 요청 감지 로그입니다. Cloud Functions에서 기록된 보안 이벤트만 표시됩니다.</p>
+          </div>
+          <div class="admin-toolbar">
+            <button type="button" class="admin-button admin-button-ghost" data-logs-refresh>Refresh</button>
+            <button type="button" class="admin-button admin-button-danger" data-logs-clear>Clear All</button>
+          </div>
+        </div>
+        <div class="admin-status-row">
+          <span data-logs-summary>Not loaded</span>
+        </div>
+        <div class="admin-logs" data-admin-logs>
+          <p class="admin-empty">No security events found.</p>
+        </div>
+      </div>
+    </section>
   </section>
 </BaseLayout>
 
 <script>
   import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-  import { get, ref, remove, update } from 'firebase/database';
+  import { get, query, orderByKey, limitToLast, ref, remove, update } from 'firebase/database';
   import { getFirebaseAuth, getFirebaseDatabase } from '../../lib/firebase/client';
 
   const auth = getFirebaseAuth('comments-admin');
@@ -78,6 +99,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const userLabel = document.querySelector<HTMLElement>('[data-admin-user]');
   const logoutButton = document.querySelector<HTMLElement>('[data-admin-logout]');
   const refreshButton = document.querySelector<HTMLButtonElement>('[data-admin-refresh]');
+  const logsRoot = document.querySelector<HTMLElement>('[data-admin-logs]');
+  const logsSummary = document.querySelector<HTMLElement>('[data-logs-summary]');
+  const logsRefreshButton = document.querySelector<HTMLButtonElement>('[data-logs-refresh]');
+  const logsClearButton = document.querySelector<HTMLButtonElement>('[data-logs-clear]');
   const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-admin-filter]'));
   const commentsRoot = document.querySelector<HTMLElement>('[data-admin-comments]');
   const adminPanel = document.querySelector<HTMLElement>('[data-admin-panel]');
@@ -231,6 +256,43 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
   }
 
+  const EVENT_LABELS: Record<string, string> = {
+    invalid_date_rejected: 'Invalid Date',
+  };
+
+  async function loadLogs() {
+    if (!hasAdminAccess || !logsRoot) return;
+    try {
+      const logsQuery = query(ref(database, '_logs/security'), orderByKey(), limitToLast(100));
+      const snapshot = await get(logsQuery);
+      const raw = snapshot.val() || {};
+      const entries = Object.entries(raw)
+        .map(([key, value]) => ({ key, ...(value as any) }))
+        .reverse(); // 최신 순
+
+      if (logsSummary) logsSummary.textContent = `${entries.length} events`;
+
+      if (entries.length === 0) {
+        logsRoot.innerHTML = '<p class="admin-empty">No security events found.</p>';
+        return;
+      }
+
+      logsRoot.innerHTML = entries.map((entry) => `
+        <div class="admin-log-row">
+          <span class="admin-badge admin-badge-warn">${escapeHtml(EVENT_LABELS[entry.event] ?? entry.event)}</span>
+          <span class="admin-log-time">${escapeHtml(entry.timestamp ? new Date(entry.timestamp).toLocaleString('ko-KR') : '-')}</span>
+          <span class="admin-log-chip">IP <code>${escapeHtml(entry.ipHash ?? '-')}</code></span>
+          <span class="admin-log-chip">Date <code>${escapeHtml(String(entry.date ?? '-'))}</code></span>
+          <span class="admin-log-ua" title="${escapeHtml(entry.ua ?? '')}">${escapeHtml((entry.ua ?? '').slice(0, 60))}${(entry.ua ?? '').length > 60 ? '…' : ''}</span>
+        </div>
+      `).join('');
+    } catch (error) {
+      console.error('Failed to load security logs.', error);
+      if (logsRoot) logsRoot.innerHTML = '<p class="admin-empty">Failed to load logs.</p>';
+      if (logsSummary) logsSummary.textContent = 'Load failed';
+    }
+  }
+
   loginForm?.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -260,6 +322,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   refreshButton?.addEventListener('click', async () => {
     await loadComments();
+  });
+
+  logsRefreshButton?.addEventListener('click', async () => {
+    await loadLogs();
+  });
+
+  logsClearButton?.addEventListener('click', async () => {
+    if (!hasAdminAccess) return;
+    const confirmed = window.confirm('보안 로그를 전부 삭제하시겠습니까?');
+    if (!confirmed) return;
+    try {
+      await remove(ref(database, '_logs/security'));
+      await loadLogs();
+    } catch (error) {
+      console.error('Failed to clear logs.', error);
+    }
   });
 
   filterButtons.forEach((button) => {
@@ -338,7 +416,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         setAuthStatus('', 'neutral');
         setScreenState(true);
         setAdminView(true);
-        await loadComments();
+        await Promise.all([loadComments(), loadLogs()]);
       } else {
         setScreenState(false);
         setAdminView(false);
@@ -614,6 +692,57 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .admin-empty {
     color: var(--ink-3);
     padding: 2rem 0;
+  }
+
+  .admin-logs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .admin-log-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+  }
+
+  .admin-badge-warn {
+    background: rgba(180, 100, 0, 0.1);
+    color: #b46000;
+    border-color: rgba(180, 100, 0, 0.2);
+  }
+
+  .admin-log-time {
+    color: var(--ink-3);
+    min-width: 140px;
+  }
+
+  .admin-log-chip {
+    color: var(--ink-2);
+  }
+
+  .admin-log-chip code {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+  }
+
+  .admin-log-ua {
+    color: var(--ink-3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
   }
 
   .admin-comment-actions {

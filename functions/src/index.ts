@@ -22,13 +22,7 @@ export const trackVisit = onCall(
   { region: 'asia-northeast3' }, // 서울 리전
   async (request) => {
     const date: unknown = request.data?.date;
-
-    // 날짜 형식 검증 (클라이언트가 보낸 값을 신뢰하지 않음)
-    if (typeof date !== 'string' || !DATE_REGEX.test(date)) {
-      return { counted: false, reason: 'invalid_date', current: 0 };
-    }
-
-    const db = getDatabase();
+    const userAgent = (request.rawRequest.headers['user-agent'] as string | undefined) ?? '';
 
     // IP 수집 — 역방향 프록시 헤더 우선, 없으면 소켓 IP
     const rawIp =
@@ -41,6 +35,17 @@ export const trackVisit = onCall(
     // IP를 직접 저장하지 않고 16자리 해시만 보관 (개인정보 보호)
     const ipHash = createHash('sha256').update(rawIp).digest('hex').slice(0, 16);
 
+    const db = getDatabase();
+
+    // 날짜 형식 검증 (클라이언트가 보낸 값을 신뢰하지 않음)
+    if (typeof date !== 'string' || !DATE_REGEX.test(date)) {
+      const ts = new Date().toISOString();
+      console.warn(JSON.stringify({ event: 'invalid_date_rejected', date, ipHash, ua: userAgent, timestamp: ts }));
+      // 어드민 대시보드에서 볼 수 있도록 Firebase에도 기록
+      db.ref('_logs/security').push({ event: 'invalid_date_rejected', date, ipHash, ua: userAgent, timestamp: ts }).catch(() => {});
+      return { counted: false, reason: 'invalid_date', current: 0 };
+    }
+
     // rate limit 노드: _rateLimit/visits/{date}/{ipHash}
     // → firebase rules에서 클라이언트 읽기/쓰기 모두 차단
     const rateLimitRef = db.ref(`_rateLimit/visits/${date}/${ipHash}`);
@@ -51,6 +56,13 @@ export const trackVisit = onCall(
     const currentCount: number = currentSnap.exists() ? (currentSnap.val() as number) : 0;
 
     if (alreadyCounted) {
+      console.log(JSON.stringify({
+        event: 'visit_deduplicated',
+        date,
+        ipHash,
+        current: currentCount,
+        timestamp: new Date().toISOString(),
+      }));
       return { counted: false, current: currentCount };
     }
 
@@ -62,9 +74,19 @@ export const trackVisit = onCall(
     // rate limit 기록
     await rateLimitRef.set(true);
 
+    const finalCount = result.snapshot.val() as number;
+    console.log(JSON.stringify({
+      event: 'visit_counted',
+      date,
+      ipHash,
+      ua: userAgent,
+      current: finalCount,
+      timestamp: new Date().toISOString(),
+    }));
+
     return {
       counted: true,
-      current: result.snapshot.val() as number,
+      current: finalCount,
     };
   }
 );
