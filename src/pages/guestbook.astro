@@ -311,26 +311,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .gb-entry {
     background: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    margin-bottom: 1.5rem;
+    border: 2px solid var(--border);
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
     border-radius: var(--radius);
     transition: all var(--transition);
     animation: fadeInUp 0.5s ease-out forwards;
   }
 
-  .gb-entry:hover { border-color: var(--accent); transform: translateX(4px); }
+  .gb-entry:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
 
   .gb-entry-head {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
   }
 
-  .gb-entry-author { font-size: 1rem; color: var(--ink); font-weight: 500; }
-  .gb-entry-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-3); }
-  .gb-entry-body { font-size: 1.05rem; color: var(--ink-2); line-height: 1.7; font-weight: 300; white-space: pre-wrap; }
+  .gb-entry-author {
+    font-size: 1.1rem;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+  .gb-entry-date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .gb-entry-body {
+    font-size: 1rem;
+    color: var(--ink-2);
+    line-height: 1.8;
+    font-weight: 300;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
 
   .gb-loading, .gb-empty { text-align: center; padding: 4rem 1rem; color: var(--ink-3); font-family: var(--font-mono); font-size: 0.9rem; }
 
