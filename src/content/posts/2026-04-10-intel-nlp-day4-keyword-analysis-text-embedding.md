@@ -1,40 +1,63 @@
 ---
-title: "[Intel NLP] Day 4: 키워드 분석부터 텍스트 임베딩까지"
-slug: intel-nlp-day4-keyword-analysis-text-embedding
+title: "[NLP] 키워드 분석부터 텍스트 임베딩까지: Word2Vec과 신경망 기초"
+slug: nlp-study-keyword-analysis-word2vec-embedding
 date: 2026-04-10
 author: Evan Yoon
 category: study
-subcategory: bootcamp
-description: "한국어 형태소 분석부터 단어 임베딩, 신경망까지 NLP의 전체 파이프라인을 배웠다."
+subcategory: nlp
+description: |
+  한국어 형태소 분석, 키워드 추출부터 시작해 TF-IDF, Word2Vec, 
+  그리고 RNN/LSTM 신경망까지 텍스트를 벡터로 표현하고 학습하는 전체 파이프라인을 다룬다.
+  TF-IDF의 한계와 Word2Vec의 강점, 신경망이 필요한 이유를 체계적으로 정리했다.
 thumbnail: ""
 tags:
-  - NLP
-  - 자연어처리
-  - Word2Vec
+  - nlp
+  - word2vec
   - 임베딩
   - 유사도
-  - 텍스트마이닝
-  - RNN
-  - LSTM
-  - Python
+  - text-embedding
+  - rnn
+  - lstm
+  - 한국어처리
+  - nlp-study
 readTime: 15
 series: "Intel NLP 과정"
-seriesOrder: 4
+seriesOrder: 2
 featured: false
 draft: false
 toc: true
 ---
 
-지난 3일간은 감정 분석이라는 구체적 문제를 다뤘다면, 오늘은 한 발 물러서서 "텍스트를 어떻게 이해하고 처리할 것인가"의 다양한 관점을 배웠다. 한국어 데이터에서 키워드를 뽑아내는 것부터 시작해서, 단어를 숫자의 벡터로 표현하고, 그 벡터들 사이의 유사도를 계산하고, 결국 신경망으로 의미를 학습하는 과정까지. 오늘만큼 "NLP의 전체 파이프라인"을 느낀 날이 없었다.
+지난 스터디에서는 TF-IDF와 로지스틱 회귀로 텍스트를 분류하는 기본을 배웠다. "curry on fire" 예제에서 보았듯이, 단순한 키워드 매칭은 문맥을 이해하지 못한다. 이번 학습은 한 발 더 나아간 것이다.
+
+한국어 데이터에서 키워드를 뽑아내는 것부터 시작해서, 단어를 의미있는 벡터로 표현하고, 그 벡터들 사이의 유사도를 여러 방식으로 계산하고, 궁극적으로 신경망(RNN/LSTM)으로 의미를 학습하는 과정까지.
+
+오늘의 핵심 질문은 이것이다: **"'커피'라는 단어가 의미하는 바를 컴퓨터가 어떻게 이해할까?"**
+
+TF-IDF는 "어떤 문서에서 많이 나타나는가"를 본다. Word2Vec은 다르다. "어떤 단어들과 함께 나타나는가"를 학습해서, 그 관계로부터 의미를 추론한다. 그리고 신경망은 이 모든 걸 자동으로 배운다.
+
+## 이전 학습과의 연결
+
+이전 스터디에서 배운 것:
+
+- ✅ TF-IDF 벡터화로 텍스트를 숫자로 변환
+- ✅ 로지스틱 회귀로 분류 모델 구축
+- ❌ 하지만 "curry on fire"처럼 문맥을 이해하지 못함
+
+이번 학습에서 나아가는 것:
+
+- **Why**: TF-IDF의 한계를 넘기 위해
+- **How**: 단어의 "의미"를 학습하는 방식들을 배운다
+- **What**: Word2Vec, 신경망 등으로 더 똑똑한 모델 만들기
 
 ## 오늘 다룬 범위
 
-1. **한국어 형태소 분석**: Mecab으로 문장을 분해
-2. **키워드 추출 & 빈도 분석**: 영화 리뷰 데이터에서 핵심 단어 발굴
-3. **텍스트 벡터화**: 텍스트를 숫자로 변환 (BoW, TF-IDF)
-4. **유사도 계산**: 텍스트와 텍스트의 거리를 측정하는 여러 방식
-5. **단어 임베딩**: Word2Vec으로 단어의 의미를 벡터에 담기
-6. **신경망 모델**: RNN, LSTM으로 시퀀스 학습
+1. **한국어 형태소 분석**: Mecab으로 문장을 의미 있는 단위로 분해
+2. **키워드 추출 & 빈도 분석**: 데이터의 패턴을 눈으로 이해하기
+3. **텍스트 벡터화**: BoW, TF-IDF (복습) — 그리고 그 한계
+4. **유사도 계산**: 코사인, 유클리디안, 자카드 — 다양한 거리 측정법
+5. **Word2Vec**: 단어의 "의미"를 학습하는 임베딩 방식
+6. **신경망 모델**: Embedding + RNN/LSTM으로 시퀀스 학습
 
 ---
 
@@ -52,13 +75,14 @@ sentence = '언제나 현재에 집중할 수 있다면 행복할 것이다.'
 result = tagger.pos(sentence)
 
 # 출력
-# [('언제나', 'MAG'), ('현재', 'NNG'), ('에', 'JKB'), 
+# [('언제나', 'MAG'), ('현재', 'NNG'), ('에', 'JKB'),
 #  ('집중', 'NNG'), ('할', 'XSV'), ('수', 'NNG'), ...]
 ```
 
 **형태소란?** 더 이상 분석할 수 없는 최소 의미 단위다. "집중할"은 "집중(동사) + 할(보조동사)"로 분해된다.
 
 **품사 태그의 의미:**
+
 - **NNG**: 일반 명사 (현재, 집중)
 - **VV**: 동사 (집중하다)
 - **MAG**: 일반 부사 (언제나)
@@ -71,7 +95,7 @@ result = tagger.pos(sentence)
 모든 단어가 의미 있는 건 아니다. 영화 리뷰에서 "영화", "전" (이전), "난" (나) 같은 단어는 자주 나타나지만 실제로 감정을 드러내진 않는다.
 
 ```python
-stop_words = ['영화', '전', '난', '일', '걸', '뭐', '줄', '만', '건', 
+stop_words = ['영화', '전', '난', '일', '걸', '뭐', '줄', '만', '건',
               '분', '개', '끝', '하다', '되다']
 ```
 
@@ -126,7 +150,7 @@ plt.show()
 ```python
 from wordcloud import WordCloud
 
-wc = WordCloud(background_color='white', 
+wc = WordCloud(background_color='white',
                font_path='./font/NanumBarunGothic.ttf')
 wc.generate_from_frequencies(top_nouns)
 plt.imshow(wc)
@@ -142,7 +166,7 @@ import squarify
 import matplotlib as mpl
 
 colors = [mpl.cm.Blues(norm(value)) for value in top_nouns.values()]
-squarify.plot(label=top_nouns.keys(), sizes=top_nouns.values(), 
+squarify.plot(label=top_nouns.keys(), sizes=top_nouns.values(),
               color=colors, alpha=0.7)
 ```
 
@@ -274,11 +298,13 @@ cos_sim = np.dot(s1_bow, s2_bow) / (np.linalg.norm(s1_bow) * np.linalg.norm(s2_b
 **원리:** 두 벡터가 이루는 각도를 계산한다.
 
 **특징:**
+
 - -1 ~ 1 사이의 값 (1이 가장 유사)
 - 벡터의 방향만 고려하고 크기는 무시
 - 텍스트 길이가 달라도 공정하게 비교
 
 실제 결과:
+
 ```
 s1 vs s2: 0.486 (그나마 유사)
 s1 vs s3: 0.000 (완전히 다름)
@@ -353,6 +379,7 @@ similarity = model.wv.similarity('커피', '차')
 ```
 
 **BoW/TF-IDF와의 차이:**
+
 - BoW: 문서 × 단어 행렬 (sparse, 희소)
 - Word2Vec: 단어 × 임베딩 벡터 (dense, 밀집)
 - BoW는 단어 존재 여부, Word2Vec은 단어의 의미
@@ -376,13 +403,14 @@ model.fit(X_train, y_train, epochs=10)
 ```
 
 **각 층의 의미:**
+
 - **Embedding**: One-hot 벡터 (예: [0,1,0,0,...])를 100차원 벡터로 변환
   - 이게 바로 Word2Vec 같은 임베딩을 자동으로 학습하는 것
 - **LSTM**: 긴 시퀀스의 의존성을 학습
   - 예: "커피를 마시면" 이 문장에서 "마시면"을 예측할 때, "커피"라는 정보를 오래 기억해야 함
 - **Dense**: 최종 분류 층
 
-**목표:** 다음 단어 예측. 예: "나는 아침에 __를 마신다" → "커피"를 예측
+**목표:** 다음 단어 예측. 예: "나는 아침에 \_\_를 마신다" → "커피"를 예측
 
 #### RNN vs LSTM vs GRU
 
@@ -398,6 +426,7 @@ model = Sequential([
 ```
 
 **비교:**
+
 - **RNN**: 가장 기본. 하지만 긴 시퀀스에서 "기울기 소실" 문제 발생
 - **LSTM**: 복잡한 게이트로 중요한 정보를 오래 기억. 더 안정적
 - **GRU**: LSTM보다 간단. 계산량 적음
@@ -470,6 +499,7 @@ Word2Vec: [0.2, -0.5, 0.1, ...]  ← 100 차원 (dense)
 ```
 
 이 변환으로:
+
 1. 메모리 효율 (30,000 → 100)
 2. 의미 정보 포함 (One-hot은 숫자일 뿐, Embedding은 의미 담음)
 
@@ -496,6 +526,7 @@ Word2Vec: [0.2, -0.5, 0.1, ...]  ← 100 차원 (dense)
 아니다. 시각적 표현일 뿐, 정확한 빈도는 데이터를 봐야 한다.
 
 WordCloud는:
+
 - 👍 한눈에 분포 파악
 - 👎 정확한 숫자 비교 어려움
 
@@ -544,8 +575,29 @@ Word2Vec은 "블랙박스"라서 왜 그런 예측을 했는지 설명하기 어
 
 ---
 
+## 핵심 학습 경로: TF-IDF → Word2Vec → 신경망
+
+```
+① TF-IDF 방식 (이전)
+   단어 개수를 세고 가중치를 줌
+   장점: 빠르고 해석 가능
+   한계: "curry"가 항상 같은 의미로 취급됨
+
+② Word2Vec 방식 (이번)
+   단어의 "주변 맥락"을 학습
+   장점: 의미를 이해함 ("curry"의 문맥 파악 가능)
+   한계: 순서 정보는 무시 (모든 문맥이 같은 가중치)
+
+③ RNN/LSTM 방식 (이번 후반부)
+   단어의 순서를 고려한 학습
+   장점: 전체 문맥과 순서를 이해함
+   한계: 더 많은 데이터와 계산 필요
+```
+
 ## 한 줄 정리
 
-한국어 텍스트에서 키워드를 추출하고, 이를 벡터로 표현하고, 벡터 간 유사도를 계산하고, 궁극적으로 신경망으로 단어의 의미를 학습하는 일련의 과정이 NLP의 기초다.
+TF-IDF로 분류하는 것에서 출발해, Word2Vec으로 의미를 학습하고, RNN/LSTM으로 순서까지 고려하는 신경망에 이르는 과정이 현대 NLP의 기초다.
 
-지금까지 배운 것들이 다 모여 있는 날이었다. Day 1~3에서 배운 텍스트 정제, 벡터화, 모델 평가가 여기서 모두 나타났다. 다음부터는 이런 기초 위에서 좀 더 실무적인 프로젝트나 최신 모델들(트랜스포머, BERT 등)을 배울 것 같다. 기대된다.
+이전 스터디의 "curry on fire" 문제는 이제 명확해졌다. Word2Vec 벡터에서 'curry'와 'fire'는 문맥에 따라 다른 임베딩을 가질 수 있다. RNN/LSTM이라면 문장 전체의 순서까지 고려해서 "Michael curry is on fire"가 스포츠 문맥인지 재난 문맥인지 구분할 수 있다.
+
+다음은 이런 기초 위에서 **감정 분석(Sentiment Analysis)**을 실제로 구현해 보는 시간이 될 것 같다.
