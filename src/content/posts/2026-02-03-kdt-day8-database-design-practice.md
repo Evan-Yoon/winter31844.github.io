@@ -1,6 +1,6 @@
 ---
-title: "[KDT] 8일차: DB 설계 실습 - 모든 것을 종합하다"
-slug: "kdt-day8-database-design-practice"
+title: "[APP] 8일차: DB 설계 실습 - 모든 것을 종합하다"
+slug: "app-day8-database-design-practice"
 date: 2026-02-03
 author: "Evan Yoon"
 category: "study"
@@ -8,14 +8,14 @@ subcategory: "bootcamp"
 description: "한 주 동안 배운 모든 개념을 종합해서 실제 데이터베이스를 설계하고 구현한 마지막 날."
 thumbnail: ""
 tags:
-  - kdt
+  - app
   - database-design
   - sql
   - project
   - study
   - bootcamp
 readTime: 9
-series: "KDT 부트캠프 기록"
+series: "APP 과정"
 seriesOrder: 8
 featured: false
 draft: false

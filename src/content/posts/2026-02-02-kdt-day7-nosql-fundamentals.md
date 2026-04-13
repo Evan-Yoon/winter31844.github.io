@@ -1,6 +1,6 @@
 ---
-title: "[KDT] 7일차: NoSQL 이해 - 다른 방식의 데이터 저장"
-slug: "kdt-day7-nosql-fundamentals"
+title: "[APP] 7일차: NoSQL 이해 - 다른 방식의 데이터 저장"
+slug: "app-day7-nosql-fundamentals"
 date: 2026-02-02
 author: "Evan Yoon"
 category: "study"
@@ -8,7 +8,7 @@ subcategory: "bootcamp"
 description: "SQL만이 아닌 NoSQL, 특히 MongoDB를 배우며 데이터 저장의 다양성을 이해한 하루."
 thumbnail: ""
 tags:
-  - kdt
+  - app
   - nosql
   - mongodb
   - json
@@ -16,7 +16,7 @@ tags:
   - study
   - bootcamp
 readTime: 8
-series: "KDT 부트캠프 기록"
+series: "APP 과정"
 seriesOrder: 7
 featured: false
 draft: false

@@ -1,6 +1,6 @@
 ---
-title: "[KDT] 4일차: 개발 도구 실습 - AI와 Git으로 실전 준비하기"
-slug: "kdt-day4-development-tools-practice"
+title: "[APP] 4일차: 개발 도구 실습 - AI와 Git으로 실전 준비하기"
+slug: "app-day4-development-tools-practice"
 date: 2026-01-28
 author: "Evan Yoon"
 category: "study"
@@ -8,7 +8,7 @@ subcategory: "bootcamp"
 description: "Refactoring, VCS, Git, GitHub를 배우며 실제 개발 워크플로우를 경험한 하루."
 thumbnail: ""
 tags:
-  - kdt
+  - app
   - git
   - github
   - refactoring
@@ -16,14 +16,14 @@ tags:
   - study
   - bootcamp
 readTime: 7
-series: "KDT 부트캠프 기록"
+series: "APP 과정"
 seriesOrder: 4
 featured: false
 draft: false
 toc: true
 ---
 
-지금까지 3일간 배운 것들은 모두 "논리와 이론"이었다. 오늘부터는 그 논리를 **"실제 코드"로 구현하고, 그 코드를 "협업하고 관리하는 방법"**을 배웠다. 머리로만 아는 것과 손으로 직접 하는 것의 차이를 느꼈다.
+지금까지 3일간 배운 것들은 모두 "논리와 이론"이었다. 오늘부터는 그 논리를 **"실제 코드"로 구현하고, 그 코드를 "협업하고 관리하는 방법"**을 배웠다.
 
 ## 오늘 다룬 범위
 

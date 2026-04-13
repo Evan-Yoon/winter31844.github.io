@@ -1,6 +1,6 @@
 ---
-title: "[KDT] 5일차: DB 개념 이해 - 데이터를 영구보관하는 방법"
-slug: "kdt-day5-database-fundamentals"
+title: "[APP] 5일차: DB 개념 이해 - 데이터를 영구보관하는 방법"
+slug: "app-day5-database-fundamentals"
 date: 2026-01-29
 author: "Evan Yoon"
 category: "study"
@@ -8,14 +8,14 @@ subcategory: "bootcamp"
 description: "프로그램이 종료되면 데이터는 어디로 가나? DB, DBMS, RDBMS의 개념을 정리한 하루."
 thumbnail: ""
 tags:
-  - kdt
+  - app
   - database
   - dbms
   - rdbms
   - study
   - bootcamp
 readTime: 7
-series: "KDT 부트캠프 기록"
+series: "APP 과정"
 seriesOrder: 5
 featured: false
 draft: false

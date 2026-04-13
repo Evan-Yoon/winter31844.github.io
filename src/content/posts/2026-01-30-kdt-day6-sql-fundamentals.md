@@ -1,6 +1,6 @@
 ---
-title: "[KDT] 6일차: SQL 문법 기초 - 데이터에 질문을 던지다"
-slug: "kdt-day6-sql-fundamentals"
+title: "[APP] 6일차: SQL 문법 기초 - 데이터에 질문을 던지다"
+slug: "app-day6-sql-fundamentals"
 date: 2026-01-30
 author: "Evan Yoon"
 category: "study"
@@ -8,7 +8,7 @@ subcategory: "bootcamp"
 description: "SELECT, CREATE, INSERT, UPDATE, DELETE로 데이터를 다루는 기본 언어, SQL을 배운 하루."
 thumbnail: ""
 tags:
-  - kdt
+  - app
   - sql
   - ddl
   - dml
@@ -16,7 +16,7 @@ tags:
   - study
   - bootcamp
 readTime: 8
-series: "KDT 부트캠프 기록"
+series: "APP 과정"
 seriesOrder: 6
 featured: false
 draft: false
