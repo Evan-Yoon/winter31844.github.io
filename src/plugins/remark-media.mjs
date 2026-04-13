@@ -16,6 +16,11 @@ const BASE = '';
 function collectReferenced(nodes, result = new Set()) {
   for (const node of nodes) {
     if (node.type === 'image') result.add(path.basename(node.url));
+    // raw HTML 블록(<img src="...">)에서도 참조된 이미지 수집
+    if (node.type === 'html') {
+      const matches = node.value.matchAll(/src=["']([^"']+)["']/g);
+      for (const [, src] of matches) result.add(path.basename(src));
+    }
     if (node.children) collectReferenced(node.children, result);
   }
   return result;
