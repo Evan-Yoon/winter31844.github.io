@@ -246,6 +246,7 @@ const latestNews = allPosts
   import { initializeApp } from 'firebase/app';
   import { getDatabase, get, ref } from 'firebase/database';
   import { getFunctions, httpsCallable } from 'firebase/functions';
+  import { getAuth, signInAnonymously } from 'firebase/auth';
 
   const firebaseConfig = {
     apiKey: 'AIzaSyCNkdX0A83XXEK-FIjqPt7b8iZxJ5mlw_4',
@@ -259,8 +260,12 @@ const latestNews = allPosts
   };
 
   const firebaseApp = initializeApp(firebaseConfig);
+  const auth = getAuth(firebaseApp);
   const database = getDatabase(firebaseApp);
   const functions = getFunctions(firebaseApp, 'asia-northeast3');
+
+  // Sign in anonymously to get authentication token
+  signInAnonymously(auth).catch(() => {});
   // ── 운영일 계산 (2025-11-28 기준) ──
   const launch = new Date('2025-11-28T00:00:00+09:00');
   const today = new Date();
