@@ -1,0 +1,524 @@
+/* ─── HERO ───────────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 20px 2rem;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 0;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  font-family: var(--font-mono);
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 2rem;
+}
+
+.hero-title em.acc-2 { font-style: italic; color: var(--accent-2); }
+
+.hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+  max-width: 44ch;
+  margin-bottom: 3.5rem;
+  font-weight: 300;
+}
+
+.hero-cta { display: flex; gap: 1rem; align-items: center; }
+
+/* ─── VISITOR STATS ──────────────────────────────────────────────────────── */
+.visitor-stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.stat-item { display: flex; flex-direction: column; gap: 0.3rem; }
+.stat-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-3); letter-spacing: 0.1em; }
+.stat-value { font-family: var(--font-mono); font-size: 1.4rem; color: var(--ink); font-weight: 400; }
+.stat-divider { width: 1px; height: 2rem; background: var(--border-strong); }
+
+/* ─── SNAKE EASTER EGG ───────────────────────────────────────────────────── */
+.snake-easter-egg {
+  position: absolute;
+  right: clamp(1rem, 4vw, 2.5rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  width: 56px;
+  height: 32px;
+  opacity: 0.42;
+  transition: transform var(--transition), opacity var(--transition), filter var(--transition);
+  filter: drop-shadow(0 4px 10px rgba(34, 197, 94, 0.18));
+}
+
+.snake-easter-egg:hover {
+  opacity: 0.95;
+  transform: translateY(-2px) rotate(-3deg);
+}
+
+.snake-easter-egg svg { width: 100%; height: 100%; overflow: visible; }
+
+.snake-easter-egg .snake-body,
+.snake-easter-egg .snake-tongue {
+  fill: none;
+  stroke: #22c55e;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.5;
+}
+
+.snake-easter-egg .snake-head {
+  fill: #86efac;
+  stroke: #22c55e;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.4;
+}
+
+.snake-easter-egg .snake-eye { fill: #14532d; }
+
+/* ─── BUTTONS ────────────────────────────────────────────────────────────── */
+.btn-primary {
+  padding: 12px 28px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: all var(--transition);
+}
+
+.btn-primary:hover { background: var(--accent); }
+
+.btn-ghost {
+  padding: 12px 28px;
+  border: 1px solid var(--border-strong);
+  color: var(--ink-2);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: all var(--transition);
+}
+
+.btn-ghost:hover { background: var(--bg-hover); color: var(--ink); }
+
+/* ─── SECTION LAYOUT ─────────────────────────────────────────────────────── */
+section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.view-all {
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+}
+
+.view-all:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ─── POSTS GRID ─────────────────────────────────────────────────────────── */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.post-card {
+  position: relative;
+  background: var(--bg-card);
+  padding: 2rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all var(--transition);
+}
+
+.post-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.post-card-meta { display: flex; align-items: center; justify-content: space-between; }
+
+.post-cat-badge {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+}
+
+.post-date { font-size: 0.75rem; color: var(--ink-3); font-family: var(--font-mono); }
+
+.post-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.post-card-title a { color: var(--ink); }
+.post-card-title a:hover { color: var(--accent); }
+
+.post-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.read-time { font-size: 0.75rem; color: var(--ink-3); font-family: var(--font-mono); }
+.post-view-count { font-size: 0.75rem; color: var(--ink-3); font-family: var(--font-mono); }
+.post-card-footer > .read-time { margin-right: auto; }
+.read-arrow { font-size: 0.8rem; color: var(--ink-3); transition: transform var(--transition); }
+.post-card:hover .read-arrow { color: var(--accent); transform: translateX(4px); }
+
+/* post-card tooltip */
+.post-card::after {
+  content: attr(data-summary);
+  position: absolute;
+  bottom: calc(100% + 15px);
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 100;
+  font-family: var(--font-sans);
+  font-weight: 300;
+}
+
+.post-card:hover::after { opacity: 1; transform: translateY(-8px); }
+
+[data-theme="dark"] .post-card::after {
+  background: var(--bg-hover);
+  color: var(--ink);
+  border: 1px solid var(--border-strong);
+}
+
+/* ─── ABOUT SECTION ──────────────────────────────────────────────────────── */
+.about-section {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.about-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
+.about-heading-wrap { position: sticky; top: 100px; }
+.about-body { font-size: 1.05rem; line-height: 1.85; color: var(--ink-2); font-weight: 300; margin-bottom: 2rem; }
+.about-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+
+.skill-chip {
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--border-strong);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  transition: all var(--transition);
+}
+
+.skill-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+/* ─── TIMELINE ───────────────────────────────────────────────────────────── */
+.timeline {
+  max-width: var(--col);
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2.5rem;
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  align-items: start;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.tl-item.accent .tl-title { color: var(--accent); }
+.tl-item.accent .tl-date { color: var(--accent); font-weight: 500; }
+.tl-date { font-size: 0.75rem; font-family: var(--font-mono); color: var(--ink-3); text-align: right; }
+.tl-mono { text-transform: uppercase; letter-spacing: 0.06em; }
+.tl-title { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ink); margin-bottom: 0.5rem; font-weight: 400; }
+.tl-desc { font-size: 0.875rem; color: var(--ink-2); line-height: 1.7; font-weight: 300; }
+
+/* ─── AI NEWS PREVIEW ────────────────────────────────────────────────────── */
+.ai-news-section { border-top: 1px solid var(--border); }
+
+.news-preview-card {
+  background: var(--bg-card);
+  padding: 3rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  max-width: var(--col);
+  margin: 0 auto;
+  transition: all var(--transition);
+}
+
+.news-preview-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.news-preview-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.news-preview-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-3); }
+
+.news-preview-kicker {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.news-preview-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+
+.news-preview-title a:hover { color: var(--accent); }
+
+.news-preview-desc {
+  font-size: 1.05rem;
+  color: var(--ink-2);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.news-preview-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all var(--transition);
+}
+
+.news-preview-link:hover { color: var(--accent); }
+.news-preview-link .arrow { transition: transform var(--transition); }
+.news-preview-link:hover .arrow { transform: translateX(4px); }
+
+/* ─── ACTIVITY / GITHUB ──────────────────────────────────────────────────── */
+.activity-container { display: grid; gap: 4rem; grid-template-columns: 1fr; }
+
+.github-graph-wrap {
+  background: var(--bg-card);
+  padding: 2rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+.recent-commits-wrap { max-width: none; padding-left: 0; }
+.activity-copy { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+
+.commits-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.commits-desc { font-size: 0.9rem; color: var(--ink-3); line-height: 1.5; }
+.activity-loading, .no-activity { font-size: 0.85rem; color: var(--ink-3); font-family: var(--font-mono); }
+
+#recent-commits-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+
+.commit-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-card);
+  min-height: 132px;
+}
+
+.commit-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.commit-repo { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-2); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+.commit-badge { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent); background: var(--accent-soft); padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+
+.commit-msg {
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.5;
+  font-weight: 350;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.commit-detail {
+  font-size: 0.82rem;
+  color: var(--ink-2);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.commit-bottom { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.commit-repos { font-size: 0.68rem; color: var(--ink-3); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+.commit-date { font-size: 0.7rem; color: var(--ink-3); font-family: var(--font-mono); white-space: nowrap; }
+
+.github-link-button {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  border-bottom: 1px solid var(--border);
+  transition: all var(--transition);
+}
+
+.github-link-button:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ─── GITHUB CALENDAR (third-party widget overrides) ─────────────────────── */
+#github-calendar { min-height: 180px; position: relative; }
+
+.calendar {
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  border: none !important;
+  color: var(--ink-3) !important;
+  background: transparent !important;
+}
+
+.calendar h2,
+.calendar .sr-only,
+.calendar .year-tabs,
+.calendar .contrib-footer,
+.calendar .contrib-column { display: none !important; }
+
+.calendar .width-full { border: none !important; padding: 0 !important; margin: 0 !important; }
+.calendar .graph-before-tabs { border: none !important; margin: 0 !important; }
+
+#github-calendar .ContributionCalendar-day[data-level="0"],
+#github-calendar .ContributionCalendar-day:not([data-level]) { fill: var(--bg-hover) !important; }
+#github-calendar .ContributionCalendar-day[data-level="1"] { fill: rgba(74, 103, 133, 0.2) !important; }
+#github-calendar .ContributionCalendar-day[data-level="2"] { fill: rgba(74, 103, 133, 0.4) !important; }
+#github-calendar .ContributionCalendar-day[data-level="3"] { fill: rgba(74, 103, 133, 0.7) !important; }
+#github-calendar .ContributionCalendar-day[data-level="4"] { fill: var(--accent) !important; }
+
+.calendar .ContributionCalendar-label { fill: var(--ink-3) !important; font-family: var(--font-mono) !important; font-size: 10px !important; }
+.calendar-graph { height: auto !important; padding: 0 !important; display: flex !important; justify-content: center !important; }
+.calendar .text-gray { color: var(--ink-3) !important; font-family: var(--font-mono) !important; }
+.js-calendar-graph-svg { margin: 0 auto; }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero { min-height: auto; padding: 80px 1rem; border: none; }
+  .hero-content { padding: 3rem 0; }
+  .snake-easter-egg { right: 0.5rem; bottom: 0.5rem; width: 48px; }
+  .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .about-heading-wrap { position: static; }
+  .timeline { grid-template-columns: 1fr; gap: 0; }
+  .tl-item { grid-template-columns: 1fr; gap: 0.5rem; border: none; border-left: 1px solid var(--border); padding: 1rem 0 1.5rem 1rem; margin-left: 1rem; }
+  .tl-date { text-align: left; margin-bottom: 0; }
+}
+
+@media (max-width: 800px) {
+  .news-preview-card { padding: 2rem; }
+  .news-preview-title { font-size: 1.5rem; }
+  .activity-copy { display: block; }
+  .commits-desc { margin-top: 0.35rem; }
+  #recent-commits-list { grid-template-columns: 1fr; }
+  .commit-item { min-height: 0; }
+}
