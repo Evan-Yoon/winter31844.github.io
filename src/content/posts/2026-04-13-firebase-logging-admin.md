@@ -1,11 +1,13 @@
 ---
-title: "사고 대응은 로그부터 — Firebase 블로그에 보안 로그 붙이기"
+title: |
+  사고 대응은 로그부터 — 
+  블로그에 보안 로그 붙이기
 slug: "firebase-logging-admin"
 date: 2026-04-13
 author: "Evan Yoon"
 category: "explore"
 subcategory: "new-tech"
-description: "정적 사이트 + Firebase 구조에서 별도 서버 없이 보안 로그를 남기는 방법. Cloud Functions에 구조화 로그를 추가하고, 어드민 대시보드에서 바로 확인하는 전 과정."
+description: "정적 사이트 + Firebase 구조에서 별도 서버 없이 보안 로그를 남기는 방법. Cloud Functions에 구조화 로그를 추가하고, 어드민 대시보드에서 바로 확인."
 tags:
   - security
   - firebase
@@ -44,11 +46,11 @@ draft: false
 
 아니다. 이미 있는 인프라에서 다 해결된다.
 
-| 무엇을 | 어디서 | 비용 |
-|------|------|------|
+| 무엇을                   | 어디서                      | 비용 |
+| ------------------------ | --------------------------- | ---- |
 | Cloud Function 요청/오류 | Google Cloud Logging (자동) | 무료 |
-| 보안 이벤트 (이상 요청) | console.log + 구조화 JSON | 무료 |
-| 어드민 대시보드 표시 | Firebase `_logs/security` | 무료 |
+| 보안 이벤트 (이상 요청)  | console.log + 구조화 JSON   | 무료 |
+| 어드민 대시보드 표시     | Firebase `_logs/security`   | 무료 |
 
 Cloud Functions는 배포하는 순간부터 Google Cloud Logging이 자동 수집한다. `console.log()`로 찍은 것도 전부 여기 저장된다. 무료 티어는 한 달 50GB — 개인 블로그는 평생 무료 수준이다.
 
@@ -66,47 +68,82 @@ Cloud Functions는 배포하는 순간부터 Google Cloud Logging이 자동 수�
 ```typescript
 // functions/src/index.ts
 export const trackVisit = onCall(
-  { region: 'asia-northeast3' },
+  { region: "asia-northeast3" },
   async (request) => {
     const date: unknown = request.data?.date;
-    const userAgent = request.rawRequest.headers['user-agent'] ?? '';
-    const rawIp = request.rawRequest.headers['x-forwarded-for'] ?? '...';
-    const ipHash = createHash('sha256').update(rawIp).digest('hex').slice(0, 16);
+    const userAgent = request.rawRequest.headers["user-agent"] ?? "";
+    const rawIp = request.rawRequest.headers["x-forwarded-for"] ?? "...";
+    const ipHash = createHash("sha256")
+      .update(rawIp)
+      .digest("hex")
+      .slice(0, 16);
 
     const db = getDatabase();
 
-    if (typeof date !== 'string' || !DATE_REGEX.test(date)) {
+    if (typeof date !== "string" || !DATE_REGEX.test(date)) {
       const ts = new Date().toISOString();
 
       // Cloud Logging
-      console.warn(JSON.stringify({ event: 'invalid_date_rejected', date, ipHash, ua: userAgent, timestamp: ts }));
+      console.warn(
+        JSON.stringify({
+          event: "invalid_date_rejected",
+          date,
+          ipHash,
+          ua: userAgent,
+          timestamp: ts,
+        }),
+      );
 
       // 어드민 대시보드용 Firebase 기록
-      db.ref('_logs/security').push({ event: 'invalid_date_rejected', date, ipHash, ua: userAgent, timestamp: ts }).catch(() => {});
+      db.ref("_logs/security")
+        .push({
+          event: "invalid_date_rejected",
+          date,
+          ipHash,
+          ua: userAgent,
+          timestamp: ts,
+        })
+        .catch(() => {});
 
-      return { counted: false, reason: 'invalid_date', current: 0 };
+      return { counted: false, reason: "invalid_date", current: 0 };
     }
 
     // ... 중복 방문 처리
     if (alreadyCounted) {
-      console.log(JSON.stringify({ event: 'visit_deduplicated', date, ipHash, timestamp: new Date().toISOString() }));
+      console.log(
+        JSON.stringify({
+          event: "visit_deduplicated",
+          date,
+          ipHash,
+          timestamp: new Date().toISOString(),
+        }),
+      );
       return { counted: false, current: currentCount };
     }
 
     // ... atomic 증가
-    console.log(JSON.stringify({ event: 'visit_counted', date, ipHash, ua: userAgent, current: finalCount, timestamp: new Date().toISOString() }));
+    console.log(
+      JSON.stringify({
+        event: "visit_counted",
+        date,
+        ipHash,
+        ua: userAgent,
+        current: finalCount,
+        timestamp: new Date().toISOString(),
+      }),
+    );
     return { counted: true, current: finalCount };
-  }
+  },
 );
 ```
 
 ### 로그 3종
 
-| 이벤트 | 언제 | 저장 위치 |
-|------|------|------|
+| 이벤트                  | 언제                                       | 저장 위치                |
+| ----------------------- | ------------------------------------------ | ------------------------ |
 | `invalid_date_rejected` | 날짜 형식이 이상한 요청 (공격 시도 가능성) | Cloud Logging + Firebase |
-| `visit_deduplicated` | 같은 IP 하루 2회째 방문 | Cloud Logging |
-| `visit_counted` | 정상 카운트 | Cloud Logging |
+| `visit_deduplicated`    | 같은 IP 하루 2회째 방문                    | Cloud Logging            |
+| `visit_counted`         | 정상 카운트                                | Cloud Logging            |
 
 보안 이벤트(`invalid_date_rejected`)만 Firebase에도 기록한다. 정상 이벤트를 전부 Firebase에 쓰면 쓰기 비용이 발생하고, 의미 없는 데이터가 쌓인다.
 
@@ -117,7 +154,7 @@ export const trackVisit = onCall(
 IP 원문을 저장하면 개인정보 이슈가 생긴다. SHA-256 해시의 앞 16자리만 보관한다.
 
 ```typescript
-const ipHash = createHash('sha256').update(rawIp).digest('hex').slice(0, 16);
+const ipHash = createHash("sha256").update(rawIp).digest("hex").slice(0, 16);
 ```
 
 이렇게 해도 "사건 당시 같은 IP인지 아닌지"는 판단할 수 있다. 누구인지는 알 수 없고, 동일 출처인지만 구분 가능하다.
@@ -146,9 +183,9 @@ Firebase 로그인 → 관리자 계정 확인 → Comments 패널과 함께 Sec
 ```typescript
 // 최신 100건만 조회
 const logsQuery = query(
-  ref(database, '_logs/security'),
+  ref(database, "_logs/security"),
   orderByKey(),
-  limitToLast(100)
+  limitToLast(100),
 );
 const snapshot = await get(logsQuery);
 ```
