@@ -3,11 +3,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-function getEntrySlug(entry) {
+function getEntrySlug(entry: any) {
   return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
 }
 
-function isWeeklyNews(entry) {
+function isWeeklyNews(entry: any) {
   return !entry.data.draft && entry.data.category === 'ai-news' && getEntrySlug(entry).includes('weekly-ai-news');
 }
 
@@ -264,8 +264,8 @@ const latestNews = allPosts
   const database = getDatabase(firebaseApp);
   const functions = getFunctions(firebaseApp, 'asia-northeast3');
 
-  // Sign in anonymously to get authentication token
-  signInAnonymously(auth).catch(() => {});
+  // Ensure anonymous auth is ready before calling functions
+  const authReady = signInAnonymously(auth).catch(() => null);
   // ── 운영일 계산 (2025-11-28 기준) ──
   const launch = new Date('2025-11-28T00:00:00+09:00');
   const today = new Date();
@@ -295,6 +295,9 @@ const latestNews = allPosts
     const dailyRef = ref(database, `visits/${todayKst}`);
     const storageKey = `visited_${todayKst}`;
     try {
+      // Wait for authentication to complete
+      await authReady;
+
       // 오늘 카운트 읽기 (읽기는 여전히 클라이언트에서 직접)
       const snapshot = await get(dailyRef);
       const current = snapshot.exists() ? snapshot.val() : 0;
@@ -322,7 +325,7 @@ const latestNews = allPosts
     // 1. GitHub Calendar
     const calendarRoot = document.getElementById('github-calendar');
 
-    function showCalendarFallback(message) {
+    function showCalendarFallback(message: string) {
       if (!calendarRoot) return;
       calendarRoot.innerHTML = `
         <p class="no-activity">${message}</p>
@@ -339,7 +342,7 @@ const latestNews = allPosts
         showCalendarFallback('GitHub activity graph could not be loaded right now.');
       };
       script.onload = () => {
-        const loadCalendar = window.GitHubCalendar;
+        const loadCalendar = (window as any).GitHubCalendar;
         if (typeof loadCalendar !== 'function') {
           showCalendarFallback('GitHub activity graph could not be loaded right now.');
           return;
@@ -380,7 +383,7 @@ const latestNews = allPosts
     const commitsList = document.getElementById('recent-commits-list');
     if (!commitsList) return;
 
-    function escapeHtml(value) {
+    function escapeHtml(value: any) {
       return String(value ?? '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -389,15 +392,15 @@ const latestNews = allPosts
         .replace(/'/g, '&#39;');
     }
 
-    function summarizeDay(events) {
+    function summarizeDay(events: any[]) {
       const repoSet = new Set();
       let pushEvents = 0;
       let pushedCommits = 0;
       let createEvents = 0;
       let pullRequests = 0;
-      const highlights = [];
+      const highlights: string[] = [];
 
-      events.forEach((event) => {
+      events.forEach((event: any) => {
         const repo = (event.repo?.name || '').replace('Evan-Yoon/', '') || 'Repository';
         repoSet.add(repo);
 
@@ -453,7 +456,7 @@ const latestNews = allPosts
         return;
       }
 
-      const groupedByDay = [];
+      const groupedByDay: string[] = [];
       const dayMap = new Map();
       pushes.forEach((event) => {
         const dayKey = new Date(event.created_at).toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
