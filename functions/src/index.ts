@@ -19,7 +19,7 @@ const DATE_REGEX = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
  * 응답: { counted: boolean, current: number }
  */
 export const trackVisit = onCall(
-  { region: 'asia-northeast3' }, // 서울 리전
+  { region: 'asia-northeast3', invoker: 'public' }, // 서울 리전
   async (request) => {
     const date: unknown = request.data?.date;
     const userAgent = (request.rawRequest.headers['user-agent'] as string | undefined) ?? '';

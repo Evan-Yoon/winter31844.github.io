@@ -18,7 +18,7 @@ const DATE_REGEX = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
  * 요청: { date: "YYYY-MM-DD" }  ← KST 기준 날짜
  * 응답: { counted: boolean, current: number }
  */
-exports.trackVisit = (0, https_1.onCall)({ region: 'asia-northeast3' }, // 서울 리전
+exports.trackVisit = (0, https_1.onCall)({ region: 'asia-northeast3', invoker: 'public' }, // 서울 리전
 async (request) => {
     var _a, _b, _c, _d, _e, _f, _g;
     const date = (_a = request.data) === null || _a === void 0 ? void 0 : _a.date;
