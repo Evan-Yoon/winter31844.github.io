@@ -1,4 +1,7 @@
 ---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
 interface Props {
   title?: string;
   description?: string;
@@ -28,29 +31,10 @@ const contactHref = email ? `mailto:${email}` : "/#about";
 </head>
 <body class="fade-in">
 
-  <nav id="global-nav">
-    <a href="/" class="nav-logo">
-      <img src="/favicon.svg" alt="Evan Yoon" class="nav-logo-img" />
-    </a>
-    <ul class="nav-links">
-      <li><a href="/posts">All</a></li>
-      <li><a href="/guestbook">Guestbook</a></li>
-      <li><a href="/ai-news">AI News</a></li>
-      <li><a href="/categories/explore">Explore</a></li>
-      <li><a href="/categories/study">Study</a></li>
-      <li><a href="/categories/project">Projects</a></li>
-      <li><a href="/#about">About</a></li>
-    </ul>
-    <div class="nav-right">
-      <button id="search-toggle" aria-label="Search" title="Search (Ctrl+Shift+P)">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-      </button>
-      <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-    </div>
-  </nav>
+  <Nav />
 
+  <!-- Search modal — markup kept here because the search script below references
+       these IDs directly. Extract together in a later phase. -->
   <div id="search-overlay" aria-hidden="true">
     <div id="search-modal" role="dialog" aria-label="Search posts">
       <div id="search-header">
@@ -77,16 +61,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
     <slot />
   </main>
 
-  <footer>
-    <div class="footer-inner">
-      <span class="footer-logo">Restart<span>.</span></span>
-      <ul class="footer-links">
-        <li><a href="https://github.com/Evan-Yoon" target="_blank">GitHub</a></li>
-        <li><a href={contactHref}>Contact</a></li>
-      </ul>
-      <span class="footer-copy">© 2025 Evan Yoon</span>
-    </div>
-  </footer>
+  <Footer contactHref={contactHref} />
 
   <div id="scroll-navigation" class="scroll-nav">
     <button id="scroll-top" aria-label="Scroll to top" title="Go to Top">
@@ -97,10 +72,10 @@ const contactHref = email ? `mailto:${email}` : "/#about";
     </button>
   </div>
 
-  <script data-goatcounter="https://evan-yoon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <script is:inline data-goatcounter="https://evan-yoon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
+  <!-- ─── SEARCH ──────────────────────────────────────────────────────────── -->
   <script is:inline>
-    /* SEARCH */
     (function () {
       let posts = null;
       let active = -1;
@@ -239,8 +214,10 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         if (e.key === 'Escape' && overlay.classList.contains('open')) close();
       });
     })();
+  </script>
 
-    /* THEME TOGGLE */
+  <!-- ─── THEME TOGGLE ─────────────────────────────────────────────────────── -->
+  <script is:inline>
     const toggle = document.getElementById('theme-toggle');
     const saved = localStorage.getItem('theme') || 'light';
     document.documentElement.dataset.theme = saved;
@@ -251,8 +228,10 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       localStorage.setItem('theme', next);
       toggle.textContent = next === 'dark' ? '☀️' : '🌙';
     });
+  </script>
 
-    /* POST VIEW COUNTS */
+  <!-- ─── POST VIEW COUNTS (GoatCounter) ──────────────────────────────────── -->
+  <script is:inline>
     (function () {
       const site = 'https://evan-yoon.goatcounter.com';
       const selector = '[data-post-views]';
@@ -336,8 +315,10 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         renderCounts();
       }
     })();
+  </script>
 
-    /* SCROLL NAVIGATION JS */
+  <!-- ─── SCROLL NAVIGATION ────────────────────────────────────────────────── -->
+  <script is:inline>
     (function() {
       const topBtn = document.getElementById('scroll-top');
       const bottomBtn = document.getElementById('scroll-bottom');
@@ -354,17 +335,19 @@ const contactHref = email ? `mailto:${email}` : "/#about";
         });
       }
     })();
+  </script>
 
-    /* BLIZZARD EASTER EGG */
+  <!-- ─── BLIZZARD EASTER EGG ──────────────────────────────────────────────── -->
+  <script is:inline>
     (function() {
       let snowing = false;
       const input = document.getElementById('search-input');
       const overlay = document.getElementById('search-overlay');
-      
+
       function startSnow() {
         if (snowing) return;
         snowing = true;
-        
+
         const canvas = document.createElement('canvas');
         canvas.id = 'blizzard-canvas';
         Object.assign(canvas.style, {
@@ -377,18 +360,18 @@ const contactHref = email ? `mailto:${email}` : "/#about";
           zIndex: 10000,
         });
         document.body.appendChild(canvas);
-        
+
         const ctx = canvas.getContext('2d');
         let w, h;
         const particles = [];
-        
+
         function resize() {
           w = canvas.width = window.innerWidth;
           h = canvas.height = window.innerHeight;
         }
         window.addEventListener('resize', resize);
         resize();
-        
+
         for (let i = 0; i < 150; i++) {
           particles.push({
             x: Math.random() * w,
@@ -399,7 +382,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
             s: Math.random() * 0.5 + 0.2
           });
         }
-        
+
         function draw() {
           ctx.clearRect(0, 0, w, h);
           ctx.fillStyle = document.documentElement.dataset.theme === 'dark'
@@ -412,7 +395,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
           }
           ctx.fill();
         }
-        
+
         function update() {
           for (const p of particles) {
             p.y += p.v;
@@ -426,13 +409,13 @@ const contactHref = email ? `mailto:${email}` : "/#about";
             if (p.x < 0) p.x = w;
           }
         }
-        
+
         function loop() {
           draw();
           update();
           requestAnimationFrame(loop);
         }
-        
+
         if (overlay) overlay.classList.remove('open');
         loop();
       }
@@ -492,7 +475,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       content: "";
       position: fixed;
       inset: 0;
-      background-image: 
+      background-image:
         radial-gradient(circle at 15% 25%, rgba(143, 170, 200, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 85% 75%, rgba(224, 199, 168, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 50% 50%, rgba(143, 170, 200, 0.03) 0%, transparent 60%);
@@ -501,7 +484,7 @@ const contactHref = email ? `mailto:${email}` : "/#about";
       filter: blur(40px);
       animation: atmospherePulse 20s infinite alternate ease-in-out;
     }
-    
+
     [data-theme="dark"] body::after {
       content: "";
       position: fixed;

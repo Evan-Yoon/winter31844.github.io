@@ -1,0 +1,16 @@
+---
+interface Props {
+  contactHref: string;
+}
+const { contactHref } = Astro.props;
+---
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Restart<span>.</span></span>
+    <ul class="footer-links">
+      <li><a href="https://github.com/Evan-Yoon" target="_blank">GitHub</a></li>
+      <li><a href={contactHref}>Contact</a></li>
+    </ul>
+    <span class="footer-copy">© 2025 Evan Yoon</span>
+  </div>
+</footer>
