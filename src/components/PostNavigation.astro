@@ -1,0 +1,45 @@
+---
+interface Props {
+  previousPost?: any;
+  nextPost?: any;
+}
+
+const { previousPost, nextPost } = Astro.props;
+
+function getEntrySlug(entry: any): string {
+  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
+}
+---
+<section class="post-footer-nav" aria-label="Post navigation">
+  <a
+    class={`post-nav-card ${!previousPost ? 'is-disabled' : ''}`}
+    href={previousPost ? `/posts/${getEntrySlug(previousPost)}` : undefined}
+    aria-disabled={!previousPost}
+  >
+    <span class="post-nav-label">이전 포스트</span>
+    {previousPost ? (
+      <>
+        <strong class="post-nav-title">{previousPost.data.title}</strong>
+        <span class="post-nav-meta">{new Date(previousPost.data.date).toLocaleDateString('ko-KR')}</span>
+      </>
+    ) : (
+      <strong class="post-nav-title">첫 글입니다</strong>
+    )}
+  </a>
+
+  <a
+    class={`post-nav-card align-right ${!nextPost ? 'is-disabled' : ''}`}
+    href={nextPost ? `/posts/${getEntrySlug(nextPost)}` : undefined}
+    aria-disabled={!nextPost}
+  >
+    <span class="post-nav-label">다음 포스트</span>
+    {nextPost ? (
+      <>
+        <strong class="post-nav-title">{nextPost.data.title}</strong>
+        <span class="post-nav-meta">{new Date(nextPost.data.date).toLocaleDateString('ko-KR')}</span>
+      </>
+    ) : (
+      <strong class="post-nav-title">가장 최신 글입니다</strong>
+    )}
+  </a>
+</section>

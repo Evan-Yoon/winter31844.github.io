@@ -1,9 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-
-function getEntrySlug(entry) {
-  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
-}
+import PostNavigation from '../components/PostNavigation.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
 
 const {
   frontmatter,
@@ -144,96 +142,13 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       </article>
     </div>
 
-    <section class="post-footer-nav" aria-label="Post navigation">
-      <a
-        class={`post-nav-card ${!previousPost ? 'is-disabled' : ''}`}
-        href={previousPost ? `/posts/${getEntrySlug(previousPost)}` : undefined}
-        aria-disabled={!previousPost}
-      >
-        <span class="post-nav-label">이전 포스트</span>
-        {previousPost ? (
-          <>
-            <strong class="post-nav-title">{previousPost.data.title}</strong>
-            <span class="post-nav-meta">{new Date(previousPost.data.date).toLocaleDateString('ko-KR')}</span>
-          </>
-        ) : (
-          <strong class="post-nav-title">첫 글입니다</strong>
-        )}
-      </a>
+    <PostNavigation previousPost={previousPost} nextPost={nextPost} />
 
-      <a
-        class={`post-nav-card align-right ${!nextPost ? 'is-disabled' : ''}`}
-        href={nextPost ? `/posts/${getEntrySlug(nextPost)}` : undefined}
-        aria-disabled={!nextPost}
-      >
-        <span class="post-nav-label">다음 포스트</span>
-        {nextPost ? (
-          <>
-            <strong class="post-nav-title">{nextPost.data.title}</strong>
-            <span class="post-nav-meta">{new Date(nextPost.data.date).toLocaleDateString('ko-KR')}</span>
-          </>
-        ) : (
-          <strong class="post-nav-title">가장 최신 글입니다</strong>
-        )}
-      </a>
-    </section>
-
-    <section class="related-posts-section" aria-labelledby="related-posts-heading">
-      <div class="related-posts-head">
-        <div>
-          <p class="related-kicker">{categoryLabel}</p>
-          <h2 id="related-posts-heading" class="related-title">같은 카테고리의 다른 글</h2>
-        </div>
-        <a href={`/categories/${frontmatter.category}`} class="related-category-link">
-          카테고리 전체 보기
-        </a>
-      </div>
-
-      {relatedPosts.length > 0 ? (
-        <>
-          <div class="related-posts-grid" id="related-posts-grid">
-            {relatedPosts.map((post: any, index: number) => (
-              <article class={`related-post-card ${index >= 3 ? 'is-hidden' : ''}`}>
-                <a href={`/posts/${getEntrySlug(post)}`} class="related-post-link">
-                  <div class="related-post-meta">
-                    <span class={`related-post-badge badge-${post.data.category || 'explore'}`}>
-                      {post.data.category || 'explore'}
-                    </span>
-                    <span>{new Date(post.data.date).toLocaleDateString('ko-KR')}</span>
-                  </div>
-                  <h3 class="related-post-card-title">{post.data.title}</h3>
-                  <p class="related-post-desc">
-                    {post.data.description || '같은 카테고리에서 이어서 읽을 수 있는 글입니다.'}
-                  </p>
-                  <div class="related-post-footer">
-                    <span>{post.data.readTime ? `${post.data.readTime} min read` : 'Read more'}</span>
-                    <span class="post-view-count" data-post-views data-goatcounter-path={`/posts/${getEntrySlug(post)}/`}>views -</span>
-                    <span class="related-post-arrow">→</span>
-                  </div>
-                </a>
-              </article>
-            ))}
-          </div>
-
-          {relatedPosts.length > 3 && (
-            <div class="related-more-wrap">
-              <button
-                type="button"
-                class="related-more-button"
-                id="related-more-button"
-                data-expanded="false"
-              >
-                더보기
-              </button>
-            </div>
-          )}
-        </>
-      ) : (
-        <div class="related-empty-state">
-          같은 카테고리에 아직 다른 글이 없습니다.
-        </div>
-      )}
-    </section>
+    <RelatedPosts
+      relatedPosts={relatedPosts}
+      categoryLabel={categoryLabel}
+      category={frontmatter.category}
+    />
   </div>
 
   {showToc && (
@@ -260,6 +175,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
   </div>
 </BaseLayout>
 
+<!-- ─── READING PROGRESS BAR ─────────────────────────────────────────────── -->
 <script>
   const bar = document.getElementById('progress');
 
@@ -273,25 +189,10 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
   updateReadingProgress();
   window.addEventListener('scroll', updateReadingProgress, { passive: true });
+</script>
 
-  const moreButton = document.getElementById('related-more-button');
-  const relatedCards = Array.from(document.querySelectorAll('.related-post-card'));
-
-  if (moreButton) {
-    moreButton.addEventListener('click', () => {
-      const expanded = moreButton.dataset.expanded === 'true';
-
-      relatedCards.forEach((card, index) => {
-        if (index >= 3) {
-          card.classList.toggle('is-hidden', expanded);
-        }
-      });
-
-      moreButton.dataset.expanded = expanded ? 'false' : 'true';
-      moreButton.textContent = expanded ? '더보기' : '접기';
-    });
-  }
-
+<!-- ─── TABLE OF CONTENTS ACTIVE LINK ────────────────────────────────────── -->
+<script>
   const tocLinks = Array.from(document.querySelectorAll('[data-toc-link]'));
   const tocSections = tocLinks
     .map((link) => {
@@ -380,31 +281,44 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       });
     });
   }
-
 </script>
 
+<!-- ─── COMMENTS (Firebase) ───────────────────────────────────────────────── -->
 <script>
   import { get, push, ref, runTransaction } from 'firebase/database';
   import { getFirebaseDatabase } from '../lib/firebase/client';
+
+  interface Comment {
+    id: string;
+    author: string;
+    content: string;
+    createdAt: number;
+    parentId?: string | null;
+    reportCount?: number;
+    replies: Comment[];
+  }
+
+  // Shape of a comment before the reply tree is built
+  type RawComment = Omit<Comment, 'replies'>;
 
   const section = document.querySelector('[data-comments-section]');
 
   if (section) {
     const database = getFirebaseDatabase('comments');
     const postSlug = section.getAttribute('data-post-slug') || '';
-    const form = section.querySelector('[data-comment-form]');
+    const form = section.querySelector<HTMLFormElement>('[data-comment-form]');
     const parentIdInput = section.querySelector('[data-comment-parent-id]');
-    const replyTarget = section.querySelector('[data-comment-reply-target]');
+    const replyTarget = section.querySelector<HTMLElement>('[data-comment-reply-target]');
     const replyLabel = section.querySelector('[data-comment-reply-label]');
     const replyCancel = section.querySelector('[data-comment-reply-cancel]');
     const list = section.querySelector('[data-comments-list]');
     const count = section.querySelector('[data-comments-count]');
-    const status = section.querySelector('[data-comment-status]');
+    const status = section.querySelector<HTMLElement>('[data-comment-status]');
     const commentsRef = ref(database, `comments/${postSlug}`);
     const submitCooldownKey = `comment_submit_${postSlug}`;
     const submitCooldownMs = 60_000;
 
-    const setReplyTarget = (comment) => {
+    const setReplyTarget = (comment: Comment | null) => {
       if (!(parentIdInput instanceof HTMLInputElement) || !replyTarget || !replyLabel) return;
       if (!comment) {
         parentIdInput.value = '';
@@ -422,7 +336,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       setReplyTarget(null);
     });
 
-    const formatDate = (value) => {
+    const formatDate = (value: number | string): string => {
       const date = new Date(value);
       if (Number.isNaN(date.getTime())) return '';
       return date.toLocaleDateString('ko-KR', {
@@ -432,22 +346,23 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       });
     };
 
-    const setStatus = (message, tone = 'neutral') => {
+    const setStatus = (message: string, tone = 'neutral') => {
       if (!status) return;
       status.textContent = message;
       status.dataset.tone = tone;
     };
 
-    const setCount = (total) => {
+    const setCount = (total: number) => {
       if (!count) return;
       count.textContent = `${total} comment${total === 1 ? '' : 's'}`;
     };
 
-    const sortByCreatedAt = (left, right) => Number(left.createdAt || 0) - Number(right.createdAt || 0);
+    const sortByCreatedAt = (left: RawComment, right: RawComment) =>
+      Number(left.createdAt || 0) - Number(right.createdAt || 0);
 
-    const buildCommentTree = (items) => {
-      const byId = new Map();
-      const roots = [];
+    const buildCommentTree = (items: RawComment[]): Comment[] => {
+      const byId = new Map<string, Comment>();
+      const roots: Comment[] = [];
 
       items.forEach((item) => {
         byId.set(item.id, { ...item, replies: [] });
@@ -455,13 +370,13 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
 
       byId.forEach((item) => {
         if (item.parentId && byId.has(item.parentId)) {
-          byId.get(item.parentId).replies.push(item);
+          byId.get(item.parentId)!.replies.push(item);
         } else {
           roots.push(item);
         }
       });
 
-      const sortTree = (nodes) => {
+      const sortTree = (nodes: Comment[]) => {
         nodes.sort(sortByCreatedAt);
         nodes.forEach((node) => sortTree(node.replies));
       };
@@ -470,7 +385,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       return roots;
     };
 
-    const reportComment = async (commentId, reportButton) => {
+    const reportComment = async (commentId: string, reportButton: HTMLButtonElement): Promise<void> => {
       const storageKey = `comment_reported_${postSlug}_${commentId}`;
       if (localStorage.getItem(storageKey)) {
         setStatus('You already reported this comment from this browser.', 'error');
@@ -505,7 +420,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       }
     };
 
-    const renderComments = (items) => {
+    const renderComments = (items: RawComment[]) => {
       if (!list) return;
 
       if (items.length === 0) {
@@ -518,7 +433,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       setCount(items.length);
       const tree = buildCommentTree(items);
 
-      const createCommentCard = (item, depth = 0) => {
+      const createCommentCard = (item: Comment, depth = 0): HTMLElement => {
         const article = document.createElement('article');
         article.className = 'comment-card';
         if (depth > 0) {
@@ -605,10 +520,10 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       try {
         const snapshot = await get(commentsRef);
         const raw = snapshot.val() || {};
-        const items = Object.entries(raw)
-          .map(([id, item]) => ({ id, ...(item || {}) }))
-          .filter((item) => item && typeof item === 'object')
-          .sort((left, right) => Number(left.createdAt || 0) - Number(right.createdAt || 0));
+        const items: RawComment[] = Object.entries(raw as Record<string, Record<string, unknown>>)
+          .map(([id, data]): RawComment => ({ id, ...(data ?? {}) } as RawComment))
+          .filter((item): item is RawComment => !!item && typeof item === 'object')
+          .sort(sortByCreatedAt);
 
         renderComments(items);
       } catch (error) {
