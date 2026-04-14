@@ -3,7 +3,7 @@ import path from "path";
 
 export const ROOT = process.cwd();
 export const POSTS_DIR = path.join(ROOT, "src", "content", "posts");
-export const STYLE_PATH = path.join(ROOT, "style.md");
+export const STYLE_PATH = path.join(ROOT, "docs", "style.md");
 
 export function ensureExists(targetPath, message) {
   if (!fs.existsSync(targetPath)) {

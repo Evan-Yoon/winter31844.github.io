@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "input.txt"
-      - "style.md"
+      - "docs/style.md"
       - "scripts/generatePost.js"
       - ".github/workflows/auto-blog.yml"
 
