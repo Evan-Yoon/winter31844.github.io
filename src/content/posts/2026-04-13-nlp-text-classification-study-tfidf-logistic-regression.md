@@ -4,7 +4,7 @@ slug: nlp-text-classification-study-tfidf-logistic-regression
 date: 2026-04-13
 author: Evan Yoon
 category: study
-subcategory: nlp
+subcategory: bootcamp
 description: |
   재난 관련 트윗 데이터를 이용해 텍스트 분류 전체 파이프라인을 구현했다.
   데이터 탐색, 텍스트 전처리, TF-IDF 벡터화, 로지스틱 회귀 모델 훈련, 하이퍼파라미터 튜닝, 

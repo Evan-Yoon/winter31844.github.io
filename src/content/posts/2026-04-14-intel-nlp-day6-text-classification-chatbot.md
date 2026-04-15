@@ -4,7 +4,7 @@ slug: intel-nlp-day6-text-classification-chatbot
 date: 2026-04-14
 author: Evan Yoon
 category: study
-subcategory: nlp
+subcategory: bootcamp
 description: |
   2026년 4월 14일 수업에서는 TF-IDF 기반 감정 분류 과제를 진행하고,
   간단한 신경망 챗봇과 코사인 유사도 기반 챗봇을 구현했다.

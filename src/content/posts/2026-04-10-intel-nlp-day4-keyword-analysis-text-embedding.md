@@ -4,7 +4,7 @@ slug: nlp-study-keyword-analysis-word2vec-embedding
 date: 2026-04-10
 author: Evan Yoon
 category: study
-subcategory: nlp
+subcategory: bootcamp
 description: |
   한국어 형태소 분석, 키워드 추출부터 시작해 TF-IDF, Word2Vec, 
   그리고 RNN/LSTM 신경망까지 텍스트를 벡터로 표현하고 학습하는 전체 파이프라인을 다룬다.

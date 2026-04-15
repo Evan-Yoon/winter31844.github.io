@@ -1,9 +1,10 @@
 ---
 // src/pages/categories/[category].astro
+import type { RenderedContent } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-function getEntrySlug(entry) {
+function getEntrySlug(entry: { id: any; body?: string | undefined; collection?: "posts"; data: any; rendered?: RenderedContent | undefined; filePath?: string | undefined; }) {
   return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
 }
 
@@ -42,7 +43,7 @@ const subcatMeta: Record<string, { label: string; description: string }> = {
   'team-project': { label: 'Team Project', description: '팀으로 함께 만든 프로젝트' },
   'personal-project': { label: 'Personal Project', description: '혼자 기획하고 개발한 프로젝트' },
   certification: { label: 'Certification', description: '자격증 취득 과정과 시험 후기' },
-  'aws-hands-on': { label: 'AWS Hands-On', description: 'Route53, SES, SMTP 연동 같은 실전 설정 기록' },
+  'aws-hands-on': { label: 'AWS Hands-On', description: 'AWS 실습 기록' },
   bootcamp: { label: 'Bootcamp', description: 'Intel AI 과정 수업 기록' },
   'self-study': { label: 'Self Study', description: '팀 스터디 및 개인 자습 기록' },
   'field-visit': { label: 'Field Visit', description: '직접 현장을 찾아간 방문 기록' },
