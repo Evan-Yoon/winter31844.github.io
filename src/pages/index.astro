@@ -494,6 +494,11 @@ const recentGithubCards = await getRecentGithubActivity();
                 el.style.display = 'none';
               }
             });
+            // Remove tabindex from calendar td cells — they are too small for touch
+            // targets and don't need to be individually focusable.
+            calendar.querySelectorAll('td[tabindex]').forEach((td) => {
+              td.removeAttribute('tabindex');
+            });
           })
           .catch(() => {
             showCalendarFallback('GitHub activity graph could not be loaded right now.');
