@@ -1,4 +1,4 @@
----
+﻿---
 title: |
   [Mongle] Day 7
   알림 시스템과 폐기 결정
@@ -38,10 +38,14 @@ toc: true
 
 `.env.example`도 이 커밋에서 정리했다. 팀원들이 처음 환경을 세팅할 때 어떤 환경 변수가 필요한지 알 수 있도록.
 
+<img src="/images/posts/mongle/collaboration-effort-1.png" alt="Mongle Day 7 협업 정리 화면" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
+
 > `fix: 바텀 탭 복구` — 09:51
 > 1 file, 3 insertions(+), 524 deletions(-)
 
 `app/(couple)/index.jsx`가 이상했다. 라우팅 재설계 과정에서 바텀 탭 네비게이션 코드가 이 파일 안으로 복사됐다. 원래 탭은 `_layout.jsx`가 담당해야 한다. 524줄이 삭제됐는데, 지운 게 아니라 **있으면 안 되는 코드를 걷어낸 것**이다.
+
+<img src="/images/posts/mongle/collaboration-effort-2.png" alt="Mongle Day 7 협업량과 정리 흐름" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
 
 ---
 
@@ -112,6 +116,10 @@ calculateCompletenessScore(item) {
 ```
 
 가격 투명성(부가세 포함 여부, 계약금 명시)과 상세 정보 제공 여부를 충실도 지표로 추가했다.
+
+<img src="/images/posts/mongle/estimate-comparison-ai-logic.png" alt="Mongle 견적 비교 AI 로직" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
+
+<img src="/images/posts/mongle/budget-ai-logic.png" alt="Mongle 예산 관련 AI 로직" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
 
 ---
 
@@ -191,6 +199,8 @@ async def run_daily_notification_job():
 
 잔금 일정도 같은 방식으로 D-1, D-3, D-7을 체크한다. 발송은 Expo의 공개 푸시 API(`https://exp.host/--/api/v2/push/send`)를 통해 한다.
 
+<img src="/images/posts/mongle/couple-notification-screen.png" alt="Mongle couple 알림 화면" style="display:block; max-width:360px; width:auto; height:auto; margin:1rem auto;" />
+
 ### 그리고 폐기
 
 그런데 로컬에서 테스트를 돌리니 알림이 오지 않았다. 원인을 추적하기 시작했다.
@@ -242,6 +252,8 @@ app/settings/
 ```
 
 `mypage.jsx`에서 설정으로 진입하는 버튼을 추가하고, 각 페이지에서 WebView나 스크롤 텍스트로 내용을 보여주는 방식이다.
+
+<img src="/images/posts/mongle/legal-response-document.png" alt="법적 문제 대응을 위한 예시 문서" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
 
 법적 텍스트는 분량이 많다. `terms.jsx`가 461줄, `privacy.jsx`가 600줄인 이유다.
 
@@ -338,6 +350,8 @@ const [showPwConfirm, setShowPwConfirm]     = useState(false);
 
 이메일 입력 → 중복 확인 → OTP 발송 → OTP 인증 → 비밀번호 설정 → 가입 완료. 이 흐름이 완성됐다.
 
+<img src="/images/posts/mongle/supabase-email-smtp-settings.png" alt="Supabase 이메일 인증 제한을 AWS Route53, AWS SES, SMTP 설정으로 확장한 기록" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
+
 ---
 
 ## 오늘을 돌아보며
@@ -349,18 +363,6 @@ const [showPwConfirm, setShowPwConfirm]     = useState(false);
 작동하지 않는 기능을 붙잡고 시간을 쏟는 것보다, 우선순위를 정하고 더 중요한 것에 집중하는 결정이 때로는 더 나은 선택이다.
 
 PGRST116 같은 Supabase 특유의 에러도 오늘 처음 제대로 이해했다. `.single()`과 `.maybeSingle()`의 차이는 작아 보이지만, 신규 가입 직후처럼 데이터가 아직 없는 경우를 얼마나 방어적으로 처리하느냐의 차이다.
-
----
-
-## 화면 기록
-
-알림, 회원가입, 약관 대응을 같이 정리한 날이라 관련 자료를 한 곳에 모았다. 실제 알림 화면과 인증 인프라 대응, 법적 문서 예시가 Day 7의 성격과 가장 잘 맞는다.
-
-<img src="/images/posts/mongle/couple-notification-screen.png" alt="Mongle couple 알림 화면" style="display:block; max-width:360px; width:auto; height:auto; margin:1rem auto;" />
-
-<img src="/images/posts/mongle/supabase-email-smtp-settings.png" alt="Supabase 이메일 인증 제한을 AWS Route53, AWS SES, SMTP 설정으로 확장한 기록" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
-
-<img src="/images/posts/mongle/legal-response-document.png" alt="법적 문제 대응을 위한 예시 문서" style="display:block; max-width:560px; width:auto; height:auto; margin:1rem auto;" />
 
 ---
 

@@ -27,8 +27,6 @@ Mongle 웨딩 앱 프로젝트에서 회원가입 기능을 붙이면서 이메�
 
 그런데 Supabase 기본 이메일 Auth 전송은 하루에 6건 정도만 가능해서 몇 번 테스트하면 바로 막혔다. 실제 서비스 전인데도 답답한 수준이었고, 나중에 사용자가 붙으면 더는 기본 설정으로 버티기 어렵겠다는 생각이 들었다. 그래서 `Supabase 기본 메일 발송` 대신 `직접 SMTP를 연결하는 방식`으로 바꾸기로 했다.
 
-![Route53과 SES 설정의 시작](/images/posts/supabase-ses-route53-auth-email/1.png)
-
 ## SES만 붙이면 끝날 줄 알았는데 아니었다
 
 처음에는 SES만 연결하면 금방 끝날 일이라고 생각했다. 그런데 막상 해보니 순서가 생각보다 길었다.
@@ -43,8 +41,6 @@ Mongle 웨딩 앱 프로젝트에서 회원가입 기능을 붙이면서 이메�
 
 즉, 단순히 메일 서비스 하나만 켜는 일이 아니라 도메인과 DNS부터 먼저 정리해야 하는 작업이었다. AWS를 만질 때 자주 느끼는 점인데, 기능 하나를 쓰려 해도 그 기능이 기대하는 전제 조건이 이미 깔려 있어야 한다.
 
-![AWS 계정과 서비스 화면을 보며 어디서부터 열어야 할지 정리하던 순간](/images/posts/supabase-ses-route53-auth-email/2.png)
-
 ## Route53을 쓰려면 먼저 결제부터 해야 했다
 
 가장 먼저 막힌 부분은 유료 계정 전환이었다. Route53에서 도메인을 구매하려면 당연히 결제 가능한 계정 상태가 필요했고, 그때부터 이 작업이 단순 테스트가 아니라 운영 환경 설정에 가깝다는 느낌이 들었다.
@@ -53,7 +49,13 @@ Mongle 웨딩 앱 프로젝트에서 회원가입 기능을 붙이면서 이메�
 
 도메인을 고를 때는 하이픈 유무와 `.com`, `.dev`, `.site` 같은 조합도 잠깐 둘러봤다. 그래도 가장 무난하고 설명하기 쉬운 건 역시 `.com`이었다. 서비스용 메일을 붙이려는 목적이 있었기 때문에 기억하기 쉽고 신뢰감 있는 쪽으로 정리했다.
 
-![도메인 구매 단계에서 실제 비용과 등록 절차를 확인하던 화면](/images/posts/supabase-ses-route53-auth-email/3.png)
+![Route53에서 evan-yoon.com 도메인을 검색하던 화면](/images/posts/supabase-ses-route53-auth-email/2.png)
+
+![함께 제안된 다른 도메인 조합들을 비교하던 화면](/images/posts/supabase-ses-route53-auth-email/3.png)
+
+![도메인 결제 단계에서 1년 15달러 가격을 확인하던 화면](/images/posts/supabase-ses-route53-auth-email/1.png)
+
+![도메인 등록 요청이 진행 중인 상태를 확인하던 화면](/images/posts/supabase-ses-route53-auth-email/4.png)
 
 ## 도메인을 산 다음에 SES 설정이 이어졌다
 
@@ -61,7 +63,11 @@ Mongle 웨딩 앱 프로젝트에서 회원가입 기능을 붙이면서 이메�
 
 여기서 좋았던 점은 Route53과 SES를 같은 AWS 안에서 연결하니 동선이 비교적 단순했다는 것이다. 외부 DNS를 쓰는 상황이었다면 레코드를 복사해서 넣고 전파 상태를 따로 확인해야 했겠지만, 같은 콘솔 안에서 처리하니 훨씬 따라가기 쉬웠다.
 
-![도메인 검증을 위해 DNS 레코드를 연결하던 화면](/images/posts/supabase-ses-route53-auth-email/4.png)
+![SES에서 전송 도메인으로 evan-yoon.com을 추가하던 화면](/images/posts/supabase-ses-route53-auth-email/5.png)
+
+![DNS 검증 레코드를 연결한 뒤 확인 보류 상태를 보던 화면](/images/posts/supabase-ses-route53-auth-email/6.png)
+
+![도메인 자격 증명이 확인됨 상태로 바뀐 화면](/images/posts/supabase-ses-route53-auth-email/7.png)
 
 ## SES SMTP를 Supabase와 연결했다
 
@@ -73,11 +79,7 @@ Mongle 웨딩 앱 프로젝트에서 회원가입 기능을 붙이면서 이메�
 
 즉, Supabase를 버리는 것이 아니라 `Supabase Auth + AWS SES SMTP` 조합으로 재구성한 것이다. 이렇게 하면 앱 로직은 크게 흔들지 않으면서도 메일 발송 한도 문제를 우회할 수 있다.
 
-![SES 쪽 발신 설정과 SMTP 연결 정보를 확인하던 과정](/images/posts/supabase-ses-route53-auth-email/5.png)
-
 SMTP 설정을 붙일 때는 서버 주소, 포트, 사용자 이름, 비밀번호 같은 값을 정확히 옮겨야 한다. 이런 연결 작업은 사소한 오타 하나로도 실패하기 때문에, 오히려 코드를 짤 때보다 더 천천히 보게 된다. 특히 비밀번호는 AWS 콘솔 로그인 비밀번호가 아니라 SMTP용 자격 증명이라는 점을 구분해야 했다.
-
-![Supabase SMTP 설정 화면에 SES 정보를 옮겨 적던 단계](/images/posts/supabase-ses-route53-auth-email/6.png)
 
 ## 가장 먼저 체감된 건 테스트 속도였다
 
@@ -86,8 +88,6 @@ SMTP 설정을 붙일 때는 서버 주소, 포트, 사용자 이름, 비밀번�
 Supabase 기본 전송만 쓸 때는 메일 몇 번 보내고 나면 그날 테스트가 사실상 끝났다. 하지만 SES를 SMTP로 연결한 뒤에는 더 이상 "오늘 quota 다 썼나?"부터 걱정하지 않아도 됐다. 개발 흐름이 끊기지 않는다는 점 자체가 컸다.
 
 결과적으로 하루 6건 정도만 가능하던 상태에서, 최종적으로는 하루 50,000건까지 보낼 수 있는 구조로 바뀌었다. 실제로 그만큼 보낼 일은 거의 없겠지만, 적어도 개발 중 테스트 때문에 발송 한도에 막히는 상황은 정리됐다.
-
-![테스트 메일과 인증 흐름을 다시 확인하던 단계](/images/posts/supabase-ses-route53-auth-email/7.png)
 
 ## 의외로 오래 걸린 건 SES Sandbox 해제였다
 
