@@ -1,5 +1,8 @@
 ---
-title: "화면 안 켜도 Claude가 알아서 말 걸어줌 — Clawd on Desk"
+title: |
+  화면 안 켜도 Claude가
+  알아서 말 걸어줌
+  — Clawd on Desk
 slug: clawd-on-desk-review
 date: 2026-04-15
 author: Evan Yoon
