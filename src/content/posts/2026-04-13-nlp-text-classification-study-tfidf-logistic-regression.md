@@ -1,5 +1,5 @@
 ---
-title: "[NLP] 텍스트 분류: TF-IDF와 로지스틱 회귀로 재난 관련 트윗 분류하기"
+title: "[NLP] day 3: 텍스트 분류 - TF-IDF와 로지스틱 회귀로 재난 관련 트윗 분류하기"
 slug: nlp-text-classification-study-tfidf-logistic-regression
 date: 2026-04-13
 author: Evan Yoon

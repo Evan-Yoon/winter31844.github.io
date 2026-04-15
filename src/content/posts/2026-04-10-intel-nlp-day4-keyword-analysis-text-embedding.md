@@ -1,5 +1,5 @@
 ---
-title: "[NLP] 키워드 분석부터 텍스트 임베딩까지: Word2Vec과 신경망 기초"
+title: "[NLP] day 4: 키워드 분석부터 텍스트 임베딩까지 - Word2Vec과 신경망 기초"
 slug: nlp-study-keyword-analysis-word2vec-embedding
 date: 2026-04-10
 author: Evan Yoon
