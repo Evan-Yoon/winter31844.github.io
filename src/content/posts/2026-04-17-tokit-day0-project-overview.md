@@ -71,7 +71,7 @@ toc: true
 - 입력 토큰 감소
 - 출력 토큰 감소
 - 성능 유지 또는 향상
-- Codex CLI / Gemini CLI와 완전 호환
+- Codex CLI / Gemini CLI와의 호환성 확보
 
 ---
 
@@ -111,7 +111,7 @@ toc: true
 - 중복 내용 제거
 - 영어로 압축
 
-입력 토큰은 이 방향으로 가면 꽤 확실하게 줄일 수 있다고 보고 있다.
+입력 토큰은 이 방향으로 가면 비교적 안정적으로 줄일 수 있다고 보고 있다.
 
 ### 출력 토큰
 
@@ -173,7 +173,7 @@ only root cause and fix
   </div>
 </div>
 
-Explain만 예외적으로 길어질 수 있고, 나머지는 기본적으로 짧게 가는 쪽으로 잡고 있다.
+Explain만 예외적으로 길어질 수 있고, 나머지는 기본적으로 짧게 가도록 설계하려고 한다.
 
 ---
 
@@ -182,7 +182,7 @@ Explain만 예외적으로 길어질 수 있고, 나머지는 기본적으로 �
 1. **always-on** — 모든 프롬프트를 처리한다. 필터링 조건을 만족하지 못하면 원문 그대로 통과시킨다.
 2. **명령어는 건드리지 않는다** — `/`, `@`, `!`로 시작하는 CLI 명령어는 패스스루.
 3. **출력은 기본값으로 짧게** — verbose 모드는 opt-in.
-4. **전체 비용으로 평가한다** — `최적화 모델 비용 + 메인 모델 비용`이 함께 줄어야 성공.
+4. **전체 비용으로 평가한다** — `최적화 모델 비용 + 메인 모델 비용`이 함께 줄어드는지로 판단한다.
 
 ---
 
@@ -192,20 +192,20 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 
 잘못 만들면 진짜 중복이 된다. 내가 계속 붙잡고 있는 기준은 **모델이 이미 잘 하는 걸 또 만들지 않는 것**이다.
 
-### 모델이 하지 않는 것
+### 모델만으로는 해결되지 않는 것
 
 <div class="info-grid">
   <div class="info-item">
     <div class="info-title">비용 최적화</div>
-    <p class="info-desc">모델의 목표는 정확한 답이지, 토큰 비용 최소화가 아니다</p>
+    <p class="info-desc">모델도 내부적으로 효율화를 하긴 하지만, 목표가 사용자의 총 토큰 비용 최소화에 있지는 않다</p>
   </div>
   <div class="info-item">
     <div class="info-title">세션 전체 최적화</div>
-    <p class="info-desc">모델은 요청 1건 단위로만 판단한다</p>
+    <p class="info-desc">모델은 주로 현재 요청 단위로 동작하고, 세션 전체 흐름이나 반복 루프까지 직접 최적화하지는 않는다</p>
   </div>
   <div class="info-item">
     <div class="info-title">외부 데이터 정제</div>
-    <p class="info-desc">툴 출력(logs, HTML, JSON)은 모델이 그대로 받는다. Tokit은 들어가기 전에 줄일 수 있다</p>
+    <p class="info-desc">툴 출력(logs, HTML, JSON)은 대체로 모델에 들어가기 전에 서비스 레이어에서 먼저 정제하는 편이 더 효율적이다</p>
   </div>
 </div>
 
@@ -225,7 +225,7 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
   <div class="eval-row">
     <span class="eval-icon dot-no"></span>
     <span class="eval-label">긴 문장 줄이기</span>
-    <span class="eval-note">모델이 이미 잘함</span>
+    <span class="eval-note">모델 내부 최적화와 겹치기 쉬움</span>
   </div>
   <div class="eval-row">
     <span class="eval-icon dot-yes"></span>
@@ -245,7 +245,7 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
   <div class="eval-row">
     <span class="eval-icon dot-yes"></span>
     <span class="eval-label">캐싱</span>
-    <span class="eval-note">모델이 못함</span>
+    <span class="eval-note">모델 바깥 레이어에서 다뤄야 함</span>
   </div>
 </div>
 
@@ -424,7 +424,7 @@ Rules:
 <div class="stat-grid">
   <div class="stat-card">
     <div class="stat-label">입력 토큰</div>
-    <div class="stat-value">확실히 감소</div>
+    <div class="stat-value">상대적으로 감소 가능성 높음</div>
   </div>
   <div class="stat-card">
     <div class="stat-label">출력 토큰</div>
@@ -436,7 +436,7 @@ Rules:
   </div>
   <div class="stat-card">
     <div class="stat-label">응답 품질</div>
-    <div class="stat-value">유지 또는 향상 가능</div>
+    <div class="stat-value">유지 가능, 설계에 따라 향상 가능</div>
   </div>
 </div>
 
