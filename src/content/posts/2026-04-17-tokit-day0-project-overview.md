@@ -135,41 +135,41 @@ only root cause and fix
   <img src="/reference/Tokit/mermaid2.png" alt="작업 유형별 최적화 정책 다이어그램" style="max-width: 100%; height: auto;" />
 </div>
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Debug</div>
-    <div class="compare-body">
-      <code>Identify the root cause and suggest a fix.</code>
-      <p>출력 제어: <strong>강</strong></p>
+<div class="task-list">
+  <div class="task-row">
+    <div class="task-meta">
+      <span class="task-name">Debug</span>
+      <span class="task-badge badge-high">강</span>
     </div>
+    <code class="task-prompt">Identify the root cause and suggest a fix.</code>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Performance</div>
-    <div class="compare-body">
-      <code>Identify the main bottleneck and suggest up to 3 improvements.</code>
-      <p>출력 제어: <strong>중</strong></p>
+  <div class="task-row">
+    <div class="task-meta">
+      <span class="task-name">Performance</span>
+      <span class="task-badge badge-mid">중</span>
     </div>
+    <code class="task-prompt">Identify the main bottleneck and suggest up to 3 improvements.</code>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Review</div>
-    <div class="compare-body">
-      <code>List up to 3 critical issues in this code.</code>
-      <p>출력 제어: <strong>강</strong></p>
+  <div class="task-row">
+    <div class="task-meta">
+      <span class="task-name">Review</span>
+      <span class="task-badge badge-high">강</span>
     </div>
+    <code class="task-prompt">List up to 3 critical issues in this code.</code>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Refactor</div>
-    <div class="compare-body">
-      <code>Suggest concise refactoring improvements.</code>
-      <p>출력 제어: <strong>중</strong></p>
+  <div class="task-row">
+    <div class="task-meta">
+      <span class="task-name">Refactor</span>
+      <span class="task-badge badge-mid">중</span>
     </div>
+    <code class="task-prompt">Suggest concise refactoring improvements.</code>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Explain</div>
-    <div class="compare-body">
-      <code>Explain briefly.</code> (필요 시 <code>Explain in detail.</code>)
-      <p>출력 제어: <strong>선택적</strong></p>
+  <div class="task-row">
+    <div class="task-meta">
+      <span class="task-name">Explain</span>
+      <span class="task-badge badge-opt">선택적</span>
     </div>
+    <code class="task-prompt">Explain briefly. <span style="color:var(--ink-3)">(필요 시: Explain in detail.)</span></code>
   </div>
 </div>
 
@@ -194,24 +194,18 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 
 ### 모델이 하지 않는 것
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">비용 최적화</div>
-    <div class="compare-body">
-      <p>모델의 목표는 정확한 답이지, 토큰 비용 최소화가 아니다</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">비용 최적화</div>
+    <p class="info-desc">모델의 목표는 정확한 답이지, 토큰 비용 최소화가 아니다</p>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">세션 전체 최적화</div>
-    <div class="compare-body">
-      <p>모델은 요청 1건 단위로만 판단한다</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">세션 전체 최적화</div>
+    <p class="info-desc">모델은 요청 1건 단위로만 판단한다</p>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">외부 데이터 정제</div>
-    <div class="compare-body">
-      <p>툴 출력(logs, HTML, JSON)은 모델이 그대로 받는다. Tokit은 들어가기 전에 줄일 수 있다</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">외부 데이터 정제</div>
+    <p class="info-desc">툴 출력(logs, HTML, JSON)은 모델이 그대로 받는다. Tokit은 들어가기 전에 줄일 수 있다</p>
   </div>
 </div>
 
@@ -227,36 +221,31 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
   <p>이 최적화가 <strong>모델 없이도 의미 있는가?</strong> YES면 Tokit이 해야 할 일이다. NO면 모델이 이미 하고 있는 것과 중복된다.</p>
 </div>
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">긴 문장 줄이기</div>
-    <div class="compare-body">
-      <p>❌ 모델이 이미 잘함</p>
-    </div>
+<div class="eval-list">
+  <div class="eval-row">
+    <span class="eval-icon dot-no"></span>
+    <span class="eval-label">긴 문장 줄이기</span>
+    <span class="eval-note">모델이 이미 잘함</span>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">JSON 정리</div>
-    <div class="compare-body">
-      <p>✅ 가치 있음</p>
-    </div>
+  <div class="eval-row">
+    <span class="eval-icon dot-yes"></span>
+    <span class="eval-label">JSON 정리</span>
+    <span class="eval-note">가치 있음</span>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">로그 필터링</div>
-    <div class="compare-body">
-      <p>✅ 매우 중요</p>
-    </div>
+  <div class="eval-row">
+    <span class="eval-icon dot-yes"></span>
+    <span class="eval-label">로그 필터링</span>
+    <span class="eval-note">매우 중요</span>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">히스토리 요약</div>
-    <div class="compare-body">
-      <p>⚠️ 상황에 따라 다름</p>
-    </div>
+  <div class="eval-row">
+    <span class="eval-icon dot-maybe"></span>
+    <span class="eval-label">히스토리 요약</span>
+    <span class="eval-note">상황에 따라 다름</span>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">캐싱</div>
-    <div class="compare-body">
-      <p>✅ 모델이 못함</p>
-    </div>
+  <div class="eval-row">
+    <span class="eval-icon dot-yes"></span>
+    <span class="eval-label">캐싱</span>
+    <span class="eval-note">모델이 못함</span>
   </div>
 </div>
 
@@ -374,30 +363,22 @@ Rules:
 
 ## 기대 효과와 리스크
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">입력 토큰</div>
-    <div class="compare-body">
-      <p>확실히 감소</p>
-    </div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">입력 토큰</div>
+    <div class="stat-value">확실히 감소</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">출력 토큰</div>
-    <div class="compare-body">
-      <p>작업 유형별로 감소</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">출력 토큰</div>
+    <div class="stat-value">작업 유형별로 감소</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">총 비용</div>
-    <div class="compare-body">
-      <p>설계에 따라 감소</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">총 비용</div>
+    <div class="stat-value">설계에 따라 감소</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">응답 품질</div>
-    <div class="compare-body">
-      <p>유지 또는 향상 가능</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">응답 품질</div>
+    <div class="stat-value">유지 또는 향상 가능</div>
   </div>
 </div>
 
