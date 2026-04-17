@@ -1,13 +1,17 @@
 ---
-title: "[Tokit] Day 0 - 프로젝트 시작 전 아이디어 정리"
+title: |
+  [Tokit] Day 0 - 프로젝트 
+  시작 전 아이디어 정리
 slug: tokit-day0-project-overview
 date: 2026-04-17
 author: Evan Yoon
 category: project
 subcategory: team-project
 description: |
-  4월 20일부터 시작하는 NLP 프로젝트 Tokit의 핵심 아이디어 정리.
-  "프롬프트 컴파일러"라는 개념으로 LLM CLI의 토큰 비용을 줄이는 시스템을 만든다.
+  4월 20일부터 시작하는 NLP 프로젝트
+  Tokit의 핵심 아이디어 정리.
+  "프롬프트 컴파일러"라는 개념으로 LLM CLI의
+  토큰 비용을 줄이는 시스템을 만든다.
 thumbnail: /images/posts/tokit/tokit-day0.png
 tags:
   - nlp
@@ -73,16 +77,45 @@ toc: true
 
 ## 전체 흐름
 
-```mermaid
-flowchart TD
-    A["사용자 입력 (한국어)"] --> B[코드 전처리]
-    B --> C{최적화 대상?}
-    C -->|"짧은 입력 / 명령어"| D[원문 통과]
-    C -->|최적화 대상| E["모델: 영어 최적 프롬프트 생성"]
-    E --> F[코드 후처리]
-    D --> G
-    F --> G[Codex / Gemini CLI]
-    G --> H["출력 (제어된 길이)"]
+```text
+    ┌──────────────────────────┐
+    │    사용자 입력 (한국어)     │
+    └────────────┬─────────────┘
+                 │
+                 ▼
+    ┌──────────────────────────┐
+    │         코드 전처리        │
+    └────────────┬─────────────┘
+                 │
+                 ▼
+            ╱‾‾‾‾‾‾‾‾‾‾‾‾╲
+           ╱   최적화 대상?  ╲
+           ╲               ╱
+            ╲_____________╱
+            /               \
+  짧은 입력/명령어           최적화 대상
+          /                     \
+         ▼                       ▼
+┌──────────────┐     ┌────────────────────────┐
+│   원문 통과   │     │   모델: 영어 최적           │
+└──────┬───────┘     │        프롬프트 생성        │
+       │             └───────────┬─────────────┘
+       │                         │
+       │             ┌───────────▼─────────────┐
+       │             │        코드 후처리         │
+       │             └───────────┬─────────────┘
+       │                         │
+       └─────────────────────────┘
+                       │
+                       ▼
+    ┌──────────────────────────┐
+    │     Codex / Gemini CLI    │
+    └────────────┬─────────────┘
+                 │
+                 ▼
+    ┌──────────────────────────┐
+    │      출력 (제어된 길이)     │
+    └──────────────────────────┘
 ```
 
 시스템은 두 레이어로 나뉜다.
@@ -135,30 +168,87 @@ only root cause and fix
 
 유저 프롬프트가 어떤 종류의 작업인지 분류하고, 그에 맞는 출력 제어 전략을 적용한다.
 
-```mermaid
-flowchart TD
-    A[유저 프롬프트] --> B{작업 유형 분류}
-    B --> C[Debug]
-    B --> D[Performance]
-    B --> E[Review]
-    B --> F[Refactor]
-    B --> G[Explain]
-    C --> C1["Identify the root cause and suggest a fix."]
-    D --> D1["Identify the main bottleneck\nand suggest up to 3 improvements."]
-    E --> E1["List up to 3 critical issues in this code."]
-    F --> F1["Suggest concise refactoring improvements."]
-    G --> G1{"상세 필요?"}
-    G1 -->|No| G2["Explain briefly."]
-    G1 -->|Yes| G3["Explain in detail."]
+```text
+          ┌─────────────────────┐
+          │    유저 프롬프트       │
+          └──────────┬──────────┘
+                     │
+                     ▼
+              ╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲
+             ╱   작업 유형 분류  ╲
+             ╲                ╱
+              ╲______________╱
+               │
+               ├──▶ ┌─────────────┐    ┌────────────────────────────────────────┐
+               │    │    Debug    │───▶│  Identify the root cause and fix.      │
+               │    └─────────────┘    └────────────────────────────────────────┘
+               │
+               ├──▶ ┌─────────────┐    ┌────────────────────────────────────────────────────┐
+               │    │ Performance │───▶│  Identify the main bottleneck + up to 3 improvements│
+               │    └─────────────┘    └────────────────────────────────────────────────────┘
+               │
+               ├──▶ ┌─────────────┐    ┌────────────────────────────────────────┐
+               │    │   Review    │───▶│  List up to 3 critical issues.         │
+               │    └─────────────┘    └────────────────────────────────────────┘
+               │
+               ├──▶ ┌─────────────┐    ┌────────────────────────────────────────┐
+               │    │  Refactor   │───▶│  Suggest concise refactoring improvements│
+               │    └─────────────┘    └────────────────────────────────────────┘
+               │
+               └──▶ ┌─────────────┐
+                    │   Explain   │
+                    └──────┬──────┘
+                           │
+                           ▼
+                     ╱‾‾‾‾‾‾‾‾‾╲
+                    ╱  상세 필요?  ╲
+                    ╲             ╱
+                     ╲___________╱
+                      /           \
+                     No           Yes
+                     ▼             ▼
+             ┌────────────┐  ┌──────────────┐
+             │ "briefly." │  │ "in detail." │
+             └────────────┘  └──────────────┘
 ```
 
-| 작업 유형   | 최적화된 프롬프트 예시                                           | 출력 제어 강도 |
-| ----------- | ---------------------------------------------------------------- | -------------- |
-| Debug       | `Identify the root cause and suggest a fix.`                     | 강             |
-| Performance | `Identify the main bottleneck and suggest up to 3 improvements.` | 중             |
-| Review      | `List up to 3 critical issues in this code.`                     | 강             |
-| Refactor    | `Suggest concise refactoring improvements.`                      | 중             |
-| Explain     | `Explain briefly.` (필요 시 `Explain in detail.`)                | 선택적         |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">Debug</div>
+    <div class="compare-body">
+      <code>Identify the root cause and suggest a fix.</code>
+      <p>출력 제어: <strong>강</strong></p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Performance</div>
+    <div class="compare-body">
+      <code>Identify the main bottleneck and suggest up to 3 improvements.</code>
+      <p>출력 제어: <strong>중</strong></p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Review</div>
+    <div class="compare-body">
+      <code>List up to 3 critical issues in this code.</code>
+      <p>출력 제어: <strong>강</strong></p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Refactor</div>
+    <div class="compare-body">
+      <code>Suggest concise refactoring improvements.</code>
+      <p>출력 제어: <strong>중</strong></p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Explain</div>
+    <div class="compare-body">
+      <code>Explain briefly.</code> (필요 시 <code>Explain in detail.</code>)
+      <p>출력 제어: <strong>선택적</strong></p>
+    </div>
+  </div>
+</div>
 
 Explain 타입만 예외적으로 길어질 수 있다. 나머지는 기본적으로 짧게 강제한다.
 
@@ -181,11 +271,26 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 
 ### 모델이 하지 않는 것
 
-| 모델이 못하는 영역 | 이유                                                                                 |
-| ------------------ | ------------------------------------------------------------------------------------ |
-| 비용 최적화        | 모델의 목표는 정확한 답이지, 토큰 비용 최소화가 아니다                               |
-| 세션 전체 최적화   | 모델은 요청 1건 단위로만 판단한다                                                    |
-| 외부 데이터 정제   | 툴 출력(logs, HTML, JSON)은 모델이 그대로 받는다. Tokit은 들어가기 전에 줄일 수 있다 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">비용 최적화</div>
+    <div class="compare-body">
+      <p>모델의 목표는 정확한 답이지, 토큰 비용 최소화가 아니다</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">세션 전체 최적화</div>
+    <div class="compare-body">
+      <p>모델은 요청 1건 단위로만 판단한다</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">외부 데이터 정제</div>
+    <div class="compare-body">
+      <p>툴 출력(logs, HTML, JSON)은 모델이 그대로 받는다. Tokit은 들어가기 전에 줄일 수 있다</p>
+    </div>
+  </div>
+</div>
 
 ### Tokit이 해야 할 방향
 
@@ -199,13 +304,38 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
   <p>이 최적화가 <strong>모델 없이도 의미 있는가?</strong> YES면 Tokit이 해야 할 일이다. NO면 모델이 이미 하고 있는 것과 중복된다.</p>
 </div>
 
-| 작업           | 평가                |
-| -------------- | ------------------- |
-| 긴 문장 줄이기 | ❌ 모델이 이미 잘함 |
-| JSON 정리      | ✅ 가치 있음        |
-| 로그 필터링    | ✅ 매우 중요        |
-| 히스토리 요약  | ⚠️ 상황에 따라 다름 |
-| 캐싱           | ✅ 모델이 못함      |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">긴 문장 줄이기</div>
+    <div class="compare-body">
+      <p>❌ 모델이 이미 잘함</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">JSON 정리</div>
+    <div class="compare-body">
+      <p>✅ 가치 있음</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">로그 필터링</div>
+    <div class="compare-body">
+      <p>✅ 매우 중요</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">히스토리 요약</div>
+    <div class="compare-body">
+      <p>⚠️ 상황에 따라 다름</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">캐싱</div>
+    <div class="compare-body">
+      <p>✅ 모델이 못함</p>
+    </div>
+  </div>
+</div>
 
 ---
 
@@ -232,15 +362,29 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 
 작업 간 의존 관계와 실행 순서를 그래프로 표현하면 이렇다.
 
-```mermaid
-flowchart LR
-    IN[유저 입력] --> SC[shared_context 추출]
-    SC --> T1["t1: code_generation"]
-    T1 -->|generated_code| T2["t2: code_review"]
-    T1 -->|generated_code| T3["t3: test_creation"]
-    T2 -->|review_findings| T3
-    T2 --> OUT[최종 출력]
-    T3 --> OUT
+```text
+┌──────────┐       ┌─────────────────────┐
+│  유저 입력 │──────▶│  shared_context 추출  │
+└──────────┘       └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │   t1: code_generation │
+                    └────────┬─────────────┘
+                             │
+          ┌──────────────────┴──────────────────┐
+     generated_code                       generated_code
+          │                                     │
+          ▼                                     ▼
+┌───────────────────┐                 ┌───────────────────────┐
+│  t2: code_review  │─review_findings▶│   t3: test_creation   │
+└─────────┬─────────┘                 └──────────┬────────────┘
+          │                                       │
+          └──────────────────┐   ┌───────────────┘
+                             ▼   ▼
+                      ┌─────────────┐
+                      │   최종 출력   │
+                      └─────────────┘
 ```
 
 ### 공유 컨텍스트 분리
@@ -268,17 +412,25 @@ flowchart LR
 
 각 단계마다 전체 대화를 다시 넘기면 컨텍스트가 계속 커진다. 각 단계의 결과를 정규화된 상태(state)로 저장하고, 다음 단계에는 필요한 것만 전달한다.
 
-```mermaid
-flowchart TD
-    T1["t1: 코드 생성"] -->|"generated_code (원문 유지)"| T2["t2: 보안 리뷰"]
-    T1 -->|"generated_code (원문 유지)"| T3["t3: 테스트 생성"]
-    T2 -->|"review_findings만 (요약 금지)"| T3
-    T3 --> OUT["최종 출력 통합"]
-
-    style T1 fill:#3b4261,stroke:#565f89,color:#c0caf5
-    style T2 fill:#3b4261,stroke:#565f89,color:#c0caf5
-    style T3 fill:#3b4261,stroke:#565f89,color:#c0caf5
-    style OUT fill:#2d4a3e,stroke:#4a8c6f,color:#c0caf5
+```text
+              ┌──────────────────────┐
+              │      t1: 코드 생성     │
+              └───────────┬──────────┘
+                          │
+          ┌───────────────┴───────────────────┐
+          │ generated_code (원문 유지)           │ generated_code (원문 유지)
+          ▼                                   ▼
+┌──────────────────┐               ┌────────────────────────┐
+│   t2: 보안 리뷰    │               │     t3: 테스트 생성      │
+└────────┬─────────┘               └──────────┬─────────────┘
+         │                                     ▲
+         │      review_findings만 (요약 금지)    │
+         └─────────────────────────────────────┘
+                                               │
+                                               ▼
+                                  ┌────────────────────────┐
+                                  │      최종 출력 통합       │
+                                  └────────────────────────┘
 ```
 
 - 리뷰 단계 → 코드 + 최소 요구사항만
@@ -291,12 +443,26 @@ flowchart TD
   <p>생성된 코드 본문, 에러 메시지 원문, 보안 리뷰 발견 이슈, 함수 시그니처는 <strong>절대 요약하지 않는다.</strong> 이 정보를 잃으면 다음 단계 품질이 무너진다.</p>
 </div>
 
-| 압축 금지                  | 압축 가능            |
-| -------------------------- | -------------------- |
-| 생성된 코드 본문           | 반복된 배경 설명     |
-| 에러 메시지 원문           | 해결된 이전 논의     |
-| 보안 리뷰 발견 이슈        | 중요도 낮은 코멘트   |
-| 함수 시그니처 / 인터페이스 | 성공 로그, 중복 설명 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">압축 금지</div>
+    <div class="compare-body">
+      <p>생성된 코드 본문</p>
+      <p>에러 메시지 원문</p>
+      <p>보안 리뷰 발견 이슈</p>
+      <p>함수 시그니처 / 인터페이스</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">압축 가능</div>
+    <div class="compare-body">
+      <p>반복된 배경 설명</p>
+      <p>해결된 이전 논의</p>
+      <p>중요도 낮은 코멘트</p>
+      <p>성공 로그, 중복 설명</p>
+    </div>
+  </div>
+</div>
 
 ---
 
@@ -323,12 +489,32 @@ Rules:
 
 ## 기대 효과와 리스크
 
-| 항목      | 예상 결과           |
-| --------- | ------------------- |
-| 입력 토큰 | 확실히 감소         |
-| 출력 토큰 | 작업 유형별로 감소  |
-| 총 비용   | 설계에 따라 감소    |
-| 응답 품질 | 유지 또는 향상 가능 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">입력 토큰</div>
+    <div class="compare-body">
+      <p>확실히 감소</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">출력 토큰</div>
+    <div class="compare-body">
+      <p>작업 유형별로 감소</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">총 비용</div>
+    <div class="compare-body">
+      <p>설계에 따라 감소</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">응답 품질</div>
+    <div class="compare-body">
+      <p>유지 또는 향상 가능</p>
+    </div>
+  </div>
+</div>
 
 <div class="callout callout-warn">
   <p class="callout-label">주요 리스크</p>
@@ -345,10 +531,20 @@ Rules:
 
 ## 일정
 
-| 기간               | 내용                                  |
-| ------------------ | ------------------------------------- |
-| 4월 20일 ~ 5월 1일 | NLP 프로젝트 — 프롬프트 컴파일러 구현 |
-| 5월 초 ~ 5월 중순  | 서비스 프로젝트 — Tokit 서비스화      |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">4월 20일 ~ 5월 1일</div>
+    <div class="compare-body">
+      <p>NLP 프로젝트 — 프롬프트 컴파일러 구현</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">5월 초 ~ 5월 중순</div>
+    <div class="compare-body">
+      <p>서비스 프로젝트 — Tokit 서비스화</p>
+    </div>
+  </div>
+</div>
 
 ---
 
