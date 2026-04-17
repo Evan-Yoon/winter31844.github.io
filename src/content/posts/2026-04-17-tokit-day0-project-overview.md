@@ -41,10 +41,22 @@ toc: true
 
 핵심은 "번역"이 아니라 "컴파일"이다.
 
-| 방식         | 프롬프트 예시                                            |
-| ------------ | -------------------------------------------------------- |
-| 단순 번역    | `Please explain this code in detail...`                  |
-| Tokit 컴파일 | `Explain this code briefly and identify the main issue.` |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">단순 번역</div>
+    <div class="compare-body">
+      <code>Please explain this code in detail...</code>
+      <p>의미만 옮긴다. 길이와 출력 토큰은 그대로다.</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">Tokit 컴파일</div>
+    <div class="compare-body">
+      <code>Explain this code briefly and identify the main issue.</code>
+      <p>의미 유지 + 길이 압축 + 출력 형식 제어.</p>
+    </div>
+  </div>
+</div>
 
 번역은 의미만 옮긴다. 컴파일은 의미를 유지하면서 길이를 줄이고, 출력 형식까지 제어한다.
 
@@ -61,13 +73,16 @@ toc: true
 
 ## 전체 흐름
 
-```
-사용자 입력 (한국어)
-→ 코드 전처리
-→ 모델 (영어 최적 프롬프트 생성)
-→ 코드 후처리
-→ Codex / Gemini CLI
-→ 출력 (제어된 길이)
+```mermaid
+flowchart TD
+    A["사용자 입력 (한국어)"] --> B[코드 전처리]
+    B --> C{최적화 대상?}
+    C -->|"짧은 입력 / 명령어"| D[원문 통과]
+    C -->|최적화 대상| E["모델: 영어 최적 프롬프트 생성"]
+    E --> F[코드 후처리]
+    D --> G
+    F --> G[Codex / Gemini CLI]
+    G --> H["출력 (제어된 길이)"]
 ```
 
 시스템은 두 레이어로 나뉜다.
@@ -120,6 +135,23 @@ only root cause and fix
 
 유저 프롬프트가 어떤 종류의 작업인지 분류하고, 그에 맞는 출력 제어 전략을 적용한다.
 
+```mermaid
+flowchart TD
+    A[유저 프롬프트] --> B{작업 유형 분류}
+    B --> C[Debug]
+    B --> D[Performance]
+    B --> E[Review]
+    B --> F[Refactor]
+    B --> G[Explain]
+    C --> C1["Identify the root cause and suggest a fix."]
+    D --> D1["Identify the main bottleneck\nand suggest up to 3 improvements."]
+    E --> E1["List up to 3 critical issues in this code."]
+    F --> F1["Suggest concise refactoring improvements."]
+    G --> G1{"상세 필요?"}
+    G1 -->|No| G2["Explain briefly."]
+    G1 -->|Yes| G3["Explain in detail."]
+```
+
 | 작업 유형   | 최적화된 프롬프트 예시                                           | 출력 제어 강도 |
 | ----------- | ---------------------------------------------------------------- | -------------- |
 | Debug       | `Identify the root cause and suggest a fix.`                     | 강             |
@@ -162,7 +194,10 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 - **중요도 기반 필터링** — 에러 메시지는 유지, 성공 로그는 제거, stack trace는 축소
 - **구조화 압축** — 자연어 대신 JSON으로 정보 전달 (토큰 감소 + 의미 보존)
 
-판단 기준은 하나다: **이 최적화가 모델 없이도 의미 있는가?** YES면 Tokit이 해야 할 일이다.
+<div class="callout callout-key">
+  <p class="callout-label">판단 기준</p>
+  <p>이 최적화가 <strong>모델 없이도 의미 있는가?</strong> YES면 Tokit이 해야 할 일이다. NO면 모델이 이미 하고 있는 것과 중복된다.</p>
+</div>
 
 | 작업           | 평가                |
 | -------------- | ------------------- |
@@ -195,6 +230,19 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 }
 ```
 
+작업 간 의존 관계와 실행 순서를 그래프로 표현하면 이렇다.
+
+```mermaid
+flowchart LR
+    IN[유저 입력] --> SC[shared_context 추출]
+    SC --> T1["t1: code_generation"]
+    T1 -->|generated_code| T2["t2: code_review"]
+    T1 -->|generated_code| T3["t3: test_creation"]
+    T2 -->|review_findings| T3
+    T2 --> OUT[최종 출력]
+    T3 --> OUT
+```
+
 ### 공유 컨텍스트 분리
 
 세 작업이 공통으로 쓰는 정보를 매번 반복하면 토큰이 낭비된다. `shared_context`로 한 번만 정의하고, 각 작업에는 차이점만 담는다.
@@ -220,10 +268,28 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 
 각 단계마다 전체 대화를 다시 넘기면 컨텍스트가 계속 커진다. 각 단계의 결과를 정규화된 상태(state)로 저장하고, 다음 단계에는 필요한 것만 전달한다.
 
+```mermaid
+flowchart TD
+    T1["t1: 코드 생성"] -->|"generated_code (원문 유지)"| T2["t2: 보안 리뷰"]
+    T1 -->|"generated_code (원문 유지)"| T3["t3: 테스트 생성"]
+    T2 -->|"review_findings만 (요약 금지)"| T3
+    T3 --> OUT["최종 출력 통합"]
+
+    style T1 fill:#3b4261,stroke:#565f89,color:#c0caf5
+    style T2 fill:#3b4261,stroke:#565f89,color:#c0caf5
+    style T3 fill:#3b4261,stroke:#565f89,color:#c0caf5
+    style OUT fill:#2d4a3e,stroke:#4a8c6f,color:#c0caf5
+```
+
 - 리뷰 단계 → 코드 + 최소 요구사항만
 - 테스트 단계 → 최종 코드 구조 + 리뷰에서 발견된 위험 포인트만
 
 ### 압축하면 안 되는 것
+
+<div class="callout callout-warn">
+  <p class="callout-label">압축 금지 구간</p>
+  <p>생성된 코드 본문, 에러 메시지 원문, 보안 리뷰 발견 이슈, 함수 시그니처는 <strong>절대 요약하지 않는다.</strong> 이 정보를 잃으면 다음 단계 품질이 무너진다.</p>
+</div>
 
 | 압축 금지                  | 압축 가능            |
 | -------------------------- | -------------------- |
@@ -264,11 +330,10 @@ Rules:
 | 총 비용   | 설계에 따라 감소    |
 | 응답 품질 | 유지 또는 향상 가능 |
 
-**주요 리스크:**
-
-- 의미 손실 — 압축 과정에서 조건 누락 위험
-- 지연 증가 — 매 프롬프트마다 모델을 한 번 더 호출
-- 짧은 입력에서는 오히려 손해 가능
+<div class="callout callout-warn">
+  <p class="callout-label">주요 리스크</p>
+  <p>의미 손실(압축 중 조건 누락), 지연 증가(매 프롬프트마다 모델 추가 호출), 짧은 입력에서 오히려 손해. 세 가지 모두 <strong>fallback + 캐싱 + 입력 길이 필터링</strong>으로 대응한다.</p>
+</div>
 
 **대응 방향:**
 
@@ -284,3 +349,22 @@ Rules:
 | ------------------ | ------------------------------------- |
 | 4월 20일 ~ 5월 1일 | NLP 프로젝트 — 프롬프트 컴파일러 구현 |
 | 5월 초 ~ 5월 중순  | 서비스 프로젝트 — Tokit 서비스화      |
+
+---
+
+## 한 줄 요약
+
+<div class="callout callout-key">
+  <p class="callout-label">Tokit이 만드는 것</p>
+  <p>개발자가 한국어로 프롬프트를 입력하면, Tokit이 그것을 <strong>더 짧고 명확한 영어 명령으로 컴파일</strong>해서 Codex / Gemini CLI에 넘긴다. 번역이 아니라 압축이다. 입력 토큰과 출력 토큰을 동시에 줄이는 것이 목표다.</p>
+</div>
+
+구체적으로 만드는 것은 세 가지다.
+
+**1. 프롬프트 컴파일러** — 한국어 입력을 받아 작업 유형(Debug / Review / Explain 등)을 분류하고, 각 유형에 맞는 짧은 영어 명령으로 재작성한다. 출력 형식 제어(`in 3 bullet points`, `only root cause and fix`)도 프롬프트 안에 포함시킨다.
+
+**2. 입력 전처리 레이어** — `/`, `@`, `!` 명령어는 건드리지 않고, 짧은 입력은 원문 그대로 통과시킨다. 툴 출력(logs, JSON, HTML)은 모델에 넘기기 전에 정제한다.
+
+**3. 반복 루프 최적화** — 복합 요청(코드 생성 → 리뷰 → 테스트)을 작업 그래프로 분해하고, 각 단계에는 전체 대화 대신 필요한 상태(state)만 전달해 컨텍스트가 눈덩이처럼 커지는 걸 막는다.
+
+이 세 가지가 합쳐진 시스템이 Tokit이다.

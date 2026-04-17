@@ -701,6 +701,122 @@
   background: var(--bg-hover);
 }
 
+/* ─── MERMAID ────────────────────────────────────────────────────────────── */
+.mermaid-diagram {
+  margin: 2.5rem 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.mermaid-diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ─── CALLOUT BOXES ──────────────────────────────────────────────────────── */
+.callout {
+  margin: 2rem 0;
+  padding: 1.1rem 1.4rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-strong);
+  border-left-width: 3px;
+  background: var(--bg-card);
+}
+
+.callout-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+}
+
+.callout p {
+  font-size: 0.97rem !important;
+  line-height: 1.7 !important;
+  margin: 0 !important;
+  color: var(--ink-2) !important;
+}
+
+.callout strong {
+  color: var(--ink) !important;
+}
+
+.callout.callout-key {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+.callout.callout-key .callout-label { color: var(--accent); }
+
+.callout.callout-warn {
+  border-left-color: var(--accent-2);
+  background: var(--accent-2-soft);
+}
+.callout.callout-warn .callout-label { color: var(--accent-2); }
+
+/* ─── BEFORE / AFTER COMPARE ─────────────────────────────────────────────── */
+.compare-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.compare-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+}
+
+.compare-label {
+  padding: 0.45rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.compare-card.compare-before .compare-label {
+  background: var(--accent-2-soft);
+  color: var(--accent-2);
+}
+
+.compare-card.compare-after .compare-label {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.compare-body {
+  padding: 1rem 1.25rem;
+  background: var(--bg-card);
+}
+
+.compare-body code {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: none !important;
+  padding: 0 !important;
+  margin-bottom: 0.5rem;
+}
+
+.compare-body p {
+  font-size: 0.88rem !important;
+  line-height: 1.6 !important;
+  color: var(--ink-3) !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 600px) {
+  .compare-wrap { grid-template-columns: 1fr; }
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
 @media (max-width: 1280px) {
   .post-layout-outer.has-toc {
