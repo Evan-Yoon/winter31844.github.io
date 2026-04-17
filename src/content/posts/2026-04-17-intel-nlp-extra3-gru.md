@@ -52,7 +52,7 @@ LSTM은 RNN의 장기 의존성 문제를 완화한 구조였지만, 그만큼 �
 
 ![LSTM과 GRU 비교 슬라이드](/images/posts/intel-nlp-extra3-gru/gru-slide-64-64.png)
 
-GRU의 방향은 명확하다.
+GRU의 방향은 분명하다.
 
 > LSTM이 하던 기억 관리를 유지하되, 구조는 더 단순하게 만들자.
 
@@ -115,6 +115,8 @@ GRU에는 두 개의 gate가 나온다.
 
 GRU 수식은 LSTM보다 적지만, 처음 보면 오히려 더 압축돼 보여서 낯설 수 있다.  
 하지만 아래처럼 읽으면 구조가 단순하게 보인다.
+
+![GRU 수식 흐름 이해용 도식](/images/posts/intel-nlp-extra3-gru/gru-math-flow.svg)
 
 ```text
 reset gate: 과거를 지금 계산에 얼마나 섞을까
@@ -219,7 +221,7 @@ LSTM의 forget gate와 input gate를 하나로 합쳤다는 말은, 결국 이 u
 
 즉, GRU는 "장기 메모리용 통로"와 "현재 출력용 통로"를 분리하지 않고, 하나의 hidden state 안에서 같이 다루려는 구조다.
 
-이 말은 곧 장단점이 같이 있다는 뜻이다.
+이 말은 곧 장점과 trade-off가 같이 있다는 뜻이다.
 
 ### 장점
 
@@ -267,7 +269,7 @@ reset gate가 이전 hidden state를 현재 후보 상태 계산에 얼마나 �
 
 update gate가 예전 hidden state를 얼마나 유지하고, 새 후보 상태를 얼마나 반영할지 정한다.
 
-즉, 최종 hidden state는 아래처럼 볼 수 있다.
+즉, 최종 hidden state는 아래처럼 이해하면 된다.
 
 ```text
 새 hidden state
@@ -317,8 +319,14 @@ h_t = (1 - z_t) * h_{t-1} + z_t * \tilde{h_t}
 
 즉, GRU는 기억을 "덮어쓰기"보다 "비율을 섞어서 갱신하기"에 가깝다.
 
-예를 들어 `z_t = 0.1`이면 예전 메모를 대부분 유지하고,  
-`z_t = 0.9`이면 새 후보 메모로 거의 바꾸는 식이다.
+문장으로 바꾸면 이런 느낌이다.
+
+- `"The movie looked boring at first"`까지 읽은 상태에서는 "지루할 것 같다"는 메모가 꽤 강하게 남아 있다
+- 그런데 뒤에 `"but it was actually fun"`이 나오면 update gate는 새 문맥을 더 많이 반영해야 한다고 판단할 수 있다
+- 반대로 그냥 덧붙이는 설명만 나오면 예전 메모를 더 많이 유지할 수 있다
+
+즉, update gate는 숫자 하나라기보다
+"지금 이 단어가 들어왔을 때 기존 해석을 유지할지, 새로 바꿀지"를 정하는 비율이라고 보면 된다.
 
 ## 8. LSTM과 GRU를 비교해서 보면 더 쉬워진다
 

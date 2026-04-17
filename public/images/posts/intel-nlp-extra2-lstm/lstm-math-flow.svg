@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">LSTM math flow diagram</title>
+  <desc id="desc">Simple diagram showing forget gate, input gate, cell state update, and output gate in LSTM.</desc>
+  <rect width="1200" height="620" fill="#f8fafc"/>
+
+  <rect x="60" y="85" width="180" height="80" rx="20" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="150" y="132" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#1e3a8a">x_t</text>
+
+  <rect x="60" y="200" width="180" height="80" rx="20" fill="#ede9fe" stroke="#7c3aed" stroke-width="3"/>
+  <text x="150" y="247" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#4c1d95">h_(t-1)</text>
+
+  <rect x="60" y="315" width="180" height="80" rx="20" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+  <text x="150" y="362" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#92400e">c_(t-1)</text>
+
+  <rect x="320" y="65" width="180" height="90" rx="22" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
+  <text x="410" y="104" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="#7f1d1d">Forget gate</text>
+  <text x="410" y="138" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#7f1d1d">f_t</text>
+
+  <rect x="320" y="180" width="180" height="90" rx="22" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text x="410" y="219" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="#14532d">Input gate</text>
+  <text x="410" y="253" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#14532d">i_t</text>
+
+  <rect x="320" y="295" width="180" height="90" rx="22" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+  <text x="410" y="324" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#0c4a6e">
+    <tspan x="410" dy="0">후보</tspan>
+    <tspan x="410" dy="22">cell state</tspan>
+  </text>
+  <text x="410" y="370" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#0c4a6e">c~_t</text>
+
+  <rect x="320" y="410" width="180" height="90" rx="22" fill="#fae8ff" stroke="#c026d3" stroke-width="3"/>
+  <text x="410" y="449" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="#86198f">Output gate</text>
+  <text x="410" y="483" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#86198f">o_t</text>
+
+  <rect x="620" y="160" width="250" height="238" rx="28" fill="#ffffff" stroke="#334155" stroke-width="4"/>
+  <text x="745" y="198" font-family="Arial, sans-serif" font-size="23" font-weight="700" text-anchor="middle" fill="#0f172a">
+    <tspan x="745" dy="0">cell state</tspan>
+    <tspan x="745" dy="26">업데이트</tspan>
+  </text>
+  <text x="745" y="246" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#334155">이전 메모 유지</text>
+  <text x="745" y="282" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#334155">f_t * c_(t-1)</text>
+  <text x="745" y="318" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#334155">+</text>
+  <text x="745" y="346" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#334155">새 메모 추가</text>
+  <text x="745" y="382" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#334155">i_t * c~_t</text>
+
+  <rect x="945" y="145" width="180" height="90" rx="22" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+  <text x="1035" y="176" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#92400e">
+    <tspan x="1035" dy="0">새</tspan>
+    <tspan x="1035" dy="22">cell state</tspan>
+  </text>
+  <text x="1035" y="218" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#92400e">c_t</text>
+
+  <rect x="945" y="335" width="180" height="90" rx="22" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text x="1035" y="374" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#14532d">hidden state</text>
+  <text x="1035" y="408" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#14532d">h_t</text>
+
+  <path d="M240 125 C275 125, 285 110, 320 110" fill="none" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M240 240 C275 240, 285 225, 320 225" fill="none" stroke="#7c3aed" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M240 355 C275 355, 285 210, 620 210" fill="none" stroke="#d97706" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M500 110 C560 110, 560 250, 620 250" fill="none" stroke="#dc2626" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M500 225 C560 225, 560 325, 620 325" fill="none" stroke="#16a34a" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M500 340 C560 340, 560 325, 620 325" fill="none" stroke="#0284c7" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M500 455 C640 455, 810 455, 945 380" fill="none" stroke="#c026d3" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M870 235 C905 235, 910 190, 945 190" fill="none" stroke="#d97706" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M870 325 C915 325, 905 380, 945 380" fill="none" stroke="#16a34a" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <text x="600" y="565" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#475569">
+    LSTM은 cell state를 따로 두고, gate로 무엇을 남기고 무엇을 더할지 조절한다.
+  </text>
+
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#334155"/>
+    </marker>
+  </defs>
+</svg>
