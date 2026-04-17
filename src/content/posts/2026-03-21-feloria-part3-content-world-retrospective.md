@@ -374,7 +374,7 @@ SE   — 짧은 효과음 (버튼, 포획, 피격)
 
 끝까지 혼자만 본 프로젝트로 두지 않으려고 Vercel 배포도 붙였다. 브라우저에서 바로 열 수 있게 해두니, 그제야 다른 사람이 실제로 플레이해보고 피드백을 줄 수 있었다.
 
-<img src="/images/posts/feloria-part3/vercel-deploy-success.png" alt="Feloria의 Vercel 배포 성공 화면" style="display:block; width:100%; max-width:760px; margin:1rem auto; border-radius:16px;" />
+<img src="/images/posts/feloria-part3/vercel-deploy-success.png" alt="Feloria의 Vercel 배포 성공 화면" style="display:block; max-width:560px; width:100%; height:auto; margin:1rem auto; border-radius:16px;" />
 배포 성공 화면. 이 한 장 덕분에 로컬에서만 돌던 프로토타입이 '남이 직접 눌러볼 수 있는 게임'으로 넘어갔다.
 
 특히 고마웠던 자료가 [Feloria 버그 리포트 by 지호](/files/feloria/feloria-bug-report-by-jiho.pdf)였다. 실제로 Vercel에 올린 빌드를 플레이한 뒤 직접 정리해준 리포트였고, 읽어보면 플레이어가 어디에서 막히는지가 아주 구체적으로 드러난다.
