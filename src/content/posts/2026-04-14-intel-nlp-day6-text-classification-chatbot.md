@@ -28,90 +28,85 @@ draft: false
 toc: true
 ---
 
-2026년 4월 14일 수업은 [day 4의 키워드 분석과 텍스트 임베딩](/posts/nlp-study-keyword-analysis-word2vec-embedding/)에서 다룬 벡터화 개념을 실제 분류와 응답 생성 쪽으로 밀어붙이는 흐름이었다. 앞에서는 단어를 어떻게 수치화할지에 집중했다면, 이번에는 그 벡터를 이용해 문장을 분류하고, 질의에 반응하는 챗봇 형태까지 만들어 봤다.
-
-특히 이날은 한 가지 모델만 깊게 파기보다, 같은 NLP 파이프라인이 서로 다른 문제에 어떻게 적용되는지를 연속해서 확인한 날이었다. TF-IDF 기반 영화 리뷰 감정 분류, 간단한 의도 분류 챗봇, 코사인 유사도 기반 질의응답 챗봇이 그 축이었다.
+Day 4~5에서 배운 벡터화와 분류 개념을 세 가지 방향으로 적용했다. 영화 리뷰 감정 분석, 의도 분류 챗봇, 코사인 유사도 기반 챗봇이다. 같은 NLP 파이프라인이 문제 정의에 따라 어떻게 다른 구조로 구현되는지 확인하는 날이었다.
 
 ## 1. TF-IDF 분류 과제: 영화 리뷰 감정 분석
 
-`4월 14일.ipynb`에서는 앞부분에서 재난 트윗 분류를 이어가고, 마지막 `5. NLP 분류 과제!`부터는 IMDB 영화 리뷰 데이터로 감정 분석을 진행했다. 여기서는 훈련용 `pkl` 파일과 테스트용 `pkl` 파일을 불러와 리뷰가 긍정인지 부정인지 분류했다.
+**목표**: IMDB 영화 리뷰가 긍정인지 부정인지 분류한다.
 
-핵심 흐름은 단순했다.
-
-1. `CountVectorizer(max_features=5000)`로 단어 가방을 만든다.
-2. `TfidfTransformer()`로 빈도 벡터를 TF-IDF로 바꾼다.
-3. `LogisticRegression()`으로 긍정/부정을 학습한다.
-4. 테스트 세트 정확도로 성능을 확인한다.
-
-수업 코드에서는 아래와 같이 진행했다.
+**흐름**: 단어 빈도 행렬 → TF-IDF 가중치 적용 → 로지스틱 회귀 학습 → 평가
 
 ```python
-vectorizer = CountVectorizer(
-    analyzer="word",
-    strip_accents=None,
-    tokenizer=None,
-    preprocessor=None,
-    stop_words=None,
-    max_features=5000
-)
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.linear_model import LogisticRegression
 
+# 1단계: 단어 빈도 행렬 만들기
+vectorizer = CountVectorizer(max_features=5000)  # 상위 5,000개 단어만 사용
 train_data_features = vectorizer.fit_transform(df_raw["text"])
-test_data_features = vectorizer.transform(df_raw_test["text"])
+test_data_features  = vectorizer.transform(df_raw_test["text"])  # fit 없이 transform만
 
+# 2단계: TF-IDF 가중치 적용
+# TF: 문서 내 단어 빈도 / TF-IDF: 빈도 × 희소성(IDF)
 tfidfier = TfidfTransformer()
-tfidf = tfidfier.fit_transform(train_data_features)
-tfidf_test = tfidfier.transform(test_data_features)
-```
+tfidf      = tfidfier.fit_transform(train_data_features)
+tfidf_test = tfidfier.transform(test_data_features)  # 역시 transform만
 
-이후 로지스틱 회귀로 학습했을 때 테스트 정확도는 약 `0.88256`이 나왔다. 복잡한 딥러닝 없이도 전처리와 벡터화가 정리되면, 전통적인 선형 모델만으로도 꽤 안정적인 분류가 가능하다는 점을 다시 확인한 셈이다.
-
-```python
+# 3단계: 학습과 평가
 rf = LogisticRegression()
 rf.fit(X_all, y_all)
-print(rf.score(X_test, y_test))
+print(rf.score(X_test, y_test))  # 약 0.88256
 ```
 
-이 과제의 의미는 단순히 점수를 얻는 데 있지 않았다. day 4에서 TF-IDF와 임베딩을 배울 때는 "이 숫자 표현이 왜 필요한가"에 더 가까웠다면, 이번에는 그 표현이 실제 분류 성능으로 어떻게 이어지는지 확인했다. 텍스트를 벡터로 바꾸는 작업이 전처리의 끝이 아니라, 모델 입력을 설계하는 핵심 단계라는 점이 더 분명해졌다.
+테스트 데이터에 `fit_transform` 대신 `transform`만 쓰는 이유: 학습 데이터에서 만든 어휘 사전과 IDF 값을 그대로 적용해야 한다. 테스트 데이터로 다시 fit하면 "모르는 데이터를 미리 보는" 꼴이 된다.
 
-추가로, 같은 노트북 앞부분에서는 재난 트윗 분류 예제를 통해 `GridSearchCV`로 하이퍼파라미터를 조정하고, 입력 문장을 직접 넣어 관련성 여부를 판별하는 파이프라인도 만들었다. 결국 리뷰 감정 분석 과제는 그 흐름을 데이터셋만 바꿔 다시 적용한 형태에 가깝다.
+**결과**: 88.3% 정확도. 복잡한 딥러닝 없이 전처리와 TF-IDF만으로도 충분한 성능이 나온다.
 
 ## 2. 신경망으로 의도 분류 챗봇 만들기
 
-`4월 14일 (2).ipynb`에서는 아주 작은 문장 집합을 가지고 챗봇의 기본 구조를 직접 만들었다. 데이터는 `Hi`, `Hello`, `bye`, `working` 같은 짧은 문장이고, 라벨은 `greeting`, `busy`, `bye` 세 가지였다.
+**목표**: 사용자가 입력한 문장이 어떤 의도인지 분류한다.  
+**구조**: 문장 → BoW 벡터 → 신경망 → 의도 레이블(greeting / busy / bye)
 
-여기서 먼저 한 일은 텍스트 정리였다.
+데이터 예시:
+- `"Hi"`, `"Hello"` → `greeting`
+- `"I'm working"`, `"Busy now"` → `busy`
+- `"bye"`, `"See you"` → `bye`
 
-- 소문자 변환
-- 영문자와 공백 외 문자 제거
-- 불필요한 공백 정리
-- 단어 집합(vocabulary) 구축
-- 문장을 BoW 형태의 이진 벡터로 인코딩
-
-예를 들면 이런 식이다.
+### 전처리와 인코딩
 
 ```python
 def preprocess_data(X):
-    X = [data_point.lower() for data_point in X]
-    X = [remove_non_alpha_characters(sentence) for sentence in X]
-    X = [data_point.strip() for data_point in X]
-    X = [re.sub(' +', ' ', data_point) for data_point in X]
+    X = [s.lower() for s in X]            # 소문자
+    X = [remove_non_alpha(s) for s in X]  # 영문만 남김
+    X = [s.strip() for s in X]            # 앞뒤 공백 제거
+    X = [re.sub(' +', ' ', s) for s in X] # 연속 공백 제거
     return X
 
 def encode_sentence(sentence):
+    """문장을 BoW 이진 벡터로 변환 — 단어 있으면 1, 없으면 0"""
     sentence = preprocess_data([sentence])[0]
-    sentence_encoded = [0] * len(vocabulary)
-    for i in range(len(vocabulary)):
-        if vocabulary[i] in sentence.split(' '):
-            sentence_encoded[i] = 1
-    return sentence_encoded
+    vector = [0] * len(vocabulary)
+    for i, word in enumerate(vocabulary):
+        if word in sentence.split():
+            vector[i] = 1
+    return vector
 ```
 
-그 다음에는 Keras `Sequential` 모델로 간단한 다층 퍼셉트론을 만들었다. 입력층 뒤에 `Dense(64, activation='sigmoid')`, 출력층에 `softmax`를 두고, 다중 클래스 분류 형태로 학습했다.
+왜 이진 벡터를 쓰는가: 문장이 매우 짧아서 단어 빈도 차이가 의미 없다. 있냐/없냐만 구별하면 충분하다.
+
+### 신경망 구조
 
 ```python
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.losses import categorical_crossentropy
+from tensorflow.keras.optimizers import SGD
+
 model = Sequential()
+# 입력: 어휘 크기 차원의 BoW 벡터
 model.add(Dense(units=64, activation='sigmoid', input_dim=len(X_train[0])))
+# 출력: 클래스 수(3)만큼 소프트맥스 확률 반환
 model.add(Dense(units=len(y_train[0]), activation='softmax'))
+
 model.compile(
     loss=categorical_crossentropy,
     optimizer=SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
@@ -119,70 +114,92 @@ model.compile(
 model.fit(np.array(X_train), np.array(y_train), epochs=100, batch_size=16)
 ```
 
-이 챗봇은 아직 "대화를 이해한다"기보다, 입력 문장을 의도 라벨로 분류하는 구조에 가깝다. 사용자가 문장을 입력하면 모델이 `greeting`, `busy`, `bye` 중 하나를 예측하고 그 결과를 돌려준다.
+`softmax`: 3개 클래스에 대한 확률 합이 1이 되도록 출력. 가장 높은 확률의 클래스가 예측 결과.
 
 ```python
+# 예측: 출력 확률 중 가장 높은 인덱스의 클래스 선택
 prediction = model.predict(np.array([encode_sentence(sentence)]))
-print(classes[np.argmax(prediction)])
+print(classes[np.argmax(prediction)])  # 'greeting' 또는 'busy' 또는 'bye'
 ```
 
-규모는 작지만, 챗봇의 기본 뼈대는 여기서 이미 드러난다. 결국 챗봇도 입력 문장을 적절한 표현으로 바꾸고, 그 표현을 기준으로 다음 행동을 결정하는 시스템이다. 이 노트북은 그 과정을 가장 단순한 형태로 보여줬다.
+이 챗봇의 한계: 사전에 정의된 3가지 의도만 분류할 수 있다. 새로운 유형의 입력은 처리하지 못한다.
 
 ## 3. 코사인 유사도 기반 질의응답 챗봇
 
-`4월 14일(3).ipynb`에서는 접근 방식이 달라졌다. 이번에는 문장을 특정 클래스에 분류하는 대신, 지식 문서 안에서 사용자의 질문과 가장 비슷한 문장을 찾아 답으로 돌려주는 방식이었다.
+**목표**: 사전에 준비된 지식 문서에서 사용자 질문과 가장 유사한 문장을 찾아 답한다.  
+**방식**: 분류가 아니라 검색이다. 미리 클래스를 정의하지 않아도 된다.
 
-핵심 구성은 다음과 같았다.
+**왜 이 방식이 유용한가**: 챗봇이 답해야 할 내용이 문서 형태로 있을 때(FAQ, 제품 매뉴얼 등), 문서를 모두 클래스로 분류하는 것은 불가능하다. 대신 가장 관련 있는 문장을 검색해서 돌려준다.
 
-- `nltk.sent_tokenize`로 문서를 문장 단위로 분리
-- `nltk.word_tokenize`로 단어 토큰화
-- `WordNetLemmatizer`로 표제어 정규화
-- `TfidfVectorizer`로 문장 벡터화
-- `cosine_similarity`로 질문과 문장 간 유사도 계산
-
-정규화 함수는 아래처럼 구성했다.
+### 텍스트 정규화 함수
 
 ```python
-remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
+import string, nltk
+from nltk.stem import WordNetLemmatizer
+
+lemmer = WordNetLemmatizer()
+remove_punct = dict((ord(punct), None) for punct in string.punctuation)
 
 def LemNormalize(text):
-    return LemTokens(
-        nltk.word_tokenize(text.lower().translate(remove_punct_dict))
-    )
+    """소문자 변환 + 구두점 제거 + 단어 토큰화 + 표제어 추출"""
+    tokens = nltk.word_tokenize(text.lower().translate(remove_punct))
+    return [lemmer.lemmatize(t) for t in tokens]
 ```
 
-실제 응답 함수에서는 사용자 질문을 기존 문장 목록에 임시로 추가한 뒤, TF-IDF 벡터를 만들고 마지막 문장인 질문과 나머지 문장들 사이의 코사인 유사도를 계산했다. 가장 유사한 문장을 찾아 그대로 응답으로 반환하는 구조다.
+### 응답 함수
 
 ```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
 def response(user_response):
+    # 1. 사용자 질문을 기존 문장 목록에 임시 추가
     sent_tokens.append(user_response)
+    
+    # 2. 전체 문장(질문 포함)을 TF-IDF 벡터로 변환
     TfidfVec = TfidfVectorizer(tokenizer=LemNormalize, stop_words='english')
     tfidf = TfidfVec.fit_transform(sent_tokens)
+    
+    # 3. 마지막(질문) 벡터와 나머지 문장들의 코사인 유사도 계산
     vals = cosine_similarity(tfidf[-1], tfidf)
-
+    
+    # 4. 유사도 가장 높은 문장 찾기 (자기 자신 제외 → [-2])
     idx = vals.argsort()[0][-2]
     best_sim = vals[0][idx]
-
+    
+    sent_tokens.remove(user_response)  # 추가했던 질문 제거
+    
     if best_sim == 0:
-        robo_response = "I am sorry! I don't understand you"
-    else:
-        robo_response = sent_tokens[idx]
-
-    return robo_response
+        return "I am sorry! I don't understand you"
+    return sent_tokens[idx]
 ```
 
-이 방식은 앞의 의도 분류 챗봇과 성격이 다르다. 앞쪽 모델이 입력을 몇 개의 클래스 중 하나로 보내는 구조였다면, 여기서는 질문과 가장 가까운 문장을 검색해서 답한다. 분류보다는 검색 기반 챗봇에 더 가깝고, 지식 문서가 좋아질수록 답변도 같이 좋아지는 구조다.
+`tfidf[-1]`: 방금 추가한 사용자 질문의 TF-IDF 벡터  
+`vals.argsort()[0][-2]`: 유사도 순으로 정렬했을 때 가장 높은 것 ([-1]은 자기 자신이므로 [-2])
 
-또 하나 흥미로웠던 부분은 인사말 처리와 일반 질의응답을 분리했다는 점이다. `greeting()` 함수로 간단한 인삿말을 먼저 처리하고, 그 외 질문만 유사도 기반 응답 함수로 넘겼다. 실제 서비스에서도 규칙 기반 처리와 모델 기반 처리를 섞는 경우가 많은데, 이 노트북이 그 구조를 가볍게 보여줬다.
+### 인사말 처리 분리
 
-## 4. 4월 14일 수업에서 정리된 흐름
+```python
+GREETING_INPUTS  = ("hello", "hi", "greetings", "sup")
+GREETING_OUTPUTS = ["hi", "hey", "hi there", "Hello!"]
 
-세 노트북을 이어서 보면 이날 수업은 하나의 방향으로 묶인다. 텍스트를 전처리하고, 벡터로 바꾸고, 그 벡터를 이용해 분류하거나 가장 적절한 응답을 찾는 흐름이다.
+def greeting(sentence):
+    for word in sentence.split():
+        if word.lower() in GREETING_INPUTS:
+            return random.choice(GREETING_OUTPUTS)
+    return None
+```
 
-- TF-IDF + 로지스틱 회귀: 리뷰 감정 분류
-- BoW + 신경망: 의도 분류 챗봇
-- TF-IDF + 코사인 유사도: 검색형 질의응답 챗봇
+인사말을 별도로 처리하는 이유: 짧은 인사말은 지식 문서에 없어서 유사도 기반 검색이 맞지 않는다. 규칙 기반으로 먼저 처리하고, 나머지만 유사도 검색으로 넘긴다. 실제 서비스도 이처럼 규칙 기반과 모델 기반을 섞는다.
 
-같은 NLP라도 문제 정의에 따라 모델 구조가 달라진다는 점이 분명했다. 어떤 경우에는 선형 분류기가 충분하고, 어떤 경우에는 작은 신경망이 필요하고, 또 어떤 경우에는 분류보다 검색이 더 자연스럽다. 중요한 것은 항상 앞단의 텍스트 표현 방식이다.
+---
 
-day 4에서 배운 벡터화와 임베딩이 이론으로만 남지 않고, day 6에서는 실제 분류기와 챗봇 구조로 이어졌다. 이 연결이 잡히고 나니 NLP를 개별 기법의 목록으로 보는 대신, 입력 표현과 문제 유형에 따라 조합되는 파이프라인으로 보기 시작했다.
+## 핵심 정리
+
+| 방식 | 문제 유형 | 핵심 아이디어 |
+|---|---|---|
+| TF-IDF + 로지스틱 회귀 | 고정된 클래스 분류 (감정 분석) | 벡터화 후 선형 분류 |
+| BoW + 신경망 | 의도 분류 (챗봇) | 이진 벡터 → 확률 분류 |
+| TF-IDF + 코사인 유사도 | 검색형 Q&A | 분류 없이 가장 유사한 문장 검색 |
+
+문제가 달라지면 구조가 달라진다. 클래스가 고정되어 있으면 분류 모델, 지식 문서에서 답을 찾아야 하면 검색 기반이 더 자연스럽다. 공통점은 언제나 텍스트를 벡터로 바꾸는 것에서 시작한다는 점이다.
