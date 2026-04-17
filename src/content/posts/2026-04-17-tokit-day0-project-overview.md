@@ -12,7 +12,7 @@ description: |
   Tokit의 핵심 아이디어 정리.
   "프롬프트 컴파일러"라는 개념으로 LLM CLI의
   토큰 비용을 줄이는 시스템을 만든다.
-thumbnail: /images/posts/tokit/tokit-day0.png
+thumbnail: /images/posts/tokit/mermaid1.png
 tags:
   - nlp
   - llm
@@ -78,7 +78,7 @@ toc: true
 ## 전체 흐름
 
 <div style="text-align: center;">
-  <img src="/reference/Tokit/mermaid1.png" alt="전체 흐름 다이어그램" style="max-height: 500px; width: auto;" />
+  <img src="/images/posts/tokit/mermaid1.png" alt="전체 흐름 다이어그램" style="max-height: 500px; width: auto;" />
 </div>
 
 시스템은 두 레이어로 나뉜다.
@@ -132,7 +132,7 @@ only root cause and fix
 유저 프롬프트가 어떤 종류의 작업인지 분류하고, 그에 맞는 출력 제어 전략을 적용한다.
 
 <div style="text-align: center;">
-  <img src="/reference/Tokit/mermaid2.png" alt="작업 유형별 최적화 정책 다이어그램" style="max-width: 100%; height: auto;" />
+  <img src="/images/posts/tokit/mermaid2.png" alt="작업 유형별 최적화 정책 다이어그램" style="max-width: 100%; height: auto;" />
 </div>
 
 <div class="task-list">
@@ -275,7 +275,7 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 작업 간 의존 관계와 실행 순서를 그래프로 표현하면 이렇다.
 
 <div style="text-align: center;">
-  <img src="/reference/Tokit/mermaid3.png" alt="복합 요청 처리 다이어그램" style="max-height: 480px; width: auto;" />
+  <img src="/images/posts/tokit/mermaid3.png" alt="복합 요청 처리 다이어그램" style="max-height: 480px; width: auto;" />
 </div>
 
 ### 공유 컨텍스트 분리
@@ -304,7 +304,7 @@ OpenAI, Google 같은 서비스들은 이미 내부에서 컨텍스트 압축과
 각 단계마다 전체 대화를 다시 넘기면 컨텍스트가 계속 커진다. 각 단계의 결과를 정규화된 상태(state)로 저장하고, 다음 단계에는 필요한 것만 전달한다.
 
 <div style="text-align: center;">
-  <img src="/reference/Tokit/mermaid4.png" alt="단계 간 상태 전달 다이어그램" style="max-height: 420px; width: auto;" />
+  <img src="/images/posts/tokit/mermaid4.png" alt="단계 간 상태 전달 다이어그램" style="max-height: 420px; width: auto;" />
 </div>
 
 - 리뷰 단계 → 코드 + 최소 요구사항만

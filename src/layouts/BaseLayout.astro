@@ -78,6 +78,17 @@ const contactHref = email ? `mailto:${email}` : "/#about";
     </button>
   </div>
 
+  <div class="image-lightbox" id="image-lightbox" aria-hidden="true" hidden>
+    <div class="image-lightbox-backdrop" data-lightbox-close></div>
+    <div class="image-lightbox-dialog" role="dialog" aria-modal="true" aria-label="이미지 크게 보기">
+      <button type="button" class="image-lightbox-close" data-lightbox-close aria-label="닫기">Close</button>
+      <p class="image-lightbox-hint">Ctrl + wheel to zoom</p>
+      <div class="image-lightbox-stage">
+        <img id="image-lightbox-media" alt="" />
+      </div>
+    </div>
+  </div>
+
   <script is:inline data-goatcounter="https://evan-yoon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
   <!-- ─── SEARCH ──────────────────────────────────────────────────────────── -->
@@ -408,6 +419,95 @@ const contactHref = email ? `mailto:${email}` : "/#about";
           }
         });
       }
+    })();
+  </script>
+
+  <script is:inline>
+    (function () {
+      const triggerSelector = '.article-body img, .news-content img, .news-cover';
+      const lightbox = document.getElementById('image-lightbox');
+      const media = document.getElementById('image-lightbox-media');
+      if (!lightbox || !media) return;
+
+      let scale = 1;
+
+      function applyZoom() {
+        media.style.transform = `scale(${scale})`;
+      }
+
+      function openLightbox(image) {
+        const source = image.currentSrc || image.getAttribute('src');
+        if (!source) return;
+
+        scale = 1;
+        media.setAttribute('src', source);
+        media.setAttribute('alt', image.getAttribute('alt') || '');
+        applyZoom();
+
+        lightbox.hidden = false;
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+      }
+
+      function closeLightbox() {
+        if (lightbox.hidden) return;
+        lightbox.hidden = true;
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+        media.removeAttribute('src');
+        media.removeAttribute('alt');
+        scale = 1;
+        applyZoom();
+      }
+
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const closeTarget = target.closest('[data-lightbox-close]');
+        if (closeTarget) {
+          event.preventDefault();
+          closeLightbox();
+          return;
+        }
+
+        const image = target.closest(triggerSelector);
+        if (!(image instanceof HTMLImageElement)) return;
+        if (image.closest('#image-lightbox')) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        openLightbox(image);
+      });
+
+      lightbox.addEventListener('wheel', (event) => {
+        if (!event.ctrlKey) return;
+        event.preventDefault();
+        const delta = event.deltaY < 0 ? 0.16 : -0.16;
+        scale = Math.min(5, Math.max(1, scale + delta));
+        applyZoom();
+      }, { passive: false });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeLightbox();
+          return;
+        }
+
+        if (lightbox.hidden) return;
+
+        if ((event.key === '+' || event.key === '=') && event.ctrlKey) {
+          event.preventDefault();
+          scale = Math.min(5, scale + 0.16);
+          applyZoom();
+        }
+
+        if (event.key === '-' && event.ctrlKey) {
+          event.preventDefault();
+          scale = Math.max(1, scale - 0.16);
+          applyZoom();
+        }
+      });
     })();
   </script>
 

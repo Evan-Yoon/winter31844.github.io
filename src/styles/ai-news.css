@@ -61,6 +61,7 @@
   width: 100%;
   max-width: 860px;
   margin: 2.5rem auto 0;
+  cursor: zoom-in;
   border-radius: 18px;
   border: 1px solid var(--border);
   object-fit: cover;
@@ -203,6 +204,7 @@
 .news-content .flip-media {
   aspect-ratio: 1 / 1;
   width: 100%;
+  cursor: zoom-in;
   object-fit: cover;
   background: #e9e1d7;
   border-bottom: 1px solid rgba(26, 21, 18, 0.08);
