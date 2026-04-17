@@ -1,20 +1,21 @@
 ---
-title: "[NLP] extra 3: GRU를 LSTM보다 간단하게 이해하기"
+title: "[NLP] extra 3: GRU를 기초부터 다시 이해하기"
 slug: intel-nlp-extra3-gru
 date: 2026-04-17
 author: Evan Yoon
 category: study
 subcategory: bootcamp
 description: |
-  GRU가 왜 LSTM 다음에 나왔는지, reset gate와 update gate는 각각 어떤 역할을 하는지,
-  왜 cell state를 따로 두지 않아도 되는지 강의 자료 64~67페이지를 바탕으로
-  쉽게 풀어 정리했다.
+  RNN, LSTM, GRU, Transformer 강의 자료 중 64~67페이지를 바탕으로
+  GRU가 왜 LSTM 다음에 나왔는지, reset gate와 update gate가 각각 어떤 역할을 하는지,
+  왜 cell state를 따로 두지 않아도 되는지를 쉽게 풀어 정리했다.
 thumbnail: /images/posts/intel-nlp-extra3-gru/gru-slide-64-64.png
 tags:
   - NLP
   - GRU
   - LSTM
   - RNN
+  - intel-nlp-extra
   - sequence-model
   - deep-learning
   - nlp-study

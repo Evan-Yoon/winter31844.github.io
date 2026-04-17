@@ -12,6 +12,7 @@ const {
   previousPost,
   nextPost,
   relatedPosts = [],
+  relatedMeta,
   headings = [],
 } = Astro.props;
 
@@ -150,6 +151,7 @@ const showToc = frontmatter.toc !== false && tocItems.length > 0;
       relatedPosts={relatedPosts}
       categoryLabel={categoryLabel}
       category={frontmatter.category}
+      relatedMeta={relatedMeta}
     />
   </div>
 

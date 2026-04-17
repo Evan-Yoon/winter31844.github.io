@@ -1,5 +1,5 @@
 ---
-title: "[NLP] extra 1: RNN을 처음부터 다시 이해하기"
+title: "[NLP] extra 1: RNN을 기초부터 다시 이해하기"
 slug: intel-nlp-extra1-rnn
 date: 2026-04-17
 author: Evan Yoon
@@ -7,12 +7,13 @@ category: study
 subcategory: bootcamp
 description: |
   RNN, LSTM, GRU, Transformer 강의 자료 중 1~41페이지를 바탕으로
-  RNN이 왜 필요한지, 어떻게 동작하는지, 어떻게 학습되는지,
+  RNN이 왜 필요한지, 이전 정보를 어떻게 넘기는지, 어떻게 학습되는지,
   그리고 왜 긴 문장에서 약한지를 수학 배경이 많지 않아도 이해할 수 있게 정리했다.
 thumbnail: /images/posts/intel-nlp-extra1-rnn/rnn-slide-18-18.png
 tags:
   - NLP
   - RNN
+  - intel-nlp-extra
   - sequence-model
   - time-series
   - deep-learning

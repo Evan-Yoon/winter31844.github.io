@@ -28,13 +28,55 @@ const currentPostIndex = allPosts.findIndex(
 const previousPost = currentPostIndex < allPosts.length - 1 ? allPosts[currentPostIndex + 1] : null;
 const nextPost = currentPostIndex > 0 ? allPosts[currentPostIndex - 1] : null;
 
-const relatedPosts = allPosts
+const currentSeries = entry.data.series;
+const currentSeriesOrder = entry.data.seriesOrder;
+
+const sameSeriesPosts = allPosts
   .filter(
     (post) =>
       getEntrySlug(post) !== currentPostSlug &&
-      post.data.category === entry.data.category,
+      currentSeries &&
+      post.data.series === currentSeries,
   )
-  .slice(0, 6);
+  .sort((a, b) => {
+    if (typeof currentSeriesOrder === 'number') {
+      const distanceA = Math.abs((a.data.seriesOrder ?? Number.MAX_SAFE_INTEGER) - currentSeriesOrder);
+      const distanceB = Math.abs((b.data.seriesOrder ?? Number.MAX_SAFE_INTEGER) - currentSeriesOrder);
+
+      if (distanceA !== distanceB) {
+        return distanceA - distanceB;
+      }
+    }
+
+    if (typeof a.data.seriesOrder === 'number' && typeof b.data.seriesOrder === 'number') {
+      return a.data.seriesOrder - b.data.seriesOrder;
+    }
+
+    return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+  });
+
+const sameCategoryPosts = allPosts.filter(
+  (post) =>
+    getEntrySlug(post) !== currentPostSlug &&
+    post.data.category === entry.data.category &&
+    (!currentSeries || post.data.series !== currentSeries),
+);
+
+const relatedPosts = [...sameSeriesPosts, ...sameCategoryPosts].slice(0, 6);
+
+const relatedMeta = sameSeriesPosts.length > 0
+  ? {
+      kicker: currentSeries,
+      title: '같은 시리즈의 다른 글',
+      linkHref: `/categories/${entry.data.category}`,
+      linkLabel: '카테고리 전체 보기',
+    }
+  : {
+      kicker: entry.data.category,
+      title: '같은 카테고리의 다른 글',
+      linkHref: `/categories/${entry.data.category}`,
+      linkLabel: '카테고리 전체 보기',
+    };
 
 const { Content, headings } = await render(entry);
 ---
@@ -46,6 +88,7 @@ const { Content, headings } = await render(entry);
   previousPost={previousPost}
   nextPost={nextPost}
   relatedPosts={relatedPosts}
+  relatedMeta={relatedMeta}
   headings={headings}
 >
   <Content />

@@ -1,19 +1,20 @@
 ---
-title: "[NLP] extra 2: LSTM을 RNN 다음 단계로 이해하기"
+title: "[NLP] extra 2: LSTM을 기초부터 다시 이해하기"
 slug: intel-nlp-extra2-lstm
 date: 2026-04-17
 author: Evan Yoon
 category: study
 subcategory: bootcamp
 description: |
-  RNN 다음에 왜 LSTM이 나왔는지, cell state와 hidden state가 어떻게 다르고
-  forget gate, input gate, output gate가 각각 무슨 역할을 하는지
-  강의 자료 42~63페이지를 바탕으로 쉽게 풀어 정리했다.
+  RNN, LSTM, GRU, Transformer 강의 자료 중 42~63페이지를 바탕으로
+  LSTM이 왜 나왔는지, cell state와 hidden state가 어떻게 다르고,
+  forget gate, input gate, output gate가 각각 무슨 역할을 하는지 쉽게 풀어 정리했다.
 thumbnail: /images/posts/intel-nlp-extra2-lstm/lstm-slide-45-45.png
 tags:
   - NLP
   - LSTM
   - RNN
+  - intel-nlp-extra
   - sequence-model
   - deep-learning
   - nlp-study

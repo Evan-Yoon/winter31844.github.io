@@ -3,9 +3,20 @@ interface Props {
   relatedPosts: any[];
   categoryLabel: string;
   category: string;
+  relatedMeta?: {
+    kicker?: string;
+    title?: string;
+    linkHref?: string;
+    linkLabel?: string;
+  };
 }
 
-const { relatedPosts, categoryLabel, category } = Astro.props;
+const { relatedPosts, categoryLabel, category, relatedMeta } = Astro.props;
+
+const relatedKicker = relatedMeta?.kicker || categoryLabel;
+const relatedTitle = relatedMeta?.title || '같은 카테고리의 다른 글';
+const relatedLinkHref = relatedMeta?.linkHref || `/categories/${category}`;
+const relatedLinkLabel = relatedMeta?.linkLabel || '카테고리 전체 보기';
 
 function getEntrySlug(entry: any): string {
   return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
@@ -14,11 +25,11 @@ function getEntrySlug(entry: any): string {
 <section class="related-posts-section" aria-labelledby="related-posts-heading">
   <div class="related-posts-head">
     <div>
-      <p class="related-kicker">{categoryLabel}</p>
-      <h2 id="related-posts-heading" class="related-title">같은 카테고리의 다른 글</h2>
+      <p class="related-kicker">{relatedKicker}</p>
+      <h2 id="related-posts-heading" class="related-title">{relatedTitle}</h2>
     </div>
-    <a href={`/categories/${category}`} class="related-category-link">
-      카테고리 전체 보기
+    <a href={relatedLinkHref} class="related-category-link">
+      {relatedLinkLabel}
     </a>
   </div>
 
@@ -36,7 +47,7 @@ function getEntrySlug(entry: any): string {
               </div>
               <h3 class="related-post-card-title">{post.data.title}</h3>
               <p class="related-post-desc">
-                {post.data.description || '같은 카테고리에서 이어서 읽을 수 있는 글입니다.'}
+                {post.data.description || '같은 주제로 이어서 읽을 수 있는 글입니다.'}
               </p>
               <div class="related-post-footer">
                 <span>{post.data.readTime ? `${post.data.readTime} min read` : 'Read more'}</span>
@@ -63,12 +74,11 @@ function getEntrySlug(entry: any): string {
     </>
   ) : (
     <div class="related-empty-state">
-      같은 카테고리에 아직 다른 글이 없습니다.
+      아직 연결할 다른 글이 없습니다.
     </div>
   )}
 </section>
 
-<!-- Expand/collapse button for posts beyond the first 3 -->
 <script>
   const moreButton = document.getElementById('related-more-button');
   const relatedCards = Array.from(document.querySelectorAll('.related-post-card'));
