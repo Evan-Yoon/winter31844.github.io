@@ -187,6 +187,14 @@ word_vector = model.wv['커피']   # 100차원 벡터
 model.wv.similarity('커피', '차') # 유사도 점수 (0~1)
 ```
 
+여기서 `window`와 `sg` 파라미터를 같이 이해하면 Word2Vec이 어떻게 학습되는지 훨씬 선명해진다.
+
+- `window`: 중심 단어 주변 몇 개 단어까지 문맥으로 볼지 정하는 값
+- `sg=0`: CBOW, 주변 단어로 중심 단어를 예측
+- `sg=1`: Skip-Gram, 중심 단어로 주변 단어를 예측
+
+CBOW는 빠르고 안정적이고, Skip-Gram은 느리지만 드문 단어 학습에 더 강한 편이다. 즉, Word2Vec은 단어를 그냥 번호로 바꾸는 것이 아니라, 문맥 예측 문제를 풀게 하면서 의미를 벡터 공간에 압축하는 방식이다.
+
 <div class="compare-wrap">
   <div class="compare-card compare-before">
     <div class="compare-label">TF-IDF</div>
@@ -207,6 +215,15 @@ model.wv.similarity('커피', '차') # 유사도 점수 (0~1)
     </div>
   </div>
 </div>
+
+### 왜 dense embedding이 중요한가
+
+TF-IDF 벡터는 대부분 값이 0인 sparse vector다. 반면 Word2Vec은 비교적 짧은 길이의 dense vector를 만든다. dense embedding의 장점은 두 가지다.
+
+- 저장 공간과 계산량이 줄어든다.
+- 단어 간 의미적 유사성이 벡터 거리로 표현된다.
+
+그래서 이후의 딥러닝 모델들은 one-hot보다 embedding을 먼저 거쳐 입력을 처리하는 경우가 많다.
 
 ## 6. RNN/LSTM — 순서를 고려한 학습
 
@@ -229,6 +246,17 @@ model = Sequential([
 model.compile(optimizer='adam', loss='categorical_crossentropy')
 model.fit(X_train, y_train, epochs=10)
 ```
+
+여기서 `Embedding` 층은 고정 사전이 아니라 학습 가능한 파라미터 층이다. 즉, 모델이 다음 단어를 잘 맞히도록 훈련되는 과정에서 각 단어의 임베딩도 함께 좋아진다. 이 점에서 Word2Vec과 LSTM 언어모델은 서로 이어지는 개념이다.
+
+### Day 4를 표현 학습의 흐름으로 정리하면
+
+- 키워드 추출: 많이 나온 단어를 본다.
+- TF-IDF: 중요한 단어에 가중치를 준다.
+- Word2Vec: 단어 의미를 벡터 공간에 담는다.
+- RNN/LSTM: 단어 순서와 문맥 흐름까지 학습한다.
+
+즉, Day 4는 단어 빈도 중심의 표현에서 의미와 순서 중심의 표현으로 넘어가는 전환점에 가깝다.
 
 <div class="info-grid">
   <div class="info-item">

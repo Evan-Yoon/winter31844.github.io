@@ -1,12 +1,14 @@
 ---
-title: "[NLP] day 9: Fine-Tuning 실습과 Gemma·LLaMA 모델 적응"
+title: |
+  [NLP] day 9: Fine-Tuning과
+  Gemma·LLaMA 모델 적응
 slug: intel-nlp-day9-fine-tuning-llama-gemma
 date: 2026-04-17
 author: Evan Yoon
 category: study
 subcategory: bootcamp
 description: |
-  2026년 4월 17일 수업에서는 Fine-Tuning의 개념과 진행 과정을 정리하고,
+  Fine-Tuning의 개념과 진행 과정을 정리하고,
   Colab에서 CSV 데이터를 JSONL로 바꿔 Hugging Face Dataset으로 올린 뒤
   Gemma 3 4B와 LLaMA 3.2 3B-Instruct를 LoRA 방식으로 미세조정하는 실습을 진행했다.
 thumbnail: ""
@@ -88,7 +90,7 @@ with open(jsonl_path, 'w', encoding='utf-8') as f:
 api.upload_file(
     path_or_fileobj=jsonl_path,
     path_in_repo=jsonl_file_name,
-    repo_id="JaeminKim/callme",
+    repo_id="evan-yoon/callme",
     repo_type="dataset"
 )
 ```
@@ -355,7 +357,7 @@ save_path = "fine-tuned-gemma-model"
 trainer.model.save_pretrained(save_path)
 trainer.processing_class.save_pretrained(save_path)
 
-repo_name = "JaeminKim/Gemma_callme"
+repo_name = "evan-yoon/Gemma_callme"
 trainer.model.push_to_hub(repo_name)
 trainer.processing_class.push_to_hub(repo_name)
 ```
@@ -364,7 +366,7 @@ trainer.processing_class.push_to_hub(repo_name)
 
 ```python
 model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="JaeminKim/Gemma_callme",
+    model_name="evan-yoon/Gemma_callme",
     max_seq_length=4096,
     dtype=None,
     load_in_4bit=True,
