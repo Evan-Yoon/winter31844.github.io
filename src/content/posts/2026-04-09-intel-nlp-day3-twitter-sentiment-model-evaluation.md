@@ -77,12 +77,26 @@ train_tfidf = tfidf_vect.fit_transform(merge['Clean_Tweets'])
 print(train_tfidf.shape)  # (49159, 1000)
 ```
 
-| | BOW | TF-IDF |
-|---|---|---|
-| 특성 수 | 30,000 | 1,000 |
-| 단어 가중치 기준 | 등장 횟수 | 빈도 × 희소성 |
-| 흔한 단어 처리 | 높은 가중치 | 낮은 가중치 |
-| 불용어 자동 제거 | 불가 | 가능 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">BOW</div>
+    <div class="compare-body">
+      <p><strong>특성 수:</strong> 30,000</p>
+      <p><strong>가중치 기준:</strong> 등장 횟수</p>
+      <p><strong>흔한 단어 처리:</strong> 높은 가중치</p>
+      <p><strong>불용어 자동 제거:</strong> 불가</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">TF-IDF</div>
+    <div class="compare-body">
+      <p><strong>특성 수:</strong> 1,000</p>
+      <p><strong>가중치 기준:</strong> 빈도 × 희소성</p>
+      <p><strong>흔한 단어 처리:</strong> 낮은 가중치</p>
+      <p><strong>불용어 자동 제거:</strong> 가능</p>
+    </div>
+  </div>
+</div>
 
 ## 2. 데이터 분할
 
@@ -195,12 +209,24 @@ roc_auc_tfidf = metrics.roc_auc_score(y_test_tfidf, y_pred_proba_tfidf)
 
 기준:
 
-| ROC-AUC | 의미 |
-|---|---|
-| 0.5 | 동전 던지기 수준 |
-| 0.7 ~ 0.8 | 좋음 |
-| 0.8 ~ 0.9 | 매우 좋음 |
-| 0.9 이상 | 뛰어남 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">0.5</div>
+    <div class="compare-body"><p>동전 던지기 수준</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">0.7 ~ 0.8</div>
+    <div class="compare-body"><p>좋음</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">0.8 ~ 0.9</div>
+    <div class="compare-body"><p>매우 좋음</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">0.9 이상</div>
+    <div class="compare-body"><p>뛰어남</p></div>
+  </div>
+</div>
 
 ## 5. 최종 예측 및 제출
 

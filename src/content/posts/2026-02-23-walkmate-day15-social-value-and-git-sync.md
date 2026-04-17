@@ -37,13 +37,28 @@ toc: true
 
 서비스의 정당성 확보와 기술적 한계 극복, 그리고 원활한 협업 체계 구축을 핵심 목표로 삼았다.
 
-| 목표 항목                             |  상태   | 비고                                           |
-| :------------------------------------ | :-----: | :--------------------------------------------- |
-| 프로젝트의 사회적 가치 정립 (UN SDGs) | ✅ 완료 | SDG 11.2, 10.2 목표 매칭 및 분석               |
-| 보행자 방향(Heading) 보정 로직 설계   | ✅ 완료 | 센서 퓨전 및 LPF(저역 통과 필터) 구상          |
-| GitHub 브랜치 구조 분석 및 동기화     | ✅ 완료 | `main`과 `yoonjihyun` 브랜치 간 격차 해소      |
-| 브랜드 정체성 적용 (Capacitor Assets) | ✅ 완료 | 플랫폼별 아이콘 및 스플래시 생성 프로세스 검토 |
-| AI 모델 고도화 환경 점검              | ✅ 완료 | Letterbox 전처리 기반 인식률 향상 확인         |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">✅ 프로젝트의 사회적 가치 정립 (UN SDGs)</div>
+    <div class="compare-body"><p>SDG 11.2, 10.2 목표 매칭 및 분석</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ 보행자 방향(Heading) 보정 로직 설계</div>
+    <div class="compare-body"><p>센서 퓨전 및 LPF(저역 통과 필터) 구상</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ GitHub 브랜치 구조 분석 및 동기화</div>
+    <div class="compare-body"><p><code>main</code>과 <code>yoonjihyun</code> 브랜치 간 격차 해소</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ 브랜드 정체성 적용 (Capacitor Assets)</div>
+    <div class="compare-body"><p>플랫폼별 아이콘 및 스플래시 생성 프로세스 검토</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ AI 모델 고도화 환경 점검</div>
+    <div class="compare-body"><p>Letterbox 전처리 기반 인식률 향상 확인</p></div>
+  </div>
+</div>
 
 ---
 
@@ -51,16 +66,40 @@ toc: true
 
 사용자 인터페이스의 핵심 컴포넌트인 GuidingScreen과 VisionCamera의 고도화, 그리고 앱 브랜딩을 위한 기초 작업들이 진행되었다.
 
-| Hash      | Message                                              | 주요 내용                                                  |
-| :-------- | :--------------------------------------------------- | :--------------------------------------------------------- |
-| `871821e` | **docs: add portfolio AI prompts and failure cases** | AI 모델 성능 분석 및 실패 케이스 문서화                    |
-| `267dbf1` | **feat: Add user UI README and presentation prompt** | 사용자 UI 가이드라인 및 발표 자료 기초 구축                |
-| `d8cde77` | **feat: Add metadata.json for app info**             | 앱 이름, 설명 및 필수 권한 정의 파일 추가                  |
-| `830f292` | **feat: Add new GuidingScreen UI component**         | 내비게이션 안내를 위한 핵심 UI 컴포넌트 추가               |
-| `17010e2` | **feat: Add initial Android app icons and splash**   | 플랫폼별 브랜드 자산(아이콘, 스플래시) 초기 적용           |
-| `0334a5b` | **feat: Implement HazardModal component**            | 위험 요소 상세 정보 및 이미지 확대 기능 구현               |
-| `5fd7444` | **feat: Implement initial user interface**           | 카메라, 안내, 확인 화면으로 이어지는 핵심 사용자 경험 구축 |
-| `283e9c0` | **feat: add VisionCamera component**                 | 실시간 객체 인식을 위한 카메라 뷰 컴포넌트 통합            |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label"><code>871821e</code></div>
+    <div class="compare-body"><p><strong>docs: add portfolio AI prompts and failure cases</strong></p><p>AI 모델 성능 분석 및 실패 케이스 문서화</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>267dbf1</code></div>
+    <div class="compare-body"><p><strong>feat: Add user UI README and presentation prompt</strong></p><p>사용자 UI 가이드라인 및 발표 자료 기초 구축</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>d8cde77</code></div>
+    <div class="compare-body"><p><strong>feat: Add metadata.json for app info</strong></p><p>앱 이름, 설명 및 필수 권한 정의 파일 추가</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>830f292</code></div>
+    <div class="compare-body"><p><strong>feat: Add new GuidingScreen UI component</strong></p><p>내비게이션 안내를 위한 핵심 UI 컴포넌트 추가</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>17010e2</code></div>
+    <div class="compare-body"><p><strong>feat: Add initial Android app icons and splash</strong></p><p>플랫폼별 브랜드 자산(아이콘, 스플래시) 초기 적용</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>0334a5b</code></div>
+    <div class="compare-body"><p><strong>feat: Implement HazardModal component</strong></p><p>위험 요소 상세 정보 및 이미지 확대 기능 구현</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>5fd7444</code></div>
+    <div class="compare-body"><p><strong>feat: Implement initial user interface</strong></p><p>카메라, 안내, 확인 화면으로 이어지는 핵심 사용자 경험 구축</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>283e9c0</code></div>
+    <div class="compare-body"><p><strong>feat: add VisionCamera component</strong></p><p>실시간 객체 인식을 위한 카메라 뷰 컴포넌트 통합</p></div>
+  </div>
+</div>
 
 ---
 

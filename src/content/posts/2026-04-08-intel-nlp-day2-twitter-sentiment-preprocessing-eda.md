@@ -45,11 +45,20 @@ merge = train._append(test, ignore_index=True, sort=True)
 print(f"Total tweets: {len(merge)}")  # 49,159개
 ```
 
-| 컬럼 | 내용 |
-|---|---|
-| `id` | 트윗 고유 번호 |
-| `tweet` | 트윗 원문 |
-| `label` | 0 = 부정, 1 = 긍정 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">id</div>
+    <div class="compare-body"><p>트윗 고유 번호</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">tweet</div>
+    <div class="compare-body"><p>트윗 원문</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">label</div>
+    <div class="compare-body"><p>0 = 부정, 1 = 긍정</p></div>
+  </div>
+</div>
 
 `_append()` 대신 `pd.concat([train, test], ignore_index=True)`를 써도 된다. `ignore_index=True`가 없으면 인덱스 중복이 생긴다.
 
@@ -168,12 +177,42 @@ ht_negative = Hashtags_Extract(merge[merge['label'] == 0]['Clean_Tweets'])
 
 ## 핵심 정리
 
-| 단계 | 목적 | 주요 도구 |
-|---|---|---|
-| @멘션 제거 | 사람 이름은 감정과 무관 | `re.sub(r"@[\w]*", "")` |
-| 특수문자 제거 | 노이즈 제거, 소문자 통일 | `re.sub("[^a-zA-Z#]", " ")` |
-| 토큰화 | 단어 단위로 분리 | `str.split()` |
-| 워드클라우드 | 감정별 특징 단어 시각화 | `WordCloud` |
-| 해시태그 추출 | 주제/의도 파악 | `re.findall(r"#(\w+)")` |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">@멘션 제거</div>
+    <div class="compare-body">
+      <p><strong>목적:</strong> 사람 이름은 감정과 무관</p>
+      <code>re.sub(r"@[\w]*", "")</code>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">특수문자 제거</div>
+    <div class="compare-body">
+      <p><strong>목적:</strong> 노이즈 제거, 소문자 통일</p>
+      <code>re.sub("[^a-zA-Z#]", " ")</code>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">토큰화</div>
+    <div class="compare-body">
+      <p><strong>목적:</strong> 단어 단위로 분리</p>
+      <code>str.split()</code>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">워드클라우드</div>
+    <div class="compare-body">
+      <p><strong>목적:</strong> 감정별 특징 단어 시각화</p>
+      <code>WordCloud</code>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">해시태그 추출</div>
+    <div class="compare-body">
+      <p><strong>목적:</strong> 주제/의도 파악</p>
+      <code>re.findall(r"#(\w+)")</code>
+    </div>
+  </div>
+</div>
 
 전처리 결론: Twitter 텍스트는 지저분하지만 정규식 몇 줄로 의미 있는 데이터로 바꿀 수 있다. Day 3에서는 이 정제된 데이터로 실제 분류 모델을 만든다.

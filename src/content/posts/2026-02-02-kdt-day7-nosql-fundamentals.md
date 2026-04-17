@@ -129,15 +129,32 @@ db.students.deleteOne({ name: "Kim" });
 
 ### SQL과 NoSQL의 비교
 
-| 개념 | SQL | NoSQL |
-|------|-----|-------|
-| 데이터 구조 | Table | Collection |
-| 행 | Row/Record | Document |
-| 열 | Column/Attribute | Field |
-| 관계 | Primary/Foreign Key | Reference, Embedding |
-| 데이터 형식 | 정형 | JSON |
-| 확장성 | 수직 | 수평 |
-| 트랜잭션 | 강함 | 약함 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">SQL</div>
+    <div class="compare-body">
+      <p><strong>데이터 구조:</strong> Table</p>
+      <p><strong>행:</strong> Row / Record</p>
+      <p><strong>열:</strong> Column / Attribute</p>
+      <p><strong>관계:</strong> Primary / Foreign Key</p>
+      <p><strong>데이터 형식:</strong> 정형</p>
+      <p><strong>확장성:</strong> 수직</p>
+      <p><strong>트랜잭션:</strong> 강함</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">NoSQL</div>
+    <div class="compare-body">
+      <p><strong>데이터 구조:</strong> Collection</p>
+      <p><strong>행:</strong> Document</p>
+      <p><strong>열:</strong> Field</p>
+      <p><strong>관계:</strong> Reference, Embedding</p>
+      <p><strong>데이터 형식:</strong> JSON</p>
+      <p><strong>확장성:</strong> 수평</p>
+      <p><strong>트랜잭션:</strong> 약함</p>
+    </div>
+  </div>
+</div>
 
 ## 헷갈렸던 점 / 실수 포인트
 

@@ -106,14 +106,32 @@ ZeroWorks 헤더
 
 12개의 FAQ가 6개 카테고리로 분류되어 있다.
 
-| 카테고리 | 내용 예시 |
-|----------|----------|
-| 근무 | 유연근무제 운영 방식, 근무 시간 |
-| 인사 | 승진 체계, 조직도 |
-| 복지 | 건강검진, 교육 지원, 차량 할인 |
-| 휴가 | 연차 정책, 공휴일 |
-| 교육 | 사내 교육, 외국어 강좌 |
-| 온보딩 | 첫날 절차 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">근무</div>
+    <div class="compare-body"><p>유연근무제 운영 방식, 근무 시간</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">인사</div>
+    <div class="compare-body"><p>승진 체계, 조직도</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">복지</div>
+    <div class="compare-body"><p>건강검진, 교육 지원, 차량 할인</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">휴가</div>
+    <div class="compare-body"><p>연차 정책, 공휴일</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">교육</div>
+    <div class="compare-body"><p>사내 교육, 외국어 강좌</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">온보딩</div>
+    <div class="compare-body"><p>첫날 절차</p></div>
+  </div>
+</div>
 
 검색창에 텍스트를 입력하거나 카테고리 칩을 탭하면 `useMemo`로 필터링된 결과가 아코디언 형태로 열린다. FAQ에 없는 질문은 화면 하단의 "챗봇에게 물어보기" 버튼으로 바로 이어진다.
 

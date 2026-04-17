@@ -189,12 +189,26 @@ CSV 파일 누락, 인증 실패, 그 외 예외 상황을 나눠서 처리했�
 
 ## 전후 비교
 
-| 항목 | 수동 발송 | 자동화 후 |
-|------|----------|----------|
-| 지원자 100명 기준 소요 시간 | 약 2시간 | 약 1분 |
-| 오탈자 발생 가능성 | 높음 (반복 복붙) | 없음 (템플릿 고정) |
-| 발송 누락 가능성 | 있음 | 없음 (CSV 전체 순회) |
-| 담당자 집중력 소모 | 매우 높음 | 없음 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">수동 발송</div>
+    <div class="compare-body">
+      <p><strong>소요 시간:</strong> 약 2시간 (100명 기준)</p>
+      <p><strong>오탈자:</strong> 높음 (반복 복붙)</p>
+      <p><strong>누락:</strong> 있음</p>
+      <p><strong>집중력 소모:</strong> 매우 높음</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">자동화 후</div>
+    <div class="compare-body">
+      <p><strong>소요 시간:</strong> 약 1분</p>
+      <p><strong>오탈자:</strong> 없음 (템플릿 고정)</p>
+      <p><strong>누락:</strong> 없음 (CSV 전체 순회)</p>
+      <p><strong>집중력 소모:</strong> 없음</p>
+    </div>
+  </div>
+</div>
 
 ## 확장 가능성
 

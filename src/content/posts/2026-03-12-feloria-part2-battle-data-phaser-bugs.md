@@ -168,12 +168,24 @@ JavaScript는 에러를 내지 않는다. 조용히 덮어쓰고 넘어간다. �
 
 100종으로 확장할 때 스킬 등급 체계도 함께 확정했다.
 
-| 단계        | 스킬 등급 | 스킬 수 | 이유        |
-| ----------- | --------- | ------- | ----------- |
-| 기본형      | 3등급     | 3개     | 기초 스킬   |
-| 진화형      | 2등급     | 3개     | 중급 스킬   |
-| 최종 진화형 | 1등급     | 3개     | 고급 스킬   |
-| 전설형      | 전설 고유 | 4개     | 고유 스킬셋 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">기본형</div>
+    <div class="compare-body"><p><strong>등급:</strong> 3등급 &nbsp;|&nbsp; <strong>스킬 수:</strong> 3개</p><p><strong>이유:</strong> 기초 스킬</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">진화형</div>
+    <div class="compare-body"><p><strong>등급:</strong> 2등급 &nbsp;|&nbsp; <strong>스킬 수:</strong> 3개</p><p><strong>이유:</strong> 중급 스킬</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">최종 진화형</div>
+    <div class="compare-body"><p><strong>등급:</strong> 1등급 &nbsp;|&nbsp; <strong>스킬 수:</strong> 3개</p><p><strong>이유:</strong> 고급 스킬</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">전설형</div>
+    <div class="compare-body"><p><strong>등급:</strong> 전설 고유 &nbsp;|&nbsp; <strong>스킬 수:</strong> 4개</p><p><strong>이유:</strong> 고유 스킬셋</p></div>
+  </div>
+</div>
 
 기본형이 최종 스킬을 쓰면 진화할 이유가 없어진다. 진화할수록 쓸 수 있는 스킬 등급이 높아지는 구조가 파티 육성의 장기 동기를 만든다.
 

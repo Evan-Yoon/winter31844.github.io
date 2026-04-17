@@ -71,12 +71,24 @@ npx lighthouse https://evan-yoon.com --preset=desktop --view
 
 결과는 이랬다.
 
-| 항목 | 점수 |
-|---|---|
-| **Performance** | **89** |
-| Accessibility | 90 |
-| Best Practices | 100 |
-| SEO | 100 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">Performance</div>
+    <div class="compare-body"><p><strong>89</strong></p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Accessibility</div>
+    <div class="compare-body"><p>90</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Best Practices</div>
+    <div class="compare-body"><p>100</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">SEO</div>
+    <div class="compare-body"><p>100</p></div>
+  </div>
+</div>
 
 Best Practices와 SEO는 만점이고 Accessibility도 90점이라 나쁘지 않다. 하지만 Performance가 89점이고 Core Web Vitals 중 **LCP(Largest Contentful Paint)가 2.0s**로 가장 낮은 점수(0.62)를 기록하고 있었다. 이 부분을 집중적으로 개선해보기로 했다.
 
@@ -198,19 +210,47 @@ GitHub Calendar 위젯이 생성하는 테이블 셀은 직접 수정할 수 없
   />
 </div>
 
-| 항목 | Before | After |
-|---|---|---|
-| **Performance** | **89** | **97** |
-| Accessibility | 90 | 95 |
-| Best Practices | 100 | 100 |
-| SEO | 100 | 100 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">Before</div>
+    <div class="compare-body">
+      <p><strong>Performance:</strong> 89</p>
+      <p>Accessibility: 90</p>
+      <p>Best Practices: 100</p>
+      <p>SEO: 100</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">After</div>
+    <div class="compare-body">
+      <p><strong>Performance: 97</strong></p>
+      <p>Accessibility: 95</p>
+      <p>Best Practices: 100</p>
+      <p>SEO: 100</p>
+    </div>
+  </div>
+</div>
 
-| Core Web Vital | Before | After |
-|---|---|---|
-| FCP | 1.0s | 1.0s |
-| **LCP** | **2.0s** | **1.0s** |
-| TBT | 0ms | 0ms |
-| CLS | 0 | 0 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">Core Web Vitals — Before</div>
+    <div class="compare-body">
+      <p>FCP: 1.0s</p>
+      <p><strong>LCP: 2.0s</strong></p>
+      <p>TBT: 0ms</p>
+      <p>CLS: 0</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">Core Web Vitals — After</div>
+    <div class="compare-body">
+      <p>FCP: 1.0s</p>
+      <p><strong>LCP: 1.0s</strong></p>
+      <p>TBT: 0ms</p>
+      <p>CLS: 0</p>
+    </div>
+  </div>
+</div>
 
 LCP가 2.0s → 1.0s로 절반으로 줄었다. 폰트 로딩 하나만 비동기로 바꿔도 이렇게 차이가 난다.
 

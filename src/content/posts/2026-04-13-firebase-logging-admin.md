@@ -46,11 +46,29 @@ draft: false
 
 아니다. 이미 있는 인프라에서 다 해결된다.
 
-| 무엇을                   | 어디서                      | 비용 |
-| ------------------------ | --------------------------- | ---- |
-| Cloud Function 요청/오류 | Google Cloud Logging (자동) | 무료 |
-| 보안 이벤트 (이상 요청)  | console.log + 구조화 JSON   | 무료 |
-| 어드민 대시보드 표시     | Firebase `_logs/security`   | 무료 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">Cloud Function 요청/오류</div>
+    <div class="compare-body">
+      <p><strong>어디서:</strong> Google Cloud Logging (자동)</p>
+      <p><strong>비용:</strong> 무료</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">보안 이벤트 (이상 요청)</div>
+    <div class="compare-body">
+      <p><strong>어디서:</strong> console.log + 구조화 JSON</p>
+      <p><strong>비용:</strong> 무료</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">어드민 대시보드 표시</div>
+    <div class="compare-body">
+      <p><strong>어디서:</strong> Firebase <code>_logs/security</code></p>
+      <p><strong>비용:</strong> 무료</p>
+    </div>
+  </div>
+</div>
 
 Cloud Functions는 배포하는 순간부터 Google Cloud Logging이 자동 수집한다. `console.log()`로 찍은 것도 전부 여기 저장된다. 무료 티어는 한 달 50GB — 개인 블로그는 평생 무료 수준이다.
 
@@ -139,11 +157,29 @@ export const trackVisit = onCall(
 
 ### 로그 3종
 
-| 이벤트                  | 언제                                       | 저장 위치                |
-| ----------------------- | ------------------------------------------ | ------------------------ |
-| `invalid_date_rejected` | 날짜 형식이 이상한 요청 (공격 시도 가능성) | Cloud Logging + Firebase |
-| `visit_deduplicated`    | 같은 IP 하루 2회째 방문                    | Cloud Logging            |
-| `visit_counted`         | 정상 카운트                                | Cloud Logging            |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">invalid_date_rejected</div>
+    <div class="compare-body">
+      <p><strong>언제:</strong> 날짜 형식이 이상한 요청 (공격 시도 가능성)</p>
+      <p><strong>저장:</strong> Cloud Logging + Firebase</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">visit_deduplicated</div>
+    <div class="compare-body">
+      <p><strong>언제:</strong> 같은 IP 하루 2회째 방문</p>
+      <p><strong>저장:</strong> Cloud Logging</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">visit_counted</div>
+    <div class="compare-body">
+      <p><strong>언제:</strong> 정상 카운트</p>
+      <p><strong>저장:</strong> Cloud Logging</p>
+    </div>
+  </div>
+</div>
 
 보안 이벤트(`invalid_date_rejected`)만 Firebase에도 기록한다. 정상 이벤트를 전부 Firebase에 쓰면 쓰기 비용이 발생하고, 의미 없는 데이터가 쌓인다.
 

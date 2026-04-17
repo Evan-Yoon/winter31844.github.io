@@ -183,12 +183,42 @@ twitter_predictor(tweet3)  # → ???
 
 ## 핵심 정리
 
-| 단계 | 도구 | 핵심 |
-|---|---|---|
-| 데이터 탐색 | Pandas | 타겟 변수 확인, 모호한 레이블 제거 |
-| 텍스트 전처리 | NLTK, Regex | 소문자화, 특수문자 제거, 불용어 제거 |
-| 벡터화 | TF-IDF | 중요한 단어에 높은 가중치 |
-| 모델 학습 | LogisticRegression | 확률 기반 이진 분류 |
-| 튜닝 | GridSearchCV | 최적 하이퍼파라미터 자동 탐색 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">데이터 탐색</div>
+    <div class="compare-body">
+      <p><strong>도구:</strong> Pandas</p>
+      <p>타겟 변수 확인, 모호한 레이블 제거</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">텍스트 전처리</div>
+    <div class="compare-body">
+      <p><strong>도구:</strong> NLTK, Regex</p>
+      <p>소문자화, 특수문자 제거, 불용어 제거</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">벡터화</div>
+    <div class="compare-body">
+      <p><strong>도구:</strong> TF-IDF</p>
+      <p>중요한 단어에 높은 가중치</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">모델 학습</div>
+    <div class="compare-body">
+      <p><strong>도구:</strong> LogisticRegression</p>
+      <p>확률 기반 이진 분류</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">튜닝</div>
+    <div class="compare-body">
+      <p><strong>도구:</strong> GridSearchCV</p>
+      <p>최적 하이퍼파라미터 자동 탐색</p>
+    </div>
+  </div>
+</div>
 
 **오늘의 교훈**: TF-IDF + 로지스틱 회귀로 약 75% 정확도를 달성했다. 나쁘지 않지만, "curry on fire"처럼 문맥에 따라 의미가 달라지는 경우를 처리하려면 더 정교한 방법이 필요하다. 이것이 Word2Vec, BERT 등 더 발전된 방법들이 나온 이유다.

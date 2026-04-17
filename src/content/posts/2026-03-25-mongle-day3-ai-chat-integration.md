@@ -48,11 +48,20 @@ toc: true
 
 이 시간대에 Evan-Yoon이 머지한 PR만 3개다.
 
-| 시각 | PR |
-|------|----|
-| 11:31 | PR #30 — 타임라인 UI |
-| 11:53 | PR #32 — 플래너 프로필 UI |
-| 12:23 | PR #33 — 일정 대시보드 UI (달력 + 잔금 일정) |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">PR #30 · 11:31</div>
+    <div class="compare-body"><p>타임라인 UI</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #32 · 11:53</div>
+    <div class="compare-body"><p>플래너 프로필 UI</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #33 · 12:23</div>
+    <div class="compare-body"><p>일정 대시보드 UI (달력 + 잔금 일정)</p></div>
+  </div>
+</div>
 
 팀원들이 각자 화면을 착착 올려주고 있다. PM으로서 코드 리뷰 후 머지하는 게 루틴이 됐다.
 
@@ -270,11 +279,20 @@ except Exception as e:
 
 이날 오후 머지한 PR.
 
-| 시각 | PR |
-|------|----|
-| 15:30 | PR #35 — 타임라인 UI 완성 |
-| 16:20 | PR #36 — 업체 리스트 UI |
-| 16:49 | PR #38 — 로그인·회원가입 화면 UI |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">PR #35 · 15:30</div>
+    <div class="compare-body"><p>타임라인 UI 완성</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #36 · 16:20</div>
+    <div class="compare-body"><p>업체 리스트 UI</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #38 · 16:49</div>
+    <div class="compare-body"><p>로그인·회원가입 화면 UI</p></div>
+  </div>
+</div>
 
 ---
 

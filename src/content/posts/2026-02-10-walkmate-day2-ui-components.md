@@ -37,12 +37,24 @@ toc: true
 
 오늘은 개발 환경을 셋업하고, 접근성(Accessibility)을 최우선으로 고려한 화면들을 구현하는 데 집중했다.
 
-| 목표 항목                             |  상태   | 비고                                          |
-| :------------------------------------ | :-----: | :-------------------------------------------- |
-| Node.js (LTS) 설치 및 프로젝트 초기화 | ✅ 완료 | v24.13.0 설치 및 Vite 프로젝트 생성           |
-| Tailwind CSS 및 기본 라이브러리 설정  | ✅ 완료 | 스타일링 시스템 및 의존성 설치 완료           |
-| 시각장애인용 핵심 UI 컴포넌트 구현    | ✅ 완료 | StandbyScreen, ListeningScreen, Waveform 개발 |
-| Git 저장소 연동 및 초기 UI 커밋       | ✅ 완료 | 4건의 커밋을 통해 단계별 형상 관리 수행       |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">✅ Node.js (LTS) 설치 및 프로젝트 초기화</div>
+    <div class="compare-body"><p>v24.13.0 설치 및 Vite 프로젝트 생성</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ Tailwind CSS 및 기본 라이브러리 설정</div>
+    <div class="compare-body"><p>스타일링 시스템 및 의존성 설치 완료</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ 시각장애인용 핵심 UI 컴포넌트 구현</div>
+    <div class="compare-body"><p>StandbyScreen, ListeningScreen, Waveform 개발</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ Git 저장소 연동 및 초기 UI 커밋</div>
+    <div class="compare-body"><p>4건의 커밋을 통해 단계별 형상 관리 수행</p></div>
+  </div>
+</div>
 
 ---
 
@@ -50,12 +62,24 @@ toc: true
 
 오늘 커밋은 환경 세팅부터 핵심 UI 컴포넌트 추가까지 단계별로 진행됐다.
 
-| Hash      | Message                                  | 주요 내용                                        |
-| :-------- | :--------------------------------------- | :----------------------------------------------- |
-| `c0c94f5` | **user UI 생성**                         | 프로젝트 초기 UI 구조 및 컴포넌트 기초 설계      |
-| `2635d81` | **feat: add Waveform component...**      | 음성 인식 시각화를 위한 웨이브폼 애니메이션 추가 |
-| `e89b00f` | **chore: Install project dependencies.** | React, Tailwind 등 프로젝트 필요 패키지 설치     |
-| `806f12c` | **file migration**                       | 프로젝트 폴더 구조 최적화 및 파일 이동           |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label"><code>c0c94f5</code></div>
+    <div class="compare-body"><p><strong>user UI 생성</strong></p><p>프로젝트 초기 UI 구조 및 컴포넌트 기초 설계</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>2635d81</code></div>
+    <div class="compare-body"><p><strong>feat: add Waveform component...</strong></p><p>음성 인식 시각화를 위한 웨이브폼 애니메이션 추가</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>e89b00f</code></div>
+    <div class="compare-body"><p><strong>chore: Install project dependencies.</strong></p><p>React, Tailwind 등 프로젝트 필요 패키지 설치</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>806f12c</code></div>
+    <div class="compare-body"><p><strong>file migration</strong></p><p>프로젝트 폴더 구조 최적화 및 파일 이동</p></div>
+  </div>
+</div>
 
 ---
 

@@ -35,11 +35,20 @@ Day 1 기획에서 주말(3/28~3/29)은 **개발 불가**로 못 박아뒀다. �
 
 ## 오후 2시: PR 머지와 팀 작업 확인
 
-| 시각 | PR |
-|------|----|
-| 14:31 | PR #69 — vendors 데이터 Supabase 연동 (팀원 B) |
-| 14:44 | PR #70 — 상담 신청 및 알림 시스템 (팀원 A) |
-| 16:23 | PR #71 — 플래너 계정 알림 Supabase 연동 (팀원 A) |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">PR #69 · 14:31</div>
+    <div class="compare-body"><p>vendors 데이터 Supabase 연동 (팀원 B)</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #70 · 14:44</div>
+    <div class="compare-body"><p>상담 신청 및 알림 시스템 (팀원 A)</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #71 · 16:23</div>
+    <div class="compare-body"><p>플래너 계정 알림 Supabase 연동 (팀원 A)</p></div>
+  </div>
+</div>
 
 팀원들도 주말에 작업을 해뒀다. 코드 리뷰 후 세 개를 머지하고 나서 내 작업을 시작했다.
 

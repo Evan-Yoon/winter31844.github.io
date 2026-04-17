@@ -103,11 +103,29 @@ squarify.plot(label=list(top_nouns.keys()), sizes=list(top_nouns.values()))
 plt.show()
 ```
 
-| 방식 | 장점 | 단점 |
-|---|---|---|
-| 막대 그래프 | 정확한 수치 비교 가능 | 항목이 많으면 복잡 |
-| 워드클라우드 | 직관적, 보기 쉬움 | 정확한 숫자 파악 어려움 |
-| 트리맵 | 비율 시각화 명확 | 항목 이름이 겹칠 수 있음 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">막대 그래프</div>
+    <div class="compare-body">
+      <p><strong>장점:</strong> 정확한 수치 비교 가능</p>
+      <p><strong>단점:</strong> 항목이 많으면 복잡</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">워드클라우드</div>
+    <div class="compare-body">
+      <p><strong>장점:</strong> 직관적, 보기 쉬움</p>
+      <p><strong>단점:</strong> 정확한 숫자 파악 어려움</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">트리맵</div>
+    <div class="compare-body">
+      <p><strong>장점:</strong> 비율 시각화 명확</p>
+      <p><strong>단점:</strong> 항목 이름이 겹칠 수 있음</p>
+    </div>
+  </div>
+</div>
 
 ## 4. 텍스트 유사도 계산
 
@@ -178,12 +196,26 @@ word_vector = model.wv['커피']   # 100차원 벡터
 model.wv.similarity('커피', '차') # 유사도 점수 (0~1)
 ```
 
-| | TF-IDF | Word2Vec |
-|---|---|---|
-| 벡터 형태 | 단어 수 차원 (sparse) | 고정 차원 100~300 (dense) |
-| 단어 의미 | 빈도만 반영 | 문맥 관계 반영 |
-| "커피"와 "카페인" | 별개 단어 | 벡터 공간에서 가까움 |
-| 데이터 요구량 | 적어도 가능 | 충분한 코퍼스 필요 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">TF-IDF</div>
+    <div class="compare-body">
+      <p><strong>벡터 형태:</strong> 단어 수 차원 (sparse)</p>
+      <p><strong>단어 의미:</strong> 빈도만 반영</p>
+      <p><strong>"커피"와 "카페인":</strong> 별개 단어</p>
+      <p><strong>데이터 요구량:</strong> 적어도 가능</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">Word2Vec</div>
+    <div class="compare-body">
+      <p><strong>벡터 형태:</strong> 고정 차원 100~300 (dense)</p>
+      <p><strong>단어 의미:</strong> 문맥 관계 반영</p>
+      <p><strong>"커피"와 "카페인":</strong> 벡터 공간에서 가까움</p>
+      <p><strong>데이터 요구량:</strong> 충분한 코퍼스 필요</p>
+    </div>
+  </div>
+</div>
 
 ## 6. RNN/LSTM — 순서를 고려한 학습
 
@@ -207,12 +239,35 @@ model.compile(optimizer='adam', loss='categorical_crossentropy')
 model.fit(X_train, y_train, epochs=10)
 ```
 
-| | RNN | LSTM | GRU |
-|---|---|---|---|
-| 구조 | 단순 | 복잡 (3개 게이트) | 중간 (2개 게이트) |
-| 긴 문장 처리 | 기울기 소실로 취약 | 게이트로 해결 | LSTM보다 간단 |
-| 속도 | 빠름 | 느림 | LSTM보다 빠름 |
-| 사용 시점 | 짧은 시퀀스 | 긴 의존성 필요 | 빠른 학습 필요 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">RNN</div>
+    <div class="compare-body">
+      <p><strong>구조:</strong> 단순</p>
+      <p><strong>긴 문장 처리:</strong> 기울기 소실로 취약</p>
+      <p><strong>속도:</strong> 빠름</p>
+      <p><strong>사용 시점:</strong> 짧은 시퀀스</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">LSTM</div>
+    <div class="compare-body">
+      <p><strong>구조:</strong> 복잡 (3개 게이트)</p>
+      <p><strong>긴 문장 처리:</strong> 게이트로 해결</p>
+      <p><strong>속도:</strong> 느림</p>
+      <p><strong>사용 시점:</strong> 긴 의존성 필요</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">GRU</div>
+    <div class="compare-body">
+      <p><strong>구조:</strong> 중간 (2개 게이트)</p>
+      <p><strong>긴 문장 처리:</strong> LSTM보다 간단</p>
+      <p><strong>속도:</strong> LSTM보다 빠름</p>
+      <p><strong>사용 시점:</strong> 빠른 학습 필요</p>
+    </div>
+  </div>
+</div>
 
 ---
 

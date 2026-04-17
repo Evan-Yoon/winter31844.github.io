@@ -63,14 +63,32 @@ function UserList() {
 }
 ```
 
-| 속성 | 역할 |
-|------|------|
-| `data` | 렌더링할 배열 |
-| `keyExtractor` | 각 항목의 고유 key |
-| `renderItem` | 각 항목을 그리는 함수 |
-| `ItemSeparatorComponent` | 항목 사이의 구분선 |
-| `ListEmptyComponent` | data가 빈 배열일 때 표시 |
-| `ListHeaderComponent` | 리스트 상단 고정 헤더 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">data</div>
+    <div class="compare-body"><p>렌더링할 배열</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">keyExtractor</div>
+    <div class="compare-body"><p>각 항목의 고유 key</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">renderItem</div>
+    <div class="compare-body"><p>각 항목을 그리는 함수</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">ItemSeparatorComponent</div>
+    <div class="compare-body"><p>항목 사이의 구분선</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">ListEmptyComponent</div>
+    <div class="compare-body"><p>data가 빈 배열일 때 표시</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">ListHeaderComponent</div>
+    <div class="compare-body"><p>리스트 상단 고정 헤더</p></div>
+  </div>
+</div>
 
 ---
 

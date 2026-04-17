@@ -85,13 +85,43 @@ class ShiftProvider extends ChangeNotifier {
 
 커밋 히스토리를 phase 단위로 묶으면 흐름이 보인다.
 
-| Phase | 시기 | 핵심 작업 |
-|---|---|---|
-| Phase 1 | 3/5 초반 | 앱 뼈대, 초기 화면 구조, 온보딩 |
-| Phase 2 | 3/5 중반 | 핵심 계산 로직, Provider 구조, 단위 테스트 |
-| Phase 3 | 3/5 후반 | 프리미엄 구독, 통계 페이지, PDF export |
-| Phase 4 | 3/6~10 | Google Drive 백업, CSV export, 알림, 패턴 생성기 |
-| Phase 5 | 3/17~19 | 배포 설정, 아이콘, 로딩 수정, 마감 폴리싱 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">Phase 1</div>
+    <div class="compare-body">
+      <p><strong>시기:</strong> 3/5 초반</p>
+      <p><strong>핵심 작업:</strong> 앱 뼈대, 초기 화면 구조, 온보딩</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Phase 2</div>
+    <div class="compare-body">
+      <p><strong>시기:</strong> 3/5 중반</p>
+      <p><strong>핵심 작업:</strong> 핵심 계산 로직, Provider 구조, 단위 테스트</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Phase 3</div>
+    <div class="compare-body">
+      <p><strong>시기:</strong> 3/5 후반</p>
+      <p><strong>핵심 작업:</strong> 프리미엄 구독, 통계 페이지, PDF export</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Phase 4</div>
+    <div class="compare-body">
+      <p><strong>시기:</strong> 3/6~10</p>
+      <p><strong>핵심 작업:</strong> Google Drive 백업, CSV export, 알림, 패턴 생성기</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Phase 5</div>
+    <div class="compare-body">
+      <p><strong>시기:</strong> 3/17~19</p>
+      <p><strong>핵심 작업:</strong> 배포 설정, 아이콘, 로딩 수정, 마감 폴리싱</p>
+    </div>
+  </div>
+</div>
 
 Phase 2까지는 "계산이 맞게 작동하는가"가 기준이었다. Phase 3부터는 기준이 달라졌다.
 

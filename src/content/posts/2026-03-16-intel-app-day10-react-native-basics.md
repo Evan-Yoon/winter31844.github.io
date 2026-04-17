@@ -61,15 +61,32 @@ mobile-app/
 
 ## 웹 vs 모바일: 핵심 차이
 
-| 항목 | React (웹) | React Native (모바일) |
-|------|-----------|----------------------|
-| 기본 컨테이너 | `<div>` | `<View>` |
-| 텍스트 | `<p>`, `<span>` | `<Text>` |
-| 이미지 | `<img>` | `<Image>` |
-| 버튼 | `<button>` | `<Pressable>`, `<TouchableOpacity>` |
-| 스크롤 | CSS `overflow` | `<ScrollView>`, `<FlatList>` |
-| 스타일 | CSS 파일 또는 Tailwind | `StyleSheet.create()` |
-| flex 기본 방향 | row (가로) | column (세로) |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">React (웹)</div>
+    <div class="compare-body">
+      <p><strong>기본 컨테이너:</strong> <code>&lt;div&gt;</code></p>
+      <p><strong>텍스트:</strong> <code>&lt;p&gt;</code>, <code>&lt;span&gt;</code></p>
+      <p><strong>이미지:</strong> <code>&lt;img&gt;</code></p>
+      <p><strong>버튼:</strong> <code>&lt;button&gt;</code></p>
+      <p><strong>스크롤:</strong> CSS <code>overflow</code></p>
+      <p><strong>스타일:</strong> CSS 파일 또는 Tailwind</p>
+      <p><strong>flex 기본 방향:</strong> row (가로)</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">React Native (모바일)</div>
+    <div class="compare-body">
+      <p><strong>기본 컨테이너:</strong> <code>&lt;View&gt;</code></p>
+      <p><strong>텍스트:</strong> <code>&lt;Text&gt;</code></p>
+      <p><strong>이미지:</strong> <code>&lt;Image&gt;</code></p>
+      <p><strong>버튼:</strong> <code>&lt;Pressable&gt;</code>, <code>&lt;TouchableOpacity&gt;</code></p>
+      <p><strong>스크롤:</strong> <code>&lt;ScrollView&gt;</code>, <code>&lt;FlatList&gt;</code></p>
+      <p><strong>스타일:</strong> <code>StyleSheet.create()</code></p>
+      <p><strong>flex 기본 방향:</strong> column (세로)</p>
+    </div>
+  </div>
+</div>
 
 ---
 

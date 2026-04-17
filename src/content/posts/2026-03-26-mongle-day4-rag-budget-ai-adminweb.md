@@ -51,11 +51,20 @@ Mongle-server/ai/script/vendors/
 
 오전 내내 Merge PR도 이어졌다.
 
-| 시각 | PR |
-|------|----|
-| 09:37 | PR #40 — 플래너 개인 화면 UI 시작 |
-| 10:32 | PR #41 — 홈 화면 업체 정보 적용 |
-| 13:50 | PR #43 — 플래너 개인 화면 UI 완성 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">PR #40 · 09:37</div>
+    <div class="compare-body"><p>플래너 개인 화면 UI 시작</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #41 · 10:32</div>
+    <div class="compare-body"><p>홈 화면 업체 정보 적용</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #43 · 13:50</div>
+    <div class="compare-body"><p>플래너 개인 화면 UI 완성</p></div>
+  </div>
+</div>
 
 ---
 
@@ -137,16 +146,40 @@ RAG 테스트 중 "호텔 웨딩" 검색 시 결과가 비어있는 문제가 �
 
 이 시간대 Merge PR.
 
-| 시각 | PR |
-|------|----|
-| 15:05 | PR #47 — 스크롤 상단 올라가기 버튼 |
-| 15:29 | PR #48 — 알림 창 UI 및 전역 상태 |
-| 15:44 | PR #49 — 뒤로가기 홈 화면 버그 수정 |
-| 15:52 | PR #50 — 뒤로가기 리스트 화면 버그 수정 |
-| 16:30 | PR #53 — index, id 최적화 리팩터링 |
-| 16:47 | PR #55 — 상담 신청 모달 구현 |
-| 17:10 | PR #54 — 백엔드 폴더 정리 |
-| 17:22 | PR #57 — 일반회원/플래너 구분 로그인 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">PR #47 · 15:05</div>
+    <div class="compare-body"><p>스크롤 상단 올라가기 버튼</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #48 · 15:29</div>
+    <div class="compare-body"><p>알림 창 UI 및 전역 상태</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #49 · 15:44</div>
+    <div class="compare-body"><p>뒤로가기 홈 화면 버그 수정</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #50 · 15:52</div>
+    <div class="compare-body"><p>뒤로가기 리스트 화면 버그 수정</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #53 · 16:30</div>
+    <div class="compare-body"><p>index, id 최적화 리팩터링</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #55 · 16:47</div>
+    <div class="compare-body"><p>상담 신청 모달 구현</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #54 · 17:10</div>
+    <div class="compare-body"><p>백엔드 폴더 정리</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #57 · 17:22</div>
+    <div class="compare-body"><p>일반회원/플래너 구분 로그인</p></div>
+  </div>
+</div>
 
 ---
 

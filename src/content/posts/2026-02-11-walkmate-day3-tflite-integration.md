@@ -34,11 +34,20 @@ toc: true
 
 TFLite 모델을 안드로이드 WebView 환경에 성공적으로 탑재하고, 실시간 추론이 가능한 수준으로 최적화했다.
 
-| 목표 항목                                    |  상태   | 비고                                 |
-| :------------------------------------------- | :-----: | :----------------------------------- |
-| TFLite 모델의 실제 앱 연동 및 객체 감지 성공 | ✅ 완료 | 안드로이드에서 "준비 완료!" 확인     |
-| 보도블록(점자/선형) 클래스 분류 정확도 확인  | ✅ 완료 | 정상/파손 4종 클래스 매핑 완료       |
-| 실제 소요 시간                               |  9시간  | 계획(8h) 대비 연동 이슈로 1시간 초과 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">✅ TFLite 모델의 실제 앱 연동 및 객체 감지 성공</div>
+    <div class="compare-body"><p>안드로이드에서 "준비 완료!" 확인</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ 보도블록(점자/선형) 클래스 분류 정확도 확인</div>
+    <div class="compare-body"><p>정상/파손 4종 클래스 매핑 완료</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">실제 소요 시간: 9시간</div>
+    <div class="compare-body"><p>계획(8h) 대비 연동 이슈로 1시간 초과</p></div>
+  </div>
+</div>
 
 ---
 
@@ -46,14 +55,32 @@ TFLite 모델을 안드로이드 WebView 환경에 성공적으로 탑재하고,
 
 안드로이드 플랫폼 초기화와 TFLite 모델 전용 스크린 구현을 위해 총 6건의 커밋이 이루어졌다.
 
-| Hash      | Message                                         | 주요 내용                                            |
-| :-------- | :---------------------------------------------- | :--------------------------------------------------- |
-| `29fa4e5` | **feat: Implement VisionScreen...**             | 실시간 객체 탐지용 VisionScreen 및 TTS 플러그인 설정 |
-| `457fb55` | **feat: Initialize new Capacitor project...**   | Capacitor 기반 안드로이드 프로젝트 초기화            |
-| `8df639f` | **feat: Add int8 quantized YOLO11n-obb...**     | 점자블록용 경량화 모델 및 메타데이터 추가            |
-| `abd9ad1` | **feat: initialize Capacitor Android platform** | 안드로이드 플랫폼 전용 자산 및 설정 파일 구성        |
-| `28d1174` | **한국어 주석 처리**                            | 코드 가독성 향상을 위한 국문 주석 업데이트           |
-| `726c195` | **user UI 구현**                                | 사용자 피드백을 위한 UI 요소 추가                    |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label"><code>29fa4e5</code></div>
+    <div class="compare-body"><p><strong>feat: Implement VisionScreen...</strong></p><p>실시간 객체 탐지용 VisionScreen 및 TTS 플러그인 설정</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>457fb55</code></div>
+    <div class="compare-body"><p><strong>feat: Initialize new Capacitor project...</strong></p><p>Capacitor 기반 안드로이드 프로젝트 초기화</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>8df639f</code></div>
+    <div class="compare-body"><p><strong>feat: Add int8 quantized YOLO11n-obb...</strong></p><p>점자블록용 경량화 모델 및 메타데이터 추가</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>abd9ad1</code></div>
+    <div class="compare-body"><p><strong>feat: initialize Capacitor Android platform</strong></p><p>안드로이드 플랫폼 전용 자산 및 설정 파일 구성</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>28d1174</code></div>
+    <div class="compare-body"><p><strong>한국어 주석 처리</strong></p><p>코드 가독성 향상을 위한 국문 주석 업데이트</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>726c195</code></div>
+    <div class="compare-body"><p><strong>user UI 구현</strong></p><p>사용자 피드백을 위한 UI 요소 추가</p></div>
+  </div>
+</div>
 
 ---
 

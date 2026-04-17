@@ -34,12 +34,24 @@ toc: true
 
 보행 네비게이션의 정밀도를 높이고, 시각 장애인 사용자가 정면을 향할 수 있도록 돕는 방향 보정 시스템을 완성했다.
 
-| 목표 항목                         |  상태   | 비고                        |
-| :-------------------------------- | :-----: | :-------------------------- |
-| TMAP API 연동 및 경로 데이터 수신 | ✅ 완료 | 한국 내 도보 안내 환경 구축 |
-| 실시간 보행자 위치 추적 로직 구현 | ✅ 완료 | 안내 지점 자동 갱신 기능    |
-| 나침반 연동 방향 보정 시스템 구축 | ✅ 완료 | "방향이 맞습니다" 멘트 성공 |
-| 음성 안내(TTS) 큐잉 및 최적화     | ✅ 완료 | 안내 멘트 겹침 현상 해결    |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">✅ TMAP API 연동 및 경로 데이터 수신</div>
+    <div class="compare-body"><p>한국 내 도보 안내 환경 구축</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ 실시간 보행자 위치 추적 로직 구현</div>
+    <div class="compare-body"><p>안내 지점 자동 갱신 기능</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ 나침반 연동 방향 보정 시스템 구축</div>
+    <div class="compare-body"><p>"방향이 맞습니다" 멘트 성공</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">✅ 음성 안내(TTS) 큐잉 및 최적화</div>
+    <div class="compare-body"><p>안내 멘트 겹침 현상 해결</p></div>
+  </div>
+</div>
 
 ---
 
@@ -47,15 +59,36 @@ toc: true
 
 TMAP API 전환과 시계 방향 안내 로직 고도화를 위해 총 7건의 커밋이 이루어졌다.
 
-| Hash      | Message                                        | 주요 내용                                      |
-| :-------- | :--------------------------------------------- | :--------------------------------------------- |
-| `3a019b4` | **feat: implement NavigationScreen with TMAP** | TMAP API 기반 보행자 내비게이션 안내 화면 구현 |
-| `5bfc248` | **feat: update TMAP integration**              | TMAP 연동 관련 코드 및 통신 로직 반영          |
-| `ba58658` | **chore: unify development env to Java 17**    | 개발 환경 Java 17 버전 통합                    |
-| `e10746f` | **feat: initialize Android app with TFLite**   | TFLite 및 카메라 지원 안드로이드 앱 초기화     |
-| `d71d2ac` | **feat: add TFLite plugin and UI components**  | NPU/GPU 가속 플러그인 및 안내/재시도 UI 추가   |
-| `c6e0872` | **refactor: remove VisionScreen**              | 불필요해진 이전 버전 스크린 코드 제거          |
-| `41f3379` | **chore: update project configurations**       | 프로젝트 설정 및 환경 최적화 업데이트          |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label"><code>3a019b4</code></div>
+    <div class="compare-body"><p><strong>feat: implement NavigationScreen with TMAP</strong></p><p>TMAP API 기반 보행자 내비게이션 안내 화면 구현</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>5bfc248</code></div>
+    <div class="compare-body"><p><strong>feat: update TMAP integration</strong></p><p>TMAP 연동 관련 코드 및 통신 로직 반영</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>ba58658</code></div>
+    <div class="compare-body"><p><strong>chore: unify development env to Java 17</strong></p><p>개발 환경 Java 17 버전 통합</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>e10746f</code></div>
+    <div class="compare-body"><p><strong>feat: initialize Android app with TFLite</strong></p><p>TFLite 및 카메라 지원 안드로이드 앱 초기화</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>d71d2ac</code></div>
+    <div class="compare-body"><p><strong>feat: add TFLite plugin and UI components</strong></p><p>NPU/GPU 가속 플러그인 및 안내/재시도 UI 추가</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>c6e0872</code></div>
+    <div class="compare-body"><p><strong>refactor: remove VisionScreen</strong></p><p>불필요해진 이전 버전 스크린 코드 제거</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label"><code>41f3379</code></div>
+    <div class="compare-body"><p><strong>chore: update project configurations</strong></p><p>프로젝트 설정 및 환경 최적화 업데이트</p></div>
+  </div>
+</div>
 
 ---
 

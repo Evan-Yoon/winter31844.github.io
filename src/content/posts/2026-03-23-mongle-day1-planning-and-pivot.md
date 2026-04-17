@@ -91,12 +91,24 @@ toc: true
 
 MVP 범위를 잡기 위해 MoSCoW 기법으로 기능 우선순위를 정리했다.
 
-| 구분 | 기능 |
-|------|------|
-| **Must** | 일정 관리, 예산 관리, AI 챗봇, 업체 리스트 |
-| **Should** | 로그인/회원가입, 플래너 화면, 업체 추천, 리마인드 알림, 채팅 |
-| **Could** | 견적 분석·문서화 |
-| **Won't** | 청첩장 기능 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">Must</div>
+    <div class="compare-body"><p>일정 관리, 예산 관리, AI 챗봇, 업체 리스트</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Should</div>
+    <div class="compare-body"><p>로그인/회원가입, 플래너 화면, 업체 추천, 리마인드 알림, 채팅</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Could</div>
+    <div class="compare-body"><p>견적 분석·문서화</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">Won't</div>
+    <div class="compare-body"><p>청첩장 기능</p></div>
+  </div>
+</div>
 
 Must 기능 데드라인을 **3월 26일(목)**으로 설정했다. 주말(3/28~3/29) 개발 불가 조건이 추가되면서 실질 개발 가능일이 9일에서 7일로 줄었기 때문에, 일정표를 전체 재설계해야 했다.
 
@@ -106,11 +118,20 @@ Must 기능 데드라인을 **3월 26일(목)**으로 설정했다. 주말(3/28~
 
 기존 서비스들이 해결 못 하는 지점을 먼저 정리했다.
 
-| 서비스 | 강점 | 한계 |
-|--------|------|------|
-| **웨딩북** | 업체 DB 풍부, 후기 많음 | 플래너↔커플 협업 기능 없음, AI 없음 |
-| **허니문리스트** | 준비 단계 안내 명확 | 플래너 연동 없음, 실시간 공유 불가 |
-| **카카오톡+스프레드시트** | 범용성 높음, 익숙한 UI | 정보 유실 잦음, 자동화·AI 전무 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">웨딩북</div>
+    <div class="compare-body"><p><strong>강점:</strong> 업체 DB 풍부, 후기 많음</p><p><strong>한계:</strong> 플래너↔커플 협업 기능 없음, AI 없음</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">허니문리스트</div>
+    <div class="compare-body"><p><strong>강점:</strong> 준비 단계 안내 명확</p><p><strong>한계:</strong> 플래너 연동 없음, 실시간 공유 불가</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">카카오톡+스프레드시트</div>
+    <div class="compare-body"><p><strong>강점:</strong> 범용성 높음, 익숙한 UI</p><p><strong>한계:</strong> 정보 유실 잦음, 자동화·AI 전무</p></div>
+  </div>
+</div>
 
 Mongle의 차별점은 하나다. **일정·비용·챗봇·업체를 하나로 통합하고, 플래너↔커플이 초대코드로 연결되어 실시간으로 공유한다.** 기존 서비스들은 각 기능을 파편화해서 제공한다.
 
@@ -118,12 +139,24 @@ Mongle의 차별점은 하나다. **일정·비용·챗봇·업체를 하나로 
 
 ## 4인 역할 분담
 
-| 이름 | 역할 | 담당 업무 |
-|------|------|----------|
-| **윤지현 (PM)** | PM · 챗봇 AI · 발표 | 킥오프, PR 리뷰, 데일리 싱크, 챗봇 UI 개발, 발표 직접 진행 |
-| **정서영** | Frontend | 로그인 화면, 플래너 소개, 업체 탐색 화면, FE 통합 |
-| **김주영** | Backend · AI | DB 설계, AI 챗봇 백엔드(LLM 연동), 예산관리 API |
-| **이건영** | Frontend | 신혼부부 배너·타임라인, 플래너 대시보드, 비용·일정 UI |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">윤지현 (PM)</div>
+    <div class="compare-body"><p><strong>역할:</strong> PM · 챗봇 AI · 발표</p><p>킥오프, PR 리뷰, 데일리 싱크, 챗봇 UI 개발, 발표 직접 진행</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">정서영</div>
+    <div class="compare-body"><p><strong>역할:</strong> Frontend</p><p>로그인 화면, 플래너 소개, 업체 탐색 화면, FE 통합</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">김주영</div>
+    <div class="compare-body"><p><strong>역할:</strong> Backend · AI</p><p>DB 설계, AI 챗봇 백엔드(LLM 연동), 예산관리 API</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">이건영</div>
+    <div class="compare-body"><p><strong>역할:</strong> Frontend</p><p>신혼부부 배너·타임라인, 플래너 대시보드, 비용·일정 UI</p></div>
+  </div>
+</div>
 
 협업 규칙: PR은 팀장 리뷰 후 머지, 커밋 메시지 통일, 기능 완료 시 즉시 공유. 매일 오전 데일리 싱크 10분.
 
@@ -131,12 +164,24 @@ Mongle의 차별점은 하나다. **일정·비용·챗봇·업체를 하나로 
 
 ## 예상 리스크
 
-| 리스크 | 가능성 | 대응 |
-|--------|--------|------|
-| 주말 제외로 개발 일정 부족 | **높음** | Must 기능 우선 완성 후 Should 순차 추가 |
-| AI 챗봇 응답 품질 미흡 | 중간 | 웨딩 특화 시스템 프롬프트 설계, fallback 메시지 준비 |
-| FE·BE 연동 지연 | 중간 | API 명세 3/24까지 사전 확정, 더미 데이터로 FE 선행 개발 |
-| LLM API 비용 초과 | 낮음 | 개발 중 무료 티어 활용, 데모용 캐싱 응답 준비 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">주말 제외로 개발 일정 부족 · 높음</div>
+    <div class="compare-body"><p>Must 기능 우선 완성 후 Should 순차 추가</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">AI 챗봇 응답 품질 미흡 · 중간</div>
+    <div class="compare-body"><p>웨딩 특화 시스템 프롬프트 설계, fallback 메시지 준비</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">FE·BE 연동 지연 · 중간</div>
+    <div class="compare-body"><p>API 명세 3/24까지 사전 확정, 더미 데이터로 FE 선행 개발</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">LLM API 비용 초과 · 낮음</div>
+    <div class="compare-body"><p>개발 중 무료 티어 활용, 데모용 캐싱 응답 준비</p></div>
+  </div>
+</div>
 
 "일정 부족"을 가장 높은 리스크로 분류했다. 주말이 빠지면서 실 개발일이 줄었고, 이게 후반부 일정 압박으로 이어질 가능성이 컸다. (실제로 Day 6에서 일요일에 혼자 7시간 일했다.)
 
@@ -148,11 +193,20 @@ MVP를 만들면서도 "이게 실제 서비스가 된다면?" 을 함께 고민
 
 **수익 구조: Freemium + Subscription + 업체 입점 수수료**
 
-| 수익 요소 | 내용 |
-|-----------|------|
-| **플래너 프리미엄 구독** (월 29,900원) | 다수 커플 관리, 고급 대시보드, 잔금 알림 무제한 |
-| **업체 프리미엄 입점** (월 9,900원) | 추천 배지, 상단 노출, AI 챗봇 추천 연동 |
-| **예비부부 프리미엄** (월 4,900원) | AI 챗봇 무제한, 견적서 PDF, 서류 보관함 확장 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">플래너 프리미엄 구독 · 월 29,900원</div>
+    <div class="compare-body"><p>다수 커플 관리, 고급 대시보드, 잔금 알림 무제한</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">업체 프리미엄 입점 · 월 9,900원</div>
+    <div class="compare-body"><p>추천 배지, 상단 노출, AI 챗봇 추천 연동</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">예비부부 프리미엄 · 월 4,900원</div>
+    <div class="compare-body"><p>AI 챗봇 무제한, 견적서 PDF, 서류 보관함 확장</p></div>
+  </div>
+</div>
 
 국내 웨딩 시장은 연간 약 **3조 원** 규모다. 잠재 사용자(예비부부)는 38만 명, 웨딩플래너는 2만 명 이상으로 추정된다. 플래너 월 구독만으로도 의미 있는 고정 수익이 나온다.
 

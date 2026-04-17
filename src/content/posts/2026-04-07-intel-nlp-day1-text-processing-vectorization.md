@@ -56,12 +56,36 @@ re.sub('[a-z]', '1', 'abc')   # '111' — 소문자 전체를 1로 치환
 
 자주 쓰이는 패턴:
 
-| 패턴 | 의미 | 예 |
-|---|---|---|
-| `\d` | 숫자 | `\d+` → 1개 이상의 숫자 |
-| `\s` | 공백(스페이스, 탭, 줄바꿈) | `\s+` → 연속 공백 |
-| `\w` | 영문자, 숫자, 언더스코어 | `\w{3,5}` → 3~5글자 단어 |
-| `[^...]` | NOT | `[^a-z]` → 소문자가 아닌 것 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">\d</div>
+    <div class="compare-body">
+      <p><strong>의미:</strong> 숫자</p>
+      <p><code>\d+</code> → 1개 이상의 숫자</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">\s</div>
+    <div class="compare-body">
+      <p><strong>의미:</strong> 공백 (스페이스, 탭, 줄바꿈)</p>
+      <p><code>\s+</code> → 연속 공백</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">\w</div>
+    <div class="compare-body">
+      <p><strong>의미:</strong> 영문자, 숫자, 언더스코어</p>
+      <p><code>\w{3,5}</code> → 3~5글자 단어</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">[^...]</div>
+    <div class="compare-body">
+      <p><strong>의미:</strong> NOT</p>
+      <p><code>[^a-z]</code> → 소문자가 아닌 것</p>
+    </div>
+  </div>
+</div>
 
 같은 패턴을 반복 사용한다면 `re.compile()`로 미리 컴파일해두면 더 빠르다.
 
@@ -133,12 +157,26 @@ lemmatizer.lemmatize('am', pos='v')      # 'be'
 lemmatizer.lemmatize('happily')          # 'happily' — 품사 미지정 시 명사로 처리
 ```
 
-| | Stemming | Lemmatization |
-|---|---|---|
-| 방식 | 규칙 기반 어근 잘라냄 | 사전 기반 표제어 변환 |
-| 속도 | 빠름 | 느림 |
-| 결과 | 실제 단어가 아닐 수 있음 | 항상 실제 단어 |
-| 사용 시점 | 속도 중요, 정밀도 덜 중요 | 정확도 중요한 경우 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">Stemming</div>
+    <div class="compare-body">
+      <p><strong>방식:</strong> 규칙 기반 어근 잘라냄</p>
+      <p><strong>속도:</strong> 빠름</p>
+      <p><strong>결과:</strong> 실제 단어가 아닐 수 있음</p>
+      <p><strong>사용 시점:</strong> 속도 중요, 정밀도 덜 중요</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">Lemmatization</div>
+    <div class="compare-body">
+      <p><strong>방식:</strong> 사전 기반 표제어 변환</p>
+      <p><strong>속도:</strong> 느림</p>
+      <p><strong>결과:</strong> 항상 실제 단어</p>
+      <p><strong>사용 시점:</strong> 정확도 중요한 경우</p>
+    </div>
+  </div>
+</div>
 
 ## 6. 감정 분석과 품사 태깅
 
@@ -237,12 +275,26 @@ vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(docs)
 ```
 
-| | Bag of Words | TF-IDF |
-|---|---|---|
-| 단어 가중치 | 등장 횟수 | 빈도 × 희소성 |
-| 흔한 단어 처리 | 높은 가중치 | 낮은 가중치 |
-| 불용어 제거 | 직접 해야 함 | `stop_words` 파라미터 지원 |
-| 사용 시점 | 빠른 기준선 필요 시 | 단어 중요도 구별이 필요할 때 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">Bag of Words</div>
+    <div class="compare-body">
+      <p><strong>단어 가중치:</strong> 등장 횟수</p>
+      <p><strong>흔한 단어 처리:</strong> 높은 가중치</p>
+      <p><strong>불용어 제거:</strong> 직접 해야 함</p>
+      <p><strong>사용 시점:</strong> 빠른 기준선 필요 시</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">TF-IDF</div>
+    <div class="compare-body">
+      <p><strong>단어 가중치:</strong> 빈도 × 희소성</p>
+      <p><strong>흔한 단어 처리:</strong> 낮은 가중치</p>
+      <p><strong>불용어 제거:</strong> <code>stop_words</code> 파라미터 지원</p>
+      <p><strong>사용 시점:</strong> 단어 중요도 구별이 필요할 때</p>
+    </div>
+  </div>
+</div>
 
 ---
 

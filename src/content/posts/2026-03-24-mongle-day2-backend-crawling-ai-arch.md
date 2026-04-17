@@ -247,13 +247,28 @@ upload_to_supabase.py →  Supabase 업로드 스크립트
 
 이날 Evan-Yoon이 머지한 PR만 5개다.
 
-| 시각 | PR |
-|------|----|
-| 13:27 | PR #20 — 메인 화면 UI |
-| 16:00 | PR #21 — 회원가입 |
-| 16:15 | PR #22 — 메인 화면 UI (수정) |
-| 17:11 | PR #24 — AI 챗봇 백엔드 |
-| 17:19 | PR #26 — 타임라인 UI |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">PR #20 · 13:27</div>
+    <div class="compare-body"><p>메인 화면 UI</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #21 · 16:00</div>
+    <div class="compare-body"><p>회원가입</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #22 · 16:15</div>
+    <div class="compare-body"><p>메인 화면 UI (수정)</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #24 · 17:11</div>
+    <div class="compare-body"><p>AI 챗봇 백엔드</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #26 · 17:19</div>
+    <div class="compare-body"><p>타임라인 UI</p></div>
+  </div>
+</div>
 
 ---
 

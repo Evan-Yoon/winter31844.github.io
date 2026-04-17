@@ -142,11 +142,24 @@ def doc2vec_response(user_response):
 
 **이유**: Doc2Vec는 대규모 코퍼스에서 의미 있는 벡터를 학습한다. 47개 문장짜리 FAQ 데이터는 너무 작다. TF-IDF는 단어 빈도 기반이라 소규모 데이터에서도 잘 작동한다.
 
-| | TF-IDF | Doc2Vec |
-|---|---|---|
-| 필요한 데이터 | 적어도 가능 | 대규모 코퍼스 필요 |
-| 소규모 FAQ 정확도 | 높음 | 낮음 |
-| 의미 유사성 파악 | 제한적 | 학습 시 가능 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">TF-IDF</div>
+    <div class="compare-body">
+      <p><strong>필요한 데이터:</strong> 적어도 가능</p>
+      <p><strong>소규모 FAQ 정확도:</strong> 높음</p>
+      <p><strong>의미 유사성 파악:</strong> 제한적</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">Doc2Vec</div>
+    <div class="compare-body">
+      <p><strong>필요한 데이터:</strong> 대규모 코퍼스 필요</p>
+      <p><strong>소규모 FAQ 정확도:</strong> 낮음</p>
+      <p><strong>의미 유사성 파악:</strong> 학습 시 가능</p>
+    </div>
+  </div>
+</div>
 
 추가로, gensim 4.3.2와 최신 scipy 사이에 `scipy.linalg`의 `triu` 함수 경로가 변경되어 `ImportError`가 발생했다. 라이브러리 버전 호환성 문제는 실습 중 흔히 만나는 현실이다.
 
@@ -236,16 +249,36 @@ for i in range(20000):
 
 학습된 W1을 각 단어의 2D 좌표로 사용해 시각화했다.
 
-| 단어 | x1 | x2 |
-|---|---|---|
-| boy | 0.04 | -1.85 |
-| girl | 0.04 | -1.85 |
-| man | 2.29 | -2.54 |
-| woman | 3.50 | -3.06 |
-| king | 1.33 | -2.04 |
-| queen | 1.74 | -2.05 |
-| prince | -1.90 | -3.52 |
-| princess | -1.83 | -3.46 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">boy / girl</div>
+    <div class="compare-body">
+      <p>boy: (0.04, -1.85)</p>
+      <p>girl: (0.04, -1.85)</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">man / woman</div>
+    <div class="compare-body">
+      <p>man: (2.29, -2.54)</p>
+      <p>woman: (3.50, -3.06)</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">king / queen</div>
+    <div class="compare-body">
+      <p>king: (1.33, -2.04)</p>
+      <p>queen: (1.74, -2.05)</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">prince / princess</div>
+    <div class="compare-body">
+      <p>prince: (-1.90, -3.52)</p>
+      <p>princess: (-1.83, -3.46)</p>
+    </div>
+  </div>
+</div>
 
 boy와 girl이 거의 같은 위치에 놓이고, king/queen이 별도 군집을 형성한다. 10개 문장, 15개 단어짜리 소규모 코퍼스임에도 의미 유사성이 공간 거리에 반영됐다.
 
@@ -253,9 +286,21 @@ boy와 girl이 거의 같은 위치에 놓이고, king/queen이 별도 군집을
 
 ## 핵심 정리
 
-| 챗봇 유형 | 방식 | 적합한 데이터 규모 |
-|---|---|---|
-| TF-IDF + 코사인 유사도 | 단어 빈도 기반 유사 질문 검색 | 소규모 (수십~수백 문장) |
-| Doc2Vec | 문서 벡터 의미 유사도 검색 | 대규모 코퍼스 필요 |
+<div class="compare-wrap">
+  <div class="compare-card compare-before">
+    <div class="compare-label">TF-IDF + 코사인 유사도</div>
+    <div class="compare-body">
+      <p><strong>방식:</strong> 단어 빈도 기반 유사 질문 검색</p>
+      <p><strong>적합한 규모:</strong> 소규모 (수십~수백 문장)</p>
+    </div>
+  </div>
+  <div class="compare-card compare-after">
+    <div class="compare-label">Doc2Vec</div>
+    <div class="compare-body">
+      <p><strong>방식:</strong> 문서 벡터 의미 유사도 검색</p>
+      <p><strong>적합한 규모:</strong> 대규모 코퍼스 필요</p>
+    </div>
+  </div>
+</div>
 
 Word2Vec 직접 구현에서 확인한 것: gensim `Word2Vec` 한 줄이 내부적으로는 원핫 인코딩 → 행렬 곱 → 소프트맥스 → 역전파 전체를 처리한다. W1 행렬이 바로 임베딩 벡터들이다.

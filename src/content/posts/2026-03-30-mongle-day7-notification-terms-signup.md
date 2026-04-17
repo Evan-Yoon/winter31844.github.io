@@ -222,16 +222,40 @@ Expo Push API가 응답했는지 → 200 OK가 왔다.
 
 알림 작업을 정리하고 팀원들 PR 처리로 전환했다.
 
-| 시각 | PR | 내용 |
-|------|----|------|
-| 10:23 | PR #75 | 마이페이지 버그 수정 |
-| 10:30 | PR #76 | 플래너 채팅 창 및 하단 내비게이션 |
-| 10:54 | PR #78 | 메인 화면 업체 리스트 버그 수정 |
-| 11:53 | PR #79 | 커플 채팅 Supabase 연동 |
-| 15:07 | PR #81 | 커플 채팅 초대 기능 |
-| 16:11 | PR #83 | 채팅 초대 버그 수정 |
-| 16:35 | PR #85 | 채팅 그룹 채팅 버그 수정 |
-| 17:32 | PR #86 | 그룹 채팅 테스트 완료 |
+<div class="compare-wrap">
+  <div class="compare-card">
+    <div class="compare-label">PR #75 · 10:23</div>
+    <div class="compare-body"><p>마이페이지 버그 수정</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #76 · 10:30</div>
+    <div class="compare-body"><p>플래너 채팅 창 및 하단 내비게이션</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #78 · 10:54</div>
+    <div class="compare-body"><p>메인 화면 업체 리스트 버그 수정</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #79 · 11:53</div>
+    <div class="compare-body"><p>커플 채팅 Supabase 연동</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #81 · 15:07</div>
+    <div class="compare-body"><p>커플 채팅 초대 기능</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #83 · 16:11</div>
+    <div class="compare-body"><p>채팅 초대 버그 수정</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #85 · 16:35</div>
+    <div class="compare-body"><p>채팅 그룹 채팅 버그 수정</p></div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label">PR #86 · 17:32</div>
+    <div class="compare-body"><p>그룹 채팅 테스트 완료</p></div>
+  </div>
+</div>
 
 커플 채팅이 오늘 하루에만 PR 5개가 올라왔다. 채팅 → 연동 → 초대 기능 → 버그 → 재수정의 흐름이다. 팀원이 빠르게 이터레이션하면서 완성도를 올리고 있다.
 
