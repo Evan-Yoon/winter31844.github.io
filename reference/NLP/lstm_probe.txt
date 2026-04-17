@@ -1,0 +1,586 @@
+순환신경망 개선 모델 : Truncated BPTT
+• 너무 길어진 신경망을 적당한 지점에서 잘라서 작은 여러 개의 신경망을 생성
+• 순전파는 그대로 유지하고, 역전파에서만 끊어짐
+
+
+
+
+                           참고 : https://welcome-to-dewy-world.tistory.com/102   42
+순환신경망 개선 모델 : Long Short-Term Memory(LSTM)
+• Long Short Term Memory(LSTM)은 장기 의존성 문제를 완화한 RNN 개선 모델
+• Cell state (𝑐𝑡 )구조를 제안하고, 세가지 gate를 추가한 구조
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+                                                       ℎ𝑡−1 = 𝑓 𝑊𝑥ℎ 𝑥𝑡−1 + 𝑊ℎℎ ℎ𝑡−2
+                                                       ℎ𝑡 = 𝑓 𝑊𝑥ℎ 𝑥𝑡 + 𝑊ℎℎ ℎ𝑡−1
+           𝑾𝒉𝒉           𝑾𝒉𝒚                           𝑦𝑡 = 𝑔(𝑊ℎ𝑦 ℎ𝑡 )
+
+
+
+                 𝑾𝒙𝒉
+
+
+           RNN을 Gate 형식으로 표현
+
+                                 참고 : https://colah.github.io/posts/2015-08-Understanding-LSTMs/   43
+순환신경망 개선 모델 : Long Short-Term Memory(LSTM)
+• Long Short Term Memory(LSTM)은 장기 의존성 문제를 완화한 RNN 개선 모델
+• Cell state (𝑐𝑡 )구조를 제안하고, 세가지 gate를 추가한 구조
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+                                               𝑓𝑡 = 𝜎 𝑊𝑥ℎ𝑓 𝑥𝑡 + 𝑊ℎℎ𝑓 ℎ𝑡−1 + 𝑏ℎ𝑓
+                                               𝑖𝑡 = 𝜎 𝑊𝑥ℎ𝑖 𝑥𝑡 + 𝑊ℎℎ𝑖 ℎ𝑡−1 + 𝑏ℎ𝑖
+                                               𝑜𝑡 = 𝜎 𝑊𝑥ℎ𝑜 𝑥𝑡 + 𝑊ℎℎ𝑜 ℎ𝑡−1 + 𝑏ℎ𝑜
+                                               𝑐𝑡ǁ = 𝑡𝑎𝑛ℎ(𝑊𝑥ℎ𝑔 𝑥𝑡 + 𝑊ℎℎ𝑔 ℎ𝑡−1 + 𝑏ℎ𝑔 )
+
+                                               𝑐𝑡 = 𝑓𝑡 ⊗ 𝑐𝑡−1 ⊕ 𝑖𝑡 ⊗ 𝑐𝑡ǁ
+                                               ℎ𝑡 = 𝑜𝑡 ⊗𝑡𝑎𝑛ℎ(𝑐𝑡 )
+               LSTM
+
+                                 참고 : https://colah.github.io/posts/2015-08-Understanding-LSTMs/   44
+순환신경망 개선 모델 : Long Short-Term Memory(LSTM)
+• Long Short Term Memory(LSTM)은 장기 의존성 문제를 완화한 RNN 개선 모델
+• Cell state (𝑐𝑡 )구조를 제안하고, 세가지 gate를 추가한 구조
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+
+
+                                                                 Cell State 𝑐𝑡
+
+
+                                                                 hidden State ℎ𝑡
+                                                 참고 : https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+
+ 1. Cell State (𝑐𝑡 ​)
+ • 장기적으로 정보를 유지하는 장기 메모리(Long-term memory) 역할을 한다.
+ • 시간의 흐름에 따라 비교적 변형이 적게 일어나며, 필요한 정보만 게이트를 통해 추가하거나 삭제한다
+ • 시퀀스 전체에서 중요한 정보가 다음 시점까지 전달될 수 있도록 하는 정보 흐름의 주요 경로.
+ 2. Hidden State (ℎ𝑡 ​)
+ • 현재 시점에서의 단기 메모리 역할을 하며, 직전 시점의 중요한 특징을 담아 출력으로 사용된다.
+ • 직전 시점의 정보를 포함하지만, 장기적 정보보다는 현재 시점의 상황을 반영하는 데 초점.
+ • 다음 시점 계산 시 입력으로 사용되며, 동시에 모델의 출력에도 직접 연결된다                                                                      45
+순환신경망 개선 모델 : Long Short-Term Memory(LSTM)
+• Long Short Term Memory(LSTM)은 장기 의존성 문제를 완화한 RNN 개선 모델
+• Cell state (𝑐𝑡 )구조를 제안하고, 세가지 gate를 추가한 구조
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+
+
+
+     𝑓𝑡 = 𝜎 𝑊𝑥ℎ𝑓 𝑥𝑡 + 𝑊ℎℎ𝑓 ℎ𝑡−1 + 𝑏ℎ𝑓   𝑐𝑡ǁ = 𝑡𝑎𝑛ℎ(𝑊𝑥ℎ𝑔 𝑥𝑡 + 𝑊ℎℎ𝑔 ℎ𝑡−1 + 𝑏ℎ𝑔 )
+
+     𝑖𝑡 = 𝜎 𝑊𝑥ℎ𝑖 𝑥𝑡 + 𝑊ℎℎ𝑖 ℎ𝑡−1 + 𝑏ℎ𝑖   𝑐𝑡 = 𝑓𝑡 ⊗ 𝑐𝑡−1 ⊕ 𝑖𝑡 ⊗ 𝑐𝑡ǁ
+     𝑜𝑡 = 𝜎 𝑊𝑥ℎ𝑜 𝑥𝑡 + 𝑊ℎℎ𝑜 ℎ𝑡−1 + 𝑏ℎ𝑜   ℎ𝑡 = 𝑜𝑡 ⊗𝑡𝑎𝑛ℎ(𝑐𝑡 )
+                                        𝑦𝑡 = 𝑔(𝑊ℎ𝑦 ℎ𝑡 )                          46
+순환신경망 개선 모델 : Long Short-Term Memory(LSTM)
+• Long Short Term Memory(LSTM)은 장기 의존성 문제를 완화한 RNN 개선 모델
+• Cell state (𝑐𝑡 )구조를 제안하고, 세가지 gate를 추가한 구조
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+
+
+
+                       𝑐𝑡ǁ
+        𝑊ℎℎ𝑔
+
+             𝑊𝑥ℎ𝑔
+                                        𝑐𝑡ǁ = 𝑡𝑎𝑛ℎ(𝑊𝑥ℎ𝑔 𝑥𝑡 + 𝑊ℎℎ𝑔 ℎ𝑡−1 + 𝑏ℎ𝑔 )
+     𝑓𝑡 = 𝜎 𝑊𝑥ℎ𝑓 𝑥𝑡 + 𝑊ℎℎ𝑓 ℎ𝑡−1 + 𝑏ℎ𝑓   𝑐𝑡 = 𝑓𝑡 ⊗ 𝑐𝑡−1 ⊕ 𝑖𝑡 ⊗ 𝑐𝑡ǁ
+     𝑖𝑡 = 𝜎 𝑊𝑥ℎ𝑖 𝑥𝑡 + 𝑊ℎℎ𝑖 ℎ𝑡−1 + 𝑏ℎ𝑖   ℎ𝑡 = 𝑜𝑡 ⊗𝑡𝑎𝑛ℎ(𝑐𝑡 )
+     𝑜𝑡 = 𝜎 𝑊𝑥ℎ𝑜 𝑥𝑡 + 𝑊ℎℎ𝑜 ℎ𝑡−1 + 𝑏ℎ𝑜   𝑦𝑡 = 𝑔(𝑊ℎ𝑦 ℎ𝑡 )                          47
+순환신경망 개선 모델 : Long Short-Term Memory(LSTM)
+• Long Short Term Memory(LSTM)은 장기 의존성 문제를 완화한 RNN 개선 모델
+• Cell state (𝑐𝑡 )구조를 제안하고, 세가지 gate를 추가한 구조
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+               𝑓𝑡 ⊗ 𝑐𝑡−1         𝑐𝑡
+
+
+                           𝑐𝑡ǁ
+        𝑊ℎℎ𝑔
+
+             𝑊𝑥ℎ𝑔
+                                        𝑐𝑡ǁ = 𝑡𝑎𝑛ℎ(𝑊𝑥ℎ𝑔 𝑥𝑡 + 𝑊ℎℎ𝑔 ℎ𝑡−1 + 𝑏ℎ𝑔 )
+     𝑓𝑡 = 𝜎 𝑊𝑥ℎ𝑓 𝑥𝑡 + 𝑊ℎℎ𝑓 ℎ𝑡−1 + 𝑏ℎ𝑓   𝑐𝑡 = 𝑓𝑡 ⊗ 𝑐𝑡−1 ⊕ 𝑖𝑡 ⊗ 𝑐𝑡ǁ
+     𝑖𝑡 = 𝜎 𝑊𝑥ℎ𝑖 𝑥𝑡 + 𝑊ℎℎ𝑖 ℎ𝑡−1 + 𝑏ℎ𝑖   ℎ𝑡 = 𝑜𝑡 ⊗𝑡𝑎𝑛ℎ(𝑐𝑡 )
+     𝑜𝑡 = 𝜎 𝑊𝑥ℎ𝑜 𝑥𝑡 + 𝑊ℎℎ𝑜 ℎ𝑡−1 + 𝑏ℎ𝑜   𝑦𝑡 = 𝑔(𝑊ℎ𝑦 ℎ𝑡 )                          48
+순환신경망 개선 모델 : Long Short-Term Memory(LSTM)
+• Long Short Term Memory(LSTM)은 장기 의존성 문제를 완화한 RNN 개선 모델
+• Cell state (𝑐𝑡 )구조를 제안하고, 세가지 gate를 추가한 구조
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+                              𝑐𝑡
+
+
+                       𝑐𝑡ǁ
+        𝑊ℎℎ𝑔
+
+             𝑊𝑥ℎ𝑔
+                                        𝑐𝑡ǁ = 𝑡𝑎𝑛ℎ(𝑊𝑥ℎ𝑔 𝑥𝑡 + 𝑊ℎℎ𝑔 ℎ𝑡−1 + 𝑏ℎ𝑔 )
+     𝑓𝑡 = 𝜎 𝑊𝑥ℎ𝑓 𝑥𝑡 + 𝑊ℎℎ𝑓 ℎ𝑡−1 + 𝑏ℎ𝑓   𝑐𝑡 = 𝑓𝑡 ⊗ 𝑐𝑡−1 ⊕ 𝑖𝑡 ⊗ 𝑐𝑡ǁ
+     𝑖𝑡 = 𝜎 𝑊𝑥ℎ𝑖 𝑥𝑡 + 𝑊ℎℎ𝑖 ℎ𝑡−1 + 𝑏ℎ𝑖   ℎ𝑡 = 𝑜𝑡 ⊗𝑡𝑎𝑛ℎ(𝑐𝑡 )
+     𝑜𝑡 = 𝜎 𝑊𝑥ℎ𝑜 𝑥𝑡 + 𝑊ℎℎ𝑜 ℎ𝑡−1 + 𝑏ℎ𝑜   𝑦𝑡 = 𝑔(𝑊ℎ𝑦 ℎ𝑡 )                          49
+LSTM 구조
+          1. Gate 계산하기 : Forget (𝒇𝒕 ), Input (𝒊𝒕 ), gate(𝒐𝒕 )
+                𝒇𝒕 = 𝝈 𝑾𝒙𝒉𝒇 𝒙𝒕 + 𝑾𝒉𝒉𝒇 𝒉𝒕−𝟏 + 𝒃𝒉𝒇
+                𝒊𝒕 = 𝝈 𝑾𝒙𝒉𝒊 𝒙𝒕 + 𝑾𝒉𝒉𝒊 𝒉𝒕−𝟏 + 𝒃𝒉𝒊
+                𝒐𝒕 = 𝝈 𝑾𝒙𝒉𝒐 𝒙𝒕 + 𝑾𝒉𝒉𝒐 𝒉𝒕−𝟏 + 𝒃𝒉𝒐
+
+
+                2. Cell state (𝒄𝒕 ) 업데이트 하기
+              𝒄෤ 𝒕 = 𝒕𝒂𝒏𝒉(𝑾𝒙𝒉𝒈 𝒙𝒕 + 𝑾𝒉𝒉𝒈 𝒉𝒕−𝟏 + 𝒃𝒉𝒈 )
+              𝒄𝒕 = 𝒇𝒕 ⊗ 𝒄𝒕−𝟏 ⊕ 𝒊𝒕 ⊗ 𝒄෤ 𝒕
+
+             3. Hidden state (𝒉𝒕 ) 업데이트 하기
+
+                𝒉𝒕 = 𝒐𝒕 ⊗ 𝒕𝒂𝒏𝒉(𝒄𝒕 )
+
+                                                                50
+LSTM 구조 1. Gate 계산하기 : Forget (𝒇𝒕), Input (𝒊𝒕), gate(𝒐𝒕)
+Gate는 다음과 같은 함수로 정의되어 0~1 사이의 값을 가지는 벡터
+• Gate = 𝝈 𝑾𝒙𝒉 𝒙𝒕 + 𝑾𝒉𝒉 𝒉𝒕−𝟏 + 𝒃𝒉 , 𝝈는 시그모이드 함수 : 0~1
+• Gate는 최종적으로 0~1사이 값을 가지므로 얼마나 적용할지에 대한 가중치 역할
+• Gate마다 서로 다른 파라미터 (𝑾𝒙𝒉 , 𝑾𝒉𝒉 )를 사용하기 때문에 서로 다른 값을 지님
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+
+
+
+                       참고 : https://www.codecademy.com/resources/docs/ai/neural-networks/sigmoid-activation-function   51
+LSTM 구조 1. Gate 계산하기 : Forget (𝒇𝒕), Input (𝒊𝒕), gate(𝒐𝒕)
+Forget Gate는 불필요한 과거 정보를 잊기 위한 gate
+ = 과거 cell state에서 사용하거나 사용하지 않을 데이터에 대한 가중치
+• Forget Gate 𝒇𝒕 = 𝝈 𝑾𝒙𝒉𝒇 𝒙𝒕 + 𝑾𝒉𝒉𝒇 𝒉𝒕−𝟏 + 𝒃𝒉𝒇
+
+
+                                                  Forget Gate (𝒇𝒕 )
+
+
+  𝒉𝒕−𝟏
+
+
+
+
+                                                       =
+                                             +
+            𝑾𝒙𝒉𝒇                           𝑾𝒉𝒉𝒇         𝑾𝒙𝒉𝒇
+                          𝒉𝒕−𝟏
+
+
+            𝒙𝒕−𝟏                                          𝒙𝒕          52
+LSTM 구조 1. Gate 계산하기 : Forget (𝒇𝒕), Input (𝒊𝒕), gate(𝒐𝒕)
+Input Gate는 현재 정보를 기억하기 위한 gate
+ = cell state에서 사용할 데이터를 저장하기 위한 가중치
+• Input Gate 𝒊𝒕 = 𝝈 𝑾𝒙𝒉𝒊 𝒙𝒕 + 𝑾𝒉𝒉𝒊 𝒉𝒕−𝟏 + 𝒃𝒉𝒊
+
+
+
+                                                 Input Gate (𝒊𝒕 )
+
+
+  𝒉𝒕−𝟏
+
+
+
+
+                                                     =
+                                         +
+
+           𝑾𝒙𝒉𝒊         𝒉𝒕−𝟏            𝑾𝒉𝒉𝒊           𝑾𝒙𝒉𝒊
+
+
+
+           𝒙𝒕−𝟏                                         𝒙𝒕          53
+LSTM 구조 1. Gate 계산하기 : Forget (𝒇𝒕), Input (𝒊𝒕), gate(𝒐𝒕)
+Output Gate는 어떤 정보를 output으로 내보낼지 결정하기 위한 gate
+ = Hidden state에 cell state를 얼마나 반영할 것인지에 대한 가중치
+• Output Gate 𝒐𝒕 = 𝝈 𝑾𝒙𝒉𝒐 𝒙𝒕 + 𝑾𝒉𝒉𝒐 𝒉𝒕−𝟏 + 𝒃𝒉𝒐
+
+
+
+                                                Output Gate (𝒐𝒕 )
+
+
+  𝒉𝒕−𝟏
+
+
+
+
+                                                     =
+                                         +
+
+           𝑾𝒙𝒉𝒐         𝒉𝒕−𝟏           𝑾𝒉𝒉𝒐           𝑾𝒙𝒉𝒐
+
+
+
+           𝒙𝒕−𝟏                                         𝒙𝒕          54
+LSTM 구조
+          1. Gate 계산하기 : Forget (𝒇𝒕 ), Input (𝒊𝒕 ), gate(𝒐𝒕 )
+                𝒇𝒕 = 𝝈 𝑾𝒙𝒉𝒇 𝒙𝒕 + 𝑾𝒉𝒉𝒇 𝒉𝒕−𝟏 + 𝒃𝒉𝒇
+                𝒊𝒕 = 𝝈 𝑾𝒙𝒉𝒊 𝒙𝒕 + 𝑾𝒉𝒉𝒊 𝒉𝒕−𝟏 + 𝒃𝒉𝒊
+                𝒐𝒕 = 𝝈 𝑾𝒙𝒉𝒐 𝒙𝒕 + 𝑾𝒉𝒉𝒐 𝒉𝒕−𝟏 + 𝒃𝒉𝒐
+
+
+                2. Cell state (𝒄𝒕 ) 업데이트 하기
+              𝒄෤ 𝒕 = 𝒕𝒂𝒏𝒉(𝑾𝒙𝒉𝒈 𝒙𝒕 + 𝑾𝒉𝒉𝒈 𝒉𝒕−𝟏 + 𝒃𝒉𝒈 )
+              𝒄𝒕 = 𝒇𝒕 ⊗ 𝒄𝒕−𝟏 ⊕ 𝒊𝒕 ⊗ 𝒄෤ 𝒕
+
+             3. Hidden state (𝒉𝒕 ) 업데이트 하기
+
+                𝒉𝒕 = 𝒐𝒕 ⊗ 𝒕𝒂𝒏𝒉(𝒄𝒕 )
+
+                                                                55
+LSTM 구조               2. Cell state (𝒄𝒕 ) 업데이트 하기
+
+임시 cell state(෤𝒄𝒕 )를 생성, 이때 𝒕𝒂𝒏𝒉 를 통해 -1 ~ 1 사이의 값을
+가지는 벡터로 산출
+• 임시 cell state는 현재 입력값과 과거 hidden state정보에 대한 정보 요약
+• 임시 cell state 𝒄෤ 𝒕 = 𝒕𝒂𝒏𝒉(𝑾𝒙𝒉𝒈 𝒙𝒕 + 𝑾𝒉𝒉𝒈 𝒉𝒕−𝟏 + 𝒃𝒉𝒈 )
+• 현 시점에 대한 Cell state (𝒄𝒕 ) 를 업데이트 할 때 forget과 input gate를 활용
+• Cell state 𝒄𝒕 = 𝒇𝒕 ⊗ 𝒄𝒕−𝟏 ⊕ 𝒊𝒕 ⊗ 𝒄෤ 𝒕
+
+
+
+
+                                                                56
+LSTM 구조                  2. Cell state (𝒄𝒕 ) 업데이트 하기
+
+
+• 현 시점에 대한 Cell state (𝒄𝒕 ) 를 업데이트 할 때 forget과 input gate를 활용
+• Cell state 𝒄𝒕 = 𝒇𝒕 ⊗ 𝒄𝒕−𝟏 ⊕ 𝒊𝒕 ⊗ 𝒄෤ 𝒕
+• Forget gate는 불필요한 과거 정보(𝒄𝒕−𝟏 )를 잊기 위한 gate
+
+              다 기억하는 경우
+
+     𝒇𝒕        1     1         1      1       1         1      1
+
+    𝒄𝒕−𝟏      -0.2   0.1      0.5    0.7     0.9       -0.3   -1.1
+
+  𝒇𝒕 ⊗ 𝒄𝒕−𝟏   -0.2   0.1      0.5    0.7     0.9       -0.3   -1.1
+
+                                                                     57
+LSTM 구조                  2. Cell state (𝒄𝒕 ) 업데이트 하기
+
+
+• 현 시점에 대한 Cell state (𝒄𝒕 ) 를 업데이트 할 때 forget과 input gate를 활용
+• Cell state 𝒄𝒕 = 𝒇𝒕 ⊗ 𝒄𝒕−𝟏 ⊕ 𝒊𝒕 ⊗ 𝒄෤ 𝒕
+• Forget gate는 불필요한 과거 정보(𝒄𝒕−𝟏 )를 잊기 위한 gate
+
+              다 잊는 경우
+
+     𝒇𝒕        0     0        0       0       0         0      0
+
+    𝒄𝒕−𝟏      -0.2   0.1      0.5    0.7     0.9       -0.3   -1.1
+
+  𝒇𝒕 ⊗ 𝒄𝒕−𝟏    0     0         0      0       0         0      0
+
+                                                                     58
+LSTM 구조                 2. Cell state (𝒄𝒕 ) 업데이트 하기
+
+
+• 현 시점에 대한 Cell state (𝒄𝒕 ) 를 업데이트 할 때 forget과 input gate를 활용
+• Cell state 𝒄𝒕 = 𝒇𝒕 ⊗ 𝒄𝒕−𝟏 ⊕ 𝒊𝒕 ⊗ 𝒄෤ 𝒕
+• Forget gate는 불필요한 과거 정보(𝒄𝒕−𝟏 )를 잊기 위한 gate
+
+              일반적인 경우
+
+     𝒇𝒕        0     0.2     0.9    0.1      1        0.2     0.1
+
+    𝒄𝒕−𝟏      -0.2   0.1     0.5    0.7     0.9       -0.3   -1.1
+
+  𝒇𝒕 ⊗ 𝒄𝒕−𝟏    0     0.02   0.45    0.07    0.9   -0.06      -0.11
+
+                                                                     59
+LSTM 구조                    2. Cell state (𝒄𝒕 ) 업데이트 하기
+
+
+• 현 시점에 대한 Cell state (𝒄𝒕 ) 를 업데이트 할 때 forget과 input gate를 활용
+• Cell state 𝒄𝒕 = 𝒇𝒕 ⊗ 𝒄𝒕−𝟏 ⊕ 𝒊𝒕 ⊗ 𝒄෤ 𝒕
+• Input gate는 현재 정보를 기억하기 위한 gate
+• 𝒄෤ 𝒕 = 𝒕𝒂𝒏𝒉(𝑾𝒙𝒉𝒈 𝒙𝒕 + 𝑾𝒉𝒉𝒈 𝒉𝒕−𝟏 + 𝒃𝒉𝒈 )
+
+               일반적인 경우
+
+      𝒊𝒕        0.1    0        0.8    0.2     0.8       0.7   1
+
+      𝒄෤ 𝒕     -0.1    0.3      0.6    0.9     0.1       0     2.1
+
+   𝒊𝒕 ⊗ 𝒄෤ 𝒕   -0.01   0       0.48    0.18   0.08       0     2.1
+                                                                     60
+LSTM 구조
+          1. Gate 계산하기 : Forget (𝒇𝒕 ), Input (𝒊𝒕 ), gate(𝒐𝒕 )
+                𝒇𝒕 = 𝝈 𝑾𝒙𝒉𝒇 𝒙𝒕 + 𝑾𝒉𝒉𝒇 𝒉𝒕−𝟏 + 𝒃𝒉𝒇
+                𝒊𝒕 = 𝝈 𝑾𝒙𝒉𝒊 𝒙𝒕 + 𝑾𝒉𝒉𝒊 𝒉𝒕−𝟏 + 𝒃𝒉𝒊
+                𝒐𝒕 = 𝝈 𝑾𝒙𝒉𝒐 𝒙𝒕 + 𝑾𝒉𝒉𝒐 𝒉𝒕−𝟏 + 𝒃𝒉𝒐
+
+
+                2. Cell state (𝒄𝒕 ) 업데이트 하기
+              𝒄෤ 𝒕 = 𝒕𝒂𝒏𝒉(𝑾𝒙𝒉𝒈 𝒙𝒕 + 𝑾𝒉𝒉𝒈 𝒉𝒕−𝟏 + 𝒃𝒉𝒈 )
+              𝒄𝒕 = 𝒇𝒕 ⊗ 𝒄𝒕−𝟏 ⊕ 𝒊𝒕 ⊗ 𝒄෤ 𝒕
+
+             3. Hidden state (𝒉𝒕 ) 업데이트 하기
+
+                𝒉𝒕 = 𝒐𝒕 ⊗ 𝒕𝒂𝒏𝒉(𝒄𝒕 )
+
+                                                                61
+ LSTM 구조                3. Hidden state (𝒉𝒕 ) 업데이트 하기
+
+
+ • 최종적으로 단기적 정보 hidden state (𝒉𝒕 )를 업데이트
+ • 𝒉𝒕 = 𝒐𝒕 ⊗ 𝒕𝒂𝒏𝒉(𝒄𝒕 )
+ • 𝒉𝒕 를 이용해서 𝒚                 ෝ𝒕 = 𝒉𝒕 X 𝑾𝒉𝒚
+                ෝ𝒕 값을 구할 수 있다. 𝒚
+
+
+      𝒐𝒕        0.5      0.4     0.1    0.9     0.2     0.3    0.8     0~1 사이 값
+
+
+    𝒕𝒂𝒏𝒉(𝒄𝒕 )   -0.01   0.02    0.73    0.1    0.92    0.01    -0.2
+
+𝒐𝒕 ⊗ 𝒕𝒂𝒏𝒉(𝒄𝒕 ) -0.005   0.008   0.073   0.09   0.184   0.003   -0.16
+
+
+                                                                                  62
+LSTM - Review
+• Long Short Term Memory(LSTM)은 장기 의존성 문제를 완화한 RNN 개선 모델
+• Cell state (𝑐𝑡 )구조를 제안하고, 세가지 gate를 추가한 구조
+➢ 세가지 gate : Forget gate(𝑓𝑡 ), Input gate(𝑖𝑡 ), Output gate(𝑜𝑡 )
+
+                              𝑐𝑡
+
+
+                       𝑐𝑡ǁ
+        𝑊ℎℎ𝑔
+
+             𝑊𝑥ℎ𝑔
+                                        𝑐𝑡ǁ = 𝑡𝑎𝑛ℎ(𝑊𝑥ℎ𝑔 𝑥𝑡 + 𝑊ℎℎ𝑔 ℎ𝑡−1 + 𝑏ℎ𝑔 )
+     𝑓𝑡 = 𝜎 𝑊𝑥ℎ𝑓 𝑥𝑡 + 𝑊ℎℎ𝑓 ℎ𝑡−1 + 𝑏ℎ𝑓   𝑐𝑡 = 𝑓𝑡 ⊗ 𝑐𝑡−1 ⊕ 𝑖𝑡 ⊗ 𝑐𝑡ǁ
+     𝑖𝑡 = 𝜎 𝑊𝑥ℎ𝑖 𝑥𝑡 + 𝑊ℎℎ𝑖 ℎ𝑡−1 + 𝑏ℎ𝑖   ℎ𝑡 = 𝑜𝑡 ⊗𝑡𝑎𝑛ℎ(𝑐𝑡 )
+     𝑜𝑡 = 𝜎 𝑊𝑥ℎ𝑜 𝑥𝑡 + 𝑊ℎℎ𝑜 ℎ𝑡−1 + 𝑏ℎ𝑜   𝑦𝑡 = 𝑔(𝑊ℎ𝑦 ℎ𝑡 )                          63
+LSTM 구조 개선모델 : Gated Recurrent Unit
+• 일반적인 LSTM에서 cell state와 세가지 gate가 정의됨 (forget, input, output)
+• GRU는 LSTM 구조를 간단하게 개선하여 파라미터 개수를 줄임
+➢ forget gate, input gate를 update gate(𝒛𝒕 )로 통합. Output gate를 없애고, reset
+  gate(𝒓𝒕 ) 정의
+
+
+
+                 LSTM                               GRU
+
+
+
+
+                                                                           64
+LSTM 구조 개선모델 : Gated Recurrent Unit
+Output gate를 없애고, reset gate(𝒓𝒕 ) 정의. forget gate, input gate를
+update gate(𝒛𝒕 )로 통합
+• reset gate 𝒓𝒕 = 𝜎 𝑊𝑥ℎ𝑟 𝑥𝑡 + 𝑊ℎℎ𝑟 ℎ𝑡−1 + 𝑏ℎ𝑟
+• update gate 𝒛𝒕 = 𝜎 𝑊𝑥ℎ𝑧 𝑥𝑡 + 𝑊ℎℎ𝑧 ℎ𝑡−1 + 𝑏ℎ𝑧
+• 임시 cell state 𝑐𝑡ǁ = 𝑡𝑎𝑛ℎ(𝑊𝑥ℎ𝑔 𝑥𝑡 + 𝑊ℎℎ𝑔 (𝒓𝒕 ⊗ ℎ𝑡−1 ) + 𝑏ℎ𝑔 )
+
+
+
+
+   GRU                    𝑊ℎℎ𝑔                  𝒄෤ 𝒕
+
+
+
+
+                          𝑊𝑥ℎ𝑔
+                                                                 65
+LSTM 구조 개선모델 : Gated Recurrent Unit
+Output gate를 없애고, reset gate(𝒓𝒕 ) 정의. forget gate, input gate를
+update gate(𝒛𝒕 )로 통합
+• reset gate 𝒓𝒕 = 𝜎 𝑊𝑥ℎ𝑟 𝑥𝑡 + 𝑊ℎℎ𝑟 ℎ𝑡−1 + 𝑏ℎ𝑟
+• update gate 𝒛𝒕 = 𝜎 𝑊𝑥ℎ𝑧 𝑥𝑡 + 𝑊ℎℎ𝑧 ℎ𝑡−1 + 𝑏ℎ𝑧
+• 최종 hidden state 𝒉𝒕 = (1 − 𝒛𝒕 )⊗ ℎ𝑡−1 ⊕ 𝒛𝒕 ⊗ 𝑐𝑡ǁ
+
+
+                                     (𝟏 − 𝒛𝒕 )⊗ 𝒉𝒕−𝟏
+
+
+
+   GRU                   𝑊ℎℎ𝑔                    𝒄෤ 𝒕
+
+
+
+
+                         𝑊𝑥ℎ𝑔
+                                                                 66
+LSTM 구조 개선모델 : Gated Recurrent Unit
+Output gate를 없애고, reset gate(𝒓𝒕 ) 정의. forget gate, input gate를
+update gate(𝒛𝒕 )로 통합
+• reset gate 𝒓𝒕 = 𝜎 𝑊𝑥ℎ𝑟 𝑥𝑡 + 𝑊ℎℎ𝑟 ℎ𝑡−1 + 𝑏ℎ𝑟
+• update gate 𝒛𝒕 = 𝜎 𝑊𝑥ℎ𝑧 𝑥𝑡 + 𝑊ℎℎ𝑧 ℎ𝑡−1 + 𝑏ℎ𝑧
+• 임시 cell state 𝑐𝑡ǁ = 𝑡𝑎𝑛ℎ(𝑊𝑥ℎ𝑔 𝑥𝑡 + 𝑊ℎℎ𝑔 (𝒓𝒕 ⊗ ℎ𝑡−1 ) + 𝑏ℎ𝑔 )
+Cell, hidden state를 hidden state로 통합
+• 최종 hidden state 𝒉𝒕 = (1 − 𝒛𝒕 )⊗ ℎ𝑡−1 ⊕ 𝒛𝒕 ⊗ 𝑐𝑡ǁ
+                                                                 GRU
+                   Forget gate의 역할   Input gate의 역할
+
+
+
+
+                                                                       67
+Tansformer
+
+
+AI for Future Workforce
+Transformer 구조
+
+                   • 2017년에 Google에서 출시
+                   • 병렬 실행이 가능
+                   • Encoder와 Decoder의 구조
+                   1. Embedding
+                   2. Positional Encoding
+                   3. Multi-Head Attention
+                   4. Feed Forward
+                   5. Add(Residual Connection)
+                   6. Norm
+
+                 참고 “Attention Is All You Need“
+                                                  69
+Embedding
+• Embedding 자연어를 벡터 형태로 변환
+
+• Transformer에서는 word embedding을 사용
+
+• Output Embedding은 트랜스포머(Transformer) 모델의 디코더(Decoder) 부분에서 사용되며,
+ 주로 자연어 처리(NLP) 작업에서 텍스트 생성(예: 번역, 요약, 텍스트 생성 등)에 사용
+
+• 훈련 중에는 디코더의 입력으로 실제 정답 시퀀스가 사용됩니다. 예를 들어, 번역 모델을 훈련할
+ 때, 소스 언어를 인코더가 처리한 후 디코더는 타겟 언어의 정답 문장을 입력으로 받습니다.
+
+• 추론 중에는 디코더가 이전에 생성한
+
+ 단어들이 입력으로 사용
+
+
+
+                                                                     70
+Positional Encoding
+• 위치 정보를 가지고 있으므로 동시처리, 병렬 연산처리가 가능
+• sin, cos 모두 -1~1 사이임으로 정규화 효과.
+• Sin 하나만 사용하면 Sin은 주기함수이므로 다른 데이터가 같은 값이 나올 수
+  있으므로, sin, cos을 번갈아 사용함으로 해서 겹침을 방지
+• 단어의미 벡터에 Positional 벡터를 더해서, 의미 + 위치 정보를 가진 입력 벡터를
+  만든다
+
+                                I       Sin(0)    Cos(0)    Sin(0)    Cos(0)
+
+                              am        Sin(1)    Cos(1)    Sin(1)    Cos(1)
+
+                               a       Sin(2/..) Cos(2/..) Sin(2/..) Cos(2/..)
+
+                             student   Sin(3/..) Cos(3/..) Sin(3/..) Cos(3/..)
+                                                                                 71
+Positional encoding + embedding vector
+
+
+
+
+                                    출처 : https://wikidocs.net/31379
+                                                                      72
+Multi-Head Attention
+Attention
+• Self-Attention : Self-Attention은 입력 벡터의 가중합을
+ 계산하는 일련의 선형 변환(linear transformation)과
+ 행렬 연산으로 구성.
+  Weights within an encoder or weights within a decoder
+• Query, Key, Value 행렬 구성
+• 𝑄𝐾 𝑇 는 일반 행렬 곱셈이며 단어들과의 상관관계를 구함
+• 𝑑𝑘 는 정규화 효과
+• Self-Attention의 출력은 다음 단계에서 Dense layers와 같은 신경망 층에
+  입력으로 들어가며, 여기서 비선형성이 도입.
+
+
+                                                          73
+Multi-Head Attention
+
+
+
+
+                       출처 : https://jalammar.github.io/illustrated-transformer/
+                                                                                  74
+Multi-Head Attention
+
+
+
+
+                       출처 : https://wikidocs.net/31379
+                                                         75
+Multi-Head Attention
+Attention
+• 예를 들어, "The cat sat on the mat"라는 문장에서 Self-Attention은 "cat"이
+  "sat"와 강하게 관련되어 있음을 학습.
+• 이렇게 단어들 간의 관계를 학습함으로써 모델은 문맥을 이해할 수 있으며, 이는
+  특히 문장 구조가 복잡하거나 장기적인 의존성을 다룰 때 매우 유리
+• Self-Attention 메커니즘은 순차적인 처리를 요구하지 않기 때문에 모든 단어에
+  대해 병렬로 상관관계를 계산
+• Self-Attention 메커니즘을 통해 단어들 간의 상관관계를 학습한 후, 그 결과를
+  Dense Layer로 전달하는 방식은 트랜스포머 모델의 성능을 크게 향상
+• Multi-Head 이므로 N개의 K, Q, V 임계치 배열이 만들어지고, 서로 다른
+  상관관계를 학습 ( CNN에서 여러 개의 Kernel을 도입하는 개념과 비슷 )
+• Dense Layer는 비선형성을 도입하여 Self-Attention에서 학습된 상관관계 정보를
+  더욱 풍부하고 복잡한 특징으로 변환
+                                                                  76
+Masked Multi-Head Attention
+Attention
+• 디코더의 Masked 의미는 모델이 미래의 단어를 보지 못하게 하는 의미
+
+
+
+
+                                  출처 : https://wikidocs.net/31379
+                                                                    77
+Feed Forward
+• 트랜스포머 모델의 Feed Forward 층은 Self-Attention 층의 출력을 비선형적으로
+  변환하여 모델의 표현력을 강화
+• 이 층을 통해 모델은 단순한 상관관계 이상의 복잡한 패턴을 학습할 수 있으며,
+  각 위치에서 독립적으로 계산이 이루어져 병렬 처리의 장점도 살릴 수 있다.
+
+
+
+
+                                                               출처 : https://wikidocs.net/31379
+                     출처 : https://jalammar.github.io/illustrated-transformer/                    78
+Add
+• Add 단계에서의 Residual Connection 개념을 사용
+• 트랜스포머 모델의 각 인코더 및 디코더 블록에서, Self-Attention 층이나 Feed
+  Forward 층을 통과한 출력에 Residual Connection을 사용하여 원래의 입력을
+  더합니다.
+• 수식으로 표현하면: Output=Layer Output + Layer Input
+  ➢   Layer Output은 Self-Attention이나 Feed Forward 층을 통과한 출력
+  ➢   Layer Input은 그 층에 주어진 원래의 입력입니다.
+
+• 딥러닝 모델이 깊어질수록, 즉 층이 많아질수록 역전파 과정에서
+  기울기(gradient)가 소실되는 문제가 발생할 수 있습니다.
+• Residual Connection은 이 문제를 완화하여 더 깊은 네트워크를 안정적으로
+  학습할 수 있게 합니다.원래의 입력 값을 출력에 더해줌으로써, 역전파 시
+  기울기가 안정적으로 전파될 수 있습니다.
+                                                              79
+Norm
+• Norm 단계 (Layer Normalization) : Residual Connection을 통해 더한 출력은
+  Layer Normalization을 통해 정규화됩니다.
+• Layer Normalization은 네트워크의 출력을 정규화하여 학습을 안정화하고,
+  과적합(overfitting)을 방지하는 데 도움을 줍니다.
+
+
+
+
+                                                                   80
+Transformer 구조
+
+                   • 2017년에 Google에서 출시
+                   • 병렬 실행이 가능
+                   • Encoder와 Decoder의 구조
+
+
+
+
+                 참고 “Attention Is All You Need“
+                                                  81
+⊕
+
+⊗
+
