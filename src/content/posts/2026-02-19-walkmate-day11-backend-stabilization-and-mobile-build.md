@@ -39,26 +39,31 @@ toc: true
 
 백엔드 API 안정화와 모바일 앱 빌드 환경의 고도화를 목표로 삼았으며, 대부분의 이슈를 해결하고 전처리 알고리즘을 개선했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">✅ 백엔드 API 연결 안정화 (Trailing Slash 이슈)</div>
-    <div class="compare-body"><p>307 리다이렉트 및 404 해결</p></div>
+<div class="task-list">
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">백엔드 API 연결 안정화 (Trailing Slash 이슈)</div>
+    <div class="task-prompt">307 리다이렉트 및 404 해결</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 모바일 앱 빌드 오류 해결 (Capacitor 마이그레이션)</div>
-    <div class="compare-body"><p><code>react-native-fs</code>를 <code>capacitor/filesystem</code>으로 교체</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">모바일 앱 빌드 오류 해결 (Capacitor 마이그레이션)</div>
+    <div class="task-prompt"><code>react-native-fs</code>를 <code>capacitor/filesystem</code>으로 교체</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ YOLO 이미지 전처리 최적화 (Letterbox 도입)</div>
-    <div class="compare-body"><p>이미지 왜곡 방지 및 인식률 향상</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">YOLO 이미지 전처리 최적화 (Letterbox 도입)</div>
+    <div class="task-prompt">이미지 왜곡 방지 및 인식률 향상</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ Vite 빌드 설정 최적화 및 네이티브 라이브러리 충돌 수정</div>
-    <div class="compare-body"><p><code>vite.config.ts</code> alias 및 exclude 설정</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">Vite 빌드 설정 최적화 및 네이티브 라이브러리 충돌 수정</div>
+    <div class="task-prompt"><code>vite.config.ts</code> alias 및 exclude 설정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ AdminUI 타입 에러 수정</div>
-    <div class="compare-body"><p>ReportCard 컴포넌트 key 속성 타입 에러 해결</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">AdminUI 타입 에러 수정</div>
+    <div class="task-prompt">ReportCard 컴포넌트 key 속성 타입 에러 해결</div>
   </div>
 </div>
 
@@ -68,38 +73,38 @@ toc: true
 
 빌드 환경 구축과 핵심 내비게이션 기능의 기초를 다지기 위해 주요 커밋들이 진행되었다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label"><code>a528c0a</code></div>
-    <div class="compare-body"><p><strong>build: add Capacitor Android build configuration</strong></p><p>핵심 및 커뮤니티 플러그인 Android 빌드 설정 추가</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title"><code>a528c0a</code> — build: add Capacitor Android build configuration</div>
+    <div class="info-desc">핵심 및 커뮤니티 플러그인 Android 빌드 설정 추가</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>6db7e26</code></div>
-    <div class="compare-body"><p><strong>feat: Add YOLO parsing utility and reporting API</strong></p><p>YOLO 결과 파싱 유틸리티 및 Vision Camera 연동 API 구축</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>6db7e26</code> — feat: Add YOLO parsing utility and reporting API</div>
+    <div class="info-desc">YOLO 결과 파싱 유틸리티 및 Vision Camera 연동 API 구축</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>28d247f</code></div>
-    <div class="compare-body"><p><strong>feat: Introduce hazard reporting system</strong></p><p>실시간 객체 탐지 기반 S3 이미지 업로드 및 신고 관리 기능</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>28d247f</code> — feat: Introduce hazard reporting system</div>
+    <div class="info-desc">실시간 객체 탐지 기반 S3 이미지 업로드 및 신고 관리 기능</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>e1382e2</code></div>
-    <div class="compare-body"><p><strong>feat: Initialize Capacitor Android project with TFLite</strong></p><p>Web API 기반 TFLite 연동 및 앱 구조 초기화</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>e1382e2</code> — feat: Initialize Capacitor Android project with TFLite</div>
+    <div class="info-desc">Web API 기반 TFLite 연동 및 앱 구조 초기화</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>52c27f6</code></div>
-    <div class="compare-body"><p><strong>feat: Add initial user and admin UI structures</strong></p><p>API 연동 및 환경 설정, UI 기본 구조 구축</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>52c27f6</code> — feat: Add initial user and admin UI structures</div>
+    <div class="info-desc">API 연동 및 환경 설정, UI 기본 구조 구축</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>0f3375b</code></div>
-    <div class="compare-body"><p><strong>feat: Integrate TMAP API for navigation</strong></p><p>경로 계산, 장소 검색 및 디버그용 맵(Leaflet) 통합</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>0f3375b</code> — feat: Integrate TMAP API for navigation</div>
+    <div class="info-desc">경로 계산, 장소 검색 및 디버그용 맵(Leaflet) 통합</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>7346e82</code></div>
-    <div class="compare-body"><p><strong>feat: Implement real-time pedestrian navigation</strong></p><p>GPS/나침반/TTS 통합 백엔드 경로 안내 화면 구현</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>7346e82</code> — feat: Implement real-time pedestrian navigation</div>
+    <div class="info-desc">GPS/나침반/TTS 통합 백엔드 경로 안내 화면 구현</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>6644a0f</code></div>
-    <div class="compare-body"><p><strong>chore: Add package-lock.json</strong></p><p>의존성 잠금 및 환경 일관성 확보</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>6644a0f</code> — chore: Add package-lock.json</div>
+    <div class="info-desc">의존성 잠금 및 환경 일관성 확보</div>
   </div>
 </div>
 

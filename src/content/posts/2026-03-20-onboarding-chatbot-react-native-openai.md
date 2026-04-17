@@ -106,30 +106,30 @@ ZeroWorks 헤더
 
 12개의 FAQ가 6개 카테고리로 분류되어 있다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">근무</div>
-    <div class="compare-body"><p>유연근무제 운영 방식, 근무 시간</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">근무</div>
+    <div class="info-desc">유연근무제 운영 방식, 근무 시간</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">인사</div>
-    <div class="compare-body"><p>승진 체계, 조직도</p></div>
+  <div class="info-item">
+    <div class="info-title">인사</div>
+    <div class="info-desc">승진 체계, 조직도</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">복지</div>
-    <div class="compare-body"><p>건강검진, 교육 지원, 차량 할인</p></div>
+  <div class="info-item">
+    <div class="info-title">복지</div>
+    <div class="info-desc">건강검진, 교육 지원, 차량 할인</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">휴가</div>
-    <div class="compare-body"><p>연차 정책, 공휴일</p></div>
+  <div class="info-item">
+    <div class="info-title">휴가</div>
+    <div class="info-desc">연차 정책, 공휴일</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">교육</div>
-    <div class="compare-body"><p>사내 교육, 외국어 강좌</p></div>
+  <div class="info-item">
+    <div class="info-title">교육</div>
+    <div class="info-desc">사내 교육, 외국어 강좌</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">온보딩</div>
-    <div class="compare-body"><p>첫날 절차</p></div>
+  <div class="info-item">
+    <div class="info-title">온보딩</div>
+    <div class="info-desc">첫날 절차</div>
   </div>
 </div>
 

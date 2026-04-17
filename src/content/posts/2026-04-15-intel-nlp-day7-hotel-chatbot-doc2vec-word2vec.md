@@ -249,34 +249,22 @@ for i in range(20000):
 
 학습된 W1을 각 단어의 2D 좌표로 사용해 시각화했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">boy / girl</div>
-    <div class="compare-body">
-      <p>boy: (0.04, -1.85)</p>
-      <p>girl: (0.04, -1.85)</p>
-    </div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">boy / girl</div>
+    <div class="stat-value">(0.04, -1.85) / (0.04, -1.85)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">man / woman</div>
-    <div class="compare-body">
-      <p>man: (2.29, -2.54)</p>
-      <p>woman: (3.50, -3.06)</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">man / woman</div>
+    <div class="stat-value">(2.29, -2.54) / (3.50, -3.06)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">king / queen</div>
-    <div class="compare-body">
-      <p>king: (1.33, -2.04)</p>
-      <p>queen: (1.74, -2.05)</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">king / queen</div>
+    <div class="stat-value">(1.33, -2.04) / (1.74, -2.05)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">prince / princess</div>
-    <div class="compare-body">
-      <p>prince: (-1.90, -3.52)</p>
-      <p>princess: (-1.83, -3.46)</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">prince / princess</div>
+    <div class="stat-value">(-1.90, -3.52) / (-1.83, -3.46)</div>
   </div>
 </div>
 

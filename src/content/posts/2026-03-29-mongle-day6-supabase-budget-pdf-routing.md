@@ -35,18 +35,18 @@ Day 1 기획에서 주말(3/28~3/29)은 **개발 불가**로 못 박아뒀다. �
 
 ## 오후 2시: PR 머지와 팀 작업 확인
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">PR #69 · 14:31</div>
-    <div class="compare-body"><p>vendors 데이터 Supabase 연동 (팀원 B)</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">PR #69 · 14:31</div>
+    <div class="info-desc">vendors 데이터 Supabase 연동 (팀원 B)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #70 · 14:44</div>
-    <div class="compare-body"><p>상담 신청 및 알림 시스템 (팀원 A)</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #70 · 14:44</div>
+    <div class="info-desc">상담 신청 및 알림 시스템 (팀원 A)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #71 · 16:23</div>
-    <div class="compare-body"><p>플래너 계정 알림 Supabase 연동 (팀원 A)</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #71 · 16:23</div>
+    <div class="info-desc">플래너 계정 알림 Supabase 연동 (팀원 A)</div>
   </div>
 </div>
 

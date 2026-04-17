@@ -85,41 +85,26 @@ class ShiftProvider extends ChangeNotifier {
 
 커밋 히스토리를 phase 단위로 묶으면 흐름이 보인다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Phase 1</div>
-    <div class="compare-body">
-      <p><strong>시기:</strong> 3/5 초반</p>
-      <p><strong>핵심 작업:</strong> 앱 뼈대, 초기 화면 구조, 온보딩</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">Phase 1 — 3/5 초반</div>
+    <div class="info-desc">앱 뼈대, 초기 화면 구조, 온보딩</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Phase 2</div>
-    <div class="compare-body">
-      <p><strong>시기:</strong> 3/5 중반</p>
-      <p><strong>핵심 작업:</strong> 핵심 계산 로직, Provider 구조, 단위 테스트</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">Phase 2 — 3/5 중반</div>
+    <div class="info-desc">핵심 계산 로직, Provider 구조, 단위 테스트</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Phase 3</div>
-    <div class="compare-body">
-      <p><strong>시기:</strong> 3/5 후반</p>
-      <p><strong>핵심 작업:</strong> 프리미엄 구독, 통계 페이지, PDF export</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">Phase 3 — 3/5 후반</div>
+    <div class="info-desc">프리미엄 구독, 통계 페이지, PDF export</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Phase 4</div>
-    <div class="compare-body">
-      <p><strong>시기:</strong> 3/6~10</p>
-      <p><strong>핵심 작업:</strong> Google Drive 백업, CSV export, 알림, 패턴 생성기</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">Phase 4 — 3/6~10</div>
+    <div class="info-desc">Google Drive 백업, CSV export, 알림, 패턴 생성기</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Phase 5</div>
-    <div class="compare-body">
-      <p><strong>시기:</strong> 3/17~19</p>
-      <p><strong>핵심 작업:</strong> 배포 설정, 아이콘, 로딩 수정, 마감 폴리싱</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">Phase 5 — 3/17~19</div>
+    <div class="info-desc">배포 설정, 아이콘, 로딩 수정, 마감 폴리싱</div>
   </div>
 </div>
 

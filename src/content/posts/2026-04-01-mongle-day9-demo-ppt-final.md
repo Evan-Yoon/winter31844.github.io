@@ -71,30 +71,30 @@ PPT는 총 45슬라이드, 5개 챕터로 구성했다.
 
 이게 지금 웨딩 시장의 현실이다. 데이터와 함께 6가지 문제로 정리했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">웨딩업체 가격 비공개</div>
-    <div class="compare-body"><p>85%가 가격 정보 부족 경험</p></div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">웨딩업체 가격 비공개</div>
+    <div class="stat-value">85% 경험</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">스드메 불투명성</div>
-    <div class="compare-body"><p>83%가 예상치 못한 추가 비용 발생</p></div>
+  <div class="stat-card">
+    <div class="stat-label">스드메 불투명성</div>
+    <div class="stat-value">83% 추가 비용</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">직접 상담 필요</div>
-    <div class="compare-body"><p>웨딩홀 90% 이상 방문 상담 시에만 가격 공개</p></div>
+  <div class="stat-card">
+    <div class="stat-label">직접 상담 필요</div>
+    <div class="stat-value">웨딩홀 90%+</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">사람마다 다른 가격</div>
-    <div class="compare-body"><p>동일 서비스에서 최대 2~3배 차이</p></div>
+  <div class="stat-card">
+    <div class="stat-label">사람마다 다른 가격</div>
+    <div class="stat-value">최대 2~3배 차이</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">검색 번거로움</div>
-    <div class="compare-body"><p>75%가 여러 플랫폼 검색 필요 경험</p></div>
+  <div class="stat-card">
+    <div class="stat-label">검색 번거로움</div>
+    <div class="stat-value">75% 경험</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">플래너 추천 제휴 중심</div>
-    <div class="compare-body"><p>60%가 제휴 중심 추천 경험</p></div>
+  <div class="stat-card">
+    <div class="stat-label">플래너 추천 제휴 중심</div>
+    <div class="stat-value">60% 경험</div>
   </div>
 </div>
 
@@ -108,30 +108,30 @@ PPT는 총 45슬라이드, 5개 챕터로 구성했다.
 
 Mongle을 기존 경쟁 서비스(메링, 웨딩플로우)와 기능 비교표로 나란히 놨다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">AI 추천</div>
-    <div class="compare-body"><p><strong>메링:</strong> 부분 &nbsp;|&nbsp; <strong>웨딩플로우:</strong> 부분 &nbsp;|&nbsp; <strong>Mongle:</strong> 완벽</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">AI 추천</div>
+    <div class="info-desc">메링: 부분 &nbsp;|&nbsp; 웨딩플로우: 부분 &nbsp;|&nbsp; Mongle: 완벽</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">견적 분석</div>
-    <div class="compare-body"><p><strong>메링:</strong> 없음 &nbsp;|&nbsp; <strong>웨딩플로우:</strong> 기본 &nbsp;|&nbsp; <strong>Mongle:</strong> 심층</p></div>
+  <div class="info-item">
+    <div class="info-title">견적 분석</div>
+    <div class="info-desc">메링: 없음 &nbsp;|&nbsp; 웨딩플로우: 기본 &nbsp;|&nbsp; Mongle: 심층</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">예산 최적화</div>
-    <div class="compare-body"><p><strong>메링:</strong> 없음 &nbsp;|&nbsp; <strong>웨딩플로우:</strong> 기본 &nbsp;|&nbsp; <strong>Mongle:</strong> AI</p></div>
+  <div class="info-item">
+    <div class="info-title">예산 최적화</div>
+    <div class="info-desc">메링: 없음 &nbsp;|&nbsp; 웨딩플로우: 기본 &nbsp;|&nbsp; Mongle: AI</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">일정 관리</div>
-    <div class="compare-body"><p><strong>메링:</strong> 있음 &nbsp;|&nbsp; <strong>웨딩플로우:</strong> 있음 &nbsp;|&nbsp; <strong>Mongle:</strong> 스마트</p></div>
+  <div class="info-item">
+    <div class="info-title">일정 관리</div>
+    <div class="info-desc">메링: 있음 &nbsp;|&nbsp; 웨딩플로우: 있음 &nbsp;|&nbsp; Mongle: 스마트</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">채팅</div>
-    <div class="compare-body"><p><strong>메링:</strong> 있음 &nbsp;|&nbsp; <strong>웨딩플로우:</strong> 있음 &nbsp;|&nbsp; <strong>Mongle:</strong> AI</p></div>
+  <div class="info-item">
+    <div class="info-title">채팅</div>
+    <div class="info-desc">메링: 있음 &nbsp;|&nbsp; 웨딩플로우: 있음 &nbsp;|&nbsp; Mongle: AI</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">가격 투명성</div>
-    <div class="compare-body"><p><strong>메링:</strong> 낮음 &nbsp;|&nbsp; <strong>웨딩플로우:</strong> 중간 &nbsp;|&nbsp; <strong>Mongle:</strong> 높음</p></div>
+  <div class="info-item">
+    <div class="info-title">가격 투명성</div>
+    <div class="info-desc">메링: 낮음 &nbsp;|&nbsp; 웨딩플로우: 중간 &nbsp;|&nbsp; Mongle: 높음</div>
   </div>
 </div>
 
@@ -143,22 +143,22 @@ AI 추천과 예산 최적화에서 기존 서비스 대비 명확한 차별점�
 
 ### 팀 구성
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">윤지현 (Evan)</div>
-    <div class="compare-body"><p><strong>역할:</strong> PM / AI Lead</p><p><strong>기여:</strong> AI 기능, DB 연동, Web UI</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">윤지현 (Evan) — PM / AI Lead</div>
+    <div class="info-desc">AI 기능, DB 연동, Web UI</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">정서영</div>
-    <div class="compare-body"><p><strong>역할:</strong> UI/UX</p><p><strong>기여:</strong> 커플 화면, 추천 화면, 예산 화면 디자인, DB 연동</p></div>
+  <div class="info-item">
+    <div class="info-title">정서영 — UI/UX</div>
+    <div class="info-desc">커플 화면, 추천 화면, 예산 화면 디자인, DB 연동</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">이건영</div>
-    <div class="compare-body"><p><strong>역할:</strong> FE</p><p><strong>기여:</strong> 업체 상세, 채팅창, 로그인/회원가입, 디버깅</p></div>
+  <div class="info-item">
+    <div class="info-title">이건영 — FE</div>
+    <div class="info-desc">업체 상세, 채팅창, 로그인/회원가입, 디버깅</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">강주영</div>
-    <div class="compare-body"><p><strong>역할:</strong> BE</p><p><strong>기여:</strong> DB 설계, API 개발, Web UI, DB 연동</p></div>
+  <div class="info-item">
+    <div class="info-title">강주영 — BE</div>
+    <div class="info-desc">DB 설계, API 개발, Web UI, DB 연동</div>
   </div>
 </div>
 
@@ -258,29 +258,30 @@ PPT에 넣은 주요 이슈들.
 
 팀원별 측정 기준도 수치화했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">윤지현 (PM/AI)</div>
-    <div class="compare-body">
-      <p><strong>AI 정확도 98%</strong> — 테스트 케이스 기반 측정</p>
-      <p><strong>DB 연동</strong> — 실시간 동기화 동작 확인</p>
-      <p><strong>일정 준수 100%</strong> — 마일스톤 기준</p>
-    </div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">윤지현 — AI 정확도</div>
+    <div class="stat-value">98%</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">정서영 (UI/UX)</div>
-    <div class="compare-body"><p><strong>사용성 4.8/5</strong> — 내부 피드백</p></div>
+  <div class="stat-card">
+    <div class="stat-label">윤지현 — 일정 준수</div>
+    <div class="stat-value">100%</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">이건영 (FE)</div>
-    <div class="compare-body">
-      <p><strong>응답속도 0.2s</strong> — 로컬 측정</p>
-      <p><strong>버그 해결률 95%</strong> — 이슈 기준</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">정서영 — 사용성</div>
+    <div class="stat-value">4.8 / 5</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">강주영 (BE)</div>
-    <div class="compare-body"><p><strong>API 안정성 99%</strong> — 테스트 기준</p></div>
+  <div class="stat-card">
+    <div class="stat-label">이건영 — 응답속도</div>
+    <div class="stat-value">0.2s</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">이건영 — 버그 해결률</div>
+    <div class="stat-value">95%</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">강주영 — API 안정성</div>
+    <div class="stat-value">99%</div>
   </div>
 </div>
 

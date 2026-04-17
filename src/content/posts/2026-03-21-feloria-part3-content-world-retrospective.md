@@ -223,26 +223,26 @@ SOLARION: {
 
 현재 맵별 배치 원칙:
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Starwhisk Village 주변</div>
-    <div class="compare-body"><p><strong>크리처:</strong> Thistlekit, Snagpuss, Mosslynx</p><p><strong>기준:</strong> 초기, 약함</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">Starwhisk Village 주변 — 초기, 약함</div>
+    <div class="info-desc">Thistlekit, Snagpuss, Mosslynx</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Greenpaw Forest</div>
-    <div class="compare-body"><p><strong>크리처:</strong> Fernclaw, Thornkit, Barkpelt, Ripplepaw(희귀)</p><p><strong>기준:</strong> 숲/풀 타입 중심</p></div>
+  <div class="info-item">
+    <div class="info-title">Greenpaw Forest — 숲/풀 타입 중심</div>
+    <div class="info-desc">Fernclaw, Thornkit, Barkpelt, Ripplepaw(희귀)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Mosslight Path</div>
-    <div class="compare-body"><p><strong>크리처:</strong> Thornmane, Vinefang, Sparkpaw, Pebblepaw</p><p><strong>기준:</strong> 중간 강도</p></div>
+  <div class="info-item">
+    <div class="info-title">Mosslight Path — 중간 강도</div>
+    <div class="info-desc">Thornmane, Vinefang, Sparkpaw, Pebblepaw</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Ancient Forest</div>
-    <div class="compare-body"><p><strong>크리처:</strong> Verdantlynx, Umbrafang, Mistlynx, Stormkit</p><p><strong>기준:</strong> 강함</p></div>
+  <div class="info-item">
+    <div class="info-title">Ancient Forest — 강함</div>
+    <div class="info-desc">Verdantlynx, Umbrafang, Mistlynx, Stormkit</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Mosslight Shrine</div>
-    <div class="compare-body"><p><strong>크리처:</strong> 랜덤 조우 없음 (보스만)</p></div>
+  <div class="info-item">
+    <div class="info-title">Mosslight Shrine — 보스 전용</div>
+    <div class="info-desc">랜덤 조우 없음 (보스만)</div>
   </div>
 </div>
 
@@ -435,54 +435,66 @@ collision 레이어는 렌더링되지 않는다. 이 규칙은 처음부터 있
 
 **시스템 (동작하는 것):**
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">탑다운 월드 탐험</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+<div class="task-list">
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">탑다운 월드 탐험</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">턴제 전투 (야생 + 트레이너)</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">턴제 전투 (야생 + 트레이너)</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">포획 / 파티 / 도감</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">포획 / 파티 / 도감</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">레벨업 / 진화</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">레벨업 / 진화</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">상점 / 인벤토리 / 골드</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">상점 / 인벤토리 / 골드</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">NPC 대화 + 퀘스트</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">NPC 대화 + 퀘스트</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">저장 / 불러오기</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">저장 / 불러오기</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">타입 상성</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">타입 상성</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">스킬 애니메이션</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">스킬 애니메이션</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">오디오 시스템</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">오디오 시스템</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">보스전 + 컷신</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">보스전 + 컷신</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">전설 복선 시스템</div>
-    <div class="compare-body"><p>✓ 구현 완료</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">전설 복선 시스템</div>
+    <div class="task-prompt">구현 완료</div>
   </div>
 </div>
 

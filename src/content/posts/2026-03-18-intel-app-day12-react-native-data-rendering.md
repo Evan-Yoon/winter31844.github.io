@@ -63,30 +63,30 @@ function UserList() {
 }
 ```
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">data</div>
-    <div class="compare-body"><p>렌더링할 배열</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">data</div>
+    <div class="info-desc">렌더링할 배열</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">keyExtractor</div>
-    <div class="compare-body"><p>각 항목의 고유 key</p></div>
+  <div class="info-item">
+    <div class="info-title">keyExtractor</div>
+    <div class="info-desc">각 항목의 고유 key</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">renderItem</div>
-    <div class="compare-body"><p>각 항목을 그리는 함수</p></div>
+  <div class="info-item">
+    <div class="info-title">renderItem</div>
+    <div class="info-desc">각 항목을 그리는 함수</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">ItemSeparatorComponent</div>
-    <div class="compare-body"><p>항목 사이의 구분선</p></div>
+  <div class="info-item">
+    <div class="info-title">ItemSeparatorComponent</div>
+    <div class="info-desc">항목 사이의 구분선</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">ListEmptyComponent</div>
-    <div class="compare-body"><p>data가 빈 배열일 때 표시</p></div>
+  <div class="info-item">
+    <div class="info-title">ListEmptyComponent</div>
+    <div class="info-desc">data가 빈 배열일 때 표시</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">ListHeaderComponent</div>
-    <div class="compare-body"><p>리스트 상단 고정 헤더</p></div>
+  <div class="info-item">
+    <div class="info-title">ListHeaderComponent</div>
+    <div class="info-desc">리스트 상단 고정 헤더</div>
   </div>
 </div>
 

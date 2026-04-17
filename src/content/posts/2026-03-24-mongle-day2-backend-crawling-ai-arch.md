@@ -247,26 +247,26 @@ upload_to_supabase.py →  Supabase 업로드 스크립트
 
 이날 Evan-Yoon이 머지한 PR만 5개다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">PR #20 · 13:27</div>
-    <div class="compare-body"><p>메인 화면 UI</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">PR #20 · 13:27</div>
+    <div class="info-desc">메인 화면 UI</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #21 · 16:00</div>
-    <div class="compare-body"><p>회원가입</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #21 · 16:00</div>
+    <div class="info-desc">회원가입</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #22 · 16:15</div>
-    <div class="compare-body"><p>메인 화면 UI (수정)</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #22 · 16:15</div>
+    <div class="info-desc">메인 화면 UI (수정)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #24 · 17:11</div>
-    <div class="compare-body"><p>AI 챗봇 백엔드</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #24 · 17:11</div>
+    <div class="info-desc">AI 챗봇 백엔드</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #26 · 17:19</div>
-    <div class="compare-body"><p>타임라인 UI</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #26 · 17:19</div>
+    <div class="info-desc">타임라인 UI</div>
   </div>
 </div>
 

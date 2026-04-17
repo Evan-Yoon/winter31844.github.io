@@ -196,27 +196,18 @@ def greeting(sentence):
 
 ## 핵심 정리
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">TF-IDF + 로지스틱 회귀</div>
-    <div class="compare-body">
-      <p><strong>문제 유형:</strong> 고정된 클래스 분류 (감정 분석)</p>
-      <p><strong>핵심 아이디어:</strong> 벡터화 후 선형 분류</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">TF-IDF + 로지스틱 회귀</div>
+    <div class="info-desc">고정된 클래스 분류 (감정 분석) — 벡터화 후 선형 분류</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">BoW + 신경망</div>
-    <div class="compare-body">
-      <p><strong>문제 유형:</strong> 의도 분류 (챗봇)</p>
-      <p><strong>핵심 아이디어:</strong> 이진 벡터 → 확률 분류</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">BoW + 신경망</div>
+    <div class="info-desc">의도 분류 (챗봇) — 이진 벡터 → 확률 분류</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">TF-IDF + 코사인 유사도</div>
-    <div class="compare-body">
-      <p><strong>문제 유형:</strong> 검색형 Q&A</p>
-      <p><strong>핵심 아이디어:</strong> 분류 없이 가장 유사한 문장 검색</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">TF-IDF + 코사인 유사도</div>
+    <div class="info-desc">검색형 Q&A — 분류 없이 가장 유사한 문장 검색</div>
   </div>
 </div>
 

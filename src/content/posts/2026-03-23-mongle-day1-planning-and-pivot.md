@@ -91,22 +91,22 @@ toc: true
 
 MVP 범위를 잡기 위해 MoSCoW 기법으로 기능 우선순위를 정리했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Must</div>
-    <div class="compare-body"><p>일정 관리, 예산 관리, AI 챗봇, 업체 리스트</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">Must</div>
+    <div class="info-desc">일정 관리, 예산 관리, AI 챗봇, 업체 리스트</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Should</div>
-    <div class="compare-body"><p>로그인/회원가입, 플래너 화면, 업체 추천, 리마인드 알림, 채팅</p></div>
+  <div class="info-item">
+    <div class="info-title">Should</div>
+    <div class="info-desc">로그인/회원가입, 플래너 화면, 업체 추천, 리마인드 알림, 채팅</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Could</div>
-    <div class="compare-body"><p>견적 분석·문서화</p></div>
+  <div class="info-item">
+    <div class="info-title">Could</div>
+    <div class="info-desc">견적 분석·문서화</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Won't</div>
-    <div class="compare-body"><p>청첩장 기능</p></div>
+  <div class="info-item">
+    <div class="info-title">Won't</div>
+    <div class="info-desc">청첩장 기능</div>
   </div>
 </div>
 
@@ -118,18 +118,18 @@ Must 기능 데드라인을 **3월 26일(목)**으로 설정했다. 주말(3/28~
 
 기존 서비스들이 해결 못 하는 지점을 먼저 정리했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">웨딩북</div>
-    <div class="compare-body"><p><strong>강점:</strong> 업체 DB 풍부, 후기 많음</p><p><strong>한계:</strong> 플래너↔커플 협업 기능 없음, AI 없음</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">웨딩북</div>
+    <div class="info-desc"><strong>강점:</strong> 업체 DB 풍부, 후기 많음 &nbsp;|&nbsp; <strong>한계:</strong> 플래너↔커플 협업 기능 없음, AI 없음</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">허니문리스트</div>
-    <div class="compare-body"><p><strong>강점:</strong> 준비 단계 안내 명확</p><p><strong>한계:</strong> 플래너 연동 없음, 실시간 공유 불가</p></div>
+  <div class="info-item">
+    <div class="info-title">허니문리스트</div>
+    <div class="info-desc"><strong>강점:</strong> 준비 단계 안내 명확 &nbsp;|&nbsp; <strong>한계:</strong> 플래너 연동 없음, 실시간 공유 불가</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">카카오톡+스프레드시트</div>
-    <div class="compare-body"><p><strong>강점:</strong> 범용성 높음, 익숙한 UI</p><p><strong>한계:</strong> 정보 유실 잦음, 자동화·AI 전무</p></div>
+  <div class="info-item">
+    <div class="info-title">카카오톡+스프레드시트</div>
+    <div class="info-desc"><strong>강점:</strong> 범용성 높음, 익숙한 UI &nbsp;|&nbsp; <strong>한계:</strong> 정보 유실 잦음, 자동화·AI 전무</div>
   </div>
 </div>
 
@@ -139,22 +139,22 @@ Mongle의 차별점은 하나다. **일정·비용·챗봇·업체를 하나로 
 
 ## 4인 역할 분담
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">윤지현 (PM)</div>
-    <div class="compare-body"><p><strong>역할:</strong> PM · 챗봇 AI · 발표</p><p>킥오프, PR 리뷰, 데일리 싱크, 챗봇 UI 개발, 발표 직접 진행</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">윤지현 (PM) — PM · 챗봇 AI · 발표</div>
+    <div class="info-desc">킥오프, PR 리뷰, 데일리 싱크, 챗봇 UI 개발, 발표 직접 진행</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">정서영</div>
-    <div class="compare-body"><p><strong>역할:</strong> Frontend</p><p>로그인 화면, 플래너 소개, 업체 탐색 화면, FE 통합</p></div>
+  <div class="info-item">
+    <div class="info-title">정서영 — Frontend</div>
+    <div class="info-desc">로그인 화면, 플래너 소개, 업체 탐색 화면, FE 통합</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">김주영</div>
-    <div class="compare-body"><p><strong>역할:</strong> Backend · AI</p><p>DB 설계, AI 챗봇 백엔드(LLM 연동), 예산관리 API</p></div>
+  <div class="info-item">
+    <div class="info-title">김주영 — Backend · AI</div>
+    <div class="info-desc">DB 설계, AI 챗봇 백엔드(LLM 연동), 예산관리 API</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">이건영</div>
-    <div class="compare-body"><p><strong>역할:</strong> Frontend</p><p>신혼부부 배너·타임라인, 플래너 대시보드, 비용·일정 UI</p></div>
+  <div class="info-item">
+    <div class="info-title">이건영 — Frontend</div>
+    <div class="info-desc">신혼부부 배너·타임라인, 플래너 대시보드, 비용·일정 UI</div>
   </div>
 </div>
 
@@ -164,22 +164,22 @@ Mongle의 차별점은 하나다. **일정·비용·챗봇·업체를 하나로 
 
 ## 예상 리스크
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">주말 제외로 개발 일정 부족 · 높음</div>
-    <div class="compare-body"><p>Must 기능 우선 완성 후 Should 순차 추가</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">주말 제외로 개발 일정 부족 — 위험도: 높음</div>
+    <div class="info-desc">Must 기능 우선 완성 후 Should 순차 추가</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">AI 챗봇 응답 품질 미흡 · 중간</div>
-    <div class="compare-body"><p>웨딩 특화 시스템 프롬프트 설계, fallback 메시지 준비</p></div>
+  <div class="info-item">
+    <div class="info-title">AI 챗봇 응답 품질 미흡 — 위험도: 중간</div>
+    <div class="info-desc">웨딩 특화 시스템 프롬프트 설계, fallback 메시지 준비</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">FE·BE 연동 지연 · 중간</div>
-    <div class="compare-body"><p>API 명세 3/24까지 사전 확정, 더미 데이터로 FE 선행 개발</p></div>
+  <div class="info-item">
+    <div class="info-title">FE·BE 연동 지연 — 위험도: 중간</div>
+    <div class="info-desc">API 명세 3/24까지 사전 확정, 더미 데이터로 FE 선행 개발</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">LLM API 비용 초과 · 낮음</div>
-    <div class="compare-body"><p>개발 중 무료 티어 활용, 데모용 캐싱 응답 준비</p></div>
+  <div class="info-item">
+    <div class="info-title">LLM API 비용 초과 — 위험도: 낮음</div>
+    <div class="info-desc">개발 중 무료 티어 활용, 데모용 캐싱 응답 준비</div>
   </div>
 </div>
 
@@ -193,18 +193,18 @@ MVP를 만들면서도 "이게 실제 서비스가 된다면?" 을 함께 고민
 
 **수익 구조: Freemium + Subscription + 업체 입점 수수료**
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">플래너 프리미엄 구독 · 월 29,900원</div>
-    <div class="compare-body"><p>다수 커플 관리, 고급 대시보드, 잔금 알림 무제한</p></div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">플래너 프리미엄 구독</div>
+    <div class="stat-value">월 29,900원</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">업체 프리미엄 입점 · 월 9,900원</div>
-    <div class="compare-body"><p>추천 배지, 상단 노출, AI 챗봇 추천 연동</p></div>
+  <div class="stat-card">
+    <div class="stat-label">업체 프리미엄 입점</div>
+    <div class="stat-value">월 9,900원</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">예비부부 프리미엄 · 월 4,900원</div>
-    <div class="compare-body"><p>AI 챗봇 무제한, 견적서 PDF, 서류 보관함 확장</p></div>
+  <div class="stat-card">
+    <div class="stat-label">예비부부 프리미엄</div>
+    <div class="stat-value">월 4,900원</div>
   </div>
 </div>
 

@@ -222,38 +222,38 @@ Expo Push API가 응답했는지 → 200 OK가 왔다.
 
 알림 작업을 정리하고 팀원들 PR 처리로 전환했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">PR #75 · 10:23</div>
-    <div class="compare-body"><p>마이페이지 버그 수정</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">PR #75 · 10:23</div>
+    <div class="info-desc">마이페이지 버그 수정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #76 · 10:30</div>
-    <div class="compare-body"><p>플래너 채팅 창 및 하단 내비게이션</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #76 · 10:30</div>
+    <div class="info-desc">플래너 채팅 창 및 하단 내비게이션</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #78 · 10:54</div>
-    <div class="compare-body"><p>메인 화면 업체 리스트 버그 수정</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #78 · 10:54</div>
+    <div class="info-desc">메인 화면 업체 리스트 버그 수정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #79 · 11:53</div>
-    <div class="compare-body"><p>커플 채팅 Supabase 연동</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #79 · 11:53</div>
+    <div class="info-desc">커플 채팅 Supabase 연동</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #81 · 15:07</div>
-    <div class="compare-body"><p>커플 채팅 초대 기능</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #81 · 15:07</div>
+    <div class="info-desc">커플 채팅 초대 기능</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #83 · 16:11</div>
-    <div class="compare-body"><p>채팅 초대 버그 수정</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #83 · 16:11</div>
+    <div class="info-desc">채팅 초대 버그 수정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #85 · 16:35</div>
-    <div class="compare-body"><p>채팅 그룹 채팅 버그 수정</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #85 · 16:35</div>
+    <div class="info-desc">채팅 그룹 채팅 버그 수정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #86 · 17:32</div>
-    <div class="compare-body"><p>그룹 채팅 테스트 완료</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #86 · 17:32</div>
+    <div class="info-desc">그룹 채팅 테스트 완료</div>
   </div>
 </div>
 

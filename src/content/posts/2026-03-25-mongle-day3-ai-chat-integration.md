@@ -48,18 +48,18 @@ toc: true
 
 이 시간대에 Evan-Yoon이 머지한 PR만 3개다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">PR #30 · 11:31</div>
-    <div class="compare-body"><p>타임라인 UI</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">PR #30 · 11:31</div>
+    <div class="info-desc">타임라인 UI</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #32 · 11:53</div>
-    <div class="compare-body"><p>플래너 프로필 UI</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #32 · 11:53</div>
+    <div class="info-desc">플래너 프로필 UI</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #33 · 12:23</div>
-    <div class="compare-body"><p>일정 대시보드 UI (달력 + 잔금 일정)</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #33 · 12:23</div>
+    <div class="info-desc">일정 대시보드 UI (달력 + 잔금 일정)</div>
   </div>
 </div>
 
@@ -279,18 +279,18 @@ except Exception as e:
 
 이날 오후 머지한 PR.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">PR #35 · 15:30</div>
-    <div class="compare-body"><p>타임라인 UI 완성</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">PR #35 · 15:30</div>
+    <div class="info-desc">타임라인 UI 완성</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #36 · 16:20</div>
-    <div class="compare-body"><p>업체 리스트 UI</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #36 · 16:20</div>
+    <div class="info-desc">업체 리스트 UI</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #38 · 16:49</div>
-    <div class="compare-body"><p>로그인·회원가입 화면 UI</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #38 · 16:49</div>
+    <div class="info-desc">로그인·회원가입 화면 UI</div>
   </div>
 </div>
 

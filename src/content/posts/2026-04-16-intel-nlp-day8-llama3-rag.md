@@ -137,26 +137,26 @@ text_generator = pipeline(
 
 주요 Pipeline 타입:
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">text-generation</div>
-    <div class="compare-body"><p>텍스트 생성, 이어쓰기</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">text-generation</div>
+    <div class="info-desc">텍스트 생성, 이어쓰기</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">text-classification</div>
-    <div class="compare-body"><p>감정 분석, 카테고리 분류</p></div>
+  <div class="info-item">
+    <div class="info-title">text-classification</div>
+    <div class="info-desc">감정 분석, 카테고리 분류</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">ner</div>
-    <div class="compare-body"><p>개체명 인식</p></div>
+  <div class="info-item">
+    <div class="info-title">ner</div>
+    <div class="info-desc">개체명 인식</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">question-answering</div>
-    <div class="compare-body"><p>컨텍스트 기반 Q&A</p></div>
+  <div class="info-item">
+    <div class="info-title">question-answering</div>
+    <div class="info-desc">컨텍스트 기반 Q&A</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">summarization</div>
-    <div class="compare-body"><p>요약</p></div>
+  <div class="info-item">
+    <div class="info-title">summarization</div>
+    <div class="info-desc">요약</div>
   </div>
 </div>
 
@@ -300,27 +300,18 @@ splitter = RecursiveCharacterTextSplitter(
 **이게 뭔지**: 텍스트 청크를 고정 크기의 숫자 벡터로 변환하는 작업.  
 **왜 필요한가**: 벡터 간 코사인 유사도나 거리를 계산해서 "의미적으로 가까운 청크"를 검색할 수 있다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">OpenAI Embeddings</div>
-    <div class="compare-body">
-      <p><strong>차원:</strong> 1536</p>
-      <p>유료, 한/영 모두 지원</p>
-    </div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">OpenAI Embeddings</div>
+    <div class="stat-value">1536차원 — 유료, 한/영 모두 지원</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">BAAI/bge-m3</div>
-    <div class="compare-body">
-      <p><strong>차원:</strong> 1024</p>
-      <p>무료, 한/영 모두 지원</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">BAAI/bge-m3</div>
+    <div class="stat-value">1024차원 — 무료, 한/영 모두 지원</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">jhgan/ko-sbert-nli</div>
-    <div class="compare-body">
-      <p><strong>차원:</strong> 768</p>
-      <p>무료, 한국어 특화</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">jhgan/ko-sbert-nli</div>
+    <div class="stat-value">768차원 — 무료, 한국어 특화</div>
   </div>
 </div>
 
@@ -406,34 +397,22 @@ MMR(Maximal Marginal Relevance): 이미 선택된 결과와 너무 비슷한 문
 
 검색된 청크를 LLM에 어떻게 전달할지에 따라 4가지 방식이 있다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Stuff</div>
-    <div class="compare-body">
-      <p><strong>방식:</strong> 청크 전체를 하나로 합쳐 전달</p>
-      <p><strong>적합한 상황:</strong> 청크가 적고 토큰 한계 여유 있을 때</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">Stuff</div>
+    <div class="info-desc">청크 전체를 하나로 합쳐 전달 — 청크가 적고 토큰 한계 여유 있을 때</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Map-Reduce</div>
-    <div class="compare-body">
-      <p><strong>방식:</strong> 각 청크 개별 처리 후 결과 합산</p>
-      <p><strong>적합한 상황:</strong> 대용량 문서셋</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">Map-Reduce</div>
+    <div class="info-desc">각 청크 개별 처리 후 결과 합산 — 대용량 문서셋</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Refine</div>
-    <div class="compare-body">
-      <p><strong>방식:</strong> 첫 청크로 초안 작성, 이후 청크로 순차 개선</p>
-      <p><strong>적합한 상황:</strong> 품질 중요, 점진적 개선</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">Refine</div>
+    <div class="info-desc">첫 청크로 초안 작성, 이후 청크로 순차 개선 — 품질 중요, 점진적 개선</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Map-Retrieve</div>
-    <div class="compare-body">
-      <p><strong>방식:</strong> 쿼리를 섹션별로 분리해 각 관련 부분 검색</p>
-      <p><strong>적합한 상황:</strong> 복합 질문</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">Map-Retrieve</div>
+    <div class="info-desc">쿼리를 섹션별로 분리해 각 관련 부분 검색 — 복합 질문</div>
   </div>
 </div>
 

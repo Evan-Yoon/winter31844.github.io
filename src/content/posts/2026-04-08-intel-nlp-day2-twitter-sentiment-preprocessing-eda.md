@@ -45,18 +45,18 @@ merge = train._append(test, ignore_index=True, sort=True)
 print(f"Total tweets: {len(merge)}")  # 49,159개
 ```
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">id</div>
-    <div class="compare-body"><p>트윗 고유 번호</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">id</div>
+    <div class="info-desc">트윗 고유 번호</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">tweet</div>
-    <div class="compare-body"><p>트윗 원문</p></div>
+  <div class="info-item">
+    <div class="info-title">tweet</div>
+    <div class="info-desc">트윗 원문</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">label</div>
-    <div class="compare-body"><p>0 = 부정, 1 = 긍정</p></div>
+  <div class="info-item">
+    <div class="info-title">label</div>
+    <div class="info-desc">0 = 부정, 1 = 긍정</div>
   </div>
 </div>
 
@@ -177,41 +177,26 @@ ht_negative = Hashtags_Extract(merge[merge['label'] == 0]['Clean_Tweets'])
 
 ## 핵심 정리
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">@멘션 제거</div>
-    <div class="compare-body">
-      <p><strong>목적:</strong> 사람 이름은 감정과 무관</p>
-      <code>re.sub(r"@[\w]*", "")</code>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">@멘션 제거 — 사람 이름은 감정과 무관</div>
+    <div class="info-desc"><code>re.sub(r"@[\w]*", "")</code></div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">특수문자 제거</div>
-    <div class="compare-body">
-      <p><strong>목적:</strong> 노이즈 제거, 소문자 통일</p>
-      <code>re.sub("[^a-zA-Z#]", " ")</code>
-    </div>
+  <div class="info-item">
+    <div class="info-title">특수문자 제거 — 노이즈 제거, 소문자 통일</div>
+    <div class="info-desc"><code>re.sub("[^a-zA-Z#]", " ")</code></div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">토큰화</div>
-    <div class="compare-body">
-      <p><strong>목적:</strong> 단어 단위로 분리</p>
-      <code>str.split()</code>
-    </div>
+  <div class="info-item">
+    <div class="info-title">토큰화 — 단어 단위로 분리</div>
+    <div class="info-desc"><code>str.split()</code></div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">워드클라우드</div>
-    <div class="compare-body">
-      <p><strong>목적:</strong> 감정별 특징 단어 시각화</p>
-      <code>WordCloud</code>
-    </div>
+  <div class="info-item">
+    <div class="info-title">워드클라우드 — 감정별 특징 단어 시각화</div>
+    <div class="info-desc"><code>WordCloud</code></div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">해시태그 추출</div>
-    <div class="compare-body">
-      <p><strong>목적:</strong> 주제/의도 파악</p>
-      <code>re.findall(r"#(\w+)")</code>
-    </div>
+  <div class="info-item">
+    <div class="info-title">해시태그 추출 — 주제/의도 파악</div>
+    <div class="info-desc"><code>re.findall(r"#(\w+)")</code></div>
   </div>
 </div>
 

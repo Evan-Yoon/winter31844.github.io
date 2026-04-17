@@ -36,22 +36,26 @@ toc: true
 
 오늘은 아이디어를 구체화하고, AI 모델이 실제로 돌아가는 환경을 잡는 게 목표였다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">✅ 프로젝트 핵심 아이디어 구체화 및 차별화 포인트 설정</div>
-    <div class="compare-body"><p>유료 서비스(PathPal) 벤치마킹 및 차별성 확보</p></div>
+<div class="task-list">
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">프로젝트 핵심 아이디어 구체화 및 차별화 포인트 설정</div>
+    <div class="task-prompt">유료 서비스(PathPal) 벤치마킹 및 차별성 확보</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 기술 스택 확정 (YOLOv11n, TFLite, Flutter)</div>
-    <div class="compare-body"><p>모바일 최적화를 위해 경량 모델 채택</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">기술 스택 확정 (YOLOv11n, TFLite, Flutter)</div>
+    <div class="task-prompt">모바일 최적화를 위해 경량 모델 채택</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 프로젝트 제안서 초안 작성 (1.1~1.4)</div>
-    <div class="compare-body"><p>2025 통계 기반 문제 분석 반영</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">프로젝트 제안서 초안 작성 (1.1~1.4)</div>
+    <div class="task-prompt">2025 통계 기반 문제 분석 반영</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 협업 그라운드 룰 및 브랜치 전략 수립</div>
-    <div class="compare-body"><p>Git Flow 기반 협업 규칙 정립</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">협업 그라운드 룰 및 브랜치 전략 수립</div>
+    <div class="task-prompt">Git Flow 기반 협업 규칙 정립</div>
   </div>
 </div>
 

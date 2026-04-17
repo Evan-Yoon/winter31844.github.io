@@ -37,22 +37,26 @@ toc: true
 
 발표용 슬라이드를 정리하면서 프로젝트 전체 흐름을 다시 엮었다. 특히 사진으로 남아 있던 개발 흔적들을 빠짐없이 정리해 보니, `잘 된 장면`보다 `잘못 감지되던 과정`이 더 많은 설명을 필요로 한다는 점이 분명해졌다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">✅ 최종 발표 자료 제작</div>
-    <div class="compare-body"><p>기능보다 의사결정 흐름 중심으로 재구성</p></div>
+<div class="task-list">
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">최종 발표 자료 제작</div>
+    <div class="task-prompt">기능보다 의사결정 흐름 중심으로 재구성</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ Walkmate 전체 회고 정리</div>
-    <div class="compare-body"><p>기획, 모델 학습, 관리자 UI, 음성 안내까지 통합</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">Walkmate 전체 회고 정리</div>
+    <div class="task-prompt">기획, 모델 학습, 관리자 UI, 음성 안내까지 통합</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ YOLO11→YOLO26 전환 근거 정리</div>
-    <div class="compare-body"><p>탐지 성능과 출력 형식 차이 문제까지 문서화</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">YOLO11→YOLO26 전환 근거 정리</div>
+    <div class="task-prompt">탐지 성능과 출력 형식 차이 문제까지 문서화</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 오탐 사례 아카이빙</div>
-    <div class="compare-body"><p>출력 텐서 처리 실수와 점자블록 오인식 사례 포함</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">오탐 사례 아카이빙</div>
+    <div class="task-prompt">출력 텐서 처리 실수와 점자블록 오인식 사례 포함</div>
   </div>
 </div>
 

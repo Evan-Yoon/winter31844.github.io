@@ -183,41 +183,26 @@ twitter_predictor(tweet3)  # → ???
 
 ## 핵심 정리
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">데이터 탐색</div>
-    <div class="compare-body">
-      <p><strong>도구:</strong> Pandas</p>
-      <p>타겟 변수 확인, 모호한 레이블 제거</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">데이터 탐색 — Pandas</div>
+    <div class="info-desc">타겟 변수 확인, 모호한 레이블 제거</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">텍스트 전처리</div>
-    <div class="compare-body">
-      <p><strong>도구:</strong> NLTK, Regex</p>
-      <p>소문자화, 특수문자 제거, 불용어 제거</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">텍스트 전처리 — NLTK, Regex</div>
+    <div class="info-desc">소문자화, 특수문자 제거, 불용어 제거</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">벡터화</div>
-    <div class="compare-body">
-      <p><strong>도구:</strong> TF-IDF</p>
-      <p>중요한 단어에 높은 가중치</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">벡터화 — TF-IDF</div>
+    <div class="info-desc">중요한 단어에 높은 가중치</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">모델 학습</div>
-    <div class="compare-body">
-      <p><strong>도구:</strong> LogisticRegression</p>
-      <p>확률 기반 이진 분류</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">모델 학습 — LogisticRegression</div>
+    <div class="info-desc">확률 기반 이진 분류</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">튜닝</div>
-    <div class="compare-body">
-      <p><strong>도구:</strong> GridSearchCV</p>
-      <p>최적 하이퍼파라미터 자동 탐색</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">튜닝 — GridSearchCV</div>
+    <div class="info-desc">최적 하이퍼파라미터 자동 탐색</div>
   </div>
 </div>
 

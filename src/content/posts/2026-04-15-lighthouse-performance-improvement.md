@@ -71,22 +71,22 @@ npx lighthouse https://evan-yoon.com --preset=desktop --view
 
 결과는 이랬다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Performance</div>
-    <div class="compare-body"><p><strong>89</strong></p></div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">Performance</div>
+    <div class="stat-value">89</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Accessibility</div>
-    <div class="compare-body"><p>90</p></div>
+  <div class="stat-card">
+    <div class="stat-label">Accessibility</div>
+    <div class="stat-value">90</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Best Practices</div>
-    <div class="compare-body"><p>100</p></div>
+  <div class="stat-card">
+    <div class="stat-label">Best Practices</div>
+    <div class="stat-value">100</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">SEO</div>
-    <div class="compare-body"><p>100</p></div>
+  <div class="stat-card">
+    <div class="stat-label">SEO</div>
+    <div class="stat-value">100</div>
   </div>
 </div>
 

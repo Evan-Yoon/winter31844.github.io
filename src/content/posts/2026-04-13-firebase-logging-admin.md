@@ -46,27 +46,18 @@ draft: false
 
 아니다. 이미 있는 인프라에서 다 해결된다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Cloud Function 요청/오류</div>
-    <div class="compare-body">
-      <p><strong>어디서:</strong> Google Cloud Logging (자동)</p>
-      <p><strong>비용:</strong> 무료</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">Cloud Function 요청/오류</div>
+    <div class="info-desc">Google Cloud Logging (자동) — 무료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">보안 이벤트 (이상 요청)</div>
-    <div class="compare-body">
-      <p><strong>어디서:</strong> console.log + 구조화 JSON</p>
-      <p><strong>비용:</strong> 무료</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">보안 이벤트 (이상 요청)</div>
+    <div class="info-desc">console.log + 구조화 JSON — 무료</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">어드민 대시보드 표시</div>
-    <div class="compare-body">
-      <p><strong>어디서:</strong> Firebase <code>_logs/security</code></p>
-      <p><strong>비용:</strong> 무료</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">어드민 대시보드 표시</div>
+    <div class="info-desc">Firebase <code>_logs/security</code> — 무료</div>
   </div>
 </div>
 
@@ -157,27 +148,18 @@ export const trackVisit = onCall(
 
 ### 로그 3종
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">invalid_date_rejected</div>
-    <div class="compare-body">
-      <p><strong>언제:</strong> 날짜 형식이 이상한 요청 (공격 시도 가능성)</p>
-      <p><strong>저장:</strong> Cloud Logging + Firebase</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">invalid_date_rejected</div>
+    <div class="info-desc">날짜 형식이 이상한 요청 (공격 시도 가능성) — Cloud Logging + Firebase</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">visit_deduplicated</div>
-    <div class="compare-body">
-      <p><strong>언제:</strong> 같은 IP 하루 2회째 방문</p>
-      <p><strong>저장:</strong> Cloud Logging</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">visit_deduplicated</div>
+    <div class="info-desc">같은 IP 하루 2회째 방문 — Cloud Logging</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">visit_counted</div>
-    <div class="compare-body">
-      <p><strong>언제:</strong> 정상 카운트</p>
-      <p><strong>저장:</strong> Cloud Logging</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">visit_counted</div>
+    <div class="info-desc">정상 카운트 — Cloud Logging</div>
   </div>
 </div>
 

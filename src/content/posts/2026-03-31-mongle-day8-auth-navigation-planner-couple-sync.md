@@ -235,46 +235,46 @@ export const resolveAuthRole = async (session, fallbackRole = null) => {
 
 팀원들이 플래너 기능들을 밀어 올리고 있었다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">PR #88 · 09:42</div>
-    <div class="compare-body"><p>플래너 대시보드</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">PR #88 · 09:42</div>
+    <div class="info-desc">플래너 대시보드</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #93 · 10:50</div>
-    <div class="compare-body"><p>플래너 타임라인·예산</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #93 · 10:50</div>
+    <div class="info-desc">플래너 타임라인·예산</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #94 · 13:54</div>
-    <div class="compare-body"><p>플래너 타임라인·예산 업데이트</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #94 · 13:54</div>
+    <div class="info-desc">플래너 타임라인·예산 업데이트</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #98 · 14:53</div>
-    <div class="compare-body"><p>비밀번호 변경 기능</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #98 · 14:53</div>
+    <div class="info-desc">비밀번호 변경 기능</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #99 · 15:06</div>
-    <div class="compare-body"><p>커플 알림 기능</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #99 · 15:06</div>
+    <div class="info-desc">커플 알림 기능</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #101 · 16:13</div>
-    <div class="compare-body"><p>계정 삭제 기능</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #101 · 16:13</div>
+    <div class="info-desc">계정 삭제 기능</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #103 · 16:33</div>
-    <div class="compare-body"><p>플래너 파일 버그 수정</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #103 · 16:33</div>
+    <div class="info-desc">플래너 파일 버그 수정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #104 · 16:55</div>
-    <div class="compare-body"><p>대시보드 bypass 처리</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #104 · 16:55</div>
+    <div class="info-desc">대시보드 bypass 처리</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #105 · 17:05</div>
-    <div class="compare-body"><p>플래너 정보 편집</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #105 · 17:05</div>
+    <div class="info-desc">플래너 정보 편집</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #106, #107 · 20:11</div>
-    <div class="compare-body"><p>채팅 버그 수정, 관리자 웹 Supabase 연동</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #106, #107 · 20:11</div>
+    <div class="info-desc">채팅 버그 수정, 관리자 웹 Supabase 연동</div>
   </div>
 </div>
 

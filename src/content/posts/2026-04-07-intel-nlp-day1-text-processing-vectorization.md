@@ -56,34 +56,22 @@ re.sub('[a-z]', '1', 'abc')   # '111' — 소문자 전체를 1로 치환
 
 자주 쓰이는 패턴:
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">\d</div>
-    <div class="compare-body">
-      <p><strong>의미:</strong> 숫자</p>
-      <p><code>\d+</code> → 1개 이상의 숫자</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title"><code>\d</code> — 숫자</div>
+    <div class="info-desc"><code>\d+</code> → 1개 이상의 숫자</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">\s</div>
-    <div class="compare-body">
-      <p><strong>의미:</strong> 공백 (스페이스, 탭, 줄바꿈)</p>
-      <p><code>\s+</code> → 연속 공백</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title"><code>\s</code> — 공백 (스페이스, 탭, 줄바꿈)</div>
+    <div class="info-desc"><code>\s+</code> → 연속 공백</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">\w</div>
-    <div class="compare-body">
-      <p><strong>의미:</strong> 영문자, 숫자, 언더스코어</p>
-      <p><code>\w{3,5}</code> → 3~5글자 단어</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title"><code>\w</code> — 영문자, 숫자, 언더스코어</div>
+    <div class="info-desc"><code>\w{3,5}</code> → 3~5글자 단어</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">[^...]</div>
-    <div class="compare-body">
-      <p><strong>의미:</strong> NOT</p>
-      <p><code>[^a-z]</code> → 소문자가 아닌 것</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title"><code>[^...]</code> — NOT</div>
+    <div class="info-desc"><code>[^a-z]</code> → 소문자가 아닌 것</div>
   </div>
 </div>
 

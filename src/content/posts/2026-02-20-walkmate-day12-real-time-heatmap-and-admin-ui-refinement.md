@@ -35,26 +35,31 @@ toc: true
 
 사용자 위치 기반의 시각화 도구를 완성하고, 관리자 도구의 안정성을 대폭 향상했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">✅ 실시간 위험 지역 히트맵 구현</div>
-    <div class="compare-body"><p>Leaflet 기반 히트맵 및 내 위치 표시</p></div>
+<div class="task-list">
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">실시간 위험 지역 히트맵 구현</div>
+    <div class="task-prompt">Leaflet 기반 히트맵 및 내 위치 표시</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ Admin UI 고도화 및 테마 최적화</div>
-    <div class="compare-body"><p>다크모드/라이트모드 인터페이스 정밀 조정</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">Admin UI 고도화 및 테마 최적화</div>
+    <div class="task-prompt">다크모드/라이트모드 인터페이스 정밀 조정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 이미지 전처리 로직(Letterbox) 적용 완료</div>
-    <div class="compare-body"><p>사물 왜곡 방지 로직 전면 적용</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">이미지 전처리 로직(Letterbox) 적용 완료</div>
+    <div class="task-prompt">사물 왜곡 방지 로직 전면 적용</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 프로젝트 개발 환경 표준화 (Docker)</div>
-    <div class="compare-body"><p>PostgreSQL, Redis 포함 Dev Container 구축</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">프로젝트 개발 환경 표준화 (Docker)</div>
+    <div class="task-prompt">PostgreSQL, Redis 포함 Dev Container 구축</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 복합 HTTP 에러(404, 405, 422) 해결</div>
-    <div class="compare-body"><p>통신 규격 일치 및 필드 스키마 업데이트</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">복합 HTTP 에러(404, 405, 422) 해결</div>
+    <div class="task-prompt">통신 규격 일치 및 필드 스키마 업데이트</div>
   </div>
 </div>
 
@@ -64,38 +69,38 @@ toc: true
 
 관리자 패널의 핵심 기능과 실시간 모니터링 시스템 구축을 위해 총 8건의 주요 프로젝트 업데이트가 진행되었다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label"><code>1a3b48a</code></div>
-    <div class="compare-body"><p><strong>feat: Add Dev Container setup</strong></p><p>Docker, PostgreSQL, Redis 기반 개발 환경 표준화</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title"><code>1a3b48a</code> — feat: Add Dev Container setup</div>
+    <div class="info-desc">Docker, PostgreSQL, Redis 기반 개발 환경 표준화</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>8d4e0f0</code></div>
-    <div class="compare-body"><p><strong>feat: Introduce admin panel with hazard management</strong></p><p>신고 관리, soft deletion 기능 및 백엔드 엔드포인트 구축</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>8d4e0f0</code> — feat: Introduce admin panel with hazard management</div>
+    <div class="info-desc">신고 관리, soft deletion 기능 및 백엔드 엔드포인트 구축</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>fb9c5c8</code></div>
-    <div class="compare-body"><p><strong>feat: Implement real-time heatmap and vision camera</strong></p><p>관리자용 실시간 히트맵 및 사용자 카메라 뷰 연동</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>fb9c5c8</code> — feat: Implement real-time heatmap and vision camera</div>
+    <div class="info-desc">관리자용 실시간 히트맵 및 사용자 카메라 뷰 연동</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>79c9892</code></div>
-    <div class="compare-body"><p><strong>feat: Implement admin UI with dark mode</strong></p><p>상세 모달 뷰 및 테마 최적화가 적용된 Admin UI</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>79c9892</code> — feat: Implement admin UI with dark mode</div>
+    <div class="info-desc">상세 모달 뷰 및 테마 최적화가 적용된 Admin UI</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>b06ea94</code></div>
-    <div class="compare-body"><p><strong>feat: Implement Admin dashboard and user report API</strong></p><p>대시보드 통계 및 사용자 신고 데이터 연동 체계 구축</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>b06ea94</code> — feat: Implement Admin dashboard and user report API</div>
+    <div class="info-desc">대시보드 통계 및 사용자 신고 데이터 연동 체계 구축</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>2ffe66c</code></div>
-    <div class="compare-body"><p><strong>feat: Implement admin UI components</strong></p><p>테이블, 모달 등 핵심 UI 컴포넌트 라이브러리화</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>2ffe66c</code> — feat: Implement admin UI components</div>
+    <div class="info-desc">테이블, 모달 등 핵심 UI 컴포넌트 라이브러리화</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>be54f05</code></div>
-    <div class="compare-body"><p><strong>feat: Implement real-time hazard monitoring</strong></p><p>사용자-관리자 간 실시간 모니터링 대시보드 완성</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>be54f05</code> — feat: Implement real-time hazard monitoring</div>
+    <div class="info-desc">사용자-관리자 간 실시간 모니터링 대시보드 완성</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>d27dbd0</code></div>
-    <div class="compare-body"><p><strong>feat: Implement admin UI TestMonitor page</strong></p><p>거리/방향 정보가 포함된 실시간 모니터링 페이지 구현</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>d27dbd0</code> — feat: Implement admin UI TestMonitor page</div>
+    <div class="info-desc">거리/방향 정보가 포함된 실시간 모니터링 페이지 구현</div>
   </div>
 </div>
 

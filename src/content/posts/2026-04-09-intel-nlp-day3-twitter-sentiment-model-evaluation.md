@@ -209,22 +209,22 @@ roc_auc_tfidf = metrics.roc_auc_score(y_test_tfidf, y_pred_proba_tfidf)
 
 기준:
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">0.5</div>
-    <div class="compare-body"><p>동전 던지기 수준</p></div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">AUC 0.5</div>
+    <div class="stat-value">동전 던지기 수준</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">0.7 ~ 0.8</div>
-    <div class="compare-body"><p>좋음</p></div>
+  <div class="stat-card">
+    <div class="stat-label">AUC 0.7 ~ 0.8</div>
+    <div class="stat-value">좋음</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">0.8 ~ 0.9</div>
-    <div class="compare-body"><p>매우 좋음</p></div>
+  <div class="stat-card">
+    <div class="stat-label">AUC 0.8 ~ 0.9</div>
+    <div class="stat-value">매우 좋음</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">0.9 이상</div>
-    <div class="compare-body"><p>뛰어남</p></div>
+  <div class="stat-card">
+    <div class="stat-label">AUC 0.9 이상</div>
+    <div class="stat-value">뛰어남</div>
   </div>
 </div>
 

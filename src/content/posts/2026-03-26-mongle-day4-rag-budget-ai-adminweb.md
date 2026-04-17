@@ -51,18 +51,18 @@ Mongle-server/ai/script/vendors/
 
 오전 내내 Merge PR도 이어졌다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">PR #40 · 09:37</div>
-    <div class="compare-body"><p>플래너 개인 화면 UI 시작</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">PR #40 · 09:37</div>
+    <div class="info-desc">플래너 개인 화면 UI 시작</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #41 · 10:32</div>
-    <div class="compare-body"><p>홈 화면 업체 정보 적용</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #41 · 10:32</div>
+    <div class="info-desc">홈 화면 업체 정보 적용</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #43 · 13:50</div>
-    <div class="compare-body"><p>플래너 개인 화면 UI 완성</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #43 · 13:50</div>
+    <div class="info-desc">플래너 개인 화면 UI 완성</div>
   </div>
 </div>
 
@@ -146,38 +146,38 @@ RAG 테스트 중 "호텔 웨딩" 검색 시 결과가 비어있는 문제가 �
 
 이 시간대 Merge PR.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">PR #47 · 15:05</div>
-    <div class="compare-body"><p>스크롤 상단 올라가기 버튼</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">PR #47 · 15:05</div>
+    <div class="info-desc">스크롤 상단 올라가기 버튼</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #48 · 15:29</div>
-    <div class="compare-body"><p>알림 창 UI 및 전역 상태</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #48 · 15:29</div>
+    <div class="info-desc">알림 창 UI 및 전역 상태</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #49 · 15:44</div>
-    <div class="compare-body"><p>뒤로가기 홈 화면 버그 수정</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #49 · 15:44</div>
+    <div class="info-desc">뒤로가기 홈 화면 버그 수정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #50 · 15:52</div>
-    <div class="compare-body"><p>뒤로가기 리스트 화면 버그 수정</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #50 · 15:52</div>
+    <div class="info-desc">뒤로가기 리스트 화면 버그 수정</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #53 · 16:30</div>
-    <div class="compare-body"><p>index, id 최적화 리팩터링</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #53 · 16:30</div>
+    <div class="info-desc">index, id 최적화 리팩터링</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #55 · 16:47</div>
-    <div class="compare-body"><p>상담 신청 모달 구현</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #55 · 16:47</div>
+    <div class="info-desc">상담 신청 모달 구현</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #54 · 17:10</div>
-    <div class="compare-body"><p>백엔드 폴더 정리</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #54 · 17:10</div>
+    <div class="info-desc">백엔드 폴더 정리</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">PR #57 · 17:22</div>
-    <div class="compare-body"><p>일반회원/플래너 구분 로그인</p></div>
+  <div class="info-item">
+    <div class="info-title">PR #57 · 17:22</div>
+    <div class="info-desc">일반회원/플래너 구분 로그인</div>
   </div>
 </div>
 

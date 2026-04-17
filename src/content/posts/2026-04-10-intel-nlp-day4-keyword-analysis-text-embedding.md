@@ -103,27 +103,18 @@ squarify.plot(label=list(top_nouns.keys()), sizes=list(top_nouns.values()))
 plt.show()
 ```
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">막대 그래프</div>
-    <div class="compare-body">
-      <p><strong>장점:</strong> 정확한 수치 비교 가능</p>
-      <p><strong>단점:</strong> 항목이 많으면 복잡</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">막대 그래프</div>
+    <div class="info-desc"><strong>장점:</strong> 정확한 수치 비교 가능 / <strong>단점:</strong> 항목이 많으면 복잡</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">워드클라우드</div>
-    <div class="compare-body">
-      <p><strong>장점:</strong> 직관적, 보기 쉬움</p>
-      <p><strong>단점:</strong> 정확한 숫자 파악 어려움</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">워드클라우드</div>
+    <div class="info-desc"><strong>장점:</strong> 직관적, 보기 쉬움 / <strong>단점:</strong> 정확한 숫자 파악 어려움</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">트리맵</div>
-    <div class="compare-body">
-      <p><strong>장점:</strong> 비율 시각화 명확</p>
-      <p><strong>단점:</strong> 항목 이름이 겹칠 수 있음</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">트리맵</div>
+    <div class="info-desc"><strong>장점:</strong> 비율 시각화 명확 / <strong>단점:</strong> 항목 이름이 겹칠 수 있음</div>
   </div>
 </div>
 
@@ -239,33 +230,18 @@ model.compile(optimizer='adam', loss='categorical_crossentropy')
 model.fit(X_train, y_train, epochs=10)
 ```
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">RNN</div>
-    <div class="compare-body">
-      <p><strong>구조:</strong> 단순</p>
-      <p><strong>긴 문장 처리:</strong> 기울기 소실로 취약</p>
-      <p><strong>속도:</strong> 빠름</p>
-      <p><strong>사용 시점:</strong> 짧은 시퀀스</p>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title">RNN</div>
+    <div class="info-desc">구조 단순, 속도 빠름 / 긴 문장에서 기울기 소실 취약 / 짧은 시퀀스에 적합</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">LSTM</div>
-    <div class="compare-body">
-      <p><strong>구조:</strong> 복잡 (3개 게이트)</p>
-      <p><strong>긴 문장 처리:</strong> 게이트로 해결</p>
-      <p><strong>속도:</strong> 느림</p>
-      <p><strong>사용 시점:</strong> 긴 의존성 필요</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">LSTM</div>
+    <div class="info-desc">3개 게이트로 긴 의존성 처리 / 구조 복잡, 속도 느림 / 긴 문장 의존성 필요 시</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">GRU</div>
-    <div class="compare-body">
-      <p><strong>구조:</strong> 중간 (2개 게이트)</p>
-      <p><strong>긴 문장 처리:</strong> LSTM보다 간단</p>
-      <p><strong>속도:</strong> LSTM보다 빠름</p>
-      <p><strong>사용 시점:</strong> 빠른 학습 필요</p>
-    </div>
+  <div class="info-item">
+    <div class="info-title">GRU</div>
+    <div class="info-desc">2개 게이트, LSTM보다 간단 / LSTM보다 빠름 / 빠른 학습이 필요한 경우</div>
   </div>
 </div>
 

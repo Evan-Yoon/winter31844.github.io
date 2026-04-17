@@ -37,22 +37,26 @@ toc: true
 
 GPS 방향 인식의 고질적인 문제를 해결하고, 전체 시스템의 관리 측면을 보강하기 위한 Admin UI 작업을 성공적으로 진행했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">✅ GPS 벡터 기반 방향 안내 로직 교체</div>
-    <div class="compare-body"><p>나침반 센서 의존성 제거</p></div>
+<div class="task-list">
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">GPS 벡터 기반 방향 안내 로직 교체</div>
+    <div class="task-prompt">나침반 센서 의존성 제거</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 관리자 페이지(Admin) 프로토타입 구현</div>
-    <div class="compare-body"><p>신고 목록 및 상세 모달 완성</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">관리자 페이지(Admin) 프로토타입 구현</div>
+    <div class="task-prompt">신고 목록 및 상세 모달 완성</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ 백엔드 연동 규격 확정 및 API 연동</div>
-    <div class="compare-body"><p>Multipart 사진 전송 및 UUID 적용</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">백엔드 연동 규격 확정 및 API 연동</div>
+    <div class="task-prompt">Multipart 사진 전송 및 UUID 적용</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">✅ AR 카메라 UI 통합 (4:6 분할)</div>
-    <div class="compare-body"><p>상단 지도 + 하단 카메라 뷰 구성</p></div>
+  <div class="task-row">
+    <span class="eval-icon dot-yes"></span>
+    <div class="task-name">AR 카메라 UI 통합 (4:6 분할)</div>
+    <div class="task-prompt">상단 지도 + 하단 카메라 뷰 구성</div>
   </div>
 </div>
 
@@ -62,30 +66,30 @@ GPS 방향 인식의 고질적인 문제를 해결하고, 전체 시스템의 �
 
 안드로이드 핵심 모듈 업데이트와 관리자 UI 초기 구축을 위해 총 6건의 주요 커밋이 진행되었다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label"><code>2473abb</code></div>
-    <div class="compare-body"><p><strong>chore: update Android module dependencies</strong></p><p>Gradle 설정 및 필수 플러그인 의존성 최신화</p></div>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="info-title"><code>2473abb</code> — chore: update Android module dependencies</div>
+    <div class="info-desc">Gradle 설정 및 필수 플러그인 의존성 최신화</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>f74029e</code></div>
-    <div class="compare-body"><p><strong>chore: clean up package-lock.json</strong></p><p>의존성 충돌 방지를 위한 패키지 잠금 파일 정리</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>f74029e</code> — chore: clean up package-lock.json</div>
+    <div class="info-desc">의존성 충돌 방지를 위한 패키지 잠금 파일 정리</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>873c40b</code></div>
-    <div class="compare-body"><p><strong>feat: implement Admin ReportsPage</strong></p><p>신고 목록 조회 및 상태 업데이트 API 연동</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>873c40b</code> — feat: implement Admin ReportsPage</div>
+    <div class="info-desc">신고 목록 조회 및 상태 업데이트 API 연동</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>f9b56f8</code></div>
-    <div class="compare-body"><p><strong>feat: initialize backend models and API</strong></p><p>DB 스키마 설계 및 백엔드 기초 구조 구축</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>f9b56f8</code> — feat: initialize backend models and API</div>
+    <div class="info-desc">DB 스키마 설계 및 백엔드 기초 구조 구축</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>e9a2166</code></div>
-    <div class="compare-body"><p><strong>feat: initialize Admin UI project</strong></p><p>React+Tailwind 기반 대시보드 환경 구축</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>e9a2166</code> — feat: initialize Admin UI project</div>
+    <div class="info-desc">React+Tailwind 기반 대시보드 환경 구축</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label"><code>a300434</code></div>
-    <div class="compare-body"><p><strong>feat: initialize core navigation components</strong></p><p>GuidingScreen, VisionCamera, DebugMap 초기화</p></div>
+  <div class="info-item">
+    <div class="info-title"><code>a300434</code> — feat: initialize core navigation components</div>
+    <div class="info-desc">GuidingScreen, VisionCamera, DebugMap 초기화</div>
   </div>
 </div>
 

@@ -180,66 +180,46 @@ print(f"R^2  : {rf_r2:.4f}")
 
 노트북 출력값 기준 top feature importance는 아래 순서였다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Customers</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.736121</p>
-    </div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">Customers</div>
+    <div class="stat-value">0.736121</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">StoreType</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.057394</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">StoreType</div>
+    <div class="stat-value">0.057394</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">CompetitionDistance</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.054285</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">CompetitionDistance</div>
+    <div class="stat-value">0.054285</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Promo</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.034123</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">Promo</div>
+    <div class="stat-value">0.034123</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Store</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.032212</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">Store</div>
+    <div class="stat-value">0.032212</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Promo2SinceWeek</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.010810</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">Promo2SinceWeek</div>
+    <div class="stat-value">0.010810</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">DayOfWeek</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.010062</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">DayOfWeek</div>
+    <div class="stat-value">0.010062</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">CompetitionOpenSinceMonth</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.009225</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">CompetitionOpenSinceMonth</div>
+    <div class="stat-value">0.009225</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">Assortment</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.008834</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">Assortment</div>
+    <div class="stat-value">0.008834</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">CompetitionOpenDuration</div>
-    <div class="compare-body">
-      <p><strong>Importance:</strong> 0.008286</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">CompetitionOpenDuration</div>
+    <div class="stat-value">0.008286</div>
   </div>
 </div>
 
@@ -343,48 +323,30 @@ promo_pred = rf_model.predict(scenario_promo)
 
 발표 자료 기준으로 모델 비교 결과는 아래처럼 정리했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">Random Forest</div>
-    <div class="compare-body">
-      <p><strong>RMSE:</strong> 469.5302 &nbsp;|&nbsp; <strong>MAE:</strong> 312.5302 &nbsp;|&nbsp; <strong>R²:</strong> 0.9771</p>
-      <p><strong>비고:</strong> Best Model</p>
-    </div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">Random Forest (Best)</div>
+    <div class="stat-value">R² 0.9771</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">LightGBM</div>
-    <div class="compare-body">
-      <p><strong>RMSE:</strong> 476.6559 &nbsp;|&nbsp; <strong>MAE:</strong> 332.0468 &nbsp;|&nbsp; <strong>R²:</strong> 0.9764</p>
-      <p><strong>비고:</strong> 근소한 차이</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">LightGBM</div>
+    <div class="stat-value">R² 0.9764</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">CatBoost</div>
-    <div class="compare-body">
-      <p><strong>RMSE:</strong> 599.8146 &nbsp;|&nbsp; <strong>MAE:</strong> 421.2359 &nbsp;|&nbsp; <strong>R²:</strong> 0.9626</p>
-      <p><strong>비고:</strong> 범주형 처리 강점</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">CatBoost</div>
+    <div class="stat-value">R² 0.9626</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">XGBoost</div>
-    <div class="compare-body">
-      <p><strong>RMSE:</strong> 797.5473 &nbsp;|&nbsp; <strong>MAE:</strong> 578.3192 &nbsp;|&nbsp; <strong>R²:</strong> 0.9340</p>
-      <p><strong>비고:</strong> 기준선 비교용</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">XGBoost</div>
+    <div class="stat-value">R² 0.9340</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">LSTM</div>
-    <div class="compare-body">
-      <p><strong>RMSE:</strong> 740.7106 &nbsp;|&nbsp; <strong>MAE:</strong> 538.5830 &nbsp;|&nbsp; <strong>R²:</strong> 0.9391</p>
-      <p><strong>비고:</strong> DL 모델</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">LSTM</div>
+    <div class="stat-value">R² 0.9391</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">MLP</div>
-    <div class="compare-body">
-      <p><strong>RMSE:</strong> 1436.3629 &nbsp;|&nbsp; <strong>MAE:</strong> 1007.9686 &nbsp;|&nbsp; <strong>R²:</strong> 0.7853</p>
-      <p><strong>비고:</strong> DL 모델</p>
-    </div>
+  <div class="stat-card">
+    <div class="stat-label">MLP</div>
+    <div class="stat-value">R² 0.7853</div>
   </div>
 </div>
 

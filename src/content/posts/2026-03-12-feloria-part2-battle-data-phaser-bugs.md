@@ -168,22 +168,22 @@ JavaScript는 에러를 내지 않는다. 조용히 덮어쓰고 넘어간다. �
 
 100종으로 확장할 때 스킬 등급 체계도 함께 확정했다.
 
-<div class="compare-wrap">
-  <div class="compare-card">
-    <div class="compare-label">기본형</div>
-    <div class="compare-body"><p><strong>등급:</strong> 3등급 &nbsp;|&nbsp; <strong>스킬 수:</strong> 3개</p><p><strong>이유:</strong> 기초 스킬</p></div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">기본형 / 스킬 3개</div>
+    <div class="stat-value">3등급 (기초)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">진화형</div>
-    <div class="compare-body"><p><strong>등급:</strong> 2등급 &nbsp;|&nbsp; <strong>스킬 수:</strong> 3개</p><p><strong>이유:</strong> 중급 스킬</p></div>
+  <div class="stat-card">
+    <div class="stat-label">진화형 / 스킬 3개</div>
+    <div class="stat-value">2등급 (중급)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">최종 진화형</div>
-    <div class="compare-body"><p><strong>등급:</strong> 1등급 &nbsp;|&nbsp; <strong>스킬 수:</strong> 3개</p><p><strong>이유:</strong> 고급 스킬</p></div>
+  <div class="stat-card">
+    <div class="stat-label">최종 진화형 / 스킬 3개</div>
+    <div class="stat-value">1등급 (고급)</div>
   </div>
-  <div class="compare-card">
-    <div class="compare-label">전설형</div>
-    <div class="compare-body"><p><strong>등급:</strong> 전설 고유 &nbsp;|&nbsp; <strong>스킬 수:</strong> 4개</p><p><strong>이유:</strong> 고유 스킬셋</p></div>
+  <div class="stat-card">
+    <div class="stat-label">전설형 / 스킬 4개</div>
+    <div class="stat-value">전설 고유</div>
   </div>
 </div>
 
