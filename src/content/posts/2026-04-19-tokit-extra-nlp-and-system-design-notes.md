@@ -257,7 +257,7 @@ toc: true
 
 그런데 **한국어 개발자 입력 -> 작업 분류 -> 프롬프트 컴파일 -> 세션 최적화 -> patch 중심 출력**을 한 흐름으로 묶은 건 거의 못 찾았다.
 
-### Tokit과 가까운 3개
+### 1. 구조 비교용 레포
 
 | 레포 | 언어/스택 | 잘하는 것 | Tokit과 겹치는 지점 | Tokit이 더 가져가야 하는 부분 |
 | --- | --- | --- | --- | --- |
@@ -272,6 +272,21 @@ toc: true
 - [`gptdiff`](https://github.com/255BITS/gptdiff)는 출력 쪽 조각
 
 Tokit은 이 셋을 한 흐름으로 붙이는 쪽에 가깝다.
+
+### 2. 한국어 맥락 참고 레포
+
+이쪽은 Tokit과 구조가 비슷한 레포라기보다, **한국어 입력을 어떻게 다룰지 참고할 때 볼 만한 레포**다.
+
+| 레포 | 언어/스택 | 참고할 부분 | Tokit과의 관계 |
+| --- | --- | --- | --- |
+| [`LLM-Prompting-Engineering-for-Korean-Translation`](https://github.com/Yoojeong-Kim/LLM-Prompting-Engineering-for-Korean-Translation) | Python, Gemini API | 한국어 high-context 특성을 반영한 프롬프트 실험 | 한국어 입력 처리 관점에서 참고 가치 있음 |
+| [`Prompt-Engineering-Korea`](https://github.com/11mLLM/Prompt-Engineering-Korea) | Python, Streamlit 중심 | 한국어 프롬프트 엔지니어링 자료/실험 맥락 | 직접 비교 대상보다는 한국어 프롬프트 참고용 |
+| [`awesome-korean-llm`](https://github.com/NomaDamas/awesome-korean-llm) | Awesome list | 한국어 특화 LLM 후보 정리 | 한국어 모델 선택 참고용 |
+
+정리하면:
+
+- 구조 비교는 위 3개 레포를 보는 게 맞고
+- 한국어 처리 방향은 이 참고 레포들을 따로 보는 게 맞다
 
 ---
 
