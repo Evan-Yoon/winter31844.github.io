@@ -4,7 +4,7 @@ slug: ai-infracon-blockchain-security
 date: 2026-04-15
 author: Evan Yoon
 category: explore
-subcategory: visit
+subcategory: field-visit
 thumbnail: /images/posts/ai-infracon-blockchain-security/verification-shot.jpg
 tags:
   - blockchain
