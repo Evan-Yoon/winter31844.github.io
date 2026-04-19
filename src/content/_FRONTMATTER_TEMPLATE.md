@@ -31,7 +31,7 @@ category: "explore"
 
 # category: project →  subcategory: team-project | personal-project
 # category: study   →  subcategory: certification | self-study
-# category: explore →  subcategory: visit | new-tech
+# category: explore →  subcategory: field-visit | new-tech
 # 없으면 이 줄 삭제 또는 주석 처리
 
 # subcategory: "new-tech"
