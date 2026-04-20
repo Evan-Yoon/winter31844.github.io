@@ -22,7 +22,11 @@ export async function getStaticPaths() {
   return Array.from(combos.values()).map(({ category, subcategory }) => {
     const filteredPosts = allPosts
       .filter(p => p.data.category === category && p.data.subcategory === subcategory && !p.data.draft)
-      .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+      .sort((a, b) => {
+        const dateDiff = new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+        if (dateDiff !== 0) return dateDiff;
+        return (b.data.seriesOrder ?? 0) - (a.data.seriesOrder ?? 0);
+      });
 
     return {
       params: { category, subcategory },

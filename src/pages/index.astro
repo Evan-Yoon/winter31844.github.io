@@ -131,7 +131,11 @@ const allPosts = await getCollection('posts');
 // Filter recent posts (excluding ai-news) for the home page list
 const recentPosts = allPosts
   .filter((post) => !post.data.draft && post.data.category !== 'ai-news')
-  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
+  .sort((a, b) => {
+    const dateDiff = new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+    if (dateDiff !== 0) return dateDiff;
+    return (b.data.seriesOrder ?? 0) - (a.data.seriesOrder ?? 0);
+  })
   .slice(0, 3);
 
 // Get latest AI News

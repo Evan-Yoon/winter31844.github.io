@@ -11,7 +11,11 @@ function getEntrySlug(entry) {
 const allPosts = await getCollection('posts');
 const sortedPosts = allPosts
   .filter((post) => !post.data.draft)
-  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+  .sort((a, b) => {
+    const dateDiff = new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+    if (dateDiff !== 0) return dateDiff;
+    return (b.data.seriesOrder ?? 0) - (a.data.seriesOrder ?? 0);
+  });
 ---
 
 <BaseLayout title="Posts | Evan Yoon" description="Evan Yoon의 기술 블로그 전체 글 목록입니다.">

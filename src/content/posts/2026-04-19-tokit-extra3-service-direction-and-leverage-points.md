@@ -3,6 +3,7 @@ title: "[Tokit] Extra 3 - 서비스 방향과 진짜 효과가 나는 지점 정
 slug: tokit-extra3-service-direction-and-leverage-points
 date: 2026-04-19
 author: Evan Yoon
+seriesOrder: 3
 category: project
 subcategory: team-project
 description: |
