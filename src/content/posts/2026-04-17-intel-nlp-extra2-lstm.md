@@ -3,7 +3,6 @@ title: "[NLP] Extra 2 - LSTM을 기초부터 다시 이해하기"
 slug: intel-nlp-extra2-lstm
 date: 2026-04-17
 author: Evan Yoon
-seriesOrder: 2
 category: study
 subcategory: bootcamp
 description: |

@@ -3,7 +3,6 @@ title: "[Tokit] Extra 2 - 실행 태스크 리스트"
 slug: tokit-extra2-execution-task-list
 date: 2026-04-19
 author: Evan Yoon
-seriesOrder: 2
 category: project
 subcategory: team-project
 description: |

@@ -3,7 +3,6 @@ title: "[Tokit] Extra 4 - 최종 방향 정리"
 slug: tokit-extra4-final-direction
 date: 2026-04-19
 author: Evan Yoon
-seriesOrder: 4
 category: project
 subcategory: team-project
 description: |

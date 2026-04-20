@@ -3,7 +3,6 @@ title: "[NLP] Extra 3 - GRU를 기초부터 다시 이해하기"
 slug: intel-nlp-extra3-gru
 date: 2026-04-17
 author: Evan Yoon
-seriesOrder: 3
 category: study
 subcategory: bootcamp
 description: |

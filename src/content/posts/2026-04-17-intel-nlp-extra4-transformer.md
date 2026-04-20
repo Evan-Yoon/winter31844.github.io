@@ -3,7 +3,6 @@ title: "[NLP] Extra 4 - Transformer를 기초부터 다시 이해하기"
 slug: intel-nlp-extra4-transformer
 date: 2026-04-17
 author: Evan Yoon
-seriesOrder: 4
 category: study
 subcategory: bootcamp
 description: |

@@ -3,7 +3,6 @@ title: "[Tokit] Extra 1 - 구조, 차별점, 우선순위 정리"
 slug: tokit-extra-structure-differentiation-priority
 date: 2026-04-18
 author: Evan Yoon
-seriesOrder: 1
 category: project
 subcategory: team-project
 description: |

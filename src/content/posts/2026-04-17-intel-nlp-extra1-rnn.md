@@ -3,7 +3,6 @@ title: "[NLP] Extra 1 - RNN을 기초부터 다시 이해하기"
 slug: intel-nlp-extra1-rnn
 date: 2026-04-17
 author: Evan Yoon
-seriesOrder: 1
 category: study
 subcategory: bootcamp
 description: |
