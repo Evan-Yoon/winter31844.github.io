@@ -137,4 +137,16 @@ Claude Design은 적어도 그 경계를 덜 느끼게 하는 방향으로 보�
 
 Claude Design이 흥미로웠던 이유는 화면이 멋져 보여서만은 아니다. 디자인, 수정, 코멘트, 공유, 개발 연결까지 한 흐름 안에서 처리하려는 방향이 지금 내 작업 방식과 더 잘 맞아 보였다.
 
-참고로 이때 만든 결과물은 `reference/profile/Ji Hyun Yoon - Profile.html` 파일로 남아 있다.
+실제로 이때 만든 결과물은 `reference/profile/Ji Hyun Yoon - Profile.html` 파일로 남아 있다. 블로그에서는 아래 버튼으로 바로 열 수 있게 연결해뒀다.
+
+<div style="margin: 1.5rem 0 0;">
+  <a
+    href="/portfolio/ji-hyun-yoon.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="display:inline-flex;align-items:center;gap:.55rem;padding:.85rem 1.15rem;border-radius:999px;background:#0f172a;color:#f8fafc;text-decoration:none;font-weight:700;border:1px solid #334155;"
+  >
+    포트폴리오 페이지 보기
+    <span aria-hidden="true">→</span>
+  </a>
+</div>
