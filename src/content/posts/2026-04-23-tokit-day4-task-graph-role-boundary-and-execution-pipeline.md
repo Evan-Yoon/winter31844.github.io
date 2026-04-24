@@ -3,7 +3,7 @@ title: |
   [Tokit] Day 4
   Task Graph 책임 재정의와 실행 파이프라인 정리
 slug: tokit-day4-task-graph-role-boundary-and-execution-pipeline
-date: 2026-04-24
+date: 2026-04-23
 author: Evan Yoon
 category: project
 subcategory: team-project
@@ -26,7 +26,7 @@ draft: false
 toc: true
 ---
 
-4월 24일에는 기능을 하나씩 추가했다기보다, **Task Graph가 어느 역할에서 어떻게 만들어져야 하는지**를 다시 정리하는 데 시간을 썼다. 이전 구조에서는 Role 1이 `tasks[]`, `id`, `depends_on`까지 만들어 주는 쪽으로 정의돼 있었는데, 이 방식은 실제로 구현을 시작하려고 보니 Role 2.1과 책임이 겹쳤다.
+4월 23일에는 기능을 하나씩 추가했다기보다, **Task Graph가 어느 역할에서 어떻게 만들어져야 하는지**를 다시 정리하는 데 시간을 썼다. 이전 구조에서는 Role 1이 `tasks[]`, `id`, `depends_on`까지 만들어 주는 쪽으로 정의돼 있었는데, 이 방식은 실제로 구현을 시작하려고 보니 Role 2.1과 책임이 겹쳤다.
 
 그래서 이날 정리한 핵심은 단순했다. Role 1은 전처리만 맡고, Role 2.1은 분석과 Task Graph 구성을 전담한다. 이 경계를 먼저 분명하게 잡고 나서, 그 아래에 붙는 검증과 실행 준비 구조를 순서대로 정리했다.
 

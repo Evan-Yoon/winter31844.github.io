@@ -1,15 +1,15 @@
 ---
-title: "특강: 선택받는 이력서"
+title: "인텔 특강: 선택받는 이력서"
 slug: special-lecture-selected-resume
 date: 2026-04-22
 author: Evan Yoon
 category: explore
 subcategory: lecture
 description: |
-  4월 22일 들은 "선택받는 이력서" 특강 내용을 정리했다.
+  "선택받는 이력서" 특강 내용을 정리했다.
   채용 담당자가 이력서와 포트폴리오에서 실제로 보는 기준,
   신입 개발자가 자주 하는 실수, 그리고 JD 맞춤형 PDF 중심으로
-  문서를 다시 써야 하는 이유가 핵심이었다.
+  문서를 다시 써야 하는 이유에 대하여.
 tags:
   - resume
   - portfolio
