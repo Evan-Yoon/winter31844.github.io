@@ -1,0 +1,14 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agent cloud network">
+  <rect width="1200" height="720" fill="#06121F"/>
+  <rect x="72" y="72" width="1056" height="576" rx="36" fill="#0B1B2C"/>
+  <path d="M366 424H836C899 424 950 373 950 310C950 247 899 196 836 196C812 129 748 84 674 84C586 84 512 150 502 236C466 211 420 205 376 224C312 252 280 326 305 392C258 403 224 445 224 496C224 555 272 604 332 604H820" stroke="#7DD3FC" stroke-width="16" stroke-linecap="round"/>
+  <g stroke="#A7F3D0" stroke-width="8" stroke-linecap="round">
+    <path d="M424 410L578 326L742 410"/>
+    <path d="M578 326V512"/>
+    <path d="M424 410V512H742V410"/>
+  </g>
+  <circle cx="424" cy="410" r="28" fill="#22D3EE"/>
+  <circle cx="578" cy="326" r="28" fill="#34D399"/>
+  <circle cx="742" cy="410" r="28" fill="#A78BFA"/>
+  <circle cx="578" cy="512" r="28" fill="#F59E0B"/>
+</svg>

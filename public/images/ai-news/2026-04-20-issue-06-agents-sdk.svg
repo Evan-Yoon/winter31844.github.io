@@ -1,0 +1,13 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agent SDK sandbox">
+  <rect width="1200" height="720" fill="#0B1020"/>
+  <rect x="108" y="116" width="984" height="488" rx="34" fill="#111827" stroke="#818CF8" stroke-width="5"/>
+  <rect x="156" y="172" width="888" height="76" rx="18" fill="#1F2937"/>
+  <circle cx="206" cy="210" r="13" fill="#F87171"/>
+  <circle cx="250" cy="210" r="13" fill="#FBBF24"/>
+  <circle cx="294" cy="210" r="13" fill="#34D399"/>
+  <rect x="186" y="306" width="246" height="180" rx="24" fill="#312E81" stroke="#A5B4FC" stroke-width="4"/>
+  <rect x="477" y="306" width="246" height="180" rx="24" fill="#164E63" stroke="#67E8F9" stroke-width="4"/>
+  <rect x="768" y="306" width="246" height="180" rx="24" fill="#14532D" stroke="#86EFAC" stroke-width="4"/>
+  <path d="M432 396H477M723 396H768" stroke="#CBD5E1" stroke-width="10" stroke-linecap="round"/>
+  <path d="M276 374H342M276 416H386M568 374H634M568 416H676M858 374H924M858 416H968" stroke="#F8FAFC" stroke-width="14" stroke-linecap="round"/>
+</svg>

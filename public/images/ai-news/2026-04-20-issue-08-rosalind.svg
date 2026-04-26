@@ -1,0 +1,16 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Scientific AI model">
+  <rect width="1200" height="720" fill="#111322"/>
+  <rect x="86" y="78" width="1028" height="564" rx="38" fill="#1E1B4B" stroke="#C4B5FD" stroke-width="4"/>
+  <path d="M420 152C620 244 620 476 420 568" stroke="#F0ABFC" stroke-width="16" stroke-linecap="round"/>
+  <path d="M780 152C580 244 580 476 780 568" stroke="#67E8F9" stroke-width="16" stroke-linecap="round"/>
+  <g stroke="#E9D5FF" stroke-width="8" stroke-linecap="round">
+    <path d="M475 220H725"/>
+    <path d="M438 300H762"/>
+    <path d="M438 420H762"/>
+    <path d="M475 500H725"/>
+  </g>
+  <circle cx="420" cy="152" r="20" fill="#F0ABFC"/>
+  <circle cx="780" cy="152" r="20" fill="#67E8F9"/>
+  <circle cx="420" cy="568" r="20" fill="#F0ABFC"/>
+  <circle cx="780" cy="568" r="20" fill="#67E8F9"/>
+</svg>

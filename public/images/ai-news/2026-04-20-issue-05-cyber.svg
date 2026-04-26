@@ -1,0 +1,10 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cyber defense AI">
+  <rect width="1200" height="720" fill="#111827"/>
+  <path d="M600 94L910 218V354C910 486 786 588 600 648C414 588 290 486 290 354V218L600 94Z" fill="#172554" stroke="#93C5FD" stroke-width="8"/>
+  <path d="M468 374L560 464L744 276" stroke="#BFDBFE" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <g opacity=".55" stroke="#60A5FA" stroke-width="5">
+    <path d="M210 184H96M210 280H142M210 376H88"/>
+    <path d="M990 184H1104M990 280H1058M990 376H1112"/>
+    <path d="M396 126V56M600 126V36M804 126V56"/>
+  </g>
+</svg>

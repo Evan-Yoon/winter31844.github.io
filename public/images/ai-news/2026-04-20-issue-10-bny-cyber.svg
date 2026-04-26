@@ -1,0 +1,13 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bank cyber model test">
+  <rect width="1200" height="720" fill="#07111F"/>
+  <rect x="110" y="144" width="980" height="424" rx="34" fill="#0F172A" stroke="#60A5FA" stroke-width="5"/>
+  <path d="M222 296H978L600 164L222 296Z" fill="#1D4ED8" stroke="#BFDBFE" stroke-width="6" stroke-linejoin="round"/>
+  <g fill="#172554" stroke="#93C5FD" stroke-width="5">
+    <rect x="286" y="316" width="86" height="166" rx="12"/>
+    <rect x="456" y="316" width="86" height="166" rx="12"/>
+    <rect x="626" y="316" width="86" height="166" rx="12"/>
+    <rect x="796" y="316" width="86" height="166" rx="12"/>
+  </g>
+  <rect x="246" y="500" width="708" height="36" rx="18" fill="#BFDBFE"/>
+  <path d="M600 234V214M600 234L568 254M600 234L632 254" stroke="#F8FAFC" stroke-width="10" stroke-linecap="round"/>
+</svg>

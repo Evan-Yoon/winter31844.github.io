@@ -1,0 +1,10 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI coding workflow">
+  <rect width="1200" height="720" fill="#08111F"/>
+  <rect x="96" y="106" width="1008" height="508" rx="34" fill="#0F172A" stroke="#38BDF8" stroke-width="5"/>
+  <rect x="150" y="168" width="430" height="384" rx="22" fill="#111827"/>
+  <rect x="626" y="168" width="424" height="384" rx="22" fill="#122033"/>
+  <path d="M272 284L206 360L272 436" stroke="#67E8F9" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M458 284L524 360L458 436" stroke="#67E8F9" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M392 250L338 470" stroke="#A7F3D0" stroke-width="18" stroke-linecap="round"/>
+  <path d="M696 252H956M696 318H902M696 384H982M696 450H876" stroke="#CBD5E1" stroke-width="18" stroke-linecap="round"/>
+</svg>
