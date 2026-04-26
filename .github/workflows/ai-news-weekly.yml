@@ -29,7 +29,7 @@ jobs:
 
       - name: Generate weekly AI news posts
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets['ANTHROPIC_API_KEY'] }}
         run: npm run ai-news:weekly
 
       - name: Build site
