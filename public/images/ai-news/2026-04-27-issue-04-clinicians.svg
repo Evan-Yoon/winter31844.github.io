@@ -1,0 +1,10 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Clinical AI workspace">
+  <rect width="1200" height="720" fill="#0F172A"/>
+  <rect x="112" y="96" width="976" height="528" rx="38" fill="#ECFEFF"/>
+  <rect x="176" y="158" width="350" height="404" rx="28" fill="#FFFFFF" stroke="#0891B2" stroke-width="5"/>
+  <rect x="586" y="158" width="438" height="404" rx="28" fill="#FFFFFF" stroke="#94A3B8" stroke-width="5"/>
+  <path d="M350 232V328M302 280H398" stroke="#DC2626" stroke-width="28" stroke-linecap="round"/>
+  <path d="M660 238H930M660 304H894M660 370H950M660 436H842" stroke="#334155" stroke-width="20" stroke-linecap="round"/>
+  <path d="M254 448C254 402 292 364 338 364H362C408 364 446 402 446 448V472H254V448Z" fill="#67E8F9"/>
+  <circle cx="350" cy="330" r="46" fill="#67E8F9"/>
+</svg>

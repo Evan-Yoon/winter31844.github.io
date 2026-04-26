@@ -1,0 +1,14 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI policy and lobbying">
+  <rect width="1200" height="720" fill="#111827"/>
+  <rect x="126" y="132" width="948" height="456" rx="34" fill="#1F2937" stroke="#FBBF24" stroke-width="5"/>
+  <path d="M260 280H940L600 162L260 280Z" fill="#92400E" stroke="#FDE68A" stroke-width="7" stroke-linejoin="round"/>
+  <g fill="#111827" stroke="#FDE68A" stroke-width="5">
+    <rect x="314" y="306" width="84" height="188" rx="12"/>
+    <rect x="490" y="306" width="84" height="188" rx="12"/>
+    <rect x="666" y="306" width="84" height="188" rx="12"/>
+    <rect x="842" y="306" width="84" height="188" rx="12"/>
+  </g>
+  <rect x="270" y="516" width="660" height="34" rx="17" fill="#FDE68A"/>
+  <circle cx="600" cy="236" r="30" fill="#FBBF24"/>
+  <path d="M574 236H626M600 210V262" stroke="#111827" stroke-width="10" stroke-linecap="round"/>
+</svg>
