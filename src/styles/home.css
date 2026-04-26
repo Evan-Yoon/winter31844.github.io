@@ -295,7 +295,13 @@ section {
 .about-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
 .about-heading-wrap { position: sticky; top: 100px; }
 .about-body { font-size: 1.05rem; line-height: 1.85; color: var(--ink-2); font-weight: 300; margin-bottom: 2rem; }
-.about-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+.about-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; margin-bottom: 0; }
+
+.about-cta {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
 
 .skill-chip {
   font-size: 0.7rem;
