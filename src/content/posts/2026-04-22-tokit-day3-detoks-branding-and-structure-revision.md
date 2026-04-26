@@ -1,6 +1,6 @@
 ---
 title: |
-  [Tokit] Day 3
+  [DeToks] Day 3
   DeToks 리브랜딩과 기획서 구조 수정
 slug: tokit-day3-detoks-branding-and-structure-revision
 date: 2026-04-22

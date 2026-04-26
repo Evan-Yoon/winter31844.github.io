@@ -1,6 +1,6 @@
 ---
 title: |
-  [Tokit] Day 4
+  [DeToks] Day 4
   Task Graph 책임 재정의와 실행 파이프라인 정리
 slug: tokit-day4-task-graph-role-boundary-and-execution-pipeline
 date: 2026-04-23
