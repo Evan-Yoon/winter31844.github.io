@@ -31,7 +31,8 @@
       "Bash(gh run *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(npm run *)"
     ],
     "additionalDirectories": [
       "c:\\dev\\project\\winter31844.github.io\\src\\pages\\categories",

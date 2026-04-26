@@ -210,6 +210,11 @@
   border-bottom: 1px solid rgba(26, 21, 18, 0.08);
 }
 
+.news-content .flip-media[src$=".svg"] {
+  object-fit: contain;
+  background: #050505;
+}
+
 .news-content .flip-body {
   display: flex;
   flex: 1;
