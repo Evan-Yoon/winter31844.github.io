@@ -1,26 +1,62 @@
-<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="720" fill="#0B1320"/>
-  <rect x="72" y="72" width="1056" height="576" rx="36" fill="url(#paint0_linear)"/>
-  <rect x="132" y="132" width="340" height="456" rx="28" fill="#102033" stroke="#7DD3FC" stroke-width="4"/>
-  <rect x="520" y="132" width="548" height="132" rx="24" fill="#132A40"/>
-  <rect x="520" y="294" width="548" height="108" rx="24" fill="#15324D"/>
-  <rect x="520" y="432" width="548" height="108" rx="24" fill="#193B59"/>
-  <path d="M302 198L212 234V324C212 411 269 492 302 510C335 492 392 411 392 324V234L302 198Z" fill="#7DD3FC"/>
-  <path d="M302 234L248 256V322C248 383 285 437 302 448C319 437 356 383 356 322V256L302 234Z" fill="#0B1320"/>
-  <path d="M268 332L292 356L338 304" stroke="#7DD3FC" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="564" cy="198" r="16" fill="#7DD3FC"/>
-  <circle cx="564" cy="348" r="16" fill="#93C5FD"/>
-  <circle cx="564" cy="486" r="16" fill="#BFDBFE"/>
-  <rect x="596" y="180" width="352" height="18" rx="9" fill="#E0F2FE"/>
-  <rect x="596" y="214" width="256" height="14" rx="7" fill="#9FB3C8"/>
-  <rect x="596" y="330" width="312" height="18" rx="9" fill="#E0F2FE"/>
-  <rect x="596" y="364" width="284" height="14" rx="7" fill="#9FB3C8"/>
-  <rect x="596" y="468" width="296" height="18" rx="9" fill="#E0F2FE"/>
-  <rect x="596" y="502" width="248" height="14" rx="7" fill="#9FB3C8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
   <defs>
-    <linearGradient id="paint0_linear" x1="120" y1="120" x2="1080" y2="600" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0F1E30"/>
-      <stop offset="1" stop-color="#102844"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="100%" stop-color="#0a0a0c"/>
     </linearGradient>
+    <radialGradient id="glow1" cx="80%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="20%" cy="80%" r="50%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="80"/>
+    </filter>
   </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  
+  <!-- Glowing Background -->
+  <circle cx="900" cy="250" r="450" fill="url(#glow1)" filter="url(#blur)"/>
+  <circle cx="300" cy="600" r="350" fill="url(#glow2)" filter="url(#blur)"/>
+
+  <!-- Decorative Grid -->
+  <g stroke="#ffffff" stroke-opacity="0.02" stroke-width="1.5" transform="rotate(-5, 600, 400)">
+    <path d="M0 -200 V1000"/><path d="M60 -200 V1000"/><path d="M120 -200 V1000"/><path d="M180 -200 V1000"/><path d="M240 -200 V1000"/><path d="M300 -200 V1000"/><path d="M360 -200 V1000"/><path d="M420 -200 V1000"/><path d="M480 -200 V1000"/><path d="M540 -200 V1000"/><path d="M600 -200 V1000"/><path d="M660 -200 V1000"/><path d="M720 -200 V1000"/><path d="M780 -200 V1000"/><path d="M840 -200 V1000"/><path d="M900 -200 V1000"/><path d="M960 -200 V1000"/><path d="M1020 -200 V1000"/><path d="M1080 -200 V1000"/><path d="M1140 -200 V1000"/><path d="M1200 -200 V1000"/><path d="M1260 -200 V1000"/><path d="M1320 -200 V1000"/><path d="M1380 -200 V1000"/>
+    <path d="M-200 -200 H1400"/><path d="M-200 -140 H1400"/><path d="M-200 -80 H1400"/><path d="M-200 -20 H1400"/><path d="M-200 40 H1400"/><path d="M-200 100 H1400"/><path d="M-200 160 H1400"/><path d="M-200 220 H1400"/><path d="M-200 280 H1400"/><path d="M-200 340 H1400"/><path d="M-200 400 H1400"/><path d="M-200 460 H1400"/><path d="M-200 520 H1400"/><path d="M-200 580 H1400"/><path d="M-200 640 H1400"/><path d="M-200 700 H1400"/><path d="M-200 760 H1400"/><path d="M-200 820 H1400"/><path d="M-200 880 H1400"/><path d="M-200 940 H1400"/>
+  </g>
+
+  <!-- Abstract Art -->
+  <g transform="translate(650, 150)">
+    
+    <path d="M250 50 L400 130 V280 L250 360 L100 280 V130 Z" fill="none" stroke="url(#accent)" stroke-width="8" stroke-dasharray="20 10"/>
+    <path d="M250 80 L370 145 V265 L250 330 L130 265 V145 Z" fill="url(#accent)" fill-opacity="0.1" stroke="url(#accent)" stroke-width="2"/>
+    <path d="M250 120 L330 160 V240 L250 280 L170 240 V160 Z" fill="url(#accent)" fill-opacity="0.3"/>
+    <circle cx="250" cy="200" r="30" fill="#ffffff" fill-opacity="0.9"/>
+    <circle cx="250" cy="200" r="80" fill="none" stroke="#ffffff" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="10 10"/>
+
+  </g>
+
+  <!-- Content Card -->
+  <g transform="translate(80, 500)">
+    <!-- Glass background with backdrop-filter effect simulation -->
+    <rect width="1040" height="240" rx="32" fill="#111115" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.1" stroke-width="2"/>
+    <rect x="0" y="0" width="1040" height="240" rx="32" fill="url(#accent)" fill-opacity="0.05"/>
+    
+    <path d="M 60 70 L 80 70" stroke="url(#accent)" stroke-width="6" stroke-linecap="round"/>
+    <text x="100" y="76" fill="url(#accent)" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="24" letter-spacing="3">AI GOVERNANCE</text>
+    
+    <text x="60" y="150" fill="url(#text-grad)" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="52" letter-spacing="-1">Guardian Agents</text>
+  </g>
 </svg>
