@@ -5,7 +5,7 @@ date: "2026-04-27"
 author: "Evan Yoon"
 category: "ai-news"
 description: "4월 넷째 주 핵심 AI 이슈를 12장의 카드로 정리했다."
-thumbnail: "https://images.ctfassets.net/kftzwdyauwt9/5A8f5mO7aKrwLH5ClDV0si/e49a0a3c56f63d9998dd338ce16d0dd6/Blog1.png?fm=webp&amp;q=90&amp;w=3840"
+thumbnail: "https://images.ctfassets.net/kftzwdyauwt9/5A8f5mO7aKrwLH5ClDV0si/e49a0a3c56f63d9998dd338ce16d0dd6/Blog1.png?fm=webp&q=90&w=3840"
 tags: ["주간-ai-뉴스", "ai-브리핑", "카드뉴스", "기술트렌드"]
 draft: false
 toc: false
