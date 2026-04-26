@@ -1,15 +1,11 @@
 ---
-title: |
-  [DeToks] Day 4
-  Task Graph 책임 재정의와 실행 파이프라인 정리
+title: "[DeToks] Day 4 - Task Graph 책임 재정의와 실행 파이프라인 정리"
 slug: tokit-day4-task-graph-role-boundary-and-execution-pipeline
 date: 2026-04-23
 author: Evan Yoon
 category: project
 subcategory: team-project
-description: |
-  Tokit 프로젝트 4일차에는 Role 1과 Role 2.1의 책임 경계를 다시 나누고,
-  Sentence 기반 입력 구조와 Task Graph 실행 파이프라인을 정리했다.
+description: "Tokit 프로젝트 4일차에는 Role 1과 Role 2.1의 책임 경계를 다시 나누고, Sentence 기반 입력 구조와 Task Graph 실행 파이프라인을 정리했다."
 thumbnail: /images/posts/tokit/mermaid4.png
 tags:
   - tokit
@@ -26,13 +22,13 @@ draft: false
 toc: true
 ---
 
-4월 23일에는 기능을 하나씩 추가했다기보다, **Task Graph가 어느 역할에서 어떻게 만들어져야 하는지**를 다시 정리하는 데 시간을 썼다. 이전 구조에서는 Role 1이 `tasks[]`, `id`, `depends_on`까지 만들어 주는 쪽으로 정의돼 있었는데, 이 방식은 실제로 구현을 시작하려고 보니 Role 2.1과 책임이 겹쳤다.
+4월 23일에는 기능을 하나씩 추가하기보다, **Task Graph가 어느 역할에서 어떻게 만들어져야 하는지**를 다시 정리하는 데 시간을 썼다. 이전 구조에서는 Role 1이 `tasks[]`, `id`, `depends_on`까지 만들어 주는 쪽으로 정의돼 있었다. 하지만 실제 구현을 시작하려고 보니 이 방식은 Role 2.1과 책임이 겹쳤다.
 
 그래서 이날 정리한 핵심은 단순했다. Role 1은 전처리만 맡고, Role 2.1은 분석과 Task Graph 구성을 전담한다. 이 경계를 먼저 분명하게 잡고 나서, 그 아래에 붙는 검증과 실행 준비 구조를 순서대로 정리했다.
 
 ## Role 1은 문장을 정리하고, Role 2.1은 그래프를 만든다
 
-이번 변경에서 가장 중요한 부분은 입력 구조를 Task 중심에서 Sentence 중심으로 바꾼 것이다.
+이번 변경에서 가장 중요한 부분은 입력 구조를 Task 중심에서 Sentence 중심으로 바꾼 것이다. 즉, 처음부터 완성된 task를 만들기보다 먼저 문장 배열을 만들고, 그다음 단계에서 그래프를 구성하도록 책임을 나눴다.
 
 기존에는 Role 1이 아래 같은 역할까지 맡는 흐름이었다.
 
@@ -74,7 +70,7 @@ toc: true
 
 ## TaskGraphProcessor도 이 경계에 맞춰 다시 정리했다
 
-역할 재정의에 맞춰 `TaskGraphProcessor`의 입력도 바뀌었다. 더 이상 `{ intent, tasks[] }`를 받지 않고, `{ sentences: string[] }`를 받도록 전면 수정됐다.
+역할 재정의에 맞춰 `TaskGraphProcessor`의 입력도 바뀌었다. 더 이상 `{ intent, tasks[] }`를 받지 않고, `{ sentences: string[] }`를 받도록 수정했다.
 
 이 변경에 따라 `pipeline.ts`에서는 `RawTaskSchema`, `RawAnalyzedRequestSchema`를 제거하고 `CompiledSentencesSchema`를 추가했다. 문서에서도 `AnalyzedRequest` 대신 `CompiledSentences`를 기준으로 흐름을 다시 설명하게 됐다.
 
@@ -89,7 +85,7 @@ toc: true
 
 ## 그래프를 만든 뒤에는 검증, 해석, 병렬 분류 순서로 이어진다
 
-이번에 같이 정리한 나머지 네 개 모듈은 Task Graph를 실제 실행 가능한 상태로 넘기기 위한 흐름에 가깝다.
+이번에 함께 정리한 나머지 모듈들은 Task Graph를 실제 실행 가능한 상태로 넘기기 위한 흐름에 가깝다.
 
 먼저 `DAGValidator`는 그래프가 유효한지 검사한다. 여기서는 세 가지를 본다.
 
@@ -99,7 +95,7 @@ toc: true
 
 검증이 통과하면 `topologicalOrder`를 반환한다. 이 값은 다음 단계에서 바로 사용된다.
 
-그다음 `DependencyResolver`는 검증된 그래프를 실제 실행 순서로 바꾼다. 단순히 ID 목록만 넘기는 것이 아니라, 각 task가 어떤 task들에 의존하는지 실제 객체 기준으로 풀어낸 `ResolvedTask` 구조를 만든다. 여기까지 오면 "무엇이 먼저 실행돼야 하는가"가 코드 상에서도 명확해진다.
+그다음 `DependencyResolver`는 검증된 그래프를 실제 실행 순서로 바꾼다. 단순히 ID 목록만 넘기는 것이 아니라, 각 task가 어떤 task들에 의존하는지 실제 객체 기준으로 풀어낸 `ResolvedTask` 구조를 만든다. 여기까지 오면 "무엇이 먼저 실행돼야 하는가"가 코드에서도 명확해진다.
 
 이후 `ParallelClassifier`는 resolved task들을 stage 단위로 묶는다. 규칙은 비교적 단순하다.
 
@@ -110,7 +106,7 @@ toc: true
 
 ## 이번 정리는 기능 추가보다 구조 정리에 가까웠다
 
-겉으로 보면 `DAGValidator`, `DependencyResolver`, `ParallelClassifier`처럼 새 파일이 여러 개 생겼다. 하지만 실제로 더 중요했던 건, 이 모듈들이 모두 **Role 재정의 이후의 흐름 위에 놓였다는 점**이었다.
+겉으로 보면 `DAGValidator`, `DependencyResolver`, `ParallelClassifier`처럼 새 파일이 여러 개 생겼다. 하지만 실제로 더 중요했던 건 이 모듈들이 모두 **Role 재정의 이후의 흐름 위에 놓였다는 점**이었다.
 
 정리하면 지금 구조는 아래처럼 읽힌다.
 
