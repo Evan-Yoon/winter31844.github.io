@@ -15,7 +15,7 @@ export default defineConfig({
     remarkPlugins: [remarkMedia],
     shikiConfig: {
       theme: "one-dark-pro",
-      wrap: true,
+      wrap: false,
     },
   },
 });
