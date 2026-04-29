@@ -51,7 +51,7 @@ import '../styles/guestbook.css';
 </BaseLayout>
 
 <script>
-  import { get, push, ref, query, orderByKey, limitToLast } from 'firebase/database';
+  import { get, push, ref, query, orderByKey } from 'firebase/database';
   import { getFirebaseDatabase } from '../lib/firebase/client';
 
   const form = document.getElementById('guestbook-form') as HTMLFormElement;

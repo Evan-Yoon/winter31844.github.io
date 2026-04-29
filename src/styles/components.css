@@ -94,7 +94,9 @@
 .badge-study { background: var(--accent-2-soft); color: var(--accent-2); }
 .badge-project { background: #E6F0E6; color: #2E7D32; }
 .badge-explore { background: var(--accent-soft); color: var(--accent); }
+.badge-ai-news { background: #E9EEF8; color: #365D9D; }
 [data-theme="dark"] .badge-project { background: #1a2e1a; color: #66bb6a; }
+[data-theme="dark"] .badge-ai-news { background: #172235; color: #8FB4E8; }
 .sr-date { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-3); white-space: nowrap; }
 .sr-desc { font-size: 0.8rem; color: var(--ink-2); line-height: 1.5; }
 .sr-desc mark { background: var(--accent-soft); color: var(--accent); border-radius: 2px; padding: 0 2px; }

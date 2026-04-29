@@ -3,10 +3,6 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/ai-news.css';
 
-function getEntrySlug(entry: { id: string; data: { slug?: string } }) {
-  return entry.data.slug ?? entry.id.split('/').pop() ?? entry.id;
-}
-
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
   const newsEntries = allPosts.filter((post) => {
@@ -48,9 +44,9 @@ const { Content } = await render(entry);
 
     <footer class="news-footer">
       <a href="/ai-news" class="back-link">
-        <span class="arrow">←</span> Back to Archive
+        <span class="arrow" aria-hidden="true">←</span> Back to Archive
       </a>
-    </footer  >
+    </footer>
   </div>
 </BaseLayout>
 

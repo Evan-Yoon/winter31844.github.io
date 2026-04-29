@@ -94,7 +94,7 @@ export function remarkMedia() {
     if (h2Indices.length === 0) return;
 
     const insertions = h2Indices
-      .map((h2Idx, index) => ({
+      .map((_, index) => ({
         at: h2Indices[index + 1] ?? tree.children.length,
         file: candidates[index],
       }))

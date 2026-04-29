@@ -53,7 +53,7 @@ export function remarkAutoImages() {
 
     // 각 h2 섹션 끝(다음 h2 직전 또는 문서 끝)에 이미지 하나씩 삽입 계획
     const insertions = h2Indices
-      .map((h2Idx, i) => ({
+      .map((_, i) => ({
         at: h2Indices[i + 1] ?? tree.children.length,
         file: candidates[i],
       }))
