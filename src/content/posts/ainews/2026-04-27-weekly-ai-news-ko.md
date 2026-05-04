@@ -281,7 +281,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="Microsoft AI security 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="https://www.microsoft.com/en-us/security/blog/wp-content/uploads/2026/04/Security-now-1.jpg" alt="Microsoft AI-powered defense" />
+        <img class="flip-media" src="/images/ai-news/2026-04-27-issue-11-microsoft-security.svg" alt="Microsoft AI-powered defense" />
         <div class="flip-body">
           <h3 class="flip-title">보안팀, AI 공격에 AI 방어로 맞선다</h3>
         </div>
