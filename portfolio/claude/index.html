@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Evan Yoon</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <style>
+    @page { size: A4; margin: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #14152a;
+      --ink2:   #1c1e34;
+      --ink3:   #242640;
+      --paper:  #f0ece4;
+      --white:  #ffffff;
+      --gold:   #c4a25e;
+      --muted:  #6c6c80;
+      --line:   #e2ddd5;
+      --r:      12px;
+      --pw:     794px;
+      --ph:     1123px;
+    }
+
+    body {
+      font-family: 'Pretendard', 'Inter', -apple-system, sans-serif;
+      background: #d8d4cc;
+      color: var(--ink);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: var(--pw);
+      height: var(--ph);
+      margin: 0 auto 24px;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    /* ═══════════════════════════════════
+       PAGE 1 — COVER
+    ═══════════════════════════════════ */
+    .cover {
+      height: var(--ph);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── dark zone (top ~580px) ── */
+    .cv-dark {
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cv-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 36px;
+      border-bottom: 1px solid var(--ink3);
+    }
+
+    .cv-bar__title {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .cv-bar__num {
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: #32344c;
+    }
+
+    /* hero: left identity, right contacts */
+    .cv-hero {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      padding: 36px 36px 30px;
+      border-bottom: 1px solid var(--ink3);
+    }
+
+    .cv-hero__left {
+      padding-right: 36px;
+    }
+
+    .cv-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .cv-eyebrow::before {
+      content: '';
+      display: block;
+      width: 18px; height: 2px;
+      background: var(--gold);
+      border-radius: 1px;
+    }
+
+    .cv-name {
+      font-size: 60px;
+      font-weight: 800;
+      line-height: 0.95;
+      color: #fff;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+
+    .cv-name em { font-style: normal; color: var(--gold); }
+
+    .cv-role {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #acaec4;
+      margin-bottom: 6px;
+    }
+
+    .cv-spec {
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #3c3e5c;
+      margin-bottom: 16px;
+    }
+
+    .cv-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .cv-chip {
+      font-size: 9px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 5px;
+      background: var(--ink3);
+      color: #5a5c7a;
+      letter-spacing: 0.3px;
+    }
+
+    .cv-hero__right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 16px;
+      padding-left: 36px;
+      border-left: 1px solid var(--ink3);
+      padding-top: 6px;
+    }
+
+    .cv-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cv-contact__lbl {
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .cv-contact__val {
+      font-size: 12px;
+      font-weight: 400;
+      color: #b8bace;
+    }
+
+    /* profile summary */
+    .cv-summary {
+      padding: 20px 36px 22px;
+      border-bottom: 1px solid var(--ink3);
+    }
+
+    .cv-summary__lbl {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .cv-summary__text {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #86889e;
+    }
+
+    /* 3 strength cards */
+    .cv-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      padding: 18px 36px 22px;
+    }
+
+    .cv-card {
+      background: var(--ink2);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      border: 1px solid var(--ink3);
+    }
+
+    .cv-card__num {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .cv-card__title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #e0e0ee;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .cv-card__desc {
+      font-size: 10px;
+      font-weight: 400;
+      color: #48496a;
+      line-height: 1.55;
+    }
+
+    /* ── light zone (bottom ~540px) — selected projects ── */
+    .cv-light {
+      flex: 1;
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+      padding: 20px 36px 24px;
+    }
+
+    .cv-light__lbl {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .cv-proj-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 11px;
+    }
+
+    .cv-proj {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cv-proj__head {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+      margin-bottom: 6px;
+    }
+
+    .cv-proj__num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .cv-proj__name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+    }
+
+    .cv-proj__tag {
+      margin-left: auto;
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(196,162,94,0.1);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .cv-proj__desc {
+      font-size: 11.5px;
+      font-weight: 400;
+      color: #505060;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      flex: 1;
+    }
+
+    .cv-proj__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .cv-proj__chip {
+      font-size: 9px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: var(--paper);
+      color: var(--muted);
+    }
+
+    .cv-proj__ref {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    /* ═══════════════════════════════════
+       PAGE 2 — WALKMATE
+    ═══════════════════════════════════ */
+    .proj {
+      height: var(--ph);
+      display: flex;
+      flex-direction: column;
+      background: var(--paper);
+    }
+
+    /* ── Zone 1: header (dark) ── */
+    .ph {
+      flex: 0 0 auto;
+      background: var(--ink);
+      padding: 22px 36px 18px;
+      position: relative;
+    }
+
+    .ph::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 80px; height: 2px;
+      background: var(--gold);
+    }
+
+    .ph__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .ph__meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ph__idx {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .ph__sep {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: #32344c;
+    }
+
+    .ph__type {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #42446a;
+    }
+
+    .ph__pnum {
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: #32344c;
+    }
+
+    .ph__title {
+      font-size: 44px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+
+    .ph__title em { font-style: normal; color: var(--gold); }
+
+    .ph__sub {
+      font-size: 11.5px;
+      color: #60629a;
+      line-height: 1.45;
+      margin-bottom: 13px;
+      max-width: 540px;
+    }
+
+    .ph__metrics {
+      display: flex;
+      width: fit-content;
+      border: 1px solid var(--ink3);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 11px;
+    }
+
+    .ph__met {
+      padding: 7px 18px;
+      text-align: center;
+      border-right: 1px solid var(--ink3);
+    }
+
+    .ph__met:last-child { border-right: none; }
+
+    .ph__met-val {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .ph__met-lbl {
+      font-size: 7.5px;
+      font-weight: 500;
+      color: #42446a;
+      margin-top: 3px;
+      letter-spacing: 0.4px;
+    }
+
+    .ph__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .ph__chip {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 2.5px 7px;
+      border-radius: 4px;
+      background: var(--ink2);
+      color: #42446a;
+    }
+
+    .ph__chip--hi {
+      background: rgba(196,162,94,0.13);
+      color: var(--gold);
+    }
+
+    /* ── Zone 2: challenges ── */
+    .pz2 {
+      flex: 0 0 auto;
+      padding: 16px 36px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .slbl {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .cs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .cs-card {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 12px 14px;
+    }
+
+    .cs-half { }
+
+    .cs-half + .cs-div { margin-top: 8px; }
+    .cs-div { height: 1px; background: var(--line); margin-bottom: 8px; }
+
+    .cs-half__lbl {
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .cs-half__lbl--c { color: #a83c3c; }
+    .cs-half__lbl--s { color: #2e7a52; }
+
+    .cs-half__text {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #3a3a54;
+    }
+
+    /* ── Zone 3: flex grows to fill remaining height ── */
+    .pz3 {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 36px 20px;
+      gap: 0;
+      min-height: 0;
+    }
+
+    /* context callout */
+    .pz3-context {
+      background: rgba(196,162,94,0.07);
+      border-left: 2px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+    }
+
+    .pz3-context__text {
+      font-size: 11.5px;
+      font-weight: 400;
+      color: #48402a;
+      line-height: 1.55;
+    }
+
+    /* role section */
+    .pz3-role {
+      margin-bottom: 16px;
+    }
+
+    /* 2-col grid: features | tech */
+    .pz3-mid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 0;
+    }
+
+    /* outcome + relevance — pushed to bottom */
+    .pz3-bottom {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* shared list */
+    .rlist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .rlist li {
+      font-size: 11px;
+      color: #3c3c54;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .rlist li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    /* tech stack categories */
+    .tech-cat {
+      margin-bottom: 9px;
+    }
+
+    .tech-cat:last-child { margin-bottom: 0; }
+
+    .tech-cat__lbl {
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .tech-cat__text {
+      font-size: 10.5px;
+      color: #484860;
+      line-height: 1.4;
+    }
+
+    /* project meta */
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-row {
+      font-size: 10.5px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .meta-row span {
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* key outcome */
+    .outcome {
+      background: var(--ink);
+      border-radius: var(--r);
+      padding: 13px 15px;
+    }
+
+    .outcome__lbl {
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 7px;
+    }
+
+    .outcome__text {
+      font-size: 11px;
+      color: #8486a4;
+      line-height: 1.55;
+    }
+
+    /* sales relevance */
+    .relevance {
+      background: rgba(196,162,94,0.08);
+      border: 1px solid rgba(196,162,94,0.22);
+      border-radius: var(--r);
+      padding: 13px 15px;
+    }
+
+    .relevance__lbl {
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #a07838;
+      margin-bottom: 7px;
+    }
+
+    .relevance__text {
+      font-size: 11px;
+      color: #48401e;
+      line-height: 1.55;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: none; }
+      .page { margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     PAGE 1 · COVER
+══════════════════════════════════ -->
+<div class="page">
+<div class="cover">
+
+  <!-- dark upper zone -->
+  <div class="cv-dark">
+
+    <div class="cv-bar">
+      <span class="cv-bar__title">2026 Sales Engineer Portfolio</span>
+      <span class="cv-bar__num">01 / 05</span>
+    </div>
+
+    <div class="cv-hero">
+      <div class="cv-hero__left">
+        <div class="cv-eyebrow">Sales Engineer Candidate</div>
+        <div class="cv-name">Evan<br /><em>Yoon</em></div>
+        <div class="cv-role">AI · Mobile · B2B Solution Prototyping</div>
+        <div class="cv-spec">Flutter &nbsp;·&nbsp; React Native &nbsp;·&nbsp; FastAPI &nbsp;·&nbsp; GPT-4o</div>
+        <div class="cv-chips">
+          <span class="cv-chip">TFLite / YOLOv26</span>
+          <span class="cv-chip">PostgreSQL</span>
+          <span class="cv-chip">Redis</span>
+          <span class="cv-chip">AWS S3</span>
+          <span class="cv-chip">Docker</span>
+        </div>
+      </div>
+      <div class="cv-hero__right">
+        <div class="cv-contact">
+          <div class="cv-contact__lbl">Contact</div>
+          <div class="cv-contact__val">wlgus1805@gmail.com</div>
+        </div>
+        <div class="cv-contact">
+          <div class="cv-contact__lbl">GitHub</div>
+          <div class="cv-contact__val">github.com/winter31844</div>
+        </div>
+        <div class="cv-contact">
+          <div class="cv-contact__lbl">Blog</div>
+          <div class="cv-contact__val">winter31844.github.io</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-summary">
+      <div class="cv-summary__lbl">Profile</div>
+      <p class="cv-summary__text">
+        Full-stack engineer with hands-on experience delivering AI-integrated mobile applications and end-user tools
+        across accessibility, HR, and consumer verticals. Able to scope customer problems quickly, ship working
+        prototypes, and communicate technical decisions clearly to non-technical stakeholders.
+        Seeking a Sales Engineer role to bridge product depth with real-world business outcomes.
+      </p>
+    </div>
+
+    <div class="cv-cards">
+      <div class="cv-card">
+        <div class="cv-card__num">01</div>
+        <div class="cv-card__title">Customer Problem → Prototype</div>
+        <div class="cv-card__desc">MVP-first mindset. Scope fast, ship a working demo, and de-risk assumptions with real user feedback.</div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card__num">02</div>
+        <div class="cv-card__title">Technical Communication</div>
+        <div class="cv-card__desc">Translate engineering depth into business-clear language — fluent with developers and decision-makers.</div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card__num">03</div>
+        <div class="cv-card__title">End-to-End Delivery</div>
+        <div class="cv-card__desc">Full ownership from architecture through deployment and user testing — no handoffs, no gaps.</div>
+      </div>
+    </div>
+
+  </div><!-- end .cv-dark -->
+
+  <!-- light lower zone — selected projects -->
+  <div class="cv-light">
+    <div class="cv-light__lbl">Selected Projects</div>
+    <div class="cv-proj-grid">
+
+      <div class="cv-proj">
+        <div class="cv-proj__head">
+          <span class="cv-proj__num">01</span>
+          <span class="cv-proj__name">Walkmate</span>
+          <span class="cv-proj__tag">B2G · Accessibility</span>
+        </div>
+        <p class="cv-proj__desc">On-device AI navigation for visually impaired pedestrians. Dual stakeholder delivery: mobile app for users + city admin heatmap dashboard for hazard monitoring.</p>
+        <div class="cv-proj__chips">
+          <span class="cv-proj__chip">Flutter</span>
+          <span class="cv-proj__chip">YOLOv26nano</span>
+          <span class="cv-proj__chip">TFLite</span>
+          <span class="cv-proj__chip">FastAPI</span>
+          <span class="cv-proj__chip">React Admin</span>
+        </div>
+        <div class="cv-proj__ref">→ Page 02</div>
+      </div>
+
+      <div class="cv-proj">
+        <div class="cv-proj__head">
+          <span class="cv-proj__num">02</span>
+          <span class="cv-proj__name">DeToks</span>
+          <span class="cv-proj__tag">B2C · Platform</span>
+        </div>
+        <p class="cv-proj__desc">Short-form content platform with AI-driven curation and topic filtering. Personalized discovery feed with moderation workflow and creator analytics dashboard.</p>
+        <div class="cv-proj__chips">
+          <span class="cv-proj__chip">React</span>
+          <span class="cv-proj__chip">FastAPI</span>
+          <span class="cv-proj__chip">GPT-4o</span>
+          <span class="cv-proj__chip">PostgreSQL</span>
+        </div>
+        <div class="cv-proj__ref">→ Page 03</div>
+      </div>
+
+      <div class="cv-proj">
+        <div class="cv-proj__head">
+          <span class="cv-proj__num">03</span>
+          <span class="cv-proj__name">Mongle</span>
+          <span class="cv-proj__tag">B2C · FinTech</span>
+        </div>
+        <p class="cv-proj__desc">Wedding vendor quote comparison app powered by GPT-4o Vision. Parses low-quality photos of estimate documents and outputs structured cost breakdowns for budget planning.</p>
+        <div class="cv-proj__chips">
+          <span class="cv-proj__chip">React Native</span>
+          <span class="cv-proj__chip">GPT-4o Vision</span>
+          <span class="cv-proj__chip">FastAPI</span>
+        </div>
+        <div class="cv-proj__ref">→ Page 04</div>
+      </div>
+
+      <div class="cv-proj">
+        <div class="cv-proj__head">
+          <span class="cv-proj__num">04</span>
+          <span class="cv-proj__name">WorkWage</span>
+          <span class="cv-proj__tag">B2C · HR / Payroll</span>
+        </div>
+        <p class="cv-proj__desc">Shift salary calculator for hotel and service industry workers. Accurately handles night-shift premiums, holiday multipliers, and midnight-crossing edge cases.</p>
+        <div class="cv-proj__chips">
+          <span class="cv-proj__chip">Flutter</span>
+          <span class="cv-proj__chip">Dart</span>
+          <span class="cv-proj__chip">RevenueCat</span>
+          <span class="cv-proj__chip">Google Drive API</span>
+        </div>
+        <div class="cv-proj__ref">→ Page 05</div>
+      </div>
+
+    </div>
+  </div><!-- end .cv-light -->
+
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     PAGE 2 · WALKMATE
+══════════════════════════════════ -->
+<div class="page">
+<div class="proj">
+
+  <!-- Zone 1: dark header -->
+  <div class="ph">
+    <div class="ph__top">
+      <div class="ph__meta">
+        <span class="ph__idx">Project 01</span>
+        <span class="ph__sep"></span>
+        <span class="ph__type">Team · Feb 2026 · 16 days</span>
+      </div>
+      <span class="ph__pnum">02 / 05</span>
+    </div>
+    <div class="ph__title">Walk<em>mate</em></div>
+    <div class="ph__sub">On-device AI navigation for visually impaired pedestrians — real-time obstacle detection, hazard reporting, and city-level safety dashboard.</div>
+    <div class="ph__metrics">
+      <div class="ph__met">
+        <div class="ph__met-val">6MB</div>
+        <div class="ph__met-lbl">Model (quantized)</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">5s</div>
+        <div class="ph__met-lbl">Detection cycle</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">16d</div>
+        <div class="ph__met-lbl">Build time</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">3</div>
+        <div class="ph__met-lbl">Engineers</div>
+      </div>
+    </div>
+    <div class="ph__chips">
+      <span class="ph__chip ph__chip--hi">On-device AI</span>
+      <span class="ph__chip">Flutter</span>
+      <span class="ph__chip">YOLOv26nano</span>
+      <span class="ph__chip">TFLite</span>
+      <span class="ph__chip">FastAPI</span>
+      <span class="ph__chip">React Admin</span>
+      <span class="ph__chip">PostgreSQL</span>
+      <span class="ph__chip">Redis</span>
+      <span class="ph__chip">AWS S3</span>
+      <span class="ph__chip">Docker</span>
+    </div>
+  </div>
+
+  <!-- Zone 2: challenges -->
+  <div class="pz2">
+    <div class="slbl">Key Challenges &amp; Solutions</div>
+    <div class="cs-grid">
+      <div class="cs-card">
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--c">Challenge</div>
+          <div class="cs-half__text">Server-based AI introduced unacceptable latency for safety-critical real-time navigation guidance on a mobile device.</div>
+        </div>
+        <div class="cs-div"></div>
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--s">Solution</div>
+          <div class="cs-half__text">Migrated to on-device TFLite inference with YOLOv26nano (6MB quantized) — zero network round-trip, works offline.</div>
+        </div>
+      </div>
+      <div class="cs-card">
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--c">Challenge</div>
+          <div class="cs-half__text">Compass sensor proved unreliable at slow walking speeds, producing incorrect directional voice prompts for the user.</div>
+        </div>
+        <div class="cs-div"></div>
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--s">Solution</div>
+          <div class="cs-half__text">Replaced compass with GPS vector-based direction detection and a low-pass sensor fusion filter for stable guidance.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone 3: role + features|tech + outcome|relevance -->
+  <div class="pz3">
+
+    <!-- project context callout -->
+    <div class="pz3-context">
+      <p class="pz3-context__text">
+        Walkmate closes a gap in accessibility infrastructure — no existing app combined real-time AI obstacle avoidance
+        with automated city hazard reporting. The dual stakeholder model (end user + admin portal) reflects a common
+        pattern in enterprise B2G SaaS, making it directly relevant to SE client conversations.
+      </p>
+    </div>
+
+    <!-- my role -->
+    <div class="pz3-role">
+      <div class="slbl">My Role &amp; Contribution</div>
+      <ul class="rlist">
+        <li>Led mobile AI pipeline — integrated TFLite within Flutter/Android WebView, resolved native bridge and WebView communication issues</li>
+        <li>Owned navigation module: TMAP API integration, GPS vector direction algorithm, low-pass sensor fusion implementation</li>
+        <li>Drove model selection decision (YOLO11 → YOLO26) and image preprocessing strategy (letterbox padding for reduced false positives)</li>
+        <li>Coordinated backend API contract with FastAPI team — diagnosed and resolved trailing-slash routing and ngrok CORS blockers</li>
+        <li>Designed admin dashboard data flow: hazard report schema, S3 image storage, and heatmap aggregation logic</li>
+      </ul>
+    </div>
+
+    <!-- core features + tech stack side by side -->
+    <div class="pz3-mid">
+      <div>
+        <div class="slbl">Core Features</div>
+        <ul class="rlist">
+          <li>Real-time on-device obstacle detection — damaged pavements, unparked vehicles, physical obstructions</li>
+          <li>TMAP pedestrian turn-by-turn voice navigation with GPS + sensor fusion for accurate direction at walking speed</li>
+          <li>Automated hazard photo capture with GPS tagging (5s interval) and batch upload to backend</li>
+          <li>React admin dashboard with live cluster heatmap of reported hazard locations by area</li>
+        </ul>
+      </div>
+      <div>
+        <div class="slbl">Tech Stack</div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Mobile</div>
+          <div class="tech-cat__text">Flutter, Dart, Android WebView, TFLite, Capacitor</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">AI / Model</div>
+          <div class="tech-cat__text">YOLOv26nano (6MB, int8 quantized), on-device inference, letterbox preprocessing</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Backend</div>
+          <div class="tech-cat__text">FastAPI (Python), PostgreSQL, Redis, Docker, AWS S3</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Admin Panel</div>
+          <div class="tech-cat__text">React, Tailwind CSS, TMAP heatmap API</div>
+        </div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line);">
+          <div class="slbl" style="color: var(--muted);">Details</div>
+          <div class="meta-list">
+            <div class="meta-row">Type <span>· Team (3 engineers)</span></div>
+            <div class="meta-row">Period <span>· Feb 2026</span></div>
+            <div class="meta-row">Status <span>· Demo-ready</span></div>
+            <div class="meta-row">Target <span>· Visually impaired users + city admin</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- key outcome + sales relevance — pushed to bottom -->
+    <div class="pz3-bottom">
+      <div class="outcome">
+        <div class="outcome__lbl">Key Outcome</div>
+        <div class="outcome__text">Delivered a field-tested on-device AI navigation demo within 16 days. Resolved 4 critical technical blockers mid-sprint — on-device AI migration, direction accuracy, image preprocessing, and API integration — with no schedule slip.</div>
+      </div>
+      <div class="relevance">
+        <div class="relevance__lbl">Sales Relevance</div>
+        <div class="relevance__text">Demonstrates dual stakeholder delivery: end-user product and operational admin portal shipped together. Strong fit for enterprise clients needing on-device AI, accessibility compliance, or B2G proof-of-concept systems under tight timelines.</div>
+      </div>
+    </div>
+
+  </div><!-- end .pz3 -->
+
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     PAGE 3 · DETOKS
+══════════════════════════════════ -->
+<div class="page">
+<div class="proj">
+
+  <div class="ph">
+    <div class="ph__top">
+      <div class="ph__meta">
+        <span class="ph__idx">Project 02</span>
+        <span class="ph__sep"></span>
+        <span class="ph__type">Team · Apr – May 2026 · 10 days</span>
+      </div>
+      <span class="ph__pnum">03 / 05</span>
+    </div>
+    <div class="ph__title">De<em>Toks</em></div>
+    <div class="ph__sub">LLM token optimization CLI for developers — compiles Korean prompts into concise English, decomposes tasks into a dependency DAG, and manages session context across multi-turn AI interactions.</div>
+    <div class="ph__metrics">
+      <div class="ph__met">
+        <div class="ph__met-val">34.8%</div>
+        <div class="ph__met-lbl">Token reduction</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">82%</div>
+        <div class="ph__met-lbl">Classifier accuracy</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">106/106</div>
+        <div class="ph__met-lbl">Tests passing</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">0.89s</div>
+        <div class="ph__met-lbl">Avg inference</div>
+      </div>
+    </div>
+    <div class="ph__chips">
+      <span class="ph__chip ph__chip--hi">DAG Orchestration</span>
+      <span class="ph__chip">TypeScript</span>
+      <span class="ph__chip">Node.js</span>
+      <span class="ph__chip">LLaMA.cpp</span>
+      <span class="ph__chip">supergemma-4-e4b</span>
+      <span class="ph__chip">Claude Adapter</span>
+      <span class="ph__chip">Codex</span>
+      <span class="ph__chip">Gemini CLI</span>
+    </div>
+  </div>
+
+  <div class="pz2">
+    <div class="slbl">Key Challenges &amp; Solutions</div>
+    <div class="cs-grid">
+      <div class="cs-card">
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--c">Challenge</div>
+          <div class="cs-half__text">Korean prompts contain politeness markers and discourse fillers ("if it's okay", "when you have time") that inflate token count and confuse naive task extraction.</div>
+        </div>
+        <div class="cs-div"></div>
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--s">Solution</div>
+          <div class="cs-half__text">Separated translation (Role 1) from task analysis (Role 2). Dedicated TaskCandidateExtractor removes meta-expressions before classification, preserving only executable intent.</div>
+        </div>
+      </div>
+      <div class="cs-card">
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--c">Challenge</div>
+          <div class="cs-half__text">Users describe multi-step tasks out of execution order ("fix X after checking Y"), making sentence order unreliable as a proxy for task dependencies.</div>
+        </div>
+        <div class="cs-div"></div>
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--s">Solution</div>
+          <div class="cs-half__text">Built FLOWS_TO type transition table encoding which task types naturally precede others. Combined with Kahn's algorithm for topological sort — deterministic, order-independent execution.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pz3">
+
+    <div class="pz3-context">
+      <p class="pz3-context__text">
+        DeToks addresses a real developer pain point: Korean-language prompts are verbose and expensive to run through paid LLM APIs.
+        By moving optimization upstream — into structured task decomposition and context compression — it reduces cost without sacrificing
+        execution quality. The CLI-first architecture and multi-adapter support (Claude, Codex, Gemini) make it directly applicable to
+        enterprise developer tooling workflows.
+      </p>
+    </div>
+
+    <div class="pz3-role">
+      <div class="slbl">My Role &amp; Contribution</div>
+      <ul class="rlist">
+        <li>Designed and built the Task Graph Processor (Role 2.1): 8-type task classification system (explore, analyze, create, modify, validate, execute, document, plan)</li>
+        <li>Created the FLOWS_TO dependency transition table defining natural execution order between task types; integrated Kahn's algorithm for topological sort</li>
+        <li>Built DAGValidator to catch unknown dependencies, cycles, and disconnected nodes before execution</li>
+        <li>Implemented TaskCandidateExtractor to strip polite prefixes, discourse fillers, and meta-instructions from normalized input</li>
+        <li>Added 50+ regression tests on compound requests; validated against 106-sample corpus and 1,000+ individual prompts</li>
+      </ul>
+    </div>
+
+    <div class="pz3-mid">
+      <div>
+        <div class="slbl">Core Features</div>
+        <ul class="rlist">
+          <li>Prompt Compiler: local LLM (supergemma-4-e4b) translates Korean → English with identifier masking, achieving ~30% token reduction and 99%+ accuracy</li>
+          <li>8-type task classifier with FLOWS_TO dependency table and DAG validation — deterministic, non-probabilistic task ordering</li>
+          <li>Dual-tier session context compression: keeps 3 recent tasks in full, compresses older tasks dynamically per adapter budget (85K–485K tokens)</li>
+          <li>Multi-adapter CLI wrapper with REPL commands, ASCII spinners, and error-to-Korean summary conversion</li>
+        </ul>
+      </div>
+      <div>
+        <div class="slbl">Tech Stack</div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Core</div>
+          <div class="tech-cat__text">TypeScript, Node.js, LLaMA.cpp (local inference)</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">AI / Models</div>
+          <div class="tech-cat__text">supergemma-4-e4b (translation), kompress-base (compression), fine-tuned classifier (F1: 0.9815)</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Adapters</div>
+          <div class="tech-cat__text">Claude Code, Codex (exec mode), Gemini API, extensible adapter interface</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Infrastructure</div>
+          <div class="tech-cat__text">File-based session persistence, atomic writes + file locking, WSL Ubuntu</div>
+        </div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line);">
+          <div class="slbl" style="color: var(--muted);">Details</div>
+          <div class="meta-list">
+            <div class="meta-row">Type <span>· Team (4 engineers)</span></div>
+            <div class="meta-row">Period <span>· Apr – May 2026</span></div>
+            <div class="meta-row">Status <span>· Phase 1 complete</span></div>
+            <div class="meta-row">Target <span>· Korean-language LLM developers</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pz3-bottom">
+      <div class="outcome">
+        <div class="outcome__lbl">Key Outcome</div>
+        <div class="outcome__text">34.8% token reduction on 15-turn benchmark (3,784 → 2,424 tokens). 106/106 functional preservation across test corpus. Type classification accuracy improved from 70% to 82%. 895 regression tests passing. Zero DAG validation errors in production sessions.</div>
+      </div>
+      <div class="relevance">
+        <div class="relevance__lbl">Sales Relevance</div>
+        <div class="relevance__text">LLM cost management is a top concern for enterprise AI adoption. DeToks demonstrates workflow orchestration, multi-model adapter design, and structured prompt engineering — skills directly applicable to SE conversations around AI developer tools, LLMOps platforms, and API cost optimization.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     PAGE 4 · MONGLE
+══════════════════════════════════ -->
+<div class="page">
+<div class="proj">
+
+  <div class="ph">
+    <div class="ph__top">
+      <div class="ph__meta">
+        <span class="ph__idx">Project 03</span>
+        <span class="ph__sep"></span>
+        <span class="ph__type">Team · Mar – Apr 2026 · 11 days</span>
+      </div>
+      <span class="ph__pnum">04 / 05</span>
+    </div>
+    <div class="ph__title">Mon<em>gle</em></div>
+    <div class="ph__sub">AI-powered wedding planning platform — GPT-4o Vision parses vendor estimate photos into structured cost breakdowns, with real-time couple–planner sync and budget optimization engine.</div>
+    <div class="ph__metrics">
+      <div class="ph__met">
+        <div class="ph__met-val">98%</div>
+        <div class="ph__met-lbl">Chatbot accuracy</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">0.2s</div>
+        <div class="ph__met-lbl">API response</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">6T KRW</div>
+        <div class="ph__met-lbl">Market size</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">4</div>
+        <div class="ph__met-lbl">Engineers</div>
+      </div>
+    </div>
+    <div class="ph__chips">
+      <span class="ph__chip ph__chip--hi">GPT-4o Vision</span>
+      <span class="ph__chip">React Native</span>
+      <span class="ph__chip">Expo Router</span>
+      <span class="ph__chip">FastAPI</span>
+      <span class="ph__chip">Supabase</span>
+      <span class="ph__chip">SSE Streaming</span>
+      <span class="ph__chip">RAG</span>
+      <span class="ph__chip">PDF Generation</span>
+    </div>
+  </div>
+
+  <div class="pz2">
+    <div class="slbl">Key Challenges &amp; Solutions</div>
+    <div class="cs-grid">
+      <div class="cs-card">
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--c">Challenge</div>
+          <div class="cs-half__text">Vendor estimate documents are low-quality phone photos. Standard OCR fails to extract accurate pricing, especially for items with context-dependent costs (e.g., makeup at ¥80K is clearly wrong).</div>
+        </div>
+        <div class="cs-div"></div>
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--s">Solution</div>
+          <div class="cs-half__text">Used GPT-4o Vision (over gpt-4o-mini) with domain-specific prompting embedding wedding industry knowledge — model uses context to infer plausible costs and flag outliers.</div>
+        </div>
+      </div>
+      <div class="cs-card">
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--c">Challenge</div>
+          <div class="cs-half__text">Korean text typed on macOS (NFD encoding) vs Android (NFC encoding) caused === comparison failures in vendor category matching, silently breaking the entire comparison engine.</div>
+        </div>
+        <div class="cs-div"></div>
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--s">Solution</div>
+          <div class="cs-half__text">Applied string.normalize('NFC') before all category matching across the codebase. Discovered and fixed after a 5,000-line rollback incident that traced the root cause to Unicode normalization mismatch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pz3">
+
+    <div class="pz3-context">
+      <p class="pz3-context__text">
+        85% of Korean couples encounter non-transparent vendor pricing; 83% face surprise add-on costs. Mongle solves
+        both with AI-parsed estimates and a transparent budget engine — while the couple–planner sync model mirrors
+        B2B SaaS patterns (admin + end-user dual portal) that are common in enterprise software sales conversations.
+      </p>
+    </div>
+
+    <div class="pz3-role">
+      <div class="slbl">My Role &amp; Contribution</div>
+      <ul class="rlist">
+        <li>Led as PM and AI Lead — owned chatbot architecture, GPT-4o Vision integration, and budget optimization engine</li>
+        <li>Built RAG chatbot with SSE streaming: search filter extraction → Supabase vendor lookup → GPT-4o response, with real-time character-by-character output in the UI</li>
+        <li>Implemented estimation parser (FastAPI endpoint + GPT-4o Vision) with domain-specific prompting to extract structured cost data from photo documents</li>
+        <li>Designed ComparisonEngine scoring: riskScore, completenessScore, valueScore with VAT handling and optional item normalization</li>
+        <li>Built PDF service (160-line template system) and drove final 45-slide presentation and full feature demo</li>
+      </ul>
+    </div>
+
+    <div class="pz3-mid">
+      <div>
+        <div class="slbl">Core Features</div>
+        <ul class="rlist">
+          <li>GPT-4o Vision estimate parser: photo → structured JSON breakdown with risk flagging and VAT normalization</li>
+          <li>RAG chatbot with SSE streaming for vendor recommendations, budget Q&amp;A, and real-time wedding planning guidance</li>
+          <li>Budget optimization engine using Jaccard style similarity + price reduction scoring across vendor categories</li>
+          <li>PDF export and couple–planner sync dashboard with role-based views (Supabase RLS)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="slbl">Tech Stack</div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Frontend</div>
+          <div class="tech-cat__text">React Native, Expo Router, Supabase Auth (RLS), SSE client</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">AI / LLM</div>
+          <div class="tech-cat__text">GPT-4o Vision (estimate parsing), GPT-4o (chatbot), RAG pipeline, domain-specific prompt engineering</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Backend</div>
+          <div class="tech-cat__text">FastAPI, Supabase (PostgreSQL), PDF generation, Axios interceptor (auto token)</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Revenue Model</div>
+          <div class="tech-cat__text">Freemium + SaaS (₩29,900/planner/mo) + AI premium + vendor commission</div>
+        </div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line);">
+          <div class="slbl" style="color: var(--muted);">Details</div>
+          <div class="meta-list">
+            <div class="meta-row">Type <span>· Team (4 engineers)</span></div>
+            <div class="meta-row">Period <span>· Mar – Apr 2026</span></div>
+            <div class="meta-row">Status <span>· Full demo deployed</span></div>
+            <div class="meta-row">Target <span>· Couples + wedding planners (B2C/B2B)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pz3-bottom">
+      <div class="outcome">
+        <div class="outcome__lbl">Key Outcome</div>
+        <div class="outcome__text">Full feature demo deployed in 11 days: estimate parsing, RAG chatbot, budget optimization, and planner sync all functional. 98% chatbot accuracy, 0.2s API response, 4.8/5.0 UI usability score. Recovered from 5,000-line rollback incident without schedule slip.</div>
+      </div>
+      <div class="relevance">
+        <div class="relevance__lbl">Sales Relevance</div>
+        <div class="relevance__text">Dual-portal product (couple app + planner dashboard) mirrors common enterprise SaaS patterns. Vision AI applied to document parsing demonstrates a reusable capability relevant to insurance, legal, and fintech clients. Revenue model and 6T KRW market sizing show business-case thinking beyond the technical build.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     PAGE 5 · WORKWAGE
+══════════════════════════════════ -->
+<div class="page">
+<div class="proj">
+
+  <div class="ph">
+    <div class="ph__top">
+      <div class="ph__meta">
+        <span class="ph__idx">Project 04</span>
+        <span class="ph__sep"></span>
+        <span class="ph__type">Personal · Mar 2026 · 5 weeks</span>
+      </div>
+      <span class="ph__pnum">05 / 05</span>
+    </div>
+    <div class="ph__title">Work<em>Wage</em></div>
+    <div class="ph__sub">Shift salary calculator for hotel and service industry workers — handles Korean labor law edge cases including night-shift premiums, holiday multipliers, and midnight-crossing shifts.</div>
+    <div class="ph__metrics">
+      <div class="ph__met">
+        <div class="ph__met-val">5wk</div>
+        <div class="ph__met-lbl">MVP to Play Store</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">500K</div>
+        <div class="ph__met-lbl">Target users (KR)</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">5</div>
+        <div class="ph__met-lbl">Dev phases</div>
+      </div>
+      <div class="ph__met">
+        <div class="ph__met-val">Solo</div>
+        <div class="ph__met-lbl">Full ownership</div>
+      </div>
+    </div>
+    <div class="ph__chips">
+      <span class="ph__chip ph__chip--hi">HR Domain Expertise</span>
+      <span class="ph__chip">Flutter</span>
+      <span class="ph__chip">Dart</span>
+      <span class="ph__chip">Provider</span>
+      <span class="ph__chip">RevenueCat</span>
+      <span class="ph__chip">Google Drive API</span>
+      <span class="ph__chip">PDF / CSV Export</span>
+    </div>
+  </div>
+
+  <div class="pz2">
+    <div class="slbl">Key Challenges &amp; Solutions</div>
+    <div class="cs-grid">
+      <div class="cs-card">
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--c">Challenge</div>
+          <div class="cs-half__text">Midnight-crossing shifts (e.g., 20:00–05:00) produce negative duration when naively subtracted, breaking the entire salary calculation pipeline.</div>
+        </div>
+        <div class="cs-div"></div>
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--s">Solution</div>
+          <div class="cs-half__text">If end.isBefore(start), add Duration(days: 1) to end DateTime. Handles all overnight shifts correctly, including break deductions across midnight.</div>
+        </div>
+      </div>
+      <div class="cs-card">
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--c">Challenge</div>
+          <div class="cs-half__text">Night-shift premium (22:00–06:00 at 1.5x) may partially overlap a shift — calculating the exact intersection requires two-dimensional time math spanning two calendar dates.</div>
+        </div>
+        <div class="cs-div"></div>
+        <div class="cs-half">
+          <div class="cs-half__lbl cs-half__lbl--s">Solution</div>
+          <div class="cs-half__text">Explicit overlap logic: max(shiftStart, windowStart) → min(shiftEnd, windowEnd). Precise to the minute; handles partial, full, and no-overlap cases without branching per scenario.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pz3">
+
+    <div class="pz3-context">
+      <p class="pz3-context__text">
+        Built from direct HR and hotel industry experience — the problem is real, the edge cases are real, and no existing
+        app handles them correctly. WorkWage demonstrates the ability to translate domain expertise into a production-ready
+        mobile product, from algorithm design through monetization strategy and Play Store launch.
+      </p>
+    </div>
+
+    <div class="pz3-role">
+      <div class="slbl">My Role &amp; Contribution</div>
+      <ul class="rlist">
+        <li>100% solo — full product ownership from algorithm design, UI/UX, state management, through Google Play Store submission</li>
+        <li>Designed SalaryCalculator.dart implementing all Korean labor law edge cases: midnight crossing, night premium overlap, holiday multipliers, break deductions</li>
+        <li>Built Provider-based state management (ChangeNotifier): salary total auto-updates across screens on every shift input</li>
+        <li>Implemented RevenueCat subscription flow (free tier + ₩4,900/mo premium) and Google Drive SDK backup sync</li>
+        <li>Used Stitch (UI mockup) + Jules (code scaffolding) with structured prompt engineering — discovered that prompt density beats prompt quantity for AI-assisted development</li>
+      </ul>
+    </div>
+
+    <div class="pz3-mid">
+      <div>
+        <div class="slbl">Core Features</div>
+        <ul class="rlist">
+          <li>Real-time shift salary calculation: duration, night-premium overlap, holiday multiplier, break deduction — all Korean labor law compliant</li>
+          <li>Monthly dashboard with shift history, earnings breakdown, and statistics with trend visualization</li>
+          <li>PDF and CSV export for payroll records; Google Drive cloud backup for data portability</li>
+          <li>RevenueCat premium subscription (advanced stats, export, backup) with freemium conversion flow</li>
+        </ul>
+      </div>
+      <div>
+        <div class="slbl">Tech Stack</div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Mobile</div>
+          <div class="tech-cat__text">Flutter, Dart, Provider + ChangeNotifier, SharedPreferences</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Monetization</div>
+          <div class="tech-cat__text">RevenueCat (iOS + Android subscription management), freemium tier logic</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Data &amp; Export</div>
+          <div class="tech-cat__text">PDF generation (custom templates), CSV formatter, Google Drive SDK v3</div>
+        </div>
+        <div class="tech-cat">
+          <div class="tech-cat__lbl">Dev Approach</div>
+          <div class="tech-cat__text">Stitch (UI design), Jules (code scaffolding), structured prompt engineering</div>
+        </div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line);">
+          <div class="slbl" style="color: var(--muted);">Details</div>
+          <div class="meta-list">
+            <div class="meta-row">Type <span>· Personal (solo)</span></div>
+            <div class="meta-row">Period <span>· Mar 2026 (5 weeks)</span></div>
+            <div class="meta-row">Status <span>· Google Play submitted</span></div>
+            <div class="meta-row">Target <span>· Hotel / hospital shift workers (KR)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pz3-bottom">
+      <div class="outcome">
+        <div class="outcome__lbl">Key Outcome</div>
+        <div class="outcome__text">MVP to Play Store in 5 weeks, solo. All Korean labor law edge cases handled correctly (midnight crossing, partial night-premium overlap, holiday + break combinations). RevenueCat and Google Drive integrations complete. Structured AI-assisted dev workflow cut scaffold time by ~60%.</div>
+      </div>
+      <div class="relevance">
+        <div class="relevance__lbl">Sales Relevance</div>
+        <div class="relevance__text">Demonstrates domain expertise turned into product: hotel/HR background translated directly into a business opportunity. Shows full B2C product lifecycle (ideation → algorithm → monetization → distribution) and the ability to independently scope, build, and launch — a key SE signal for clients evaluating team capability.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+</body>
+</html>
