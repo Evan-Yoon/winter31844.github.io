@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="AI compute capacity">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121315"/>
+      <stop offset="100%" stop-color="#294039"/>
+    </linearGradient>
+    <linearGradient id="rack" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <text x="118" y="154" fill="#f1f5f9" font-size="24" font-weight="800" font-family="Inter, Arial, sans-serif" letter-spacing="3">COMPUTE CAPACITY</text>
+  <text x="118" y="288" fill="#f1f5f9" font-size="76" font-weight="800" font-family="Inter, Arial, sans-serif">Limits are</text>
+  <text x="118" y="374" fill="#f1f5f9" font-size="76" font-weight="800" font-family="Inter, Arial, sans-serif">infrastructure</text>
+  <g transform="translate(704 118)">
+    <rect x="0" y="0" width="300" height="520" rx="24" fill="url(#rack)" fill-opacity="0.12" stroke="#f1f5f9" stroke-opacity="0.28"/>
+    <rect x="44" y="62" width="212" height="54" rx="12" fill="#f1f5f9" fill-opacity="0.18"/>
+    <rect x="44" y="146" width="212" height="54" rx="12" fill="#f1f5f9" fill-opacity="0.18"/>
+    <rect x="44" y="230" width="212" height="54" rx="12" fill="#f1f5f9" fill-opacity="0.18"/>
+    <rect x="44" y="314" width="212" height="54" rx="12" fill="#f1f5f9" fill-opacity="0.18"/>
+    <rect x="44" y="398" width="212" height="54" rx="12" fill="#f1f5f9" fill-opacity="0.18"/>
+    <path d="M78 89H222M78 173H222M78 257H222M78 341H222M78 425H222" stroke="#4ade80" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <text x="118" y="620" fill="#bbf7d0" font-size="28" font-weight="700" font-family="Inter, Arial, sans-serif">capacity, GPUs, rate limits</text>
+</svg>

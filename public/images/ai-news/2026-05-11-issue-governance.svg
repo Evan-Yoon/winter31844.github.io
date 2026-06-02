@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="AI governance">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111315"/>
+      <stop offset="100%" stop-color="#26342b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <text x="116" y="154" fill="#f8fafc" font-size="24" font-weight="800" font-family="Inter, Arial, sans-serif" letter-spacing="3">AI GOVERNANCE</text>
+  <text x="116" y="288" fill="#f8fafc" font-size="76" font-weight="800" font-family="Inter, Arial, sans-serif">Observe</text>
+  <text x="116" y="374" fill="#f8fafc" font-size="76" font-weight="800" font-family="Inter, Arial, sans-serif">before action</text>
+  <g transform="translate(696 144)">
+    <rect x="0" y="0" width="300" height="420" rx="28" fill="#f8fafc" fill-opacity="0.1" stroke="#f8fafc" stroke-opacity="0.28"/>
+    <path d="M70 128H230M70 210H230M70 292H230" stroke="#f8fafc" stroke-width="16" stroke-linecap="round" stroke-opacity="0.58"/>
+    <path d="M74 128L116 162L184 82" fill="none" stroke="url(#accent)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M74 210L116 244L184 164" fill="none" stroke="url(#accent)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M74 292L116 326L184 246" fill="none" stroke="url(#accent)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <rect x="116" y="560" width="548" height="92" rx="24" fill="#f8fafc" fill-opacity="0.09" stroke="#f8fafc" stroke-opacity="0.18"/>
+  <text x="146" y="608" fill="#bbf7d0" font-size="28" font-weight="700" font-family="Inter, Arial, sans-serif">agents need identity, policy, audit</text>
+</svg>

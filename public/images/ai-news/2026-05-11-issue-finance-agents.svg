@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Finance agents">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151311"/>
+      <stop offset="100%" stop-color="#3b2719"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="96" y="96" width="1010" height="608" rx="32" fill="#fbf3df" fill-opacity="0.08" stroke="#fbf3df" stroke-opacity="0.18"/>
+  <text x="132" y="164" fill="#f8f0df" font-size="24" font-weight="800" font-family="Inter, Arial, sans-serif" letter-spacing="3">FINANCE AGENTS</text>
+  <text x="132" y="284" fill="#f8f0df" font-size="68" font-weight="800" font-family="Inter, Arial, sans-serif">From reports</text>
+  <text x="132" y="362" fill="#f8f0df" font-size="68" font-weight="800" font-family="Inter, Arial, sans-serif">to governed work</text>
+  <g transform="translate(690 176)">
+    <rect x="0" y="0" width="270" height="350" rx="20" fill="#f8f0df" fill-opacity="0.92"/>
+    <rect x="34" y="44" width="176" height="16" rx="8" fill="#1f2933" fill-opacity="0.24"/>
+    <rect x="34" y="88" width="212" height="16" rx="8" fill="#1f2933" fill-opacity="0.18"/>
+    <rect x="34" y="132" width="138" height="16" rx="8" fill="#1f2933" fill-opacity="0.18"/>
+    <path d="M44 254L104 198L154 230L226 136" fill="none" stroke="url(#accent)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(832 468)">
+    <rect x="0" y="0" width="154" height="92" rx="18" fill="#22c55e" fill-opacity="0.18" stroke="#22c55e" stroke-opacity="0.55"/>
+    <path d="M38 47H116" stroke="#f8f0df" stroke-width="12" stroke-linecap="round"/>
+    <path d="M77 18V74" stroke="#f8f0df" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <text x="132" y="618" fill="#f8f0df" font-size="28" font-weight="700" font-family="Inter, Arial, sans-serif">planning, close, KYC, procurement</text>
+</svg>

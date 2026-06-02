@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Weekly AI News May 4 to May 10">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111411"/>
+      <stop offset="54%" stop-color="#243022"/>
+      <stop offset="100%" stop-color="#4b3620"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f8f0df" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d8f3dc" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e37b45"/>
+      <stop offset="100%" stop-color="#4fb286"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <g opacity="0.16" stroke="#f8f0df" stroke-width="1.5">
+    <path d="M80 120H1120"/>
+    <path d="M80 240H1120"/>
+    <path d="M80 360H1120"/>
+    <path d="M80 480H1120"/>
+    <path d="M80 600H1120"/>
+    <path d="M180 80V700"/>
+    <path d="M360 80V700"/>
+    <path d="M540 80V700"/>
+    <path d="M720 80V700"/>
+    <path d="M900 80V700"/>
+    <path d="M1080 80V700"/>
+  </g>
+  <rect x="84" y="92" width="1032" height="616" rx="30" fill="#0c0f0c" fill-opacity="0.48" stroke="#f8f0df" stroke-opacity="0.16"/>
+  <rect x="126" y="126" width="316" height="72" rx="36" fill="url(#panel)" fill-opacity="0.18" stroke="#f8f0df" stroke-opacity="0.22"/>
+  <text x="158" y="171" fill="#f8f0df" font-size="24" font-weight="800" font-family="Inter, Arial, sans-serif" letter-spacing="3">WEEKLY AI NEWS</text>
+  <text x="126" y="286" fill="#f8f0df" font-size="76" font-weight="800" font-family="Inter, Arial, sans-serif">Agents move</text>
+  <text x="126" y="366" fill="#f8f0df" font-size="76" font-weight="800" font-family="Inter, Arial, sans-serif">into work</text>
+  <text x="130" y="432" fill="#d8f3dc" font-size="28" font-weight="600" font-family="Inter, Arial, sans-serif">May 4 - May 10, 2026</text>
+  <g transform="translate(694 150)">
+    <rect x="0" y="0" width="284" height="196" rx="22" fill="#f8f0df" fill-opacity="0.13" stroke="#f8f0df" stroke-opacity="0.28"/>
+    <path d="M44 60H230" stroke="#f8f0df" stroke-width="12" stroke-linecap="round" stroke-opacity="0.82"/>
+    <path d="M44 104H196" stroke="#d8f3dc" stroke-width="12" stroke-linecap="round" stroke-opacity="0.76"/>
+    <path d="M44 148H230" stroke="#e37b45" stroke-width="12" stroke-linecap="round" stroke-opacity="0.76"/>
+    <rect x="56" y="240" width="244" height="188" rx="22" fill="#f8f0df" fill-opacity="0.11" stroke="#f8f0df" stroke-opacity="0.24"/>
+    <path d="M100 288H252" stroke="#f8f0df" stroke-width="12" stroke-linecap="round" stroke-opacity="0.8"/>
+    <path d="M100 334H216" stroke="#d8f3dc" stroke-width="12" stroke-linecap="round" stroke-opacity="0.78"/>
+    <path d="M100 380H258" stroke="#e37b45" stroke-width="12" stroke-linecap="round" stroke-opacity="0.72"/>
+    <path d="M142 196V240" stroke="url(#accent)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M246 196L246 240" stroke="url(#accent)" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <rect x="126" y="560" width="420" height="92" rx="24" fill="url(#panel)" fill-opacity="0.14" stroke="#f8f0df" stroke-opacity="0.2"/>
+  <text x="154" y="604" fill="#f8f0df" font-size="24" font-weight="700" font-family="Inter, Arial, sans-serif">Enterprise AI</text>
+  <text x="154" y="636" fill="#d8f3dc" font-size="20" font-weight="500" font-family="Inter, Arial, sans-serif">finance, voice, compute, governance</text>
+</svg>
