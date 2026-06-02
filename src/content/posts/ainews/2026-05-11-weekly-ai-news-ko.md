@@ -5,7 +5,7 @@ date: "2026-05-11"
 author: "Evan Yoon"
 category: "ai-news"
 description: "5월 둘째 주 AI 이슈를 엔터프라이즈 에이전트, 기본 모델 업데이트, 음성 AI, 컴퓨트 확장, 거버넌스 경쟁 중심으로 짧게 정리했다."
-thumbnail: "/images/ai-news/2026-05-11-weekly-overview.svg"
+thumbnail: "https://blogs.microsoft.com/wp-content/uploads/2026/05/OMB-WTI-Hero-4_28_26-1024x576.png"
 tags: ["주간-ai-뉴스", "ai-브리핑", "카드뉴스", "기술트렌드"]
 draft: false
 toc: false
@@ -19,7 +19,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="OpenAI PwC CFO 에이전트 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-finance-agents.svg" alt="OpenAI PwC CFO agents" />
+        <img class="flip-media" src="https://www.pwc.com/us/en/technology/alliances/openai-hero-1600x900.jpeg" alt="OpenAI PwC CFO agents" />
         <div class="flip-body">
           <h3 class="flip-title">CFO 업무도 에이전트가 맡는다</h3>
         </div>
@@ -45,7 +45,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="GPT-5.5 Instant 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-model-release.svg" alt="GPT-5.5 Instant" />
+        <img class="flip-media" src="https://images.ctfassets.net/kftzwdyauwt9/5bsfu8NcoBRFtPBIKqg3fv/ec6e143175189cee14e35a02f69e4e11/algebra.jpeg?fm=webp&amp;q=90&amp;w=640" alt="GPT-5.5 Instant" />
         <div class="flip-body">
           <h3 class="flip-title">ChatGPT 기본 모델이 더 정확해졌다</h3>
         </div>
@@ -72,7 +72,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="OpenAI B2B Signals 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-governance.svg" alt="OpenAI B2B Signals" />
+        <img class="flip-media" src="https://images.ctfassets.net/kftzwdyauwt9/4kKQaeWGl9atcyE51ri1ZW/3aa677511fa40bc0a4b089ef6cd9698f/Frame.png?fm=webp&amp;q=90&amp;w=3840" alt="OpenAI B2B Signals" />
         <div class="flip-body">
           <h3 class="flip-title">AI 격차는 사용 깊이에서 벌어진다</h3>
         </div>
@@ -99,7 +99,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="OpenAI Realtime Voice 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-voice-ai.svg" alt="OpenAI realtime voice models" />
+        <img class="flip-media" src="https://images.ctfassets.net/kftzwdyauwt9/32pQSj9Ayvkt9QSZpOPdky/470716092a7230e92e9670dba0ad410d/OAI_GPT-Realtime-2_Three_ways_to_build_with_voice_AI_desktop-light.svg?q=90&amp;w=3840" alt="OpenAI realtime voice models" />
         <div class="flip-body">
           <h3 class="flip-title">음성 AI, 듣고 생각하고 행동한다</h3>
         </div>
@@ -125,7 +125,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="Anthropic finance agents 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-finance-agents.svg" alt="Anthropic finance agents" />
+        <img class="flip-media" src="https://www.anthropic.com/api/opengraph-illustration?name=Agents%20for%20financial%20services&amp;backgroundColor=clay" alt="Anthropic finance agents" />
         <div class="flip-body">
           <h3 class="flip-title">Claude, 금융 업무 템플릿을 낸다</h3>
         </div>
@@ -151,7 +151,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="Anthropic SpaceX compute 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-compute.svg" alt="Anthropic SpaceX compute" />
+        <img class="flip-media" src="https://www.anthropic.com/api/opengraph-illustration?name=Higher%20usage%20limits%20for%20Claude%20and%20a%20compute%20deal%20with%20SpaceX&amp;backgroundColor=sky" alt="Anthropic SpaceX compute" />
         <div class="flip-body">
           <h3 class="flip-title">Claude Code 한도, 컴퓨트로 풀었다</h3>
         </div>
@@ -177,7 +177,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="Adobe productivity agent 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-document-agent.svg" alt="Adobe productivity agent" />
+        <img class="flip-media" src="https://news.adobe.com/news/2026/05/media_163f63c674a5c83c2e977b0bfad6a819bb48bc91d.jpg?width=1200&amp;format=pjpg&amp;optimize=medium" alt="Adobe productivity agent" />
         <div class="flip-body">
           <h3 class="flip-title">Adobe, PDF를 대화형 작업공간으로</h3>
         </div>
@@ -203,7 +203,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="Google Workspace AI Control Center 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-governance.svg" alt="Google Workspace AI Control Center" />
+        <img class="flip-media" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjHT-wtV55za-rchj8t5QCniGEanIriLD8qVFJg_StMzWmdatHJ-ZT5HBipSBEUByXp2dn-m-U-dldkofvOY3rT3v6KugHLANxw7jsZCbt4b61rDSt8JE8f0RFLuGoudVGe1ABkNDRxCewqQFZ9sTwBZWqbc051dc2hd2xSLvhFkhtvZXRufHKcgzfAvY/s960/Securely%20manage%20AI%20and%20agent%20access%20to%20Workspace%20data%20with%20the%20AI%20control%20center%20-%206901.gif" alt="Google Workspace AI Control Center" />
         <div class="flip-body">
           <h3 class="flip-title">Google Workspace, AI 통제센터 추가</h3>
         </div>
@@ -229,7 +229,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="Microsoft Work Trend Index 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-governance.svg" alt="Microsoft Work Trend Index" />
+        <img class="flip-media" src="https://blogs.microsoft.com/wp-content/uploads/2026/05/OMB-WTI-Hero-4_28_26-1024x576.png" alt="Microsoft Work Trend Index" />
         <div class="flip-body">
           <h3 class="flip-title">Microsoft, 프론티어 기업 모델 제시</h3>
         </div>
@@ -256,7 +256,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="Microsoft CAISI AISI 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-governance.svg" alt="Microsoft CAISI AISI AI evaluation" />
+        <img class="flip-media" src="https://blogs.microsoft.com/wp-content/uploads/sites/5/2026/05/FY26_OML_Q4_PA_RAI-Announcement_Header_2-1024x576.png" alt="Microsoft CAISI AISI AI evaluation" />
         <div class="flip-body">
           <h3 class="flip-title">Microsoft 모델, 정부 공동 테스트로</h3>
         </div>
@@ -282,7 +282,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="ServiceNow AI Control Tower 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-governance.svg" alt="ServiceNow AI Control Tower" />
+        <img class="flip-media" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/ServiceNow_logo.svg/1280px-ServiceNow_logo.svg.png" alt="ServiceNow AI Control Tower" />
         <div class="flip-body">
           <h3 class="flip-title">ServiceNow, AI 관제탑을 넓힌다</h3>
         </div>
@@ -308,7 +308,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="Cisco Astrix AI agent security 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="/images/ai-news/2026-05-11-issue-governance.svg" alt="Cisco Astrix AI agent security" />
+        <img class="flip-media" src="https://www.networkworld.com/wp-content/uploads/2026/05/4166695-0-77332700-1777923425-Swarm2.jpg?quality=50&amp;strip=all&amp;w=1024" alt="Cisco Astrix AI agent security" />
         <div class="flip-body">
           <h3 class="flip-title">AI 에이전트 보안, 신원 관리로 간다</h3>
         </div>
