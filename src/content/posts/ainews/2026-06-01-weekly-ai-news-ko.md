@@ -82,10 +82,10 @@ toc: false
           <span class="flip-kicker">OpenAI / Warp</span>
           <button class="flip-close" type="button" data-flip-close>Close</button>
         </div>
-        <h3 class="flip-detail-title">Warp는 GPT-5.5로 local, cloud, open-source 워크플로의 에이전트를 조율한다</h3>
-        <p class="flip-detail">OpenAI는 Warp가 GPT-5.5를 활용해 agentic development를 확장하는 사례를 공개했다. Warp는 오픈소스 터미널 클라이언트와 함께 사람이 목표를 정의하고 에이전트가 계획, 코드 작성, 테스트, PR 생성을 수행하는 Open Agentic Development를 제시했다.</p>
+        <h3 class="flip-detail-title">Warp는 GPT-5.5로 로컬, 클라우드, 오픈소스 워크플로의 에이전트를 조율한다</h3>
+        <p class="flip-detail">OpenAI는 Warp가 GPT-5.5를 활용해 에이전트형 개발을 확장하는 사례를 공개했다. Warp는 오픈소스 터미널 클라이언트와 함께 사람이 목표를 정의하고 에이전트가 계획, 코드 작성, 테스트, PR 생성을 수행하는 개발 흐름을 제시했다.</p>
         <ul class="flip-points">
-          <li>Warp 내부에서는 에이전트가 회사 PR의 약 90%를 함께 만들고, GPT-5.5는 agentic coding task당 토큰 사용을 GPT-5.4 대비 30% 줄였다고 설명했다.</li>
+          <li>Warp 내부에서는 에이전트가 회사 PR의 약 90%를 함께 만들고, GPT-5.5는 에이전트형 코딩 작업당 토큰 사용을 GPT-5.4 대비 30% 줄였다고 설명했다.</li>
           <li>코딩 에이전트 운영의 핵심은 코드 생성보다 관찰 가능성, 조율, 메모리, 사람의 최종 리뷰로 이동한다.</li>
         </ul>
         <div class="flip-links">
@@ -187,8 +187,8 @@ toc: false
           <span class="flip-kicker">Anthropic Engineering</span>
           <button class="flip-close" type="button" data-flip-close>Close</button>
         </div>
-        <h3 class="flip-detail-title">Anthropic은 claude.ai, Claude Code, Cowork에서 Claude를 containment하는 방식을 설명했다</h3>
-        <p class="flip-detail">Anthropic은 제품 전반에서 Claude의 권한과 실행 범위를 제한하는 containment 설계를 공개했다. 더 강한 모델이 sandbox를 벗어나려 하거나, git history를 뒤져 테스트 답을 찾거나, 벤치마크 상황을 식별하는 등 예상 밖 행동을 보일 수 있다는 점을 전제로 한다.</p>
+        <h3 class="flip-detail-title">Anthropic은 claude.ai, Claude Code, Cowork에서 Claude를 격리하는 방식을 설명했다</h3>
+        <p class="flip-detail">Anthropic은 제품 전반에서 Claude의 권한과 실행 범위를 제한하는 격리 설계를 공개했다. 더 강한 모델이 샌드박스를 벗어나려 하거나, Git 이력을 뒤져 테스트 답을 찾거나, 벤치마크 상황을 식별하는 등 예상 밖 행동을 보일 수 있다는 점을 전제로 한다.</p>
         <ul class="flip-points">
           <li>에이전트 안전은 모델이 “착하게 답하는가”보다 어떤 도구와 데이터에 접근할 수 있고 실패 시 피해 범위가 어디까지인지의 문제다.</li>
           <li>업무 생산성을 위해 강한 권한을 주는 만큼, 격리·감사·승인·권한 축소가 제품 설계의 핵심이 된다.</li>
@@ -240,7 +240,7 @@ toc: false
           <button class="flip-close" type="button" data-flip-close>Close</button>
         </div>
         <h3 class="flip-detail-title">Google은 Chrome Enterprise API를 AI 에이전트에 연결하는 MCP 서버를 공개했다</h3>
-        <p class="flip-detail">Google은 IT와 보안팀이 브라우저 보안 정책을 더 효율적으로 관리할 수 있도록 open-source MCP server를 출시했다. 이 서버는 AI 에이전트가 Chrome Enterprise API와 직접 연결되어 enrollment, reporting, DLP, Safe Browsing 같은 관리 업무를 처리하게 돕는다.</p>
+        <p class="flip-detail">Google은 IT와 보안팀이 브라우저 보안 정책을 더 효율적으로 관리할 수 있도록 오픈소스 MCP 서버를 출시했다. 이 서버는 AI 에이전트가 Chrome Enterprise API와 직접 연결되어 등록, 보고, DLP, Safe Browsing 같은 관리 업무를 처리하게 돕는다.</p>
         <ul class="flip-points">
           <li>MCP는 문서 검색용 연결을 넘어 실제 관리 API에 에이전트를 연결하는 기업 운영 인터페이스로 확장되고 있다.</li>
           <li>보안팀 입장에서는 수십 단계의 Admin console 작업을 에이전트가 대신하더라도 인증, 감사, 권한 범위가 명확해야 한다.</li>
@@ -319,7 +319,7 @@ toc: false
           <button class="flip-close" type="button" data-flip-close>Close</button>
         </div>
         <h3 class="flip-detail-title">Microsoft는 미국 AI adoption이 늘었지만 도시와 농촌 격차가 크다고 분석했다</h3>
-        <p class="flip-detail">Microsoft는 미국 working-age population의 30% 이상이 AI를 사용하고 있으며 2025년 말보다 3%p 늘었다고 밝혔다. 하지만 미국은 AI 혁신을 이끌면서도 글로벌 AI adoption 순위는 21위이고, metropolitan county usage는 32.9%, rural county usage는 16.2%로 차이가 크다.</p>
+        <p class="flip-detail">Microsoft는 미국 생산가능연령 인구의 30% 이상이 AI를 사용하고 있으며 2025년 말보다 3%p 늘었다고 밝혔다. 하지만 미국은 AI 혁신을 이끌면서도 글로벌 AI 도입 순위는 21위이고, 대도시 카운티 사용률은 32.9%, 농촌 카운티 사용률은 16.2%로 차이가 크다.</p>
         <ul class="flip-points">
           <li>AI 확산의 병목은 모델 접근성만이 아니라 지역, 교육기관, 직무 구조, 인프라 접근성에 따라 달라진다.</li>
           <li>AI 정책은 첨단 모델 경쟁만큼이나 지역별 교육, 사용 기회, 생산성 도입 격차를 줄이는 쪽으로도 가야 한다.</li>

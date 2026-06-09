@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="100%" stop-color="#121317"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1.5">
+    <path d="M0 120H1200M0 240H1200M0 360H1200M0 480H1200M0 600H1200M0 720H1200"/>
+    <path d="M120 0V800M240 0V800M360 0V800M480 0V800M600 0V800M720 0V800M840 0V800M960 0V800M1080 0V800"/>
+  </g>
+  <circle cx="850" cy="260" r="210" fill="#22c55e" opacity="0.16" filter="url(#soft)"/>
+  <circle cx="365" cy="470" r="180" fill="#38bdf8" opacity="0.14" filter="url(#soft)"/>
+
+  <g transform="translate(690 155)">
+    <rect x="55" y="55" width="330" height="330" rx="34" fill="url(#chip)" stroke="url(#accent)" stroke-width="8"/>
+    <rect x="128" y="128" width="184" height="184" rx="22" fill="#0f172a" stroke="#ffffff" stroke-opacity="0.22" stroke-width="4"/>
+    <path d="M150 220h140M220 150v140" stroke="url(#accent)" stroke-width="18" stroke-linecap="round"/>
+    <g stroke="#38bdf8" stroke-width="8" stroke-linecap="round" opacity="0.75">
+      <path d="M220 10v45M220 385v45M10 220h45M385 220h45"/>
+      <path d="M105 25v50M335 25v50M105 365v50M335 365v50"/>
+      <path d="M25 105h50M25 335h50M365 105h50M365 335h50"/>
+    </g>
+  </g>
+
+  <g transform="translate(80 505)">
+    <rect width="1040" height="220" rx="28" fill="#0b0d12" fill-opacity="0.78" stroke="#ffffff" stroke-opacity="0.1" stroke-width="2"/>
+    <path d="M60 66h28" stroke="url(#accent)" stroke-width="7" stroke-linecap="round"/>
+    <text x="108" y="73" fill="#7dd3fc" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="24" letter-spacing="3">SEMICONDUCTOR</text>
+    <text x="60" y="147" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="52">Japan AI Chip Push</text>
+  </g>
+</svg>

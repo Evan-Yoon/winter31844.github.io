@@ -59,7 +59,7 @@ toc: false
         <h3 class="flip-detail-title">ChatGPT Images 2.0은 글자와 장면 이해를 더 잘 다룬다</h3>
         <p class="flip-detail">OpenAI는 ChatGPT Images 2.0에서 텍스트 표현, 장면 구성, 지시 이해를 개선했다. 이미지 생성도 이제 예쁜 결과보다 요청을 정확히 읽는 능력이 중요해졌다.</p>
         <ul class="flip-points">
-          <li>이미지 생성은 이제 예쁜 그림뿐 아니라 사용자의 지시를 정확히 이해하는 능력이 중요해졌다.</li>
+          <li>텍스트 정확도와 장면 제약을 지키는 능력이 창작 도구의 실사용성을 좌우한다.</li>
           <li>창작 도구 안에서도 모델이 먼저 계획하고, 그 결과를 다시 다듬는 흐름이 늘고 있다.</li>
         </ul>
         <div class="flip-links">
@@ -190,7 +190,7 @@ toc: false
         <h3 class="flip-detail-title">Anthropic은 선거 질문에서 Claude가 어떻게 답해야 하는지 공개했다</h3>
         <p class="flip-detail">선거 관련 AI 안전은 균형 잡힌 답변만으로 끝나지 않는다. 유해한 요청은 거절하고, 최신 정보가 필요한 질문에는 검증 가능한 출처를 붙이는 방식이 중요하다.</p>
         <ul class="flip-points">
-          <li>선거 관련 AI 안전은 답변의 균형, 유해 요청 차단, 최신 정보 확인을 함께 다뤄야 한다.</li>
+          <li>최신 선거 정보는 모델 내부 지식보다 검증 가능한 공식 채널 연결이 더 중요하다.</li>
           <li>정치 질문에서는 잘 답하는 것만큼, 답하지 말아야 할 요청을 거절하는 능력도 중요하다.</li>
         </ul>
         <div class="flip-links">
@@ -240,7 +240,7 @@ toc: false
           <button class="flip-close" type="button" data-flip-close>Close</button>
         </div>
         <h3 class="flip-detail-title">4월 Gemini 업데이트는 개인 작업 공간에 더 가까워졌다</h3>
-        <p class="flip-detail">Gemini는 이미지 생성, NotebookLM 기반 정리, 음악 생성, 개념 시각화를 한 앱에 묶었다. 소비자용 AI 앱은 단순 챗봇보다 개인 작업 공간으로 바뀌고 있다.</p>
+        <p class="flip-detail">Gemini는 이미지 생성, NotebookLM 기반 정리, 음악 생성, 개념 시각화를 한 앱에 묶었다. 소비자용 AI 앱은 단순 챗봇보다 여러 산출물을 이어서 다루는 작업 허브에 가까워지고 있다.</p>
         <ul class="flip-points">
           <li>소비자용 AI 앱은 단순 챗봇보다 개인 작업 공간에 가까워지고 있다.</li>
           <li>이미지, 음악, 노트, 시각화가 한 앱 안에서 이어지는 흐름이 뚜렷하다.</li>

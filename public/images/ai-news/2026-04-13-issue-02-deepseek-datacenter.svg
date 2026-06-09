@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#a3e635"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <circle cx="850" cy="260" r="260" fill="#06b6d4" opacity="0.14" filter="url(#soft)"/>
+  <circle cx="330" cy="560" r="210" fill="#a3e635" opacity="0.12" filter="url(#soft)"/>
+
+  <g transform="translate(650 140)">
+    <rect x="40" y="30" width="360" height="410" rx="28" fill="#0b1220" stroke="#ffffff" stroke-opacity="0.18" stroke-width="3"/>
+    <g fill="#111827" stroke="#06b6d4" stroke-opacity="0.55" stroke-width="3">
+      <rect x="80" y="75" width="280" height="60" rx="12"/>
+      <rect x="80" y="160" width="280" height="60" rx="12"/>
+      <rect x="80" y="245" width="280" height="60" rx="12"/>
+      <rect x="80" y="330" width="280" height="60" rx="12"/>
+    </g>
+    <g fill="#a3e635">
+      <circle cx="115" cy="105" r="7"/>
+      <circle cx="145" cy="105" r="7"/>
+      <circle cx="115" cy="190" r="7"/>
+      <circle cx="145" cy="190" r="7"/>
+      <circle cx="115" cy="275" r="7"/>
+      <circle cx="145" cy="275" r="7"/>
+      <circle cx="115" cy="360" r="7"/>
+      <circle cx="145" cy="360" r="7"/>
+    </g>
+    <path d="M420 105h85v270h-85" fill="none" stroke="url(#accent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M505 240h75" stroke="#ffffff" stroke-opacity="0.35" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(80 505)">
+    <rect width="1040" height="220" rx="28" fill="#0b0d12" fill-opacity="0.78" stroke="#ffffff" stroke-opacity="0.1" stroke-width="2"/>
+    <path d="M60 66h28" stroke="url(#accent)" stroke-width="7" stroke-linecap="round"/>
+    <text x="108" y="73" fill="#67e8f9" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="24" letter-spacing="3">AI INFRA</text>
+    <text x="60" y="147" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="52">DeepSeek Data Center</text>
+  </g>
+</svg>

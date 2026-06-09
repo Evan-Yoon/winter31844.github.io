@@ -212,8 +212,8 @@ toc: false
           <span class="flip-kicker">Anthropic</span>
           <button class="flip-close" type="button" data-flip-close>Close</button>
         </div>
-        <h3 class="flip-detail-title">Sydney office와 ANZ 총괄 선임은 Claude의 지역 확장 신호다</h3>
-        <p class="flip-detail">Anthropic은 Theo Hourmouzis를 Australia & New Zealand GM으로 임명하고 Sydney office를 공식 오픈했다. Canva, Xero, YMCA South Australia 같은 현지 파트너도 함께 언급됐다.</p>
+        <h3 class="flip-detail-title">시드니 오피스와 ANZ 총괄 선임은 Claude의 지역 확장 신호다</h3>
+        <p class="flip-detail">Anthropic은 Theo Hourmouzis를 호주·뉴질랜드 총괄로 임명하고 시드니 오피스를 공식 오픈했다. Canva, Xero, YMCA South Australia 같은 현지 파트너도 함께 언급됐다.</p>
         <ul class="flip-points">
           <li>프론티어 AI 회사는 모델 API만 파는 것이 아니라 지역별 엔터프라이즈 영업망을 넓히고 있다.</li>
           <li>기업 고객은 AI 성능만큼 현지 지원, 거버넌스, 안전 기준을 함께 본다.</li>
@@ -329,4 +329,3 @@ toc: false
     </div>
   </div>
 </div>
-

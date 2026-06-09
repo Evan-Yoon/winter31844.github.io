@@ -19,7 +19,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="일본 반도체 자립 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="https://cdn.aitimes.com/news/photo/202604/209127_211471_1051.jpg" alt="일본 반도체 자립" referrerpolicy="no-referrer" />
+        <img class="flip-media" src="/images/ai-news/2026-04-13-issue-01-japan-chip.svg" alt="일본 반도체 자립" />
         <div class="flip-body">
           <h3 class="flip-title">일본, AI 칩 자립에 24조 투입</h3>
         </div>
@@ -33,7 +33,7 @@ toc: false
         <p class="flip-detail">일본은 라피더스에 대규모 자금을 넣으며 차세대 반도체 생산망을 다시 잡으려 한다. AI 시대에는 좋은 모델만큼 칩을 안정적으로 구하는 힘도 중요해졌다.</p>
         <ul class="flip-points">
           <li>TSMC 의존을 줄이고 차세대 공정 역량을 안으로 가져오려는 움직임이다.</li>
-          <li>AI 모델만큼 칩 공급망을 먼저 챙기는 나라가 늘고 있다는 점이 중요하다.</li>
+          <li>국가 주도 반도체 투자는 연구개발과 제조 생태계를 동시에 붙잡기 위한 장기전이다.</li>
         </ul>
         <div class="flip-links">
           <a href="https://www.aitimes.com/news/articleView.html?idxno=209127" target="_blank" rel="noreferrer">원문 보기</a>
@@ -45,7 +45,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="딥시크 데이터센터 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="https://cdn.aitimes.com/news/photo/202604/209126_211470_4737.jpg" alt="딥시크 데이터센터" referrerpolicy="no-referrer" />
+        <img class="flip-media" src="/images/ai-news/2026-04-13-issue-02-deepseek-datacenter.svg" alt="딥시크 데이터센터" />
         <div class="flip-body">
           <h3 class="flip-title">딥시크, 데이터센터까지 직접 챙긴다</h3>
         </div>
@@ -71,7 +71,7 @@ toc: false
   <div class="flip-card" data-flip-card tabindex="0" aria-label="텐센트 로봇 모델 카드">
     <div class="flip-card-inner">
       <section class="flip-card-face flip-card-front">
-        <img class="flip-media" src="https://cdn.aitimes.com/news/photo/202604/209113_211453_1127.png" alt="텐센트 HY-Embodied" referrerpolicy="no-referrer" />
+        <img class="flip-media" src="/images/ai-news/2026-04-13-issue-03-robot-model.svg" alt="텐센트 HY-Embodied" />
         <div class="flip-body">
           <h3 class="flip-title">로봇 AI, 보는 것에서 움직이는 것으로</h3>
         </div>
